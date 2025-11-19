@@ -1,2 +1,4 @@
 * [Home](/)
 * [ADCP Tools](/adcp/readADCP.md)
+* Attitude Tools
+    * [appendAtt](/att/appendAtt.md)
