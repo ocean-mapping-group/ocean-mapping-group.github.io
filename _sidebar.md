@@ -5,3 +5,4 @@
     * [att2ascii](/att/att2ascii.md)
     * [attCombo](/att/attCombo.md)
     * [attedit](/att/attedit.md)
+    * [attSplit](/att/attSplit.md)
