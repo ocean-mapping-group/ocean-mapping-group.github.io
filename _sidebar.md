@@ -34,3 +34,5 @@
 * ELAC Tools
     * [qualityFlag](/elac/qualityFlag.md)
     * [refoELAC](/elac/refoELAC.md)
+* GL Tools
+    * [synSwath](/gl/synSwath.md)
