@@ -18,3 +18,5 @@
     * [plotGSvAR](/class/plotGSvAR.md)
     * [plotSSclass](/class/plotSSclass.md)
     * [readAngStrip](/class/readAngStrip.md)
+* Delay Editor Tools
+    * [DelayEditor](/DE/DelayEditor.md)
