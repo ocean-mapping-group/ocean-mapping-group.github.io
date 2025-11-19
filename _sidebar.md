@@ -9,3 +9,4 @@
     * [heaveCombo](/att/heaveCombo.md)
     * [mergeHeading](/att/mergeHeading.md)
     * [mergeHeave](/att/mergeHeave.md)
+    * [readDelHeave](/att/readDelHeave.md)
