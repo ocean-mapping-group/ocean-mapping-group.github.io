@@ -8,3 +8,4 @@
     * [attSplit](/att/attSplit.md)
     * [heaveCombo](/att/heaveCombo.md)
     * [mergeHeading](/att/mergeHeading.md)
+    * [mergeHeave](/att/mergeHeave.md)
