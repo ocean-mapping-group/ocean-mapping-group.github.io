@@ -12,3 +12,4 @@
     * [readDelHeave](/att/readDelHeave.md)
 * Classification Tools
     * [classAngStrip](/class/classAngStrip.md)
+    * [classSS](/class/classSS.md)
