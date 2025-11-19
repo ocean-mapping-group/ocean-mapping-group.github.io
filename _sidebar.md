@@ -13,3 +13,8 @@
 * Classification Tools
     * [classAngStrip](/class/classAngStrip.md)
     * [classSS](/class/classSS.md)
+    * [compAngStrip](/class/compAngStrip.md)
+    * [findCloseAR](/class/findCloseAR.md)
+    * [plotGSvAR](/class/plotGSvAR.md)
+    * [plotSSclass](/class/plotSSclass.md)
+    * [readAngStrip](/class/readAngStrip.md)
