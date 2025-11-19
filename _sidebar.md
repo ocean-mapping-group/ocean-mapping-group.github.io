@@ -10,3 +10,5 @@
     * [mergeHeading](/att/mergeHeading.md)
     * [mergeHeave](/att/mergeHeave.md)
     * [readDelHeave](/att/readDelHeave.md)
+* Classification Tools
+    * [classAngStrip](/class/classAngStrip.md)
