@@ -36,3 +36,5 @@
     * [refoELAC](/elac/refoELAC.md)
 * GL Tools
     * [synSwath](/gl/synSwath.md)
+* GLSEIS Tools
+    * [glSeis](/glseis/glSeis.md)
