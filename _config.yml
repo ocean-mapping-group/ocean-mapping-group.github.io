@@ -3,6 +3,9 @@ title: Ocean Mapping Group Tools
 description: Documentation for the Ocean Mapping Group command-line tools.
 url: https://ocean-mapping-group.github.io
 
+# Set the theme color scheme
+color_scheme: dark
+
 # Aux links for the header
 aux_links:
   "OMG on GitHub":
