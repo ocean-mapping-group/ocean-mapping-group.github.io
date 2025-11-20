@@ -1,3 +1,9 @@
+---
+layout: default
+title: correlate
+parent: Grid Tools
+nav_order: 16
+---
 # correlate
 
 ## Description

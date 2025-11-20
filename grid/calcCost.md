@@ -1,3 +1,9 @@
+---
+layout: default
+title: calcCost
+parent: Grid Tools
+nav_order: 9
+---
 # calcCost
 
 ## Description

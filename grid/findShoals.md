@@ -1,3 +1,9 @@
+---
+layout: default
+title: findShoals
+parent: Grid Tools
+nav_order: 32
+---
 # findShoals
 
 ## Description

@@ -1,3 +1,9 @@
+---
+layout: default
+title: contgrid
+parent: Grid Tools
+nav_order: 12
+---
 # contgrid
 
 ## Description

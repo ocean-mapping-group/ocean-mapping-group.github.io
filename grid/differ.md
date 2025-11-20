@@ -1,3 +1,9 @@
+---
+layout: default
+title: differ
+parent: Grid Tools
+nav_order: 21
+---
 # differ
 
 ## Description

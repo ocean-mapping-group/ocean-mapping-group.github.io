@@ -1,3 +1,9 @@
+---
+layout: default
+title: calcXYZ
+parent: Grid Tools
+nav_order: 10
+---
 # calcXYZ
 
 ## Description

@@ -1,3 +1,9 @@
+---
+layout: default
+title: DTMreject
+parent: Grid Tools
+nav_order: 22
+---
 # DTMreject
 
 ## Description

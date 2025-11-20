@@ -1,3 +1,9 @@
+---
+layout: default
+title: addSUN
+parent: Grid Tools
+nav_order: 6
+---
 # addSUN
 
 ## Description

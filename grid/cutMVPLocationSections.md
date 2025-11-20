@@ -1,3 +1,9 @@
+---
+layout: default
+title: cutMVPLocationSections
+parent: Grid Tools
+nav_order: 17
+---
 # cutMVPLocationSections
 
 ## Description

@@ -1,3 +1,9 @@
+---
+layout: default
+title: 8bittor4
+parent: Grid Tools
+nav_order: 1
+---
 # 8bittor4
 
 ## Description

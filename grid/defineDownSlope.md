@@ -1,3 +1,9 @@
+---
+layout: default
+title: defineDownSlope
+parent: Grid Tools
+nav_order: 18
+---
 # defineDownSlope
 
 ## Description

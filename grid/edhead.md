@@ -1,3 +1,9 @@
+---
+layout: default
+title: edhead
+parent: Grid Tools
+nav_order: 23
+---
 # edhead
 
 ## Description

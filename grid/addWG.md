@@ -1,3 +1,9 @@
+---
+layout: default
+title: addWG
+parent: Grid Tools
+nav_order: 7
+---
 # addWG
 
 ## Description

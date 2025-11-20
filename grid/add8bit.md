@@ -1,3 +1,9 @@
+---
+layout: default
+title: add8bit
+parent: Grid Tools
+nav_order: 2
+---
 # add8bit
 
 ## Description

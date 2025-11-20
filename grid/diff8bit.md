@@ -1,3 +1,9 @@
+---
+layout: default
+title: diff8bit
+parent: Grid Tools
+nav_order: 20
+---
 # diff8bit
 
 ## Description

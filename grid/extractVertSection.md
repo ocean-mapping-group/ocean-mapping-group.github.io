@@ -1,3 +1,9 @@
+---
+layout: default
+title: extractVertSection
+parent: Grid Tools
+nav_order: 29
+---
 # extractVertSection
 
 ## Description

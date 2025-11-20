@@ -1,3 +1,9 @@
+---
+layout: default
+title: addGain
+parent: Grid Tools
+nav_order: 4
+---
 # addGain
 
 ## Description

@@ -1,3 +1,9 @@
+---
+layout: default
+title: addstamp
+parent: Grid Tools
+nav_order: 5
+---
 # addstamp
 
 ## Description
