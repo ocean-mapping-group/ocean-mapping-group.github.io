@@ -1,3 +1,9 @@
+---
+layout: default
+title: attCombo
+parent: Attitude Tools
+nav_order: 3
+---
 # attCombo
 
 ## Description

@@ -1,3 +1,9 @@
+---
+layout: default
+title: Home
+nav_order: 1
+---
+
 # Welcome to the Ocean Mapping Group Tools Documentation
 
 This documentation aims to provide comprehensive guides and references for the powerful suite of command-line tools developed by the Ocean Mapping Group. These tools are designed for processing, modifying, and interacting with various types of oceanographic data, including multibeam sonar, ADCP, navigation, attitude, and tide records.
@@ -9,4 +15,4 @@ You can navigate through the different tool categories using the sidebar. Each t
 ## How to Use This Documentation
 
 *   **Browse by Category:** Tools are organized by their primary function (e.g., ADCP, Navigation, Grid).
-*   **Search:** Use the search bar (if enabled by the theme) to quickly find specific tools or functionalities.
+*   **Search:** The search bar at the top allows you to quickly find specific tools or functionalities.

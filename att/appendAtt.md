@@ -1,3 +1,9 @@
+---
+layout: default
+title: appendAtt
+parent: Attitude Tools
+nav_order: 1
+---
 # appendAtt
 
 ## Description

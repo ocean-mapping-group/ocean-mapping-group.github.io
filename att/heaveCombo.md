@@ -1,3 +1,9 @@
+---
+layout: default
+title: heaveCombo
+parent: Attitude Tools
+nav_order: 6
+---
 # heaveCombo
 
 ## Description

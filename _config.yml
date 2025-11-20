@@ -1,0 +1,9 @@
+theme: just-the-docs
+title: Ocean Mapping Group Tools
+description: Documentation for the Ocean Mapping Group command-line tools.
+url: https://ocean-mapping-group.github.io
+
+# Aux links for the header
+aux_links:
+  "OMG on GitHub":
+    - "https://github.com/ocean-mapping-group"

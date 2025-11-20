@@ -1,3 +1,9 @@
+---
+layout: default
+title: attedit
+parent: Attitude Tools
+nav_order: 4
+---
 # attedit
 
 ## Description

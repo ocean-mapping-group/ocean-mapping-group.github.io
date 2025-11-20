@@ -1,3 +1,9 @@
+---
+layout: default
+title: attSplit
+parent: Attitude Tools
+nav_order: 5
+---
 # attSplit
 
 ## Description

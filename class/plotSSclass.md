@@ -1,3 +1,9 @@
+---
+layout: default
+title: plotSSclass
+parent: Classification Tools
+nav_order: 6
+---
 # plotSSclass
 
 ## Description

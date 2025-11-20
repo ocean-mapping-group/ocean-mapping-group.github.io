@@ -1,3 +1,9 @@
+---
+layout: default
+title: readAngStrip
+parent: Classification Tools
+nav_order: 7
+---
 # readAngStrip
 
 ## Description

@@ -1,3 +1,9 @@
+---
+layout: default
+title: compAngStrip
+parent: Classification Tools
+nav_order: 3
+---
 # compAngStrip
 
 ## Description

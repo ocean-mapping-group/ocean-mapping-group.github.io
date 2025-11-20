@@ -1,3 +1,9 @@
+---
+layout: default
+title: mergeHeading
+parent: Attitude Tools
+nav_order: 7
+---
 # mergeHeading
 
 ## Description

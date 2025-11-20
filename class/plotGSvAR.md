@@ -1,3 +1,9 @@
+---
+layout: default
+title: plotGSvAR
+parent: Classification Tools
+nav_order: 5
+---
 # plotGSvAR
 
 ## Description

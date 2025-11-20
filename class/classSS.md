@@ -1,3 +1,9 @@
+---
+layout: default
+title: classSS
+parent: Classification Tools
+nav_order: 2
+---
 # classSS
 
 ## Description

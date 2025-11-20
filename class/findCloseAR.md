@@ -1,3 +1,9 @@
+---
+layout: default
+title: findCloseAR
+parent: Classification Tools
+nav_order: 4
+---
 # findCloseAR
 
 ## Description

@@ -1,3 +1,9 @@
+---
+layout: default
+title: readADCP
+parent: ADCP Tools
+nav_order: 1
+---
 # readADCP
 
 ## Description

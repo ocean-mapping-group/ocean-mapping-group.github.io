@@ -1,3 +1,9 @@
+---
+layout: default
+title: mergeHeave
+parent: Attitude Tools
+nav_order: 8
+---
 # mergeHeave
 
 ## Description

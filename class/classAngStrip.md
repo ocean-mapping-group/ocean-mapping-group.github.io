@@ -1,3 +1,9 @@
+---
+layout: default
+title: classAngStrip
+parent: Classification Tools
+nav_order: 1
+---
 # classAngStrip
 
 ## Description
