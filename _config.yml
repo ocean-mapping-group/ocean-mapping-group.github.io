@@ -1,4 +1,4 @@
-theme: just-the-docs
+remote_theme: just-the-docs/just-the-docs
 title: Ocean Mapping Group Tools
 description: Documentation for the Ocean Mapping Group command-line tools.
 url: https://ocean-mapping-group.github.io
