@@ -1,0 +1,52 @@
+---
+layout: default
+title: makeFoot
+parent: Plot Tools
+nav_order: 127
+---
+# makeFoot
+
+## Description
+`makeFoot` is a utility designed to generate a `beam.foot` file, which describes the characteristics of each beam in a multibeam sonar system. This file contains information such as the beam angle, beam height, beam width, and offset direction for each beam, tailored to a specific sonar model.
+
+The tool supports a wide range of sonar models (e.g., various Simrad EM series, Reson SeaBat series, ELAC, FSWP20, ISIS, TOWSS, Fishfinder) and allows for customization of parameters like angular sector and beam spacing. This `beam.foot` file can then be used by other processing tools for footprint modeling, coverage analysis, and data inversion.
+
+## Usage
+```bash
+makeFoot (-em3000 | -fswp20 | -isis | -towss | ...) -outfile <bf_file> [OPTIONS]
+```
+
+## Arguments
+
+| Option | Description |
+|---|---|
+| `(-em3000 | -fswp20 | -isis | -towss | -elacII_120 | -elacII_150 | -reson_8101 | -em300 | -sb_classic | -em3000d | -em1002 | -reson_8125 | -em120 | -em710 | -fishfinder)` | **Required.** Specifies the sonar model for which to generate the beam footprint file. |
+| `-outfile <bf_file>` | **Required.** Path for the output beam footprint file. | `beam.foot` |
+| `-infile <param_file>` | (Optional) Path to an input parameter file (not directly used in the provided code logic, but might be for specific models). |
+| `-reprate <val>` | Repetition rate (ping interval) in seconds. |
+| `-ssp <val>` | Surface sound speed. | `1500.0` |
+| `-port` / `-stbd` | Generate beam definitions only for the port or starboard side. | Both |
+
+### Interactive (for some EM models)
+| Option | Description |
+|---|---|
+| `-em300` | (Interactive) Will ask for `nobeams`, `spacing_type`, `angsect`, `tr_bwdth`, `rc_bwdth`. |
+| `-em120` | (Interactive) Will ask for `spacing_type`, `angsect`, `tr_bwdth`, `rc_bwdth`. |
+| `-em1002` | (Interactive) Will ask for `spacing_type`, `angsect`. |
+
+## How It Works
+1.  **Initialization:** Parses command-line arguments to set the sonar `model`, output filename, and various simulation parameters.
+2.  **Sonar Model Configuration:** Based on the chosen sonar `model`, it populates a `BeamFoot` structure (`bf`) with sonar-specific characteristics. This includes:
+    *   `toolType`, `operatingMode`, `shot_interval`, `spacing_type` (equiangular `1` or equidistant `-1` or internal `2`), `nobeams`, `nopings`, `interleave`, `ping_offset`.
+    *   For each beam `i` within `bf.nobeams`:
+        *   `bf.beamangle[i]`: The beam's angle. This is calculated based on the `spacing_type` and `angsect` (angular sector width).
+        *   `bf.beamheight[i]`: The effective height of the beam footprint (related to beam width and angle).
+        *   `bf.beamwidth[i]`: The beam's width.
+        *   `bf.offset_dirn[i]`: Direction of the offset.
+    *   **Specific Model Logic:** The code contains extensive `if/else if` blocks to handle the unique geometry and characteristics of each specified sonar model. Some models (like `EM300`, `EM120`, `EM1002`) require interactive input for parameters.
+    *   **Multi-sector Sonars (e.g., EM710):** For multi-sector sonars like the EM710, it defines multiple sectors (`bf.nosectors`) and specifies `bf.sector_Tx_shift`, `bf.sector_port_angle`, `bf.sector_stbd_angle`, `bf.sector_nobeams`, `bf.sector_beamangle`, `bf.sector_beamheight`, and `bf.sector_beamwidth` for each sector.
+    *   **Dual-Head Sonars (e.g., EM3000D):** For dual-head systems, it accounts for separate processing of port and starboard sides.
+3.  **Output:** After populating the `bf` structure, it calls `dump_BF_characteristics(outname, &bf)` (an external function) to write the beam footprint characteristics to the specified output file.
+```
+```
+```
