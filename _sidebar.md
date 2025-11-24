@@ -8,6 +8,7 @@
 * [cmaps Tools](cmaps/index.md)
 * [DE Tools](DE/index.md)
 * [EKlook Tools](EKlook/index.md)
+* [elac Tools](elac/index.md)
 * Attitude Tools
     * [appendAtt](att/appendAtt.md)
     * [att2ascii](att/att2ascii.md)
