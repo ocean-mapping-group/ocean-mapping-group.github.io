@@ -1,3 +1,10 @@
+---
+layout: default
+title: SE AUTOFLAGwin
+parent: SE Tools
+nav_order: 5
+---
+
 # `SE_AUTOFLAGwin.c` - Automated Flagging Parameters Window for Sonar Editor
 
 `SE_AUTOFLAGwin.c` is a specialized C program module within the `SE` (Sonar Editor) suite, designed to provide an X-windows graphical interface for configuring and applying automated flagging parameters to multibeam sonar data. This tool empowers users to define and customize rules for automatically identifying and marking (flagging) problematic soundings based on various criteria such as two-slope tests (both across-track and along-track), isolation from neighboring data points, and specific detection modes. It plays a crucial role in semi-automating and streamlining the data cleaning and quality control processes in hydrographic surveys.

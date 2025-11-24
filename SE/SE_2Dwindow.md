@@ -1,3 +1,10 @@
+---
+layout: default
+title: SE 2Dwindow
+parent: SE Tools
+nav_order: 3
+---
+
 # `SE_2Dwindow.c` - 2D Bathymetry View and Editing Tool
 
 `SE_2Dwindow.c` is a specialized C program that provides an interactive X-windows graphical interface for visualizing and editing 2D profiles of bathymetric data. As a core component of the `SE` (likely "Sonar Editor" or "Sounding Editor") suite, its primary function is to enable hydrographic data processors to meticulously examine individual soundings, interactively flag or unflag them based on various quality criteria, and assess overall data quality within a defined geographical area. This tool is instrumental in the manual cleaning and validation of multibeam bathymetry datasets.

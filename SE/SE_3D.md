@@ -1,3 +1,10 @@
+---
+layout: default
+title: SE 3D
+parent: SE Tools
+nav_order: 4
+---
+
 # `SE_3D.c` - 3D OpenGL Visualization and Watercolumn Editing Tool
 
 `SE_3D.c` is a specialized C program functioning as a core component of the `SE` (likely "Sonar Editor" or "Sounding Editor") suite. It provides a highly interactive 3D OpenGL visualization and editing environment tailored for multibeam sonar data, with a particular emphasis on watercolumn scatterers and bathymetric information. This tool allows users to explore sonar data from diverse perspectives, dynamically adjust display parameters, and interact directly with a three-dimensional representation of the seafloor and the watercolumn.

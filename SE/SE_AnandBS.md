@@ -1,3 +1,10 @@
+---
+layout: default
+title: SE AnandBS
+parent: SE Tools
+nav_order: 6
+---
+
 # `SE_AnandBS.c` - Backscatter Analysis and Angular Response Curve Tool
 
 `SE_AnandBS.c`, developed by Anand and JHC, is a specialized C program module integrated within the `SE` (Sonar Editor) suite. This X-windows graphical interface tool is designed for the comprehensive analysis of multibeam sonar backscatter data. Its primary function is to generate and visualize Angular Response Curves (ARCs) and associated metrics, processing raw backscatter snippets, applying various corrections, and presenting data through interactive plots to enhance the understanding of seabed acoustic properties and sonar system performance.
