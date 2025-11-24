@@ -18,7 +18,7 @@ This file tracks the documentation status of the C code in the `code/` directory
 | `code/adcp/readADCP_mod.c` | [exists](adcp/readADCP_mod.md) |
 | `code/adcp/readGenericADCP.c` | [exists](adcp/readGenericADCP.md) |
 | `code/adcp/readWinADCP.c` | [exists](adcp/readWinADCP.md) |
-| `code/att/appendAtt.c` | [exists](ocean-mapping-group.github.io/att/appendAtt.md) |
+| `code/att/appendAtt.c` | [exists](att/appendAtt.md) |
 | `code/att/att2ascii.c` | [exists](ocean-mapping-group.github.io/att/att2ascii.md) |
 | `code/att/attCombo.c` | [exists](ocean-mapping-group.github.io/att/attCombo.md) |
 | `code/att/attedit.c` | [exists](ocean-mapping-group.github.io/att/attedit.md) |
