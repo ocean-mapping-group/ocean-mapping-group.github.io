@@ -6,6 +6,7 @@
 * [bpdemo Tools](bpdemo/index.md)
 * [class Tools](class/index.md)
 * [cmaps Tools](cmaps/index.md)
+* [DE Tools](DE/index.md)
 * Attitude Tools
     * [appendAtt](att/appendAtt.md)
     * [att2ascii](att/att2ascii.md)
