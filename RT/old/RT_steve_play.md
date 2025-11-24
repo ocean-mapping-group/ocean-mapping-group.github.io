@@ -1,3 +1,10 @@
+---
+layout: default
+title: RT steve play
+parent: RT Tools
+nav_order: 5
+---
+
 # `RT_steve_play.c` - Real-Time Sonar Data Unraveling, Monitoring, and Logging Tool
 
 `RT_steve_play.c` (located in an "old" directory, suggesting a legacy or specialized version) is an exceptionally comprehensive and complex C program designed for real-time processing, visualization, and logging of data originating from various multibeam and singlebeam sonar systems. This application functions as a robust real-time monitor, displaying incoming data through an interactive X-windows graphical user interface (GUI) and simultaneously writing processed data to standardized Ocean Mapping Group (OMG) HDCS files and other ancillary formats. It serves as a critical tool for on-the-fly quality control and preliminary data processing during marine surveys.
