@@ -4,6 +4,7 @@
 * [ADCP Tools](adcp/readADCP.md)
 * [ianc Tools](ianc/index.md)
 * [bpdemo Tools](bpdemo/index.md)
+* [class Tools](class/index.md)
 * Attitude Tools
     * [appendAtt](att/appendAtt.md)
     * [att2ascii](att/att2ascii.md)

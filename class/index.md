@@ -1,8 +1,10 @@
 ---
 layout: default
-title: Classification Tools
-nav_order: 4
+title: class Tools
 has_children: true
+nav_order: 4
 ---
-# Classification Tools
-Tools for classifying seafloor characteristics based on backscatter data.
+
+# class Tools
+
+This is a collection of tools from the `class` directory.
