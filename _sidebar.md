@@ -10,6 +10,7 @@
 * [EKlook Tools](EKlook/index.md)
 * [elac Tools](elac/index.md)
 * [gl Tools](gl/index.md)
+* [glseis Tools](glseis/index.md)
 * Attitude Tools
     * [appendAtt](att/appendAtt.md)
     * [att2ascii](att/att2ascii.md)
