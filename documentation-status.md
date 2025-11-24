@@ -49,8 +49,8 @@ This file tracks the documentation status of the C code in the `code/` directory
 | `code/class/plotGSvAR.c` | [exists](ocean-mapping-group.github.io/class/plotGSvAR.md) |
 | `code/class/plotSSclass.c` | [exists](ocean-mapping-group.github.io/class/plotSSclass.md) |
 | `code/class/readAngStrip.c` | [exists](ocean-mapping-group.github.io/class/readAngStrip.md) |
-| `code/cmaps/CnCcolorMap.c` | Missing |
-| `code/cmaps/CnCcolorMapV.c` | Missing |
+| `code/cmaps/CnCcolorMap.c` | [exists](cmaps/CnCcolorMap.md) |
+| `code/cmaps/CnCcolorMapV.c` | [exists](cmaps/CnCcolorMapV.md) |
 | `code/DE/DelayEditor.c` | [exists](ocean-mapping-group.github.io/DE/DelayEditor.md) |
 | `code/EKlook/BatchProcEK.c` | [exists](ocean-mapping-group.github.io/EKlook/BatchProcEK.md) |
 | `code/EKlook/comboCalibEK_ARCs.c` | [exists](ocean-mapping-group.github.io/EKlook/comboCalibEK_ARCs.md) |
