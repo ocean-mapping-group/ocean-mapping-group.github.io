@@ -1,6 +1,7 @@
 * [Home](/)
 * [GEMINI Project Overview](GEMINI-overview.md)
 * [Wiki Info](wiki-info.md)
+* [Usage Guide](usage-guide.md)
 * [ADCP Tools](adcp/readADCP.md)
 * Attitude Tools
     * [appendAtt](att/appendAtt.md)
