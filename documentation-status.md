@@ -4,20 +4,20 @@ This file tracks the documentation status of the C code in the `code/` directory
 
 | C File Path | Documentation Status |
 |---|---|
-| `code/adcp/calc_ellipse1.c` | Missing |
-| `code/adcp/calc_ellipse2.c` | Missing |
-| `code/adcp/calc_ellipse.c` | Missing |
-| `code/adcp/combineMultiADCP.c` | Missing |
-| `code/adcp/combineMultiADCP_garret.c` | Missing |
-| `code/adcp/combineMultiADCP_wshiftoption.c` | Missing |
-| `code/adcp/makeTSmap.c` | Missing |
-| `code/adcp/makeVectorPlot.c` | Missing |
-| `code/adcp/mapGenericADCP.c` | Missing |
+| `code/adcp/calc_ellipse1.c` | [exists](adcp/calc_ellipse1.md) |
+| `code/adcp/calc_ellipse2.c` | [exists](adcp/calc_ellipse2.md) |
+| `code/adcp/calc_ellipse.c` | [exists](adcp/calc_ellipse.md) |
+| `code/adcp/combineMultiADCP.c` | [exists](adcp/combineMultiADCP.md) |
+| `code/adcp/combineMultiADCP_garret.c` | [exists](adcp/combineMultiADCP_garret.md) |
+| `code/adcp/combineMultiADCP_wshiftoption.c` | [exists](adcp/combineMultiADCP_wshiftoption.md) |
+| `code/adcp/makeTSmap.c` | [exists](adcp/makeTSmap.md) |
+| `code/adcp/makeVectorPlot.c` | [exists](adcp/makeVectorPlot.md) |
+| `code/adcp/mapGenericADCP.c` | [exists](adcp/mapGenericADCP.md) |
 | `code/adcp/readADCP.c` | [exists](ocean-mapping-group.github.io/adcp/readADCP.md) |
-| `code/adcp/readADCP_g.c` | Missing |
-| `code/adcp/readADCP_mod.c` | Missing |
-| `code/adcp/readGenericADCP.c` | Missing |
-| `code/adcp/readWinADCP.c` | Missing |
+| `code/adcp/readADCP_g.c` | [exists](adcp/readADCP_g.md) |
+| `code/adcp/readADCP_mod.c` | [exists](adcp/readADCP_mod.md) |
+| `code/adcp/readGenericADCP.c` | [exists](adcp/readGenericADCP.md) |
+| `code/adcp/readWinADCP.c` | [exists](adcp/readWinADCP.md) |
 | `code/att/appendAtt.c` | [exists](ocean-mapping-group.github.io/att/appendAtt.md) |
 | `code/att/att2ascii.c` | [exists](ocean-mapping-group.github.io/att/att2ascii.md) |
 | `code/att/attCombo.c` | [exists](ocean-mapping-group.github.io/att/attCombo.md) |
