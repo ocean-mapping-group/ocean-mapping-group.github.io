@@ -1,8 +1,10 @@
 ---
 layout: default
-title: Grid Tools
-nav_order: 10
+title: grid Tools
 has_children: true
+nav_order: 11
 ---
-# Grid Tools
-Tools for creating, modifying, converting, and analyzing 2D grid files.
+
+# grid Tools
+
+This is a collection of tools from the `grid` directory.
