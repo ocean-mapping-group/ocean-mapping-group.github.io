@@ -37,11 +37,16 @@ getRollResidual <filename.merged> [-testonly]
     *   For pings that are not near the edges of the file (to ensure a full `filter_length` window):
         *   Calculates a `filtered_slope` by averaging `across_track_slope` values within a moving window of `filter_length` (hardcoded to `40`) pings.
     *   Outputs the ping number, the raw `across_track_slope[i]`, and the `filtered_slope` to standard output.
-6.  **Cleanup:** Closes the merged file and frees allocated memory.
 
-## Output
-The tool prints to standard output:
+## Output Files
+The tool prints a three-column ASCII listing to standard output:
 *   Ping number
 *   Raw across-track slope (in degrees) for that ping
 *   Filtered across-track slope (in degrees) for that ping
-```
+
+## Dependencies
+*   `OMG_HDCS_jversion.h`: For OMG-HDCS data structures.
+*   `support.h`: For general utility functions and error handling.
+
+## Notes
+Residual roll errors can introduce significant artifacts in multibeam data if not properly corrected. This tool helps to quantify these errors by analyzing the apparent across-track slope in the data. The moving average filter helps to distinguish systematic biases from short-period noise. The output is suitable for further analysis or input into correction algorithms. The `-testonly` option is listed but not implemented.

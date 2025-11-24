@@ -22,7 +22,7 @@ classSel -lut <LUThandle> [-step <pixels>] [-v]
 |---|---|
 | `-lut <LUThandle>` | **Required.** The handle (base name) for the Look-Up Table files. The tool expects `<LUThandle>.lut` and `<LUThandle>.num` files. |
 | `-step <pixels>` | Specifies the size of the square analysis window (in pixels) for both X and Y dimensions. | `10` |
-| `-v` | Enable verbose output. |
+| `-v` | Enable verbose output. | |
 
 ## How It Works
 1.  **Load Information (`load_up_info`):**
@@ -50,3 +50,16 @@ classSel -lut <LUThandle> [-step <pixels>] [-v]
         *   `<LUThandle>.tai`: Tail backscatter.
     *   These output grids are created with the same header as the `num` file, and each pixel represents the calculated parameter for the corresponding analysis window. The values are scaled to `0-255` based on `dB_min` and `dB_max`.
 4.  **Memory Management:** Allocates and frees memory for the output grids.
+
+## Output Files
+*   `<LUThandle>.mea`: JHC-format `.r4` grid of mean backscatter.
+*   `<LUThandle>.slp`: JHC-format `.r4` grid of slope of angular response.
+*   `<LUThandle>.nad`: JHC-format `.r4` grid of nadir backscatter.
+*   `<LUThandle>.tai`: JHC-format `.r4` grid of tail backscatter.
+
+## Dependencies
+*   `OMG_HDCS_jversion.h`: For `JHC_header` structure.
+*   `support.h`: For general utility functions and error handling.
+
+## Notes
+This tool is used for seafloor classification by deriving statistical properties of backscatter and grazing angle within spatial windows. The output grids can then be used in further classification algorithms or for visualizing seabed texture. The current implementation uses 8-bit output for the `.r4` grids, which implies a scaling of the float values to fit the 0-255 range.

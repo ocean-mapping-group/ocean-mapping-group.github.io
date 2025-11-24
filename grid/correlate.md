@@ -4,6 +4,12 @@ title: correlate
 parent: Grid Tools
 nav_order: 16
 ---
+---
+layout: default
+title: correlate
+parent: Grid Tools
+nav_order: 16
+---
 # correlate
 
 ## Description
@@ -29,3 +35,30 @@ correlate -name <file_prefix> [OPTIONS]
 | `-pixfract` | If enabled, also outputs an ASCII file (`XYZ.list`) containing sub-pixel accurate correlation results. | |
 | `-secondpass` | Enables a second pass mode where previous X/Y shift files (`.xshift`, `.yshift`) are used to initialize the search, allowing for more refined results. Requires a file prefix to load the previous shifts. | |
 | `-v` | Enable verbose output during processing. | |
+
+## How It Works
+1.  **File Opening:** Opens the master and slave input images (`.master`, `.slave`) and creates output files for X-shift (`.xshift`), Y-shift (`.yshift`), and correlation coefficient (`.sdev`).
+2.  **Header Reading:** Reads `JHC_header` from input image files to get dimensions.
+3.  **Parameter Setup:** Initializes `x_size`, `y_size` (window size), `x_range`, `y_range` (search range), `skip_pixels`, `gross_offset_x`, `gross_offset_y`, and `min_coeff` from command-line arguments.
+4.  **Correlation Loop:** Iterates through the master image based on `skip_pixels` and `xbound`/`ybound`:
+    *   For each pixel in the master image, it extracts a `window_x_size` x `window_y_size` template.
+    *   It then searches within a `search_range_x` x `search_range_y` area in the slave image around the expected corresponding location (adjusted by `gross_offset` or `secondpass` data).
+    *   **Correlation Metric:** Calculates the correlation coefficient (or inverse sum of squared differences) between the master template and each candidate window in the slave image.
+    *   The location of the best match gives the X and Y shifts, and the value of the match is the correlation coefficient.
+    *   These values are written to the respective output `.xshift`, `.yshift`, and `.sdev` files.
+5.  **Sub-pixel Refinement (`-pixfract`):** If enabled, it applies sub-pixel interpolation to refine the shift estimates.
+6.  **Output Header:** Creates and writes `JHC_header` for the output shift and correlation files.
+
+## Output Files
+*   `<file_prefix>.xshift`: An 8-bit JHC grid of X-shifts.
+*   `<file_prefix>.yshift`: An 8-bit JHC grid of Y-shifts.
+*   `<file_prefix>.sdev`: An 8-bit JHC grid of correlation coefficients (or residual differences).
+*   `XYZ.list`: An ASCII file with sub-pixel correlation results (if `-pixfract` is used).
+
+## Dependencies
+*   `array.h`: For `JHC_header` structure and image data handling.
+*   `support.h`: For general utility functions and error handling.
+*   `math.h`: For mathematical functions.
+
+## Notes
+The correlation coefficient is typically scaled to an 8-bit range (0-100) for storage in the `.sdev` image. This tool is often used as a preprocessing step for creating Digital Elevation Models from stereo optical imagery or for tracking displacement in time-lapse image sequences.

@@ -22,94 +22,37 @@ It acts as a graphical device driver for `plotlib`, translating generic plotting
 
 ## Functions (Implementing `plotlib` Driver Interface)
 
-### `plot_start(float dx, float dy)`
-Initializes the X-windows display and creates the main plotting window.
-*   **`dx`, `dy`:** The desired drawing area width and height in `plotlib` units.
-*   Calculates window dimensions (`wdx`, `wdy`) based on `MAXWINDOW` and scaling.
-*   Initializes X-windows connection (`start_x()`).
-*   Creates and maps the main window (`main_window`) and a graphic window (`graphic_window[0]`).
-*   Sets up the colormap and initial graphics context (`image_gc`).
-*   Sets the logical drawing area within `graphic_param[0]`.
-
-### `plot_end()`
-Finalizes the X-windows display.
-*   Enters an event loop (`process_x_events`) to handle user interaction (e.g., zooming, closing).
-*   If `just_dump` is set, it dumps the window content to a PPM file (`viewmeta.dump.ppm`).
-*   Closes the X-windows connection (`terminate_x()`).
-
-### `plot_rotate()`
-(Empty function) Not directly implemented for screen display; rotation would typically be handled by transforming coordinates.
-
-### `plot_move(float x, float y)`
-Moves the logical pen position.
-*   **`x`, `y`:** Target coordinates in `plotlib` units.
-*   Updates `last_Xcoord` and `last_Ycoord` (global variables used by drawing functions).
-
-### `plot_line(float x, float y)`
-Draws a line on the X-windows display.
-*   **`x`, `y`:** Target coordinates in `plotlib` units.
-*   Calls `jhc_line()` (an X-windows drawing function from `X_extra.h`) to draw a line from `(last_Xcoord, last_Ycoord)` to `(x, y)` in both the main window and any sub-windows.
-*   Updates `last_Xcoord` and `last_Ycoord`.
-
-### `plot_text(char *text)`
-Draws a text string on the X-windows display.
-*   **`text`:** The string to draw.
-*   Calls `jhc_text()` (an X-windows drawing function from `X_extra.h`) to draw the text at the last pen position in both the main window and any sub-windows.
-
-### `plot_textrot(float angle)`
-Sets the orientation for text drawing.
-*   **`angle`:** Rotation angle in degrees.
-*   Calculates a normalized angle for text path setting (though the actual X-windows text drawing uses font rotation, not path).
-
-### `plot_pen(int pen)`
-Selects the drawing pen (color).
-*   **`pen`:** Pen number from `plotlib`'s internal mapping.
-*   Maps the `plotlib` pen number to an X-windows color and updates `pennum` (used by `jhc_line` and `jhc_text`). Handles a swap for Apollo black/white.
-
-### `plot_textsize(float x, float y)`
-Sets the size of the text characters.
-*   **`x`, `y`:** Character width and height scaling factors (relative to `plotlib` units).
-*   Calls `jhc_select_font()` (an X-windows font selection function from `X_extra.h`) based on the Y-scaling.
-
-### `plot_clip(float x0, float y0, float x1, float y1)`
-(Empty function) Clipping is not directly implemented by this module.
+*   `plot_start(float dx, float dy)`: Initializes the X-windows display and creates the main plotting window. Calculates window dimensions, initializes X-windows connection, creates and maps the main window and a graphic window. Sets up the colormap and initial graphics context.
+*   `plot_end()`: Finalizes the X-windows display. Enters an event loop (`process_x_events`) to handle user interaction (e.g., zooming, closing). If `just_dump` is set, it dumps the window content to a PPM file. Closes the X-windows connection.
+*   `plot_rotate()`: (Empty function) Not directly implemented for screen display; rotation would typically be handled by transforming coordinates.
+*   `plot_move(float x, float y)`: Moves the logical pen position. Updates `last_Xcoord` and `last_Ycoord` (global variables used by drawing functions).
+*   `plot_line(float x, float y)`: Draws a line on the X-windows display. Calls `jhc_line()` (an X-windows drawing function) to draw a line from `(last_Xcoord, last_Ycoord)` to `(x, y)` in both the main window and any sub-windows.
+*   `plot_text(char *text)`: Draws a text string on the X-windows display. Calls `jhc_text()` (an X-windows drawing function) to draw the text at the last pen position in both the main window and any sub-windows.
+*   `plot_textrot(float angle)`: Sets the orientation for text drawing. Calculates a normalized angle for text path setting.
+*   `plot_pen(int pen)`: Selects the drawing pen (color). Maps the `plotlib` pen number to an X-windows color and updates `pennum`.
+*   `plot_textsize(float x, float y)`: Sets the size of the text characters. Calls `jhc_select_font()` (an X-windows font selection function) based on the Y-scaling.
+*   `plot_clip(float x0, float y0, float x1, float y1)`: (Empty function) Clipping is not directly implemented by this module.
 
 ## Event Handling Functions
 
-### `refresh_window(Window window)`
-Refreshes the content of a given window (main or sub-window) by copying its pixmap buffer to the screen.
+*   `refresh_window(Window window)`: Refreshes the content of a given window (main or sub-window) by copying its pixmap buffer to the screen.
+*   `view_subarea(int window_idx, int anchor_x, int anchor_y, int toe_x, int toe_y)`: Creates a new sub-window to display a zoomed-in view of a selected rectangular area. Re-parses the metafile, redrawing all commands constrained to the new sub-window's coordinate system and clipping area.
+*   `process_x_events(int go)`: The main X-windows event loop. Handles `ConfigureNotify`, `Expose`, `KeyPress`, `MotionNotify`, `ButtonRelease`, and `ButtonPress` events. Supports rubber-band selection for zooming, printing coordinates, and exiting.
+*   `dump_the_window(Window window, int the_width, int the_height, char *filename)`: Captures the content of an X-window and saves it as a PPM (Portable Pixmap) image file.
 
-### `view_subarea(int window_idx, int anchor_x, int anchor_y, int toe_x, int toe_y)`
-Creates a new sub-window to display a zoomed-in view of a selected rectangular area.
-*   **`window_idx`:** Index of the parent window (0 for main, negative for sub-windows).
-*   **`anchor_x`, `anchor_y`, `toe_x`, `toe_y`:** Coordinates of the rubber-banded rectangle in device pixels.
-*   Calculates the `plotlib` coordinate range for the sub-area.
-*   Creates a new X-window (`sub_window[no_sub_windows]`) and associated pixmap (`sub_pixmap[no_sub_windows]`).
-*   **Re-parses Metafile:** Seeks to the beginning of the `plot_infile` and re-parses the entire metafile, redrawing all commands but now constrained to the new sub-window's coordinate system and clipping area.
+## How It Works
+`viewmeta.c` implements a `plotlib` device driver that renders generic `plotlib` commands onto an X-windows graphical display. It initializes an X-windows connection, creates a main window, and sets up a graphics context. When `plotdriver` processes a `plotlib` metafile and dispatches commands to `viewmeta.c`, these commands are translated into X-windows drawing primitives (lines, text, colors). The module uses double-buffering (drawing to an off-screen pixmap and then copying to the visible window) to prevent flickering. An event loop (`process_x_events`) handles user interactions, enabling interactive features like zooming (by re-parsing and re-drawing within a new coordinate system) and screenshot capture.
 
-### `process_x_events(int go)`
-The main X-windows event loop.
-*   Handles `ConfigureNotify`, `Expose`, `KeyPress`, `MotionNotify`, `ButtonRelease`, and `ButtonPress` events.
-*   **KeyPress:** `q` or `d` to exit, `r` to refresh, `x` to close a sub-window.
-*   **Button1 (Left-click):** Initiates a rubber-banding operation. On release, it calls `view_subarea()` to create a zoomed-in sub-window.
-*   **Button2 (Middle-click):** Prints the `plotlib` coordinates (cm) of the cursor to stdout.
-*   **MotionNotify:** Handles drawing the rubber-band rectangle.
-
-### `dump_the_window(Window window, int the_width, int the_height, char *filename)`
-Captures the content of an X-window and saves it as a PPM (Portable Pixmap) image file.
-*   **`window`:** The X-window to capture.
-*   **`the_width`, `the_height`:** Dimensions of the window.
-*   **`filename`:** Name of the output PPM file.
-*   Uses `XGetImage` to retrieve pixel data and writes it to a PPM file. Handles `TrueColor` and pseudo-color visuals.
+## Output Files
+*   The primary output is a graphical display in an X-windows window.
+*   `viewmeta.dump.ppm`: A PPM image file if `just_dump` is set (for screenshots).
 
 ## Dependencies
 *   `plotdriver.h`: Defines the interface for `plotlib` device drivers.
 *   `plotlib.h`: Defines general `plotlib` constants and global variables.
 *   `viewmeta.h`: Defines `viewmeta`-specific constants and global variables, including `MAXWINDOW`, `MAX_SUB_WINDOW`.
-*   `X_extra.h`: Provides custom X-windows drawing functions (`start_x`, `terminate_x`, `jhc_line`, `jhc_text`, `jhc_fill_rect`, `jhc_scaled_values`, `j_rubber_band`, `jMOD_XCreateSimpleWindow`, `jhc_select_font`, `do_colormap`, `prime_palettes`).
+*   `X_extra.h`: Provides custom X-windows drawing functions (`start_x`, `terminate_x`, `jhc_line`, `jhc_text`, etc.).
+*   X11 and GLX libraries.
 
 ## Notes
-*   The `plotdriver.c` module (which calls these `plot_*` functions) is responsible for reading the metafile and invoking the appropriate functions in this module.
-*   Zooming (creating sub-windows) is implemented by re-parsing the entire metafile and applying coordinate transformations.
-```
-```
+`viewmeta` is a crucial tool for interactively previewing and debugging `plotlib` generated output, offering a dynamic alternative to static file formats like HPGL. Its ability to zoom into specific areas and capture screenshots enhances its utility for analysis and documentation. The `SUN_flag` is a legacy option for specific workstation types.

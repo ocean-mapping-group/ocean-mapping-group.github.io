@@ -32,7 +32,6 @@ The input ASCII file (from `swatheditor`'s 2D dump) is expected to contain:
 *   `reg_left reg_right` (float, float): Global X range of the region.
 *   `reg_bot reg_top` (float, float): Global Y range of the region.
 *   `sub_left sub_right` (float, float): Sub-region X range.
-*   `sub_bot sub_top` (float, float): Sub-region Y range.
 *   `box_left box_right` (float, float): Box X range.
 *   `box_bot box_top` (float, float): Box Y range.
 *   `tide` (int): Tide correction flag.
@@ -47,7 +46,7 @@ The input ASCII file (from `swatheditor`'s 2D dump) is expected to contain:
     *   `shape`: Shape index (0 for cross, 1 for diamond).
 
 ## How It Works
-1.  **Initialization:** Parses command-line arguments to set input/output filenames, plot size, and `patch_flag`.
+1.  **Initialization:** Parses command-line arguments to set plotting options, input file names, plot size, and `patch_flag`.
 2.  **File Opening:** Opens the input ASCII data file (`-infile`) for reading and initializes the `plotlib` PostScript output (`plot.meta`).
 3.  **Parameter Reading:** Reads various plot parameters (region bounds, sub-region bounds, box bounds, tide/flag settings, `xmin`, `xmax`, `ymin`, `ymax`) from the input ASCII file. If `patch_flag` is set, it also reads roll, pitch, gyro offsets, and time delay.
 4.  **Plot Setup:**
@@ -65,7 +64,13 @@ The input ASCII file (from `swatheditor`'s 2D dump) is expected to contain:
 7.  **Plot Metadata:** Adds labels for tide correction, flagging status, processing type (observed/processed), and view direction.
 8.  **Cleanup:** Calls `plot_close` to finalize the PostScript output.
 
-## Output
-*   A PostScript metafile (`plot.meta` or specified by `-outfile`) containing the 2D plot.
-```
-```
+## Output Files
+*   `<outfile.meta>`: A PostScript metafile (`.meta`) containing the 2D plot.
+
+## Dependencies
+*   `plotlib.h`: For `plotlib` functions.
+*   `support.h`: For general utility functions.
+*   `X_extra.h`: For X-windows related drawing utilities.
+
+## Notes
+`plot2D` is an essential tool for visualizing calibration results and data quality in multibeam hydrography. The "patch test" plots are particularly useful for identifying and correcting constant errors in roll, pitch, gyro, and latency. The tool's reliance on specific ASCII dump formats highlights its role within a broader processing workflow. The `label` option is listed but not implemented.

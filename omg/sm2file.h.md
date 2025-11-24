@@ -12,14 +12,14 @@ nav_order: 63
 The header defines structures for record headers, file headers, and a file block that manages the state of an open sm2 file. It also declares several external functions for opening, reading, writing, and closing sm2 files.
 
 ## Macros
-```c
-#define SM2FILE 0
-#define SM2eof ((time)0)
-#define SM2_OPEN_ERR -10
-#define SM2_READ_ERR -20
-#define SM2_WRIT_ERR -30
-#define SM2_ERRC_MAX 5
-```
+| Macro | Description |
+|---|---|
+| `SM2FILE` | `0` |
+| `SM2eof` | `((time)0)` |
+| `SM2_OPEN_ERR` | `-10` |
+| `SM2_READ_ERR` | `-20` |
+| `SM2_WRIT_ERR` | `-30` |
+| `SM2_ERRC_MAX` | `5` |
 These macros define constants related to the sm2 file format and error codes.
 
 ## Data Structures
@@ -102,3 +102,6 @@ The header declares several external functions (presumably implemented in `libsm
 
 ## Dependencies
 This header relies on `sm2misc.h` and `sm2list.h`, which are not provided here but likely contain definitions for `time`, `address`, and `listCell`.
+
+## Notes
+This header file is crucial for any application that needs to interact with the custom "sm2" binary file format, providing the necessary data structures and function declarations to correctly parse and manipulate these files. The use of macros for common structure names (`r__hdr`, `f__hdr`) aims to simplify code readability.

@@ -4,6 +4,12 @@ title: calcXYZ
 parent: Grid Tools
 nav_order: 10
 ---
+---
+layout: default
+title: calcXYZ
+parent: Grid Tools
+nav_order: 10
+---
 # calcXYZ
 
 ## Description
@@ -26,3 +32,25 @@ calcXYZ [OPTIONS] -coeff <coeff_map.8bit> -parallax <parallax_map.8bit> -out <ou
 | `-flen <value>` | Specifies the camera's focal length in millimeters, used in the 3D reconstruction calculations. | `50.0` |
 | `-csep <value>` | Specifies the camera separation (baseline) in millimeters, used in the 3D reconstruction calculations. | `220.0` |
 | `-v` | Enable verbose output, printing detailed information during processing. | |
+
+## How It Works
+1.  **File Opening:** Opens the input correlation coefficient map (`-coeff`), parallax map (`-parallax`), and the output XYZ file. If `-spix` is used, it opens the sub-pixel input file instead of the parallax map.
+2.  **Header Reading:** Reads the `JHC_header` from the correlation coefficient map.
+3.  **Parameter Setup:** Initializes `focal_length`, `camera_separation`, and `min_coefficient` from command-line arguments.
+4.  **Pixel Iteration:** Iterates through each pixel in the input image grids:
+    *   Reads the correlation coefficient and parallax value for the current pixel.
+    *   If the coefficient is above `min_coefficient` (and the parallax value is valid):
+        *   **3D Coordinate Calculation:** Uses the `focal_length`, `camera_separation`, and parallax value to calculate the 3D X, Y, Z coordinates for that pixel. This involves trigonometric calculations based on stereo geometry.
+        *   Writes the X, Y, Z coordinates to the output ASCII file.
+5.  **Sub-pixel Mode (`-spix`):** If this option is used, the tool reads pre-computed sub-pixel solutions (X, Y, Z coordinates) directly from the specified ASCII file, bypassing the image processing steps.
+
+## Output Files
+*   `<output.xyz>`: An ASCII file containing `X Y Z` coordinates for each valid point.
+
+## Dependencies
+*   `array.h`: For `JHC_header` structure.
+*   `support.h`: For general utility functions and error handling.
+*   `math.h`: For mathematical functions.
+
+## Notes
+This tool is fundamental for generating 3D point clouds from stereo imagery, which can then be used for terrain modeling or other spatial analyses. The quality of the output point cloud heavily depends on the accuracy of the input parallax and correlation coefficient maps, as well as the calibration parameters (`-flen`, `-csep`).

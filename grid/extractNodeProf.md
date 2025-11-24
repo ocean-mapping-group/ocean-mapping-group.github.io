@@ -4,6 +4,12 @@ title: extractNodeProf
 parent: Grid Tools
 nav_order: 26
 ---
+---
+layout: default
+title: extractNodeProf
+parent: Grid Tools
+nav_order: 26
+---
 # extractNodeProf
 
 ## Description
@@ -25,6 +31,34 @@ extractNodeProf -mapsheet <area.r4> -outprefix <prefix> -custom_Salish <lat.r4> 
 | `-custom_Salish <lat> <lon> <mask> <bathy>` | **Required.** Specifies the four critical geometry files that define the SalishSeaCast model grid: <br> 1. `lat.r4`: A grid of node latitudes. <br> 2. `lon.r4`: A grid of node longitudes. <br> 3. `mask.r4`: A grid defining valid water cells. <br> 4. `bathy.r4`: A grid of the model's bathymetry. | `-custom_Salish SalishSea_lat.r4 SalishSea_lon.r4 SalishSea_mask.r4 SalishSea_bathy.r4` |
 | `-param3D <model_time_file(s)>` | **Required.** One or more `.time` files from the SalishSeaCast output. The tool uses the prefix and path of each `.time` file to locate the corresponding parameter files (e.g., `.salinity.r4`, `.temperature.r4`, etc.) for that specific time step. | `-param3D model/20241119/salishsea.t00z.temperature.time` |
 | `-v` | Enable verbose output during processing. | |
+
+## How It Works
+1.  **Input Loading:** Reads the mapsheet (`-mapsheet`) and the four SalishSeaCast geometry files (`-custom_Salish`). These define the region of interest and the model grid.
+2.  **Node Identification:** Identifies all model nodes that fall within the specified mapsheet area.
+3.  **Time Step Iteration:** For each model time step specified by `-param3D`:
+    *   Reads the corresponding 3D parameter grids (salinity, temperature, sound speed, U, V, W currents).
+    *   For each identified node within the mapsheet area:
+        *   Extracts the full vertical profile (all depth layers) for salinity, temperature, sound speed, and U/V/W currents.
+        *   Calculates surface current magnitude and azimuth.
+    *   Writes the geographic coordinates and grid index of the node to a `.node` file.
+    *   Writes the surface current vectors to a `.curr` file.
+    *   Writes the full vertical profile data to a `.prof` file.
+
+## Output Files
+For each input file specified with `-param3D`, the tool generates a set of three files, using the date string from the input file:
+
+1.  **`<outprefix>.<datestr>.node`**: An ASCII file listing the geographic coordinates (`latitude longitude`) and grid index of every model node found within the mapsheet area.
+2.  **`<outprefix>.<datestr>.curr`**: A JCU-format navigation file containing the **surface** current vectors (magnitude and azimuth) for each node. This file can be used for vector plotting.
+3.  **`<outprefix>.<datestr>.prof`**: A detailed ASCII file containing the full vertical profile data for each node. For each node, it lists the data for every depth layer, including depth, salinity, temperature, sound speed, and the u, v, and w velocity components.
+
+## Dependencies
+*   `array.h`: For `JHC_header` structure and grid data handling.
+*   `support.h`: For general utility functions and error handling.
+*   `j_proj.h`: For coordinate projection functions.
+*   `jcu_nav.h`: For `jcu_nav_rec` structure (for current vectors).
+
+## Notes
+This tool is essential for downscaling and analyzing large-scale oceanographic model outputs for specific regions, making it valuable for coastal oceanography and environmental modeling studies. The output format is convenient for comparison with in-situ observations or for generating detailed visualizations of 3D oceanographic conditions.
 
 ## Output Files
 For each input file specified with `-param3D`, the tool generates a set of three files, using the date string from the input file:

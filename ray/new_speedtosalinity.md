@@ -31,12 +31,7 @@ new_speedtosalinity -in <infile> -out <outfile> (-wilson | -cml) [-v] [-test]
 The input file (`-in`) is expected to be a comma-separated ASCII file with three columns:
 `depth, sound_velocity, temperature`
 
-## Output File Format (ASCII)
-The output file (`-out`) will be a comma-separated ASCII file with four columns:
-`depth, sound_velocity, temperature, best_guess_salinity`
-
 ## How It Works
-
 1.  **Initialization:** Parses command-line arguments to get input/output filenames, select the empirical equation (`-wilson` or `-cml`), and set verbose/test modes.
 2.  **File Opening:** Opens the input ASCII file (`-in`) for reading and the output ASCII file (`-out`) for writing.
 3.  **Data Processing Loop:** Reads `depth`, `sound_velocity`, and `temperature` from each line of the input file:
@@ -53,8 +48,12 @@ The output file (`-out`) will be a comma-separated ASCII file with four columns:
     *   Calculates sound velocity based on temperature (`t`), pressure (`p`), and salinity (`s`) using the Chen-Millero-Li empirical formula, which is generally more accurate.
 6.  **Cleanup:** Closes input and output files.
 
+## Output Files
+*   `<outfile>`: An ASCII file containing `depth`, `sound_velocity`, `temperature`, `best_guess_salinity` data.
+
+## Dependencies
+*   `support.h`: For general utility functions.
+*   `math.h`: For mathematical functions.
+
 ## Notes
-*   Pressure is in kg/cm², Salinity is in parts per thousand (ppt).
-*   The `salinity` iteration increments in 0.1 ppt steps implicitly (by dividing by 10.0 for calculations).
-```
-```
+This tool is a valuable component in oceanographic data analysis, particularly when direct salinity measurements are missing or unreliable. By leveraging the empirical relationships between sound velocity, temperature, salinity, and pressure, it enables the reconstruction of crucial oceanographic parameters. The two available equations (Wilson and Chen-Millero-Li) provide options for different accuracy requirements. The tool creates a new file, preserving the original input.

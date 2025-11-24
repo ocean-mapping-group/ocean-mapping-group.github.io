@@ -23,23 +23,25 @@ splitOMG <OMG_HDCS_infile> <OMG_HDCS_outfile> [OPTIONS]
 | `<OMG_HDCS_infile>` | **Required.** The path to the input OMG-HDCS merged file. |
 | `<OMG_HDCS_outfile>` | **Required.** The path for the new output OMG-HDCS merged file containing the subset of data. |
 
-### Splitting Options (Choose one)
+### Splitting Options (Choose one or more)
 | Option | Description |
 |---|---|
-| `-first <ping_num>` / `-last <ping_num>` | Specifies the starting and ending ping numbers (inclusive) for the subset. |
-| `-time_start <year> <jday> <hr> <min> <sec>` / `-time_end <year> <jday> <hr> <min> <sec>` | Specifies a date and time range for the subset. The tool will find the corresponding ping numbers. |
+| `-first <ping_num>` | Specifies the starting ping number (inclusive) for the subset. |
+| `-last <ping_num>` | Specifies the ending ping number (inclusive) for the subset. |
+| `-time_start <year> <jday> <hr> <min> <sec>` | Specifies a date and time range for the subset. The tool will find the corresponding ping numbers. |
+| `-time_end <year> <jday> <hr> <min> <sec>` | Specifies a date and time range for the subset. The tool will find the corresponding ping numbers. |
 
 ### Analysis Option
 | Option | Description |
 |---|---|
 | `-into_natural_lines` | Instead of splitting, this mode calculates and outputs the vessel's speed (in knots) and change in heading (in degrees) between consecutive pings. The output is an ASCII file (`<OMG_HDCS_outfile>`) with ping number, speed, and dhead. This option overrides the splitting functionality. |
+| `-minknots` | (Present in `USAGE` but not implemented) Likely intended to filter based on minimum speed. |
+| `-minturn` | (Present in `USAGE` but not implemented) Likely intended to filter based on minimum turn. |
 
 ### Other Options
 | Option | Description |
 |---|---|
-| `-v` | Enable verbose output. |
-| `-minknots` | (Present in `USAGE` but not implemented) Likely intended to filter based on minimum speed. |
-| `-minturn` | (Present in `USAGE` but not implemented) Likely intended to filter based on minimum turn. |
+| `-v` | Enable verbose output. | |
 
 ## How It Works
 1.  **Input Reading:** Opens the input merged file and reads its summary header.
@@ -60,3 +62,14 @@ splitOMG <OMG_HDCS_infile> <OMG_HDCS_outfile> [OPTIONS]
         *   Reads the profile header and raw beams for the current ping.
         *   Writes these profile and beam data to the new output merged file.
 4.  **Cleanup:** Closes all open files.
+
+## Output Files
+*   `<OMG_HDCS_outfile>`: A new OMG-HDCS merged file containing the subset of data (if splitting) or an ASCII file with speed and heading change (if `-into_natural_lines` is used).
+
+## Dependencies
+*   `OMG_HDCS_jversion.h`: For OMG-HDCS data structures.
+*   `support.h`: For general utility functions and error handling.
+*   `j_proj.h`: For coordinate projection functions.
+
+## Notes
+`splitOMG` is a versatile tool for managing merged data, allowing for either precise extraction of subsets for further processing or for analysis of survey line characteristics. The `-into_natural_lines` mode is particularly useful for quality control, helping to identify turns or changes in vessel speed. The tool always creates a new output file, preserving the integrity of the original. The `-minknots` and `-minturn` options are listed in the usage but not implemented.

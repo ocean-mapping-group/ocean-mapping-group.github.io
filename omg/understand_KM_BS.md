@@ -51,7 +51,7 @@ understand_KM_BS <OMG_HDCS_datafile(s)> [OPTIONS] -out <ASCII_listing_file>
 | `-areaV` | Area Volume (calculated from beam widths and slant range). |
 | `-sstrc` | Sidescan trace average intensity. |
 | `-altrk` | Along-track SRA (Sonar Relative Angle) correction values (reads from `.SRA_along_atit.r4`). |
-| `-actrk` | Across-track SRA correction values (reads from `.SRA_across_atit.r4`). |
+| `-actrk` | Across-track SRA (Sonar Relative Angle) correction values (reads from `.SRA_across_atit.r4`). |
 
 ### Calibration Manipulation
 | Option | Description |
@@ -60,31 +60,28 @@ understand_KM_BS <OMG_HDCS_datafile(s)> [OPTIONS] -out <ASCII_listing_file>
 | `-flip_bscal` | Flips the sign of `BScalibration_dB` (applies `+2 * BSCAL` to compensate for double sign-flip). |
 
 ### Profile-level Parameters (for line plots)
-| Option | Description |
+| Option | Description | Default |
 |---|---|
-| `-scstr` | Steering angle of transmit sectors. |
-| `-pitch` | Vessel pitch (deg). |
-| `-rollt` | Vessel roll (deg). |
-| `-headi` | Vessel heading (deg). |
+| `-scstr` | Steering angle of transmit sectors. | |
+| `-pitch` | Vessel pitch (deg). | |
+| `-rollt` | Vessel roll (deg). | |
+| `-headi` | Vessel heading (deg). | |
 | `-RPGrange <min> <max>` | Range for values of profile-level parameters. | `-10` to `10` (for pitch/roll/scstr), `0` to `360` (for heading) |
 
 ### Filtering & Range Options
 | Option | Description |
 |---|---|
-| `-specific_swath <val>` | Processes data only for a specific swath (0-indexed). |
-| `-start <ping_num>` / `-end <ping_num>` | Processes pings only within this range (inclusive). | All pings |
+| `-specific_swath <val>` | Processes data only for a specific swath (0-indexed). | |
+| `-start <ping_num>` | Processes pings only from this ping number (inclusive). | All pings |
+| `-end <ping_num>` | Processes pings only up to this ping number (inclusive). | All pings |
 
 ### Other Options
 | Option | Description |
 |---|---|
-| `-v` | Enable verbose output. |
-| `-ascii_dmp` | Dumps chosen parameter values to the ASCII output file. |
-| `-recalc_NormalIncid` | Re-calculates `owtt_to_normal_incidence_crossover` in Simrad TVG. |
+| `-v` | Enable verbose output. | |
+| `-ascii_dmp` | Dumps chosen parameter values to the ASCII output file. | |
+| `-recalc_NormalIncid` | Re-calculates `owtt_to_normal_incidence_crossover` in Simrad TVG. | |
 | `-alrxbp <angle> <dB_drop>` | Sets parameters for Along-track Receiver Beam Pattern (alrxbp) calculation (used with `-altrk`). | `10` (angle), `3.0` (dB_drop) |
-
-## Output
-*   **`<ASCII_listing_file>` (specified by `-out`):** Contains space-separated values of ping number, beam number, ping time, beam angle, and the chosen parameter for each beam. This is generated only if `-ascii_dmp` is used.
-*   **`<ASCII_listing_file>.dmp`:** A binary file (JHC `.r4` float array) containing a 2D grid of the chosen parameter (beam number vs. ping number). This file is always created.
 
 ## How It Works
 1.  **Initialization & Argument Parsing:** Sets up various flags and parameters based on command-line arguments, including the chosen parameter to dump, ranges, and debugging options.
@@ -99,6 +96,21 @@ understand_KM_BS <OMG_HDCS_datafile(s)> [OPTIONS] -out <ASCII_listing_file>
         *   **Calibration Manipulation (`-remove_bscal`, `-flip_bscal`):** Applies transformations to the `BScalibration_dB` if specified.
         *   **Sidescan Trace Average (`-sstrc`):** Reads the raw sidescan trace and calculates its linear average, then converts it to dB.
         *   **Along/Across Track SRA (`-altrk`, `-actrk`):** Reads pre-calculated SRA values from external `.r4` files.
-    *   **Output to Dump File:** Writes the extracted/calculated parameter values (either profile-level or beam-level) to the `.dmp` file.
+    *   **Output to Dump File:** Writes the extracted/calculated parameter values (either profile-level or beam-level) to the binary `.dmp` file.
     *   **Output to ASCII File (`-ascii_dmp`):** If specified, it also writes ping number, beam number, ping time, beam angle, and the chosen parameter to the ASCII output file.
 4.  **Cleanup:** Closes all open files.
+
+## Output Files
+*   `<ASCII_listing_file>.dmp`: A binary JHC `.r4` float array file containing a 2D grid of the chosen parameter (beam number vs. ping number).
+*   `<ASCII_listing_file>`: An ASCII file containing a listing of the chosen parameter (if `-ascii_dmp` is used).
+
+## Dependencies
+*   `OMG_HDCS_jversion.h`: For OMG-HDCS data structures.
+*   `array.h`: For `JHC_header` structure.
+*   `support.h`: For general utility functions and error handling.
+*   `j_proj.h`: For coordinate projection functions.
+*   `simrad_tvg.h`: For Simrad TVG functions.
+*   `j_calibration.h`: For calibration functions (e.g., `compute_BTS`).
+
+## Notes
+This tool is invaluable for diagnostic analysis of KMALL data, allowing users to understand how various backscatter components contribute to the final reflectivity and how different calibration parameters are applied. It helps in troubleshooting backscatter processing issues and in developing new calibration strategies. The output formats are suitable for detailed plotting and further analysis.

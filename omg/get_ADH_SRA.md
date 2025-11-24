@@ -48,3 +48,19 @@ get_ADH_SRA <input_omg_file(.merged)> [OPTIONS]
         *   **`only_VRA` Method (without attitude data):** If `only_VRA` is selected and `use_attitudedata` is *not* used, it calls `get_grazing_angles()` to compute VRA (Vertically Referenced Angles) directly from depth and across-track values. It then converts the VRA sign convention.
     *   **Output Writing:** Writes the calculated angle values for each beam to the corresponding `.r4` (and optionally ASCII) output files.
 5.  **Cleanup:** Closes all open files.
+
+## Output Files
+*   `<input_omg_file_prefix>.SRA_across.r4`: JHC float grid of across-track SRA.
+*   `<input_omg_file_prefix>.SRA_along.r4`: JHC float grid of along-track SRA.
+*   `<input_omg_file_prefix>.VRA.r4`: JHC float grid of VRA.
+*   Corresponding ASCII files (`.SRA_across.txt`, `.SRA_along.txt`, `.VRA.txt`) if `-write_ascii` is used.
+
+## Dependencies
+*   `OMG_HDCS_jversion.h`: For OMG-HDCS data structures.
+*   `array.h`: For `JHC_header` structure and `.r4` file handling.
+*   `support.h`: For general utility functions and error handling.
+*   `j_proj.h`: For coordinate projection functions.
+*   `grazing_angle.h`: For `get_SRA`, `get_grazing_angles` functions.
+
+## Notes
+The calculation of Sonar Relative Angles and Vertically Referenced Angles is fundamental for understanding how the sonar beam interacts with the seafloor and for applying correct backscatter compensation. This tool provides various methods for computing these angles, accommodating different data availability (e.g., with or without precise attitude data) and analytical needs. The output `.r4` grids allow for easy visualization and integration with other gridded data.

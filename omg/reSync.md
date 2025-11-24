@@ -36,4 +36,14 @@ reSync <mergefile(s)> [-v] [-testonly]
         *   If `beams[i].observedDepth` is valid but `before_beams[i].observedDepth` is not, the sidescan info for `after_beams[i]` is zeroed out, and a `lost` counter is incremented.
         *   The `after_beams` (with restored sidescan info) are then written back to the current profile `k` in the merged file.
     *   **Update `before_beams`:** Before processing the next ping, the `beams` from the current ping `k` are copied to `before_beams` to be used as a reference for ping `k+1`.
-5.  **In-Place Modification:** The merged file is modified in place, updating the sidescan data pointers for desynchronized beams.
+5.  **In-Place Update:** The merged file is modified in place, updating the sidescan data pointers for desynchronized beams.
+
+## Output Files
+The input merged files are modified in-place (unless `-testonly` is used).
+
+## Dependencies
+*   `OMG_HDCS_jversion.h`: For OMG-HDCS data structures.
+*   `support.h`: For general utility functions and error handling.
+
+## Notes
+Sidescan data can become desynchronized from bathymetry due to various reasons, including data acquisition issues or processing errors. This tool provides a heuristic approach to recover missing sidescan data pointers by assuming continuity from adjacent pings. This can be critical for generating complete sidescan mosaics. The tool modifies merged files in place, so backups are recommended. The `-testonly` option is useful for evaluating the effect of the synchronization before applying permanent changes.

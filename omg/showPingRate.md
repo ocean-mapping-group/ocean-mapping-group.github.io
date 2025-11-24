@@ -32,20 +32,20 @@ showPingRate <omgfiles(s)> [OPTIONS]
 | `-tide <filename>` | Specifies a binary tide file (`.nav` format) to apply tide correction (for systems that have it irreversibly subtracted). |
 
 ### Coverage / Backscatter Map Options (`-show_coverage`)
-| Option | Description |
-|---|---|
-| `-show_coverage` | Generate a 2D coverage density map (depth vs. across-track distance). Requires `-maxdepth`, `-maxacross`, and `-pixel`. |
-| `-maxacross <val>` | **Required for `-show_coverage`.** Maximum absolute across-track distance for the map (in meters). |
-| `-pixel <val>` | **Required for `-show_coverage`.** Pixel size for the coverage map (in meters). |
-| `-show_BS` | (Used with `-show_coverage`). Instead of counting hits, maps the average backscatter value to the coverage map. |
-| `-normallize` | (Used with `-show_coverage`). Normalizes the coverage counts by the average count in each depth row. |
-| `-pgm` | Output the coverage map in PGM (Portable Graymap) image format. |
+| Option | Description | Default |
+|---|---|---|
+| `-show_coverage` | Generate a 2D coverage density map (depth vs. across-track distance). Requires `-maxdepth`, `-maxacross`, and `-pixel`. | |
+| `-maxacross <val>` | **Required for `-show_coverage`.** Maximum absolute across-track distance for the map (in meters). | |
+| `-pixel <val>` | **Required for `-show_coverage`.** Pixel size for the coverage map (in meters). | |
+| `-show_BS` | (Used with `-show_coverage`). Instead of counting hits, maps the average backscatter value to the coverage map. | |
+| `-normallize` | (Used with `-show_coverage`). Normalizes the coverage counts by the average count in each depth row. | |
+| `-pgm` | Output the coverage map in PGM (Portable Graymap) image format. | |
 | `-range <min> <max>` | (Used with `-pgm`). Stretches the output grayscale values in the PGM image between `min` and `max`. | `0` to `2.0` (for coverage counts) or `-50` to `-1` (for BS values) |
 
 ### Other Options
 | Option | Description |
 |---|---|
-| `-v` | Enable verbose output. |
+| `-v` | Enable verbose output. | |
 
 ## How It Works
 1.  **Initialization:** Parses command-line arguments to set up parameters for plotting (e.g., `maxdepth`, `maxtime`, `pixel` size, `draft`).
@@ -69,3 +69,16 @@ showPingRate <omgfiles(s)> [OPTIONS]
 7.  **Output Writing:**
     *   Writes the processed `fdata` array to the output `.r4` file.
     *   If `pgm_flag` is set, it converts the `fdata` (or `bdata` for PGM output) to an 8-bit grayscale image, applying min/max range stretching, and writes it to the output `.pgm` file.
+
+## Output Files
+*   `pingstack` (default, for ping rate plot) or `CoverageStack.r4` (for coverage map): A JHC `.r4` file.
+*   `<output_filename>.pgm`: A PGM image file (if `-pgm` is used with `-show_coverage`).
+
+## Dependencies
+*   `OMG_HDCS_jversion.h`: For OMG-HDCS data structures.
+*   `array.h`: For `JHC_header` structure and `.r4` file handling.
+*   `support.h`: For general utility functions and error handling.
+*   `jcu_nav.h`: For tide file handling.
+
+## Notes
+This tool is invaluable for quality control and mission planning, allowing users to assess the effectiveness of survey coverage, identify areas with poor ping rates, or visualize backscatter distributions. The output maps can be used to guide subsequent survey lines or focus data processing efforts. The tool handles various output formats for flexibility in visualization.

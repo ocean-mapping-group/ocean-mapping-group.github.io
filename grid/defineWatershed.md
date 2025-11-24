@@ -4,6 +4,12 @@ title: defineWatershed
 parent: Grid Tools
 nav_order: 19
 ---
+---
+layout: default
+title: defineWatershed
+parent: Grid Tools
+nav_order: 19
+---
 # defineWatershed
 
 ## Description
@@ -28,6 +34,28 @@ defineWatershed -startcoord <x> <y> [OPTIONS] <floatfile> [8bitfile]
 | `-use_downSlope` | A flag that enables the more rigorous, hydrologically-constrained search. When used, the tool expects to find a corresponding `<floatfile>.downSlope` file. | |
 | `-downhill_tolerance_m_per_pixel <value>` | A floating-point value that relaxes the "uphill" requirement. A value of `0.0` (default) means pixels must be at the same or higher elevation. A negative value (e.g., `-2.0`) allows the search to traverse small depressions of that depth, preventing the watershed from being artificially truncated by minor pits in the DTM. | `-downhill_tolerance_m_per_pixel -1.5` |
 | `-v` | Enable verbose output during processing. | |
+
+## How It Works
+1.  **File Opening:** Opens the input `.r4` DTM file and the output 8-bit mask file (creating it if necessary). If `-use_downSlope` is specified, it also opens the corresponding `.downSlope` file.
+2.  **Header Reading:** Reads the `JHC_header` from the input DTM file.
+3.  **Watershed Delineation:**
+    *   Initializes a `queue` with the `startcoord`.
+    *   Iterates through the `queue`:
+        *   For each pixel taken from the queue, it marks it as part of the watershed.
+        *   It then examines the 8 neighbors of the current pixel.
+        *   **Uphill Search:** If a neighbor is uphill (higher elevation) than the current pixel (or within `downhill_tolerance` if specified) AND it meets the downslope drainage criteria (if `-use_downSlope` is active), that neighbor is added to the `queue` for further processing.
+4.  **Output Header:** Creates a `JHC_header` for the output mask file and writes it.
+5.  **Output Data:** Writes the 8-bit pixel data (where pixels within the watershed are marked with `255`) to the output file.
+
+## Output Files
+*   `[8bitfile]` or `<floatfile_prefix>.wsh`: An 8-bit JHC-format grid file representing the watershed mask.
+
+## Dependencies
+*   `array.h`: For `JHC_header` structure and DTM data handling.
+*   `support.h`: For general utility functions and error handling.
+
+## Notes
+This tool is a key component in hydrological analysis, allowing users to define and extract drainage basins from elevation models. The `-use_downSlope` option significantly enhances the accuracy of the delineation by incorporating flow direction information. The `downhill_tolerance` helps to avoid truncation of watersheds due to noise in the DTM.
 
 ## Output File
 The tool generates an 8-bit JHC-format grid file (`.wsh`) which serves as a mask for the calculated watershed. Pixels within the watershed are assigned non-zero values, while pixels outside the watershed are zero.

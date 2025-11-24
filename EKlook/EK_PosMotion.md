@@ -1,3 +1,9 @@
+---
+layout: default
+title: EK_PosMotion (Module within EKlook)
+parent: EKlook Tools
+nav_order: 7
+---
 # EK_PosMotion (Module within EKlook)
 
 ## Description
@@ -7,13 +13,15 @@
 
 This module exposes the following interactive controls within the `EKlook` application:
 
-*   **Buttons:**
-    *   `Centre on Ping`: Toggles whether the geographic and time series plots are automatically centered on the currently selected ping (`currenttrace`).
-    *   `Look at C/M/B`: Cycles the 3D view's focus point between the vessel's origin ("Centre"), the mid-point between the vessel and the bottom strike ("Middle"), and the actual bottom strike point ("Bottom").
-    *   `Next Area`: If multiple geographic areas are loaded (via `-areas` in `EKlook`), this cycles through them, updating the geographic display.
-    *   `Show Backdrop`: Toggles the display of a background orthomap in the geographic view (if loaded).
-*   **Sliders:**
-    *   `Async. Motion Latency (s)`: Allows adjustment of a time latency (in seconds) applied to asynchronous motion data, essential for aligning data from different sensors in the time series plots.
+| Control | Description | Related Variable |
+|---|---|---|
+| **Buttons** | | |
+| `Centre on Ping` | Toggles whether the geographic and time series plots are automatically centered on the currently selected ping (`currenttrace`). | |
+| `Look at C/M/B` | Cycles the 3D view's focus point between the vessel's origin ("Centre"), the mid-point between the vessel and the bottom strike ("Middle"), and the actual bottom strike point ("Bottom"). | |
+| `Next Area` | If multiple geographic areas are loaded (via `-areas` in `EKlook`), this cycles through them, updating the geographic display. | |
+| `Show Backdrop` | Toggles the display of a background orthomap in the geographic view (if loaded). | |
+| **Sliders** | | |
+| `Async. Motion Latency (s)` | Allows adjustment of a time latency (in seconds) applied to asynchronous motion data, essential for aligning data from different sensors in the time series plots. | |
 
 ## Visualizations
 
@@ -57,5 +65,8 @@ The module provides several integrated visualization panels within `EKlook`:
     *   `Z`: Resets the zoom/pan in the geographic map, resets the time series plot ranges, or toggles full rendering in the 3D view.
     *   `W`: Dumps animation frames for the plan view (debug functionality).
 
-## Note
+## How It Works
+The `EK_PosMotion` module visualizes the vessel's position and motion by processing navigation and attitude data from the EK echosounder. It projects this data into both a 2D geographic map and a dynamic 3D view. Interactive controls allow users to adjust views, compare motion data from different sensors, and analyze the impact of motion on bottom strike points. The module continuously updates its displays based on incoming data and user input.
+
+## Notes
 The `EK_PosMotion` module is an integral part of the `EKlook` graphical user interface, focusing on interactive analysis and visualization of position and motion data. It does not accept any command-line arguments. Its functionality is accessed and controlled entirely through the `EKlook` GUI.

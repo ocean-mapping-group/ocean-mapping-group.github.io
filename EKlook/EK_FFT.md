@@ -1,3 +1,9 @@
+---
+layout: default
+title: EK_FFT (Module within EKlook)
+parent: EKlook Tools
+nav_order: 5
+---
 # EK_FFT (Module within EKlook)
 
 ## Description
@@ -37,5 +43,8 @@ The module displays various graphical representations within the `EKlook` applic
 *   `KEY_LEFT` / `KEY_RIGHT`: Adjusts slider values or, in specific contexts (like when `LimitWindow` is active or comparing with a sphere model), can shift frequency ranges or window limits.
 *   `KEY_SPACE` (on "Show Pulse" button): Toggles between showing the matched filter's FFT and its autocorrelation's FFT.
 
-## Note
+## How It Works
+The `EK_FFT` module processes the raw or matched-filtered echo trace data within a selected time window. It performs a Fast Fourier Transform (FFT) on this data, allowing users to view the spectral content. Interactive controls enable adjustments to FFT parameters (like window size and tapering), and the module can apply corrections such as ripple removal. The visualizations update dynamically to show the effect of these parameter changes, helping users analyze the frequency-dependent characteristics of the echosounder data.
+
+## Notes
 This module functions as a specialized analytical tool within the `EKlook` graphical user interface. It does not accept direct command-line arguments for its operation, as its sole purpose is to manage and respond to interactive input within the running `EKlook` application. Its behavior is entirely dependent on the user's actions within the GUI.

@@ -53,3 +53,17 @@ diffOMG -first <OMG_HDCS_datafile1> -second <OMG_HDCS_datafile2> -out <diff.r4fi
             *   **Output to `.r4`:** Writes `differences[]` (or `swath[]`) to the `.r4` output file, potentially averaging over `average` pings.
         *   **Statistical Output:** After processing all pings, it calculates final `av_diff[i]` and `abs_diff[i]` (average and absolute difference/standard deviation) per beam index. It writes these statistics (beam angle vs. average/abs difference) to the `.stats` and `.abs_stats` files.
 4.  **Cleanup:** Closes all open files.
+
+## Output Files
+*   `<diff.r4file>.r4`: A JHC-format `.r4` file containing depth differences (if not in `-profile_header` mode).
+*   `<diff.r4file>.avdepth`: An `.avdepth` file containing average depths (if `-dumpaverage` is used).
+*   `<diff.r4file>.stats`: An ASCII file with statistics of differences (mean, standard deviation).
+*   `<diff.r4file>.abs_stats`: An ASCII file with absolute statistics of differences.
+
+## Dependencies
+*   `OMG_HDCS_jversion.h`: For OMG-HDCS data structures.
+*   `array.h`: For `JHC_header` structure and `.r4` file handling.
+*   `support.h`: For general utility functions and error handling.
+
+## Notes
+`diffOMG` provides a powerful means to compare different processing versions of the same data, or to inter-compare independent surveys. The `-min_within_pixels` (not shown in arguments, but relevant for difference tools) or `-shift` options can help mitigate small spatial misalignments. The output statistics per beam angle are crucial for identifying angle-dependent biases.

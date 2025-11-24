@@ -2,7 +2,7 @@
 layout: default
 title: binPPK
 parent: Optech Tools
-nav_order: 110
+nav_order: 1
 ---
 # binPPK
 
@@ -37,8 +37,18 @@ binPPK <asciiPPKfile> <binaryPPKfile> [-v]
     *   **Binary Writing (`ppk_write`):** If the data is deemed acceptable (not strictly filtered by the warnings), it writes the `PPK_structure` data to the binary output file at an offset determined by `recordnum * PPK_RECLEN`. The `ppk_write` function uses `put_swapped_int` and `put_swapped_float` to handle byte-swapping, ensuring platform compatibility.
 4.  **Cleanup:** Closes both input and output files.
 
+## Output Files
+*   `<binaryPPKfile>`: A custom binary file containing PPK data.
+
 ## Helper Functions
 *   `interp_ppk()`: (Currently commented out in `main` but present) This function is designed to interpolate height values between two PPK records over a time gap, if a significant time gap and height difference exist.
 *   `ppk_write()`: Writes a `PPK_structure` to the binary file at a specified record number, handling byte-swapping.
 *   `show_date_calc()`: A debugging function to display date conversions.
-```
+
+## Dependencies
+*   `support.h`: For utility functions.
+*   `stdtime.h`: For time conversion.
+*   `jb_endian.h`: For byte swapping.
+
+## Notes
+The binary PPK format created by this tool is optimized for fast reading and processing by other internal tools within the OMG ecosystem. The explicit byte-swapping ensures portability across different system architectures. The data validation checks provide basic quality control during conversion.

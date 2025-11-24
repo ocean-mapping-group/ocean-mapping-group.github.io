@@ -1,3 +1,9 @@
+---
+layout: default
+title: EK_init (Initialization Function within EKlook)
+parent: EKlook Tools
+nav_order: 11
+---
 # EK_init (Initialization Function within EKlook)
 
 ## Description
@@ -52,5 +58,8 @@ The `eklook_init()` function sets the following default values and configuration
     *   `eklook_record`, `JEVENT_debug`: `0`
     *   `useWindows`, `useStart[0]`, `useStop[0]`: `1`, `0`, `MAXTRACES`
 
-## Note
+## How It Works
+The `eklook_init()` function is automatically called when the `EKlook` application starts. Its primary role is to ensure a consistent and predictable operational environment by assigning default values to all critical global variables and flags. This prevents undefined behavior and prepares the application for loading user data and processing. Many of these initialized values can subsequently be modified interactively by the user within the `EKlook` GUI.
+
+## Notes
 The `eklook_init()` function is an internal initialization routine of the `EKlook` application. It does not accept any command-line arguments. Its purpose is to establish a foundational state for the GUI and its underlying data processing. Users can modify many of these parameters interactively within the `EKlook` application once it has started.

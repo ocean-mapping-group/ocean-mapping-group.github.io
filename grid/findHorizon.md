@@ -4,6 +4,12 @@ title: findHorizon
 parent: Grid Tools
 nav_order: 31
 ---
+---
+layout: default
+title: findHorizon
+parent: Grid Tools
+nav_order: 31
+---
 # findHorizon
 
 ## Description
@@ -24,6 +30,28 @@ findHorizon [-curvature <pixels>] [-roll_step <degrees>] <input_floatfile.r4> <o
 | `<output_filterfile.r4>`| **Required.** The name for the output transformed `.r4` grid file. | |
 | `-curvature <pixels>` | The amplitude, in pixels, of a sinusoidal shape that defines the curvature of the feature being searched for. | `20.0` |
 | `-roll_step <degrees>` | The angular step size used when testing different tilts or "rolls" for the curved feature. This controls the resolution of the output's roll axis. | `0.1` |
+
+## How It Works
+1.  **File Opening:** Opens the input `.r4` grid file and creates the output `.r4` file.
+2.  **Header Reading:** Reads the `JHC_header` from the input file.
+3.  **Output Grid Setup:** Determines the dimensions of the output grid. The Y-dimension will be the same as the input grid (`head.dy`), while the X-dimension will be determined by `roll_step` and the range of possible "roll" angles (e.g., -45 to 45 degrees).
+4.  **Transformation Loop:** Iterates through each possible "roll" angle (column in the output grid) and each vertical position (row in the output grid):
+    *   For each "roll" angle, it constructs a curved integration path across the width of the input image. This path has a sinusoidal shape defined by `curvature` and `roll_angle`.
+    *   It then sums all the pixel values from the input image that lie along this path.
+    *   This sum becomes a single pixel value in the output grid.
+5.  **Output Header:** Creates a `JHC_header` for the output file and writes it.
+6.  **Output Data:** Writes the processed float data to the output file.
+
+## Output Files
+*   `<output_filterfile.r4>`: A new JHC-format 32-bit floating-point grid file representing the transformed image (roll vs. vertical position).
+
+## Dependencies
+*   `array.h`: For `JHC_header` structure and grid data handling.
+*   `support.h`: For general utility functions and error handling.
+*   `math.h`: For trigonometric functions.
+
+## Notes
+This tool implements a specialized image transform (similar to a slant stack or Radon transform) that can highlight specific linear features within image data, particularly those with a characteristic curvature. This is useful in applications such as seismic interpretation or geological feature detection. Peaks in the output grid indicate the presence and parameters of such features.
 
 ## How It Works
 For each possible "roll" angle, the tool creates a curved integration path across the width of the input image. This path has a sinusoidal shape defined by the `-curvature` parameter and is tilted according to the current roll angle. It then sums all the pixel values from the input image that lie along this path. This sum becomes a single pixel value in the output grid.

@@ -34,38 +34,38 @@ dumpXYZ <OMG_HDCS_datafile(s)> -out <ASCII_listing_file> [OPTIONS]
 | `-dataFrame` | Dumps comprehensive data for a data frame, including motion, beam details, lat/lon, depth, across, along, status, reflectivity, Q-factor, frequency, range, TWTT, and TXSector. |
 
 ### Coordinate System & Projection
-| Option | Description |
-|---|---|
-| `-utm` | Output coordinates in UTM (easting/northing). Requires `-merid`. |
+| Option | Description | Default / Example |
+|---|---|---|
+| `-utm` | Output coordinates in UTM (easting/northing). Requires `-merid`. | |
 | `-merid <val>` | Central meridian for UTM projection. | `-63.0` |
 | `-wgs84` / `-nad27` | Ellipsoid to use for UTM projection. | Prompts user if not specified. |
-| `-area <map.sheet>` | Only outputs beams within the geographical area defined by the map sheet (`.r4` file). |
-| `-pixelcoords` | (Used with `-area`) Outputs pixel coordinates (x, y) on the map sheet instead of lat/lon. |
+| `-area <map.sheet>` | Only outputs beams within the geographical area defined by the map sheet (`.r4` file). | |
+| `-pixelcoords` | (Used with `-area`) Outputs pixel coordinates (x, y) on the map sheet instead of lat/lon. | |
 
 ### Data Filtering
 | Option | Description |
 |---|---|
 | `-start <ping_num>` / `-end <ping_num>` | Process pings only within this range (inclusive). | All pings |
 | `-choose_beams <first_b> <last_b>` | Process beams only within this beam number range (inclusive). | All beams |
-| `-specific <filename>` | Outputs only specific ping/beam combinations listed in a file (mbriss format: `beamno+127 pingno fixno`). |
-| `-timeinterval <secs>` | Outputs navigation labels at a specified time interval (seconds). |
-| `-dirty` | (Implies `-useallZ`) Includes beams regardless of their status flags. |
-| `-just_pulse_microsec <val>` | Only process pings with `tx_pulse_len` equal to `val`. |
-| `-add_dyn_draft_shift` | Adds `profile.longperiod_heaveCorrection` to the observed depth. |
+| `-specific <filename>` | Outputs only specific ping/beam combinations listed in a file (mbriss format: `beamno+127 pingno fixno`). | |
+| `-timeinterval <secs>` | Outputs navigation labels at a specified time interval (seconds). | |
+| `-dirty` | (Implies `-useallZ`) Includes beams regardless of their status flags. | |
+| `-just_pulse_microsec <val>` | Only process pings with `tx_pulse_len` equal to `val`. | |
+| `-add_dyn_draft_shift` | Adds `profile.longperiod_heaveCorrection` to the observed depth. | |
 
 ### Corrections & Processing
 | Option | Description |
 |---|---|
-| `-coeffs` | Applies empirical refraction coefficients (from `.ref_coeffs` file). |
-| `-tidecor` | Applies tide correction (sets `use_tide_corr_flag`). |
-| `-mergeSSS <SSSfile>` | Merges a surface sound speed file (SSS) into the output (format: `ping_num sss_value`). |
+| `-coeffs` | Applies empirical refraction coefficients (from `.ref_coeffs` file). | |
+| `-tidecor` | Applies tide correction (sets `use_tide_corr_flag`). | |
+| `-mergeSSS <SSSfile>` | Merges a surface sound speed file (SSS) into the output (format: `ping_num sss_value`). | |
 
 ### Other Options
 | Option | Description |
 |---|---|
-| `-v` | Enable verbose output. |
-| `-dump_multidetect_params` | Dumps additional parameters related to multi-detection. |
-| `-nortech` | Specific output format for Nortech (similar to `mani`). |
+| `-v` | Enable verbose output. | |
+| `-dump_multidetect_params` | Dumps additional parameters related to multi-detection. | |
+| `-nortech` | Specific output format for Nortech (similar to `mani`). | |
 
 ## How It Works
 1.  **Initialization:** Parses command-line arguments to set various flags, ranges, and output formats.
@@ -85,3 +85,16 @@ dumpXYZ <OMG_HDCS_datafile(s)> -out <ASCII_listing_file> [OPTIONS]
         *   Additional multi-detect parameters.
     *   **Depth Range Tracking:** Keeps track of the shallowest and deepest depths encountered.
 6.  **Cleanup:** Closes all open files.
+
+## Output Files
+*   `<ASCII_listing_file>`: An ASCII file containing the extracted data, formatted according to the chosen options.
+
+## Dependencies
+*   `OMG_HDCS_jversion.h`: For OMG-HDCS data structures.
+*   `array.h`: For `JHC_header` structure.
+*   `support.h`: For general utility functions and error handling.
+*   `j_proj.h`: For coordinate projection functions.
+*   `ref_coeffs.h`: For refraction coefficient structures and functions.
+
+## Notes
+`dumpXYZ` is a highly flexible tool for generating custom data reports and exports from merged files. Its extensive filtering capabilities allow users to extract precisely the data needed for specific analyses. The coordinate transformation options ensure compatibility with various GIS and mapping systems. Due to the wide range of output parameters, users should carefully select the options to get the desired output format.

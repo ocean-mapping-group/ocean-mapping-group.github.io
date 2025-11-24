@@ -52,23 +52,23 @@ dumpWaveFormParams <OMG_HDCS_datafile(s)> -out <ASCII_listing_file> [OPTIONS]
 | `-hdk` | Output `i_top_bot_d`, depth-121, and `K * -1.0`. |
 
 ### Filtering & Range Options
-| Option | Description |
-|---|---|
-| `-valid_only` | Only output data that `pm_Process_Wave` marks as valid (not `9`). |
-| `-check_flag` | Only output data that `pm_Process_Wave` marks as valid (`9`). |
-| `-no_land` | Only process water returns (filters out land returns based on RAMAN waveform processing). |
-| `-surface_only` | Only output surface return information. |
-| `-area <filename>` | Only process beams within the geographical area defined by the map sheet (`.r4` file). |
+| Option | Description | Default / Example |
+|---|---|---|
+| `-valid_only` | Only output data that `pm_Process_Wave` marks as valid (not `9`). | |
+| `-check_flag` | Only output data that `pm_Process_Wave` marks as valid (`9`). | |
+| `-no_land` | Only process water returns (filters out land returns based on RAMAN waveform processing). | |
+| `-surface_only` | Only output surface return information. | |
+| `-area <filename>` | Only process beams within the geographical area defined by the map sheet (`.r4` file). | |
 | `-scan_range <first_scan> <last_scan>` | Process profiles (scans) only within this range. | All scans |
-| `-trace <depth>` | Dumps ASCII trace data for waveforms at a specific depth. |
+| `-trace <depth>` | Dumps ASCII trace data for waveforms at a specific depth. | |
 
 ### Other Options
-| Option | Description |
-|---|---|
-| `-v` | Enable verbose output. |
+| Option | Description | Default / Example |
+|---|---|---|
+| `-v` | Enable verbose output. | |
 | `-merid <val>` | Central meridian for UTM projection (not directly used by this tool but often needed for related geo-processing). | `-63.0` |
-| `-antoine` | Option to dump ASCII trace data in a specific format for Antoine. |
-| `-k_prof` | Output `K * -1.0` vs. `depth - 121` for nadir beam. |
+| `-antoine` | Option to dump ASCII trace data in a specific format for Antoine. | |
+| `-k_prof` | Output `K * -1.0` vs. `depth - 121` for nadir beam. | |
 
 ## How It Works
 1.  **Initialization:** Parses command-line arguments to set various flags, select the waveform type to process, and define output parameters.
@@ -84,4 +84,15 @@ dumpWaveFormParams <OMG_HDCS_datafile(s)> -out <ASCII_listing_file> [OPTIONS]
         *   **Land/Water Filtering (`-no_land`):** If `-no_land` is active, it checks if `ALL_waves[PM_WAVE_RAMAN].i_start_sur > 55`. If this condition is met (indicating a water return), it proceeds to output.
         *   **Output Formatting:** Based on the chosen output parameter flags (`-nadir_beam`, `-height_only`, `-k_only`, etc.), it formats and prints the derived waveform parameters (along with lat/lon and depth) to the output ASCII file. This can include raw trace data if `-trace` or `-antoine` is used.
 5.  **Cleanup:** Closes all open files.
-```
+
+## Output Files
+*   `<ASCII_listing_file>`: An ASCII file containing extracted waveform parameters (longitude, latitude, and selected parameter triplets).
+
+## Dependencies
+*   `OMG_HDCS_jversion.h`: For OMG-HDCS data structures.
+*   `support.h`: For general utility functions and error handling.
+*   `j_proj.h`: For coordinate projection functions.
+*   `Optech_waveform.h`: For Optech waveform data structures and processing functions (`pm_Process_Wave`).
+
+## Notes
+This tool is crucial for detailed quality control and analysis of Optech SHOALS data, allowing users to extract and visualize various waveform-derived parameters. These parameters are essential for tasks like seabed classification, turbidity estimation, and assessing the performance of the SHOALS system. The various output selection and filtering options provide flexibility for specific analytical needs.

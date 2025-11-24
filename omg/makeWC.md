@@ -17,12 +17,12 @@ makeWC -out <output_WCprefix> -ins <many.merged's> [OPTIONS]
 
 ## Arguments
 
-| Option | Description |
-|---|---|
-| `<input_omg_file(.merged)>` | Path to the input OMG-HDCS merged file. When using the first usage syntax, the output filename will be derived from this, typically with a `.watercol` extension. |
-| `<output_WCprefix>` | **Required.** Prefix for the output water column files. |
-| `-ins <many.merged's>` | Allows processing multiple merged files. The files are listed after `-ins` until another option is encountered. |
-| `-out <output_WCprefix>` | Alternative way to specify the output prefix, especially when using `-ins`. |
+| Option | Description | Default |
+|---|---|---|
+| `<input_omg_file(.merged)>` | Path to the input OMG-HDCS merged file. When using the first usage syntax, the output filename will be derived from this, typically with a `.watercol` extension. | |
+| `<output_WCprefix>` | **Required.** Prefix for the output water column files. | |
+| `-ins <many.merged's>` | Allows processing multiple merged files. The files are listed after `-ins` until another option is encountered. | |
+| `-out <output_WCprefix>` | Alternative way to specify the output prefix, especially when using `-ins`. | |
 
 ### Output Type
 | Option | Description | Default |
@@ -36,24 +36,33 @@ makeWC -out <output_WCprefix> -ins <many.merged's> [OPTIONS]
 ### Spatial & Temporal Filtering
 | Option | Description |
 |---|---|
-| `-start <ping_num>` / `-end <ping_num>` | Process pings within a specific range (inclusive). | All pings |
+| `-start <ping_num>` | Process pings within a specific range (inclusive). | All pings |
+| `-end <ping_num>` | Process pings within a specific range (inclusive). | All pings |
 | `-pixel <size>` | Pixel size for the output image. | `0.5` |
 | `-maxdepth <val>` | Maximum depth (in meters) for the water column image. | `100.0` |
 | `-mindepth <val>` | Minimum depth (in meters) for the water column image. | `0.0` |
-| `-left_across <val>` / `-right_across <val>` | Define the across-track limits for the image (replaces symmetrical aspect). | `+/- maxdepth * aspect / 2.0` |
+| `-left_across <val>` | Define the left across-track limit for the image (replaces symmetrical aspect). | `+/- maxdepth * aspect / 2.0` |
+| `-right_across <val>` | Define the right across-track limit for the image (replaces symmetrical aspect). | `+/- maxdepth * aspect / 2.0` |
 | `-aspect <val>` | Aspect ratio for the water column image (depth vs. across-track width). | `2.0` |
-| `-image_centre_x <val>` / `-image_centre_z <val>` | Defines the center (x, z) of a specific image area. Requires `image_width` and `image_height`. | |
-| `-image_width <val>` / `-image_height <val>` | Defines the width and height of a specific image area. Requires `image_centre_x` and `image_centre_z`. | |
+| `-image_centre_x <val>` | Defines the X-center of a specific image area. Requires `image_width` and `image_height`. | |
+| `-image_centre_z <val>` | Defines the Z-center of a specific image area. Requires `image_width` and `image_height`. | |
+| `-image_width <val>` | Defines the width of a specific image area. Requires `image_centre_x` and `image_centre_z`. | |
+| `-image_height <val>` | Defines the height of a specific image area. Requires `image_centre_x` and `image_centre_z`. | |
 | `-bottom_relative <val>` | Sets `image_centre_z` `val` meters off the bottom detect of the center beam. | |
 | `-z_scaler <val>` | Scaling factor for the Z-axis (depth). | `1.0` |
 | `-centre_on_sonarY` | If using aspect, aligns the image with the offset Transducer (Tx). | |
 | `-centre_ping_beam_LL <lat> <lon>` | Centers the processing on the ping closest to the given Latitude/Longitude. | |
 | `-mindist <val>` | (Used with `-centre_ping_beam_LL`) Minimum allowed distance for a beam to be considered "closest". | `5` |
-| `-pings_centre <ping_num>` / `-pings_around <val>` / `-pings_aside <val>` | Centers the processing around a specific ping number and processes a given number of pings around it (`pings_aside` processes `+/- val` pings). | |
+| `-pings_centre <ping_num>` | Centers the processing around a specific ping number. | |
+| `-pings_around <val>` | Processes a given number of pings around `pings_centre`. | |
+| `-pings_aside <val>` | Processes `+/- val` pings around `pings_centre`. | |
 | `-closest_to_time <time_1970> <mode>` | Finds the ping closest to a given 1970 Unix timestamp. `mode`: `0` (absolute), `1` (before), `2` (after). | |
-| `-time_start_1970 <time_1970>` / `-window_sec <val>` | Process data starting from a 1970 Unix timestamp for a given window in seconds. | |
-| `-time_start <year> <jday> <hr> <min> <sec>` / `-time_end <year> <jday> <hr> <min> <sec>` | Process data within a specific date/time range. | |
-| `-timeboundsof <merged_file>` / `-timeboundssubset <frac> <cent>` | Use time bounds from another merged file; optionally specify a fraction and center of that time range. | |
+| `-time_start_1970 <time_1970>` | Process data starting from a 1970 Unix timestamp for a given window in seconds. | |
+| `-window_sec <val>` | Process data for a given window in seconds, starting from `time_start_1970`. | |
+| `-time_start <year> <jday> <hr> <min> <sec>` | Process data within a specific date/time range. | |
+| `-time_end <year> <jday> <hr> <min> <sec>` | Process data within a specific date/time range. | |
+| `-timeboundsof <merged_file>` | Use time bounds from another merged file. | |
+| `-timeboundssubset <frac> <cent>` | Use time bounds from another merged file; optionally specify a fraction and center of that time range. | |
 | `-stack <val>` | Stack `val` pings together for averaging (typically for vertical profiles). | `1` |
 | `-skip <val>` | Skip `val` pings between processed pings. | `1` |
 | `-specif_BW <SECT#> <minBW> <maxBW>` | Restrict the bandwidth of a specific sector. | |
@@ -63,8 +72,8 @@ makeWC -out <output_WCprefix> -ins <many.merged's> [OPTIONS]
 | `-shift_logic <val>` | Logic for shifting processing in EM2040D (0-3 valid). | `0` |
 
 ### Corrections & Enhancements
-| Option | Description |
-|---|---|
+| Option | Description | Default |
+|---|---|---|
 | `-add_heave` / `-other_heave` | Apply heave correction. `-other_heave` may use an alternative heave source. | |
 | `-the_draft <val>` | Override the draft value. | Auto-calculated |
 | `-add_roll_pitch` / `-hull <hull_vector_file>` / `-hull_offset_to_sonar <x> <y> <z>` | Embed motion data (roll, pitch) and/or visualize a hull shape using a vector file and offset. | |
@@ -73,7 +82,7 @@ makeWC -out <output_WCprefix> -ins <many.merged's> [OPTIONS]
 | `-suppress_SRA_range <min> <max>` | Suppress data within a specified Sonar Relative Angle range. | |
 | `-hori_tilt <m_per_ping> <ref_ping>` | Apply a horizontal tilt correction, shifting depth per ping relative to a specified reference ping. | |
 | `-dophase` | Process phase data (only for kmall files if phase data is present). | |
-| `-WC_wrap_8bit <val>` | 8-bit wrap value for water column intensity (default -40). | `-40` |
+| `-WC_wrap_8bit <val>` | 8-bit wrap value for water column intensity. | `-40` |
 | `-add_DN_per_km <val>` | Add a Digital Number (DN) shift per kilometer. | `0.0` |
 | `-add_sector_gains <file>` | Apply custom sector gains from an ASCII file. | |
 | `-add_BT <val>` | Add bottom track information to the output image. `0` (off), `1` (on for pie), `2` (on for vertical profile). | `0` |
@@ -119,3 +128,20 @@ makeWC -out <output_WCprefix> -ins <many.merged's> [OPTIONS]
 5.  **Output Generation:** Generates the output image in JHC's custom image format (or PGM/PPM if specified) and can optionally write auxiliary files like XY coordinates for external mapping software (e.g., IVS Fledermaus), grazing angles, or along-track displacements.
 6.  **Mapping:** If the `-map` option is used, it projects the water column data onto a geographical grid defined by a `Box.header0` file, producing a georeferenced image.
 7.  **Time-Series Analysis:** For time-series outputs, it can highlight specific events or features based on time windows or RX cycle boundaries.
+
+## Output Files
+*   `<output_WCprefix>.pie`: Water column pie diagram (JHC image format or PGM/PPM).
+*   `<output_WCprefix>.vert_prof`: Vertical water column profile (JHC image format or PGM/PPM).
+*   `<output_WCprefix>.horiz_prof`: Horizontal water column profile (JHC image format or PGM/PPM).
+*   `<output_WCprefix>.time_angle`: Time-angle water column plot (JHC image format or PGM/PPM).
+*   Auxiliary files such as XY coordinates for IVS Fledermaus (`.ivs`) if `-outXY_forIVS` is used.
+
+## Dependencies
+*   `OMG_HDCS_jversion.h`: For OMG-HDCS data structures.
+*   `j_EM_watercol.h`: For water column data structures and functions.
+*   `support.h`: For general utility functions and error handling.
+*   `j_proj.h`: For coordinate projection functions.
+*   `j_generic_beam_pattern.h`: For beam pattern structures and functions.
+
+## Notes
+`makeWC` is a powerful and flexible tool for visualizing and analyzing water column data, providing insights into acoustic scattering, bottom detection reliability, and features within the water column. Its extensive customization options allow users to tailor the output to specific research questions or visualization needs. The tool supports both interactive and batch processing workflows.

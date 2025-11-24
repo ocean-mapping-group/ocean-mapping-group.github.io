@@ -1,3 +1,9 @@
+---
+layout: default
+title: BatchProcEK
+parent: EKlook Tools
+nav_order: 1
+---
 # BatchProcEK
 
 ## Description
@@ -7,16 +13,6 @@
 ```bash
 BatchProcEK [OPTIONS] -ins <procEK_dir/EK_file_prefix*.merged>
 ```
-
-**Output Files (generated based on input and options):**
-*   `<outprefix>.ARC_fullBW`: Full bandwidth Angular Response Curve.
-*   `<outprefix>.ARC_3D`: 3D Angular Response Curve (full bandwidth).
-*   `<outprefix>.ARC_3D.trim`: Trimmed 3D Angular Response Curve (full bandwidth), based on `-minfrac_MaxCount_toDump`.
-*   `<outprefix>.ARC_FFTbins`: FFT bin-specific Angular Response Curves.
-*   `<outprefix>.ARC_FFT3D`: 3D FFT bin-specific Angular Response Curve.
-*   `<outprefix>.ARC_FFT3D.trim`: Trimmed 3D FFT bin-specific Angular Response Curve, based on `-minfrac_MaxCount_toDump`.
-*   `debug.area`: ASCII output for debug areas calculation (if `-debug_Areas` is used).
-*   `debug.atten`: ASCII output for debug attenuation calculation (if `-debug_Atten` is used).
 
 ## Arguments
 
@@ -43,3 +39,13 @@ BatchProcEK [OPTIONS] -ins <procEK_dir/EK_file_prefix*.merged>
 | `-areas <AreaMapFileName(s)>` | Specifies one or more area map files (e.g., custom_rot_mapsheet.r4) for spatial processing. | `custom_rot_mapsheet.r4` |
 | `-outprefix <prefix>` | Specifies a prefix for the output ARC files. | `MultiFile` |
 | `-ins <procEK_dir/EK_file_prefix*.merged>` | **Required.** One or more input merged EK files for batch processing. Wildcards are supported. | `procEK/survey_001.merged procEK/survey_002.merged` |
+
+## Output Files
+*   `<outprefix>.ARC_fullBW`: Full bandwidth Angular Response Curve.
+*   `<outprefix>.ARC_3D`: 3D Angular Response Curve (full bandwidth).
+*   `<outprefix>.ARC_3D.trim`: Trimmed 3D Angular Response Curve (full bandwidth), based on `-minfrac_MaxCount_toDump`.
+*   `<outprefix>.ARC_FFTbins`: FFT bin-specific Angular Response Curves.
+*   `<outprefix>.ARC_FFT3D`: 3D FFT bin-specific Angular Response Curve.
+*   `<outprefix>.ARC_FFT3D.trim`: Trimmed 3D FFT bin-specific Angular Response Curve, based on `-minfrac_MaxCount_toDump`.
+*   `debug.area`: ASCII output for debug areas calculation (if `-debug_Areas` is used).
+*   `debug.atten`: ASCII output for debug attenuation calculation (if `-debug_Atten` is used).

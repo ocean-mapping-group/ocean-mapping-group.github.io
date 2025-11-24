@@ -42,7 +42,15 @@ processSHOALSdepths <OMG_HDCS_datafile(s)> [-v] [-area <array.file>] [-scan_rang
         *   **"Depth-to-Grid" Flag:** Determines the optimal depth to use for gridding (`depth_to_grid`) based on the validity and return type of PMT and GAPD waveforms. This flag (`1` to `6` for various depth types, `7` for land return) is stored in `beams[k].prim_depth_conf`.
         *   Updates `beams[k].status` to `0` for valid water returns, and `7` for land returns.
 5.  **Write Back:** The modified `beams` and `profile` (with updated depth fields and flags) are written back to the merged file.
-6.  **Cleanup:** Closes all open files.
-```
-```
-```
+
+## Output Files
+The input merged files are modified in-place, with updated `OMG_HDCS_beam` structures containing derived depth types and `prim_depth_conf` flags.
+
+## Dependencies
+*   `OMG_HDCS_jversion.h`: For OMG-HDCS data structures.
+*   `support.h`: For general utility functions and error handling.
+*   `j_proj.h`: For coordinate projection functions.
+*   `Optech_waveform.h`: For Optech waveform data structures and processing functions (`pm_Process_Wave`, `classify_Wave`).
+
+## Notes
+`processSHOALSdepths` performs complex waveform analysis to extract more accurate and robust depth estimates than simple first-arrival detection. By considering multiple depth types (PIM, opaque, extinction) and classifying returns (land/water, weak/deep), it significantly enhances the quality and interpretability of SHOALS data. The derived `depth-to-grid` flag provides an automated recommendation for which depth to use in subsequent gridding operations. The tool modifies files in-place, so backups are recommended.

@@ -67,4 +67,17 @@ get8101BeamPattern <merged_file(s)> [OPTIONS]
     *   Scales the image pixels based on the occurrence frequency of differences.
     *   Draws the normalized mean difference curve onto the PGM image.
 6.  **Cleanup:** Frees allocated memory and closes files.
-```
+
+## Output Files
+*   `beampatt`: An ASCII file containing mean and standard deviation of backscatter differences per beam.
+*   `bp.pgm`: A PGM image file visualizing the differences.
+
+## Dependencies
+*   `OMG_HDCS_jversion.h`: For OMG-HDCS data structures.
+*   `array.h`: For `JHC_header` structure and DTM data handling.
+*   `support.h`: For general utility functions and error handling.
+*   `j_proj.h`: For coordinate projection functions.
+*   `backscatter.h`: For backscatter calculation functions.
+
+## Notes
+This tool is specifically tailored for SeaBat 8101/8111 sonars and helps to empirically derive their receive beam patterns from field data. The RBP is crucial for quantitative backscatter measurements and for correcting angular response effects in sidescan imagery. The generated PGM image provides a visual diagnostic of the RBP quality. The tool handles different grazing angle estimation methods, including using a DTM for improved accuracy.

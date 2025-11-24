@@ -24,11 +24,11 @@ mergeAtt <datafile_handle> [OPTIONS]
 | `-strip_ext` | Use this if `<datafile_handle>` includes the file extension (e.g., `line.merged`). |
 
 ### Attitude Data Sources & Manipulation
-| Option | Description |
+| Option | Description | Default |
 |---|---|
-| `-useorient <1 or 2>` | Specifies which orientation file to use: `0` (default, `.orientation`), `1` (`.orientation_1`), `2` (`.orientation_2`). |
-| `-alternate_orient <file>` | Use an alternative orientation file instead of the default or numbered ones. |
-| `-other_orient <file>` | Specifies a third orientation file whose delayed heave can be put into the `LongPeriodHeaveCorrection` field. |
+| `-useorient <1 or 2>` | Specifies which orientation file to use: `0` (default, `.orientation`), `1` (`.orientation_1`), `2` (`.orientation_2`). | `0` |
+| `-alternate_orient <file>` | Use an alternative orientation file instead of the default or numbered ones. | |
+| `-other_orient <file>` | Specifies a third orientation file whose delayed heave can be put into the `LongPeriodHeaveCorrection` field. | |
 | `-delay <sec>` | Apply a time delay (in seconds) to the primary orientation data. | `0.0` |
 | `-other_delay <sec>` | Apply a time delay (in seconds) to the `-other_orient` data. | `0.0` |
 | `-time_limit <sec>` | Only include orientation data if the inter-orientation time interval is within this limit. | `1.0` |
@@ -49,7 +49,7 @@ mergeAtt <datafile_handle> [OPTIONS]
 | `-dump_ssp` | Dump the surface sound speed values for inspection. | |
 
 ### Refraction & Beam Vector Recalculation
-| Option | Description |
+| Option | Description | Default |
 |---|---|
 | `-redoref` | Re-calculates refraction using water column sound velocity profiles. Requires `-wc` option. | |
 | `-wc <file(s)>` | Specifies one or more water column (`.wc`) files for refraction recalculation. | |
@@ -64,14 +64,33 @@ mergeAtt <datafile_handle> [OPTIONS]
 | `-nonortho` | Force non-orthogonal cone calculation. | |
 | `-RP` | Reduce all positions to the Reference Point (RP) of the vessel. | |
 
-### General Options
+### SVP Selection for Multiple Profiles
 | Option | Description |
 |---|---|
-| `-skip <val>` | Skip a number of pings when processing. | `1` |
-| `-skip_remerge` | Skip the standard re-merging of attitude. | |
-| `-just_testing` | Run in test mode without writing changes to the merged file. | |
-| `-v` | Enable verbose output. |
-| `-debug_wc` | Enable water column debugging output. |
+| `-rules <file>` | Provide a file specifying time-based rules for selecting SVPs. | |
+| `-interpolate` | Interpolate between SVPs in time. | |
+| `-nearest_in_time` | Select the SVP nearest in time. | |
+| `-last_observed` | Select the last observed SVP. | |
+| `-next_observed` | Select the next observed SVP. | |
+| `-nearest_in_distance` | Select the SVP nearest in distance. | |
+| `-converge_to <depth> <velocity>` | Quick and dirty profile extension, sets maximum depth and velocity for SVPs shallower than the specified depth. | |
+
+### Miscellaneous Options
+| Option | Description | Default |
+|---|---|
+| `-just_merge` | Just merge TX orientation onto the merged file, ignoring all other raytracing options. | |
+| `-test` | For testing new solution vs. solution already stored in merged file; does NOT write changes. | |
+| `-flag` | Flag soundings that have no solution (e.g., first few pings from RESON systems). | |
+| `-mask_map <file>` | Map of area of interest; ping positions outside the area are not processed. | |
+| `-start_ping <num>` | Specify start ping for processing; pings outside this range are not processed. | All pings |
+| `-end_ping <num>` | Specify end ping for processing; pings outside this range are not processed. | All pings |
+| `-dump_depression` | Dump final depression angle and azimuth for every beam (for RESON backscatter calibration). Creates a `.depression` file. | |
+| `-OWTT_scaler <val>` | A debug tool to scale the Observed Two-Way Travel Time (OWTT) (typically a power of 2). | `1.0` |
+| `-v` | Enable verbose output. | |
+| `-debug_wc` | Enable water column debugging output. | |
+| `-debug_ping <num>` | Turn on debugging for a given ping number. | |
+| `-debug_sounding` | Turn on debugging for sounding geometry calculations. | |
+| `-special` | Print all sounding geometry information for testing. | |
 
 ## How It Works
 1.  **File Loading:** Opens the input merged file, its parameter file (`.param`), and relevant attitude/SSP/mechanical pitch files. If `-redoref` is used, it also loads water column sound velocity profiles.
@@ -86,4 +105,18 @@ mergeAtt <datafile_handle> [OPTIONS]
     *   It then re-raytraces the beam using these new angles and the (interpolated) sound velocity profile to get corrected depth and across/along-track positions.
 5.  **Output:** Writes the updated profile headers (and optionally beam records if depths were re-calculated) back to the merged file.
 6.  **Diagnostic Output:** Provides verbose output about the merging process, time discrepancies, and corrected values if `-v` is enabled.
-```
+
+## Output Files
+*   The input merged file (`<datafile_handle>`) is modified in-place (unless `-test` is used).
+*   `<datafile_handle_prefix>.depression`: A binary file containing final depression and azimuth angles for each beam (if `-dump_depression` is used).
+
+## Dependencies
+*   `OMG_HDCS_jversion.h`: For OMG-HDCS data structures.
+*   `support.h`: For general utility functions and error handling.
+*   `j_proj.h`: For coordinate projection functions.
+*   `j_nav.h`: For navigation data handling.
+*   `j_attitude.h`: For attitude data handling.
+*   `j_watercolumn.h`: For water column data handling (if `-redoref` is used).
+
+## Notes
+`mergeAtt` is a foundational tool for achieving high-accuracy multibeam bathymetry by rigorously integrating motion and sound velocity data. Its advanced beam vector recalculation and re-raytracing capabilities are essential for modern multibeam processing workflows. The tool modifies merged files in place, so thorough backups are recommended before processing. The extensive set of options allows for fine-tuning of motion compensation and refraction corrections based on specific survey conditions and sensor configurations.

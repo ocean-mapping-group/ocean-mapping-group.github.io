@@ -22,7 +22,7 @@ stackOMG <OMG_HDCS_datafile(s)> [-mode <value>] [-verbose] [-list]
 |---|---|
 | `<OMG_HDCS_datafile(s)>` | **Required.** One or more paths to input OMG-HDCS merged files. If no files are provided on the command line, it prompts for them interactively. |
 | `-mode <value>` | Only process pings that match this specific `profile.mode` value. | `999` (process all modes) |
-| `-verbose` | Enable verbose output. |
+| `-verbose` | Enable verbose output. | |
 | `-list` | Instead of generating a `stack.plot` file, it outputs an ASCII listing of averaged depths and offsets to the console or a file (not explicitly specified but implied by `list_flag`). |
 
 ## Interactive Mode (if no files specified on command line)
@@ -54,3 +54,14 @@ If no filenames are provided on the command line, the tool will:
         *   For each beam, its averaged `offset`, `depth`, and `count`.
         *   The results of the least-squares fit (`intercept`, `slope`, `fit`).
         *   `leveldepth` (detrended depths based on the least-squares slope) and `leveldepth - depth` (residuals).
+
+## Output Files
+*   `stack.plot`: An ASCII file containing averaged beam data and least-squares fit results.
+*   Console output if `-list` is used.
+
+## Dependencies
+*   `OMG_HDCS_jversion.h`: For OMG-HDCS data structures.
+*   `support.h`: For general utility functions and error handling.
+
+## Notes
+`stackOMG` is useful for generating an average cross-section of the seafloor from multiple pings, which can help to smooth out noise and reveal underlying bathymetric trends. The least-squares fit provides a simple model of the averaged seafloor slope. The interactive mode allows for flexible selection of input files and ping ranges. The tool creates a new file, ensuring the integrity of the original.

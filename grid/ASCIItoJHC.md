@@ -4,6 +4,12 @@ title: ASCIItoJHC
 parent: Grid Tools
 nav_order: 8
 ---
+---
+layout: default
+title: ASCIItoJHC
+parent: Grid Tools
+nav_order: 8
+---
 # ASCIItoJHC
 
 ## Description
@@ -53,3 +59,29 @@ ASCIItoJHC [OPTIONS] <input_ASCII_file> <output_JHC_file.r4>
 | `-ystep <value>` | Explicitly specify the Y-axis grid spacing. | `0` |
 | `-merid <value>` | Specify the central meridian for Mercator projection when converting lat/lon data. | `0` |
 | `-v` | Enable verbose output during processing. | |
+
+## How It Works
+1.  **Argument Parsing:** Parses command-line arguments to determine input/output file names, format flags, coordinate projection parameters, and grid dimensions.
+2.  **Input File Reading:** Opens the input ASCII (or binary) file.
+3.  **Header Initialization:** Initializes an `JHC_header` structure for the output `.r4` grid, setting dimensions, geographic bounds, and data type based on command-line arguments or inferred from the input.
+4.  **Data Conversion Loop:** Reads data from the input file based on the specified format:
+    *   **ASCII Formats:** Parses space- or comma-separated XYZ values.
+    *   **Binary Formats:** Reads 16-bit or 32-bit integer/float values, handling byte swapping as needed.
+    *   **Coordinate Projection:** If input is lat/lon and output is a projected grid, it converts lat/lon to UTM or Mercator projected coordinates.
+    *   **Data Manipulation:** Applies `flipdepth`, `mirror_NS`, and `keep_zero` as specified.
+    *   **Invalid Data Handling:** Converts values matching `invalid_val` to `0.0` in the output.
+5.  **Output Writing:** Writes the populated `JHC_header` and the processed float data to the output `.r4` file.
+6.  **`lld` Mode:** If `-lld` is specified, it directly outputs Lat/Lon/Depth triplets to standard output, skipping grid generation.
+
+## Output Files
+*   `<output_JHC_file.r4>`: A JHC-format 32-bit floating-point grid file (`.r4`).
+*   (If `-lld` is used): Standard output of `latitude longitude depth` triplets.
+
+## Dependencies
+*   `array.h`: For `JHC_header` structure and related functions.
+*   `support.h`: For general utility functions and error handling.
+*   `jb_endian.h`: For byte swapping.
+*   `j_proj.h`: For coordinate projection functions.
+
+## Notes
+This tool is crucial for preparing non-standard grid data for use within the JHC/OMG processing ecosystem. It provides flexibility in handling a wide variety of input formats and coordinate systems.

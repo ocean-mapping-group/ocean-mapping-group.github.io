@@ -4,6 +4,12 @@ title: addSUN
 parent: Grid Tools
 nav_order: 6
 ---
+---
+layout: default
+title: addSUN
+parent: Grid Tools
+nav_order: 6
+---
 # addSUN
 
 ## Description
@@ -34,3 +40,34 @@ If `sun_output_file` is not provided, a default name like `<input_file_prefix>.s
 | `-xystep <value>` | Overrides the X and Y step values in the output JHC header with the specified float value. | |
 | `<depth_input_file.r4>` | **Required.** The input JHC-format 32-bit floating-point depth grid file. The tool will also attempt to append `.r4` if the file is not found. | `bathymetry.r4` |
 | `[sun_output_file]` | **Optional.** The name for the output sun illumination or derivative file. If not provided, a default name will be generated. | `bathymetry.sun_315` |
+
+## How It Works
+1.  **File Opening:** Opens the input `.r4` depth grid and the output file.
+2.  **Header Reading:** Reads the `JHC_header` from the input file.
+3.  **Slope and Normal Calculation:** Iterates through each pixel in the input grid:
+    *   For each pixel, it accesses its own value and the values of its eight neighbors (using `get_map_value` and handling `ignore_val`).
+    *   It calculates the local slope (derivatives in X and Y directions), accounting for `vert_exag`.
+    *   From the slopes, it derives the normal vector to the surface facet.
+4.  **Shaded Relief / Derivative Calculation:**
+    *   If `-deriv` is set:
+        *   If `-omni`, it calculates the slope magnitude in all directions.
+        *   If `-magnitude`, it calculates the absolute magnitude of the slope.
+        *   Otherwise, it calculates the slope in the direction of the sun (`azi`).
+    *   Otherwise (default shaded relief):
+        *   It calculates the cosine of the angle between the sun's direction vector (`azi`, `elev`) and the surface normal. This cosine value represents the shaded relief intensity.
+        *   If `-cossquared` is set, it squares this value.
+5.  **Output Scaling:**
+    *   If `-float` is set, the raw calculated float value is written to the output.
+    *   If `-8bit` (default) is set, the float value is scaled to an 8-bit unsigned char (0-254 range), potentially applying logarithmic scaling (`-log`) and mapping to a user-defined `range`.
+6.  **Output Header:** Creates a `JHC_header` for the output file and writes it, followed by the processed pixel data.
+
+## Output Files
+*   `[sun_output_file]`: A JHC-format `.r4` (float) or `.8bit` (unsigned char) grid file containing the shaded relief image or terrain derivatives.
+
+## Dependencies
+*   `array.h`: For `JHC_header` structure and related functions (`get_JHC_map_value`).
+*   `support.h`: For general utility functions and error handling.
+*   `backscatter.h`: For `dget360offsets` and `dcosangle` functions (for angle calculations).
+
+## Notes
+Shaded relief images are commonly used in cartography and GIS to visually enhance topographic features, making them appear three-dimensional. The ability to calculate terrain derivatives directly can be useful for geomorphological analysis.

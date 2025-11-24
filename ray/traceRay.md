@@ -30,12 +30,11 @@ traceRay -pro <svp_handle> [-fishdep <val>] [-layerthick <val>] [-spacing <step>
     *   `finish`: Finishing beam angle (degrees). | `0.01 0 89` |
 | `-range <val>` | Maximum horizontal range for plotting (meters). | `22500.0` |
 | `-depth <val>` | Maximum vertical depth for plotting (meters). | `5000.0` |
-| `-verbose` | Enable verbose output. |
+| `-verbose` | Enable verbose output. | |
 | `-simradsvp` | Input SVP file is in Simrad SVP format (`.svp`). |
 | `-NEWsvp` | Input SVP file is in a "NEW" raw format (`.RAWPROF`). |
 
 ## How It Works
-
 1.  **Initialization:** Parses command-line arguments, setting various ray tracing and plotting parameters.
 2.  **SVP Reading (`read_in_*()` functions):**
     *   Opens the input SVP file specified by `-pro` and the format flags (`-simradsvp`, `-NEWsvp`).
@@ -59,14 +58,14 @@ traceRay -pro <svp_handle> [-fishdep <val>] [-layerthick <val>] [-spacing <step>
             *   Handles cases where the ray goes beyond `maxrange` or becomes horizontal.
 5.  **Cleanup:** Closes the input SVP file and `plotlib` output.
 
-## Output
-*   A PostScript metafile (`svp_plot.meta`) visualizing the SVP and the traced ray paths.
+## Output Files
+*   `<svp_handle>.meta`: A PostScript metafile (`.meta`) visualizing the SVP and the traced ray paths.
 
-## Helper Functions
+## Dependencies
+*   `plotlib.h`: For `plotlib` functions.
+*   `support.h`: For general utility functions.
+*   `j_watercolumn.h`: For water column structures and ray tracing functions.
+*   `math.h`: For mathematical functions.
 
-*   `read_in_raw()`: Reads SVP data in a raw format (depth, velocity pairs).
-*   `read_in_NEW_raw()`: Reads SVP data in another "NEW" raw format.
-*   `make_equisvp()`: Interpolates raw SVP data to create an equi-spaced layered velocity profile (`veldep`).
-*   `read_in_svp()`: Reads SVP data from a custom `.profile` format.
-```
-```
+## Notes
+`traceRay` provides a powerful visualization of sound propagation through the water column. This is essential for understanding how SVP variations affect multibeam sonar performance, particularly beam bending and the resulting errors in depth and position. The PostScript output allows for high-quality figures suitable for analysis and presentation. The tool creates new files, preserving the original SVP data.

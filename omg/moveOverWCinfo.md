@@ -18,12 +18,12 @@ moveOverWCinfo [-v] [-tol <tolerance>] <dot_all_merged_file> <wcinfo_merged_file
 
 ## Arguments
 
-| Option | Description |
-|---|---|
-| `<dot_all_merged_file>` | **Required.** The path to the main merged file (often derived from a `.all` raw file) where the water column information will be written. This file is modified in place. |
-| `<wcinfo_merged_file>` | **Required.** The path to the merged file (often derived from a `.wcd` raw file) containing the water column size and offset information. |
+| Option | Description | Default |
+|---|---|---|
+| `<dot_all_merged_file>` | **Required.** The path to the main merged file (often derived from a `.all` raw file) where the water column information will be written. This file is modified in place. | |
+| `<wcinfo_merged_file>` | **Required.** The path to the merged file (often derived from a `.wcd` raw file) containing the water column size and offset information. | |
 | `-tol <tolerance>` | Specifies a time tolerance (in seconds) for matching profiles when exact time stamps don't align. | `0.0` (exact match) |
-| `-v` | Enable verbose output. |
+| `-v` | Enable verbose output. | |
 
 ## How It Works
 1.  **File Loading:** Opens two merged files: the `dot_all_merged_file` (target) and the `wcinfo_merged_file` (source of WC info).
@@ -35,3 +35,13 @@ moveOverWCinfo [-v] [-tol <tolerance>] <dot_all_merged_file> <wcinfo_merged_file
     *   Once a match is found, the `watercol_size`, `watercol_offset`, and `watercol_offset_64` fields from the source profile are copied to the corresponding target profile.
     *   If no match is found, the water column information in the target profile is set to zero (effectively indicating no associated WC data).
 5.  **In-Place Update:** The modified profiles in the `dot_all_merged_file` are written back to the file.
+
+## Output Files
+The input `dot_all_merged_file` is modified in-place to include water column information.
+
+## Dependencies
+*   `OMG_HDCS_jversion.h`: For OMG-HDCS data structures.
+*   `support.h`: For general utility functions and error handling.
+
+## Notes
+This tool is essential for workflows where water column data is generated separately from the main bathymetry (e.g., from different raw data streams or processing paths). The improved KMALL-aware matching strategy enhances the reliability of linking WC data to bathymetric pings. As the tool modifies the merged file in place, backups are recommended.

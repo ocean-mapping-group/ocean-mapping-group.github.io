@@ -1,3 +1,9 @@
+---
+layout: default
+title: EK_ZoomImage (Module within EKlook)
+parent: EKlook Tools
+nav_order: 8
+---
 # EK_ZoomImage (Module within EKlook)
 
 ## Description
@@ -7,17 +13,19 @@
 
 This module exposes the following interactive controls within the `EKlook` application:
 
-*   **Buttons:**
-    *   `full trace`: Resets the zoomed view to encompass the entire length of the current trace.
-    *   `Power or IQ`: Toggles the display mode in the time series plots between power (logarithmic intensity in dB) and I/Q (in-phase/quadrature) components of the trace.
-    *   `Power or Phase`: Toggles the display in the main zoom image window between a power image (backscatter intensity) and a phase image (showing phase trends).
-    *   `add TL`: Toggles the application of Transmission Loss (TL) corrections to the displayed power data.
-    *   `record on/off`: Toggles a recording mode, potentially for capturing interactive sessions or debug information.
-    *   `before/after MF`: Toggles the display of the trace envelope before or after the matched filtering process.
-*   **Sliders:**
-    *   `dB drop (beam pattern roll off)`: Adjusts the signal drop-off (in dB) from the peak in the envelope, a key parameter for bottom detection algorithms.
-    *   `max Phase off Zero deg.`: Controls the maximum allowed phase offset from zero (in degrees) for a valid bottom phase detection.
-    *   `max Acceptable Phase Fit`: Sets the threshold for the goodness-of-fit statistic for phase detection, influencing the validity of phase-based bottom detects.
+| Control | Description |
+|---|---|
+| **Buttons** | |
+| `full trace` | Resets the zoomed view to encompass the entire length of the current trace. |
+| `Power or IQ` | Toggles the display mode in the time series plots between power (logarithmic intensity in dB) and I/Q (in-phase/quadrature) components of the trace. |
+| `Power or Phase` | Toggles the display in the main zoom image window between a power image (backscatter intensity) and a phase image (showing phase trends). |
+| `add TL` | Toggles the application of Transmission Loss (TL) corrections to the displayed power data. |
+| `record on/off` | Toggles a recording mode, potentially for capturing interactive sessions or debug information. |
+| `before/after MF` | Toggles the display of the trace envelope before or after the matched filtering process. |
+| **Sliders** | |
+| `dB drop (beam pattern roll off)` | Adjusts the signal drop-off (in dB) from the peak in the envelope, a key parameter for bottom detection algorithms. |
+| `max Phase off Zero deg.` | Controls the maximum allowed phase offset from zero (in degrees) for a valid bottom phase detection. |
+| `max Acceptable Phase Fit` | Sets the threshold for the goodness-of-fit statistic for phase detection, influencing the validity of phase-based bottom detects. |
 
 ## Visualizations
 
@@ -44,5 +52,8 @@ The module provides several integrated visualization panels within `EKlook`:
 *   **Middle Mouse Click (in main zoom image):** Sets the `currenttrace` to the clicked trace.
 *   **Middle Mouse Click (in power plot window):** Sets the `trimdB` (amplitude threshold for target detection) to the clicked value.
 
-## Note
+## How It Works
+The `EK_ZoomImage` module provides a detailed, trace-level view of EK echosounder data. It processes individual echo traces, applying matched filtering and displaying the results as envelopes and I/Q components. User interactions via buttons and sliders allow for real-time adjustment of bottom detection parameters and visualization of various data attributes. The module updates its graphical outputs instantly, enabling users to fine-tune processing and inspect data quality closely.
+
+## Notes
 The `EK_ZoomImage` module is an integral part of the `EKlook` graphical user interface, focusing on interactive analysis and fine-tuning of EK echosounder data at the trace level. It does not accept any command-line arguments. Its functionality is accessed and controlled entirely through the `EKlook` GUI.

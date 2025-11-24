@@ -28,7 +28,7 @@ r2sonic2omg -r2s <input.r2s> -omg <omg_file_prefix> [-skip_fts] [-skip_truepix] 
 | `-skip_fts` | Skips processing and writing of Full Time Series (FTS) snippet data. |
 | `-skip_truepix` | Skips processing and writing of TruePix data. |
 | `-roll_stabilize` | Adjusts beam angles by roll stabilization angles prior to calculating preliminary soundings. This does not affect receiver steering angles in the output file. |
-| `-v` | Enable verbose output. |
+| `-v` | Enable verbose output. | |
 
 ## How It Works
 
@@ -67,5 +67,11 @@ r2sonic2omg -r2s <input.r2s> -omg <omg_file_prefix> [-skip_fts] [-skip_truepix] 
 *   `<omg_file_prefix>.merged`: Standard OMG-HDCS merged file.
 *   `<omg_file_prefix>.merged.ss_data`: Snippet side-scan data (binary, raw short intensities).
 *   `<omg_file_prefix>.sonar_settings`: Binary file containing R2Sonic packet headers (for BTH0, FTS0, TPX0).
-```
-```
+
+## Dependencies
+*   `R2Sonic_parser.h`: For R2Sonic data structures and parsing functions.
+*   `OMG_HDCS_jversion.h`: For OMG-HDCS data structures.
+*   `support.h`: For general utility functions and error handling.
+
+## Notes
+`r2sonic2omg` is a crucial tool for integrating R2Sonic raw data into the standard OMG-HDCS processing workflow. It handles the complex translation from R2Sonic's proprietary binary format to the structured OMG-HDCS format, including extracting and organizing bathymetry, snippet, and TruePix data. The optional roll stabilization and data skipping flags provide flexibility for different processing needs. The tool creates new files without modifying the original `.r2s` input.

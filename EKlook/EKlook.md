@@ -1,3 +1,9 @@
+---
+layout: default
+title: EKlook
+parent: EKlook Tools
+nav_order: 9
+---
 # EKlook
 
 ## Description
@@ -39,5 +45,8 @@ EKlook [OPTIONS] -prefix <EK_file_prefix>
 *   **Middle Mouse Button Click (Main Thumbnail):** Selects a `currenttrace` for detailed analysis in other widgets.
 *   **Left Mouse Drag (Rubber Banding, Main Thumbnail):** Defines a new zoom area for detailed inspection.
 
-## Note
+## How It Works
+`EKlook` functions as a central hub, orchestrating various specialized modules (widgets) to provide a comprehensive interactive environment for EK echosounder data. It loads initial data and configuration via command-line arguments. Once running, an internal event loop (`EK_event_loop.c`) manages user interactions within the main window and dispatches events to the active widgets. Each widget (`EK_ZoomImage`, `EK_FFT`, `EK_Polar`, `EK_BottomBS`, `EK_PosMotion`) then handles its specific data processing, visualization, and interactive controls, updating its portion of the GUI in real-time.
+
+## Notes
 `EKlook` is an interactive graphical application. While it takes initial command-line arguments, much of its functionality and analysis is performed through the GUI. The descriptions of its sub-modules (`EK_ZoomImage`, `EK_FFT`, `EK_Polar`, `EK_BottomBS`, `EK_PosMotion`) provide more detail on the interactive controls and visualizations available within each specific window.

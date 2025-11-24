@@ -31,10 +31,6 @@ traceBP <merged_file(s)> [OPTIONS]
 | `-plot_dn` | Output backscatter in raw Digital Number (DN) units. |
 | `-depth_range <min_m> <max_m>` | Only process beams within this water depth range (in meters). | `0` to `1000` |
 
-## Output
-*   **`tracepatt` file:** An ASCII file (default name) containing 8 float values: `x_min`, `x_max`, `c`, `b`, `x_min_last`, `x_max_last`, `f`, `e`. These are coefficients of the quadratic equations fitted to the first and last beams.
-*   **Standard Output (if plot flags are used):** Prints detailed information about beam numbers, launch angles, angle offsets, average backscatter, and counts, formatted for external plotting tools like `xmgrace`.
-
 ## How It Works
 1.  **Initialization:** Initializes various parameters, including `draft`, `offset_y`, `min_depth`, `max_depth`, and arrays for accumulating backscatter and counts.
 2.  **File Iteration:** Loops through each input merged file:
@@ -59,3 +55,15 @@ traceBP <merged_file(s)> [OPTIONS]
     *   The coefficients (`a`, `b`, `c`, `d`, `e`, `f`) are printed to standard output.
 4.  **Output to `tracepatt`:** The calculated coefficients for the first and last beams are written to the `tracepatt` file.
 5.  **Plotting Output (if plot flags are used):** Prints a formatted table to standard output for plotting, including beam number, file sequence, launch angle, angle offset, average backscatter (converted to log, linear, or DN as requested), and count.
+
+## Output Files
+*   `tracepatt`: An ASCII file containing quadratic coefficients for beam pattern normalization.
+*   Standard Output: Formatted table for plotting (if plot flags are used).
+
+## Dependencies
+*   `OMG_HDCS_jversion.h`: For OMG-HDCS data structures.
+*   `support.h`: For general utility functions and error handling.
+*   `math.h`: For mathematical functions.
+
+## Notes
+This tool is used to derive empirical corrections for sidescan data based on the angular response of individual trace samples. The quadratic fit provides a smooth representation of this response, which can then be applied by other tools (e.g., `makess`) to normalize sidescan imagery. The verbose output is useful for diagnosing the angular response of the sonar.

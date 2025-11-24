@@ -27,7 +27,7 @@ plotFoot -infile <bf_file> [-outfile <filename.meta>] [-size <dx> <dy>] [-depth 
 | `-speed <val>` | Specifies the vessel speed in knots. | `10.0` |
 | `-reprate <val>` | Specifies the shot interval (repetition rate) in seconds. | `1.0` |
 | `-boxsize <val>` | Defines the size of the square plotting area (in meters). | `1000.0` |
-| `-interleave` | Indicates that the ping sequence is interleaved. |
+| `-interleave` | Indicates that the ping sequence is interleaved. | |
 
 ## Input File Format (`bf_file`)
 The input file is an ASCII file assumed to contain:
@@ -42,7 +42,7 @@ The input file is an ASCII file assumed to contain:
 
 ## How It Works
 1.  **Initialization:** Parses command-line arguments to set plotting options, input file name, plot size, and simulation parameters (depth, speed, shot interval, box size, interleave flag).
-2.  **Plot Setup:** Initializes the `plotlib` PostScript output (`plot.meta`). Sets up the overall plot dimensions (`xlength`, `ylength`, `xoff`, `yoff`).
+2.  **Plot Setup:** Initializes the `plotlib` PostScript output (`plot.meta`). Sets up the overall plot dimensions (`xlength`, `ylength`, `xoff`).
 3.  **Beam Footprint Data Loading:**
     *   Opens the input beam footprint file (`-infile`).
     *   Reads `toolType`, `operatingMode`, `spacing_type`, `nobeams`, `nopings`, `ping_offset`, and arrays `beamangle`, `beamwidth`, `beamheight`, `offset_dirn` for each beam.
@@ -63,8 +63,14 @@ The input file is an ASCII file assumed to contain:
             *   Plots a simple cross for the center of each beam.
 7.  **Cleanup:** Calls `plot_close` to finalize the PostScript output.
 
-## Output
-*   A PostScript metafile (`plot.meta` or specified by `-outfile`) containing a visual representation of the sonar beam footprints.
-```
-```
-```
+## Output Files
+*   `<outfile_name>`: A PostScript metafile (`.meta`) containing a visual representation of the sonar beam footprints.
+
+## Dependencies
+*   `plotlib.h`: For `plotlib` functions.
+*   `support.h`: For general utility functions.
+*   `BeamFoot.h`: For `BeamFoot` structure and related functions.
+*   `math.h`: For mathematical functions.
+
+## Notes
+`plotFoot` is a valuable tool for survey planning and understanding sonar coverage. It visually demonstrates how parameters like water depth, vessel speed, and ping rate influence the effective coverage of a multibeam system, especially for systems with interleaved ping patterns. This can help optimize survey efficiency and data density.

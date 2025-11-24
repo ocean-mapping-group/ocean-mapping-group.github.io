@@ -28,7 +28,8 @@ correctBS <OMG_HDCS_merged_file(s)> -topo <DTM_file(.r4)> [OPTIONS]
 | `-maxangle <val>` | Maximum angle for mock backscatter calculation. | `25` |
 | `-clip_beam <val>` | Minimum beam angle to map (masking out beam data inside the beam null). | `45.0` |
 | `-cast_shadow` | Enable cast shadow detection. |
-| `-min <val>` / `-max <val>` | Minimum and maximum dB values for the 8-bit output scale. | `-90.0` to `0.0` |
+| `-min <val>` | Minimum dB value for the 8-bit output scale. | `-90.0` |
+| `-max <val>` | Maximum dB value for the 8-bit output scale. | `0.0` |
 | `-nofocus` | Disable beam focus correction. |
 | `-v` | Enable verbose output. |
 
@@ -57,3 +58,16 @@ correctBS <OMG_HDCS_merged_file(s)> -topo <DTM_file(.r4)> [OPTIONS]
         *   **Mock Backscatter (`mock_flag`):** Calculates `angle_diff` (`rgraze - true_grazing_angle`) and scales it to `Beams[j].pseudoAngleIndependentBackscatter`.
         *   **Backscatter Strength (`backscatter_flag`, currently not directly used):** Contains commented-out logic for calculating backscatter strength based on sonar equation components.
 4.  **In-Place Modification:** The `pseudoAngleIndependentBackscatter`, `freq`, and `sample_interval` fields of the `Beams` structure are updated in the merged file.
+
+## Output Files
+The input merged files are modified in-place.
+
+## Dependencies
+*   `OMG_HDCS_jversion.h`: For OMG-HDCS data structures.
+*   `array.h`: For `JHC_header` structure and DTM data handling.
+*   `support.h`: For general utility functions and error handling.
+*   `j_proj.h`: For coordinate projection functions.
+*   `backscatter.h`: For `vectangle` function.
+
+## Notes
+This tool is critical for quantitative backscatter analysis, allowing for the normalization of backscatter values for environmental and geometric effects. The corrected `pseudoAngleIndependentBackscatter` can then be used for seafloor classification and habitat mapping. The use of raytracing-derived LUTs significantly improves the accuracy of grazing angle and spreading loss corrections.

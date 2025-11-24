@@ -22,7 +22,8 @@ getBounds <datafile(s).{merged,ss}> [OPTIONS]
 |---|---|
 | `<datafile(s).{merged,ss}>` | **Required.** One or more paths to OMG-HDCS merged files or GLORIA sidescan (`.ss`) files. |
 | `-v` | Enable verbose output. |
-| `-first <ping_num>` / `-last <ping_num>` | Specifies the starting and ending ping numbers (inclusive) to process. | All pings |
+| `-first <ping_num>` | Specifies the starting ping number (inclusive) to process. | All pings |
+| `-last <ping_num>` | Specifies the ending ping number (inclusive) to process. | All pings |
 | `-dump_soleol` | Dumps the min/max times and file paths to `dump_bounds_soleol.txt` in a format for soleol. |
 | `-do_anyway` | (Used with merged files) Forces processing of beams even if their status is bad or `observedDepth` is zero. |
 
@@ -50,4 +51,17 @@ getBounds <datafile(s).{merged,ss}> [OPTIONS]
 6.  **Overall Bounds Output:** After processing all files, it prints the overall min/max time and geographic bounds across the entire dataset to the console.
 7.  **Soleol Dump (`-dump_soleol`):** If specified, dumps the min/max times and file paths to `dump_bounds_soleol.txt`.
 8.  **Cleanup:** Closes all open files.
-```
+
+## Output Files
+*   The input merged or GLORIA files are modified in-place (updating their summary headers).
+*   `<datafile_prefix>.100ping_bounds`: A binary file storing bounds for every 100 pings.
+*   `<datafile_prefix>.file_bounds`: A binary file storing the overall geographic and temporal bounds for each file.
+*   `dump_bounds_soleol.txt`: An ASCII file containing min/max times and file paths (if `-dump_soleol` is used).
+
+## Dependencies
+*   `OMG_HDCS_jversion.h`: For OMG-HDCS data structures.
+*   `support.h`: For general utility functions and error handling.
+*   `j_proj.h`: For coordinate projection functions.
+
+## Notes
+This tool is essential for efficient data management, particularly for large datasets where quickly identifying the spatial and temporal coverage of files is important. The `.100ping_bounds` files act as a spatial index, allowing other tools to quickly check if a region of interest overlaps with a data file without reading the entire file. The `dump_soleol` option provides a formatted output for specific scripting or analysis workflows.

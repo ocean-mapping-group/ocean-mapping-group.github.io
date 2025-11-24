@@ -55,3 +55,17 @@ get_GRA <input_omg_file(.merged)> [OPTIONS]
     *   **Grazing Angle Calculation:** For each beam, it calls the appropriate external function (e.g., `get_grazing_angles`, `get_full_grazing_angles`, `get_dtm_grazing_angles`, `get_dtm_grazing_angles_ADH`, `get_full_grazing_angles_ADH`) based on the selected command-line option. These functions (likely from `grazing_angle.h` and `grazing_angle.c`) perform the core trigonometric or geometric calculations.
     *   **Output Writing:** Writes the calculated grazing angles for all beams in the current profile to the corresponding `.r4` output files.
 5.  **Cleanup:** Closes all open files and frees allocated memory (for DTM data).
+
+## Output Files
+*   Multiple JHC float grid files (`.r4`) containing grazing angles, with extensions based on the calculation method (e.g., `<input_omg_file_prefix>.GRA_just_across.r4`, `<input_omg_file_prefix>.GRA_ADH.r4`, `<input_omg_file_prefix>.GRA_dtm.r4`).
+
+## Dependencies
+*   `OMG_HDCS_jversion.h`: For OMG-HDCS data structures.
+*   `array.h`: For `JHC_header` structure and `.r4` file handling.
+*   `support.h`: For general utility functions and error handling.
+*   `j_proj.h`: For coordinate projection functions.
+*   `grazing_angle.h`: For grazing angle calculation functions.
+*   `ref_coeffs.h`: For refraction coefficient structures (if `-refract` is used).
+
+## Notes
+Accurate grazing angles are fundamental for backscatter compensation, seafloor classification, and beam pattern modeling. This tool provides a flexible suite of methods to derive these angles, accommodating different data characteristics and accuracy requirements. The output in `.r4` grid format facilitates further gridded analysis. The `-separate_port_stbd_grazing` option is present in the usage but not implemented in the current code.

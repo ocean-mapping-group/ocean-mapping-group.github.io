@@ -25,7 +25,7 @@ repoint -in <filename.merged> (-ssp_file <ssp.bin> | -speed <val>) [OPTIONS]
 | `-speed <val>` | **Required (one of this or `-ssp_file`).** Specifies a constant surface sound speed value (m/s) to use for repointing. |
 | `-orig_speed <val>` | Specifies the original surface sound speed value that was used during data acquisition. This is useful if the original speed is not reliably stored in the merged file or if you wish to override it. | Auto-read from merged file |
 | `-just_test` | Runs the repointing logic but does *not* write any changes back to the merged file. Useful for previewing changes. |
-| `-v` | Enable verbose output. |
+| `-v` | Enable verbose output. | |
 
 ## How It Works
 1.  **Input Reading:** Opens the target merged file and optionally an SSP file (if `-ssp_file` is used).
@@ -38,3 +38,15 @@ repoint -in <filename.merged> (-ssp_file <ssp.bin> | -speed <val>) [OPTIONS]
     *   It then applies a trigonometric correction (using the `repoint_angle` function) to both the Tx and Rx steering angles based on the `old_ssp` and `new_ssp`. This correction adjusts the angles as if they were originally recorded with the `new_ssp`.
     *   **Special Handling:** For some older sonar types (e.g., ISIS_Submetrix), which might store Rx steering angles in the `beam_depress_angle` field, a "kloodge" (workaround) is applied to ensure the repointed angles are written back correctly.
 4.  **In-Place Update:** The corrected Tx and Rx steering angles are written back to the respective `Tx_steer` and `Rc_steer` fields (or `beam_depress_angle` for kloodged sonars) in the beam structures of the merged file. The `td_sound_speed` or `soundVelocity` in the profile header is also updated to the `new_ssp`.
+
+## Output Files
+The input merged file (`-in`) is modified in-place (unless `-just_test` is used).
+
+## Dependencies
+*   `OMG_HDCS_jversion.h`: For OMG-HDCS data structures.
+*   `support.h`: For general utility functions and error handling.
+*   `j_nav.h`: For navigation data handling (if `-ssp_file` is used).
+*   `j_attitude.h`: For attitude data handling (if `-ssp_file` is used).
+
+## Notes
+Beam steering angles are highly sensitive to the surface sound speed. Inaccurate assumptions about this parameter during data acquisition can lead to significant errors in depth and position. `repoint` provides a way to correct these errors post-acquisition, improving the overall accuracy of the bathymetry. The tool modifies merged files in place, so backups are recommended. The `just_test` option is useful for previewing the effects of repointing before committing changes.

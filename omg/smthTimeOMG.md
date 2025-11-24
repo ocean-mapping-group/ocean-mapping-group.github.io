@@ -27,7 +27,7 @@ smthTimeOMG <OMG_HDCS_datafile(s)> [-v] [-test] [-filtlen <value>] [-Tshift <val
 | `-Tshift <value>` | Applies a constant time shift (in seconds) to the smoothed `timeOffset` values. | `0` |
 
 ## How It Works
-1.  **File Processing:** The tool iterates through each provided merged file.
+1.  **File Processing:** The tool iterates through each specified merged file.
 2.  **Summary Header Reading & Time Scale Adjustment:** Reads the summary header to get `summary.numProfiles` and `summary.timeScale`. The `Tshift` value is rescaled internally to match the units of `timeOffset` (microseconds * `timeScale`).
 3.  **Time Offset Extraction:**
     *   Allocates memory for two double arrays: `timeOffset` (to store original `profile.timeOffset` values) and `low_timeOffset` (for smoothed values).
@@ -42,3 +42,13 @@ smthTimeOMG <OMG_HDCS_datafile(s)> [-v] [-test] [-filtlen <value>] [-Tshift <val
     *   If `-test` is *not* used, the tool iterates through all profiles again.
     *   For each profile `i`, it reads the original profile, updates its `profile.timeOffset` with the (integer cast of) `low_timeOffset[i]`, and writes the modified profile back to the merged file.
 6.  **Cleanup:** Closes files and frees dynamically allocated memory.
+
+## Output Files
+The input merged files are modified in-place (unless `-test` is used).
+
+## Dependencies
+*   `OMG_HDCS_jversion.h`: For OMG-HDCS data structures.
+*   `support.h`: For general utility functions and error handling.
+
+## Notes
+Smoothing time offsets in merged files can significantly improve the accuracy of time-critical correlations with other data streams (e.g., heave, navigation). This is particularly important for raw data formats that may only provide coarse timestamping. The tool modifies merged files in-place, so backups are recommended. The `-test` option allows for previewing changes before committing.

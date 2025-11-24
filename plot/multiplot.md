@@ -29,7 +29,7 @@ After launching, `multiplot` will guide the user through a series of prompts:
 1.  **Plotting Area Dimensions:** Prompts for the maximum dimensions of the plotting area (`dx`, `dy` in cm).
 2.  **File Selection:** Prompts for the ASCII plot file name.
 3.  **Plot Geometry:** Prompts for X and Y axes lengths (`xlength`, `ylength`) and X and Y offsets (`xoffset`, `yoffset`) for the current plot within the overall plotting area.
-4.  **Number of Plots:** Reads the number of individual plots (`noplots`) to be drawn on the current graph from the input file.
+4.  **Number of Plots (`noplots`):** Reads the number of individual plots (`noplots`) to be drawn on the current graph from the input file.
 5.  **X-Axis Bounds:** Reads X-axis minimum (`xmin`) and maximum (`xmax`) values from the input file.
 6.  **Y-Axis Bounds (per plot):** For each of the `noplots`, it reads Y-axis minimum (`ymin[i]`) and maximum (`ymax[i]`) values from the input file.
 7.  **Number of Data Points:** Reads the total number of data points (`nopoints`) for each plot from the input file.
@@ -56,9 +56,17 @@ The input ASCII file for each graph is expected to contain:
 6.  **Data Range Reading:** Reads `noplots`, `xmin`, `xmax`, `ymin[]`, `ymax[]`, and `nopoints` from the input ASCII plot file.
 7.  **Data Plotting Loop:** Iterates through each data point `j` and then through each plot `i`:
     *   Reads `xval` and `yval` from the input file.
-    *   If `xval` and `yval` are within their respective bounds, it converts them to device coordinates (`xpos`, `ypos`).
-    *   It then draws a line segment from the `oldxpos`/`oldypos` (previous data point) to the current `xpos`/`ypos`.
+    *   If `xval` and `yval` are within their respective plot bounds and `yval` is not `0.0`, it converts them to device coordinates (`xpos`, `ypos`).
+    *   It then draws a line segment from the `oldxpos`/`oldypos` (previous data point) to the current point (`xpos`, `ypos`).
 8.  **Continue/Exit:** After plotting a graph, it asks the user if they want to plot another.
 9.  **Cleanup:** Calls `plot_close` to finalize the PostScript output.
-```
-```
+
+## Output Files
+*   `<outfile_name>`: A PostScript metafile (`.meta`) containing the generated plots.
+
+## Dependencies
+*   `plotlib.h`: For `plotlib` functions.
+*   `support.h`: For general utility functions.
+
+## Notes
+`multiplot` is an interactive tool suitable for visually comparing multiple time-series or profile datasets. The input file format is highly specific, requiring explicit definition of plot geometry and data ranges within the ASCII file itself. The interactive nature allows users to build complex composite plots step-by-step.

@@ -50,4 +50,17 @@ getGraz <merged_file(s)> -lut <LUThandle> [OPTIONS]
     *   **Verbose Output:** If `verbose_flag` is set, it prints detailed information for selected beams.
 5.  **Final `num` Array Update:** After processing all files, it writes the updated `num` array (containing sample counts per pixel) back to the `.num` file.
 6.  **Cleanup:** Closes all open files and frees allocated memory.
-```
+
+## Output Files
+*   `<LUThandle>.lut`: A custom binary file containing backscatter values (`Sb_value` structures) mapped by geographic pixel.
+*   `<LUThandle>.num`: A JHC `.r4` grid file containing the count of `Sb_value` samples per geographic pixel.
+
+## Dependencies
+*   `OMG_HDCS_jversion.h`: For OMG-HDCS data structures.
+*   `array.h`: For `JHC_header` structure and DTM data handling.
+*   `support.h`: For general utility functions and error handling.
+*   `j_proj.h`: For coordinate projection functions.
+*   `backscatter.h`: For `vectangle` function.
+
+## Notes
+This tool allows for the construction of spatially organized Look-Up Tables of backscatter vs. grazing angle. This is fundamental for building empirical models of the seafloor's acoustic response, which can then be used for seafloor classification or correcting backscatter imagery. The removal of the Simrad Lambertian correction is critical for getting true backscatter values that reflect the seafloor rather than sonar processing.

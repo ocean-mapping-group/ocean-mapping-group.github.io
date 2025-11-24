@@ -4,6 +4,12 @@ title: cutMVPLocationSections
 parent: Grid Tools
 nav_order: 17
 ---
+---
+layout: default
+title: cutMVPLocationSections
+parent: Grid Tools
+nav_order: 17
+---
 # cutMVPLocationSections
 
 ## Description
@@ -28,3 +34,22 @@ cutMVPLocationSections -mvpfile <mvp_file.m1> -outfile <output.ascii> -xloc <x_p
 | `-downcast` | Process only the downcast portion of the MVP profile. | |
 | `-bothcast` | Process both upcast and downcast portions of the MVP profile. This is the default. | |
 | `-v` | Enable verbose output during processing. | |
+
+## How It Works
+1.  **File Opening:** Opens the MVP file, all input image files, and the output ASCII file.
+2.  **MVP Data Reading:** Reads the MVP data from the specified file, extracting depth and sound velocity information.
+3.  **Image Data Reading:** Reads the `JHC_header` from each input image file.
+4.  **Profile Extraction:** For each vertical step (`dz`) from `0` to `max_depth`:
+    *   **MVP Resampling:** Interpolates the MVP data to get the sound velocity at the current depth.
+    *   **Image Slice Extraction:** For each input image, it extracts the pixel value (intensity) at the specified `xloc` and current depth. If `xwidth` is greater than 1, it averages pixels around `xloc`.
+    *   Writes the combined depth, sound velocity, and image intensities to the output ASCII file.
+
+## Output Files
+*   `<output.ascii>`: An ASCII file containing combined depth, sound velocity, and image intensity values along the vertical section.
+
+## Dependencies
+*   `array.h`: For `JHC_header` structure and image data handling.
+*   `support.h`: For general utility functions and error handling.
+
+## Notes
+This tool is particularly useful for creating cross-sectional views of oceanographic data, allowing for visual correlation between sound velocity profiles and acoustic imagery (e.g., from echosounders or sidescan). This can help identify scattering layers, thermoclines, or other water column features.

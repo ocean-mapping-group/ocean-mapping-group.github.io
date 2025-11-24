@@ -23,8 +23,9 @@ filterBP -in <file.bp> [-out <file.bp.filt>] [-rolling] [-posTol <val>] [-negTol
 | `-in <file.bp>` | **Required.** The path to the input beam pattern file (ASCII format). |
 | `-out <file.bp.filt>` | The path for the output filtered beam pattern file. Default is `<input_file>.filt`. |
 | `-rolling` | Indicates that the input file contains multiple "rolling" beam patterns (each with a ping number). |
-| `-posTol <val>` / `-negTol <val>` | (Present in `USAGE` but not implemented) These options likely intend to define positive and negative tolerance thresholds, but their functionality is not seen in the `main` function. |
-| `-v` | Enable verbose output. |
+| `-posTol <val>` | (Present in `USAGE` but not implemented) These options likely intend to define positive tolerance thresholds, but their functionality is not seen in the `main` function. | |
+| `-negTol <val>` | (Present in `USAGE` but not implemented) These options likely intend to define negative tolerance thresholds, but their functionality is not seen in the `main` function. | |
+| `-v` | Enable verbose output. | |
 
 ## How It Works
 1.  **File Opening:** Opens the input beam pattern file (`-in`) for reading and creates an output file (`<input_file>.filt` or specified by `-out`) for writing.
@@ -42,3 +43,12 @@ filterBP -in <file.bp> [-out <file.bp.filt>] [-rolling] [-posTol <val>] [-negTol
 4.  **Output Writing:** Writes the processed (gap-filled) beam pattern data to the output file.
     *   If `-rolling` is active, it writes the `ping_number` and then the 180 `inten` values.
     *   Otherwise, it writes `angle`, `inten`, `diff`, and `bcount` for all 180 bins.
+
+## Output Files
+*   `<file.bp.filt>`: The output filtered beam pattern file (ASCII format).
+
+## Dependencies
+*   `support.h`: For general utility functions and error handling.
+
+## Notes
+Beam patterns generated from real data often contain gaps due to sparse data coverage in certain angular bins. This tool helps to smooth out and interpolate these gaps, creating a more continuous and usable beam pattern for further processing, such as applying corrections to backscatter data. The `posTol` and `negTol` options are listed in the usage but not implemented in the current code.

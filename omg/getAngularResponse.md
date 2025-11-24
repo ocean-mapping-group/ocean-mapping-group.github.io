@@ -106,4 +106,21 @@ getAngularResponse <merged_file(s)> [OPTIONS]
     *   Generates a PGM image (`arc.pgm`) visualizing the angular response curve.
     *   If `do_ar_map` is active, it compiles and prints an `AR_Map` (Angular Response Map).
 6.  **Cleanup:** Frees allocated memory and closes all open files.
-```
+
+## Output Files
+*   `angular_response`: An ASCII file containing the calibrated angular response curve.
+*   `arc.pgm`: A PGM image visualizing the angular response curve.
+*   Auxiliary files (e.g., for rolling averages, `AR_Map`) if specific options are used.
+
+## Dependencies
+*   `OMG_HDCS_jversion.h`: For OMG-HDCS data structures.
+*   `array.h`: For `JHC_header` structure and `.r4` file handling.
+*   `support.h`: For general utility functions and error handling.
+*   `j_proj.h`: For coordinate projection functions.
+*   `grazing_angle.h`: For grazing angle calculation functions.
+*   `ensonification.h`: For ensonification area calculations.
+*   `Echo_calib.h`: For `calibrate_reson` and `rebuildResonBeamIntensities` functions.
+*   `backscatter.h`: For backscatter related functions.
+
+## Notes
+`getAngularResponse` is a powerful tool for backscatter calibration and seabed characterization. Its ability to apply various corrections and filters makes it adaptable to different sonar types and environmental conditions. The output angular response curves are fundamental for understanding the acoustic properties of the seafloor and for use in backscatter classification schemes. The `-AR_map` option provides a mechanism for compiling spatially distributed angular response data.

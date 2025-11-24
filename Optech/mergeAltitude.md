@@ -23,7 +23,7 @@ mergeAltitude -in <merged_file(s)> -alt <altitude_file.ascii(s)> -out <ASCII_fil
 | `-in <merged_file(s)>` | **Required.** One or more paths to input OMG-HDCS merged files. |
 | `-alt <altitude_file.ascii(s)>` | **Required.** One or more paths to ASCII altitude files. Each file is expected to contain two columns: timestamp (double) and altitude (double). |
 | `-out <ASCII_filename>` | **Required.** The path for the output ASCII file, which will contain merged geographic (lat/lon) and altitude data. |
-| `-v` | Enable verbose output. |
+| `-v` | Enable verbose output. | |
 
 ## How It Works
 1.  **Initialization:** Initializes global variables, including `verbose_flag`, file handles, and counters.
@@ -44,8 +44,13 @@ mergeAltitude -in <merged_file(s)> -alt <altitude_file.ascii(s)> -out <ASCII_fil
             *   **Output to ASCII:** If bracketing altitude records are found, it prints the `lat`, `lon`, and interpolated/closest `altitude` (`alt[1][n]`) to the output ASCII file.
 5.  **Cleanup:** Closes all open files.
 
-## Output Format
-The output ASCII file (`-out`) will contain three columns: `latitude`, `longitude`, and `altitude`, for each beam with a valid altitude lookup.
-```
-```
-```
+## Output Files
+*   `<ASCII_filename>`: An ASCII file containing `latitude`, `longitude`, and `altitude` for each beam with a valid altitude lookup.
+
+## Dependencies
+*   `OMG_HDCS_jversion.h`: For OMG-HDCS data structures.
+*   `support.h`: For general utility functions and error handling.
+*   `j_proj.h`: For coordinate projection functions.
+
+## Notes
+This tool is used to integrate external altitude data with multibeam soundings, providing a comprehensive vertical reference. This is critical for applications that require precise heights, such as mapping features above or near the water surface using laser bathymetry. The interpolation ensures that altitude values are accurately synchronized with each individual sounding.

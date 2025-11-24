@@ -48,4 +48,14 @@ downHill (-em3000 | -fswp20 | -isis | -towss | -elacII_120 | -elacII_150 | -reso
     *   **Ping Interval Update:** Calculates the `ping_interval` based on the deepest point of the simulated swath to ensure adequate along-track coverage.
 4.  **Helper Function `depth_intersect()`:** This function calculates the depth at which a beam, at a given `angle`, intersects a seafloor with a specified `nadirdepth` and `across_slope`. It uses basic trigonometry to account for the slope.
 5.  **Output:** The output file (`bf_file`) contains pairs of `along_dist` and `across_dist` values for each beam at each simulated ping interval, representing the synthetic beam footprint.
-```
+
+## Output Files
+*   `<bf_file>`: A binary file containing synthetic beam footprint data.
+
+## Dependencies
+*   `BeamFoot.h`: For `BeamFoot` structure and `dump_BF_characteristics` function.
+*   `support.h`: For general utility functions.
+*   `math.h`: For mathematical functions.
+
+## Notes
+`downHill` is a valuable tool for understanding and visualizing sonar coverage, particularly how it changes with varying seafloor topography and sonar parameters. The synthetic beam footprint data can be used for survey planning, quality control, and as ground truth for testing processing algorithms. The tool creates a new file, ensuring the integrity of the original configuration. The `canyon` and `sect_vary` options are listed but not fully implemented.

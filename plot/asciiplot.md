@@ -100,7 +100,14 @@ asciiplot [-infile file1 ...] [-infilQ fileN QstringN] [OPTIONS]
     *   **`plot_axes` Function:** A helper function that draws and labels axes with automatic tick generation and handling of flipped axes.
 4.  **Cleanup:** Calls `plot_close` to finalize the PostScript output and closes the input file.
 
-## Output
-*   A PostScript metafile (`plot.meta` or specified by `-outfile`) containing the generated plot(s).
-*   An optional `omgbin.dump.ascii` file if `-omgbin` is used (for debugging).
-```
+## Output Files
+*   `<outfile>`: A PostScript metafile (`.meta`) containing the generated plot(s).
+*   `omgbin.dump.ascii`: An optional ASCII dump file if `-omgbin` is used (for debugging).
+
+## Dependencies
+*   `plotlib.h`: For `plotlib` functions.
+*   `support.h`: For general utility functions and error handling.
+*   `array.h`: For `JHC_header` structure and `.r4` file handling.
+
+## Notes
+`asciiplot` is a flexible tool for quickly visualizing time-series or profile data from various sources. Its ability to plot multiple datasets on a single graph and customize plot aesthetics makes it useful for comparative analysis and generating publication-ready figures. The `-omgbin` option provides a bridge to directly visualize internal binary grid formats.

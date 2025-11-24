@@ -48,3 +48,13 @@ guessSwellHeave <OMG_HDCS_datafile(s)> [OPTIONS]
     *   If `-test` is *not* used, the tool iterates through all profiles again.
     *   For each profile `i`, it reads the original profile, updates its `profile.vesselHeave` with `HeavesOK[i]` (scaled to millimeters and inverted), and writes the modified profile back to the merged file.
 7.  **Cleanup:** Frees allocated memory and closes files.
+
+## Output Files
+The input merged files are modified in-place (unless `-test` is used).
+
+## Dependencies
+*   `OMG_HDCS_jversion.h`: For OMG-HDCS data structures.
+*   `support.h`: For general utility functions and error handling.
+
+## Notes
+Estimating heave from observed depths can be a useful technique when direct heave measurements are unavailable, but it relies on the assumption of a relatively flat seafloor within the filter window. This method is often used in preliminary processing or for data from systems that do not log detailed motion data. The filtering options help to remove spurious heave values. The tool modifies merged files in place, so backups are recommended.

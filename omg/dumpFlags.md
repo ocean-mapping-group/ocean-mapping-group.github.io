@@ -49,3 +49,15 @@ dumpFlags <OMG_HDCS_datafile_prefix(s)> [OPTIONS]
         *   Writes the modified `beams` back to the merged file.
 7.  **JHC Header for Flag File (when dumping):** If dumping flags, it writes a JHC header to the `.flag_bk` file before writing any flag data.
 8.  **Cleanup:** Closes all open files.
+
+## Output Files
+*   The input merged file (`.merged`) is modified in-place if `-load` is used.
+*   `<OMG_HDCS_datafile_prefix>.flag_bk`: A binary file containing the beam status flags (if not `-load`).
+
+## Dependencies
+*   `OMG_HDCS_jversion.h`: For OMG-HDCS data structures.
+*   `array.h`: For `JHC_header` structure.
+*   `support.h`: For general utility functions and error handling.
+
+## Notes
+This tool is invaluable for managing the results of data cleaning. It allows for flexible application of quality control flags, either for backup/restore purposes or for applying a consistent flagging scheme across multiple datasets. The `--dropDup` option helps to manage specific data acquisition scenarios where duplicate pings might exist.

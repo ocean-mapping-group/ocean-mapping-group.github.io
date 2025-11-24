@@ -12,12 +12,10 @@ nav_order: 71
 The file primarily sets up the environment for the target hunting process within the broader OMG toolkit.
 
 ## Macros
-```c
-#define _C_TARGETHUNT
-#define MAXSLOTSIZE 1000
-```
-*   `_C_TARGETHUNT`: A preprocessor macro to prevent multiple inclusions of this header file.
-*   `MAXSLOTSIZE`: Defines the maximum number of water column pings/swaths that can be processed in one "slot" or chunk by the `targethunt` application.
+| Macro | Description |
+|---|---|
+| `_C_TARGETHUNT` | A preprocessor macro to prevent multiple inclusions of this header file. |
+| `MAXSLOTSIZE` | `1000` | Defines the maximum number of water column pings/swaths that can be processed in one "slot" or chunk by the `targethunt` application. |
 
 ## Includes
 ```c
@@ -31,5 +29,5 @@ The header file also includes a detailed section of "Some comment codes used" wh
 *   **Debug stuff:** `HACK`, `FIXME`, `TESTING`, `CHECK_ME`
 *   **Other useful comments:** `TEST`, `UNUSED`, `DEPRECATED`, `DANGER`, `WARNING`, `BUG`
 
-## Purpose
+## Notes
 The `targethunt.h` header defines the foundational elements needed for the `targethunt` program to operate. It makes available the `MAXSLOTSIZE` constant and integrates the `c_wcpick` module, which is central to its target detection capabilities. It also indicates the typical structure of variables that would be associated with a target hunting widget or GUI, even though these variables themselves are commented out.

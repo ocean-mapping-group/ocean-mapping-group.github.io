@@ -32,15 +32,15 @@ make_Optech_prof <OMG_HDCS_datafile(s)> -out <outfile> [OPTIONS]
 | `-raman` | Process RAMAN waveforms. |
 
 ### Output/Filtering Options
-| Option | Description |
-|---|---|
-| `-nadir_beam` | (Not implemented) Intended to dump nadir beam info only. |
-| `-bottom_pick` | (Not implemented) Intended to paint bottom pick points in the trace. |
+| Option | Description | Default / Example |
+|---|---|---|
+| `-nadir_beam` | (Not implemented) Intended to dump nadir beam info only. | |
+| `-bottom_pick` | (Not implemented) Intended to paint bottom pick points in the trace. | |
 | `-beam <val>` | Only dump the waveform trace for this specific beam number. | `50` |
-| `-azimuth_angle <val>` | Only dump the waveform trace for beams with this specific azimuth angle. |
+| `-azimuth_angle <val>` | Only dump the waveform trace for beams with this specific azimuth angle. | |
 | `-scan_range <first_scan> <last_scan>` | Process profiles (scans) only within this range. | All scans |
-| `-area <filename>` | Only process beams within the geographical area defined by the map sheet (`.r4` file). |
-| `-v` | Enable verbose output. |
+| `-area <filename>` | Only process beams within the geographical area defined by the map sheet (`.r4` file). | |
+| `-v` | Enable verbose output. | |
 | `-merid <val>` | Central meridian for UTM projection (not directly used by this tool but for related geo-processing). | `-63.0` |
 
 ## How It Works
@@ -61,4 +61,16 @@ make_Optech_prof <OMG_HDCS_datafile(s)> -out <outfile> [OPTIONS]
             *   **Filtering by Beam/Azimuth/Area:** Checks if the current beam matches the specified `-beam` number, `-azimuth_angle`, or falls within the `-area`.
             *   **Output Trace:** If all filters pass, it writes the `detrend_trace` (float array) to the output `.r4` file. It also updates the JHC header in the output file to reflect the added trace and seeks back to update the header dynamically.
 5.  **Cleanup:** Closes all open files.
-```
+
+## Output Files
+*   `<outfile>`: A JHC `.r4` (float grid) file containing the detrended waveform traces.
+
+## Dependencies
+*   `OMG_HDCS_jversion.h`: For OMG-HDCS data structures.
+*   `array.h`: For `JHC_header` structure and `.r4` file handling.
+*   `support.h`: For general utility functions and error handling.
+*   `Optech_waveform.h`: For Optech waveform data structures and processing functions (`pm_Process_Wave`).
+*   `j_proj.h`: For coordinate projection functions.
+
+## Notes
+`make_Optech_prof` is a specialized tool for detailed analysis of individual waveform characteristics, allowing researchers to study how different waveform types behave and respond to the seafloor. The ability to filter by beam, azimuth, or geographic area allows for very targeted investigations. The tool always outputs to a JHC `.r4` file, making it compatible with other grid processing and visualization tools. The `-nadir_beam` and `-bottom_pick` options are listed but not implemented.

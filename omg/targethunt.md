@@ -18,50 +18,50 @@ targethunt -infile <inputfile(s)> [OPTIONS]
 
 ## Arguments
 
-| Option | Description |
-|---|---|
-| `-infile <inputfile(s)>` | **Mandatory.** One or more paths to OMG-HDCS merged files containing water column data. |
+| Option | Description | Default |
+|---|---|---|
+| `-infile <inputfile(s)>` | **Required.** One or more paths to OMG-HDCS merged files containing water column data. | |
 
 ### Help & Verbosity
-| Option | Description |
+| Option | Description | Default |
 |---|---|
-| `-h` | Shows the help text. |
-| `-v` | Activates verbose mode. |
-| `-w` | Activates workflow mode (default is ON). |
-| `-s` | Activates silent mode (no workflow, no verbose, no debug). |
-| `-noinfo` | Does not print software information in the output. |
+| `-h` | Shows the help text. | |
+| `-v` | Activates verbose mode. | |
+| `-w` | Activates workflow mode. | ON |
+| `-s` | Activates silent mode (no workflow, no verbose, no debug). | |
+| `-noinfo` | Does not print software information in the output. | |
 
 ### Input/Output Files
 | Option | Description |
 |---|---|
-| `-output` | Will print an output ASCII list of targets. |
-| `-shapefile <file>` | Specifies an input ASCII file defining the target shape/pattern to search for. |
-| `-print` | Prints the final list of targets to standard output. |
-| `-printOnly` | Prints the existing target list (from a `.tgt` file) and exits, without processing WCL data. |
+| `-output` | Will print an output ASCII list of targets. | |
+| `-shapefile <file>` | Specifies an input ASCII file defining the target shape/pattern to search for. | |
+| `-print` | Prints the final list of targets to standard output. | |
+| `-printOnly` | Prints the existing target list (from a `.tgt` file) and exits, without processing WCL data. | |
 
 ### Target Detection Parameters
-| Option | Description |
+| Option | Description | Default |
 |---|---|
-| `-setThresh <val>` | Sets a static intensity threshold value. |
+| `-setThresh <val>` | Sets a static intensity threshold value. | |
 | `-dynThresh <multiplier>` | Sets a dynamic threshold multiplier (multiplied by the difference from the background). | `1` |
-| `-dynThreshLayerX <multiplier>` | Sets a dynamic threshold depth layer multiplier (multiplied by pulse length). |
+| `-dynThreshLayerX <multiplier>` | Sets a dynamic threshold depth layer multiplier (multiplied by pulse length). | |
 | `-amplOffset <val>` | Uses an `X_LogOffset` value during acquisition. | `0` |
-| `-cubeSamples <val>` | Defines the size of the 3D cubic detection box in samples. |
-| `-cubeBeams <val>` | Defines the size of the 3D cubic detection box in beams. |
-| `-cubeSwaths <val>` | Defines the size of the 3D cubic detection box in swaths. |
-| `-blockPlPat` | Blocks (ignores) time series pattern search. |
-| `-blockAngPat` | Blocks (ignores) angular series pattern search. |
-| `-blockSwPat` | Blocks (ignores) swath series pattern search. |
-| `-minsamples <val>` / `-maxsamples <val>` | Restricts target search to a specific sample (range) number range. |
-| `-minRange <val>` / `-maxRange <val>` | Restricts target search to a specific slant range (in meters) range. |
-| `-minbeams <val>` / `-maxbeams <val>` | Restricts target search to a specific beam number range. |
-| `-minswaths <val>` / `-maxswaths <val>` | Restricts target search to a specific swath number range. |
-| `-sector <val>` | Restricts target search to a single specified sector. |
-| `-useSectors <n> <s1> <s2> ... <sn>` | Restricts target search to `n` specified sectors (`s1` to `sn`). |
+| `-cubeSamples <val>` | Defines the size of the 3D cubic detection box in samples. | |
+| `-cubeBeams <val>` | Defines the size of the 3D cubic detection box in beams. | |
+| `-cubeSwaths <val>` | Defines the size of the 3D cubic detection box in swaths. | |
+| `-blockPlPat` | Blocks (ignores) time series pattern search. | |
+| `-blockAngPat` | Blocks (ignores) angular series pattern search. | |
+| `-blockSwPat` | Blocks (ignores) swath series pattern search. | |
+| `-minsamples <val>` / `-maxsamples <val>` | Restricts target search to a specific sample (range) number range. | |
+| `-minRange <val>` / `-maxRange <val>` | Restricts target search to a specific slant range (in meters) range. | |
+| `-minbeams <val>` / `-maxbeams <val>` | Restricts target search to a specific beam number range. | |
+| `-minswaths <val>` / `-maxswaths <val>` | Restricts target search to a specific swath number range. | |
+| `-sector <val>` | Restricts target search to a single specified sector. | |
+| `-useSectors <n> <s1> <s2> ... <sn>` | Restricts target search to `n` specified sectors (`s1` to `sn`). | |
 | `-slotSize <val>` | Defines the water column data slot size (number of swaths/pings to read at once). | `100` |
-| `-force1Swath` | Forces single swath search technique (disables multiple swath search). |
-| `-detect` | Performs only detection (LIMs - Local Intensity Maxima), skipping the full target hunt. |
-| `-keepdetections` | Keeps all detections after target hunt (does not exclude them). |
+| `-force1Swath` | Forces single swath search technique (disables multiple swath search). | |
+| `-detect` | Performs only detection (LIMs - Local Intensity Maxima), skipping the full target hunt. | |
+| `-keepdetections` | Keeps all detections after target hunt (does not exclude them). | |
 
 ### Area Filtering
 | Option | Description |
@@ -73,13 +73,13 @@ targethunt -infile <inputfile(s)> [OPTIONS]
 ### Dumping/Debugging Data
 | Option | Description |
 |---|---|
-| `-dumpThresh` | Dumps all threshold values to a file. |
-| `-dumpThreshCmp` | Dumps dynamic and static threshold values to a file. |
-| `-dumpSamples` | Dumps sample values to a file. |
-| `-dumpSw <val>` | Dumps water column swath `val` only. |
-| `-dumpBm <val>` | Dumps beam `val` only. |
-| `-dumpSmpl <val>` | Dumps sample (range) `val` only. |
-| `-pause` | Pauses after processing each file. |
+| `-dumpThresh` | Dumps all threshold values to a file. | |
+| `-dumpThreshCmp` | Dumps dynamic and static threshold values to a file. | |
+| `-dumpSamples` | Dumps sample values to a file. | |
+| `-dumpSw <val>` | Dumps water column swath `val` only. | |
+| `-dumpBm <val>` | Dumps beam `val` only. | |
+| `-dumpSmpl <val>` | Dumps sample (range) `val` only. | |
+| `-pause` | Pauses after processing each file. | |
 
 ## Target Shape File Format
 The `shapefile` option refers to a specific ASCII file format:
@@ -116,5 +116,17 @@ The `shapefile` option refers to a specific ASCII file format:
     *   If `-print` is used, it prints the target list to standard output.
 5.  **Cleanup:** Frees allocated memory and closes files.
 
-## External Functions/Structures (Assumed)
-This tool relies heavily on external functions (e.g., `c_resetUserVars`, `c_findSwathType`, `c_hunt_for_detections`, `c_mark_targets`, `c_excludeDetections`, `c_hunt_for_targets`, `init_OMG_Target_List`, `read_OMG_Target_List`, `write_OMG_Target_List`, `print_OMG_Target_List`) and structures (e.g., `OMG_Target_List`, `OMG_Target_Shape`) defined in `targethunt.h`, `omg_target.h`, and `j_EM_watercol.h`, which are not fully provided in the snippet.
+## Output Files
+*   `<merged_filename_prefix>.tgt`: A binary file containing a list of detected targets.
+*   `<merged_filename_prefix>.tgt_ascii`: An ASCII file containing target details (if `-output` is used).
+*   `<merged_filename_prefix>.tgtShape`: A copy of the input shape file (if `-shapefile` is used).
+
+## Dependencies
+*   `OMG_HDCS_jversion.h`: For OMG-HDCS data structures.
+*   `j_EM_watercol.h`: For water column data structures.
+*   `targethunt.h`: For `targethunt` functionality constants and headers.
+*   `omg_target.h`: For `OMG_Target_List` and `OMG_Target_Shape` structures.
+*   `support.h`: For general utility functions and error handling.
+
+## Notes
+`targethunt` is a sophisticated tool for automating the detection of objects within the water column from multibeam sonar data. It can significantly speed up the process of identifying marine life, debris, or other features that are not part of the seafloor. The ability to define target shapes provides flexibility for searching for specific types of objects. The `--detect` option is useful for reviewing local intensity maxima before confirming them as targets.

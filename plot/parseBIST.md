@@ -24,7 +24,7 @@ parseBIST <BIST_file(s)> (-rxspecnoise | -rxelemnoise) [-dualRx2040] [-v]
 | `-rxspecnoise` | **Required (choose one).** Extracts receiver spectral noise data. |
 | `-rxelemnoise` | **Required (choose one).** Extracts receiver element noise data. |
 | `-dualRx2040` | Indicates that the BIST file is from a dual RX system (e.g., EM2040). This will generate separate output files for port and starboard RXs. |
-| `-v` | Enable verbose output. |
+| `-v` | Enable verbose output. | |
 
 ## How It Works
 1.  **Initialization:** Parses command-line arguments to set input/output filenames, select the type of noise data to extract (`tofind`), and handle dual RX systems (`dualRx2040`).
@@ -46,10 +46,13 @@ parseBIST <BIST_file(s)> (-rxspecnoise | -rxelemnoise) [-dualRx2040] [-v]
 4.  **Helper Function `removebar()`:** This function replaces vertical bar characters (`|`) in a string with spaces, as these might be present in the BIST report formatting and interfere with `sscanf`.
 5.  **Cleanup:** Closes all open files.
 
-## Output File Format
+## Output Files
 The output files (`.bist`, `.port`, `.stbd`) are ASCII files. The format depends on the `tofind` option:
 *   **`RXELEMNOISE`:** Typically `element_number noise_level1 noise_level2 ...`
 *   **`RXSPECNOISE`:** Typically `frequency noise_level1 noise_level2 ...`
-```
-```
-```
+
+## Dependencies
+*   `support.h`: For general utility functions.
+
+## Notes
+BIST reports provide crucial diagnostic information about the sonar's internal electronics and noise characteristics. This tool helps to extract and organize this data into a usable format for quality control and system performance evaluation. The output ASCII format is compatible with external plotting tools for visual analysis.

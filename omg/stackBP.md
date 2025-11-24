@@ -21,17 +21,17 @@ stackBP <beampatt_file(s)> [-verbose]
 | Option | Description |
 |---|---|
 | `<beampatt_file(s)>` | **Required.** One or more paths to input ASCII beam pattern files. These files are typically named `beampatt` or similar and contain angle, intensity, difference, and count for each bin. |
-| `-verbose` | Enable verbose output. |
+| `-verbose` | Enable verbose output. | |
 
 ## How It Works
-1.  **Input Reading:** The tool initializes arrays to store the summed intensity (`Inten`), difference (`theDiff`), and total count (`Bcount`) for each of the 180 angle bins.
+1.  **Initialization:** The tool initializes arrays to store the summed intensity (`Inten`), difference (`theDiff`), and total count (`Bcount`) for each of the 180 angle bins.
 2.  **File Iteration:** It iterates through each provided input beam pattern file:
     *   For each file, it reads the four columns of data (angle, intensity, difference, beam count) for each of the 180 bins.
     *   It accumulates `Inten[j]` by adding `intensity[j] * bcount[j]` (weighted sum).
     *   It accumulates `Bcount[j]` by adding `bcount[j]`.
     *   It also keeps track of `totinten` and `totcount` for a global average.
 3.  **Weighted Averaging:** After processing all input files:
-    *   For each angle bin `j`, if `Inten[j]` is non-zero, it calculates the weighted average intensity by dividing `Inten[j]` by `Bcount[j]`.
+    *   For each angle bin `j`, if `Bcount[j]` is non-zero, it calculates the weighted average intensity by dividing `Inten[j]` by `Bcount[j]`.
     *   It also calculates a global `totinten` (weighted average intensity across all bins and all files).
 4.  **Output Writing:**
     *   An output file named `beampatt.stack` is created.
@@ -40,4 +40,13 @@ stackBP <beampatt_file(s)> [-verbose]
         *   Weighted average intensity (`Inten[j]`)
         *   Difference from the global average (`totinten - Inten[j]`)
         *   Total count for that bin (`Bcount[j]`)
-    *   If `Inten[j]` is zero (meaning no data for that bin), the intensity and difference are written as `0.0`.
+    *   If `Bcount[j]` is zero (meaning no data for that bin), the intensity and difference are written as `0.0`.
+
+## Output Files
+*   `beampatt.stack`: An ASCII file containing the stacked and averaged beam pattern.
+
+## Dependencies
+*   `support.h`: For general utility functions.
+
+## Notes
+Stacking multiple beam patterns helps to reduce noise and provide a more statistically robust representation of the sonar's angular response. The weighted averaging ensures that data with higher confidence (more samples) contributes more to the final result. The output format is compatible with `plotBP` for visualization.

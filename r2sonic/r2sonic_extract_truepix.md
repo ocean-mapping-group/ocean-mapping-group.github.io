@@ -26,7 +26,7 @@ r2sonic_extract_truepix -r2s <input.r2s> -outprefix <output_prefix> [-ping <ping
     *   `<output_prefix>_angle.8bit`: 8-bit angle image data.
     *   `<output_prefix>_timeseries.out` (optional): ASCII time-series data for a specific ping. |
 | `-ping <ping_number>` | Dumps detailed time-series data for the specified `ping_number` (0-indexed). |
-| `-v` | Enable verbose output. |
+| `-v` | Enable verbose output. | |
 
 ## How It Works
 1.  **Initialization:** Parses command-line arguments to get input/output filenames and the `desired_ping` number.
@@ -55,5 +55,11 @@ r2sonic_extract_truepix -r2s <input.r2s> -outprefix <output_prefix> [-ping <ping
 *   `<output_prefix>_mag.8bit`: Binary file containing 8-bit magnitude data.
 *   `<output_prefix>_angle.8bit`: Binary file containing 8-bit angle data.
 *   `<output_prefix>_timeseries.out`: ASCII file with detailed time-series data for a specified ping (if `-ping` is used).
-```
-```
+
+## Dependencies
+*   `R2Sonic_parser.h`: For R2Sonic data structures and parsing functions (`build_R2SONIC_INDEX`, `read_R2SONIC_TRUEPIX`).
+*   `support.h`: For general utility functions and error handling.
+*   `array.h`: For `JHC_header` structure.
+
+## Notes
+TruePix data provides raw beam-formed information crucial for advanced backscatter analysis and bottom classification. This tool allows for the extraction and visualization of these raw signals, which can be invaluable for developing custom processing algorithms or for quality control. The output images can be viewed using image viewers that support raw 8-bit data, and the time-series dump provides detailed numeric insight into the waveforms.

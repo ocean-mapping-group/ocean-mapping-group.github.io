@@ -39,5 +39,12 @@ readHDCS <USL_HDCS_linedirectory> [-verbose]
     *   It then reads all `USL_HDCS_obs_beam` structures for that profile (though it only prints a commented-out example of beam data).
 6.  **Interactive Query (Incomplete):** The code includes an interactive section (labeled `again:`) that prompts the user for a record number and allows navigating `next`, `prev`, or `full` display (though the `OMG_HDCS_display_profile` and `OMG_HDCS_display` functions are commented out or not provided). This interactive part appears incomplete in the provided source.
 
-## Data Structures (from `USL_HDCS_hack.h` - assumed)
-The tool relies on definitions from `USL_HDCS_hack.h` (not provided) for structures like `USL_HDCS_proc_summary_header`, `USL_HDCS_obs_profile_header`, etc., which define the format of the USL-HDCS data.
+## Output Files
+The tool prints diagnostic information to standard output. No specific output files are generated.
+
+## Dependencies
+*   `USL_HDCS_hack.h`: (Assumed) Defines structures for USL-HDCS data files.
+*   `support.h`: For general utility functions.
+
+## Notes
+This tool is specifically for debugging and understanding the internal structure of legacy USL-HDCS files. Its lack of SWAPIO compliance means it should be used on systems with the same endianness as the data origin to avoid byte-ordering issues. The interactive query section is noted as incomplete, limiting its full interactive capabilities.

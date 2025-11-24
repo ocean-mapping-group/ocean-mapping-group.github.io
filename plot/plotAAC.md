@@ -27,19 +27,16 @@ plotAAC -infile <file1> [-outfile <filename.meta>] [-size <dx> <dy>] [-vref] [-s
 | `-sens` | Selects a specific set of parameters for plotting (SENS, `noval`=5). |
 | `-sparse` | (Present in `USAGE` but not fully implemented) Likely intended for sparse plotting. |
 | `-xrange <min> <max>` | Sets the X-axis (time since start of window) range for the plot. | Auto-determined. |
-| `-v` | Enable verbose output (not explicitly used). |
+| `-v` | Enable verbose output (not explicitly used). | |
 
 ## Interactive Mode
 After launching, `plotAAC` will guide the user through a series of prompts:
 
 1.  **Plotting Area Dimensions:** Prompts for the maximum dimensions of the plotting area (`dx`, `dy` in cm).
 2.  **Number of Plots (`noplots`):** Prompts for how many plots (time series of different parameters) to create.
-3.  **Y-Axis Bounds (per plot):** For each plot, it prompts for Y-axis minimum (`ymin[i]`) and maximum (`ymax[i]`) values.
+3.  **Y-axis Bounds (per plot):** For each plot, it prompts for Y-axis minimum (`ymin[i]`) and maximum (`ymax[i]`) values.
 4.  **Parameter Selection:** For each plot, it presents a menu of available parameters from the RLG, HIPPY, and TSSB systems and prompts the user to choose which parameter to plot.
 5.  **Continue Plotting:** After plotting the selected parameters for one plot, it asks if the user wants to plot another line in the current graph.
-
-## Data Structures
-The tool reads binary data files. The specific structure of these files (`bet.out`, `hippmbet.out`, `tssbmbet.out`) is assumed to be an array of doubles, where each row represents a record and each column a different parameter. The `noval` parameter implicitly defines the number of columns in the data files.
 
 ## How It Works
 1.  **Initialization:** Parses command-line arguments to set plotting options and input filenames. Initializes a `plotlib` PostScript output (`plot.meta`).
@@ -63,8 +60,13 @@ The tool reads binary data files. The specific structure of these files (`bet.ou
         *   Adds labels for the plotted parameter.
 4.  **Cleanup:** Calls `plot_close` to finalize the PostScript output and closes input files.
 
-## Output
-*   A PostScript metafile (`plot.meta` or specified by `-outfile`) containing time-series plots of the selected parameters.
-```
-```
-```
+## Output Files
+*   `<outfile_name>`: A PostScript metafile (`.meta`) containing time-series plots of the selected parameters.
+
+## Dependencies
+*   `plotlib.h`: For `plotlib` functions.
+*   `support.h`: For general utility functions.
+*   `math.h`: For mathematical functions.
+
+## Notes
+`plotAAC` is a valuable tool for quality control and detailed analysis of RLG/GNSS motion data, allowing for visual inspection of navigation and attitude parameters. The interactive mode enables flexible selection of parameters and plotting ranges. The tool applies some basic filtering to improve data quality for visualization. The input binary format is specific to AAC data.

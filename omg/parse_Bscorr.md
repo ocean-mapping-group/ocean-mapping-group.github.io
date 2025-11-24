@@ -41,10 +41,15 @@ parse_Bscorr <file.Bscorr_XXX> [-EM710] [-interpolate <val>] [-out <outname>] [-
 5.  **Output Writing:** The processed and interpolated beam pattern data is written to one or more output files.
     *   The output format attempts to mimic the input `Bscorr` file structure, including comments for human readability.
     *   It generates separate files for each depth mode and swath combination (e.g., `.Bscorr_1_0`, `.Bscorr_1_1` for mode 1, single and dual swath 1 respectively).
-6.  **Memory Management:** Dynamically allocates and frees memory for the multi-dimensional arrays used to store the beam pattern data.
 
-## Output File Naming Convention
-The output files will be named using the `-out` prefix (or the input filename if `-out` is not specified) followed by `.<mode_id>_<swath_number>`. For example, `CalibEM710.Bscorr_1_0`, `CalibEM710.Bscorr_2_1`, etc.
+## Output Files
+The output files will be named using the `-out` prefix (or the input filename if `-out` is not specified) followed by `.<mode_id>_<swath_number>`. For example:
+*   `<outname>.Bscorr_<mode>_<swath>`: ASCII files containing the parsed and interpolated beam patterns.
 
-## External Libraries
-This tool uses the GNU Scientific Library (GSL) for spline interpolation.
+## Dependencies
+*   `parse_Bscorr.h`: For `EM710_Bscorr` structure and related definitions.
+*   `support.h`: For general utility functions and error handling.
+*   `gsl/gsl_spline.h`: For GSL spline interpolation.
+
+## Notes
+This tool is crucial for preparing custom beam patterns for use in KMALL sonars, allowing for fine-tuning of backscatter calibration based on empirical data rather than manufacturer defaults. The interpolation ensures a smooth and complete beam pattern even if the input data is sparse. It creates new output files without modifying the original `Bscorr` input.

@@ -23,13 +23,13 @@ plotDump -infile <file1> [-infile <file2> ...] [-outfile <filename.meta>] [OPTIO
 | `-infile <file1> ...` | **Required.** One or more input ASCII files containing time-series data. |
 | `-outfile <filename.meta>` | Specifies the output PostScript metafile name. | `plot.meta` |
 | `-size <dx> <dy>` | Specifies the plot size in centimeters. | `20.0 25.0` |
-| `-xplot` | Enables plotting one parameter against another (X-Y plot) instead of against time. |
-| `-dofilt` | Enables interactive filtering of data before plotting. |
+| `-xplot` | Enables plotting one parameter against another (X-Y plot) instead of against time. | |
+| `-dofilt` | Enables interactive filtering of data before plotting. | |
 | `-filtlen <val>` | Specifies the length of the boxcar filter (number of samples) if filtering is enabled. | `2` |
-| `-squat <bias> <linear> <square>` | Overlays a squat model onto the plot (requires `-xplot`). |
-| `-filtdepth` | (Present in `USAGE`, but implementation not fully shown for plotting) Intended for filtering depth. |
-| `-label <string>` | Adds a custom title to the plot. |
-| `-sparse` | (Present in `USAGE`, but implementation not fully shown for plotting) Intended for sparse plotting. |
+| `-squat <bias> <linear> <square>` | Overlays a squat model onto the plot (requires `-xplot`). | |
+| `-filtdepth` | (Present in `USAGE`, but implementation not fully shown for plotting) Intended for filtering depth. | |
+| `-label <string>` | Adds a custom title to the plot. | |
+| `-sparse` | (Present in `USAGE`, but implementation not fully shown for plotting) Intended for sparse plotting. | |
 | `-xrange <min> <max>` | Sets the X-axis range. | Auto-determined. |
 | `<merged_file(s)...>` | (Optional) One or more merged files. Their time extents will be indicated on the plot. |
 
@@ -42,9 +42,6 @@ After launching, `plotDump` will guide the user through a series of prompts:
 4.  **Parameter Selection (X-axis, if `-xplot`):** If `-xplot` is enabled, it presents the same menu and prompts for the parameter to plot on the X-axis.
 5.  **Filtering (`-dofilt`):** If `-dofilt` is enabled, it asks the user if they want to filter the current time series and applies a boxcar filter with `filtlen`.
 6.  **Continue Plotting:** After plotting one line in a subplot, it asks if the user wants to plot another line in the same subplot.
-
-## Data Structure
-The input ASCII files are expected to contain 56 columns of float values, where each row represents a time step and each column a different parameter. The first column (`values[0]`) is always assumed to be time.
 
 ## How It Works
 1.  **Initialization:** Parses command-line arguments to set plotting options, input file names, and ranges. Initializes a `plotlib` PostScript output (`plot.meta`).
@@ -74,8 +71,14 @@ The input ASCII files are expected to contain 56 columns of float values, where 
     *   `filt_TS(int novals, float *invals, float *outvals, int filtlen)`: Applies a boxcar (moving average) filter to `invals` and stores results in `outvals`.
 7.  **Cleanup:** Frees allocated memory and closes all input files.
 
-## Output
-*   A PostScript metafile (`plot.meta` or specified by `-outfile`) containing time-series plots of the selected parameters.
-```
-```
-```
+## Output Files
+*   `<outfile_name>`: A PostScript metafile (`.meta`) containing time-series plots of the selected parameters.
+
+## Dependencies
+*   `plotlib.h`: For `plotlib` functions.
+*   `support.h`: For general utility functions.
+*   `math.h`: For mathematical functions.
+*   `OMG_HDCS_jversion.h`: For merged file structures.
+
+## Notes
+`plotDump` is a highly flexible interactive tool for detailed analysis of time-series data. Its interactive nature allows users to quickly explore different parameters and visualize trends, relationships, and anomalies. It is particularly useful for debugging processing results or for quality control of motion, navigation, and other time-varying data. The integration of filtering and squat models provides additional analytical capabilities.

@@ -18,16 +18,16 @@ plotAspectRatio [-ar <ratio>] [-outfile <filename.meta>] [-size <dx> <dy>] [-yra
 
 ## Arguments
 
-| Option | Description |
-|---|---|
+| Option | Description | Default / Example |
+|---|---|---|
 | `-outfile <filename.meta>` | Specifies the output PostScript metafile name. | `plot.meta` |
 | `-size <dx> <dy>` | Specifies the total plot size in centimeters (X and Y dimensions). | `15.0 15.0` |
-| `-yrange <min> <max>` | Sets the Y-axis range (count or percentage). | `0.0` to `25.0` |
+| `-yrange <min> <max>` | (Present in `USAGE` but fixed to `0.0` to `25.0` in provided code) Sets the Y-axis range (count or percentage). | `0.0` to `25.0` |
 | `-ar <ratio>` | Specifies the aspect ratio. This is multiplied by 1000 to get a simulated water column `height`. (e.g., `0.1` is a low aspect ratio). | `1000.0` (implied, as `height` initialized to `1000.0`) |
 
 ## How It Works
-1.  **Initialization:** Parses command-line arguments to set plot size, Y-axis range, and `height` (which is derived from `-ar`).
-2.  **Plot Area Setup:** Sets up the overall plot dimensions (`xlength`, `ylength`, `xoff`, `yoff`). Draws the main plot border.
+1.  **Initialization:** Parses command-line arguments to set plot size, Y-axis range, and `height` (which is derived from `-ar`). Initializes a `plotlib` PostScript output (`plot.meta`).
+2.  **Plot Setup:** Sets up the overall plot dimensions (`xlength`, `ylength`, `xoff`, `yoff`). Draws the main plot border.
 3.  **Angle Stack Calculation:**
     *   Initializes a `stack[90]` array to zeros.
     *   Iterates from `i = 0` to `999` (simulating horizontal distance).
@@ -42,8 +42,13 @@ plotAspectRatio [-ar <ratio>] [-outfile <filename.meta>] [-size <dx> <dy>] [-yra
         *   Draws a vertical bar representing `stack[j]` as a filled rectangle.
 5.  **Cleanup:** Calls `plot_close` to finalize the PostScript output.
 
-## Output
-*   A PostScript metafile (`plot.meta` or specified by `-outfile`) containing a histogram-like plot of angle distribution.
-```
-```
-```
+## Output Files
+*   `<outfile.meta>`: A PostScript metafile (`.meta`) containing a histogram-like plot of angle distribution.
+
+## Dependencies
+*   `plotlib.h`: For `plotlib` functions.
+*   `support.h`: For general utility functions.
+*   `math.h`: For mathematical functions.
+
+## Notes
+This tool provides a conceptual visualization of how sound rays are distributed as a function of grazing angle, given a simplified model of the water column. This can be used for educational purposes or for understanding the theoretical behavior of sonar systems. The Y-axis range is fixed in the current code, but the usage suggests it could be user-defined.

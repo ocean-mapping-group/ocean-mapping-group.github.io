@@ -22,8 +22,9 @@ packOMG <OMG_HDCS_infile> <OMG_HDCS_outfile> [OPTIONS]
 |---|---|
 | `<OMG_HDCS_infile>` | **Required.** The path to the input OMG-HDCS merged file in the verbose format (version 1). |
 | `<OMG_HDCS_outfile>` | **Required.** The path for the output OMG-HDCS merged file in the packed format (version 2). |
-| `-first <ping_num>` / `-last <ping_num>` | Specifies a range of pings to process. This functionality seems to be present in the `USAGE` string but is not implemented in the `main` function's loop, which processes all profiles. |
-| `-v` | Enable verbose output. |
+| `-first <ping_num>` | Specifies the starting ping number to process. This functionality seems to be present in the `USAGE` string but is not implemented in the `main` function's loop, which processes all profiles. |
+| `-last <ping_num>` | Specifies the ending ping number to process. This functionality seems to be present in the `USAGE` string but is not implemented in the `main` function's loop, which processes all profiles. |
+| `-v` | Enable verbose output. | |
 
 ## How It Works
 1.  **File Opening:** Opens the input merged file for reading and the output file for writing.
@@ -32,8 +33,13 @@ packOMG <OMG_HDCS_infile> <OMG_HDCS_outfile> [OPTIONS]
     *   Reads the profile header.
     *   Reads all raw beams associated with that profile.
     *   Writes the profile header and the raw beams to the output file.
-4.  **Output:** Creates a new merged file (`<OMG_HDCS_outfile>`) with the data converted to the packed format.
 
-## Limitations
-*   The `-first` and `-last` options are defined in the `USAGE` string but are currently not implemented in the main processing loop, meaning the tool will always process all profiles.
-*   Only conversion from `fileVersion = 1` to `fileVersion = 2` is supported.
+## Output Files
+*   `<OMG_HDCS_outfile>`: A new OMG-HDCS merged file in the packed format (version 2).
+
+## Dependencies
+*   `OMG_HDCS_jversion.h`: For OMG-HDCS data structures.
+*   `support.h`: For general utility functions and error handling.
+
+## Notes
+The conversion from version 1 to version 2 format in OMG-HDCS files is often performed to optimize storage efficiency or to align with updated software requirements. This tool handles the low-level binary restructuring of the file. The `-first` and `-last` options are defined in the usage string but currently inactive, meaning the entire file is always converted. The tool creates a new file, ensuring the original remains untouched.

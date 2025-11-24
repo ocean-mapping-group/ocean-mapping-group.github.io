@@ -19,56 +19,22 @@ This module enables applications using `plotlib` to produce graphical output com
 
 ## Helper Functions
 
-### `postx(float x)`
-Scales a `plotlib` X-coordinate to a UNIX plot X-coordinate.
-
-### `posty(float y)`
-Scales a `plotlib` Y-coordinate to a UNIX plot Y-coordinate.
-
-### `wnum(short x)`
-Writes a short integer `x` to `plot_outfile` as two bytes.
+*   `postx(float x)`: Scales a `plotlib` X-coordinate to a UNIX plot X-coordinate.
+*   `posty(float y)`: Scales a `plotlib` Y-coordinate to a UNIX plot Y-coordinate.
+*   `wnum(short x)`: Writes a short integer `x` to `plot_outfile` as two bytes.
 
 ## Functions (Implementing `plotlib` Driver Interface)
 
-### `plot_start(float dx, float dy)`
-Initializes the UNIX plot device.
-*   **`dx`, `dy`:** The desired drawing area width and height (ignored beyond opening the plot).
-*   Calls `openpl(plot_outfile)` to open the plot.
-
-### `plot_end()`
-Finalizes the UNIX plot.
-*   Calls `closepl()` to close the plot.
-
-### `plot_rotate()`
-(Empty function) UNIX plot drivers don't typically handle rotation directly.
-
-### `plot_move(float x, float y)`
-Moves the plotting pen to a new absolute position without drawing.
-*   **`x`, `y`:** Target coordinates in `plotlib` units.
-*   Calls `move(postx(x), posty(y))` to move the pen.
-
-### `plot_line(float x, float y)`
-Draws a line from the current pen position to a new absolute position.
-*   **`x`, `y`:** Target coordinates in `plotlib` units.
-*   If the position is not known, calls `move` first.
-*   Calls `cont(postx(x), posty(y))` to draw a line.
-
-### `plot_text(char *text)`
-Draws a text string.
-*   **`text`:** The string to draw.
-*   Calls `label(text)` to draw the text.
-
-### `plot_textrot(float angle)`
-(Empty function) Text rotation is not typically handled directly by this UNIX plot driver.
-
-### `plot_pen(int pen)`
-(Empty function) Pen selection is not typically handled directly by this UNIX plot driver.
-
-### `plot_textsize(float x, float y)`
-(Empty function) Text size is not typically handled directly by this UNIX plot driver.
-
-### `plot_clip(float x0, float y0, float x1, float y1)`
-(Empty function) Clipping is not typically handled directly by this UNIX plot driver.
+*   `plot_start(float dx, float dy)`: Initializes the UNIX plot device. Calls `openpl(plot_outfile)` to open the plot.
+*   `plot_end()`: Finalizes the UNIX plot. Calls `closepl()` to close the plot.
+*   `plot_rotate()`: (Empty function) UNIX plot drivers don't typically handle rotation directly.
+*   `plot_move(float x, float y)`: Moves the plotting pen to a new absolute position without drawing. Calls `move(postx(x), posty(y))` to move the pen.
+*   `plot_line(float x, float y)`: Draws a line from the current pen position to a new absolute position. Calls `move` first if position is not known, then `cont(postx(x), posty(y))` to draw a line.
+*   `plot_text(char *text)`: Draws a text string. Calls `label(text)` to draw the text.
+*   `plot_textrot(float angle)`: (Empty function) Text rotation is not typically handled directly by this UNIX plot driver.
+*   `plot_pen(int pen)`: (Empty function) Pen selection is not typically handled directly by this UNIX plot driver.
+*   `plot_textsize(float x, float y)`: (Empty function) Text size is not typically handled directly by this UNIX plot driver.
+*   `plot_clip(float x0, float y0, float x1, float y1)`: (Empty function) Clipping is not typically handled directly by this UNIX plot driver.
 
 ## Internal UNIX Plot Functions (mimicking `plot(5)`)
 
@@ -86,13 +52,16 @@ Draws a text string.
 *   `circle(short x, short y, short r)`: Writes a 'c' command and parameters to draw a circle.
 *   `arc(short x, short y, short x0, short y0, short x1, short y1)`: Writes an 'a' command and parameters to draw an arc.
 
+## How It Works
+`unix.c` provides a device driver that translates generic `plotlib` commands into the specific binary format understood by legacy UNIX `plot(5)` utilities. It implements the `plotlib` driver interface functions (`plot_start`, `plot_end`, `plot_move`, etc.). When a `plotlib` metafile is processed by `plotdriver` and linked with `unix.c`, each `plotlib` command is converted into its UNIX plot equivalent. Coordinates are scaled from `plotlib`'s internal units to UNIX plot device units. This allows `plotlib` applications to generate output compatible with traditional UNIX plotting tools, which might be useful for legacy systems or for simple, non-interactive plots.
+
+## Output Files
+The module generates a binary UNIX plot command file (typically to standard output, which can be redirected).
+
 ## Dependencies
 *   `plotdriver.h`: Defines the interface for `plotlib` device drivers.
 *   `plotlib.h`: Defines general `plotlib` constants and global variables.
-*   `support.h`: (Implied, for utility functions).
+*   Standard C library functions for file I/O and string manipulation.
 
 ## Notes
-*   The coordinate scaling (`postx`, `posty`) is hardcoded for specific dimensions (20.4cm x 26.6cm to 2500x3250 device units).
-*   Many `plotlib` features (like pen selection, text rotation, text size, clipping) are not fully implemented, reflecting the simplicity of the underlying UNIX plot format.
-```
-```
+The coordinate scaling (`postx`, `posty`) is hardcoded for specific dimensions (20.4cm x 26.6cm to 2500x3250 device units). Many `plotlib` features (like pen selection, text rotation, text size, clipping) are not fully implemented, reflecting the simplicity of the underlying UNIX plot format. This driver is primarily for compatibility with older UNIX plotting environments.

@@ -22,7 +22,8 @@ deOuterMistrack <mergefile(s)> [-v] [-first <ping_num>] [-last <ping_num>]
 |---|---|
 | `<mergefile(s)>` | **Required.** One or more paths to OMG-HDCS merged files to be processed. These files are modified in place. |
 | `-v` | Enable verbose output. |
-| `-first <ping_num>` / `-last <ping_num>` | Specifies the starting and ending ping numbers (inclusive) to process. | All pings |
+| `-first <ping_num>` | Specifies the starting ping number (inclusive) to process. | All pings |
+| `-last <ping_num>` | Specifies the ending ping number (inclusive) to process. | All pings |
 
 ## How It Works
 1.  **File Processing:** The tool iterates through each provided merged file.
@@ -38,3 +39,13 @@ deOuterMistrack <mergefile(s)> [-v] [-first <ping_num>] [-last <ping_num>]
         *   It then iterates from the determined `port_edge` inward towards the center of the swath. If a beam `i` in this region has `!beams[i].status` (meaning it's currently considered valid) it flags it by setting the 5th bit of its `status` field (`beams[i].status |= 1 << 5;`). This marks it as a mistrack.
         *   Similarly, it iterates from the `stbd_edge` outward and flags valid beams in that region as mistracks.
 4.  **In-Place Update:** The modified `beams` (with updated `status` flags for mistracks) are written back to the merged file for the current ping.
+
+## Output Files
+The input merged files are modified in-place.
+
+## Dependencies
+*   `OMG_HDCS_jversion.h`: For OMG-HDCS data structures.
+*   `support.h`: For general utility functions and error handling.
+
+## Notes
+Mistracks in the outer swath can be difficult to automatically filter using traditional slope-based methods because they might not represent sharp discontinuities. This tool uses a heuristic based on the `Q_factor` to identify these specific artifacts, which are common in newer multibeam systems. The status flag is updated using a bitwise OR, preserving other flags that might already be set.

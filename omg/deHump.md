@@ -39,9 +39,7 @@ deHump <mergefile(s)> [-v] (-angshift <value> | -depscale <value>) [-mode <value
 
 ## How It Works
 1.  **File Processing:** The tool iterates through each provided merged file (or USL-HDCS directory).
-2.  **File Type Handling:**
-    *   If `-hdcs` is *not* used, it opens the input as a standard OMG-HDCS merged file.
-    *   If `-hdcs` *is* used, it opens USL-HDCS `/ObservedDepths` and `/ObservedDepthsTmIdx` files, and extracts summary information from them, mapping it to an `OMG_HDCS_summary_header` structure.
+2.  **Summary Header Reading & File Type Handling:** Reads the summary header and handles both OMG-HDCS and USL-HDCS file formats, mapping USL-HDCS data to OMG structures.
 3.  **Correction Parameter Setup:**
     *   **`-angshift` method:** It calculates `angle_corrector[k]` values for each beam `k`. These correctors are based on `ang_shift` and are non-zero only for the innermost and outermost beams, with a smooth transition to zero in between.
     *   **`-depscale` method:** It calculates `dep_shift[k]` values for each beam `k`. These are non-zero (equal to `dep_scale` or a scaled version of it) for the innermost and outermost beams, and zero for central beams, following a pattern based on beam number.
@@ -57,3 +55,13 @@ deHump <mergefile(s)> [-v] (-angshift <value> | -depscale <value>) [-mode <value
         *   **Apply `depscale`:**
             *   Subtracts `beams[i].observedDepth * dep_shift[i]` from `beams[i].observedDepth`.
 5.  **In-Place Update:** The modified `beams` (with corrected depths and/or across-track values) are written back to the merged file (or USL-HDCS file) for the current profile.
+
+## Output Files
+The input merged files are modified in-place.
+
+## Dependencies
+*   `OMG_HDCS_jversion.h`: For OMG-HDCS data structures.
+*   `support.h`: For general utility functions and error handling.
+
+## Notes
+This tool provides empirical corrections for specific sonar artifacts observed in older datasets. The corrections are heuristic and may need careful application. The tool modifies merged files in place, so backups are recommended. It handles both OMG-HDCS and legacy USL-HDCS file formats.

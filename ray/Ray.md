@@ -29,10 +29,9 @@ Ray -pro <svp_handle> [-fishdep <val>] [-layerthick <val>] [-spacing <step> <sta
     *   `step`: Angular step (degrees).
     *   `start`: Starting beam angle (degrees).
     *   `finish`: Finishing beam angle (degrees). | `0.1 0 75` |
-| `-verbose` | Enable verbose output. |
+| `-verbose` | Enable verbose output. | |
 
 ## How It Works
-
 1.  **Initialization:** Parses command-line arguments, setting various ray tracing and output parameters.
 2.  **SVP Reading (`read_in_raw()`):**
     *   Opens the input SVP file (`<svp_handle>.RAWPROF`).
@@ -46,7 +45,7 @@ Ray -pro <svp_handle> [-fishdep <val>] [-layerthick <val>] [-spacing <step> <sta
     *   For each `outangle`:
         *   Initializes `posx`, `posz`, `ttime`, and `rangle`.
         *   **Layer-by-Layer Propagation:** Traces the ray through the water column layers:
-            *   Updates `posx`, `posz`, and `ttime`.
+            *   Updates `posx`, `posz`, and `ttime` based on the ray's path through the current layer's velocity.
             *   Stores `posx`, `posz`, and `ttime` for this ray and layer in `across[raynum][i]`, `deep[raynum][i]`, and `Ttime[raynum][i]`.
             *   Applies Snell's Law to calculate the new `rangle` for the next layer.
             *   Handles cases where the ray goes beyond `maxrange` or becomes horizontal.
@@ -66,81 +65,14 @@ Ray -pro <svp_handle> [-fishdep <val>] [-layerthick <val>] [-spacing <step> <sta
 Each output file contains a `JHC_header` followed by the raw float data.
 
 ## Helper Functions
+*   `read_in_raw()`: Reads SVP data in a raw format (depth, velocity pairs).
+*   `make_equisvp()`: Interpolates raw SVP data to create an equi-spaced layered velocity profile (`veldep`).
 
-*   `read_in_raw()`: Reads SVP data from a `.RAWPROF` file.
-*   `make_equisvp()`: Interpolates raw SVP data into an equi-spaced layered velocity profile (`veldep`).
-```
-```
----
-layout: default
-title: Ray
-parent: Ray Tools
-nav_order: 170
----
-# Ray
+## Dependencies
+*   `support.h`: For general utility functions.
+*   `array.h`: For `JHC_header` structure.
+*   `j_watercolumn.h`: For water column structures and ray tracing functions.
+*   `math.h`: For mathematical functions.
 
-## Description
-`Ray` is a ray tracing utility that takes a sound velocity profile (SVP) and builds Time-Angle (TA) lookup tables. These tables contain the across-track distance and depth for each ray at constant time intervals. The core functionality is based on Snell's Law, tracing rays through a layered water column where each layer has a constant sound velocity.
-
-The generated lookup tables (`.Time_LUT`, `.ACROSS_LUT`) are crucial for converting raw sonar measurements (like one-way travel time and beam angle) into georeferenced positions (across-track and depth). This is fundamental for multibeam data processing and image rectification.
-
-## Usage
-```bash
-Ray -pro <svp_handle> [-fishdep <val>] [-layerthick <val>] [-spacing <step> <start> <finish>] [-verbose]
-```
-
-## Arguments
-
-| Option | Description |
-|---|---|
-| `-pro <svp_handle>` | **Required.** Base name for the sound velocity profile file and output lookup tables.
-    *   Input: `<svp_handle>.RAWPROF`.
-    *   Output: `<svp_handle>.Time_LUT` and `<svp_handle>.ACROSS_LUT`. |
-| `-fishdep <val>` | Depth of the transducer/fish (meters). | `2.5` |
-| `-layerthick <val>` | Thickness of the constant velocity layers in the water column model (meters). | `0.1` |
-| `-spacing <step> <start> <finish>` | Defines the angular spacing for ray tracing:
-    *   `step`: Angular step (degrees).
-    *   `start`: Starting beam angle (degrees).
-    *   `finish`: Finishing beam angle (degrees). | `0.1 0 75` |
-| `-verbose` | Enable verbose output. |
-
-## How It Works
-
-1.  **Initialization:** Parses command-line arguments, setting various ray tracing and output parameters.
-2.  **SVP Reading (`read_in_raw()`):**
-    *   Opens the input SVP file (`<svp_handle>.RAWPROF`).
-    *   Reads depth-velocity pairs (`rawdep`, `rawvel`) and determines `fishdep` (transducer depth), `maxdepth`, and `maxrange`.
-    *   Based on `maxdepth`, it sets `timestep` (time interval for sampling ray paths) and `layerthick`.
-    *   Calculates `num_time_samples` based on `maxslantrange` and `timestep`.
-3.  **Equi-spaced SVP (`make_equisvp()`):**
-    *   Interpolates the raw SVP data into an equi-spaced layered model (`veldep`) based on `layerthick`.
-4.  **Ray Tracing (`do_raytrace()`):**
-    *   Iterates through `outangle` from `startangle` to `finishangle` with `anglestep`.
-    *   For each `outangle`:
-        *   Initializes `posx`, `posz`, `ttime`, and `rangle`.
-        *   **Layer-by-Layer Propagation:** Traces the ray through the water column layers:
-            *   Updates `posx`, `posz`, and `ttime`.
-            *   Stores `posx`, `posz`, and `ttime` for this ray and layer in `across[raynum][i]`, `deep[raynum][i]`, and `Ttime[raynum][i]`.
-            *   Applies Snell's Law to calculate the new `rangle` for the next layer.
-            *   Handles cases where the ray goes beyond `maxrange` or becomes horizontal.
-5.  **Time Sampling (`get_time_sampling_positions()`):**
-    *   Resamples the ray paths at constant `timestep` intervals along each ray.
-    *   Interpolates `deep` and `across` values at these constant time intervals and stores them in `LUT_Depth` and `LUT_Across`.
-6.  **Dump Time-Angle LUTs (`dump_time_LUT()`):**
-    *   Initializes a `JHC_header` for the output files.
-    *   Opens two binary files: `<svp_handle>.Time_LUT` and `<svp_handle>.ACROSS_LUT`.
-    *   Writes the `JHC_header` to each file.
-    *   Writes the `LUT_Depth` and `LUT_Across` arrays to their respective files.
-7.  **Cleanup:** Frees allocated memory and closes all files.
-
-## Output Files (JHC `.r4` Array Format)
-*   `<svp_handle>.Time_LUT`: A 2D floating-point array (raster) where each cell contains the depth for a given time and outgoing beam angle.
-*   `<svp_handle>.ACROSS_LUT`: A 2D floating-point array (raster) where each cell contains the across-track distance for a given time and outgoing beam angle.
-Each output file contains a `JHC_header` followed by the raw float data.
-
-## Helper Functions
-
-*   `read_in_raw()`: Reads SVP data from a `.RAWPROF` file.
-*   `make_equisvp()`: Interpolates raw SVP data into an equi-spaced layered velocity profile (`veldep`).
-```
-```
+## Notes
+The lookup tables generated by `Ray` are essential for correcting multibeam sonar data for refraction effects. By converting measured two-way travel times and beam angles into accurate across-track positions and depths, the tool contributes to the precise georeferencing of bathymetric soundings. The tool creates new files, preserving the original SVP data. The `fishdep`, `layerthick`, and `spacing` options allow for fine-tuning of the ray tracing model.

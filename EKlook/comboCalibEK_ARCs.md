@@ -1,3 +1,9 @@
+---
+layout: default
+title: comboCalibEK_ARCs
+parent: EKlook Tools
+nav_order: 2
+---
 # comboCalibEK_ARCs
 
 ## Description
@@ -10,13 +16,6 @@ Additionally, it can generate 2D slices of the combined ARC data (either frequen
 ```bash
 comboCalibEK_ARCs [OPTIONS] -out <output_prefix> -arcs <ARC_file(s)>
 ```
-
-## Output Files (generated based on input and options):
-*   `<output_prefix>.ARC_fullBW`: Combined full bandwidth ARC file.
-*   `<output_prefix>.ARC_3D`: Combined 3D ARC file.
-*   `debug.calib.sampled.txt`: Debug output for sampled calibration values (if `-calib` is used).
-*   `<outFslicename>`: 2D frequency slice output (if `-Freq2Dslice` is used).
-*   `<outGslicename>`: 2D grazing angle slice output (if `-Graz2Dslice` is used).
 
 ## Arguments
 
@@ -36,3 +35,10 @@ comboCalibEK_ARCs [OPTIONS] -out <output_prefix> -arcs <ARC_file(s)>
 | `-Graz2Dslice <filename> <lowGraz> <highGraz>` | Generate a 2D grazing angle slice. Outputs to `<filename>`, averaging backscatter for all frequencies between `lowGraz` and `highGraz`. | `graz_slice.txt 20.0 40.0` |
 | `-out <output_prefix>` | **Required.** Specifies the prefix for the output combined/calibrated ARC files. | `combined_ARCs` |
 | `-arcs <ARC_file(s)>` | **Required.** One or more input ARC files (e.g., `.ARC_fullBW`, `.ARC_FFTbins`) to be combined or calibrated. Wildcards are supported. | `survey_001.ARC_FFTbin survey_002.ARC_FFTbin` |
+
+## Output Files
+*   `<output_prefix>.ARC_fullBW`: Combined full bandwidth ARC file.
+*   `<output_prefix>.ARC_3D`: Combined 3D ARC file.
+*   `debug.calib.sampled.txt`: Debug output for sampled calibration values (if `-calib` is used).
+*   `<outFslicename>`: 2D frequency slice output (if `-Freq2Dslice` is used).
+*   `<outGslicename>`: 2D grazing angle slice output (if `-Graz2Dslice` is used).

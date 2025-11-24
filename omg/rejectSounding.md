@@ -43,3 +43,13 @@ rejectSounding <mergefile(s)> [OPTIONS]
         *   **`-eliminate`:** If this option is active, the entire `OMG_HDCS_beam` structure for the rejected beam is zeroed out (effectively removing it).
     *   **`-whole_swath`:** If this option is active and any beam in the current profile has been modified, then all valid beams in that profile will have their `status` set to `22`.
 4.  **In-Place Update:** If the `-check` flag is *not* used and any beams were modified or refreshed, the updated raw beam records are written back to the merged file.
+
+## Output Files
+The input merged files are modified in-place (unless `-check` is used).
+
+## Dependencies
+*   `OMG_HDCS_jversion.h`: For OMG-HDCS data structures.
+*   `support.h`: For general utility functions and error handling.
+
+## Notes
+`rejectSounding` is a versatile tool for initial data cleaning, allowing for rapid filtering of gross outliers or data outside the survey area. The `-eliminate` option permanently removes data, while simple flagging (`22`) allows for later review. As the tool modifies files in-place, backups are highly recommended. The `-divide10` option is a specific "hack" for certain data anomalies.

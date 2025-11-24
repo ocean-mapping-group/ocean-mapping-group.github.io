@@ -50,3 +50,17 @@ dumpReflect <OMG_HDCS_datafile> <dumpfile> [OPTIONS]
     *   Normalizes the `pseudoAngleIndependentBackscatter` values for all beams such that the average energy of the swath becomes 128.
 7.  **Output to Merged File:** If `!dumpraw_flag` (meaning modified values are being used and mapped), it updates the `pseudoAngleIndependentBackscatter` field in the merged file (and `reflectivity` for certain sonar types).
 8.  **Cleanup:** Closes all open files.
+
+## Output Files
+*   `<dumpfile>`: The main output file, which can be a JHC `.r4` image of reflectivity/backscatter map, or ASCII listing depending on options.
+*   The input merged file may be modified in-place if `-recalc` or `-gainout` are used.
+*   `plot.ascii`: Auxiliary ASCII file with plotting information (if `-map` is used).
+
+## Dependencies
+*   `OMG_HDCS_jversion.h`: For OMG-HDCS data structures.
+*   `array.h`: For `JHC_header` structure and `.r4` file handling.
+*   `support.h`: For general utility functions and error handling.
+*   `Echo_calib.h`: For `EM_convert_amplitude` function (for recalculation).
+
+## Notes
+This tool is flexible for debugging, visualizing, and standardizing backscatter data. The `-recalc` option is particularly useful for re-applying or comparing manufacturer-specific backscatter algorithms. The `-map` option provides a quick visual overview of the backscatter patterns across a survey line. The tool's behavior regarding in-place modification or new file creation depends on the chosen options.

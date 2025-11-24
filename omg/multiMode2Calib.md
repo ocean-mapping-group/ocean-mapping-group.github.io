@@ -28,7 +28,7 @@ multiMode2Calib -allbps <input_MS_BP_scii_file(s)> -out <output_sis5_calib_file>
 | `-addSawTooth <sector> <degstep> <stepsize>` | Add a sawtooth-shaped correction to a specific sector's beam pattern. `<sector>` is the sector ID, `<degstep>` is the degree step for the sawtooth, and `<stepsize>` is the amplitude of the sawtooth. | |
 
 ## How It Works
-1.  **Input Reading:** Reads one or more multi-sector beam pattern files (`.MS.beampatterns` from `newGetBP`). These files contain beam patterns and associated TX sector parameters (center frequency, pulse length, bandwidth, mode, etc.).
+1.  **Input Reading:** Reads one or more multi-sector beam pattern files (`.MS.beampatterns` from `newGetBP`) using `load_MS_bp` (from `j_generic_beam_pattern.h`). These files contain beam patterns and associated TX sector parameters (center frequency, pulse length, bandwidth, mode, etc.).
 2.  **Combination:** It combines all the loaded beam patterns and their corresponding TX sector parameters into a single internal structure, merging data from multiple input files.
 3.  **Sawtooth Correction (Optional):** If `-addSawTooth` is specified, it applies a periodic, sawtooth-shaped correction to the backscatter values of a designated sector.
 4.  **KMALL Calibration File Generation:**
@@ -39,7 +39,12 @@ multiMode2Calib -allbps <input_MS_BP_scii_file(s)> -out <output_sis5_calib_file>
     *   If no matching beam pattern is found for a particular KMALL mode/swath/sector, it writes out zero values.
 5.  **Output:** The generated KMALL calibration file is an ASCII file containing calibration tables for various sonar operating modes.
 
-## Example Workflow
-1.  Generate beam pattern files for different sonar modes using `newGetBP`.
-2.  Combine these files and format them for KMALL calibration using `multiMode2Calib`.
-3.  Load the generated `.sis5_calib` file into the KMALL sonar for backscatter calibration.
+## Output Files
+*   `<output_sis5_calib_file>`: An ASCII file containing KMALL calibration tables.
+
+## Dependencies
+*   `j_generic_beam_pattern.h`: For multi-sector beam pattern structures and functions (`load_MS_bp`).
+*   `support.h`: For general utility functions and error handling.
+
+## Notes
+This tool is crucial for preparing custom beam patterns for use in KMALL sonars, allowing for fine-tuning of backscatter calibration based on empirical data rather than manufacturer defaults. The ability to combine multiple beam patterns (e.g., from different water depths or seafloor types) provides flexibility in generating a robust calibration. The sawtooth correction is a specific empirical adjustment for certain sonar characteristics.

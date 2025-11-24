@@ -1,20 +1,126 @@
-# `jview.c` - Core JView Application Manager
+---
+layout: default
+title: jview
+parent: JV Tools
+nav_order: 1
+---
+# jview
+## Description
+`jview` is an X-windows-based interactive tool for visualizing, analyzing, and editing geospatial data. It orchestrates the entire application lifecycle, from startup configuration to user interaction handling and data processing.
 
-This `jview.c` file serves as the central command and control hub for the `jview` application, an X-windows-based interactive tool for visualizing, analyzing, and editing geospatial data. It orchestrates the entire application lifecycle, from startup configuration to user interaction handling and data processing.
+## Usage
+```bash
+jview [OPTIONS] [<input_data_files...>]
+```
 
-## Key Features and Functions
+## Arguments
 
-*   **Application Entry Point (`main` function):**
-    *   Parses a wide range of command-line arguments to configure `jview`'s behavior and input data sources. These arguments enable diverse functionalities such as loading specific data types, setting display options, and activating various analysis modes.
-    *   Initializes numerous global variables and application modules (e.g., SVP editor, FFT2D tool, WAV audio analysis) by calling functions like `initialise_JV_variables()` and `init_SVP()`.
-    *   Sets up the X-windows graphical environment (`set_up_X()`, `set_up_CMAP()`).
-    *   Creates and maps specialized widgets if their respective flags (`show_fft2d`, `show_wavfft`) are enabled.
-    *   Enters the primary event loop (`process_x_events()`) to continuously monitor and respond to user interactions.
-*   **Command-Line Argument Parsing:**
-    *   Supports an extensive set of command-line flags for flexible application configuration, including:
-        *   **Data Loading:** `-mask`, `-spline_mask`, `-pgm`, `-dump_rot_coords`, `-svp`, `-sounding`, `-tide`, `-watershed`, `-vector`, `-omgedit`, `-vectbin`, `-gl`, `-array`, `-oldarray`, `-reclen`, `-ios`, `-survey_linefile`.
-        *   **Display & View Options:** `-show_fft2d`, `-show_wavfft`, `-make_map_coords`, `-decnav`, `-contval`, `-speed_knots`, `-zigzag`, `-geomask`, `-fillbox`, `-mcol`, `-autoj`, `-show_WCIM_header`, `-linear`, `-box_is_ellipse`, `-box_is_star`, `-pickrot`, `-lookrot`, `-current_box`, `-concat`, `-concat_cumm`, `-seis`, `-displacement`, `-ticks`, `-point`, `-dot`, `-rascoord`, `-dm`, `-dms`, `-lola`, `-ship_location`, `-ship_orient`, `-ship_offset`, `-ship_outline`, `-cmap`, `-asciicmap`, `-subimage`, `-subimage2`, `-SUN`, `-paintbox`, `-paint_color`, `-paint`, `-noexpand`, `-colstart`, `-noscalebar`, `-scalelabel`, `-skip`, `-large_nav`, `-navlook`, `-navedit`, `-traces`, `-specbox`, `-nad27`, `-area`, `-forss`, `-currents`, `-bigwinds`, `-currskip`, `-currdev`, `-currscale`, `-ssedit`, `-gaudy`, `-badread`, `-angresp`, `-smoothssnav`, `-usesslut`, `-sslook`.
-        *   **Debugging/Control:** `-die`, `-help`.
+### Data Loading
+| Option | Description |
+|---|---|
+| `-mask` | Load a mask file. |
+| `-spline_mask` | Load a spline-interpolated mask. |
+| `-pgm` | Load a PGM image file. |
+| `-dump_rot_coords` | Dump rotation coordinates. |
+| `-svp` | Load Sound Velocity Profile (SVP) data. |
+| `-sounding` | Load sounding data. |
+| `-tide` | Load tide data. |
+| `-watershed` | Load watershed data. |
+| `-vector` | Load generic vector data. |
+| `-omgedit` | Load OMG format editing data. |
+| `-vectbin` | Load vector bin data. |
+| `-gl` | Load GLoria data. |
+| `-array` | Load array data. |
+| `-oldarray` | Load old array data. |
+| `-reclen` | Load record length data. |
+| `-ios` | Load IOS format data. |
+| `-survey_linefile` | Load a survey line file. |
+
+### Display & View Options
+| Option | Description |
+|---|---|
+| `-show_fft2d` | Show 2D FFT analysis widget. |
+| `-show_wavfft` | Show WAV audio FFT analysis widget. |
+| `-make_map_coords` | Make map coordinates. |
+| `-decnav` | Use decimated navigation. |
+| `-contval` | Contour value. |
+| `-speed_knots` | Speed in knots. |
+| `-zigzag` | Show zigzag pattern. |
+| `-geomask` | Use georeferenced mask. |
+| `-fillbox` | Fill box. |
+| `-mcol` | Use multiple colormaps. |
+| `-autoj` | Auto-justify display. |
+| `-show_WCIM_header` | Show Water Column IM header. |
+| `-linear` | Use linear scaling. |
+| `-box_is_ellipse` | Box is an ellipse. |
+| `-box_is_star` | Box is a star shape. |
+| `-pickrot` | Pick rotation. |
+| `-lookrot` | Look rotation. |
+| `-current_box` | Current box. |
+| `-concat` | Concatenate data. |
+| `-concat_cumm` | Cumulative concatenation. |
+| `-seis` | Show seismic data. |
+| `-displacement` | Show displacement. |
+| `-ticks` | Show ticks. |
+| `-point` | Show points. |
+| `-dot` | Show dots. |
+| `-rascoord` | Show raster coordinates. |
+| `-dm` | Use Degrees, Minutes format. |
+| `-dms` | Use Degrees, Minutes, Seconds format. |
+| `-lola` | Show Latitude/Longitude. |
+| `-ship_location` | Ship location. |
+| `-ship_orient` | Ship orientation. |
+| `-ship_offset` | Ship offset. |
+| `-ship_outline` | Show ship outline. |
+| `-cmap` | Use custom colormap. |
+| `-asciicmap` | Use ASCII colormap. |
+| `-subimage` | Show subimage. |
+| `-subimage2` | Show second subimage. |
+| `-SUN` | Show sun illumination. |
+| `-paintbox` | Paint box. |
+| `-paint_color` | Paint color. |
+| `-paint` | Paint. |
+| `-noexpand` | Do not expand. |
+| `-colstart` | Column start. |
+| `-noscalebar` | No scalebar. |
+| `-scalelabel` | Scale label. |
+| `-skip` | Skip. |
+| `-large_nav` | Large navigation. |
+| `-navlook` | Navigation look. |
+| `-navedit` | Navigation edit. |
+| `-traces` | Show traces. |
+| `-specbox` | Show spectral box. |
+| `-nad27` | Use NAD27 ellipsoid. |
+| `-area` | Show area. |
+| `-forss` | For sidescan. |
+| `-currents` | Show currents. |
+| `-bigwinds` | Big winds. |
+| `-currskip` | Current skip. |
+| `-currdev` | Current deviation. |
+| `-currscale` | Current scale. |
+| `-ssedit` | Sidescan edit. |
+| `-gaudy` | Gaudy display. |
+| `-badread` | Bad read. |
+| `-angresp` | Angular response. |
+| `-smoothssnav` | Smooth sidescan navigation. |
+| `-usesslut` | Use sidescan LUT. |
+| `-sslook` | Sidescan look. |
+
+### Debugging & Control
+| Option | Description |
+|---|---|
+| `-die` | Exit immediately. |
+| `-help` | Display help message. |
+
+## How It Works
+`jview` functions as the central command and control hub for an interactive geospatial data visualization and analysis system. It initializes the X-windows graphical environment, sets up its main window and various specialized modules (e.g., SVP editor, FFT2D tool, WAV audio analysis), and manages the entire application lifecycle. The `main` function parses command-line arguments to configure `jview`'s behavior, load specific data types, and activate various analysis modes. Upon startup, it enters a primary event loop (`process_x_events()`) which continuously monitors for user interactions (mouse clicks, keyboard presses, window events) and dispatches them to appropriate functions or widgets. Data processing, visualization, and editing are then handled by a multitude of internal functions and modules. `jview` employs an array of functionalities including data loading, preprocessing (e.g., zig-zag pattern generation, spline interpolation), various drawing and visualization routines (e.g., refreshing windows, drawing coordinate ticks, visualizing survey lines, plotting FFT results), and interactive editing and manipulation features (e.g., flagging navigation points, performing angular response analysis, displaying cross-sections). File I/O operations are handled for masks, image data, and configuration boxes. Upon exiting the main event loop, the application handles the saving of edited data and performs necessary resource cleanup.
+
+## Output Files
+`jview` is primarily an interactive visualization and editing tool, and thus does not produce standard batch output files on its own. However, through its interactive features and various sub-modules, it can:
+*   Save edited data (masks, navigation, profiles, etc.) to their original or new files.
+*   Capture X-window content to PGM or JHC image files (via `dump_current_window()`).
+*   Generate scripts for copying spectral analysis box configurations (`write_out_specboxes()`).
+*   Output specialized plot files through its plotting sub-modules.
 *   **Application Termination and Cleanup:**
     *   Upon exiting the main event loop, handles the saving of edited data (masks, navigation, OMG profiles, DN shifts, pick-rotation boxes, spectral analysis boxes) to disk.
     *   Performs resource cleanup, including terminating the X-windows environment (`terminate_x()`) and closing all open input files.

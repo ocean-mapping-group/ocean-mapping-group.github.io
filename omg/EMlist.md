@@ -49,5 +49,12 @@ EMlist -in <infile> -out <outfile> [-v] [-recno <val>]
             *   **Note:** The depths are currently outputted as a single line for each depth telegram.
 4.  **`swap_short()`:** A helper function to byte-swap a `short` integer, handling endianness differences.
 
-## Data Structures
-The tool defines structures `em1000_nav`, `em1000_beam`, and `em1000_depth` to map to the binary layout of specific Simrad EM1000 telegrams. These structures specify byte offsets and types for various data fields within the telegrams.
+## Output Files
+*   `<outfile>`: An ASCII file containing extracted information from recognized Simrad EM telegrams.
+
+## Dependencies
+*   `support.h`: For general utility functions.
+*   `jb_endian.h`: For byte swapping.
+
+## Notes
+This tool is a low-level diagnostic utility. It has limited unpacking capabilities for specific EM1000 telegram types and primarily provides raw dumps. It's useful for understanding the binary structure of these telegrams and for debugging issues with raw acquisition files. The `recno` argument is present in the usage but not implemented in the current code.

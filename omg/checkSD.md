@@ -24,37 +24,38 @@ checkSD <r4prefix> <soundingfiles(s)> [OPTIONS]
 | `<soundingfiles(s)>` | **Required.** One or more paths to OMG-HDCS merged files (or ASCII sounding lists if `-ascii` is used) containing the soundings to be checked. |
 
 ### Processing Control
-| Option | Description |
-|---|---|
-| `-v` | Enable verbose output. |
-| `-ascii` | Indicates that the sounding input files are ASCII lists (lat, lon, depth, across). |
-| `-first <ping_num>` / `-last <ping_num>` | Process soundings only within this ping range (inclusive). Cannot be used with multiple input files. | All pings |
-| `-just_pulse_microsec <val>` | Only process pings with a `tx_pulse_len` matching this microsecond value. |
+| Option | Description | Default |
+|---|---|---|
+| `-v` | Enable verbose output. | |
+| `-ascii` | Indicates that the sounding input files are ASCII lists (lat, lon, depth, across). | |
+| `-first <ping_num>` | Process soundings only from this ping number (inclusive). Cannot be used with multiple input files. | All pings |
+| `-last <ping_num>` | Process soundings only up to this ping number (inclusive). Cannot be used with multiple input files. | All pings |
+| `-just_pulse_microsec <val>` | Only process pings with a `tx_pulse_len` matching this microsecond value. | |
 
 ### Data Filtering
-| Option | Description |
-|---|---|
-| `-useallZ` | Use all soundings, regardless of their status flags (overrides `status != 22` and `status != 1`). |
+| Option | Description | Default |
+|---|---|---|
+| `-useallZ` | Use all soundings, regardless of their status flags (overrides `status != 22` and `status != 1`). | |
 | `-valid_depths <deep_m> <shal_m>` | Only consider soundings within this depth range (deep to shallow, in meters). | `-12000.0` to `12000.0` |
 | `-MAX_nonflyer_percent <val>` | Sets a percentage threshold (e.g., `3.0` for 3%) for rejecting "wild flyers" during standard deviation calculation. Soundings deviating by more than `val`% from the reference ray are discarded from the sigma calculation. | `100.0` |
 
 ### Corrections & Adjustments
-| Option | Description |
+| Option | Description | Default |
 |---|---|
 | `-draft <val>` | Specifies the draft (in meters) to subtract from observed depths. **Mandatory**. | `0.0` |
 | `-pixshift <X> <Y>` | Apply a pixel shift (X, Y) to the projected coordinates of the soundings. | `0.0` |
 | `-gyro_bias <val>` | Apply a constant gyro bias (in degrees) to the vessel heading. | `0.0` |
-| `-add_dyn_draft_shift` | Add `profile.longperiod_heaveCorrection` to the observed depth before comparison. |
-| `-remove_average_bias` | Remove the calculated average bias from the percentage difference calculation (for the second pass). |
+| `-add_dyn_draft_shift` | Add `profile.longperiod_heaveCorrection` to the observed depth before comparison. | |
+| `-remove_average_bias` | Remove the calculated average bias from the percentage difference calculation (for the second pass). | |
 
 ### Output Options
-| Option | Description |
-|---|---|
+| Option | Description | Default |
+|---|---|---|
 | `-beams <first> <last>` | Only process beams within this beam number range (inclusive). | All beams |
 | `-lessone` | (Not clearly documented in source, likely related to count thresholds). | `0` |
-| `-smth` | Apply smoothing to the calculated percentage differences and standard deviations. |
-| `-nums` | Output absolute differences (`sigma`) and counts. |
-| `-other` | Output absolute differences (`sig2`). |
+| `-smth` | Apply smoothing to the calculated percentage differences and standard deviations. | |
+| `-nums` | Output absolute differences (`sigma`) and counts. | |
+| `-other` | Output absolute differences (`sig2`). | |
 
 ## How It Works
 1.  **Initialization:** Initializes arrays to store `ray` (mean percentage difference), `sigma` (standard deviation), `sig2` (absolute standard deviation), `perc_diff`, `abso_diff`, and `count` for each angle bin.
@@ -88,3 +89,15 @@ checkSD <r4prefix> <soundingfiles(s)> [OPTIONS]
         *   Standard deviation (`100.0 * sigma[i]`)
         *   Absolute standard deviation (`100.0 * sig2[i]`)
 6.  **Cleanup:** Closes files and frees memory.
+
+## Output Files
+*   `deviation.list`: An ASCII file containing mean percentage difference, standard deviation, and absolute standard deviation per beam angle.
+
+## Dependencies
+*   `OMG_HDCS_jversion.h`: For OMG-HDCS data structures.
+*   `array.h`: For `JHC_header` structure and DTM data handling.
+*   `support.h`: For general utility functions and error handling.
+*   `j_proj.h`: For coordinate projection functions.
+
+## Notes
+This tool provides a quantitative measure of multibeam data quality against a DTM, enabling the detection of systematic errors and biases. The two-pass approach is robust in distinguishing overall bias from random scatter. The output format is suitable for plotting beam-angle-dependent accuracy characteristics.

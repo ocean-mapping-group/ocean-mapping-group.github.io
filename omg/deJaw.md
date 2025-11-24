@@ -42,8 +42,19 @@ deJaw <mergefile(s)> [-v] [-badazi] [-port | -stbd]
 4.  **In-Place Update:** The modified `beams` (with updated `status` flags) are written back to the merged file for the current profile.
 5.  **Beam Buffer Update:** Before processing the next profile, the `beams` from the current ping are copied to `before_beams`, and `after_beams` are copied to `beams`, to maintain the sliding window.
 
-## `get_slope` Function
+### `get_slope` Function
 This helper function:
 *   Takes an array of `OMG_HDCS_beam` structures.
 *   Calculates a linear least-squares fit for depth vs. across-track distance for valid beams within a specified side of the swath (`check_side`).
 *   Returns the slope (in degrees) of this fit, representing the average across-track slope of the seafloor.
+
+## Output Files
+The input merged files are modified in-place.
+
+## Dependencies
+*   `OMG_HDCS_jversion.h`: For OMG-HDCS data structures.
+*   `support.h`: For general utility functions and error handling.
+*   `math.h`: For mathematical functions.
+
+## Notes
+The "alligator" artifacts are usually indicative of problems with motion compensation, sound velocity correction, or data processing. This tool provides an automated way to identify and remove such noise, improving the quality of the bathymetric model. The hardcoded thresholds suggest these values were empirically determined to be effective for specific data types or sonar systems.

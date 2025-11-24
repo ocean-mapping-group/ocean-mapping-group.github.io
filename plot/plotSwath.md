@@ -23,10 +23,10 @@ plotSwath -infile <file1> [-outfile <filename.meta>] [-size <dx> <dy>] [-width <
 | `-infile <file1>` | **Required.** Specifies an input ASCII file containing swath data from `SwathEditor`. |
 | `-outfile <filename.meta>` | Specifies the output PostScript metafile name. | `plot.meta` |
 | `-size <dx> <dy>` | Specifies the plot size in centimeters. | `15.0 22.0` |
-| `-width <val>` | Sets the total across-track width for plotting. |
-| `-showspikes` | Displays data points that might be considered "spikes" (i.e., outside the normal range). |
-| `-showall` | Displays all data points, regardless of validity. |
-| `-sparse` | (Present in `USAGE`, but implementation not fully shown for plotting) Intended for sparse plotting. |
+| `-width <val>` | Sets the total across-track width for plotting. | |
+| `-showspikes` | Displays data points that might be considered "spikes" (i.e., outside the normal range). | |
+| `-showall` | Displays all data points, regardless of validity. | |
+| `-sparse` | (Present in `USAGE`, but implementation not fully shown for plotting) Intended for sparse plotting. | |
 
 ## Input File Format (ASCII from `SwathEditor`)
 The input ASCII file is expected to contain:
@@ -69,7 +69,12 @@ After launching, `plotSwath` will guide the user through a series of prompts:
         *   Adds text label for the selected swath/beam.
 5.  **Cleanup:** Closes all open files and `plotlib` output.
 
-## Output
-*   A PostScript metafile (`plot.meta` or specified by `-outfile`) containing cross-sectional views or comparisons of multibeam swath data.
-```
-```
+## Output Files
+*   `<outfile.meta>`: A PostScript metafile (`.meta`) containing cross-sectional views or comparisons of multibeam swath data.
+
+## Dependencies
+*   `plotlib.h`: For `plotlib` functions.
+*   `support.h`: For general utility functions.
+
+## Notes
+`plotSwath` is a powerful interactive tool for visualizing and analyzing multibeam data in cross-section. It's particularly useful for quality control, identifying systematic errors (e.g., roll bias, sound speed errors), and understanding the shape of the seafloor across the swath. The interactive selection of plotting modes (by beam or by swath) provides flexibility for different analytical needs. The `-sparse` option is listed but not implemented.

@@ -27,7 +27,7 @@ plotRoll [-range] [-outfile <filename.meta>] [-size <dx> <dy>] [-yrange <min> <m
 
 ## How It Works
 1.  **Initialization:** Parses command-line arguments to set plotting options, plot size, and `range_flag`.
-2.  **Plot Setup:** Initializes the `plotlib` PostScript output (`plot.meta`). Sets up the overall plot dimensions (`xlength`, `ylength`, `xoff`, `yoff`). Draws the main plot border.
+2.  **Plot Setup:** Initializes the `plotlib` PostScript output (`plot.meta`). Sets up the overall plot dimensions (`xlength`, `ylength`, `xoff`). Draws the main plot border.
 3.  **Axis Ranges:**
     *   If `range_flag` is set: `xmin = 0.0`, `xmax = 9.0` (range).
     *   If `range_flag` is *not* set: `xmin = 0.0`, `xmax = 90.0` (angle).
@@ -38,11 +38,16 @@ plotRoll [-range] [-outfile <filename.meta>] [-size <dx> <dy>] [-yrange <min> <m
         *   Calculates `xval` as either the angle `j` or a derived range `2.0 * tan(j * M_PI / 180.0)` if `range_flag` is set.
         *   Calculates `yval` using the formula `(180.0 / M_PI) * atan(0.005 / tan(xval * M_PI / 180.0))`. This formula relates a small angular error (0.005 radians) to the required roll accuracy as a function of the angle or range.
     *   Plots `xval` vs. `yval` as a continuous line.
-6.  **Additional Lines (`line()` function):** Calls the `line()` function with various fixed `x` values. This function plots small vertical lines at `yval = 0.9` and `yval = 1.0` at the specified `x` positions, likely indicating specific thresholds or reference points for roll accuracy.
+6.  **Additional Lines (`line()` function):** Plots small vertical lines at `yval = 0.9` and `yval = 1.0` at specific `x` positions, likely indicating thresholds or reference points for roll accuracy.
 7.  **Cleanup:** Calls `plot_close` to finalize the PostScript output.
 
-## Output
-*   A PostScript metafile (`plot.meta` or specified by `-outfile`) visualizing the required roll accuracy.
-```
-```
-```
+## Output Files
+*   `<outfile_name>`: A PostScript metafile (`.meta`) visualizing the required roll accuracy.
+
+## Dependencies
+*   `plotlib.h`: For `plotlib` functions.
+*   `support.h`: For general utility functions.
+*   `math.h`: For mathematical functions.
+
+## Notes
+This tool provides a theoretical model for understanding the impact of roll errors on multibeam depth measurements. It helps in setting specifications for motion sensor accuracy and for visualizing the trade-offs between survey coverage (outer angles/ranges) and vertical accuracy. The `yrange` option is present in usage but is hardcoded in the current code.

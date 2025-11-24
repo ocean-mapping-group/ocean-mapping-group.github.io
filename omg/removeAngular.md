@@ -39,3 +39,15 @@ removeAngular <OMG_HDCS_datafile(s)> [OPTIONS]
     *   **Correction Application:** For each beam in each profile, it calculates a correction factor: `(Overall_Average - Mean_Beam_Response[beam_number])`. This correction is added to the beam's reflectivity or calibrated backscatter.
     *   **Pseudo Angle Independent Backscatter:** The corrected value is stored in the `pseudoAngleIndependentBackscatter` field of the beam structure, and clipped to `0-255`.
 4.  **In-Place Update:** The modified beam records (specifically the `pseudoAngleIndependentBackscatter` field) are written back to the input merged files.
+
+## Output Files
+*   The input merged files are modified in-place.
+*   `Beam.Averages`: An ASCII file containing the mean backscatter response for each beam number.
+
+## Dependencies
+*   `OMG_HDCS_jversion.h`: For OMG-HDCS data structures.
+*   `support.h`: For general utility functions and error handling.
+*   `Echo_calib.h`: For `EM_convert_amplitude` function.
+
+## Notes
+This tool is used to generate angle-independent backscatter measurements, which are more indicative of the true physical properties of the seafloor. By removing the angular dependence caused by beam patterns and geometry, the resulting backscatter can be used more effectively for seafloor classification. The tool modifies merged files in place, so backups are recommended.

@@ -4,6 +4,12 @@ title: addWG
 parent: Grid Tools
 nav_order: 7
 ---
+---
+layout: default
+title: addWG
+parent: Grid Tools
+nav_order: 7
+---
 # addWG
 
 ## Description
@@ -24,3 +30,27 @@ You must specify input grids using either the `-wg` or `-allr4s` options.
 | `-offset <file_number> <value>` | Applies a vertical offset (`<value>`) to a specific input grid identified by its zero-based index (`<file_number>`) as it was listed with `-wg` or `-allr4s`. This offset is applied to the depth values before weighting. | `-offset 0 0.5` (applies 0.5m offset to the first specified grid) |
 | `-out <output_file.r4>` | **Required.** Specifies the path for the output JHC-format 32-bit floating-point weighted-average grid file. | `merged_bath.r4` |
 | `-v` | Enable verbose output during processing. | |
+
+## How It Works
+1.  **File Opening:** Opens all input `.r4` files and any associated weight files. Opens the output `.r4` file.
+2.  **Header Reading:** Reads the `JHC_header` from all input files, ensuring they are geographically co-registered and have compatible dimensions.
+3.  **Weight Loading:** For each input grid, it determines its weight:
+    *   If `default_weight == 0.0`, it loads pixel-wise weights from `<prefix>.r4_weights` and `<prefix>.r4_weight_depth` files.
+    *   If `default_weight > 0.0`, it applies this uniform weight.
+    *   If `default_weight < 0.0`, it scales existing pixel-wise weights by the absolute value of `default_weight`.
+4.  **Pixel-wise Weighted Averaging:** Iterates through each pixel location in the grid:
+    *   For each location, it sums the weighted depth values from all input grids.
+    *   It also sums the corresponding weights.
+    *   The output pixel value is the sum of weighted depths divided by the sum of weights.
+    *   Vertical offsets (from `-offset`) are applied to individual grid depths before weighting.
+5.  **Output Header:** Creates a `JHC_header` for the output file and writes it, followed by the processed pixel data.
+
+## Output Files
+*   `<output_file.r4>`: A new JHC-format 32-bit floating-point weighted-average grid file.
+
+## Dependencies
+*   `array.h`: For `JHC_header` structure and related functions.
+*   `support.h`: For general utility functions and error handling.
+
+## Notes
+This tool is robust for combining overlapping datasets from different surveys or sensors, allowing for sophisticated control over how each contributes to the final merged grid. Proper weight files are crucial for optimal results.

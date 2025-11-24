@@ -4,6 +4,12 @@ title: DTMreject
 parent: Grid Tools
 nav_order: 22
 ---
+---
+layout: default
+title: DTMreject
+parent: Grid Tools
+nav_order: 22
+---
 # DTMreject
 
 ## Description
@@ -29,5 +35,34 @@ DTMreject -area <reference_dtm.r4> -away <threshold_meters> [OPTIONS] <merged_fi
 | `-list_changes` | If specified, creates an ASCII file for each input merged file, named `<merged_filename_prefix>.DTM_reject_changes`, which contains a list of all rejected beams (lat, lon, depth, beam number). | |
 | `-v` | Enable verbose output during processing. | |
 
-## How it Works
-For each beam in a merged file, `DTMreject` calculates its geographic position, projects it onto the reference DTM grid, and uses bilinear interpolation to find the precise reference depth at that location. It then computes the difference between the beam's depth and the reference depth. If this difference is larger than the `-away` threshold, the beam's status flag is set to `22` (rejected by DTM).
+## How It Works
+1.  **File Opening:** Opens the reference DTM (`-area`) and the input merged files.
+2.  **Header Reading:** Reads the `JHC_header` from the DTM file.
+3.  **DTM Loading:** Loads the DTM data into memory.
+4.  **Merged File Processing:** Iterates through each input merged file:
+    *   Reads the `OMG_HDCS_summary_header`.
+    *   If `-from_scratch` is set, it resets the status of all beams to `0` (good).
+    *   **Profile and Beam Iteration:** Iterates through each profile (ping) and each beam within that profile:
+        *   Calculates the beam's geographic position (latitude, longitude).
+        *   Projects the geographic position to pixel coordinates on the DTM.
+        *   Interpolates the DTM to get the `reference_depth` at the beam's location.
+        *   Retrieves the beam's `observed_depth` (applying tide correction if `-tide` is set).
+        *   Calculates the absolute difference `|reference_depth - observed_depth|`.
+        *   If the difference exceeds `threshold_meters`:
+            *   If `-just_show` is set, reports the rejection without modifying the file.
+            *   Otherwise, flags the beam's `status` as `22` (rejected by DTM).
+            *   If `-list_changes` is set, writes the beam's details to a `.DTM_reject_changes` file.
+    *   **In-Place Update:** If not `-just_show`, the modified beam statuses are written back to the merged file.
+
+## Output Files
+*   The input merged files are modified in-place (unless `-just_show` is used).
+*   `<merged_filename_prefix>.DTM_reject_changes`: An ASCII file listing rejected beams (if `-list_changes` is used).
+
+## Dependencies
+*   `array.h`: For `JHC_header` structure and DTM data handling.
+*   `support.h`: For general utility functions and error handling.
+*   `OMG_HDCS_jversion.h`: For OMG-HDCS data structures.
+*   `j_proj.h`: For coordinate projection functions.
+
+## Notes
+This tool provides an automated and objective method for quality control of multibeam data against a trusted reference surface. It is particularly useful for identifying systematic errors, calibration issues, or residual noise that might manifest as consistent deviations from the DTM.

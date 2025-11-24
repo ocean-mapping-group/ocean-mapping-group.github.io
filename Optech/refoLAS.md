@@ -52,10 +52,16 @@ refoLAS <infile> <outfile_prefix> [-fmt <val>] [-dont_break_lines] [-miss <missi
         *   Writes the `summary`, `profile`, and `beams` data into a new merged file (e.g., `outfile_prefix_0000.merged`) and a corresponding `.nav` file.
 7.  **Cleanup:** Closes all open files.
 
-## Data Structures
-*   `LAS_public_header`: Maps to the header of a LAS binary file, containing metadata like scaling factors, offsets, and number of point records.
-*   `LAS_point_data_record_f1`: Maps to individual point data records in a LAS file, containing X, Y, Z coordinates, intensity, GPS time, and various flags.
-*   `optech_ascii_beam`: A custom structure to hold processed data for each zap (LAS point), including geographic coordinates, depths, waveform parameters, and flightline information.
-```
-```
-```
+## Output Files
+*   `<outfile_prefix>_0000.merged`, `<outfile_prefix>_0001.merged`, etc.: OMG-HDCS merged files, one for each scan line.
+*   `<outfile_prefix>_0000.nav`, etc.: JCU NAV files corresponding to each merged file.
+
+## Dependencies
+*   `OMG_HDCS_jversion.h`: For OMG-HDCS data structures.
+*   `support.h`: For general utility functions and error handling.
+*   `j_proj.h`: For coordinate projection functions.
+*   `jcu_nav.h`: For JCU NAV data structures.
+*   `LAS_header.h`: For LAS file format structures.
+
+## Notes
+`refoLAS` is a critical tool for integrating Optech LASer scanner data into the OMG-HDCS processing pipeline. It handles the complex conversion from LAS point cloud format to multibeam profiles, including managing scan line segmentation and missing data. The output merged files can then be processed by other OMG tools for DTM generation, quality control, and visualization. The tool creates multiple output files based on scan lines, preserving the integrity of individual flight lines.

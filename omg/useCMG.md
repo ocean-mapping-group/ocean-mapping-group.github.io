@@ -23,7 +23,7 @@ useCMG <OMG_HDCS_datafile(s)> [-filtlen <value>] [-test] [-v]
 | `<OMG_HDCS_datafile(s)>` | **Required.** One or more paths to OMG-HDCS merged files to be processed. These files are modified in place unless `-test` is used. |
 | `-filtlen <value>` | Specifies the half-width of the filter (number of pings on each side) to use for smoothing. | `3` |
 | `-test` | Runs the processing but does *not* write any changes back to the merged file. Useful for previewing potential changes. |
-| `-v` | Enable verbose output. |
+| `-v` | Enable verbose output. | |
 
 ## How It Works
 1.  **File Processing:** The tool iterates through each provided merged file.
@@ -47,3 +47,14 @@ useCMG <OMG_HDCS_datafile(s)> [-filtlen <value>] [-test] [-v]
     *   If `-test` is *not* used, the tool iterates through all profiles again.
     *   For each profile `i`, it reads the original profile, updates its `profile.vesselHeading` with the (integer cast and scaled) `NEW_GYRO_azi[i]`, and writes the modified profile back to the merged file.
 6.  **Cleanup:** Frees allocated memory and closes files.
+
+## Output Files
+The input merged files are modified in-place (unless `-test` is used).
+
+## Dependencies
+*   `OMG_HDCS_jversion.h`: For OMG-HDCS data structures.
+*   `support.h`: For general utility functions and error handling.
+*   `j_proj.h`: For coordinate projection functions.
+
+## Notes
+`useCMG` improves the accuracy and stability of heading information by combining noisy raw gyro data with the more stable (but lower-frequency) Course Made Good derived from vessel positioning. This is particularly important for multibeam sonar data processing, where accurate heading is critical for correct beam footprint calculation and georeferencing. The tool modifies merged files in place, so backups are recommended. The `-test` option allows for previewing changes before committing.

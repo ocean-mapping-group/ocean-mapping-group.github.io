@@ -30,14 +30,13 @@ plotOS500 <OS500_prefix> [-bytime | -bydepth] [-fulldate] [-up | -down | -updown
 | `-array <maxz> <dz>` | Output salinity and temperature data as JHC `.r4` array files (`.sal.r4`, `.tmp.r4`).
     *   `maxz`: Maximum depth (z-dimension) for the array.
     *   `dz`: Depth resolution for the array. |
-| `-v` | Enable verbose output. |
+| `-v` | Enable verbose output. | |
 
 ## Input File Formats
 *   `<OS500_prefix>.dir`: An ASCII directory file listing the OS500 dip segments (block number, length, channel code, time, sample interval, etc.).
 *   `<OS500_prefix>.000`, `<OS500_prefix>.001`, etc.: ASCII dip files for each segment, containing `sampnum`, `voltage`, `conductivity`, `temperature`, `pressure`, `salinity`, `sigma`, `soundspeed` for each measurement.
 
 ## How It Works
-
 1.  **Initialization:** Parses command-line arguments to set the OS500 prefix, output order (`plot_order`), profile selection (`choice`), and array output parameters (`maxz`, `dz`).
 2.  **File Opening:**
     *   Opens the OS500 directory file (`.dir`) for reading.
@@ -63,5 +62,11 @@ plotOS500 <OS500_prefix> [-bytime | -bydepth] [-fulldate] [-up | -down | -updown
 *   `<OS500_prefix>.out`: ASCII file containing processed time/depth series data (format depends on `-bytime` or `-bydepth`).
 *   `<OS500_prefix>.sal.r4`: JHC `.r4` array file containing salinity profiles (if `-array` is used).
 *   `<OS500_prefix>.tmp.r4`: JHC `.r4` array file containing temperature profiles (if `-array` is used).
-```
-```
+
+## Dependencies
+*   `support.h`: For general utility functions.
+*   `array.h`: For `JHC_header` structure.
+*   `stdtime.h`: For time conversion functions.
+
+## Notes
+`plotOS500` is crucial for processing raw CTD data from OS500 profilers, making it accessible for further oceanographic analysis and visualization. The ability to output data in both ASCII and gridded `.r4` formats provides flexibility for different downstream applications. The classification of up-casts and down-casts ensures that only relevant data segments are processed.

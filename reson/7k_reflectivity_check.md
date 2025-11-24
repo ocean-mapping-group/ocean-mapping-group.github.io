@@ -22,16 +22,9 @@ The primary purpose of this tool is for quality control and detailed analysis of
 |---|---|
 | `-s7k <input_name>` | **Required.** Path to the input Reson 7k `.s7k` file. |
 | `-v` | Enable verbose output (prints DRF information). |
-| `-debug` | Enable debug output (currently unused). |
-
-## Output Files
-*   `intensity.dat`: ASCII file containing bathymetry-derived intensity values for each beam.
-*   `snippet.dat`: ASCII file containing a specific snippet sample (sample 74) for each beam.
-*   `snippet_max.dat`: ASCII file containing the maximum snippet amplitude for each beam.
-*   `snippet_min.dat`: ASCII file containing the minimum snippet amplitude for each beam.
+| `-debug` | Enable debug output (currently unused). | |
 
 ## How It Works
-
 1.  **Initialization:** Parses command-line arguments, sets the input `.s7k` filename, and initializes Reson 7k data structures (`Reson_7K_DRF`, `Reson_7K_7000_Sonar_Settings`, `Reson_7K_7006_Bathymetry`, `Reson_7K_7007_Backscatter`, `Reson_7K_7008_Generic_Data`).
 2.  **File Opening:** Opens the input `.s7k` file for reading and creates four output ASCII files: `intensity.dat`, `snippet.dat`, `snippet_max.dat`, and `snippet_min.dat`.
 3.  **Record Processing Loop:** Reads the `.s7k` file record by record:
@@ -46,7 +39,15 @@ The primary purpose of this tool is for quality control and detailed analysis of
             *   Finds the `max` and `min` amplitude within the first 150 samples of the snippet record and writes them to `snippet_max.dat` and `snippet_min.dat`, respectively.
 4.  **Cleanup:** Closes all open files.
 
-## Output
-*   Four ASCII files (`intensity.dat`, `snippet.dat`, `snippet_max.dat`, `snippet_min.dat`) containing extracted reflectivity values.
-```
-```
+## Output Files
+*   `intensity.dat`: ASCII file containing bathymetry-derived intensity values for each beam.
+*   `snippet.dat`: ASCII file containing a specific snippet sample (sample 74) for each beam.
+*   `snippet_max.dat`: ASCII file containing the maximum snippet amplitude for each beam.
+*   `snippet_min.dat`: ASCII file containing the minimum snippet amplitude for each beam.
+
+## Dependencies
+*   `Reson_7K_parser.h`: For Reson 7k data structures and parsing functions.
+*   `support.h`: For general utility functions and error handling.
+
+## Notes
+This tool is invaluable for quality control and detailed analysis of backscatter data from Reson 7k systems. It helps in assessing the consistency of intensity measurements between different data sources within the 7k stream, which is crucial for accurate seafloor characterization. The output ASCII files can be used for plotting and further statistical analysis.

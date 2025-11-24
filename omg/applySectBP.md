@@ -4,6 +4,12 @@ title: applySectBP
 parent: OMG Tools
 nav_order: 78
 ---
+---
+layout: default
+title: applySectBP
+parent: OMG Tools
+nav_order: 78
+---
 # applySectBP
 
 ## Description
@@ -40,6 +46,45 @@ applySectBP <input_omg_file(.merged)> [OPTIONS]
 | Option | Description |
 |---|---|
 | `-beam_patt <filename>` | Specifies a single beam pattern file to apply (used if `multi_sector_bp` is not used). |
+
+## How It Works
+1.  **Initialization & Argument Parsing:** Sets up various flags and parameters for angle calculation, BP source, and output type.
+2.  **File Setup:**
+    *   Opens the input merged file (`.merged`).
+    *   Reads `sonar_settings` and `.param` files to get sonar configuration, `draft_to_use`, and `yoffset_to_use`.
+    *   Opens the `.sectors` file to read transmit sector definitions.
+    *   Opens the `.orientation` file to get attitude information for SRA/VRA calculations.
+    *   Loads the beam pattern(s) (`EM1000_Beam_Pattern`, `The_Sector_Beam_Pattern`, `The_Sector_Beam_Pattern_Across_SRBP`, `The_Sector_Beam_Pattern_Along_SRBP`) based on chosen options (`-beam_patt`, `-multi_sector_bp`, `-Apply_ACROSS_track_RBP_before_making_ss`, etc.).
+3.  **Output File Configuration:**
+    *   If `-apply_to_REFL` is *not* used, it opens the input `.ss_data` file (or `.ss_data_deTVG` if `-use_deTVG`) for reading and creates a new output `.ss_data_deSRA` or `.ss_data_deVRA` file for writing corrected sidescan traces.
+4.  **Profile Iteration:** Loops through each profile (ping) in the merged file:
+    *   Reads the current profile header and raw beams.
+    *   **Draft/Y-offset Update:** Updates `draft_to_use` if `GA_AUV_draft` is active.
+    *   **Attitude Time Synchronization:** Syncs the current ping's time with attitude records from the `.orientation` file for SRA/VRA calculations if necessary.
+    *   Loads transmit sector definitions for the current ping.
+    *   **Beam Iteration:** For each beam within the current ping:
+        *   **Launch Angle Calculation:** Calculates the `launch_angle` (either SRA or VRA) using `simple_get_launch_angle` based on sonar parameters, draft, y-offset, and attitude.
+        *   **Beam Pattern Gain Retrieval:** Retrieves the `BP_gain` from the loaded beam pattern(s) based on the calculated `launch_angle`. If multi-sector BP is used, it determines the correct sector's BP to apply.
+        *   **Apply Correction:**
+            *   If `-apply_to_REFL` is used, it updates the `beams[k].calibratedBackscatter` by adding `BP_gain` and `DN_offset`.
+            *   Otherwise, it reads the raw sidescan trace for the beam from the input `.ss_data` file, applies `BP_gain` and `DN_offset` to each sample, and writes the modified trace to the output `.ss_data_deSRA` or `.ss_data_deVRA` file.
+5.  **In-Place Modification (for `-apply_to_REFL`) or New File Creation:**
+    *   If `-apply_to_REFL` is used, the merged file is modified in place.
+    *   Otherwise, a new sidescan data file is created with the corrected traces.
+
+## Output Files
+*   The input merged file may be modified in-place if `-apply_to_REFL` is used.
+*   A new sidescan data file: `<input_omg_file_prefix>.ss_data_deSRA` or `<input_omg_file_prefix>.ss_data_deVRA`.
+
+## Dependencies
+*   `OMG_HDCS_jversion.h`: For OMG-HDCS data structures.
+*   `support.h`: For general utility functions and error handling.
+*   `j_proj.h`: For coordinate projection functions.
+*   `j_generic_beam_pattern.h`: For beam pattern structures and loading.
+*   `j_get_launch_angle.h`: For launch angle calculation.
+
+## Notes
+This tool is crucial for achieving accurate and consistent backscatter data by removing the sonar's intrinsic angular response. The choice between SRA and VRA correction depends on the sonar system and the specific goals of the backscatter processing. Careful selection of beam pattern files (e.g., from `newGetBP`) is essential for effective correction.
 
 ## How It Works
 1.  **Initialization & Argument Parsing:** Sets up various flags and parameters for angle calculation, BP source, and output type.

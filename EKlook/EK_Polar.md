@@ -1,3 +1,9 @@
+---
+layout: default
+title: EK_Polar (Module within EKlook)
+parent: EKlook Tools
+nav_order: 6
+---
 # EK_Polar (Module within EKlook)
 
 ## Description
@@ -42,5 +48,8 @@ The module displays various graphical representations within the `EKlook` applic
 *   `KEY_UP` / `KEY_DOWN` (in spectral roll-off image): Changes the selected frequency slice for the cross-section plot.
 *   `KEY_LEFT` / `KEY_RIGHT` (in spectral roll-off image): Changes the selected radial phase angle slice for the cross-section plot.
 
-## Note
+## How It Works
+The `EK_Polar` module interactively processes EK echosounder data to analyze target strength and angular phase relationships. It applies various filters and corrections based on user input from buttons and sliders. The module then generates and updates polar plots, spectral roll-off images, and cross-sections to visualize how acoustic energy is distributed in a polar coordinate system. This is crucial for understanding the directional response of targets and the seafloor.
+
+## Notes
 The `EK_Polar` module is an integral part of the `EKlook` graphical user interface, focusing on interactive analysis of EK echosounder data. It does not accept any command-line arguments. Its functionality is accessed and controlled entirely through the `EKlook` GUI.

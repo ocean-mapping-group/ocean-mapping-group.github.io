@@ -25,7 +25,7 @@ newMergeAtt -in <input.merged> -svp svp/*.svp [OPTIONS]
 | `-svp_list <file>` | Provides a list file containing paths to SVP files. |
 
 ### Raytracing Options
-| Option | Description |
+| Option | Description | Default |
 |---|---|
 | `-wc_bin <val>` | Force watercolumn resampling bin size (in meters). Default is determined by depth range. | Auto-calculated |
 | `-skip_raytrace` | Performs an isovelocity raytrace using the velocity in the profile header, skipping full raytracing. | |
@@ -34,7 +34,7 @@ newMergeAtt -in <input.merged> -svp svp/*.svp [OPTIONS]
 | `-cg` | Use the Constant Gradient method for raytracing. | |
 | `-check_cast_depth` | Only raytrace soundings shallower than the current cast's maximum depth. | |
 | `-quick` | Try the new quicktrace routine. | |
-| `-travis` | Use the new sounding reduction algorithm. |
+| `-travis` | Use the new sounding reduction algorithm. | |
 
 ### Surface Sound Speed Options
 | Option | Description |
@@ -69,12 +69,12 @@ newMergeAtt -in <input.merged> -svp svp/*.svp [OPTIONS]
 | `-roll_compensated` | Force system to be recognized as roll compensated (beam angles are already vertically referenced). | |
 
 ### Orientation Options
-| Option | Description |
+| Option | Description | Default |
 |---|---|
 | `-orientation_delay <sec>` | Apply a time delay to the orientation data. | `0.0` |
 | `-no_orientation` | Override error if no `.orientation` file is found (e.g., for single beam data). | |
 | `-check_drift` | Use value in `profile.clock_drift_millis` if it exists. | |
-| `-alternate_orient <file>` | Specify an alternate orientation file (must be `.orientation` format). |
+| `-alternate_orient <file>` | Specify an alternate orientation file (must be `.orientation` format). | |
 | `-uncrosstalk <val>` | Specify a gyro offset to correct for crosstalk between roll and pitch. | `0.0` |
 
 ### SVP Selection for Multiple Profiles
@@ -89,19 +89,20 @@ newMergeAtt -in <input.merged> -svp svp/*.svp [OPTIONS]
 | `-converge_to <depth> <velocity>` | Quick and dirty profile extension, sets maximum depth and velocity for SVPs shallower than the specified depth. | |
 
 ### Miscellaneous Options
-| Option | Description |
+| Option | Description | Default |
 |---|---|
 | `-just_merge` | Just merge TX orientation onto the merged file, ignoring all other raytracing options. | |
 | `-test` | For testing new solution vs. solution already stored in merged file; does NOT write changes. | |
 | `-flag` | Flag soundings that have no solution (e.g., first few pings from RESON systems). | |
 | `-mask_map <file>` | Map of area of interest; ping positions outside the area are not processed. | |
-| `-start_ping <num>` / `-end_ping <num>` | Specify start/end pings for processing; pings outside this range are not processed. | All pings |
+| `-start_ping <num>` | Specify start/end pings for processing; pings outside this range are not processed. | All pings |
+| `-end_ping <num>` | Specify start/end pings for processing; pings outside this range are not processed. | All pings |
 | `-dump_depression` | Dump final depression angle and azimuth for every beam (for RESON backscatter calibration). Creates a `.depression` file. | |
 | `-OWTT_scaler <val>` | A debug tool to scale the Observed Two-Way Travel Time (OWTT) (typically a power of 2). | `1.0` |
-| `-v` | Enable verbose output. |
-| `-debug_wc` | Enable water column debugging output. |
+| `-v` | Enable verbose output. | |
+| `-debug_wc` | Enable water column debugging output. | |
 | `-debug_ping <num>` | Turn on debugging for a given ping number. | |
-| `-debug_sounding` | Turn on debugging for sounding geometry calculations. |
+| `-debug_sounding` | Turn on debugging for sounding geometry calculations. | |
 | `-special` | Print all sounding geometry information for testing. | |
 
 ## How It Works
@@ -112,5 +113,20 @@ newMergeAtt -in <input.merged> -svp svp/*.svp [OPTIONS]
     *   For each beam, it calculates the sounding geometry using the selected raytracing method, the interpolated SVP, and corrected attitude (from an `.orientation` file). This involves detailed calculations of the beam path through the water column, accounting for refraction and motion.
     *   Updates the `depth`, `across-track`, and `along-track` fields of each beam with the newly calculated values.
     *   Updates the `vesselHeave`, `vesselPitch`, `vesselRoll`, and `vesselHeading` in the profile header with the merged TX orientation.
-4.  **Output:** Writes the modified profile header and rational beams back to the merged file. If `-dump_depression` is used, it also creates a `.depression` file containing the final depression and azimuth angles for each beam.
-5.  **Error Handling & Debugging:** Provides extensive debugging output and flags soundings that cannot be successfully processed.
+4.  **Output:** Writes the updated profile headers (and optionally beam records if depths were re-calculated) back to the merged file.
+5.  **Diagnostic Output:** Provides verbose output about the merging process, time discrepancies, and corrected values if `-v` is enabled.
+
+## Output Files
+*   The input merged file (`<input.merged>`) is modified in-place (unless `-test` is used).
+*   `<input.merged_prefix>.depression`: A binary file containing final depression and azimuth angles for each beam (if `-dump_depression` is used).
+
+## Dependencies
+*   `OMG_HDCS_jversion.h`: For OMG-HDCS data structures.
+*   `support.h`: For general utility functions and error handling.
+*   `j_proj.h`: For coordinate projection functions.
+*   `j_attitude.h`: For attitude data handling.
+*   `j_watercolumn.h`: For water column data handling (if SVP raytracing is used).
+*   `j_generic_beam_pattern.h`: For sonar parameter handling.
+
+## Notes
+`newMergeAtt` is a foundational tool for achieving high-accuracy multibeam bathymetry by rigorously integrating motion and sound velocity data. Its advanced beam vector recalculation and re-raytracing capabilities are essential for modern multibeam processing workflows. The tool modifies merged files in place, so thorough backups are recommended before processing. The extensive set of options allows for fine-tuning of motion compensation and refraction corrections based on specific survey conditions and sensor configurations. The `travis` algorithm is an experimental sounding reduction technique.

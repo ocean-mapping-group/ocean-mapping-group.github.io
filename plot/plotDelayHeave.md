@@ -13,7 +13,7 @@ The tool calculates and displays differences between different heave measurement
 
 ## Usage
 ```bash
-plotDelayHeave -infile <base_name> [-outfile <metafile_name>] [-size <dx> <dy>] [-start <yr> <jday> <hr> <min>] [-end <yr> <jday> <hr> <min>] [-xrange <min> <max>] [-dep] [-atten <val>] [-delay <val>] [-skip <val>] <merged_file(s)...>
+plotDelayHeave -infile <base_name> [-outfile <filename.meta>] [-size <dx> <dy>] [-start <yr> <jday> <hr> <min>] [-end <yr> <jday> <hr> <min>] [-xrange <min> <max>] [-dep] [-atten <val>] [-delay <val>] [-skip <val>] <merged_file(s)...>
 ```
 
 ## Arguments
@@ -21,7 +21,7 @@ plotDelayHeave -infile <base_name> [-outfile <metafile_name>] [-size <dx> <dy>] 
 | Option | Description |
 |---|---|
 | `-infile <base_name>` | **Required.** Specifies a base name for binary time series files (e.g., `rt_hv_base_name.out`, `vp_base_name.out`, etc.). |
-| `-outfile <metafile_name>` | Specifies the output PostScript metafile name. | `plot.meta` |
+| `-outfile <filename.meta>` | Specifies the output PostScript metafile name. | `plot.meta` |
 | `-size <dx> <dy>` | Specifies the plot size in centimeters. | `20.0 18.0` |
 | `-start <yr> <jday> <hr> <min>` | Sets the start time (X-axis minimum) for the plot. |
 | `-end <yr> <jday> <hr> <min>` | Sets the end time (X-axis maximum) for the plot. |
@@ -62,14 +62,20 @@ plotDelayHeave -infile <base_name> [-outfile <metafile_name>] [-size <dx> <dy>] 
 6.  **Merged File Extent Plotting:** If merged files (`.merged`) are provided, it reads their summary headers, extracts their time extents, and indicates these extents as rectangular boxes on the plot.
 7.  **Cleanup:** Frees allocated memory and closes all files.
 
+## Output Files
+*   `<outfile_name>`: A PostScript metafile (`.meta`) containing time-series plots of heave data.
+*   Multiple intermediate binary files (e.g., `rt_hv_<base_name>.out`, `deri_<base_name>.rt-pp`, etc.) storing processed heave data.
+
 ## Helper Functions
 *   `suck_in_data(int i, int *num)`: Reads a binary time-series (double timestamp, double value) from `name[i]` into `heave_data[i]`.
 *   `suck_in_quarter_data(int i, int *num)`: Reads data from `name[i]`, taking only every 4th record (not actively used in `main` as written).
 *   `dump_out_data(int i, int num)`: Writes a binary time-series (double timestamp, double value) from `heave_data[i]` to `name[i]`.
 
-## Output
-*   A PostScript metafile (`plot.meta` or specified by `-outfile`) containing time-series plots of heave data.
-*   Multiple intermediate binary files (e.g., `rt_hv_base_name.out`, `deri_base_name.rt-pp`, etc.) storing processed heave data.
-```
-```
-```
+## Dependencies
+*   `plotlib.h`: For `plotlib` functions.
+*   `support.h`: For general utility functions.
+*   `stdtime.h`: For time conversion.
+*   `OMG_HDCS_jversion.h`: For merged file structures.
+
+## Notes
+`plotDelayHeave` is a critical tool for quality control and analysis of vertical motion data, particularly for assessing the performance of different heave measurement systems (e.g., real-time vs. post-processed). The ability to visualize differences and apply filters helps in identifying residual errors that can affect bathymetric accuracy. The tool relies on specific binary data formats for the heave components.

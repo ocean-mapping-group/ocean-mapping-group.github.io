@@ -23,8 +23,8 @@ plotMultiDump -infile <file1> [-infile <file2> ...] [-outfile <filename.meta>] [
 | `-infile <file1> ...` | **Required.** One or more input ASCII files containing time-series data. Each file is assumed to have 33 columns of float values, with the first column being time. |
 | `-outfile <filename.meta>` | Specifies the output PostScript metafile name. | `plot.meta` |
 | `-size <dx> <dy>` | Specifies the plot size in centimeters. | `20.0 25.0` |
-| `-label <string>` | Adds a custom title to the plot. |
-| `-sparse` | (Present in `USAGE`, but implementation not fully shown for plotting) Intended for sparse plotting. |
+| `-label <string>` | Adds a custom title to the plot. | |
+| `-sparse` | (Present in `USAGE`, but implementation not fully shown for plotting) Intended for sparse plotting. | |
 | `-xrange <min> <max>` | Sets the X-axis range. | Auto-determined. |
 
 ## Interactive Mode
@@ -36,9 +36,6 @@ After launching, `plotMultiDump` will guide the user through a series of prompts
 4.  **Y-axis Bounds (per plot):** For each subplot, it prompts for Y-axis minimum (`ymin[i]`) and maximum (`ymax[i]`) values.
 5.  **Parameter Selection (Y-axis):** For each subplot, it presents a menu of 33 available parameters (similar to `plotDump`) and prompts the user to choose which one to plot on the Y-axis.
 6.  **Continue Plotting (multiple lines per subplot):** After plotting one line in a subplot, it asks if the user wants to plot another line in the same subplot.
-
-## Data Structure
-The input ASCII files are expected to contain 33 columns of float values, where each row represents a time step and each column a different parameter. The first column (`values[0]`) is always assumed to be time.
 
 ## How It Works
 1.  **Initialization:** Parses command-line arguments to set plotting options, input file names, and ranges. Initializes a `plotlib` PostScript output (`plot.meta`).
@@ -57,7 +54,13 @@ The input ASCII files are expected to contain 33 columns of float values, where 
         *   Allows plotting multiple lines within the same subplot.
 5.  **Cleanup:** Frees allocated memory and closes all input files.
 
-## Output
-*   A PostScript metafile (`plot.meta` or specified by `-outfile`) containing time-series plots of the selected parameters from multiple input files.
-```
-```
+## Output Files
+*   `<outfile_name>`: A PostScript metafile (`.meta`) containing time-series plots of the selected parameters from multiple input files.
+
+## Dependencies
+*   `plotlib.h`: For `plotlib` functions.
+*   `support.h`: For general utility functions.
+*   `math.h`: For mathematical functions.
+
+## Notes
+`plotMultiDump` is a flexible tool for comparing time-series data from various sources or processing stages. The interactive nature allows users to build complex visualizations with multiple subplots and lines, making it suitable for detailed data analysis and quality control. The input file format is expected to be a consistent ASCII dump with a fixed number of columns representing different parameters. The `-sparse` option is listed but not implemented.

@@ -1,3 +1,9 @@
+---
+layout: default
+title: EK_BottomBS (Module within EKlook)
+parent: EKlook Tools
+nav_order: 3
+---
 # EK_BottomBS (Module within EKlook)
 
 ## Description
@@ -47,3 +53,9 @@ The module displays various graphical representations within the `EKlook` applic
 *   `KEY_UP` / `KEY_DOWN`: Adjusts the `BSmax` and `BSmin` (backscatter display range) in the ARC plot.
 *   `KEY_LEFT` / `KEY_RIGHT`: Adjusts selected slider values or navigates through envelope subwindows and frequency slices.
 *   `KEY_SPACE`: Toggles `whichARC` (displaying either broadband trace directly or FFT bin counts).
+
+## How It Works
+This module operates by receiving interactive input from the user within the `EKlook` application. It updates internal variables based on slider adjustments and button presses, which then trigger recalculations and redrawing of the various visualizations. It works in conjunction with other `EKlook` modules and internal functions (like those in `EK_funcs.c`) to process EK echosounder data, apply corrections, and manage ARC generation.
+
+## Notes
+This module functions as a specialized analytical tool within the `EKlook` graphical user interface. It does not accept direct command-line arguments for its operation, as its sole purpose is to manage and respond to interactive input within the running `EKlook` application. Its behavior is entirely dependent on the user's actions within the GUI.

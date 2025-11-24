@@ -35,7 +35,6 @@ makess <input_omg_file(.merged)> <output_sidescan_file(.ss_usually)> [OPTIONS]
 | `-RESON_dB_shift <val>` | dB shift during calibration. | `0` |
 | `-RESON_attenuation <val>` | Attenuation coefficient. | `0` |
 | `-RESON_remove_tvg` | Remove TVG applied by the sonar. | |
-| `-RESON_skip_all` | Skip all RESON corrections. | |
 | `-RESON_skip_pulse` | Skip pulse length correction. | |
 | `-RESON_skip_gain` | Skip gain correction. | |
 | `-RESON_skip_source_level` | Skip source level correction. | |
@@ -70,7 +69,7 @@ makess <input_omg_file(.merged)> <output_sidescan_file(.ss_usually)> [OPTIONS]
 
 ### General Processing Options
 | Option | Description | Default |
-|---|---|---|
+|---|---|
 | `-pixel <size>` | Output sidescan pixel size in meters. | Auto-calculated |
 | `-gainup <val>` | Apply a digital gain to the output. | `0` |
 | `-DN_Shift <val>` | Digital Number (DN) shift to apply. | `0` |
@@ -133,8 +132,28 @@ makess <input_omg_file(.merged)> <output_sidescan_file(.ss_usually)> [OPTIONS]
 | `-dump_beam` / `-dump_range` | Dump beam/range codes. | |
 
 ## How It Works
-1.  **Read Input:** Reads the OMG-HDCS merged file and its associated `.param` and `.sonar_settings` files to determine sonar type and configuration.
-2.  **Configuration:** Parses command-line arguments to set up various processing flags and parameters.
-3.  **Beam Pattern & Corrections:** Loads or generates beam patterns, applying corrections for gain, TVG, absorption, and sonar-specific artifacts. This is often the most complex part, involving mode-specific or rolling beam patterns, and sometimes external files for detailed corrections.
-4.  **Sidescan Generation:** For each ping, it extracts beam data, applies the configured corrections and transformations (e.g., converting depths to across-track distances, calculating grazing angles), and then resamples the data into a fixed-resolution sidescan trace.
-5.  **Output:** Writes the processed sidescan traces to the specified output GLORIA file. Optionally, it can also output grazing angles and along-track displacement files.
+1.  **Read Input & Configuration:** Reads the OMG-HDCS merged file and its associated `.param` and `.sonar_settings` files to determine sonar type and configuration. Parses command-line arguments to set up various processing flags and parameters for sonar type, backscatter source, angle calculation, and corrections.
+2.  **Beam Pattern & Corrections Setup:** Loads or generates beam patterns. Applies corrections for gain, TVG, absorption, and sonar-specific artifacts, potentially using external files for detailed corrections.
+3.  **Sidescan Generation Loop:** For each ping:
+    *   Extracts beam data (depth, across-track, along-track).
+    *   Applies configured corrections and transformations (e.g., converting depths to across-track distances, calculating grazing angles).
+    *   Resamples the data into a fixed-resolution sidescan trace (512 samples per side).
+    *   Applies gain, digital number shifts, tapering, and filtering (median/linear) as specified.
+4.  **Output:** Writes the processed sidescan traces to the specified output GLORIA file. Optionally, outputs grazing angles (`.grz`) and along-track displacement (`.alt`) files.
+
+## Output Files
+*   `<output_sidescan_file(.ss_usually)>`: The output GLORIA sidescan file.
+*   `<output_sidescan_file_prefix>.grz`: File containing grazing angles (if `-write_grz` is used).
+*   `<output_sidescan_file_prefix>.alt`: File containing along-track displacements (if `-write_alongtrack` is used).
+
+## Dependencies
+*   `OMG_HDCS_jversion.h`: For OMG-HDCS data structures.
+*   `support.h`: For general utility functions and error handling.
+*   `j_proj.h`: For coordinate projection functions.
+*   `j_generic_beam_pattern.h`: For beam pattern structures and loading.
+*   `j_calibration.h`: For various calibration functions.
+*   `grazing_angle.h`: For grazing angle calculation.
+*   `ensonification.h`: For ensonification calculations.
+
+## Notes
+`makess` provides a highly flexible and powerful framework for generating high-quality sidescan imagery from multibeam sonar data. It allows users to bypass or refine the sonar's internal sidescan processing, providing greater control over the final product. The extensive set of options highlights the complexity and variety of factors that influence quantitative sidescan imagery.

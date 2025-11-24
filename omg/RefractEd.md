@@ -52,7 +52,18 @@ RefractEd <datafile> [-v] [-SUN] [-std16] [-raw <filename>] [-raw <filename2>]
     *   Redraws relevant graphical elements in response to user input or window events.
 6.  **Lookup Table (LUT) Dumping:** The `dump_LUTs` function (though not explicitly called in `main`'s event loop in the provided snippet) is designed to write out lookup tables for grazing angle, beam angle, and time of flight into JHC image header (`.r4`) files.
 
-## Files Generated (if `dump_LUTs` is called)
-*   `.gra` (Grazing Angle Lookup Array)
-*   `.bea` (Beam Angle Lookup Array)
-*   `.tim` (Time of Flight Lookup Array)
+## Output Files
+*   The primary output is interactive graphical display.
+*   If `dump_LUTs` is called (not directly from main, but a potential feature):
+    *   `.gra` (Grazing Angle Lookup Array): JHC `.r4` file.
+    *   `.bea` (Beam Angle Lookup Array): JHC `.r4` file.
+    *   `.tim` (Time of Flight Lookup Array): JHC `.r4` file.
+
+## Dependencies
+*   `support.h`: For general utility functions.
+*   `j_watercolumn.h`: For SVP data structures and raytracing functions.
+*   `j_generic_plot.h`: For generic plotting functions.
+*   `array.h`: For `JHC_header` structure.
+
+## Notes
+`RefractEd` is a valuable tool for understanding and correcting the effects of sound velocity variations on multibeam sonar data. The interactive graphical interface allows users to quickly assess the impact of different SVPs and adjust parameters in real-time. This can be critical for calibrating sonars and improving the accuracy of bathymetric surveys. The `-SUN` flag is a legacy option for specific workstation types.

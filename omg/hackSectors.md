@@ -31,6 +31,20 @@ hackSectors <-depthscale <factor> | -depthoffset <meters>> <mergefile(s)> [-v]
 | `-v` | Enable verbose output. |
 
 ## How It Works
-The tool iterates through each ping in the merged file. For beams in the outer portions of the swath (typically beyond 40-45 degrees from nadir, based on the `acrossTrack` and `observedDepth` values), it applies the chosen depth adjustment. The `observedDepth` field of these beams is updated directly within the file.
+1.  **File Processing:** The tool iterates through each ping in the merged file.
+2.  **Depth Adjustment:** For beams in the outer portions of the swath (typically beyond 40-45 degrees from nadir, based on the `acrossTrack` and `observedDepth` values):
+    *   It applies the chosen depth adjustment.
+    *   If `-depthscale` is used, the `observedDepth` is multiplied by the specified factor.
+    *   If `-depthoffset` is used, the specified offset is added to `observedDepth`.
+3.  **Yaw Steering Diagnostics:** For each ping, it performs a least-squares fit on the `acrossTrack` versus `alongTrack` positions of the beams to calculate the effective "Yaw Steering" for diagnostic purposes.
+4.  **In-Place Update:** The modified `observedDepth` field of these beams is updated directly within the file.
 
-Additionally, for each ping, it performs a least-squares fit on the `acrossTrack` versus `alongTrack` positions of the beams to calculate the effective "Yaw Steering" for diagnostic purposes.
+## Output Files
+The input merged files are modified in-place.
+
+## Dependencies
+*   `OMG_HDCS_jversion.h`: For OMG-HDCS data structures.
+*   `support.h`: For general utility functions and error handling.
+
+## Notes
+This is an empirical correction tool designed to fix specific artifacts that can appear in multibeam data from certain sonar systems. The corrections are heuristic and should be applied with caution and validated against other data. The tool modifies merged files in place, so backups are recommended. The diagnostic output of yaw steering can help to understand the source of the depth discrepancies.

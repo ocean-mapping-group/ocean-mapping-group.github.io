@@ -4,6 +4,12 @@ title: addDTM
 parent: Grid Tools
 nav_order: 3
 ---
+---
+layout: default
+title: addDTM
+parent: Grid Tools
+nav_order: 3
+---
 # addDTM
 
 ## Description
@@ -29,3 +35,24 @@ Note: You must either provide `-ontop` or `-addConstant`, but not necessarily bo
 | `-addtoZero` | Modifies the behavior for handling zero values. If this flag is present, a `ZERO` value becomes `9999999.99` internally, affecting how operations are performed on grid cells that might otherwise be considered "no data" or ignored. Used in conjunction with `useZeroAdd`. | |
 | `-useZeroAdd` | If set, it forces operations even on "on-top" grid cells that are zero, if the base grid cell is non-zero. Otherwise, a zero in the "on-top" grid is treated as "no data" and the base value is retained. | |
 | `-v` | Enable verbose output during processing. | |
+
+## How It Works
+1.  **File Opening:** Opens the base input `.r4` file, the optional "on-top" input `.r4` file, and the output `.r4` file.
+2.  **Header Reading:** Reads the `JHC_header` from the base file and the "on-top" file (if provided), ensuring their dimensions match.
+3.  **Data Processing:** Iterates through each pixel in the grids:
+    *   Reads the float value from the base grid.
+    *   If `-ontop` is used: Reads the float value from the "on-top" grid. If this value is `0.0` and `-useZeroAdd` is not set, the base value is retained. Otherwise, the "on-top" value is adjusted by `offset` and `multiplier`.
+    *   If `-addConstant` is used: The `addConstant` value is used as the "on-top" value.
+    *   If `-subtract` is used, the adjusted "on-top" value is subtracted from the base value. Otherwise, it is added.
+    *   The result is written to the output `.r4` file.
+4.  **Output Header:** Creates a `JHC_header` for the output file (copied from the base file's header, with updated `min_value` and `max_value`) and writes it to the output file.
+
+## Output Files
+*   `<output_r4_file>`: A new JHC-format 32-bit floating-point grid file (`.r4`).
+
+## Dependencies
+*   `array.h`: For `JHC_header` structure and related functions.
+*   `support.h`: For general utility functions and error handling.
+
+## Notes
+This tool is flexible for combining or modifying elevation models by applying either another grid or a constant value. The `addtoZero` and `useZeroAdd` options provide control over how zero values (often representing "no data") are handled during calculations.

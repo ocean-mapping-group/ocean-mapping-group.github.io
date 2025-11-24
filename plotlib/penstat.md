@@ -13,59 +13,22 @@ This tool is useful for analyzing the efficiency of a `plotlib` generated plot, 
 
 ## Functions
 
-### `plot_start(float dx, float dy)`
-Initializes the statistics gathering process.
-*   **`dx`, `dy`:** Overall plot dimensions (ignored by this module as it only gathers statistics, not performs actual plotting).
-*   Resets internal counters and flags (`pen_x`, `pen_y`, `pen_down`, `pen_number`).
+*   `plot_start(float dx, float dy)`: Initializes the statistics gathering process. Resets internal counters and flags (`pen_x`, `pen_y`, `pen_down`, `pen_number`).
+*   `plot_end()`: Finalizes the statistics gathering and prints the results. Prints a summary report to `plot_outfile` detailing pen movements, pen changes, text characters, and total distances.
+*   `plot_pen(int pen)`: Records a pen change. If the pen number changes, increments `pen_changes` and updates `pen_number`.
+*   `plot_rotate()`: (Empty function) This statistic module does not need to process rotation.
+*   `plot_move(float x, float y)`: Records a pen movement without drawing. Calculates the distance moved and adds it to `pen_moved`.
+*   `plot_line(float x, float y)`: Records a pen movement while drawing. Calculates the distance drawn and adds it to `pen_drawn`.
+*   `plot_text(char *text)`: Records text drawing. Adds the length of the string to `text_chars`.
+*   `plot_textrot(float angle)`: (Empty function) This module does not need to process text rotation.
+*   `plot_textsize(float x, float y)`: (Empty function) This module does not need to process text size.
+*   `plot_clip(float x0, float y0, float x1, float y1)`: (Empty function) This module does not need to process clipping.
 
-### `plot_end()`
-Finalizes the statistics gathering and prints the results.
-*   If the pen is currently down, increments `pen_ups`.
-*   Prints a summary report to `plot_outfile` detailing:
-    *   Number of pen-downs
-    *   Number of pen-ups
-    *   Number of pen changes
-    *   Number of text characters
-    *   Total distance drawn (pen down) in cm
-    *   Total distance moved (pen up) in cm
+## How It Works
+`penstat` implements the `plotlib` device driver interface, but instead of rendering, it acts as an observer. It intercepts each `plotlib` command (e.g., pen movements, line draws, text prints, pen changes) and updates internal counters and accumulators. For pen movements and line draws, it calculates the Euclidean distance covered. At the end of the plot processing (`plot_end()`), it presents a summary report of all these accumulated statistics.
 
-### `plot_pen(int pen)`
-Records a pen change.
-*   **`pen`:** The requested pen number.
-*   If the pen number changes, increments `pen_changes` and updates `pen_number`.
-
-### `plot_rotate()`
-(Empty function) This statistic module does not need to process rotation.
-
-### `plot_move(float x, float y)`
-Records a pen movement without drawing.
-*   **`x`, `y`:** Target coordinates.
-*   If the pen moves to a new position:
-    *   If the pen was down, increments `pen_ups`.
-    *   Calculates the distance moved using `DIST` macro and adds it to `pen_moved`.
-    *   Updates `pen_x`, `pen_y`, and sets `pen_down` to false.
-
-### `plot_line(float x, float y)`
-Records a pen movement while drawing.
-*   **`x`, `y`:** Target coordinates.
-*   If the pen draws to a new position:
-    *   If the pen was up, increments `pen_downs`.
-    *   Calculates the distance drawn using `DIST` macro and adds it to `pen_drawn`.
-    *   Updates `pen_x`, `pen_y`, and sets `pen_down` to true.
-
-### `plot_text(char *text)`
-Records text drawing.
-*   **`text`:** The text string.
-*   Adds the length of the string to `text_chars`.
-
-### `plot_textrot(float angle)`
-(Empty function) This module does not need to process text rotation.
-
-### `plot_textsize(float x, float y)`
-(Empty function) This module does not need to process text size.
-
-### `plot_clip(float x0, float y0, float x1, float y1)`
-(Empty function) This module does not need to process clipping.
+## Output Files
+The module prints a statistics report to `plot_outfile` (standard output by default).
 
 ## Dependencies
 *   `plotdriver.h`: Defines the interface for `plotlib` device drivers.
@@ -74,7 +37,4 @@ Records text drawing.
 *   `penstat.h`: Defines `penstat`-specific constants (e.g., global variables for statistics).
 
 ## Notes
-*   This module implements the `plotlib` driver interface to intercept plotting commands and tally statistics.
-*   The `plot_outfile` global variable is used to print the final statistics report.
-```
-```
+This tool is useful for analyzing and optimizing plotting routines. For example, a high number of pen changes can indicate inefficient plotting, while a large `pen_moved` distance (compared to `pen_drawn`) can highlight excessive pen-up movements, both of which can impact plotting speed on physical devices. This module demonstrates the flexibility of the `plotlib` driver architecture.

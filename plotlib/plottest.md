@@ -14,6 +14,9 @@ nav_order: 154
 plottest
 ```
 
+## Arguments
+None.
+
 ## How It Works
 1.  **Initialization:** The `main` function is called.
 2.  **`plot_open()`:** Calls `plot_open()` to initialize a plot. It requests a plot area of 10000x10000 units and lets `plotlib` generate a default filename for the metafile.
@@ -38,8 +41,12 @@ plottest
     *   `plot_text("hello world")`: Writes "hello world".
 4.  **`plot_close()`:** Calls `plot_close()` to finalize and close the plot file.
 
-## Output
+## Output Files
 *   A `plotlib` metafile (e.g., `plotfile_0`) containing the commands to draw a rectangle with text at various orientations.
-*   Standard output will show return values from `plot_open` and `plot_close`.
-```
-```
+
+## Dependencies
+*   `plotlib.h`: For `plotlib` functions.
+*   Standard C library functions for input/output.
+
+## Notes
+This program serves as a minimal working example and regression test for the `plotlib` library, ensuring that basic plotting functionality is correctly implemented. It generates a metafile that can then be viewed or converted by `plotdriver` and its associated device drivers.

@@ -41,7 +41,12 @@ r2sonicTool -in <input.r2s> [-vb] [-vs] [-vt] [-vw] [-v]
             *   Prints the contents of the packet using the corresponding `print_R2SONIC_*()` function (e.g., `print_R2SONIC_BATHY`, `print_R2SONIC_FTS`, `print_R2SONIC_TRUEPIX`, `print_R2SONIC_WCD`) to standard output.
 5.  **Cleanup:** Frees the R2Sonic index and closes the input file.
 
-## Output
-*   Prints structured information about the contents of the `.r2s` file to standard output, detailing the headers and data within selected packet types. The level of detail depends on the verbose flags used.
-```
-```
+## Output Files
+The tool prints structured information about the contents of the `.r2s` file to standard output, detailing the headers and data within selected packet types.
+
+## Dependencies
+*   `R2Sonic_parser.h`: For R2Sonic data structures and parsing functions (`build_R2SONIC_INDEX`, `read_R2SONIC_*`, `print_R2SONIC_*`).
+*   `support.h`: For general utility functions and error handling.
+
+## Notes
+`r2sonicTool` is an essential debugging and diagnostic utility for anyone working with R2Sonic raw data. It allows low-level inspection of the `.r2s` file contents, which is crucial for understanding data integrity, verifying parsing implementations, or troubleshooting issues with specific data streams. The detailed verbose output provides developers with the necessary information to interpret the proprietary R2Sonic format.

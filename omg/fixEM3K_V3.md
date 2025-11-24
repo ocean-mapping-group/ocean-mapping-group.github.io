@@ -38,4 +38,13 @@ fixEM3K_V3 <old_V3file> <fixed_V3file> [-v]
     *   Writes 24 bytes of `extra_bytes` (initialized to zeros) to the `fixed_V3file`, effectively padding the profile header to its correct size.
     *   Reads the entire block of beam data for the current profile into `bulk_data`.
     *   Writes this beam data to the `fixed_V3file`.
-5.  **Output:** A new merged file (`fixed_V3file`) is created with corrected profile header sizes and the `maxProcDepth` flag set.
+
+## Output Files
+*   `<fixed_V3file>`: A new OMG-HDCS merged file with corrected profile header sizes.
+
+## Dependencies
+*   `OMG_HDCS_jversion.h`: For OMG-HDCS data structures.
+*   `support.h`: For general utility functions and error handling.
+
+## Notes
+This tool addresses a very specific historical data format issue. It's crucial for ensuring that early EM3000/EM3002 data in OMG-HDCS version 3 format can be correctly parsed by other tools. The tool creates a new file rather than modifying in-place, which is safer. The `first` and `last` ping options are noted as not implemented, meaning it always processes the entire file.

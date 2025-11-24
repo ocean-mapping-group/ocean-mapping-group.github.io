@@ -47,4 +47,13 @@ filterAerial -out <outfile> <8bitfile(s)>
         *   Writes this averaged pixel value to `fout`.
         *   After processing a row, writes `fout` to `outfile`.
 6.  **Cleanup:** Closes the output file.
-```
+
+## Output Files
+*   `<outfile>`: An 8-bit JHC-format image file containing the averaged pixel values.
+
+## Dependencies
+*   `array.h`: For `JHC_header` structure.
+*   `support.h`: For general utility functions and error handling.
+
+## Notes
+This technique is useful for removing systematic, low-frequency noise (such as uneven illumination) that is consistent across multiple images of the same area. The resulting average image can then be subtracted from individual images to produce a cleaner, destriped output. The tool assumes all input images have identical dimensions.

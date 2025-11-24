@@ -22,7 +22,7 @@ reSortOMG <input_omg_file(.merged)> [OPTIONS]
 |---|---|
 | `<input_omg_file(.merged)>` | **Required.** The path to the input OMG-HDCS merged file. This file will not be modified directly; a new sorted file will be created. |
 | `-AUV_draft` | (Not implemented in the provided code, but present in `USAGE`) This option likely has to do with AUV-specific draft calculations or handling but its effect on sorting is not shown. |
-| `-v` | Enable verbose output. |
+| `-v` | Enable verbose output. | |
 
 ## How It Works
 1.  **Input Reading:** Opens the input merged file for reading.
@@ -41,3 +41,14 @@ reSortOMG <input_omg_file(.merged)> [OPTIONS]
     *   It then iterates through the *sorted* `pingindex` array. For each entry in this array, it reads the corresponding original profile and its raw beams from the input file (using `pI[i].origpingnum`) and writes them to the new `.sorted` file.
 7.  **No Sort Scenario:** If no backward time steps are detected, it prints a message indicating that it's not bothering to write out a sorted file.
 8.  **Cleanup:** Closes all open files and frees allocated memory.
+
+## Output Files
+*   `<input_omg_file_prefix>.sorted`: A new OMG-HDCS merged file with profiles sorted chronologically.
+*   `<input_omg_file_prefix>.sort.stats`: An ASCII file containing statistics about the sorting process.
+
+## Dependencies
+*   `OMG_HDCS_jversion.h`: For OMG-HDCS data structures.
+*   `support.h`: For general utility functions and error handling.
+
+## Notes
+Sorting merged files chronologically is crucial for ensuring proper processing by other tools that rely on sequential data (e.g., motion compensation, tide correction, or data cleaning algorithms that look at adjacent pings). This tool provides a robust way to correct out-of-order data, particularly from newer data acquisition systems. The tool creates a new file, ensuring the integrity of the original.

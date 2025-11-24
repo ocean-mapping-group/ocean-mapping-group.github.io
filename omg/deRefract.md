@@ -55,7 +55,7 @@ deRefract <mergefile(s)> [-v] (-coeffs | -hackfn <filename>) [OPTIONS]
 ## How It Works
 1.  **File Processing:** The tool iterates through each provided merged file (or USL-HDCS directory).
 2.  **Summary Header Reading & File Type Handling:** Reads the summary header and handles both OMG-HDCS and USL-HDCS file formats, mapping USL-HDCS data to OMG structures.
-3.  **Coefficient Loading (`-coeffs`):** If `-coeffs` is used, it attempts to read `ref_coeff` data from a `.ref_coeffs` file. If not found, it uses null coefficients. It also calls `jREF_decide_array_type` to set the array type based on `summary.toolType`.
+3.  **Coefficient Loading (`-coeffs`):** If `-coeffs` is used, it attempts to read `ref_coeff` data from a `.ref_coeffs` file and sets them up. If not found, it uses null coefficients. It also calls `jREF_decide_array_type` to set the array type based on `summary.toolType`.
 4.  **Hackfn Method Setup (`-hackfn`):** If `-hackfn` is used (and not `-coeffs`), it loads original depth and range data from `tidename`. It then calculates `dangle` (angular shift) or `dep_shift` (depth shift/multiplier) values per beam based on the `depthshift` or `perc_depth` flags, using a least-squares fit if `depthshift` is active.
 5.  **Profile and Beam Iteration:** For each profile (ping) in the file:
     *   **Mode Filtering:** If `-mode` is specified, it only processes pings whose `profile.mode` matches the `mode_choice`.
@@ -70,3 +70,14 @@ deRefract <mergefile(s)> [-v] (-coeffs | -hackfn <filename>) [OPTIONS]
             *   If `depthshift` is active, it modifies `beams[i].observedDepth` using `depthmove[i]` or `depth_multiplier[i]`.
             *   Otherwise (for angle shift), it calculates `orig_angle` from `orig_depth` and `orig_range`. It applies `angshift` (from `dangle[i]` or `symangle[i]`) and `roll_offset` to get `real_angle`. It then recalculates `real_depth` and `real_range` from this `real_angle` and `slant_range`, updating `beams[i].observedDepth` and `beams[i].acrossTrack`.
 6.  **In-Place Update:** The modified `beams` (with corrected depths and across-track values) are written back to the merged file (or USL-HDCS file) for the current profile.
+
+## Output Files
+The input merged files are modified in-place.
+
+## Dependencies
+*   `OMG_HDCS_jversion.h`: For OMG-HDCS data structures.
+*   `support.h`: For general utility functions and error handling.
+*   `ref_coeffs.h`: For refraction coefficient structures and functions.
+
+## Notes
+This tool offers both a modern (coefficient-based) and a legacy (hack function) approach to correcting bathymetric data for refraction and other systematic biases. Due to its empirical nature, careful validation of the applied corrections is essential. The tool modifies merged files in place, so backups are recommended.

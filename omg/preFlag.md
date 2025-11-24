@@ -30,7 +30,21 @@ preFlag <mergefile(s)> [OPTIONS]
 ## How It Works
 1.  **File Processing:** The tool iterates through each provided merged file.
 2.  **Summary Header Reading:** Reads the summary header to get basic file information.
-3.  **Beam Iteration & Flagging:** For each profile in a merged file, and then for each beam within that profile:
-    *   **`NUM_beams` and `-hackfn`:** If `NUM_beams` and `tidename` (from `-hackfn`) are provided, the tool reads a specification file. For each beam, it checks if `status_set[i]` is 0; if so, it sets the beam's `status` to `22`. If `perc_corr[i]` is not -1, it applies this percentage correction to `observedDepth` and stores it in `processedDepth`.
+3.  **Hack Function File Loading (`-hackfn`):** If `-hackfn` is specified, it reads the "hack function" file, which contains per-beam `status_set` and `perc_corr` values.
+4.  **Beam Iteration & Flagging:** For each profile in a merged file, and then for each beam within that profile:
+    *   **`NUM_beams` and `-hackfn`:** If `NUM_beams` and a hack function file (`tidename`) are provided:
+        *   It checks `status_set[i]`. If `0`, it sets the beam's `status` to `22`.
+        *   If `perc_corr[i]` is not -1, it applies this percentage correction to `observedDepth` and stores it in `processedDepth`.
     *   **`-max_incidence`:** If `max_incidence` is specified, it calculates the incidence angle for each beam using its `acrossTrack` and `observedDepth`. If the absolute value of this calculated incidence angle exceeds `max_incidence`, the beam's `status` is set to `22`.
-4.  **In-Place Update:** All modifications (setting status flags, adjusting `processedDepth`) are applied directly to the raw beam records within the input merged files.
+5.  **In-Place Update:** All modifications (setting status flags, adjusting `processedDepth`) are applied directly to the raw beam records within the input merged files.
+
+## Output Files
+The input merged files are modified in-place.
+
+## Dependencies
+*   `OMG_HDCS_jversion.h`: For OMG-HDCS data structures.
+*   `support.h`: For general utility functions and error handling.
+*   `math.h`: For mathematical functions (used in angle calculations).
+
+## Notes
+`preFlag` is useful for applying preliminary quality control or systematic corrections to multibeam data before more intensive processing. The `-hackfn` option provides a mechanism for applying custom, empirical corrections derived from analysis of specific sonar artifacts. As with all in-place modification tools, backups are recommended before processing. The `-roll_offset` option is listed but not implemented in the current code.

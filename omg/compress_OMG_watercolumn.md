@@ -18,16 +18,14 @@ compress_OMG_watercolumn -in <filename.merged> [-compress <factor>] [-v]
 
 ## Arguments
 
-| Option | Description |
-|---|---|
-| `-in <filename.merged>` | **Required.** The path to the input OMG-HDCS merged file. This file will be modified to update water column offsets and sizes. |
+| Option | Description | Default |
+|---|---|---|
+| `-in <filename.merged>` | **Required.** The path to the input OMG-HDCS merged file. This file will be modified to update water column offsets and sizes. | |
 | `-compress <factor>` | Specifies the compression factor. A factor of `1` means lossless compression (default). Higher values generally mean more compression but potentially more loss. | `1` (lossless) |
-| `-v` | Enable verbose output. |
+| `-v` | Enable verbose output. | |
 
 ## How It Works
-1.  **Initialization:**
-    *   Initializes the JasPer library for JPEG2000 compression.
-    *   Initializes a `j_EM_watercolumn` structure (`wc_in`).
+1.  **Initialization:** Initializes the JasPer library for JPEG2000 compression.
 2.  **File Opening:**
     *   Opens the input merged file (`merged_name`) for reading and writing (to update WC offsets).
     *   Generates a `.jic` (JasPer Index Cache) filename and attempts to open it. If it doesn't exist, it creates one. This file is used to store original water column offsets, primarily to prevent overwriting during re-runs.
@@ -45,3 +43,17 @@ compress_OMG_watercolumn -in <filename.merged> [-compress <factor>] [-v]
         *   **Write Compressed Data:** Writes the compressed water column data to the new WC output file (`.watercol2`) using `j_EM_write_watercolumn`. This function also updates the `watercol_offset` and `watercol_size` (or `watercol_offset_2nd` and `watercol_size_2nd` for the second head) in the `profile` structure within the merged file.
 5.  **JIC File (Original Offset Backup):** If the `.jic` file was created, it writes the array of `old_offsets` to it and closes it.
 6.  **Cleanup:** Closes all open files and frees allocated memory. The original `.watercol` file remains unchanged, and a new `.watercol2` file is created containing the compressed data. The `.merged` file is updated to point to this new `.watercol2` file.
+
+## Output Files
+*   The input merged file (`.merged`) is modified in-place to update water column offsets and sizes.
+*   `<merged_filename_prefix>.watercol2`: A new water column file containing the compressed data.
+*   `<merged_filename_prefix>.watercol.jic`: A JasPer Index Cache file.
+
+## Dependencies
+*   `OMG_HDCS_jversion.h`: For OMG-HDCS data structures.
+*   `j_EM_watercol.h`: For water column data structures and functions (`j_EM_compress`, `j_EM_read_watercolumn`, `j_EM_write_watercolumn`).
+*   `support.h`: For general utility functions and error handling.
+*   `jasper/jasper.h`: For JPEG2000 compression.
+
+## Notes
+Compressing water column data can significantly reduce storage requirements, especially for long survey lines or high-resolution systems. Lossless compression (`-compress 1`) is recommended to preserve data fidelity, while higher compression factors can be used if some data loss is acceptable. This tool helps in managing the lifecycle of large water column datasets.

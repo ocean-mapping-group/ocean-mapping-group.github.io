@@ -4,6 +4,12 @@ title: convertutm
 parent: Grid Tools
 nav_order: 15
 ---
+---
+layout: default
+title: convertutm
+parent: Grid Tools
+nav_order: 15
+---
 # convertutm
 
 ## Description
@@ -34,3 +40,25 @@ Input data is read from `stdin` and output is written to `stdout`.
 | `-spacing <value>` | (Internal/Legacy, spacing parameter, not directly used for conversion logic in parsed section). | |
 | `-colorbar` | (Internal/Legacy, relates to colorbar generation, not directly used for conversion logic in parsed section). | |
 | `-out <filename>` | (Internal/Legacy, directs output to a file instead of stdout, but primary usage is `> output`). | |
+
+## How It Works
+`convertutm` reads coordinate data from standard input, processes it based on the specified command-line options, and writes the converted coordinates to standard output.
+1.  **Coordinate System Setup:** Initializes projection parameters (e.g., Mercator, UTM, Nbstereo) and ellipsoid (WGS84, NAD27) based on command-line flags.
+2.  **Input Parsing:** Reads each line of input, interpreting the format based on flags like `-dms_to_dd` or `-commas`.
+3.  **Conversion:**
+    *   **UTM to Lat/Lon (default):** If input is UTM (X, Y) and output is Lat/Lon, it uses `inv_proj` to convert.
+    *   **Lat/Lon to UTM (`-geoutm`):** If input is Lat/Lon and output is UTM, it uses `Project` to convert.
+    *   **DMS to DD (`-dms_to_dd`):** Converts Degrees, Minutes, Seconds format to Decimal Degrees.
+    *   Other conversions (USGS weird, Nbstereo) use specific internal logic.
+4.  **Offset/Shift:** Applies `eastshift` to UTM X-coordinates before conversion if specified.
+5.  **Output:** Writes the converted coordinates to standard output.
+
+## Output Files
+The tool writes converted coordinates to standard output. This output can be redirected to a file.
+
+## Dependencies
+*   `j_proj.h`: For coordinate projection functions (`Project`, `inv_proj`).
+*   `support.h`: For general utility functions and error handling.
+
+## Notes
+This tool is flexible but relies on an understanding of coordinate systems and projection parameters. It's best used in scripting workflows where coordinate transformations are needed between different data processing steps. Some options are legacy and might not be fully functional or documented in the latest code.

@@ -4,6 +4,12 @@ title: ExtractMVP_EK60_Peaks
 parent: Grid Tools
 nav_order: 25
 ---
+---
+layout: default
+title: ExtractMVP_EK60_Peaks
+parent: Grid Tools
+nav_order: 25
+---
 # ExtractMVP_EK60_Peaks
 
 ## Description
@@ -25,12 +31,27 @@ ExtractMVP_EK60_Peaks -outfile <output.ascii> -alltxtfiles <file1.txt> ... [OPTI
 | `-pickprof <index>` | **Required.** An integer (0-11) specifying which of the 12 available EK60 backscatter traces in the input file to analyze for peak detection. | `-pickprof 7` |
 | `-minz <depth>` | Defines the minimum depth (in meters) of the vertical window to search within. The tool will ignore all data shallower than this depth. | `-minz 20` |
 | `-maxz <depth>` | Defines the maximum depth (in meters) of the vertical window to search within. The tool will ignore all data deeper than this depth. | `-maxz 70` |
-
-### Picking Methods and Criteria
-You must specify one method for the Sound Velocity (SV) profile and one for the EK60 profile.
-
-| Option | Description | Example |
-|---|---|---|
 | `-SVpick_Upper_threshold <velocity>` | **SV Picking Method.** Sets the picking criteria for the sound velocity profile. The tool searches downwards from `-minz` and picks the depth of the *first* sample that drops **below** the specified `<velocity>` value (in m/s). This is used to find the top of a velocline. | `-SVpick_Upper_threshold 1495` |
 | `-EKpick_Positive_peak <confidence>` | **EK60 Picking Method.** Sets the picking criteria for the backscatter profile. The tool finds the depth of the maximum backscatter value (the peak) within the search window. This peak is only considered valid if `(peak_value - average_value) > confidence`. This ensures that only significant acoustic peaks are chosen. | `-EKpick_Positive_peak 5.0` |
 | `-v` | Enable verbose output during processing. | |
+
+## How It Works
+1.  **File Iteration:** The tool processes each input ASCII file specified by `-alltxtfiles`.
+2.  **Data Reading:** For each file, it reads the vertical profile data, which includes depth, sound velocity, and EK60 backscatter traces.
+3.  **Sound Velocity (SV) Peak Picking (`-SVpick_Upper_threshold`):**
+    *   It searches downwards from `minz` to `maxz` in the sound velocity profile.
+    *   The first depth at which the sound velocity falls below `SVpick_Upper_threshold` is marked as the SV pick.
+4.  **EK60 Backscatter Peak Picking (`-EKpick_Positive_peak`):**
+    *   It identifies the maximum backscatter value within the specified `pickprof` trace between `minz` and `maxz`.
+    *   It also calculates the average backscatter within this window.
+    *   If the difference between the peak value and the average value exceeds `EKpick_Positive_peak`, the depth of this peak is marked as the EK60 pick.
+5.  **Output:** For each input file, it writes the filename, the picked SV depth, and the picked EK60 depth to the `-outfile`.
+
+## Output Files
+*   `<output.ascii>`: An ASCII file containing the picked depths for each input profile.
+
+## Dependencies
+*   `support.h`: For general utility functions and error handling.
+
+## Notes
+This tool streamlines the process of extracting specific oceanographic features from vertical profiles. The picking criteria are designed to be robust against noise and minor variations in the data. The two picking methods (SV threshold and EK60 positive peak) provide complementary ways to identify features based on different physical properties.

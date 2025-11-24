@@ -66,5 +66,16 @@ The user enters a number corresponding to the field they wish to edit, then prov
         *   If `choice == 22` or `choice == 23`, it prompts for a new label string and updates `JHChead.label_1` or `JHChead.label_2` respectively.
         *   **Note:** In the provided code, only `choice == 1` and `choice == 22`/`23` are implemented to modify the `summary` or `JHChead` fields. All other choices currently do nothing or only read user input without applying changes to `summary`.
     *   **Write Changes:** If a field is modified, `OMG_HDCS_dump_summary(infile, &summary)` (or `write_JHC_header(infile, JHChead)` for labels) is called to write the updated header back to the file.
-3.  **Exit:** The loop continues until the user chooses `0` (nothing/exit).
+3.  **Exit:** The loop terminates when the user chooses `0` (nothing/exit).
 4.  **Cleanup:** Closes the input file.
+
+## Output Files
+The input merged file (`<file>`) is modified in-place.
+
+## Dependencies
+*   `OMG_HDCS_jversion.h`: For OMG-HDCS data structures.
+*   `array.h`: For `JHC_header` structure and functions.
+*   `support.h`: For general utility functions and error handling.
+
+## Notes
+`edsumm` provides a direct interface for correcting metadata issues in OMG-HDCS merged files without needing to reprocess the entire dataset. This can be crucial for fixing corrupted headers or updating survey information. Users should be cautious when modifying header fields manually, as incorrect values can lead to data misinterpretation. The interactive menu could be expanded to allow editing of more fields.

@@ -25,7 +25,8 @@ getBeamPattern <file_prefix> [OPTIONS]
 ### Input Data & Mode
 | Option | Description |
 |---|---|
-| `-refl` / `-calb` | Use reflectivity or calibrated backscatter from the merged file. |
+| `-refl` | Use reflectivity values from the merged file. |
+| `-calb` | Use calibrated backscatter values (historic). |
 | `-log` | Averages logarithmic intensities (default is linear). |
 | `-useallss` | Use all sidescan trace data regardless of status flags. |
 | `-onlymode <mode_ID>` | Process data only for a specific mode ID. |
@@ -45,19 +46,19 @@ getBeamPattern <file_prefix> [OPTIONS]
 | `-separate_port_stbd_grazing` | Differentiates port/starboard grazing angles based on steering angle. |
 
 ### Corrections & Adjustments
-| Option | Description |
+| Option | Description | Default |
 |---|---|
-| `-attenremove` | Remove attenuation from value in profile header. |
-| `-attengain <val>` | Add attenuation compensation with new coefficient (dB/km). |
-| `-re_atten_ctd <CTD_File(s).svp>` | Apply gain corrections from a CTD profile. |
-| `-use_deSRA_deTVG` / `-use_deVRA_deTVG` / `-use_deTVG` | Remove various forms of TVG or SRA related gains. |
-| `-DN_Shift <val>` | Digital Number (DN) shift. |
-| `-draft <val>` / `-AUV_draft` | Specify draft or use AUV draft calculation. |
-| `-ymount <val>` | Override the Y-mount offset. |
-| `-lambertian_reference` | Calculate residuals with respect to a Lambertian roll-off model. |
-| `-external_ARC_reference <filenm>` | Calculate residuals with respect to an externally estimated ARC. |
-| `-SRbp <filenm>` | Sonar relative beam pattern to be removed. |
-| `-SR_ignore_within <deg>` | Don't use SR beam pattern within that sonar-relative incidence angle. |
+| `-attenremove` | Remove attenuation from value in profile header. | |
+| `-attengain <val>` | Add attenuation compensation with new coefficient (dB/km). | |
+| `-re_atten_ctd <CTD_File(s).svp>` | Apply gain corrections from a CTD profile. | |
+| `-use_deSRA_deTVG` / `-use_deVRA_deTVG` / `-use_deTVG` | Remove various forms of TVG or SRA related gains. | |
+| `-DN_Shift <val>` | Digital Number (DN) shift. | `0` |
+| `-draft <val>` / `-AUV_draft` | Specify draft or use AUV draft calculation. | Auto-calculated |
+| `-ymount <val>` | Override the Y-mount offset. | |
+| `-lambertian_reference` | Calculate residuals with respect to a Lambertian roll-off model. | |
+| `-external_ARC_reference <filenm>` | Calculate residuals with respect to an externally estimated ARC. | |
+| `-SRbp <filenm>` | Sonar relative beam pattern to be removed. | |
+| `-SR_ignore_within <deg>` | Don't use SR beam pattern within that sonar-relative incidence angle. | `0.0` |
 
 ### SRBP Extraction (ADH's functionality)
 | Option | Description |
@@ -81,16 +82,16 @@ getBeamPattern <file_prefix> [OPTIONS]
 | `-master_reference_sector <val>` | Master reference sector for adjusting across-track RBP. |
 
 ### Data Filtering & Selection
-| Option | Description |
+| Option | Description | Default |
 |---|---|
-| `-valid_ucDN <low> <high>` | Only use unsigned 8-bit DN values within this range. |
-| `-depth_range <min_m> <max_m>` | Only use data with water depth within this range. |
-| `-vertical_range <min_deg> <max_deg>` | Only use data with vertical incidence angles within this range. |
-| `-relative_range <min_deg> <max_deg>` | Only use data with sonar-relative incidence angles within this range. |
-| `-first <ping_num>` / `-last <ping_num>` | Process data only within a specific ping range. |
-| `-area <file.r4>` / `-mask <file.mask>` | Only process data within a geographic area. |
-| `-cyclops` | Special handling for EM3000D with one head off. |
-| `-fill_bin_gaps` | Fills gaps in angle bins by distributing contribution from wide beams. |
+| `-valid_ucDN <low> <high>` | Only use unsigned 8-bit DN values within this range. | |
+| `-depth_range <min_m> <max_m>` | Only use data with water depth within this range. | |
+| `-vertical_range <min_deg> <max_deg>` | Only use data with vertical incidence angles within this range. | |
+| `-relative_range <min_deg> <max_deg>` | Only use data with sonar-relative incidence angles within this range. | |
+| `-first <ping_num>` / `-last <ping_num>` | Process data only within a specific ping range. | |
+| `-area <file.r4>` / `-mask <file.mask>` | Only process data within a geographic area. | |
+| `-cyclops` | Special handling for EM3000D with one head off. | |
+| `-fill_bin_gaps` | Fills gaps in angle bins by distributing contribution from wide beams. | |
 
 ### Output & Debugging
 | Option | Description |
@@ -124,4 +125,21 @@ getBeamPattern <file_prefix> [OPTIONS]
     *   If SRBP extraction is active, it outputs specialized RBP files (e.g., `.across_track_RBP`, `.along_track_RBP`) and debug statistics.
     *   A custom ASCII plotfile for Gnuplot (`ARC_for_plot`) is generated.
 8.  **Cleanup:** Frees allocated memory and closes all open files.
-```
+
+## Output Files
+*   `<outname>`: An ASCII file containing the derived beam pattern.
+*   `<outname>.scatterplot`: An ASCII file for scatterplot visualization (if `-scatterplot` is used).
+*   `<outname>.ARC_for_plot`: A custom ASCII plotfile for Gnuplot.
+*   Specialized RBP files (e.g., `.across_track_RBP`, `.along_track_RBP`) if SRBP extraction is active.
+
+## Dependencies
+*   `OMG_HDCS_jversion.h`: For OMG-HDCS data structures.
+*   `array.h`: For `JHC_header` structure.
+*   `support.h`: For general utility functions and error handling.
+*   `j_proj.h`: For coordinate projection functions.
+*   `j_generic_beam_pattern.h`: For beam pattern structures and loading/dumping.
+*   `j_get_launch_angle.h`: For launch angle calculations.
+*   `j_calibration.h`: For calibration functions (e.g., `ADH_calibrate_BS`).
+
+## Notes
+`getBeamPattern` is a cornerstone tool for sonar calibration and understanding the acoustic interaction with the seafloor. Its extensive options cater to a wide range of sonar systems and processing scenarios, allowing for both basic angular response analysis and advanced SRBP extraction. Careful selection of filtering and correction parameters is crucial for obtaining accurate and meaningful beam patterns. The tool provides a robust framework for developing and validating backscatter models.

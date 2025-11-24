@@ -18,12 +18,12 @@ filterPPK <OMG_HDCS_datafile(s)> [-out <ASCII_filename>] [-longperiod <val>] [-v
 
 ## Arguments
 
-| Option | Description |
-|---|---|
-| `<OMG_HDCS_datafile(s)>` | **Required.** One or more paths to input OMG-HDCS merged files. |
-| `-out <ASCII_filename>` | **Required.** The path for the output ASCII file (contains filtered RTK heights and timestamps). |
+| Option | Description | Default / Example |
+|---|---|---|
+| `<OMG_HDCS_datafile(s)>` | **Required.** One or more paths to input OMG-HDCS merged files. | `survey_data.merged` |
+| `-out <ASCII_filename>` | **Required.** The path for the output ASCII file (contains filtered RTK heights and timestamps). | `filtered_rtk.txt` |
 | `-longperiod <val>` | Specifies the half-width of the cosine-squared tapered low-pass filter (in seconds). This effectively controls the cutoff frequency of the filter. | `15.0` |
-| `-verbose` | Enable verbose output. |
+| `-verbose` | Enable verbose output. | |
 
 ## How It Works
 1.  **File Processing:** The tool iterates through each provided merged file.
@@ -40,8 +40,13 @@ filterPPK <OMG_HDCS_datafile(s)> [-out <ASCII_filename>] [-longperiod <val>] [-v
 5.  **Output to ASCII File:** For each ping, it prints the Unix timestamp (`TtimE[k]`) and the low-pass filtered RTK height (`filtRTKatRP[k]`) to the output ASCII file.
 6.  **Cleanup:** Frees allocated memory and closes files.
 
+## Output Files
+*   `<ASCII_filename>`: An ASCII file containing timestamps and filtered RTK heights.
+
+## Dependencies
+*   `OMG_HDCS_jversion.h`: For OMG-HDCS data structures.
+*   `support.h`: For general utility functions and error handling.
+*   `math.h`: For mathematical functions.
+
 ## Notes
-*   The terms `heave` and `highpassHeave` in the code are confusingly declared and used; it appears `heave` is not directly populated from `profile.vesselHeave` in this specific tool, but `RTKatRP` (from `profile.RTK_at_RP`) is the primary input.
-*   The tool reads `profile.RTK_at_RP` and `profile.Lowpass_RTK_at_RP` from the merged file, suggesting that some form of filtered RTK height might already exist or be intended to be stored there.
-```
-```
+The `RTK_at_RP` field often contains high-frequency heave noise along with the desired long-period tide component. This tool separates these components using a spectral filter, which is crucial for applying accurate vertical datum corrections in hydrographic surveys. The terms `heave` and `highpassHeave` in the code are noted as potentially confusing; `RTKatRP` (from `profile.RTK_at_RP`) is the primary input.
