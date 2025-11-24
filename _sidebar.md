@@ -12,6 +12,8 @@
 * [gl Tools](gl/index.md)
 * [glseis Tools](glseis/index.md)
 * [grid Tools](grid/index.md)
+* [grid Tools](grid/index.md)
+* [Misc Tools](misc-tools/index.md)
 * Attitude Tools
     * [appendAtt](att/appendAtt.md)
     * [att2ascii](att/att2ascii.md)
