@@ -178,7 +178,7 @@ This file tracks the documentation status of the C code in the `code/` directory
 | `code/gsf/gsf2svp.c` | [exists](gsf/gsf2svp.md) |
 | `code/gsf/gsftest.c` | [exists](gsf/gsftest.md) |
 | `code/gsf/gsfTool.c` | [exists](gsf/gsfTool.md) |
-| `code/gsf/jhc/jgsf2omg.c` | Missing |
+| `code/gsf/jhc/jgsf2omg.c` | [exists](gsf/jhc/jgsf2omg.md) |
 | `code/gsf_lib/gsf.c` | [exists](gsf_lib/gsf.md) |
 | `code/gsf_lib/gsf_dec.c` | [exists](gsf_lib/gsf_dec.md) |
 | `code/gsf_lib/gsf_enc.c` | [exists](gsf_lib/gsf_enc.md) |
