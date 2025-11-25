@@ -2,79 +2,82 @@
 layout: default
 title: readADCP
 parent: ADCP Tools
-nav_order: 1
+nav_order: 10
 ---
+
 # readADCP
 
 ## Description
-`readADCP` is a command-line utility designed to read, process, and analyze RDI (RD Instruments) ADCP (Acoustic Doppler Current Profiler) data files, primarily in ASCII format. It offers extensive capabilities for filtering, time-bounding, depth-referencing, and outputting various velocity and backscatter profiles. The tool can integrate external navigation and attitude data, apply tide corrections, and generate output in different formats, including raw profiles and r4 grid files. It's a fundamental tool for oceanographers to extract meaningful current and backscatter information from ADCP raw data.
+`readADCP` is a comprehensive command-line utility for reading, processing, and visualizing data from RDI ADCPs (Acoustic Doppler Current Profilers). It can read RDI's ASCII output format, apply various temporal and spatial filters, perform corrections, average data, and generate time-series profiles or georeferenced maps of the current field.
+
+The tool can output various data types, including velocity magnitude, direction, backscatter, or error velocity, into a JHC-formatted 2D image file (`.prof`). It can also stack or map this data onto a georeferenced grid.
 
 ## Usage
 ```bash
-readADCP [OPTIONS] -out <output_filename> -in <input_filename(s)>
+readADCP -in <infiles> -out <outfile> [OPTIONS]
 ```
 
-## Arguments
+## Key Options
 
-| Option | Description | Default / Example |
-|---|---|---|
-| `-v` | Enable verbose output. | |
-| `-be_quiet` | Suppress verbose output. | |
-| `-mindepth` | Minimum depth for processing. | `0` |
-| `-maxdepth` | Maximum depth for processing. | `50` |
-| `-layers` | Number of depth layers for output profiles. | `100` |
-| `-MAX_allowed_layers_to_interp` | Maximum allowed layers to interpolate. | `5` |
-| `-reference_depth` | Subtracts sensor instantaneous depth from this value to provide a stable depth reference. | `172.0` |
-| `-bottom_ref` | Interprets `-mindepth` and `-maxdepth` as metres away from the bottom track, not the surface. | |
-| `-dtm_ref <terrain.r4>` | Use depth from an `r4` terrain file to trim the trace (e.g., exclude data below the seafloor). | |
-| `-use_avbeam_depth` | Trim data below the average beam depth, minus a bin depth. | |
-| `-draft` | Specifies the draft of the ADCP sensor. | `1.0` |
-| `-export_r4` | Export processed data in `r4` format (a specific grid format). | |
-| `-start <YYYY JJJ HH MM>` | Specify a start time for processing using Year, Julian Day, Hour, and Minute. | |
-| `-end <YYYY JJJ HH MM>` | Specify an end time for processing using Year, Julian Day, Hour, and Minute. | |
-| `-bounds_from <other_file_nav_format>` | Use time bounds from another navigation file to constrain processing. | |
-| `-startYMD <YYYY MM DD HH MM>` | Specify a start time for processing using Year, Month, Day, Hour, and Minute. | |
-| `-endYMD <YYYY MM DD HH MM>` | Specify an end time for processing using Year, Month, Day, Hour, and Minute. | |
-| `-duration_min <XXX>` | Specify a duration in minutes. Requires `-start` or `-startYMD` to be set. | |
-| `-onlyuseshipheading <MIN MAX>` | Only process data when the ship's heading is within the specified range (in degrees). | |
-| `-showMAG` | Display velocity magnitude (default behavior). | |
-| `-vel_scaler` | Scaling factor for velocity values. | `0.001` |
-| `-showBS` | Display backscatter data. | |
-| `-do_Sv` | Convert backscatter to Volume Backscatter Strength (Sv). Requires `-showBS`. | |
-| `-Er_DN_shift` | Shift value for Er_DN correction when calculating Sv. Requires `-do_Sv`. | `5` |
-| `-BSrange <MIN MAX>` | Specify the backscatter display range. Requires `-showBS`. | `3000 5000` |
-| `-doalltrace` | Process all traces, even past the bottom. Requires `-showBS`. | |
-| `-showERR` | Display error velocity. | |
-| `-max_err_vel` | Maximum allowable error velocity. | `150` |
-| `-allowable_sum_percent_good` | Minimum sum of percent good values required for a bin to be considered valid. | `300` (max possible `400`) |
-| `-maximum_believable_magnitude` | Maximum believable velocity magnitude (mm/s). | `10000` |
-| `-showAZI` | Display velocity azimuth. | |
-| `-headbias` | Apply a heading bias (in degrees). | `-20.0` |
-| `-showTAN` | Display tangential velocity component. | |
-| `-showRAD` | Display radial velocity component. | |
-| `-showVERT` | Display vertical velocity component. | |
-| `-plotpositive` | Plot only positive values (when showing velocities). | |
-| `-plotnegative` | Plot only negative values (when showing velocities). | |
-| `-ensem_stack` | Number of ensembles to stack. | `50` |
-| `-stack_in_map` | Stack ensembles into a map. | |
-| `-phase_zero <YYYY JJJ HH MM>` | Specify a phase zero time. | |
-| `-tidefile <filename>` | Path to a tide file for corrections. | `whatever_RTK.nav` |
-| `-ref_level` | Reference level for tide corrections. Requires `-tidefile`. | `-22.0` |
-| `-maxcurrent` | Maximum current value. | `2.0` |
-| `-min_vels_to_av` | Minimum number of valid velocities required for averaging. | `5` |
-| `-delay` | Apply a time delay in seconds. | `3600` |
-| `-map <filename>` | Path to a mapsheet file for georeferencing. | `whatever.map` |
-| `-pixel` | Pixel size for map output. Defaults to map sheet's pixel size. | `1.0` |
-| `-pad_gaps` | Pad gaps in data. | |
-| `-nav <navfilename>` | Path to an external navigation file. | |
-| `-use_adcp_nav` | Use the ADCP's internal navigation data. | |
-| `-att <attfilename>` | Path to an external attitude file (for cases without bottom track heading). | |
-| `-orientation <orientfile>` | Path to an orientation file. | |
-| `-debug_head` | Debug mode: compares CMG (Course Made Good) and MAGhead (Magnetic Heading). | |
-| `-debug_azi` | Debug mode: (not of general use). | |
-| `-out <output_filename>` | **Required.** Base name for output files. Various outputs will be generated with extensions (e.g., `.prof`, `.r4`, `.nav`). | |
-| `-winADCP` | Process data from Windows ADCP format. | |
-| `-dump_RPTZ` | Dump RPTZ (Roll, Pitch, Temperature, Depth) data to an ASCII file. | |
-| `-dump_CURR` | Dump current data to an ASCII file (supports user-specified format). | |
-| `-dump_BINS` | Dump bin data to an ASCII file. | |
-| `-in <input_filename(s)>` | **Required.** One or more input ADCP data files. | |
+### Input/Output
+| Option | Description |
+|---|---|
+| `-in <infilename(s)>` | **Required.** One or more input RDI ASCII ADCP files. |
+| `-out <outfile>` | **Required.** The prefix for the output filenames. |
+| `-nav <navfile>` | Use an external OMG-HDCS navigation file for positioning. |
+| `-use_adcp_nav` | Use the navigation data embedded within the ADCP files. |
+| `-att <attfile>`| Use an external OMG-HDCS attitude file for heading information. |
+| `-tidefile <tide.nav>` | Use an external navigation file to provide tidal height corrections. |
+| `-dtm_ref <terrain.r4>` | Use a DTM file to remove data below the seafloor. |
+| `-map <mapfile.map>` | Georeference and stack the output profiles onto a map grid. |
+| `-export_r4` | In addition to the 8-bit image, export the profile data as a floating-point (`.r4`) file. |
+| `-winADCP` | Enable special parsing mode for files generated by RDI's WinADCP software. |
+| `-dump_CURR` / `-dump_BINS` | (with `-winADCP`) Dumps current or bin data to ASCII files for each ensemble. |
+
+
+### Data Selection and Filtering
+| Option | Description |
+|---|---|
+| `-start <Y J H M>` | Set the start time for processing (Year, Julian Day, Hour, Minute). |
+| `-end <Y J H M>` | Set the end time for processing. |
+| `-startYMD <Y M D H M>`| Set start time using Year, Month, Day, Hour, Minute. |
+| `-endYMD <Y M D H M>` | Set end time using Year, Month, Day, Hour, Minute. |
+| `-duration_min <mins>` | Set the processing duration in minutes from the start time. |
+| `-bounds_from <navfile>`| Use the time window from another navigation file. |
+| `-mindepth <m>` / `-maxdepth <m>` | Set the minimum and maximum depth range to process. |
+| `-bottom_ref`| Interpret `-mindepth` and `-maxdepth` as distances from the seafloor instead of the surface. |
+| `-onlyuseshipheading <min> <max>` | Only process data where the ship's heading is within the specified range (0-360). |
+| `-allowable_sum_percent_good <%>` | Set the minimum threshold for the sum of "percent good" values from all beams (max 400). |
+| `-maximum_believable_magnitude <mm/s>` | Reject velocity data with a magnitude greater than this value. Default is 10000. |
+
+### Processing and Display
+| Option | Description |
+|---|---|
+| `-showMAG` | **(Default)** Display velocity magnitude in the output profile. |
+| `-showBS` | Display backscatter intensity. Use with `-BSrange`. |
+| `-showAZI`| Display velocity direction (azimuth). |
+| `-showVERT`| Display the vertical velocity component. |
+| `-showERR` | Display the error velocity. |
+| `-showTAN` / `-showRAD` | Display tangential or radial velocity components relative to the map orientation. |
+| `-maxcurrent <m/s>` | Set the maximum current for scaling the output image colors (for MAG, TAN, RAD, VERT). |
+| `-BSrange <min> <max>` | Set the min/max backscatter values for color scaling. |
+| `-ensem_stack <num>` | Average (stack) data over a specified number of ensembles before writing to the output file. |
+| `-headbias <deg>` | Apply a constant heading correction in degrees. |
+| `-delay <sec>` | Apply a time delay in seconds to the data. |
+| `-do_Sv` | Convert raw backscatter (DN) to absolute volume backscatter (Sv). |
+| `-layers <num>` | Set the number of vertical bins in the output profile. Default is 100. |
+
+## How It Works
+
+1.  **Read Data:** The tool reads the specified ADCP files, which can be in standard RDI ASCII format or a WinADCP variant. It also loads any auxiliary files provided (nav, attitude, tide, DTM).
+2.  **Time Filtering:** It processes each ADCP ensemble (ping), checking if its timestamp falls within the user-defined time window.
+3.  **Data Filtering:** For each depth bin within an ensemble, it checks if the data is valid based on user thresholds like `allowable_sum_percent_good` and `maximum_believable_magnitude`.
+4.  **Georeferencing:** If navigation data is provided, the tool interpolates it to find the precise geographic position of each ensemble.
+5.  **Profile Generation:** It creates a vertical profile for the chosen data type (e.g., Magnitude). The data is vertically binned into a profile with a number of layers defined by `-layers`.
+6.  **Interpolation:** The tool can interpolate between valid data points in the vertical profile to fill small gaps.
+7.  **Output:**
+    *   **Profile Mode:** The generated vertical profile for each ensemble is written as a single column in the output `.prof` image file, creating a time-series visualization.
+    *   **Map Mode (`-map`):** If a map is provided, the tool projects each ensemble's profile into the appropriate geographic bin on the map. All profiles falling into the same map column are averaged together to produce a 2D cross-section of the current field.
+8.  **Stacking:** If `-ensem_stack` is used, data is first averaged over the specified number of ensembles before being written to the output file.
+
+This process transforms raw, time-ordered ADCP profiles into a spatially or temporally coherent image that is useful for analysis.
