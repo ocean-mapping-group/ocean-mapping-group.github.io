@@ -1,19 +1,19 @@
 """
 Qimera / CARIS HIPS-style Dockable Map & Processing Monitor Widget for QGIS.
 
-Provides:
-  1. Survey Line Processing Status Table (Raw -> WC -> Merged -> Nav -> DecNav -> Att -> SVP -> SS)
-     with live file-system watcher that auto-refreshes tracklines and grids as background scripts run.
-  2. Zero-Copy OMG1 Raster Loader (.r4, .sun, .8bit, .mos, .weight) via GDAL VRTRawRasterBand sidecars
-     with automatic pseudocolor bathymetry, hillshade blending, and backscatter styling.
-  3. Interactive Inspector for .param vessel lever-arm offsets and .sv_filtered sound velocity casts.
-  4. Integrated Command Runner (QProcess) to execute tor4, addSUN, r4to8bit, mos2, swathed -locate, and jview.
+Supports both flat workspaces and multi-day Julian-Day subdirectory workspaces
+(e.g., 2026_Antarctica/OMG_Care2026/02_Bransfield with subdirs 74..81).
+
+Read-Only Master Archive Safety:
+  All generated GeoJSON tracklines and GDAL .vrt sidecar files are written to a
+  local output/cache directory (defaulting to ~/coding/bransfield_qgis_outputs or
+  ~/.cache/omg_qgis_plugin) so master archive drives (such as W:) are never modified.
 """
 
 import os
 from typing import List, Optional
 
-from qgis.PyQt.QtCore import Qt, QProcess, QTimer, QFileSystemWatcher, QVariant
+from qgis.PyQt.QtCore import Qt, QProcess, QTimer, QFileSystemWatcher
 from qgis.PyQt.QtGui import QColor, QFont
 from qgis.PyQt.QtWidgets import (
     QDockWidget,
@@ -45,7 +45,6 @@ from qgis.core import (
     QgsSingleBandPseudoColorRenderer,
     QgsColorRampShader,
     QgsRasterShader,
-    QgsStyle,
     QgsRectangle,
 )
 
@@ -55,8 +54,16 @@ from .omg_binary_io import (
     create_gdal_vrt_for_jhc,
     export_tracklines_geojson,
     parse_jhc_header,
+    parse_omg_merged_summary,
     parse_omg_param,
     scan_survey_workspace,
+)
+
+
+DEFAULT_CACHE_DIR = (
+    "/home/iwc/coding/bransfield_qgis_outputs"
+    if os.path.isdir("/home/iwc/coding")
+    else os.path.expanduser("~/.cache/omg_qgis_plugin")
 )
 
 
@@ -68,6 +75,7 @@ class OmgMonitorDockWidget(QDockWidget):
         self.iface = iface
         self.setObjectName("OmgMonitorDockWidget")
         self.workspace_dir: str = ""
+        self.output_dir: str = DEFAULT_CACHE_DIR
         self.lines: List[LineProcessingStatus] = []
         self.rasters: List[JhcHeaderInfo] = []
         self.proc: Optional[QProcess] = None
@@ -77,7 +85,7 @@ class OmgMonitorDockWidget(QDockWidget):
 
         self.debounce_timer = QTimer(self)
         self.debounce_timer.setSingleShot(True)
-        self.debounce_timer.setInterval(1200)
+        self.debounce_timer.setInterval(1500)
         self.debounce_timer.timeout.connect(self.refresh_workspace)
 
         self._init_ui()
@@ -87,10 +95,10 @@ class OmgMonitorDockWidget(QDockWidget):
         main_layout = QVBoxLayout(container)
         main_layout.setContentsMargins(6, 6, 6, 6)
 
-        # Top workspace selector bar
+        # Row 1: Survey Workspace selector (read-only safe)
         top_bar = QHBoxLayout()
         top_bar.addWidget(QLabel("Survey Workspace:"))
-        self.ws_edit = QLineEdit()
+        self.ws_edit = QLineEdit("/mnt/w/data/2026_Antarctica/OMG_Care2026/02_Bransfield")
         self.ws_edit.setPlaceholderText("/path/to/survey_project (containing raw/, merged/, decnav/, ss/)")
         top_bar.addWidget(self.ws_edit, 1)
 
@@ -98,19 +106,38 @@ class OmgMonitorDockWidget(QDockWidget):
         browse_btn.clicked.connect(self._browse_workspace)
         top_bar.addWidget(browse_btn)
 
-        refresh_btn = QPushButton("Scan / Refresh")
+        top_bar.addWidget(QLabel("Day/Subdir:"))
+        self.day_filter_combo = QComboBox()
+        self.day_filter_combo.addItem("All Days")
+        self.day_filter_combo.currentTextChanged.connect(self._apply_table_filter)
+        top_bar.addWidget(self.day_filter_combo)
+
+        refresh_btn = QPushButton("Scan Workspace")
         refresh_btn.clicked.connect(self.refresh_workspace)
         top_bar.addWidget(refresh_btn)
 
-        self.watch_cb = QCheckBox("Live Auto-Refresh")
-        self.watch_cb.setChecked(True)
+        self.watch_cb = QCheckBox("Live Watch")
+        self.watch_cb.setChecked(False)
         self.watch_cb.setToolTip(
-            "Automatically watch raw/, merged/, decnav/, ss/ and refresh QGIS layers as unravel/gridding scripts run."
+            "Enable when actively running unravel/gridding scripts on a local workspace to auto-refresh layers."
         )
         top_bar.addWidget(self.watch_cb)
         main_layout.addLayout(top_bar)
 
-        # Tabs: 1. Survey Lines & Pipeline Status, 2. Grids & Mosaics (.r4/.sun/.8bit/.mos), 3. Run OMG Tools & QC
+        # Row 2: Local Cache / Output Directory (ensures master archive W: is never modified)
+        cache_bar = QHBoxLayout()
+        cache_bar.addWidget(QLabel("Local Output/VRT Cache Dir (Archive-Safe):"))
+        self.out_dir_edit = QLineEdit(self.output_dir)
+        cache_bar.addWidget(self.out_dir_edit, 1)
+
+        color_by_lbl = QLabel("Color Tracklines By:")
+        cache_bar.addWidget(color_by_lbl)
+        self.color_mode_combo = QComboBox()
+        self.color_mode_combo.addItems(["Julian Day (subdir)", "Processing Stage"])
+        cache_bar.addWidget(self.color_mode_combo)
+        main_layout.addLayout(cache_bar)
+
+        # Tabs
         self.tabs = QTabWidget()
         main_layout.addWidget(self.tabs, 1)
 
@@ -132,15 +159,20 @@ class OmgMonitorDockWidget(QDockWidget):
         upper_layout.setContentsMargins(0, 0, 0, 0)
 
         btn_bar = QHBoxLayout()
-        self.status_summary_lbl = QLabel("No workspace loaded.")
+        self.status_summary_lbl = QLabel("Click 'Scan Workspace' to load multibeam lines.")
         btn_bar.addWidget(self.status_summary_lbl, 1)
 
-        load_tracks_btn = QPushButton("Update Tracklines Layer on Map")
+        load_wc_btn = QPushButton("Load Selected Line Water Column (.vert_prof)")
+        load_wc_btn.clicked.connect(self.load_selected_line_vert_prof)
+        btn_bar.addWidget(load_wc_btn)
+
+        load_tracks_btn = QPushButton("Plot / Update Tracklines on QGIS Map")
         load_tracks_btn.clicked.connect(self.load_or_update_tracklines_layer)
         btn_bar.addWidget(load_tracks_btn)
         upper_layout.addLayout(btn_bar)
 
         cols = [
+            "Day",
             "Survey Line",
             "Stage",
             "Raw",
@@ -150,23 +182,23 @@ class OmgMonitorDockWidget(QDockWidget):
             "decnav",
             ".orient",
             "SVP",
-            "deTVG",
             ".ss",
-            "Pings",
-            "Beams",
+            "Start UTC",
+            "Hdg (°)",
+            "Spd (kts)",
             "Depth (m)",
         ]
         self.lines_table = QTableWidget(0, len(cols))
         self.lines_table.setHorizontalHeaderLabels(cols)
         self.lines_table.setSelectionBehavior(QTableWidget.SelectRows)
         self.lines_table.setEditTriggers(QTableWidget.NoEditTriggers)
-        self.lines_table.horizontalHeader().setSectionResizeMode(0, QHeaderView.Stretch)
+        self.lines_table.horizontalHeader().setSectionResizeMode(1, QHeaderView.Stretch)
         self.lines_table.itemSelectionChanged.connect(self._on_line_selected)
         upper_layout.addWidget(self.lines_table, 1)
 
         splitter.addWidget(upper_widget)
 
-        # Lower: .param Lever Arms & .sv_filtered SVP Cast Inspector
+        # Lower: .param / .param_km Lever Arms & .svp_001 / .sv_filtered SVP Cast Inspector
         lower_widget = QWidget()
         lower_layout = QHBoxLayout(lower_widget)
         lower_layout.setContentsMargins(0, 0, 0, 0)
@@ -174,13 +206,17 @@ class OmgMonitorDockWidget(QDockWidget):
         self.param_inspector = QPlainTextEdit()
         self.param_inspector.setReadOnly(True)
         self.param_inspector.setFont(QFont("Monospace", 9))
-        self.param_inspector.setPlaceholderText("Select a survey line above to inspect its .param lever arms...")
+        self.param_inspector.setPlaceholderText(
+            "Select a survey line above to inspect its .param / .param_km lever arms & merged header..."
+        )
         lower_layout.addWidget(self.param_inspector, 1)
 
         self.svp_inspector = QPlainTextEdit()
         self.svp_inspector.setReadOnly(True)
         self.svp_inspector.setFont(QFont("Monospace", 9))
-        self.svp_inspector.setPlaceholderText("Select a survey line above to inspect its .sv_filtered cast...")
+        self.svp_inspector.setPlaceholderText(
+            "Select a survey line above to inspect its .svp_001 / .sv_filtered sound velocity cast..."
+        )
         lower_layout.addWidget(self.svp_inspector, 1)
 
         splitter.addWidget(lower_widget)
@@ -196,7 +232,7 @@ class OmgMonitorDockWidget(QDockWidget):
 
         top_bar = QHBoxLayout()
         top_bar.addWidget(
-            QLabel("Discovered OMG1 Rasters (.r4, .sun, .8bit, .mos, .weight) — Loaded Zero-Copy via GDAL VRT:")
+            QLabel("Discovered OMG1 Rasters (.r4, .sun, .8bit, .mos, .vert_prof) — Loaded Zero-Copy via GDAL VRT:")
         )
         top_bar.addStretch(1)
 
@@ -204,7 +240,7 @@ class OmgMonitorDockWidget(QDockWidget):
         load_selected_btn.clicked.connect(self.load_selected_raster_in_qgis)
         top_bar.addWidget(load_selected_btn)
 
-        load_any_btn = QPushButton("Open Any .r4 / .sun / .8bit / .mos File...")
+        load_any_btn = QPushButton("Open Any .r4 / .sun / .8bit / .mos / .vert_prof File...")
         load_any_btn.clicked.connect(self.browse_and_load_single_raster)
         top_bar.addWidget(load_any_btn)
         layout.addLayout(top_bar)
@@ -240,15 +276,13 @@ class OmgMonitorDockWidget(QDockWidget):
         self.preset_combo = QComboBox()
         self.preset_combo.addItems(
             [
-                "getBounds -nav merged/*.merged",
-                "make_blank area -float -Dx 5.0 -Dy 5.0 -boundsof -nav merged/*.merged",
-                "tor4 area 2.0 merged/*.merged",
-                "r4to8bit -in area.r4",
-                "addSUN area.r4 area.sun 315 35 4",
-                "swathed -locate area.r4 merged/*.merged",
-                "jview -sun area.8bit area.sun area.r4",
-                "make_blank area_mos -8bit -prime 255 -Dx 1.0 -Dy 1.0 -boundsof -nav merged/*.merged",
-                "mos2 -in area_mos.mos -ran area_mos.ran -smf 1.5 -weight_by_dist -swap_dirs ss/ merged/ -files ss/*.ss",
+                "getBounds -nav merged/*/*.merged",
+                "make_blank bransfield -float -Dx 25.0 -Dy 25.0 -boundsof -nav merged/*/*.merged",
+                "tor4 bransfield 2.0 merged/*/*.merged",
+                "r4to8bit -in bransfield.r4",
+                "addSUN bransfield.r4 bransfield.sun 315 35 4",
+                "swathed -locate bransfield.r4 merged/*/*.merged",
+                "jview -sun bransfield.8bit bransfield.sun bransfield.r4",
             ]
         )
         self.preset_combo.currentTextChanged.connect(lambda txt: self.cmd_input.setText(txt))
@@ -256,11 +290,11 @@ class OmgMonitorDockWidget(QDockWidget):
         layout.addLayout(cmd_bar)
 
         exec_bar = QHBoxLayout()
-        exec_bar.addWidget(QLabel("Command:"))
+        exec_bar.addWidget(QLabel("Command (Runs in Local Output Dir):"))
         self.cmd_input = QLineEdit(self.preset_combo.currentText())
         exec_bar.addWidget(self.cmd_input, 1)
 
-        run_btn = QPushButton("Run in Workspace")
+        run_btn = QPushButton("Execute Command")
         run_btn.clicked.connect(self.run_custom_command)
         exec_bar.addWidget(run_btn)
         layout.addLayout(exec_bar)
@@ -288,7 +322,7 @@ class OmgMonitorDockWidget(QDockWidget):
         old_dirs = self.fs_watcher.directories()
         if old_dirs:
             self.fs_watcher.removePaths(old_dirs)
-        if not self.workspace_dir or not os.path.isdir(self.workspace_dir):
+        if not self.watch_cb.isChecked() or not self.workspace_dir or not os.path.isdir(self.workspace_dir):
             return
         watch_list = [self.workspace_dir]
         for sub in ("raw", "merged", "decnav", "ss", "grids"):
@@ -302,33 +336,65 @@ class OmgMonitorDockWidget(QDockWidget):
         if not ws or not os.path.isdir(ws):
             return
         self.workspace_dir = os.path.abspath(ws)
+        self.output_dir = self.out_dir_edit.text().strip() or DEFAULT_CACHE_DIR
+        os.makedirs(self.output_dir, exist_ok=True)
         self._update_watched_dirs()
 
-        self.lines, self.rasters = scan_survey_workspace(self.workspace_dir)
+        self.lines, self.rasters = scan_survey_workspace(
+            self.workspace_dir, read_merged_headers=False, read_decnav_summaries=True
+        )
+
+        # Update Day/Subdir filter dropdown
+        subdirs = sorted({l.subdir for l in self.lines if l.subdir})
+        current_sel = self.day_filter_combo.currentText()
+        self.day_filter_combo.blockSignals(True)
+        self.day_filter_combo.clear()
+        self.day_filter_combo.addItem("All Days")
+        for sd in subdirs:
+            self.day_filter_combo.addItem(sd)
+        if current_sel in subdirs:
+            self.day_filter_combo.setCurrentText(current_sel)
+        self.day_filter_combo.blockSignals(False)
+
         self._populate_lines_table()
         self._populate_rasters_table()
 
         total = len(self.lines)
         n_merged = sum(1 for l in self.lines if l.has_merged)
-        n_nav = sum(1 for l in self.lines if l.has_decnav)
+        n_decnav = sum(1 for l in self.lines if l.has_decnav)
         n_att = sum(1 for l in self.lines if l.has_orientation_active)
+        n_wc = sum(1 for l in self.lines if l.has_watercol)
         n_ss = sum(1 for l in self.lines if l.has_ss_gloria)
         self.status_summary_lbl.setText(
-            f"Lines: {total} | Unpacked (.merged): {n_merged}/{total} | "
-            f"DecNav: {n_nav}/{total} | Attitude: {n_att}/{total} | "
-            f"Sidescan (.ss): {n_ss}/{total} | Rasters: {len(self.rasters)}"
+            f"Lines: {total} (Days: {', '.join(subdirs) if subdirs else 'flat'}) | "
+            f"DecNav: {n_decnav}/{total} | .merged: {n_merged}/{total} | "
+            f"WC: {n_wc}/{total} | Att: {n_att}/{total} | .ss: {n_ss}/{total}"
         )
 
+    def _get_filtered_lines(self) -> List[LineProcessingStatus]:
+        day_sel = self.day_filter_combo.currentText()
+        if not day_sel or day_sel == "All Days":
+            return self.lines
+        return [l for l in self.lines if l.subdir == day_sel]
+
+    def _apply_table_filter(self):
+        self._populate_lines_table()
+
     def _populate_lines_table(self):
-        self.lines_table.setRowCount(len(self.lines))
-        for row, st in enumerate(self.lines):
+        filtered = self._get_filtered_lines()
+        self.lines_table.setRowCount(len(filtered))
+        for row, st in enumerate(filtered):
             def chk(val: bool) -> QTableWidgetItem:
                 it = QTableWidgetItem("✔" if val else "—")
                 it.setTextAlignment(Qt.AlignCenter)
                 it.setForeground(QColor("#1b7837") if val else QColor("#999999"))
                 return it
 
+            day_it = QTableWidgetItem(st.subdir or "—")
+            day_it.setTextAlignment(Qt.AlignCenter)
             name_it = QTableWidgetItem(st.line_name)
+            name_it.setData(Qt.UserRole, st)
+
             stage_it = QTableWidgetItem(st.stage_summary)
             if st.stage_summary.startswith("COMPLETE"):
                 stage_it.setBackground(QColor("#d9f0d3"))
@@ -339,23 +405,28 @@ class OmgMonitorDockWidget(QDockWidget):
             else:
                 stage_it.setBackground(QColor("#f7f7f7"))
 
-            self.lines_table.setItem(row, 0, name_it)
-            self.lines_table.setItem(row, 1, stage_it)
-            self.lines_table.setItem(row, 2, chk(st.has_raw_kmall or st.has_raw_all))
-            self.lines_table.setItem(row, 3, chk(st.has_watercol or st.has_raw_kmwcd or st.has_raw_wcd))
-            self.lines_table.setItem(row, 4, chk(st.has_merged))
-            self.lines_table.setItem(row, 5, chk(st.has_nav_active or st.has_nav_1))
-            self.lines_table.setItem(row, 6, chk(st.has_decnav))
+            self.lines_table.setItem(row, 0, day_it)
+            self.lines_table.setItem(row, 1, name_it)
+            self.lines_table.setItem(row, 2, stage_it)
+            self.lines_table.setItem(row, 3, chk(st.has_raw_kmall or st.has_raw_all))
+            self.lines_table.setItem(row, 4, chk(st.has_watercol or st.has_vert_prof))
+            self.lines_table.setItem(row, 5, chk(st.has_merged))
+            self.lines_table.setItem(row, 6, chk(st.has_nav_active or st.has_nav_1))
+            self.lines_table.setItem(row, 7, chk(st.has_decnav))
             self.lines_table.setItem(
-                row, 7, chk(st.has_orientation_active or st.has_net_att_2 or st.has_net_att_1 or st.has_orientation_1)
+                row, 8, chk(st.has_orientation_active or st.has_net_att_2 or st.has_net_att_1 or st.has_orientation_1)
             )
-            self.lines_table.setItem(row, 8, chk(st.has_sv_filtered))
-            self.lines_table.setItem(row, 9, chk(st.has_ss_detvg))
+            self.lines_table.setItem(row, 9, chk(st.has_sv_filtered))
             self.lines_table.setItem(row, 10, chk(st.has_ss_gloria))
-            self.lines_table.setItem(row, 11, QTableWidgetItem(str(st.num_pings) if st.num_pings else "—"))
-            self.lines_table.setItem(row, 12, QTableWidgetItem(str(st.num_beams) if st.num_beams else "—"))
-            depth_str = f"{st.min_depth_m:.1f} – {st.max_depth_m:.1f}" if st.max_depth_m > 0 else "—"
-            self.lines_table.setItem(row, 13, QTableWidgetItem(depth_str))
+            self.lines_table.setItem(row, 11, QTableWidgetItem(st.start_time_utc or "—"))
+            self.lines_table.setItem(
+                row, 12, QTableWidgetItem(f"{st.mean_heading_deg:.1f}°" if st.mean_heading_deg else "—")
+            )
+            self.lines_table.setItem(
+                row, 13, QTableWidgetItem(f"{st.mean_speed_kts:.1f}" if st.mean_speed_kts else "—")
+            )
+            depth_str = f"{st.min_depth_m:.0f}–{st.max_depth_m:.0f}" if st.max_depth_m > 0 else "—"
+            self.lines_table.setItem(row, 14, QTableWidgetItem(depth_str))
 
     def _populate_rasters_table(self):
         self.rasters_table.setRowCount(len(self.rasters))
@@ -371,79 +442,133 @@ class OmgMonitorDockWidget(QDockWidget):
             self.rasters_table.setItem(row, 7, QTableWidgetItem(sun_str))
             self.rasters_table.setItem(row, 8, QTableWidgetItem(hdr.filepath))
 
-    def _on_line_selected(self):
+    def _get_selected_line(self) -> Optional[LineProcessingStatus]:
         rows = self.lines_table.selectionModel().selectedRows()
         if not rows:
-            return
-        idx = rows[0].row()
-        if idx < 0 or idx >= len(self.lines):
-            return
-        st = self.lines[idx]
+            return None
+        row = rows[0].row()
+        name_item = self.lines_table.item(row, 1)
+        if not name_item:
+            return None
+        return name_item.data(Qt.UserRole)
 
-        # 1. Populate .param inspector
+    def _on_line_selected(self):
+        st = self._get_selected_line()
+        if not st:
+            return
+
+        # 1. On-demand inspect .merged header + .param + .param_km lever arms
+        info_lines = [f"=== Line: {st.display_id} ===", f"Stage      : {st.stage_summary}"]
+        if st.merged_path and os.path.isfile(st.merged_path):
+            try:
+                summ = parse_omg_merged_summary(st.merged_path)
+                info_lines.append(
+                    f"Merged Hdr : v{summ.file_version} (toolType={summ.tool_type}), "
+                    f"{summ.num_profiles} pings × {summ.num_depths} beams/ping"
+                )
+                info_lines.append(
+                    f"Bounds     : Lat [{summ.min_lat_deg:.5f}, {summ.max_lat_deg:.5f}], "
+                    f"Lon [{summ.min_lon_deg:.5f}, {summ.max_lon_deg:.5f}]"
+                )
+            except Exception as e:
+                info_lines.append(f"Merged Hdr : {e}")
+
         if st.param_path and os.path.isfile(st.param_path):
-            params = parse_omg_param(st.param_path)
-            lines_txt = [f"=== {os.path.basename(st.param_path)} Lever Arms ==="]
-            for k, v in params.items():
-                lines_txt.append(f"{k:<18} : {v}")
-            self.param_inspector.setPlainText("\n".join(lines_txt))
-        else:
-            self.param_inspector.setPlainText(f"No .param file found for {st.line_name}")
+            info_lines.append(f"\n--- {os.path.basename(st.param_path)} ---")
+            for k, v in parse_omg_param(st.param_path).items():
+                info_lines.append(f"{k:<12} = {v}")
 
-        # 2. Populate .sv_filtered inspector
-        sv_path = os.path.join(self.workspace_dir, "merged", f"{st.line_name}.sv_filtered")
-        if os.path.isfile(sv_path):
-            with open(sv_path, "r", encoding="utf-8", errors="replace") as f:
+        if st.param_km_path and os.path.isfile(st.param_km_path) and st.param_km_path != st.param_path:
+            info_lines.append(f"\n--- {os.path.basename(st.param_km_path)} ---")
+            with open(st.param_km_path, "r", encoding="utf-8", errors="replace") as f:
+                info_lines.append(f.read(2048).strip())
+
+        self.param_inspector.setPlainText("\n".join(info_lines))
+
+        # 2. Populate SVP inspector (.svp_001 / .sv_filtered)
+        if st.svp_path and os.path.isfile(st.svp_path):
+            with open(st.svp_path, "r", encoding="utf-8", errors="replace") as f:
                 sv_txt = f.read(4096)
-            self.svp_inspector.setPlainText(f"=== {st.line_name}.sv_filtered (Depth_m  SV_m/s) ===\n{sv_txt}")
+            self.svp_inspector.setPlainText(f"=== {os.path.basename(st.svp_path)} ===\n{sv_txt}")
         else:
-            self.svp_inspector.setPlainText(f"No .sv_filtered file found for {st.line_name}")
+            self.svp_inspector.setPlainText(f"No SVP file found for {st.display_id}")
 
-        # 3. Zoom map canvas to selected line bounds if valid
+        # 3. Zoom map canvas to selected line bounds
         if st.bounds_wesn and self.iface and self.iface.mapCanvas():
             w, e, s, n = st.bounds_wesn
             if -180.0 <= w < e <= 180.0 and -90.0 <= s < n <= 90.0:
                 rect = QgsRectangle(w, s, e, n)
-                rect.scale(1.25)
+                rect.scale(1.35)
                 self.iface.mapCanvas().setExtent(rect)
                 self.iface.mapCanvas().refresh()
 
-    def load_or_update_tracklines_layer(self):
-        if not self.workspace_dir or not self.lines:
+    def load_selected_line_vert_prof(self):
+        st = self._get_selected_line()
+        if not st or not st.vert_prof_path or not os.path.isfile(st.vert_prof_path):
+            QMessageBox.information(self, "No Water Column Curtain", "Selected line has no .vert_prof file.")
             return
-        geojson_path = os.path.join(self.workspace_dir, "omg_survey_tracklines.geojson")
-        export_tracklines_geojson(self.lines, geojson_path, nav_stride=10)
+        self._load_jhc_raster_via_vrt(st.vert_prof_path)
 
-        layer_name = "OMG Survey Tracklines (By Stage)"
+    def load_or_update_tracklines_layer(self):
+        filtered = self._get_filtered_lines()
+        if not self.workspace_dir or not filtered:
+            return
+
+        self.output_dir = self.out_dir_edit.text().strip() or DEFAULT_CACHE_DIR
+        os.makedirs(self.output_dir, exist_ok=True)
+        ws_name = os.path.basename(self.workspace_dir.rstrip("/"))
+        geojson_path = os.path.join(self.output_dir, f"{ws_name}_tracklines.geojson")
+        export_tracklines_geojson(filtered, geojson_path, nav_stride=1)
+
+        layer_name = f"OMG Tracklines ({ws_name})"
         existing = QgsProject.instance().mapLayersByName(layer_name)
         if existing:
             for lyr in existing:
-                lyr.dataProvider().reloadData()
-                lyr.triggerRepaint()
-            return
+                QgsProject.instance().removeMapLayer(lyr.id())
 
         vlayer = QgsVectorLayer(geojson_path, layer_name, "ogr")
         if not vlayer.isValid():
             return
 
-        # Apply Qimera/HIPS-style categorized color symbology by stage_summary
+        color_by_day = self.color_mode_combo.currentText().startswith("Julian Day")
         categories = []
-        stage_colors = [
-            ("COMPLETE (Bathy + Nav + Att + SS)", "#1b7837", 0.8),
-            ("BATHY READY (Nav + Att Merged)", "#2166ac", 0.7),
-            ("UNPACKED (Pending Att / Ray-Trace)", "#f46d43", 0.6),
-            ("UNPACKED (Pending .nav / .orientation Copy)", "#d73027", 0.6),
-            ("RAW ONLY (Not Unravelled)", "#878787", 0.5),
+        palette = [
+            "#1f78b4", "#33a02c", "#e31a1c", "#ff7f00",
+            "#6a3d9a", "#b15928", "#a6cee3", "#b2df8a",
+            "#fb9a99", "#fdbf6f", "#cab2d6", "#ffff99",
         ]
-        for label, hex_color, width_mm in stage_colors:
-            sym = QgsSymbol.defaultSymbol(QgsWkbTypes.LineGeometry)
-            sym.setColor(QColor(hex_color))
-            sym.setWidth(width_mm)
-            categories.append(QgsRendererCategory(label, sym, label))
 
-        renderer = QgsCategorizedSymbolRenderer("stage_summary", categories)
+        if color_by_day:
+            days = sorted({l.subdir for l in filtered})
+            for idx, day in enumerate(days):
+                sym = QgsSymbol.defaultSymbol(QgsWkbTypes.LineGeometry)
+                sym.setColor(QColor(palette[idx % len(palette)]))
+                sym.setWidth(0.75)
+                label = f"Julian Day {day}" if day else "Root"
+                categories.append(QgsRendererCategory(day, sym, label))
+            renderer = QgsCategorizedSymbolRenderer("subdir", categories)
+        else:
+            stage_colors = [
+                ("COMPLETE (Bathy + WC + Nav + Att + SS)", "#1b7837", 0.8),
+                ("COMPLETE (Bathy + Nav + Att + SS)", "#33a02c", 0.8),
+                ("BATHY READY (Nav + Att Merged)", "#2166ac", 0.7),
+                ("UNPACKED (Pending Att / Ray-Trace)", "#f46d43", 0.6),
+                ("UNPACKED (Pending .nav / .orientation)", "#d73027", 0.6),
+                ("DECNAV ONLY (Track Overview)", "#762a83", 0.6),
+                ("RAW ONLY (Not Unravelled)", "#878787", 0.5),
+            ]
+            for label, hex_color, width_mm in stage_colors:
+                sym = QgsSymbol.defaultSymbol(QgsWkbTypes.LineGeometry)
+                sym.setColor(QColor(hex_color))
+                sym.setWidth(width_mm)
+                categories.append(QgsRendererCategory(label, sym, label))
+            renderer = QgsCategorizedSymbolRenderer("stage_summary", categories)
+
         vlayer.setRenderer(renderer)
         QgsProject.instance().addMapLayer(vlayer)
+        if self.iface and self.iface.mapCanvas():
+            self.iface.mapCanvas().setExtent(vlayer.extent())
+            self.iface.mapCanvas().refresh()
 
     def load_selected_raster_in_qgis(self):
         rows = self.rasters_table.selectionModel().selectedRows()
@@ -458,17 +583,18 @@ class OmgMonitorDockWidget(QDockWidget):
     def browse_and_load_single_raster(self):
         fpath, _ = QFileDialog.getOpenFileName(
             self,
-            "Select OMG Raster (.r4, .sun, .8bit, .mos, .weight)",
+            "Select OMG Raster (.r4, .sun, .8bit, .mos, .vert_prof, .weight)",
             self.workspace_dir or os.path.expanduser("~"),
-            "OMG Rasters (*.r4 *.sun* *.8bit *.mos *.weight *.blank);;All Files (*)",
+            "OMG Rasters (*.r4 *.sun* *.8bit *.mos *.vert_prof *.weight *.blank);;All Files (*)",
         )
         if fpath:
             self._load_jhc_raster_via_vrt(fpath)
 
     def _load_jhc_raster_via_vrt(self, filepath: str):
+        self.output_dir = self.out_dir_edit.text().strip() or DEFAULT_CACHE_DIR
         try:
             hdr = parse_jhc_header(filepath)
-            vrt_path = create_gdal_vrt_for_jhc(filepath)
+            vrt_path = create_gdal_vrt_for_jhc(filepath, output_dir=self.output_dir)
         except Exception as exc:
             QMessageBox.warning(self, "Error Reading OMG1 Raster", str(exc))
             return
@@ -486,7 +612,6 @@ class OmgMonitorDockWidget(QDockWidget):
             QMessageBox.warning(self, "GDAL Load Error", f"Could not load VRT {vrt_path}")
             return
 
-        # Style 32-bit float .r4 bathymetric grids with a Spectral / Turbo pseudocolor ramp
         if hdr.data_type == 3 and hdr.max_value > hdr.min_value:
             shader = QgsRasterShader()
             color_ramp = QgsColorRampShader()
@@ -511,11 +636,12 @@ class OmgMonitorDockWidget(QDockWidget):
         cmd = self.cmd_input.text().strip()
         if not cmd:
             return
-        workdir = self.workspace_dir if (self.workspace_dir and os.path.isdir(self.workspace_dir)) else os.getcwd()
-        self.cmd_log.appendPlainText(f"\n$ (cd {workdir} && {cmd})")
+        self.output_dir = self.out_dir_edit.text().strip() or DEFAULT_CACHE_DIR
+        os.makedirs(self.output_dir, exist_ok=True)
+        self.cmd_log.appendPlainText(f"\n$ (cd {self.output_dir} && {cmd})")
 
         self.proc = QProcess(self)
-        self.proc.setWorkingDirectory(workdir)
+        self.proc.setWorkingDirectory(self.output_dir)
         self.proc.setProcessChannelMode(QProcess.MergedChannels)
         self.proc.readyReadStandardOutput.connect(
             lambda: self.cmd_log.appendPlainText(
@@ -527,4 +653,3 @@ class OmgMonitorDockWidget(QDockWidget):
 
     def _on_process_finished(self, exit_code: int, _exit_status):
         self.cmd_log.appendPlainText(f"[Process finished with exit code {exit_code}]")
-        self.refresh_workspace()
