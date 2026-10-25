@@ -1,117 +1,121 @@
-# OMG Code Usage Guide
+---
+layout: default
+title: Quick Reference Cheat Sheet
+nav_order: 4
+---
 
-This guide provides information on how to use the various tools in the OMG codebase. The information here is extracted from the legacy TiddlyWiki files.
+# Quick Reference Command Cheat Sheet
 
-## Getting Started
+This page provides copy-pasteable command recipes for the most common Ocean Mapping Group (OMG) multibeam processing tasks. For detailed explanations of file formats, sensor selection, and troubleshooting, see the **[Processing Workflows & Guides](workflows/index.html)**.
 
-### How to obtain and compile the code
+---
 
-The code lives on a subversion server located in the OMG offices at UNB. To download the code with read only permissions (you can't commit your changes) use the following commands:
+## 1. Kongsberg `.kmall` & `.kmwcd` Unraveling (SIS 5.x)
 
+Supported models in [`read_kmall`](kmall/read_kmall.html): **EM2040 / EM2040P (`2040`)**, **EM2042 (`2042`)**, **EM2040C (`2045`)**, **EM712 (`712`)**, **EM304 (`304`)**, **EM124 (`124`)**.
+
+### Batch Parallel Processing (Recommended)
+Run from the parent directory containing `raw/*.kmall` (and optional `raw/*.kmwcd`):
 ```bash
-sudo apt-get install subversion subversion-tools
-mkdir ~/code
-cd ~/code
-svn checkout svn+ssh://omg_user@amundsen.omg.unb.ca/drives/amundsen/disk1/code
+./unravel_KMALL_2500m_RevHplus_netatt2_parallel
 ```
 
-To enable commit permissions use your OMG account name instead of 'omg_user' or contact someone at OMG:
-* Ian Church: ianc@omg.unb.ca
-* James Muggah: jmuggah@unb.ca
-* Steve Brucker: steveb@omg.unb.ca
+### Single-Line Manual Commands
+```bash
+mkdir -p merged decnav ss
+LINE="0001_20240615_120000_Ship"
 
-### Adding new sounder tool types
+# 1. Unpack .kmwcd FIRST (if present) and save its water-column pointer .merged file
+if [ -f "raw/${LINE}.kmwcd" ]; then
+    read_kmall -d "merged/${LINE}" -kmall "raw/${LINE}.kmwcd" -maxdepth 2500.0
+    mv "merged/${LINE}.merged" "merged/justWC_${LINE}.merged"
+fi
 
-This section documents how to add support for a new sonar system.
+# 2. Unpack .kmall SECOND and transfer water-column pointers
+read_kmall -d "merged/${LINE}" -kmall "raw/${LINE}.kmall" -maxdepth 2500.0
+if [ -f "merged/justWC_${LINE}.merged" ]; then
+    moveOverWCinfo "merged/${LINE}.merged" "merged/justWC_${LINE}.merged"
+    rm "merged/justWC_${LINE}.merged"
+fi
 
-1.  **Edit `OMG_HDCS_jversion.h` to include support for a new tool**
+# 3. Copy active navigation (.nav_1), filter spikes, append, and merge lever arms
+cp "merged/${LINE}.nav_1" "merged/${LINE}.nav"
+stripNav "merged/${LINE}.nav" "decnav/${LINE}.nav" 0.5 0.01 10.0
+appendNav decnav/all_dec.nav "decnav/${LINE}.nav"
+mergeNav -ahead 60.0 -param "merged/${LINE}.param" "merged/${LINE}.merged" decnav/all_dec.nav
 
-    1a. Increment the number of tools by 1.
+# 4. Copy active attitude (.net_att_2, .net_att_1, or .orientation_1) and ray-trace 3D beams
+cp "merged/${LINE}.net_att_2" "merged/${LINE}.orientation"
+newMergeAtt -redoref -recalc_beamVec -wc "merged/${LINE}"
 
-    ```c
-    #define NO_TOOLS      47        /* currently */
-    ```
+# 5. Generate sidescan (.ss) from snippets
+makess -pixel 2.0 -SnippetExtend "merged/${LINE}"
+mv "merged/${LINE}.ss" ss/
+```
 
-    1b. Add the new tooltype in the various "tool_def" arrays in `OMG_HDCS_jversion.h`, for this you need to know the MAXIMUM number of beams that the system can support.
+---
 
-    1c. Add a tool number definition for the new tool.
+## 2. Kongsberg `.all` & `.wcd` Unraveling (SIS 3.x / 4.x)
 
-    ```c
-    #define ODOM_ES3        46
-    ```
+Supported models in [`RTlite`](RTLite/RTlite.html): **EM120, EM122, EM300, EM302, EM710, EM1002, EM2040 (`.all`), EM3000, EM3002**.
 
-    1d. Add a human-readable tool name in the `tool_names` array.
+### Batch Processing with `bunravel`
+```bash
+# Unpack all raw/*.all files, flatten empirical TVG (deTVG), and build 1.0 m sidescan (.ss):
+bunravel -path raw -ext all -ss -pixel 1.0 -detvg
+```
 
-    1e. Compile to catch any syntax errors, etc:
-    ```bash
-    make -B OMG_HDCS_jversion.o
-    ```
+---
 
-2.  **Add V4 initialization support for the new tool type in `OMG_HDCS_jversion.c`** by editing the `OMG_HDCS_initiate_V4_summary` function.
+## 3. Bathymetric Gridding (`.blank` $\rightarrow$ `.r4` $\rightarrow$ `.8bit` / `.sun`)
 
-3.  **Add support for new data type in SwathEd** by updating `SE_mainwin.h`, `SE_mainwin.c`, `SE_omgIOwin.c` and `SE_listwin.c`.
+```bash
+# 1. Inspect geographic bounding box (West East South North)
+getBounds -nav merged/*.merged
 
-4.  **Write a program to convert the raw data into OMG format.** Examples can be found in `7k2omg.c`, `hypack2omg.c`, `xtf2omg_reson.c`, `gsf2omg.c`.
+# 2. Create a 32-bit float blank grid header (5.0 m resolution)
+# NOTE: Place <out_prefix> -float -Dx -Dy BEFORE -boundsof or -bounds!
+make_blank area -float -Dx 5.0 -Dy 5.0 -boundsof -nav merged/*.merged
 
-5.  **Add support for the tool type in `newMergeAtt`** by updating `OMG_get_rational_beams` in `OMG_HDCS_jversion.c` and `get_sounding_geometry.c` in `sonar_geometry.c`.
+# 3. Grid soundings with distance-weighting (smoothing factor 2.0)
+tor4 area 2.0 merged/*.merged
 
-6.  **Recompile all the OMG programs.**
+# 4. Create 8-bit greyscale and sun-illuminated relief images
+r4to8bit -in area.r4 -range 50.0 500.0
+addSUN area.r4 area.sun 315 35 4
 
-## Tool Reference
+# 5. View in 3D with jview
+jview -sun area.8bit area.sun area.r4
+```
 
-### SVP Tool & WOD
+---
 
-**Introduction**
-The OMG SVP Toolkit is used to visualize, manipulate and analyze large volume sound speed profile data sets. It has functionality to access the World Ocean Database (WOD).
+## 4. Interactive Swath Cleaning (`swathed`)
 
-**Environment Variables**
-*   `OMG_DEFAULT_MAP`: Default 8-bit mapsheet.
-*   `WVS_DIR`: For World Vector Shoreline plotting.
-*   `WOA01_PATH`: For World Ocean Atlas access.
-*   `WOD_PATH`: For World Ocean Database access.
-*   `WOD_DATABASE_NAME`: For World Ocean Database access.
+```bash
+# Open the .r4 grid in plan-view locator mode to click-and-drag around spikes:
+swathed -locate area.r4 merged/*.merged
 
-**Compiling for WOD**
-Requires the `libsqlite3-dev` library.
+# After flagging outlier beams and saving in swathed, re-run tor4:
+tor4 area 2.0 merged/*.merged
+```
 
-**Running `svp_tool` with WOD**
-Run `svp_tool` with an 8-bit map sheet and click the 'WOD' button.
+---
 
-**Debugging `svp_tool` with WOD**
-Use the `-debug_wod` option.
+## 5. Sidescan & Backscatter Mosaicking (`.ss` $\rightarrow$ `.mos`)
 
-### [edhead](grid/edhead.md)
-Allows editing, viewing, and dumping of data in the headers of mapsheets.
+```bash
+# 1. Fill small along-track ping gaps in all .ss files
+for f in ss/*.ss; do glfill "$f"; done
 
-### `fixnav`
-A tiny program that tests for a backwards time jump in nav data and 'fixes' it.
+# 2. Create an 8-bit blank mosaic header primed to 255 (1.0 m resolution)
+make_blank area_mos -8bit -prime 255 -Dx 1.0 -Dy 1.0 -bounds -66.55 -66.40 44.95 45.10
 
-### `flagNav`
-Flags nav fixes in an OMG `.nav` file if `flag[1]` value is greater than the `accept` value.
+# 3. Initialize .mos and .ran and run mos2 (mapping ss/ back to merged/ for companion files)
+cp area_mos.blank area_mos.mos
+cp area_mos.blank area_mos.ran
+mos2 -in area_mos.mos -ran area_mos.ran -smf 1.5 -weight_by_dist -swap_dirs ss/ merged/ -files ss/*.ss
 
-### [getBounds](omg/getBounds.md)
-Creates an index of geographical bounding boxes from a `.merged` file.
-
-### `getHeading`
-Gets the average heading of a line from a merged file.
-
-### [inArea](omg/inArea.md)
-Checks if a merged file intersects a given geographical area.
-
-### [jview](JV/jview.md)
-Used to view omg format mapsheets, backscatter and sidescan data files.
-
-### `mos2`
-Creates a mosaic of backscatter intensity. (This seems to be `mapmos` in `sidescan/mapmos/`)
-
-### `omg2hips`
-Downgrades a `.merged` file to allow it to be imported into CARIS.
-
-### `stripNav`
-Strips details out of a `.merged` file into an ascii or `.nav` file.
-
-### `sumNav`
-Does a quick summation of distance and time spanned by a nav file.
-
-### [useCMG](omg/useCMG.md)
-Overwrites the ping profile header's heading value with one derived from a filtered course made good.
+# 4. Inspect the sidescan mosaic in jview
+jview area_mos.mos
+```

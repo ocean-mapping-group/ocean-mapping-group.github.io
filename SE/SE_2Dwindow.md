@@ -1,8 +1,14 @@
 ---
 layout: default
-title: SE 2Dwindow
-parent: SE Tools
+title: SE_2Dwindow
+parent: SwathEd (SE) Tools
 nav_order: 3
+tool_name: SE_2Dwindow
+source_path: code/SE/SE_2Dwindow.c
+category: Interactive QC & Editing (SwathEd)
+input_formats: [".merged", ".100ping_bounds", ".ref_coeffs", ".r4"]
+output_formats: [".merged (beam status flags updated in-place)", "changes_2D", "beamstats.2D", "D2_plot", ".ppm"]
+related_tools: ["swathed", "SE_GEOwindows", "SE_PATCHwin", "getBounds"]
 ---
 
 # `SE_2Dwindow.c` - 2D Bathymetry View and Editing Tool

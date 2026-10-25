@@ -1,8 +1,14 @@
 ---
 layout: default
-title: SE AUTOFLAGwin
-parent: SE Tools
+title: SE_AUTOFLAGwin
+parent: SwathEd (SE) Tools
 nav_order: 5
+tool_name: SE_AUTOFLAGwin
+source_path: code/SE/SE_AUTOFLAGwin.c
+category: Interactive QC & Editing (SwathEd)
+input_formats: [".merged", "SwathEd auto-flag parameter file"]
+output_formats: [".merged (beam status flags updated via dump_array)", "SwathEd auto-flag parameter file"]
+related_tools: ["swathed", "newAutoRejectSoundings", "SE_mainwin", "SE_filters"]
 ---
 
 # `SE_AUTOFLAGwin.c` - Automated Flagging Parameters Window for Sonar Editor

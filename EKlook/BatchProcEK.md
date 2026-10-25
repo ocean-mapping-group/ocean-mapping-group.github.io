@@ -3,11 +3,28 @@ layout: default
 title: BatchProcEK
 parent: EKlook Tools
 nav_order: 1
+tool_name: BatchProcEK
+source_path: code/EKlook/BatchProcEK.c
+category: EKlook
+input_formats:
+  - OMG_HDCS (.merged)
+  - JHC Float Trace Arrays (.MF_dB, .Raw_dB, .PS_phase, .FA_phase, .MF_IQ)
+  - Bottom Track Guide (.BottomTrackGuide)
+  - JHC Float Area Maps (.r4)
+output_formats:
+  - Full-Bandwidth ARC (.ARC_fullBW, .ARC_3D, .ARC_3D.trim)
+  - Spectral FFT ARC (.ARC_FFTbins, .ARC_FFT3D, .ARC_FFT3D.trim)
+related_tools:
+  - EKlook
+  - comboCalibEK_ARCs
+  - EK_BottomBS
+  - EK_funcs
 ---
+
 # BatchProcEK
 
 ## Description
-`BatchProcEK` is a command-line utility for batch processing EK series echosounder data, specifically focusing on extracting bottom backscatter (BS) values and compiling Angular Response Curves (ARCs). It's designed to be used *after* initial tuning and setup have been done using the interactive `EKlook.c` tool. It processes multiple merged EK files, performs bottom detection, calculates various parameters related to bottom classification, and outputs ARCs in different formats (full bandwidth, FFT bin-specific, and 3D). It can also perform debug analysis of ensonified area and attenuation for a given depth.
+`BatchProcEK` is a command-line utility for batch processing Kongsberg Simrad EK60/EK80 echosounder files, extracting bottom backscatter ($BS$) values, and compiling both full-bandwidth and spectral FFT Angular Response Curves (ARCs). It is designed to be run after interactive parameter tuning and bottom-track guide creation (`<prefix>.BottomTrackGuide`) in [`EKlook`](EKlook.md), and its output ARC files feed directly into [`comboCalibEK_ARCs`](comboCalibEK_ARCs.md).
 
 ## Usage
 ```bash
@@ -19,33 +36,30 @@ BatchProcEK [OPTIONS] -ins <procEK_dir/EK_file_prefix*.merged>
 | Option | Description | Default / Example |
 |---|---|---|
 | `-v` | Enable verbose output. | |
-| `-dBdrop <value>` | Specifies the signal drop-off (in dB) from the peak in the envelope for bottom detection. | `3.0` |
-| `-phaseOffZero <value>` | Phase offset from zero for bottom detection. | `3.0` |
-| `-TwoWayBeamWidth <degrees>` | Two-way beam width in degrees. | `12.0` |
-| `-AngleSensitivity <value>` | Angle sensitivity for along and across angles. | `10.0` |
-| `-EnvWinSize <size>` | Size of the envelope window for FFT analysis (must be 64, 32, 16, 8, 4, or 2). | `16` |
-| `-trimdB <value>` | Manual trim dB value for filtering. | `20.0` |
-| `-minfrac_MaxCount_toDump <fraction>` | Minimum fraction of maximum count required for an ARC bin to be dumped (e.g., `0.1` means dump if count > 10% of max count). | `0.0` |
-| `-use_area_model <mode>` | Specifies the model for ensonified area calculation. `1` for FFT-based, `2` for Bandwidth-based. | `1` (FFT) |
-| `-skipfree` | (Debug only) Do not free memory between processing files. | |
-| `-skipArea` | Skip ensonified area calculations. | |
-| `-skipBP` | Skip Beam Pattern calculations. | |
-| `-skipTL` | Skip Transmission Loss calculations. | |
-| `-debug_Areas` | Output debug information for ensonified area calculation to `debug.area`. Requires `-fixed_depth`, `-waterT`, `-waterS`. | |
-| `-debug_Atten` | Output debug information for attenuation calculation to `debug.atten`. Requires `-fixed_depth`, `-waterT`, `-waterS`. | |
-| `-fixed_depth <meters>` | (Used with `-debug_Areas` or `-debug_Atten`) Specifies a fixed water depth for debug calculations. | `100.0` |
-| `-waterT <celsius>` | (Used with `-debug_Areas` or `-debug_Atten`) Specifies water temperature in Celsius for attenuation calculations. | `10.0` |
-| `-waterS <psu>` | (Used with `-debug_Areas` or `-debug_Atten`) Specifies water salinity in PSU for attenuation calculations. | `30.0` |
-| `-areas <AreaMapFileName(s)>` | Specifies one or more area map files (e.g., custom_rot_mapsheet.r4) for spatial processing. | `custom_rot_mapsheet.r4` |
-| `-outprefix <prefix>` | Specifies a prefix for the output ARC files. | `MultiFile` |
-| `-ins <procEK_dir/EK_file_prefix*.merged>` | **Required.** One or more input merged EK files for batch processing. Wildcards are supported. | `procEK/survey_001.merged procEK/survey_002.merged` |
+| `-dBdrop <value>` | Signal drop-off (in dB) from the envelope peak for bottom detection. | `3.0` |
+| `-phaseOffZero <value>` | Phase offset from zero (degrees) for split-beam bottom detection. | `3.0` |
+| `-TwoWayBeamWidth <degrees>` | Two-way $-3\text{ dB}$ beam width in degrees. | `12.0` |
+| `-AngleSensitivity <value>` | Split-beam electrical-to-mechanical angle sensitivity for along and across angles. | `10.0` |
+| `-EnvWinSize <size>` | Envelope sub-window size in samples for FFT spectral ARC analysis (must be `64`, `32`, `16`, `8`, `4`, or `2`). | `16` |
+| `-trimdB <value>` | Manual amplitude threshold (dB) for target/bottom search. | `20.0` |
+| `-minfrac_MaxCount_toDump <fraction>` | Minimum fraction of maximum bin count required for an ARC bin to be exported in `.trim` files. | `0.0` |
+| `-use_area_model <mode>` | Ensonified area model: `1` for FFT sub-window duration, `2` for effective pulse bandwidth. | `1` (FFT) |
+| `-skipfree` | (Debug) Do not free trace memory between files. | |
+| `-skipArea` | Skip ensonified area correction. | |
+| `-skipBP` | Skip beam pattern roll-off correction. | |
+| `-skipTL` | Skip transmission loss correction. | |
+| `-debug_Areas` | Dump ensonified area debug curves to `debug.area` (requires `-fixed_depth`, `-waterT`, `-waterS`). | |
+| `-debug_Atten` | Dump acoustic absorption debug curves to `debug.atten` (requires `-fixed_depth`, `-waterT`, `-waterS`). | |
+| `-fixed_depth <meters>` | Water depth (m) for `-debug_Areas` / `-debug_Atten`. | `100.0` |
+| `-waterT <celsius>` | Water temperature ($^\circ\text{C}$) for `-debug_Areas` / `-debug_Atten`. | `10.0` |
+| `-waterS <psu>` | Water salinity (PSU) for `-debug_Areas` / `-debug_Atten`. | `30.0` |
+| `-areas <AreaMapFileName(s)>` | One or more JHC `.r4` area map files for spatial subsetting. | `custom_rot_mapsheet.r4` |
+| `-outprefix <prefix>` | Prefix for the output ARC files. | `MultiFile` |
+| `-ins <procEK_dir/EK_file_prefix*.merged>` | **Required.** One or more input `.merged` EK files (companion `.MF_dB`, `.PS_phase`, `.FA_phase`, `.MF_IQ` files are loaded automatically). | `procEK/survey_*.merged` |
 
 ## Output Files
-*   `<outprefix>.ARC_fullBW`: Full bandwidth Angular Response Curve.
-*   `<outprefix>.ARC_3D`: 3D Angular Response Curve (full bandwidth).
-*   `<outprefix>.ARC_3D.trim`: Trimmed 3D Angular Response Curve (full bandwidth), based on `-minfrac_MaxCount_toDump`.
-*   `<outprefix>.ARC_FFTbins`: FFT bin-specific Angular Response Curves.
-*   `<outprefix>.ARC_FFT3D`: 3D FFT bin-specific Angular Response Curve.
-*   `<outprefix>.ARC_FFT3D.trim`: Trimmed 3D FFT bin-specific Angular Response Curve, based on `-minfrac_MaxCount_toDump`.
-*   `debug.area`: ASCII output for debug areas calculation (if `-debug_Areas` is used).
-*   `debug.atten`: ASCII output for debug attenuation calculation (if `-debug_Atten` is used).
+*   `<outprefix>.ARC_fullBW`: 2D full-bandwidth Angular Response Curve.
+*   `<outprefix>.ARC_3D` & `<outprefix>.ARC_3D.trim`: 3D full-bandwidth Angular Response Curve (and density-trimmed version).
+*   `<outprefix>.ARC_FFTbins`: 2D FFT frequency-bin Angular Response Curves.
+*   `<outprefix>.ARC_FFT3D` & `<outprefix>.ARC_FFT3D.trim`: 3D FFT frequency-bin Angular Response Curve (and density-trimmed version).
+*   `debug.area` / `debug.atten`: Optional diagnostic tables when `-debug_Areas` or `-debug_Atten` is enabled.

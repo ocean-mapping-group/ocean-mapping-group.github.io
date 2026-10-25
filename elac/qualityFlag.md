@@ -3,39 +3,45 @@ layout: default
 title: qualityFlag
 parent: ELAC Tools
 nav_order: 1
+tool_name: qualityFlag
+source_path: elac/qualityFlag.c
+category: bathymetry_filtering
+input_formats: [OMG_HDCS]
+output_formats: [OMG_HDCS]
+related_tools: [refoELAC, elac2omg, SwathEd]
 ---
+
 # qualityFlag
 
-## Description
-`qualityFlag` is a command-line utility designed to flag (or unflag) hydrographic data beams in OMG-HDCS merged files based on their quality factor. It specifically targets ELAC multibeam data, using the ELAC-supplied beam quality (a crude signal-to-noise ratio), or can handle SeaBat 8101 data by interpreting specific bit flags for brightness, collinearity, and amplitude/phase detection. Beams whose quality falls outside a specified minimum and maximum range are marked as invalid.
+## Overview
+
+`qualityFlag` flags or unflags multibeam bathymetry soundings in-place within OMG HDCS `.merged` files based on their beam quality factor (`Q_factor`). It is designed primarily for Honeywell ELAC BottomChart data (where `Q_factor` encodes a signal-to-noise ratio) and Reson SeaBat 8101 data (where `Q_factor` encodes brightness, collinearity, and amplitude/phase detection bits). Beams with quality values outside the specified `[minquality, maxquality]` range are marked as rejected (`status = 22`).
 
 ## Usage
-```bash
-qualityFlag [OPTIONS] <merged_file(s)>
+
+```
+qualityFlag (-v) (-minquality 0) (-maxquality 2) merged_file(s)
 ```
 
-## Arguments
+## CLI Options
 
-| Option | Description | Default / Example |
-|---|---|---|
-| `-v` | Enable verbose output. | |
-| `-minquality <value>` | Specifies the minimum acceptable quality factor. Beams with a quality factor below this value will be flagged as invalid. | `0` |
-| `-maxquality <value>` | Specifies the maximum acceptable quality factor. Beams with a quality factor above this value will be flagged as invalid. | `2` |
-| `<merged_file(s)>` | **Required.** One or more input OMG-HDCS merged files (e.g., `.merged`) to be processed. The tool directly modifies the `status` and `Q_factor` fields of the beams within these files. | `survey_001.merged survey_002.merged` |
+| Flag | Arguments | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `<merged_file(s)>` | `<file1> [file2 ...]` | *required* | One or more OMG HDCS `.merged` files to filter in-place. |
+| `-minquality` | `<value>` | `0` | Minimum acceptable quality factor; beams below this value are flagged with `status = 22`. |
+| `-maxquality` | `<value>` | `2` | Maximum acceptable quality factor; beams above this value are flagged with `status = 22`. |
+| `-v` | none | `0` | Enable verbose output. |
 
 ## How It Works
-1.  **File Processing:** The tool iterates through each provided merged file.
-2.  **Summary Header Reading:** Reads the summary header to determine the sonar type.
-3.  **Beam Quality Check:** For each beam in each ping:
-    *   It reads the beam's `Q_factor`.
-    *   If the sonar is an ELAC system, it uses `Q_factor` directly.
-    *   If the sonar is a SeaBat 8101, it interprets specific bit flags within `Q_factor` for brightness, collinearity, and detection type.
-    *   It then compares this quality value against the user-defined `minquality` and `maxquality` thresholds.
-4.  **Flagging:** If the beam's quality falls outside the acceptable range, its `status` field is set to `22` (typically indicating a rejected sounding).
-5.  **In-Place Update:** The modified beam records (with updated `status` flags) are written back to the merged file.
 
-## Output Files
-The input merged files are modified in-place.
+1. **Header Inspection**: Opens each `.merged` file in read/write mode and reads `OMG_HDCS_summary_header` to identify `summary.toolType`.
+2. **Quality Evaluation**: Iterates through every ping and beam, evaluating `beams[i].Q_factor` directly for ELAC data (where lower numbers `1`–`2` indicate higher SNR quality) or decoding brightness/collinearity bit flags for `SeaBat_8101`.
+3. **In-Place Flagging**: Sets `beams[i].status = 22` if the quality falls outside `[minquality, maxquality]` and writes the modified beam array back to the `.merged` file.
 
-## Notes
-This tool is effective for initial filtering of multibeam data based on quality indicators provided by the sonar system. It's crucial to understand the meaning of the `Q_factor` for specific sonar types to set appropriate thresholds.
+## Practical Examples
+
+### Reject ELAC beams with quality factor worse than 3
+
+```bash
+qualityFlag -minquality 1 -maxquality 3 elac_line01.merged elac_line02.merged
+```

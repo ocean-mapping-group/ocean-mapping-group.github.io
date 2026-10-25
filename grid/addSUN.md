@@ -3,12 +3,20 @@ layout: default
 title: addSUN
 parent: Grid Tools
 nav_order: 6
----
----
-layout: default
-title: addSUN
-parent: Grid Tools
-nav_order: 6
+tool_name: addSUN
+source_path: code/grid/addSUN.c
+category: visualization
+input_formats:
+  - .r4
+output_formats:
+  - .sun
+  - .8bit
+  - .r4
+related_tools:
+  - make_blank
+  - weigh_grid
+  - r4to8bit
+  - jview
 ---
 # addSUN
 

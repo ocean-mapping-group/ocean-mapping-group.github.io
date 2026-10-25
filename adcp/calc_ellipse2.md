@@ -3,14 +3,29 @@ layout: default
 title: calc_ellipse2
 parent: ADCP Tools
 nav_order: 3
+tool_name: calc_ellipse2
+source_path: code/adcp/calc_ellipse2.c
+category: adcp
+input_formats:
+  - jcu_nav Depth-Averaged ADCP Vectors (.nav)
+  - JHC Grid (.r4 / .8bit)
+output_formats:
+  - jcu_nav Tidal Ellipse Vectors (_ellipse.nav)
+  - jcu_nav Residual Current Vectors (_residual.nav)
+  - ASCII Comma-Separated Ellipse Summary (asciifile)
+related_tools:
+  - calc_ellipse
+  - calc_ellipse1
+  - combineMultiADCP
+  - readADCP
 ---
 
 # calc_ellipse2
 
 ## Description
-`calc_ellipse2` is a command-line utility for calculating tidal ellipse parameters from ADCP (Acoustic Doppler Current Profiler) data. It processes depth-averaged velocity vectors from multiple tidal cycles, sorting them by tidal phase and spatial location into bins defined by a coarse DTM grid. The tool then computes tidal ellipse parameters (major axis, minor axis, orientation, and ellipticity) for each bin and outputs the results to nav-format files. It can also output residual currents.
+`calc_ellipse2` is a command-line utility for calculating tidal ellipse parameters from ADCP (Acoustic Doppler Current Profiler) data. It processes depth-averaged velocity vectors from multiple tidal cycles, sorting them by tidal phase and spatial location into bins defined by a coarse DTM grid. The tool then computes tidal ellipse parameters (major axis, minor axis, orientation, and ellipticity) for each bin and outputs the results to nav-format files. It can also output residual currents and an optional ASCII table (`-ascii`).
 
-This tool is a modification of `calc_ellipse1` with a focus on direct ellipse parameter calculation.
+This tool is an enhanced version of [`calc_ellipse1`](calc_ellipse1.md) with both binary `jcu_nav` and optional ASCII output.
 
 ## Usage
 ```bash
@@ -22,8 +37,8 @@ calc_ellipse2 [OPTIONS] -grid <coarseDTM> -out <outfilenameprefix> -ellipse_file
 | Option | Description | Default / Example |
 |---|---|---|
 | `-v` | Enable verbose output. | |
-| `-ascii` | Output an additional ASCII file with ellipse parameters. | |
-| `-grid <coarseDTM>` | **Required.** Specifies the coarse DTM grid file for binning the ADCP data. | `-grid my_grid.jhc` |
+| `-ascii` | Output an additional ASCII file (`asciifile`) with comma-separated ellipse parameters. | |
+| `-grid <coarseDTM>` | **Required.** Specifies the coarse DTM grid file for binning the ADCP data. | `-grid my_grid.r4` |
 | `-phase_step <degrees>` | The phase step in degrees for processing the tidal cycle. | `5` |
 | `-phase_window <degrees>` | The phase window in degrees for averaging data around each phase step. | `10` |
 | `-min_vels_in_bin <number>` | Minimum number of valid velocity vectors required in a bin to perform calculations. | `50` |
@@ -44,7 +59,7 @@ calc_ellipse2 [OPTIONS] -grid <coarseDTM> -out <outfilenameprefix> -ellipse_file
 
 ## Output Files
 
-*   **`<outfilenameprefix>.phase###`**: A series of files (one for each phase step) containing the averaged velocity vectors. (Note: The code appears to open this file but may not write to it if ellipse calculation is the primary goal).
+*   **`<outfilenameprefix>.phase###`**: A series of files (one for each phase step) containing the averaged velocity vectors.
 *   **`<ellipse_parameter_file>_ellipse.nav`**: A `.nav` file where `azi` is the major axis, `velocity` is the minor axis, and `depth` is the orientation (theta).
 *   **`<ellipse_parameter_file>_residual.nav`**: A `.nav` file containing the magnitude and direction of the residual current.
 *   **`asciifile`**: If `-ascii` is used, this file is created with comma-separated values for lat, lon, theta, ellipticity, major axis, minor axis, and residual north/east velocity components.

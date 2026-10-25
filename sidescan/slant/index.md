@@ -1,9 +1,23 @@
 ---
 layout: default
 title: Slant Tools
-parent: sidescan
+parent: Sidescan Tools
 nav_order: 11
 has_children: true
 ---
-# Slant Tools
-Tools for slant range correction and bottom picking in sidescan data.
+
+# Slant-Range Correction & Bottom Picking Tools (`sidescan/slant`)
+
+The `slant` directory (`code/sidescan/slant/`) provides the core geometric rectification tools that detect the first seafloor acoustic return (water-column/seabed interface) and project raw time-sampled (slant-range) sidescan scanlines into true horizontal across-track ground range.
+
+## Available Tools
+
+* **[`bpick`](bpick.md)** — Automated and threshold-assisted bottom picker that scans raw GLORIA `.ss` records across nadir to detect the first high-amplitude seabed arrival on port and starboard channels, updating the header water depth / altitude fields.
+* **[`glslant`](glslant.md)** — Performs slant-range-to-ground-range geometric correction on JCU GLORIA `.ss` files (producing `.slr` files), removing the water column and mapping each sample from slant range $R$ to horizontal ground range $x = \sqrt{R^2 - z^2}$ assuming either a flat seafloor or local cross-track slope.
+* **[`downGrade`](downGrade.md)** — Downsamples/decimates high-resolution sidescan records along-track and/or across-track into standard GLORIA record dimensions for regional overview processing.
+* **[`makefile`](makefile.md)** — Build configuration for `glslant`, `bpick`, and `downGrade`.
+
+## Typical Workflow
+1. Run [`bpick`](bpick.md) on raw `.ss` files to determine towfish altitude above the seabed.
+2. Smooth noisy bottom picks along-track using [`azibat/smthbpick`](../azibat/smthbpick.md) or edit outliers with [`azibat/editbat`](../azibat/editbat.md).
+3. Run [`glslant`](glslant.md) to remove the water column and map slant range into ground range (`.slr`), ready for empirical beam pattern correction ([`beammap/debeam`](../beammap/debeam.md)).

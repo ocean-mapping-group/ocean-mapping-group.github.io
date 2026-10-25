@@ -3,12 +3,26 @@ layout: default
 title: combineMultiADCP
 parent: ADCP Tools
 nav_order: 4
+tool_name: combineMultiADCP
+source_path: code/adcp/combineMultiADCP.c
+category: adcp
+input_formats:
+  - jcu_nav Depth-Averaged ADCP Vectors (.nav)
+  - JHC Grid (.r4 / .8bit)
+output_formats:
+  - jcu_nav Phase-Averaged Vectors (.phase###)
+related_tools:
+  - combineMultiADCP_wshiftoption
+  - combineMultiADCP_garret
+  - calc_ellipse2
+  - readADCP
+  - readGenericADCP
 ---
 
 # combineMultiADCP
 
 ## Description
-`combineMultiADCP` is a command-line utility used to process and combine depth-averaged ADCP (Acoustic Doppler Current Profiler) data from multiple tidal cycles. The tool reads data in JCU navigation format, sorts the vectors by tidal phase and spatial location, and bins them using a provided grid. It then calculates a temporally averaged vector for each bin at discrete phase steps through the tidal cycle.
+`combineMultiADCP` is a command-line utility used to process and combine depth-averaged ADCP (Acoustic Doppler Current Profiler) data from multiple M2 tidal cycles ($12.42\text{ hours} = 360^\circ$). The tool reads data in `jcu_nav` navigation format, sorts the vectors by tidal phase and spatial location, and bins them using a provided JHC grid. It then calculates a temporally averaged vector for each bin at discrete phase steps through the tidal cycle.
 
 This is useful for creating a time-series representation of tidal currents over a geographic area.
 
@@ -22,16 +36,16 @@ combineMultiADCP [OPTIONS] -grid <coarseDTM> -out <outfilenameprefix> -in <infil
 | Option | Description | Default / Example |
 |---|---|---|
 | `-v` | Enable verbose output. | |
-| `-grid <coarseDTM>` | **Required.** Specifies the coarse DTM grid file (in JHC format) used for spatial binning of the ADCP data. | `-grid my_grid.jhc` |
+| `-grid <coarseDTM>` | **Required.** Specifies the coarse DTM grid file (in JHC format) used for spatial binning of the ADCP data. | `-grid my_grid.r4` |
 | `-phase_step <degrees>` | The phase step in degrees for processing the tidal cycle. The tool will generate an output file for each step. | `20` |
 | `-phase_window <degrees>` | The width of the phase window in degrees for averaging data around each phase step. | `20` |
 | `-min_vels_in_bin <number>` | The minimum number of velocity vectors required within a bin for it to be processed and included in the output. | `50` |
 | `-out <outfilenameprefix>` | **Required.** Specifies the prefix for the output filenames. The output files will be named `<outfilenameprefix>.phase###`. | `-out phase_vectors` |
-| `-in <infilename(s)>` | **Required.** One or more input OMG-HDCS `.nav` files containing depth-averaged ADCP data from different tidal cycles. | `-in adcp_run1.nav adcp_run2.nav` |
+| `-in <infilename(s)>` | **Required.** One or more input `jcu_nav` `.nav` files containing depth-averaged ADCP data from different tidal cycles. | `-in adcp_run1.nav adcp_run2.nav` |
 
 ## How It Works
 
-1.  **Grid and Data Loading:** The tool first loads a JHC-format grid to define the spatial bins. It then reads all specified input `.nav` files, which contain the depth-averaged ADCP current vectors. For each vector, it calculates the tidal phase (0-360 degrees) based on a 12.42-hour tidal cycle, relative to the timestamp of the very first data point.
+1.  **Grid and Data Loading:** The tool first loads a JHC-format grid to define the spatial bins. It then reads all specified input `.nav` files, which contain the depth-averaged ADCP current vectors. For each vector, it calculates the tidal phase (0–360 degrees) based on a 12.42-hour ($44{,}712\text{ s}$) M2 tidal cycle, relative to the timestamp of the very first data point.
 2.  **Phase Stepping and Binning:** The tool iterates through the tidal cycle in steps defined by `-phase_step`. For each phase step:
     *   It initializes all grid cells (nodes) to zero.
     *   It goes through all the loaded ADCP data and identifies vectors that fall within the current phase window (`phase` to `phase + phase_window`).

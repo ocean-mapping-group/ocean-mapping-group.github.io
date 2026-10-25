@@ -1,0 +1,344 @@
+{
+  "schema_version": "1.0.0",
+  "project": "UNB Ocean Mapping Group (OMG) Multibeam Sonar Processing Suite",
+  "description": "Structured tool, CLI flag, file format, and workflow catalog for LocalAI RAG and function-calling agents.",
+  "supported_kongsberg_systems": {
+    "kmall_sis5": [
+      {"echoSounderID": 2040, "model": "EM2040 / EM2040P", "unpacker": "read_kmall"},
+      {"echoSounderID": 2042, "model": "EM2042", "unpacker": "read_kmall"},
+      {"echoSounderID": 2045, "model": "EM2040C", "unpacker": "read_kmall"},
+      {"echoSounderID": 712, "model": "EM712", "unpacker": "read_kmall"},
+      {"echoSounderID": 304, "model": "EM304", "unpacker": "read_kmall"},
+      {"echoSounderID": 124, "model": "EM124", "unpacker": "read_kmall"}
+    ],
+    "all_sis3_sis4": [
+      {"model": "EM120", "unpacker": "RTlite"},
+      {"model": "EM122", "unpacker": "RTlite"},
+      {"model": "EM300", "unpacker": "RTlite"},
+      {"model": "EM302", "unpacker": "RTlite"},
+      {"model": "EM710", "unpacker": "RTlite"},
+      {"model": "EM1002", "unpacker": "RTlite"},
+      {"model": "EM2040 (.all)", "unpacker": "RTlite"},
+      {"model": "EM3000 / EM3002", "unpacker": "RTlite"}
+    ]
+  },
+  "tools": [
+    {
+      "tool_name": "read_kmall",
+      "source_path": "code/kmall/read_kmall.c",
+      "doc_path": "kmall/read_kmall.md",
+      "category": "unraveling",
+      "summary": "Unpacks Kongsberg SIS 5.x .kmall and .kmwcd files into OMG_HDCS v4 .merged swath files and 20 companion files.",
+      "cli_template": "read_kmall -d <out_prefix> -kmall <input.kmall|.kmwcd> [-maxdepth <meters>]",
+      "flags": [
+        {"flag": "-d <out_prefix>", "required": true, "description": "Output directory and base filename prefix (e.g. merged/0001_line)."},
+        {"flag": "-kmall <path>", "required": true, "description": "Input raw Kongsberg .kmall or .kmwcd file."},
+        {"flag": "-maxdepth <float>", "required": false, "default": 12000.0, "description": "Maximum depth filter in meters; beams deeper than this are flagged rejected."},
+        {"flag": "-mindepth <float>", "required": false, "default": 0.0, "description": "Minimum depth filter in meters."},
+        {"flag": "-v", "required": false, "description": "Verbose datagram diagnostic output."}
+      ],
+      "inputs": [".kmall", ".kmwcd"],
+      "outputs": [
+        ".merged", ".param", ".ss_data", ".16_data", ".sectors",
+        ".sv", ".sv_0", ".sv_1", ".sv_filtered", ".ssv",
+        ".nav_1", ".nav_2", ".nav_3",
+        ".orientation_1", ".net_att_1", ".net_att_2", ".heave",
+        ".watercol", ".WC_Phase1", ".clock", ".raw_runtime"
+      ],
+      "preconditions": [
+        "If a companion .kmwcd file exists for the same line, read_kmall MUST be run on .kmwcd FIRST, its <prefix>.merged renamed to justWC_<prefix>.merged, read_kmall run on .kmall SECOND, and moveOverWCinfo run to combine them."
+      ],
+      "postconditions": [
+        "User or script must copy <prefix>.nav_1 to <prefix>.nav before running stripNav or mergeNav.",
+        "User or script must copy the active attitude file (.net_att_2 for KM Binary format=1, .net_att_1 for POS/MV GRP 102/103 format=7, or .orientation_1 for EM3000 format=2) to <prefix>.orientation before running newMergeAtt or mergeAtt."
+      ],
+      "error_signatures": [
+        {
+          "error": "NOT Dynamically Recognizing the Echosounder Type",
+          "cause": "echoSounderID is not in {2040, 2042, 2045, 712, 304, 124} or input is a legacy .all file.",
+          "fix": "Use RTlite -simrad for .all/.wcd files, or add the new Kongsberg echoSounderID in read_kmall.c."
+        }
+      ]
+    },
+    {
+      "tool_name": "RTlite",
+      "source_path": "code/RTLite/RTlite.c",
+      "doc_path": "RTLite/RTlite.md",
+      "category": "unraveling",
+      "summary": "Unpacks legacy Kongsberg/Simrad .all and .wcd multibeam files into OMG_HDCS .merged and companion files.",
+      "cli_template": "RTlite -d <out_prefix> -simrad <input.all|.wcd> [-maxdepth <meters>]",
+      "flags": [
+        {"flag": "-d <out_prefix>", "required": true, "description": "Output directory and base filename prefix."},
+        {"flag": "-simrad <path>", "required": true, "description": "Input raw Kongsberg/Simrad .all or .wcd file."},
+        {"flag": "-maxdepth <float>", "required": false, "description": "Maximum depth gate in meters."}
+      ],
+      "inputs": [".all", ".wcd"],
+      "outputs": [".merged", ".param", ".nav", ".orientation", ".ss_data", ".16_data", ".sectors", ".sv_filtered", ".watercol"],
+      "preconditions": [
+        "If .wcd exists, unpack .wcd before .all and transfer pointers with moveOverWCinfo."
+      ],
+      "postconditions": [
+        "Writes <prefix>.nav and <prefix>.orientation directly."
+      ]
+    },
+    {
+      "tool_name": "moveOverWCinfo",
+      "source_path": "code/kmall/",
+      "doc_path": "kmall/read_kmall.md",
+      "category": "unraveling",
+      "summary": "Copies water column byte offsets and record lengths from a water-column-only .merged file into a bathymetric .merged file.",
+      "cli_template": "moveOverWCinfo <bathy_line.merged> <justWC_line.merged>",
+      "inputs": [".merged"],
+      "outputs": [".merged"],
+      "preconditions": [
+        "Both .merged files must correspond to the same survey line."
+      ],
+      "postconditions": [
+        "The temporary justWC_<line>.merged file can be deleted after completion."
+      ]
+    },
+    {
+      "tool_name": "stripNav",
+      "source_path": "code/nav/stripNav.c",
+      "doc_path": "nav/stripNav.md",
+      "category": "navigation",
+      "summary": "Filters speed jumps and decimates binary OMG .nav files by minimum time interval and distance.",
+      "cli_template": "stripNav <input.nav> <output.nav> <min_dt_sec> <min_dist_m> <max_speed_m_s>",
+      "flags": [
+        {"flag": "-start <rec>", "required": false, "description": "Starting record index."},
+        {"flag": "-end <rec>", "required": false, "description": "Ending record index."}
+      ],
+      "inputs": [".nav"],
+      "outputs": [".nav"],
+      "preconditions": [
+        "For .kmall workflows, <line>.nav_1 must be copied to <line>.nav first."
+      ],
+      "postconditions": [
+        "Decimated navigation is written to decnav/<line>.nav (typically with parameters 0.5 0.01 10.0)."
+      ]
+    },
+    {
+      "tool_name": "appendNav",
+      "source_path": "code/nav/appendNav.c",
+      "doc_path": "nav/appendNav.md",
+      "category": "navigation",
+      "summary": "Concatenates individual line .nav files into a continuous multi-line binary .nav file so line boundary pings can be interpolated.",
+      "cli_template": "appendNav <master_output.nav> <line_input.nav>",
+      "inputs": [".nav"],
+      "outputs": [".nav"],
+      "preconditions": [
+        "Must be executed sequentially (not in parallel on the same master_output.nav file)."
+      ],
+      "postconditions": [
+        "Appends records to decnav/all_dec.nav."
+      ]
+    },
+    {
+      "tool_name": "mergeNav",
+      "source_path": "code/nav/mergeNav.c",
+      "doc_path": "nav/mergeNav.md",
+      "category": "navigation",
+      "summary": "Interpolates vessel navigation into .merged ping headers and applies GPS-to-RP lever-arm offsets.",
+      "cli_template": "mergeNav -ahead <sec> -param <line.param> <line.merged> <all_dec.nav>",
+      "flags": [
+        {"flag": "-ahead <sec>", "required": false, "default": 5.0, "description": "Maximum time gap (seconds) across which navigation may be interpolated (typically 60.0)."},
+        {"flag": "-param <file.param>", "required": false, "description": "Reads Nav_X and Nav_Y lever-arm offsets from .param and negates them to convert to RP-relative offsets."},
+        {"flag": "-dx <meters>", "required": false, "description": "Manual starboard antenna offset (prefer -param instead)."},
+        {"flag": "-dy <meters>", "required": false, "description": "Manual forward antenna offset (prefer -param instead)."},
+        {"flag": "-dt <sec>", "required": false, "description": "Navigation time latency correction in seconds."},
+        {"flag": "-addGPSrolloverwraps <int>", "required": false, "description": "Adds N * 1024 GPS weeks to fix GPS week rollover timestamp bugs."}
+      ],
+      "inputs": [".merged", ".nav", ".param"],
+      "outputs": [".merged"],
+      "error_signatures": [
+        {
+          "error": "Could not bracket time",
+          "cause": "Ping timestamp falls outside the start/end range of the supplied .nav file or gap exceeds -ahead.",
+          "fix": "Use a concatenated multi-line nav file (appendNav) and pass -ahead 60.0."
+        }
+      ]
+    },
+    {
+      "tool_name": "newMergeAtt",
+      "source_path": "code/omg/",
+      "doc_path": "omg/mergeAtt.md",
+      "category": "attitude_refraction",
+      "summary": "Interpolates high-rate attitude (.orientation), recomputes 3D beam launch vectors from transmit sectors, and ray-traces beams through .sv_filtered.",
+      "cli_template": "newMergeAtt [-redoref] [-recalc_beamVec] [-wc] <merged_line_prefix>",
+      "flags": [
+        {"flag": "-redoref", "required": false, "description": "Redo sound velocity ray-tracing using <prefix>.sv_filtered."},
+        {"flag": "-recalc_beamVec", "required": false, "description": "Recompute 3D beam launch angles using <prefix>.sectors, <prefix>.param, and <prefix>.orientation."},
+        {"flag": "-wc", "required": false, "description": "Also update water column beam geometry using <prefix>.watercol and <prefix>.WC_Phase1."}
+      ],
+      "inputs": [".merged", ".orientation", ".param", ".sectors", ".sv_filtered", ".watercol", ".WC_Phase1"],
+      "outputs": [".merged"],
+      "preconditions": [
+        "<prefix>.orientation must exist and contain valid attitude records (copied from .net_att_2, .net_att_1, or .orientation_1 for .kmall data)."
+      ]
+    },
+    {
+      "tool_name": "mergeTide",
+      "source_path": "code/tide/mergeTide.c",
+      "doc_path": "tide/mergeTide.md",
+      "category": "tide",
+      "summary": "Interpolates ASCII tide heights into .merged ping headers to adjust bathymetric depths.",
+      "cli_template": "mergeTide [-flip] -in <line.merged> -tide <file.tide>",
+      "flags": [
+        {"flag": "-in <line.merged>", "required": true, "description": "Target .merged file to update in-place."},
+        {"flag": "-tide <file.tide>", "required": true, "description": "ASCII tide file (YYYY DDD HH MM SS.SS Tide_m)."},
+        {"flag": "-flip", "required": false, "description": "Invert sign of tide height before adding to positive downward depths."}
+      ],
+      "inputs": [".merged", ".tide"],
+      "outputs": [".merged"]
+    },
+    {
+      "tool_name": "deTVG",
+      "source_path": "code/jonnyb/gom_stuff/deTVG.c",
+      "doc_path": "omg/deTVG.md",
+      "category": "backscatter",
+      "summary": "Removes Kongsberg's empirical real-time Time-Varying Gain (TVG) ramp from .ss_data snippets to eliminate nadir-to-outer-swath seams.",
+      "cli_template": "deTVG -in <line.merged>",
+      "inputs": [".merged", ".ss_data", ".16_data"],
+      "outputs": [".ss_data_deTVG"],
+      "postconditions": [
+        "Follow with makess -use_deTVG -pixel <m> <line_prefix>."
+      ]
+    },
+    {
+      "tool_name": "makess",
+      "source_path": "code/sidescan/",
+      "doc_path": "workflows/kongsberg-kmall-unraveling.md",
+      "category": "backscatter",
+      "summary": "Converts unpacked multibeam snippets (.ss_data / .16_data) into GLORIA-format (.ss) across-track sidescan scanlines.",
+      "cli_template": "makess -pixel <meters> [-SnippetExtend] [-use_deTVG] <merged_line_prefix>",
+      "flags": [
+        {"flag": "-pixel <float>", "required": true, "description": "Across-track bin resolution in meters (e.g., 0.25m shallow, 2.0m deep)."},
+        {"flag": "-SnippetExtend", "required": false, "description": "Extend snippet envelopes to prevent gaps between adjacent beam footprints (standard for .kmall)."},
+        {"flag": "-use_deTVG", "required": false, "description": "Read from <prefix>.ss_data_deTVG produced by deTVG instead of <prefix>.ss_data."}
+      ],
+      "inputs": [".merged", ".ss_data", ".16_data", ".ss_data_deTVG", ".nav"],
+      "outputs": [".ss"]
+    },
+    {
+      "tool_name": "getBounds",
+      "source_path": "code/grid/",
+      "doc_path": "workflows/gridding-and-mosaicking.md",
+      "category": "gridding",
+      "summary": "Scans .merged or .nav files and prints the geographic bounding box (West East South North).",
+      "cli_template": "getBounds [-nav] <files.merged...>",
+      "flags": [
+        {"flag": "-nav", "required": false, "description": "Fast scan using ping navigation headers rather than reading every beam."}
+      ],
+      "inputs": [".merged", ".nav"],
+      "outputs": ["stdout (West East South North)"]
+    },
+    {
+      "tool_name": "make_blank",
+      "source_path": "code/grid/make_blank.c",
+      "doc_path": "grid/make_blank.md",
+      "category": "gridding",
+      "summary": "Creates a 1024-byte OMG1 raster template (.blank) for bathymetric gridding (-float) or sidescan mosaicking (-8bit -prime 255).",
+      "cli_template": "make_blank <out_prefix> [-float | -8bit -prime 255] -Dx <res_m> -Dy <res_m> -bounds <W> <E> <S> <N>",
+      "flags": [
+        {"flag": "-float", "required": false, "description": "Create a 32-bit float grid (data_type=3) initialized to 9999.0 (REQUIRED for weigh_grid / tor4). Must precede -bounds/-boundsof."},
+        {"flag": "-8bit", "required": false, "description": "Create an 8-bit unsigned char grid (data_type=1) (REQUIRED for mos2 / tomos)."},
+        {"flag": "-prime <0-255>", "required": false, "description": "Initial fill value for 8-bit rasters (use -prime 255 for mos2)."},
+        {"flag": "-Dx <meters>", "required": true, "description": "East-West cell resolution in meters (must precede -bounds/-boundsof)."},
+        {"flag": "-Dy <meters>", "required": true, "description": "North-South cell resolution in meters (must precede -bounds/-boundsof)."},
+        {"flag": "-bounds <W> <E> <S> <N>", "required": false, "description": "Explicit bounding box in decimal degrees (West negative)."},
+        {"flag": "-boundsof [-nav] <files...>", "required": false, "description": "Automatically compute bounds from all remaining CLI arguments. Must be the LAST option on the command line."}
+      ],
+      "inputs": [".merged"],
+      "outputs": [".blank"],
+      "preconditions": [
+        "CRITICAL: Place <out_prefix>, -float (or -8bit -prime 255), -Dx, and -Dy BEFORE -bounds or -boundsof."
+      ]
+    },
+    {
+      "tool_name": "weigh_grid",
+      "source_path": "code/grid/weigh_grid.c",
+      "doc_path": "grid/weigh_grid.md",
+      "category": "gridding",
+      "summary": "Accumulates distance-weighted multibeam soundings from .merged files into a 32-bit float .r4 grid and .weight buffer.",
+      "cli_template": "weigh_grid -in <grid.r4> -weight <grid.weight> -smf <factor> -files <merged/*.merged> && weigh_grid -in <grid.r4> -weight <grid.weight> -extract",
+      "flags": [
+        {"flag": "-in <grid.r4>", "required": true, "description": "Target 32-bit float grid (initialized by copying <grid>.blank)."},
+        {"flag": "-weight <grid.weight>", "required": true, "description": "Companion weight accumulation raster."},
+        {"flag": "-smf <float>", "required": false, "default": 1.0, "description": "Smoothing / footprint expansion factor (typically 2.0)."},
+        {"flag": "-extract", "required": false, "description": "Normalize accumulated weighted depths by total weight to finalize the .r4 depth grid."},
+        {"flag": "-grazing <deg>", "required": false, "description": "Reject beams with grazing angles shallower than <deg>."},
+        {"flag": "-beam_angles <port> <stbd>", "required": false, "description": "Restrict gridding to launch angles within [port, stbd]."},
+        {"flag": "-ignore", "required": false, "description": "Include all beams regardless of swathed manual edit flags."}
+      ],
+      "inputs": [".blank", ".merged"],
+      "outputs": [".r4", ".weight"],
+      "error_signatures": [
+        {
+          "error": "Input file is not a floating point grid",
+          "cause": "make_blank was invoked without -float (or -float was placed after -boundsof).",
+          "fix": "Re-run make_blank with -float before -bounds/-boundsof, copy .blank to .r4, remove .weight, and re-run weigh_grid."
+        }
+      ]
+    },
+    {
+      "tool_name": "r4to8bit",
+      "source_path": "code/grid/r4to8bit.c",
+      "doc_path": "grid/r4to8bit.md",
+      "category": "visualization",
+      "summary": "Converts a 32-bit float .r4 grid into an 8-bit greyscale raster (.8bit) for display or draping.",
+      "cli_template": "r4to8bit -in <grid.r4> [-out <grid.8bit>] [-range <min_z> <max_z>]",
+      "inputs": [".r4"],
+      "outputs": [".8bit"]
+    },
+    {
+      "tool_name": "addSUN",
+      "source_path": "code/grid/addSUN.c",
+      "doc_path": "grid/addSUN.md",
+      "category": "visualization",
+      "summary": "Computes an 8-bit directional sun-illuminated hillshade (.sun) from a 32-bit float .r4 bathymetric grid.",
+      "cli_template": "addSUN <input.r4> <output.sun> <azimuth_deg> <elevation_deg> <vertical_exaggeration>",
+      "inputs": [".r4"],
+      "outputs": [".sun"]
+    },
+    {
+      "tool_name": "swathed",
+      "source_path": "code/SE/swathed.c",
+      "doc_path": "SE/swathed.md",
+      "category": "editing_qc",
+      "summary": "Interactive X11/Motif swath editor for inspecting and flagging outlier soundings in .merged files.",
+      "cli_template": "swathed -locate <grid.r4> <merged/*.merged>",
+      "flags": [
+        {"flag": "-locate <grid.r4>", "required": false, "description": "Opens a plan-view map of <grid.r4> so the user can drag a box around an artifact and jump straight to the intersecting .merged lines."}
+      ],
+      "inputs": [".r4", ".merged"],
+      "outputs": [".merged"]
+    },
+    {
+      "tool_name": "glfill",
+      "source_path": "code/sidescan/hist/glfill.c",
+      "doc_path": "sidescan/hist/glfill.md",
+      "category": "mosaicking",
+      "summary": "Interpolates across small along-track ping gaps in GLORIA-format (.ss) sidescan files in-place.",
+      "cli_template": "glfill <line.ss>",
+      "inputs": [".ss"],
+      "outputs": [".ss"]
+    },
+    {
+      "tool_name": "mos2",
+      "source_path": "code/newmos/mos2.c",
+      "doc_path": "newmos/mos2.md",
+      "category": "mosaicking",
+      "summary": "Projects GLORIA-format (.ss) sidescan lines into an 8-bit geographic mosaic (.mos) using a range buffer (.ran) to prioritize near-nadir overlapping swaths.",
+      "cli_template": "mos2 -in <area.mos> -ran <area.ran> -smf <factor> -weight_by_dist -swap_dirs ss/ merged/ -files ss/*.ss",
+      "flags": [
+        {"flag": "-in <area.mos>", "required": true, "description": "Target 8-bit mosaic raster (initialized from make_blank -8bit -prime 255)."},
+        {"flag": "-ran <area.ran>", "required": true, "description": "Companion 8-bit range buffer raster (initialized from make_blank -8bit -prime 255)."},
+        {"flag": "-smf <float>", "required": false, "default": 1.5, "description": "Across-track/along-track smoothing factor."},
+        {"flag": "-weight_by_dist", "required": false, "description": "Blend overlapping swaths using the .ran distance-from-nadir buffer."},
+        {"flag": "-swap_dirs <ss_dir> <merged_dir>", "required": false, "description": "Replace directory prefix <ss_dir> with <merged_dir> when opening companion .merged and .nav files."}
+      ],
+      "inputs": [".blank", ".ss", ".merged", ".nav"],
+      "outputs": [".mos", ".ran"]
+    }
+  ]
+}

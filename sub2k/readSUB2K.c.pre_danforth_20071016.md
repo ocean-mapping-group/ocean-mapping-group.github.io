@@ -1,17 +1,42 @@
 ---
 layout: default
 title: readSUB2K.c.pre_danforth_20071016
-parent: SUB2K Tools
-grand_parent: code
-nav_order: 6
+parent: Submetrix ISIS (sub2k) Interferometric Sonar Tools
+nav_order: 12
+tool_name: readSUB2K.c.pre_danforth_20071016
+source_path: sub2k/readSUB2K.c.pre_danforth_20071016
+category: sub2k
+input_formats:
+  - Submetrix 2000 (.sub, .rrc)
+output_formats:
+  - OMG Swath Bathymetry (.merged)
+  - OMG Sidescan (.ss_data)
+  - OMG Navigation (.nav)
+related_tools:
+  - readSUB2K
+  - makefile_BWD
 ---
-# readSUB2K.c.pre_danforth_20071016
 
-## Description
-`readSUB2K.c.pre_danforth_20071016` is an older variant of the `readSUB2K` utility, designed for processing Submetrix 2000 sonar data and converting it into OMG_HDCS format. Its core functionality is largely identical to `readSUB2K.c`, offering similar processing steps for sidescan intensity scaling, data quality filtering, nadir pre-filtering, coverage control, phase-to-angle conversion, attitude data integration, and environmental corrections. The suffix `_pre_danforth_20071016` indicates that this version predates specific modifications made by Bill Danforth on October 16, 2007.
+# `readSUB2K.c.pre_danforth_20071016` — Pre-2007 Baseline Snapshot of `readSUB2K`
+
+## Overview
+
+`sub2k/readSUB2K.c.pre_danforth_20071016` is the preserved baseline source file of [`readSUB2K.c`](readSUB2K.html) prior to modifications contributed by Bill Danforth (U.S. Geological Survey) on October 16, 2007.
+
+---
 
 ## Usage
-The usage and arguments for `readSUB2K.c.pre_danforth_20071016` are essentially the same as `readSUB2K`. Please refer to the documentation for [`readSUB2K`](readSUB2K.md) for detailed information on command-line options.
 
-## How It Works
-The underlying logic and processing steps, including ISIS block processing, quality control, phase-to-angle conversion, sidescan intensity processing, and OMG_HDCS output, are the same as described in the documentation for [`readSUB2K`](readSUB2K.md). Specific internal differences or optimizations related to the pre-Danforth modifications may exist but do not change the high-level functionality.
+This file is an archived C source snapshot and is not built by default in [`sub2k/makefile`](makefile.html). For active usage, CLI options, and processing details, see [`readSUB2K`](readSUB2K.html):
+
+```bash
+readSUB2K -in <input.rrc> -out <output_prefix> [-spacing <m>] [-thresh <val>]
+```
+
+---
+
+## Key Historical Context
+
+- **Snapshot Date:** October 16, 2007.
+- **Role in Repository:** Preserves the original OMG Submetrix 2000 (`.sub` / `.rrc`) interferometric phase-unwrapping, stave angle calibration, and bathymetric across-track binning implementation prior to USGS Linux portability and processing updates.
+- **Production Equivalent:** [`readSUB2K`](readSUB2K.html) (`sub2k/readSUB2K.c`).

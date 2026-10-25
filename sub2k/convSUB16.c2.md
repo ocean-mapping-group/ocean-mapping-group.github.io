@@ -1,17 +1,40 @@
 ---
 layout: default
 title: convSUB16.c2
-parent: SUB2K Tools
-grand_parent: code
-nav_order: 2
+parent: Submetrix ISIS (sub2k) Interferometric Sonar Tools
+nav_order: 11
+tool_name: convSUB16.c2
+source_path: sub2k/convSUB16.c2
+category: sub2k
+input_formats:
+  - Submetrix 16-bit raw (.sub)
+output_formats:
+  - OMG Swath Bathymetry (.merged)
+  - OMG Sidescan (.ss_data)
+related_tools:
+  - convSUB16
+  - readSUB2K
 ---
-# convSUB16.c2
 
-## Description
-`convSUB16.c2` is a variant of the `convSUB16` utility, designed to convert 16-bit intensity sidescan data from Submetrix 2000 into an 8-bit GLORIA format (typically a `.sst` file). Its core functionality is largely identical to `convSUB16.c`, offering similar scaling options (linear, square root, TVG, or logarithmic) for compressing the data. This version might represent an older iteration or a slightly modified build for specific purposes.
+# `convSUB16.c2` — Alternate Revision of `convSUB16`
+
+## Overview
+
+`sub2k/convSUB16.c2` is an archived development revision of [`convSUB16.c`](convSUB16.html) preserved in the `sub2k/` source directory. Like `convSUB16`, it reads 16-bit Submetrix ISIS interferometric sonar files (`.sub`) and converts the multi-stave phase and amplitude time series into Ocean Mapping Group `.merged` swath bathymetry and `.ss_data` sidescan files.
+
+---
 
 ## Usage
-The usage and arguments for `convSUB16.c2` are essentially the same as `convSUB16`. Please refer to the documentation for [`convSUB16`](convSUB16.md) for detailed information on command-line options.
 
-## How It Works
-The underlying logic and processing steps, including data loading, scaling algorithms, and conversion to 8-bit GLORIA records, are the same as described in the documentation for [`convSUB16`](convSUB16.md). Minor internal differences or optimizations may exist but do not change the high-level functionality.
+`convSUB16.c2` is not compiled by default in [`sub2k/makefile`](makefile.html) (which compiles `convSUB16.c`). If compiled manually, its command-line syntax matches [`convSUB16`](convSUB16.html):
+
+```bash
+convSUB16 -in <input.sub> -out <output_prefix> [options]
+```
+
+---
+
+## Key Details & Relationship to `convSUB16.c`
+
+- **Purpose:** Retained in the repository as a backup/intermediate checkpoint during updates to 16-bit Submetrix interferometric amplitude scaling and Vernier phase-unwrapping logic.
+- **Production Equivalent:** Use [`convSUB16`](convSUB16.html) or [`readSUB2K`](readSUB2K.html) for production conversion of Submetrix `.sub` and `.rrc` datasets.

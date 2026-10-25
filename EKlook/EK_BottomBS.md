@@ -3,59 +3,61 @@ layout: default
 title: EK_BottomBS (Module within EKlook)
 parent: EKlook Tools
 nav_order: 3
+tool_name: EK_BottomBS
+source_path: code/EKlook/EK_BottomBS.c
+category: EKlook
+input_formats:
+  - In-Memory EKlook Trace & Phase Arrays
+output_formats:
+  - Bottom Track Guide (.BottomTrackGuide)
+  - Angular Response Curves (.ARC_fullBW, .ARC_3D, .ARC_FFTbins, .ARC_FFT3D)
+related_tools:
+  - EKlook
+  - BatchProcEK
+  - comboCalibEK_ARCs
+  - EK_funcs
 ---
+
 # EK_BottomBS (Module within EKlook)
 
 ## Description
-`EK_BottomBS` is a module within the `EKlook` interactive application. Its primary role is to manage the "BOTTOM Detect / ARC window," a graphical user interface element that allows users to interactively adjust parameters related to bottom detection and Angular Response Curve (ARC) generation for EK series echosounder data. This module provides controls for applying various corrections, enabling depth and mount angle guides, flushing or dumping ARCs, and visualizing the processed data within `EKlook`.
+`EK_BottomBS` (`code/EKlook/EK_BottomBS.c`) is an interactive GUI module within the [`EKlook`](EKlook.md) application. It manages the **"BOTTOM Detect / ARC Window,"** allowing users to interactively tune bottom-detection parameters (`dBdrop`, `phaseOffZero`), toggle radiometric/geometric corrections (Transmission Loss, Beam Pattern, Ensonified Area), inspect sub-window FFT spectra across the seafloor echo envelope, and stack or export broadband Angular Response Curves (ARCs).
 
 ## Interactive Controls
-
-This module exposes the following interactive controls within the `EKlook` application:
 
 | Control | Description | Related Variable |
 |---|---|---|
 | **Buttons (Toggle Corrections)** | | |
-| `addTL` | Toggles the inclusion of Transmission Loss (TL) corrections in ARC calculations. | `BSaddTL` |
-| `addBP` | Toggles the inclusion of Beam Pattern (BP) corrections in ARC calculations. | `BSaddBP` |
-| `addArea` | Toggles the inclusion of Ensonified Area (Area) corrections in ARC calculations. | `BSaddArea` |
+| `addTL` | Toggles Transmission Loss (TL) corrections in ARC calculations. | `BSaddTL` |
+| `addBP` | Toggles Beam Pattern (BP) corrections in ARC calculations. | `BSaddBP` |
+| `addArea` | Toggles Ensonified Area corrections in ARC calculations. | `BSaddArea` |
 | `depthGuide` | Toggles the use of Nadir Depth as a guide for bottom detection. | `useNadirDepthGuide` |
 | `mountGuide` | Toggles the use of Mount Angle as a guide for bottom detection. | `useMountAngleGuide` |
 | **Buttons (ARC Operations)** | | |
-| `dump BStrack` | Dumps bottom track parameters to a file. | |
+| `dump BStrack` | Saves bottom track parameters to `<prefix>.BottomTrackGuide` for use in [`BatchProcEK`](BatchProcEK.md). | |
 | `flushARC` | Clears the accumulated Angular Response Curves (ARCs). | `ARC_cummulative`, `ARC_byPing` |
-| `dump ARC` | Dumps the current accumulated ARC to a file. | `ARC_cummulative` |
-| `stack all ARC` | Stacks all envelopes into a cumulative ARC and dumps it. | `ARC_cummulative` |
+| `dump ARC` | Writes the current accumulated ARC to disk. | `ARC_cummulative` |
+| `stack all ARC` | Stacks all valid ping envelopes into a cumulative ARC and writes it to disk. | `ARC_cummulative` |
 | `show Area/Grazing` | Toggles the display of ensonified area versus grazing angle. | `showAreaGrazing` |
 | **Sliders** | | |
-| `Angle Sensitivity` | Adjusts the angle sensitivity for along and across angles. | `Along_AngleSensitivity` (and `Across_AngleSensitivity`) |
-| `Bulk Calibration` | Adjusts a bulk calibration value (in dB) applied to the backscatter. | `BulkCalibration` |
-| `Nadir Depth` | Sets the nadir depth used as a guide. | `NadirDepth` |
-| `Mount Angle` | Adjusts the roll mount angle of the EK system. | `EKMountAngle.roll` |
-| `Sub-Window FFT Length` | Controls the size of the envelope window for FFT analysis (e.g., 64, 32, 16, 8, 4, 2). | `envWinSize` |
+| `Angle Sensitivity` | Adjusts the split-beam angle sensitivity for along and across angles. | `Along_AngleSensitivity` |
+| `Bulk Calibration` | Adjusts the bulk calibration offset (in dB) applied to backscatter. | `BulkCalibration` |
+| `Nadir Depth` | Sets the nadir water depth guide (m). | `NadirDepth` |
+| `Mount Angle` | Adjusts the transducer roll mount angle ($^\circ$). | `EKMountAngle.roll` |
+| `Sub-Window FFT Length` | Sets the sample length of the sliding FFT sub-window (`64`, `32`, `16`, `8`, `4`, `2`). | `envWinSize` |
 
 ## Visualizations
 
-The module displays various graphical representations within the `EKlook` application:
-*   **Matched-Filtered Echo Envelope (dB):** Shows the envelope of the echo.
-*   **Fore/Aft Phase:** Displays the raw and low-pass filtered phase.
-*   **Port/Starboard Phase:** Displays the raw and low-pass filtered phase.
-*   **Highlighted Envelope Subwindow Spectrum:** Shows the FFT spectrum of a selected subwindow of the envelope.
-*   **Apparent Echo Envelope using Highlighted Frequency Slice:** Displays the envelope using a specific frequency slice.
-*   **Highlighted Envelope Subwindow I/Q (In-phase/Quadrature) data:** Shows the raw I and Q components and magnitude.
-*   **ARC (Angular Response Curve) Window:** Plots the ARC, including individual ping ARCs and cumulative ARCs.
-*   **ARC Count Window:** Displays the normalized bin counts for the ARC.
+*   **Matched-Filtered Echo Envelope (dB):** Displays the echo envelope and bottom detection bounds.
+*   **Fore/Aft & Port/Starboard Phase:** Displays raw and low-pass filtered split-beam electrical phase ramps and zero crossings.
+*   **Highlighted Envelope Subwindow Spectrum & I/Q:** Displays the FFT power spectrum and complex I/Q waveform of the selected envelope sub-window.
+*   **Apparent Echo Envelope using Highlighted Frequency Slice:** Displays the echo envelope extracted at a single FFT frequency bin.
+*   **ARC & ARC Count Windows:** Plots single-ping and cumulative Angular Response Curves ($BS$ vs. grazing angle) alongside normalized bin counts.
 
-## Key Bindings (within the module's graphic windows)
+## Key Bindings
 
-*   `KEY_Z`: Zeros or resets a selected slider's value (e.g., Angle Sensitivity to default, Bulk Calibration to 0, Nadir Depth to 100, Mount Angle to 35, EnvWinSize to 23).
+*   `KEY_Z`: Resets the active slider to its default value.
 *   `KEY_Q` / `KEY_ESC`: Closes the "BOTTOM Detect / ARC window."
-*   `KEY_UP` / `KEY_DOWN`: Adjusts the `BSmax` and `BSmin` (backscatter display range) in the ARC plot.
-*   `KEY_LEFT` / `KEY_RIGHT`: Adjusts selected slider values or navigates through envelope subwindows and frequency slices.
-*   `KEY_SPACE`: Toggles `whichARC` (displaying either broadband trace directly or FFT bin counts).
-
-## How It Works
-This module operates by receiving interactive input from the user within the `EKlook` application. It updates internal variables based on slider adjustments and button presses, which then trigger recalculations and redrawing of the various visualizations. It works in conjunction with other `EKlook` modules and internal functions (like those in `EK_funcs.c`) to process EK echosounder data, apply corrections, and manage ARC generation.
-
-## Notes
-This module functions as a specialized analytical tool within the `EKlook` graphical user interface. It does not accept direct command-line arguments for its operation, as its sole purpose is to manage and respond to interactive input within the running `EKlook` application. Its behavior is entirely dependent on the user's actions within the GUI.
+*   `KEY_UP` / `KEY_DOWN`: Adjusts the `BSmax` and `BSmin` display range in the ARC plot.
+*   `KEY_LEFT` / `KEY_RIGHT`: Adjusts slider values or steps through envelope sub-windows and frequency slices.
+*   `KEY_SPACE`: Toggles `whichARC` between full-bandwidth time-domain ARCs and FFT frequency-bin ARCs.

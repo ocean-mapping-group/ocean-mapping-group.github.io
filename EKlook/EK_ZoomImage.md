@@ -3,57 +3,44 @@ layout: default
 title: EK_ZoomImage (Module within EKlook)
 parent: EKlook Tools
 nav_order: 8
+tool_name: EK_ZoomImage
+source_path: code/EKlook/EK_ZoomImage.c
+category: EKlook
+input_formats:
+  - In-Memory Trace, Phase & Complex IQ Arrays (.MF_dB, .Raw_dB, .PS_phase, .FA_phase, .MF_IQ)
+output_formats:
+  - Bottom Track Guide (.BottomTrackGuide)
+  - Ping Parameters (.ping_Params)
+related_tools:
+  - EKlook
+  - EK_BottomBS
+  - BatchProcEK
 ---
+
 # EK_ZoomImage (Module within EKlook)
 
 ## Description
-`EK_ZoomImage` is a module within the `EKlook` interactive application. Its primary role is to manage the "ZOOM EK-Trace window," a graphical user interface element that provides a detailed, zoomed-in view of selected EK echosounder traces. This module allows users to closely examine individual pings, their envelopes, and phase information. It enables interactive adjustment of bottom detection parameters, visualization of matched-filtered data, and analysis of various trace attributes.
+`EK_ZoomImage` (`code/EKlook/EK_ZoomImage.c`) is an interactive GUI module within the [`EKlook`](EKlook.md) application. It manages the **"ZOOM EK-Trace Window,"** providing a high-resolution zoomed echogram of selected ping ranges alongside single-ping vertical profiles of uncompressed power (`.Raw_dB`), matched-filtered power (`.MF_dB`), complex I/Q waveforms (`.MF_IQ`), and Fore–Aft / Port–Starboard split-beam phase angles. It also allows interactive adjustment of bottom-detection parameters (`dBdrop`, `phaseOffZero`, `maxAcceptablePhaseFit`) and bottom-track guide curves.
 
 ## Interactive Controls
-
-This module exposes the following interactive controls within the `EKlook` application:
 
 | Control | Description |
 |---|---|
 | **Buttons** | |
-| `full trace` | Resets the zoomed view to encompass the entire length of the current trace. |
-| `Power or IQ` | Toggles the display mode in the time series plots between power (logarithmic intensity in dB) and I/Q (in-phase/quadrature) components of the trace. |
-| `Power or Phase` | Toggles the display in the main zoom image window between a power image (backscatter intensity) and a phase image (showing phase trends). |
-| `add TL` | Toggles the application of Transmission Loss (TL) corrections to the displayed power data. |
-| `record on/off` | Toggles a recording mode, potentially for capturing interactive sessions or debug information. |
-| `before/after MF` | Toggles the display of the trace envelope before or after the matched filtering process. |
+| `full trace` | Resets the vertical zoom window to encompass the full range of the current trace. |
+| `Power or IQ` | Toggles the single-ping trace plot between logarithmic power (dB) and linear In-Phase / Quadrature (I/Q) components. |
+| `Power or Phase` | Toggles the 2D zoomed echogram image between backscatter intensity (dB) and split-beam phase angle. |
+| `add TL` | Toggles Transmission Loss (TL) correction on the displayed power traces. |
+| `record on/off` | Toggles frame recording mode. |
+| `before/after MF` | Toggles the envelope display between uncompressed (`.Raw_dB`) and matched-filtered (`.MF_dB`) traces. |
 | **Sliders** | |
-| `dB drop (beam pattern roll off)` | Adjusts the signal drop-off (in dB) from the peak in the envelope, a key parameter for bottom detection algorithms. |
-| `max Phase off Zero deg.` | Controls the maximum allowed phase offset from zero (in degrees) for a valid bottom phase detection. |
-| `max Acceptable Phase Fit` | Sets the threshold for the goodness-of-fit statistic for phase detection, influencing the validity of phase-based bottom detects. |
+| `dB drop (beam pattern roll off)` | Adjusts the envelope amplitude drop threshold (in dB below peak) used to bound the seabed footprint. |
+| `max Phase off Zero deg.` | Sets the maximum allowed electrical phase offset from zero (degrees) for split-beam bottom detection. |
+| `max Acceptable Phase Fit` | Sets the linear regression goodness-of-fit threshold for phase ramp detection across the beam footprint. |
 
 ## Visualizations
 
-The module provides several integrated visualization panels within `EKlook`:
-
-*   **Zoomed Image Window (`graphic_window[0]`):** A high-resolution image of the selected trace segment. This can display either the power (intensity) or the phase information, depending on the `Power or Phase` setting.
-*   **Matched-Filtered Envelope Plot:** A time series plot showing the matched-filtered envelope of the trace (in dB), with various indicators for bottom detection.
-*   **Trace I/Q Plot:** A time series plot displaying the in-phase (I) and quadrature (Q) components of the trace.
-*   **Fore-Aft Phase Plot:** A time series plot showing the fore-aft phase trend, crucial for angle-of-arrival estimation.
-*   **Port-Starboard Phase Plot:** A time series plot showing the port-starboard phase trend.
-*   **Vertical Profile of Motion Parameters (`graphic_window[4]`):** A vertical plot displaying a selected motion parameter (Roll, Pitch, Heave, or Heading) over the range of traces currently visible in the zoomed image.
-
-## Key Bindings (within the module's graphic windows)
-
-*   `KEY_Z`: Zeros or resets a selected slider's value (e.g., `dB drop` to 10, `phaseOffZero` to 90, `maxAcceptablePhaseFit` to 0.1).
-*   `KEY_Q` / `KEY_ESC`: Closes the "ZOOM EK-Trace window."
-*   `KEY_UP` / `KEY_DOWN` (in zoomed image window): Scrolls through the traces, incrementing/decrementing the `currenttrace`.
-*   `KEY_UP` / `KEY_DOWN` (in power plot window): Adjusts the `mindB` or `maxdB` display range.
-*   `KEY_LEFT` / `KEY_RIGHT` (on sliders): Adjusts the selected slider's value.
-*   `KEY_SPACE` (in zoomed image window): Toggles `showTrack` to display target locations or phase trends.
-*   `KEY_SPACE` (in vertical profile of motion parameters): Cycles through the motion parameters (`WhattoShow`: Roll, Pitch, Heave, Heading, Peak TS, Radial Phase).
-*   `+` / `-` (Keypad): Adjusts the display range of the vertical motion profile.
-*   **Left Mouse Drag (Rubber Banding):** Defines a new zoom region within the main zoom image.
-*   **Middle Mouse Click (in main zoom image):** Sets the `currenttrace` to the clicked trace.
-*   **Middle Mouse Click (in power plot window):** Sets the `trimdB` (amplitude threshold for target detection) to the clicked value.
-
-## How It Works
-The `EK_ZoomImage` module provides a detailed, trace-level view of EK echosounder data. It processes individual echo traces, applying matched filtering and displaying the results as envelopes and I/Q components. User interactions via buttons and sliders allow for real-time adjustment of bottom detection parameters and visualization of various data attributes. The module updates its graphical outputs instantly, enabling users to fine-tune processing and inspect data quality closely.
-
-## Notes
-The `EK_ZoomImage` module is an integral part of the `EKlook` graphical user interface, focusing on interactive analysis and fine-tuning of EK echosounder data at the trace level. It does not accept any command-line arguments. Its functionality is accessed and controlled entirely through the `EKlook` GUI.
+*   **Zoomed Image Window (`graphic_window[0]`):** High-resolution 2D echogram (power or phase) of the rubber-banded ping/sample sub-window.
+*   **Matched-Filtered Envelope & Trace I/Q Plots:** Vertical profiles of the current ping's dB envelope and complex $(I, Q)$ samples with bottom-pick markers.
+*   **Fore–Aft & Port–Starboard Phase Plots:** Vertical profiles of split-beam electrical phase angles and fitted zero-crossing ramps.
+*   **Vertical Profile of Motion Parameters (`graphic_window[4]`):** Along-track profile of Roll, Pitch, Heave, Heading, Peak TS, or Radial Phase across the zoomed ping window.

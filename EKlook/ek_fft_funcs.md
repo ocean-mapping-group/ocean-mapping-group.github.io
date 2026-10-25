@@ -2,61 +2,32 @@
 layout: default
 title: ek_fft_funcs (Internal FFT Functions for EKlook)
 parent: EKlook Tools
-nav_order: 105
+nav_order: 12
+tool_name: ek_fft_funcs
+source_path: code/EKlook/ek_fft_funcs.c
+category: EKlook
+input_formats:
+  - In-Memory Complex IQ Windows (fcomplex)
+output_formats:
+  - Complex & Power Spectra (jFFT_bundle)
+related_tools:
+  - EK_FFT
+  - EKlook
+  - BatchProcEK
+  - EK_funcs
 ---
+
 # ek_fft_funcs (Internal FFT Functions for EKlook)
 
 ## Description
-`ek_fft_funcs.c` provides a suite of specialized internal functions for performing Fast Fourier Transform (FFT) analysis on EK series echosounder data within the `EKlook` application. These functions are designed to process complex-valued (I and Q) time-series data, calculate power spectra, handle frequency shifting, and apply various corrections (e.g., ripple removal, frequency-dependent attenuation). They are integral to the `EK_FFT` module, enabling interactive spectral visualization and analysis of echo envelopes and matched filter characteristics.
+`ek_fft_funcs.c` (`code/EKlook/ek_fft_funcs.c`) provides the internal Fast Fourier Transform (FFT) signal-processing routines used by [`EK_FFT`](EK_FFT.md), [`EKlook`](EKlook.md), and [`BatchProcEK`](BatchProcEK.md). It operates on `jFFT_bundle` structures containing complex In-Phase/Quadrature (`fcomplex`) time-domain windows, applying cosine tapering, computing power-of-2 complex FFTs via `four1`, unwrapping/shifting baseband frequencies to physical acoustic frequencies, applying frequency-dependent seawater absorption corrections, and detrending matched-filter autocorrelation spectral ripple.
 
-This module is not a standalone executable; its functions are called internally by other `EKlook` components, particularly those related to the "FFT EK-Trace window".
+## Key Functions
 
-## Data Structures
-
-### `jFFT_bundle` (Implicit from usage)
-A structure (presumably defined in `EK_global.h` or `ek_fft_funcs.h`) that bundles together all data related to an FFT calculation, including:
-
-| Field | Description |
-|---|---|
-| `win` | Input complex time-domain window data (`fcomplex`). |
-| `spec` | Output complex frequency-domain spectrum data (`fcomplex`). |
-| `win_mag` | Magnitude of the time-domain window. |
-| `spec_mag` | Magnitude of the frequency-domain spectrum. |
-| `spec_phase` | Phase of the frequency-domain spectrum. |
-| `spec_power` | Power spectrum (logarithmic intensity). |
-| `freq` | Original frequency bins. |
-| `freq_shift` | Shifted frequency bins. |
-| `spec_power_shift` | Shifted power spectrum. |
-| `FFT_power2` | Power of 2 representing FFT size. |
-| `nosamples` | Number of samples in the FFT. |
-| `sampinterval` | Sampling interval. |
-| `FFT_bandwidth` | Bandwidth of the FFT. |
-| `FFT_perc_taper` | Percentage of tapering applied. |
-| `FFT_centre_sample_no` | Center sample number for FFT window. |
-| `FFT_shift` | Calculated frequency shift. |
-| `FFT_bin_wrap` | Bin wrap value. |
-| `range_to_centre_m` | Range to the center of the FFT window. |
-| `atten_dBperkm` | Frequency-dependent attenuation. |
-| `Fdep_atten_dB` | Total frequency-dependent attenuation. |
-| `alloced` | Flag indicating memory allocation status. |
-| `normalized` | Flag for normalization of the spectrum. |
-
-## Functions
-
-*   `void calc_ACMF_FFT()`: Calculates the FFT of the autocorrelation function of the matched filter (ACMF). Used to derive spectral characteristics of the sonar pulse's autocorrelation, handling window sizing and zero-padding.
-*   `void detrend_ACMF_ripple()`: Attempts to remove ripple components from the spectrum of the autocorrelation function of the matched filter (ACMF) to correct for artifacts.
-*   `void calc_MF_FFT()`: Calculates the FFT of the matched filter (MF) directly, padding it to the next power of two for efficient FFT.
-*   `void detrend_MF_ripple()`: Attempts to remove ripple components from the spectrum of the matched filter (MF) to correct for artifacts.
-*   `void calc_FFT_variables()`: Orchestrates the process of preparing time-domain data, calculating its FFT, and deriving various spectral properties for a given trace window. Sets up the FFT window, applies spherical spreading correction, and handles frequency-dependent attenuation.
-*   `int get_jbun_mag_range(jFFT_bundle *jbun)`: Calculates magnitudes, phases, and power spectra from the results of an FFT stored in a `jFFT_bundle`. Populates `win_mag`, `spec_mag`, `spec_phase`, and `spec_power` fields.
-*   `int do_jbun_fcomplex_four1(jFFT_bundle *jbun)`: A wrapper function that calls the `four1` (Numerical Recipes) FFT routine for complex data. Performs the core FFT computation.
-*   `int shift_FFT_freqs(jFFT_bundle *jbun)`: Shifts and wraps the FFT frequency bins and their corresponding power spectrum for correct interpretation and display. Adjusts the frequency axis to be physically meaningful.
-*   `int calc_FFT_shift(jFFT_bundle *jbun)`: Calculates the necessary frequency shift and bin wrap parameters for FFTs. Determines how the FFT output needs to be rearranged to align with the expected frequency range.
-*   `int alloc_jFFT_bundle(jFFT_bundle *jfft, int size)`: Allocates memory for all arrays within a `jFFT_bundle` structure. Initializes the memory resources required.
-*   `int free_jFFT_bundle(jFFT_bundle *jfft)`: Frees memory allocated for all arrays within a `jFFT_bundle` structure. Releases memory resources when they are no longer needed.
-
-## How It Works
-The `ek_fft_funcs` module provides the computational backbone for the interactive FFT analysis within `EKlook`. It manages the data structures (`jFFT_bundle`) to hold complex time-domain and frequency-domain data. The functions handle the entire FFT pipeline: preparing the input window, performing the FFT using optimized routines, shifting and wrapping frequencies for correct display, and calculating various spectral properties like magnitude, phase, and power. These internal functions are invoked by the `EK_FFT` module (or other `EKlook` components) in response to user interactions, enabling real-time spectral visualization and manipulation.
-
-## Notes
-This module is not a standalone executable; its functions are called internally by other `EKlook` components, particularly those related to the "FFT EK-Trace window". It leverages mathematical libraries (like Numerical Recipes' `four1`) for efficient FFT computations.
+*   `calc_ACMF_FFT()` & `detrend_ACMF_ripple()`: Computes the FFT of the autocorrelation function of the matched filter (ACMF) and removes passband spectral ripple.
+*   `calc_MF_FFT()` & `detrend_MF_ripple()`: Computes the FFT of the matched filter replica directly and removes spectral ripple.
+*   `calc_FFT_variables()`: Prepares the complex time-domain trace window, applies cosine tapering and spherical spreading / frequency-dependent absorption corrections, and executes the forward FFT.
+*   `get_jbun_mag_range(jFFT_bundle *jbun)`: Computes magnitude (`spec_mag`), phase (`spec_phase`), and logarithmic power spectra (`spec_power`) from the complex FFT output.
+*   `do_jbun_fcomplex_four1(jFFT_bundle *jbun)`: Wrapper around the complex Radix-2 `four1` FFT algorithm.
+*   `calc_FFT_shift(jFFT_bundle *jbun)` & `shift_FFT_freqs(jFFT_bundle *jbun)`: Unwraps and shifts FFT frequency bins (`freq_shift`, `spec_power_shift`) to align with the physical transducer passband.
+*   `alloc_jFFT_bundle()` & `free_jFFT_bundle()`: Memory management for `jFFT_bundle` arrays.

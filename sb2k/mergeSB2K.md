@@ -2,53 +2,46 @@
 layout: default
 title: mergeSB2K
 parent: SB2K Tools
-nav_order: 191
+nav_order: 2
+tool_name: mergeSB2K
+source_path: sb2k/mergeSB2K.c
+category: sidescan_processing
+input_formats: [GLORIA, OMG_HDCS]
+output_formats: [OMG_HDCS]
+related_tools: [unravelSB2K, SwathEd, make_mos2]
 ---
+
 # mergeSB2K
 
-## Description
-`mergeSB2K` is a utility designed to merge SeaBeam 2000 sidescan data (from GLORIA-format files) onto existing OMG-HDCS (`.merged`) bathymetry files. It essentially adds a reference to the corresponding sidescan data within the beam structures of the `.merged` file, allowing other OMG tools to access and display the sidescan imagery alongside the bathymetry.
+## Overview
 
-This tool is useful for integrating sidescan data, which provides valuable information about seabed texture and features, with multibeam bathymetry for a more complete understanding of the seafloor.
+`mergeSB2K` merges SeaBeam 2000 sidescan imagery (stored in GLORIA format) onto existing OMG HDCS `.merged` bathymetry files in-place. For each ping profile in the `.merged` file, it searches the GLORIA sidescan file by timestamp and populates beam `61` with the byte offset, sample count (`1024`), center pixel (`512`), and pixel size of the matching sidescan record so OMG tools can display sidescan alongside bathymetry.
 
 ## Usage
-```bash
-mergeSB2K -ss <tidefile> <mergefile(s)> [-v] [-date <year> <month> <day>] [-base_offset <value>]
+
+```
+mergeSB2K (-v) (-date year month day) (-base_offset value) -ss ss_file mergefile(s)
 ```
 
-## Arguments
+## CLI Options
 
-| Option | Description |
-|---|---|
-| `-ss <tidefile>` | **Required.** Path to the GLORIA-format sidescan file (named `tidefile` due to historical reasons, likely containing time-indexed sidescan records). |
-| `<mergefile(s)>` | **Required.** One or more OMG-HDCS `.merged` files to which the sidescan data will be merged. |
-| `-v` | Enable verbose output. |
-| `-date <year> <month> <day>` | (Optional) Manually set the reference date for the summary header in the `.merged` file. This can be useful if the timestamp in the `.merged` file's header is incorrect or missing. |
-| `-base_offset <value>` | (Optional) Sets an integer base offset (in millimeters) to be added to the tide value. Used for tide correction (historical name). |
+| Flag | Arguments | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `-ss` | `<ss_file>` | *required* | Path to the GLORIA-format sidescan file. |
+| `<mergefile(s)>` | `<file1> [file2 ...]` | *required* | One or more OMG HDCS `.merged` files to update in-place. |
+| `-v` | none | `0` | Enable verbose output. |
+| `-date` | `<year> <month> <day>` | none | Override the reference date (`summary.refTime`) in the `.merged` summary header. |
+| `-base_offset` | `<mm>` | `0` | Integer base offset (in millimeters) added during processing. |
 
 ## How It Works
 
-1.  **Initialization:** Parses command-line arguments to get the sidescan (GLORIA) file path, input merged files, and optional parameters (`verbose_flag`, `year`, `month`, `day`, `base_offset`).
-2.  **GLORIA File Opening:** Opens the GLORIA-format sidescan file (`tidefile`) for reading.
-3.  **Merged File Processing Loop:**
-    *   For each input `.merged` file:
-        *   Opens the file in read/write mode (`r+`).
-        *   Reads the `OMG_HDCS_summary_header`. If a `-date` is provided, it updates `summary.refTime` in the header and writes it back to the file.
-        *   **Profile Iteration:** Iterates through each profile (ping) in the merged file:
-            *   Reads the `OMG_HDCS_profile_header`.
-            *   Calculates the absolute time (`time`) of the current profile.
-            *   **Sidescan Record Search:** Uses `jcu_time_search()` to find the closest matching sidescan record in the GLORIA file based on `time`.
-            *   Reads the `gloria_rec` (sidescan record) from the GLORIA file.
-            *   **Beam Data Update:** Reads the existing `OMG_HDCS_beam` array for the current profile. It then updates specific fields of beam `61` (hardcoded index) in the `beams` array:
-                *   `beams[61].offset`: Set to the file offset of the sidescan data within the GLORIA file.
-                *   `beams[61].no_samples`: Set to the number of samples (fixed at `1024`).
-                *   `beams[61].centre_no`: Set to the center sample (`512`).
-                *   `beams[61].sample_interval`: Set to the pixel size from the GLORIA header (`tide_rec.header.pixel_size`).
-            *   Writes the modified `OMG_HDCS_beam` array back to the `.merged` file.
-        *   Closes the current `.merged` file.
-4.  **Cleanup:** Closes the GLORIA file and exits.
+1. **Header & Date Update**: Opens the GLORIA sidescan file and each target `.merged` file (`r+`). If `-date` is supplied, updates `summary.refTime` in the `.merged` summary header.
+2. **Time Matching & Beam Pointer Update**: For each profile in the `.merged` file, computes the absolute ping time, locates the closest GLORIA record using `jcu_time_search()`, and stores the GLORIA record's file byte offset in `beams[61].offset`, `1024` in `beams[61].no_samples`, `512` in `beams[61].centre_no`, and `pixel_size` in `beams[61].sample_interval`.
 
-## Output
-The input `.merged` files are modified in-place. The `OMG_HDCS_beam` structure for beam `61` (a specific placeholder beam) in each profile is updated with references (offset, sample count, etc.) to the corresponding sidescan data within the GLORIA file.
-```
+## Practical Examples
+
+### Link a GLORIA sidescan file onto a SeaBeam 2000 `.merged` file
+
+```bash
+mergeSB2K -v -ss line01.reflect line01.depth
 ```

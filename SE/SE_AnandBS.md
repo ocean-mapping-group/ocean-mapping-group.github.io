@@ -1,8 +1,14 @@
 ---
 layout: default
-title: SE AnandBS
-parent: SE Tools
+title: SE_AnandBS
+parent: SwathEd (SE) Tools
 nav_order: 6
+tool_name: SE_AnandBS
+source_path: code/SE/SE_AnandBS.c
+category: Interactive QC & Editing (SwathEd)
+input_formats: [".merged", ".ss_data", ".sectors"]
+output_formats: []
+related_tools: ["swathed", "SE_BSwindow", "SE_sswindow", "mos2"]
 ---
 
 # `SE_AnandBS.c` - Backscatter Analysis and Angular Response Curve Tool
