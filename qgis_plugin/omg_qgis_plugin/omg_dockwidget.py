@@ -1,21 +1,22 @@
 """
-Qimera / CARIS HIPS-style Dockable Map & Processing Monitor Widget for QGIS.
+Qimera / CARIS HIPS-style Dockable Map & Processing Monitor Widget for QGIS 3.x & 4.x.
 
 Supports both flat workspaces and multi-day Julian-Day subdirectory workspaces
-(e.g., 2026_Antarctica/OMG_Care2026/02_Bransfield with subdirs 74..81).
+(e.g., W:\\data\\2026_Antarctica\\OMG_Care2026\\02_Bransfield or /mnt/w/data/... with subdirs 74..81).
 
 Read-Only Master Archive Safety:
   All generated GeoJSON tracklines and GDAL .vrt sidecar files are written to a
-  local output/cache directory (defaulting to ~/coding/bransfield_qgis_outputs or
-  ~/.cache/omg_qgis_plugin) so master archive drives (such as W:) are never modified.
+  local output/cache directory so master archive drives (such as W:) are never modified.
 """
 
 import os
+import re
 from typing import List, Optional
 
 from qgis.PyQt.QtCore import Qt, QProcess, QTimer, QFileSystemWatcher
 from qgis.PyQt.QtGui import QColor, QFont
 from qgis.PyQt.QtWidgets import (
+    QAbstractItemView,
     QDockWidget,
     QWidget,
     QVBoxLayout,
@@ -41,12 +42,21 @@ from qgis.core import (
     QgsCategorizedSymbolRenderer,
     QgsRendererCategory,
     QgsSymbol,
-    QgsWkbTypes,
     QgsSingleBandPseudoColorRenderer,
     QgsColorRampShader,
     QgsRasterShader,
     QgsRectangle,
 )
+
+try:
+    from qgis.core import Qgis
+except ImportError:
+    Qgis = None
+
+try:
+    from qgis.core import QgsWkbTypes
+except ImportError:
+    QgsWkbTypes = None
 
 from .omg_binary_io import (
     JhcHeaderInfo,
@@ -59,11 +69,63 @@ from .omg_binary_io import (
     scan_survey_workspace,
 )
 
+# Qt5 / Qt6 (QGIS 3.x / 4.x) Dual-Compatible Enum Helpers
+QT_VERTICAL = getattr(Qt, "Vertical", None) or Qt.Orientation.Vertical
+QT_ALIGN_CENTER = getattr(Qt, "AlignCenter", None) or Qt.AlignmentFlag.AlignCenter
+QT_USER_ROLE = getattr(Qt, "UserRole", None) or Qt.ItemDataRole.UserRole
+SELECT_ROWS = getattr(QAbstractItemView, "SelectRows", None) or QAbstractItemView.SelectionBehavior.SelectRows
+NO_EDIT_TRIGGERS = getattr(QAbstractItemView, "NoEditTriggers", None) or QAbstractItemView.EditTrigger.NoEditTriggers
+HEADER_STRETCH = getattr(QHeaderView, "Stretch", None) or QHeaderView.ResizeMode.Stretch
+HEADER_RESIZE_CONTENTS = getattr(QHeaderView, "ResizeToContents", None) or QHeaderView.ResizeMode.ResizeToContents
+PROC_MERGED_CHANNELS = getattr(QProcess, "MergedChannels", None) or QProcess.ProcessChannelMode.MergedChannels
+RAMP_INTERPOLATED = getattr(QgsColorRampShader, "Interpolated", None) or QgsColorRampShader.Type.Interpolated
+
+
+def _default_line_symbol():
+    """Return a default line symbol across both QGIS 3.x and QGIS 4.x APIs."""
+    if Qgis is not None and hasattr(Qgis, "GeometryType"):
+        return QgsSymbol.defaultSymbol(Qgis.GeometryType.Line)
+    if QgsWkbTypes is not None:
+        geom_type = getattr(QgsWkbTypes, "LineGeometry", None) or QgsWkbTypes.GeometryType.LineGeometry
+        return QgsSymbol.defaultSymbol(geom_type)
+    return None
+
+
+def _normalize_platform_path(raw_path: str) -> str:
+    """
+    Seamlessly translate between Windows drive paths (e.g. W:\\data\\...) and
+    WSL mount paths (e.g. /mnt/w/data/...) depending on the OS running QGIS.
+    """
+    p = raw_path.strip()
+    if not p:
+        return p
+    if os.name == "nt":
+        # Running native Windows QGIS: convert /mnt/w/... -> W:\...
+        m = re.match(r"^/mnt/([a-zA-Z])/(.*)$", p)
+        if m:
+            drive = m.group(1).upper()
+            rest = m.group(2).replace("/", "\\")
+            return f"{drive}:\\{rest}"
+    else:
+        # Running Linux / WSL QGIS: convert W:\... -> /mnt/w/...
+        m = re.match(r"^([a-zA-Z]):[\\/](.*)$", p)
+        if m:
+            drive = m.group(1).lower()
+            rest = m.group(2).replace("\\", "/")
+            return f"/mnt/{drive}/{rest}"
+    return p
+
+
+DEFAULT_WORKSPACE_DIR = (
+    r"W:\data\2026_Antarctica\OMG_Care2026\02_Bransfield"
+    if os.name == "nt"
+    else "/mnt/w/data/2026_Antarctica/OMG_Care2026/02_Bransfield"
+)
 
 DEFAULT_CACHE_DIR = (
     "/home/iwc/coding/bransfield_qgis_outputs"
     if os.path.isdir("/home/iwc/coding")
-    else os.path.expanduser("~/.cache/omg_qgis_plugin")
+    else os.path.join(os.path.expanduser("~"), "omg_qgis_outputs")
 )
 
 
@@ -98,8 +160,8 @@ class OmgMonitorDockWidget(QDockWidget):
         # Row 1: Survey Workspace selector (read-only safe)
         top_bar = QHBoxLayout()
         top_bar.addWidget(QLabel("Survey Workspace:"))
-        self.ws_edit = QLineEdit("/mnt/w/data/2026_Antarctica/OMG_Care2026/02_Bransfield")
-        self.ws_edit.setPlaceholderText("/path/to/survey_project (containing raw/, merged/, decnav/, ss/)")
+        self.ws_edit = QLineEdit(DEFAULT_WORKSPACE_DIR)
+        self.ws_edit.setPlaceholderText("W:\\data\\... or /path/to/survey_project (containing raw/, merged/, decnav/, ss/)")
         top_bar.addWidget(self.ws_edit, 1)
 
         browse_btn = QPushButton("Browse...")
@@ -151,7 +213,7 @@ class OmgMonitorDockWidget(QDockWidget):
         tab = QWidget()
         layout = QVBoxLayout(tab)
 
-        splitter = QSplitter(Qt.Vertical)
+        splitter = QSplitter(QT_VERTICAL)
 
         # Upper: Qimera/HIPS-style processing stage matrix table
         upper_widget = QWidget()
@@ -190,9 +252,9 @@ class OmgMonitorDockWidget(QDockWidget):
         ]
         self.lines_table = QTableWidget(0, len(cols))
         self.lines_table.setHorizontalHeaderLabels(cols)
-        self.lines_table.setSelectionBehavior(QTableWidget.SelectRows)
-        self.lines_table.setEditTriggers(QTableWidget.NoEditTriggers)
-        self.lines_table.horizontalHeader().setSectionResizeMode(1, QHeaderView.Stretch)
+        self.lines_table.setSelectionBehavior(SELECT_ROWS)
+        self.lines_table.setEditTriggers(NO_EDIT_TRIGGERS)
+        self.lines_table.horizontalHeader().setSectionResizeMode(1, HEADER_STRETCH)
         self.lines_table.itemSelectionChanged.connect(self._on_line_selected)
         upper_layout.addWidget(self.lines_table, 1)
 
@@ -258,10 +320,10 @@ class OmgMonitorDockWidget(QDockWidget):
         ]
         self.rasters_table = QTableWidget(0, len(cols))
         self.rasters_table.setHorizontalHeaderLabels(cols)
-        self.rasters_table.setSelectionBehavior(QTableWidget.SelectRows)
-        self.rasters_table.setEditTriggers(QTableWidget.NoEditTriggers)
-        self.rasters_table.horizontalHeader().setSectionResizeMode(0, QHeaderView.ResizeToContents)
-        self.rasters_table.horizontalHeader().setSectionResizeMode(8, QHeaderView.Stretch)
+        self.rasters_table.setSelectionBehavior(SELECT_ROWS)
+        self.rasters_table.setEditTriggers(NO_EDIT_TRIGGERS)
+        self.rasters_table.horizontalHeader().setSectionResizeMode(0, HEADER_RESIZE_CONTENTS)
+        self.rasters_table.horizontalHeader().setSectionResizeMode(8, HEADER_STRETCH)
         self.rasters_table.itemDoubleClicked.connect(lambda _item: self.load_selected_raster_in_qgis())
         layout.addWidget(self.rasters_table, 1)
 
@@ -332,11 +394,17 @@ class OmgMonitorDockWidget(QDockWidget):
         self.fs_watcher.addPaths(watch_list)
 
     def refresh_workspace(self):
-        ws = self.ws_edit.text().strip()
+        ws = _normalize_platform_path(self.ws_edit.text())
         if not ws or not os.path.isdir(ws):
+            QMessageBox.warning(
+                self,
+                "Directory Not Found",
+                f"Could not find survey workspace directory:\n{ws}\n\nPlease check that the drive is mounted or browse to the folder.",
+            )
             return
+        self.ws_edit.setText(ws)
         self.workspace_dir = os.path.abspath(ws)
-        self.output_dir = self.out_dir_edit.text().strip() or DEFAULT_CACHE_DIR
+        self.output_dir = _normalize_platform_path(self.out_dir_edit.text()) or DEFAULT_CACHE_DIR
         os.makedirs(self.output_dir, exist_ok=True)
         self._update_watched_dirs()
 
@@ -386,14 +454,14 @@ class OmgMonitorDockWidget(QDockWidget):
         for row, st in enumerate(filtered):
             def chk(val: bool) -> QTableWidgetItem:
                 it = QTableWidgetItem("✔" if val else "—")
-                it.setTextAlignment(Qt.AlignCenter)
+                it.setTextAlignment(QT_ALIGN_CENTER)
                 it.setForeground(QColor("#1b7837") if val else QColor("#999999"))
                 return it
 
             day_it = QTableWidgetItem(st.subdir or "—")
-            day_it.setTextAlignment(Qt.AlignCenter)
+            day_it.setTextAlignment(QT_ALIGN_CENTER)
             name_it = QTableWidgetItem(st.line_name)
-            name_it.setData(Qt.UserRole, st)
+            name_it.setData(QT_USER_ROLE, st)
 
             stage_it = QTableWidgetItem(st.stage_summary)
             if st.stage_summary.startswith("COMPLETE"):
@@ -450,7 +518,7 @@ class OmgMonitorDockWidget(QDockWidget):
         name_item = self.lines_table.item(row, 1)
         if not name_item:
             return None
-        return name_item.data(Qt.UserRole)
+        return name_item.data(QT_USER_ROLE)
 
     def _on_line_selected(self):
         st = self._get_selected_line()
@@ -514,9 +582,9 @@ class OmgMonitorDockWidget(QDockWidget):
         if not self.workspace_dir or not filtered:
             return
 
-        self.output_dir = self.out_dir_edit.text().strip() or DEFAULT_CACHE_DIR
+        self.output_dir = _normalize_platform_path(self.out_dir_edit.text()) or DEFAULT_CACHE_DIR
         os.makedirs(self.output_dir, exist_ok=True)
-        ws_name = os.path.basename(self.workspace_dir.rstrip("/"))
+        ws_name = os.path.basename(self.workspace_dir.rstrip("/\\"))
         geojson_path = os.path.join(self.output_dir, f"{ws_name}_tracklines.geojson")
         export_tracklines_geojson(filtered, geojson_path, nav_stride=1)
 
@@ -541,9 +609,10 @@ class OmgMonitorDockWidget(QDockWidget):
         if color_by_day:
             days = sorted({l.subdir for l in filtered})
             for idx, day in enumerate(days):
-                sym = QgsSymbol.defaultSymbol(QgsWkbTypes.LineGeometry)
-                sym.setColor(QColor(palette[idx % len(palette)]))
-                sym.setWidth(0.75)
+                sym = _default_line_symbol()
+                if sym:
+                    sym.setColor(QColor(palette[idx % len(palette)]))
+                    sym.setWidth(0.75)
                 label = f"Julian Day {day}" if day else "Root"
                 categories.append(QgsRendererCategory(day, sym, label))
             renderer = QgsCategorizedSymbolRenderer("subdir", categories)
@@ -558,9 +627,10 @@ class OmgMonitorDockWidget(QDockWidget):
                 ("RAW ONLY (Not Unravelled)", "#878787", 0.5),
             ]
             for label, hex_color, width_mm in stage_colors:
-                sym = QgsSymbol.defaultSymbol(QgsWkbTypes.LineGeometry)
-                sym.setColor(QColor(hex_color))
-                sym.setWidth(width_mm)
+                sym = _default_line_symbol()
+                if sym:
+                    sym.setColor(QColor(hex_color))
+                    sym.setWidth(width_mm)
                 categories.append(QgsRendererCategory(label, sym, label))
             renderer = QgsCategorizedSymbolRenderer("stage_summary", categories)
 
@@ -591,7 +661,7 @@ class OmgMonitorDockWidget(QDockWidget):
             self._load_jhc_raster_via_vrt(fpath)
 
     def _load_jhc_raster_via_vrt(self, filepath: str):
-        self.output_dir = self.out_dir_edit.text().strip() or DEFAULT_CACHE_DIR
+        self.output_dir = _normalize_platform_path(self.out_dir_edit.text()) or DEFAULT_CACHE_DIR
         try:
             hdr = parse_jhc_header(filepath)
             vrt_path = create_gdal_vrt_for_jhc(filepath, output_dir=self.output_dir)
@@ -615,7 +685,7 @@ class OmgMonitorDockWidget(QDockWidget):
         if hdr.data_type == 3 and hdr.max_value > hdr.min_value:
             shader = QgsRasterShader()
             color_ramp = QgsColorRampShader()
-            color_ramp.setColorRampType(QgsColorRampShader.Interpolated)
+            color_ramp.setColorRampType(RAMP_INTERPOLATED)
             zmin, zmax = hdr.min_value, hdr.max_value
             span = max(0.01, zmax - zmin)
             items = [
@@ -636,20 +706,23 @@ class OmgMonitorDockWidget(QDockWidget):
         cmd = self.cmd_input.text().strip()
         if not cmd:
             return
-        self.output_dir = self.out_dir_edit.text().strip() or DEFAULT_CACHE_DIR
+        self.output_dir = _normalize_platform_path(self.out_dir_edit.text()) or DEFAULT_CACHE_DIR
         os.makedirs(self.output_dir, exist_ok=True)
         self.cmd_log.appendPlainText(f"\n$ (cd {self.output_dir} && {cmd})")
 
         self.proc = QProcess(self)
         self.proc.setWorkingDirectory(self.output_dir)
-        self.proc.setProcessChannelMode(QProcess.MergedChannels)
+        self.proc.setProcessChannelMode(PROC_MERGED_CHANNELS)
         self.proc.readyReadStandardOutput.connect(
             lambda: self.cmd_log.appendPlainText(
                 bytes(self.proc.readAllStandardOutput()).decode("utf-8", errors="replace").rstrip()
             )
         )
         self.proc.finished.connect(self._on_process_finished)
-        self.proc.start("bash", ["-c", cmd])
+        if os.name == "nt":
+            self.proc.start("cmd.exe", ["/c", cmd])
+        else:
+            self.proc.start("bash", ["-c", cmd])
 
     def _on_process_finished(self, exit_code: int, _exit_status):
         self.cmd_log.appendPlainText(f"[Process finished with exit code {exit_code}]")

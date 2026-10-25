@@ -1,13 +1,16 @@
 [general]
 name=OMG Multibeam Survey & Processing Monitor
 qgisMinimumVersion=3.22
-description=Qimera/HIPS-style interactive map monitor, zero-copy .r4/.sun/.8bit/.mos raster loader, and Kongsberg (.kmall/.all/.merged) workflow manager for UNB Ocean Mapping Group (OMG) multibeam sonar processing.
-version=0.1.0
+qgisMaximumVersion=4.99
+supportsQt6=True
+description=Qimera/HIPS-style interactive map monitor, zero-copy .r4/.sun/.8bit/.mos/.vert_prof raster loader, and Kongsberg (.kmall/.all/.merged/.decnav) workflow manager for UNB Ocean Mapping Group (OMG) multibeam sonar processing.
+version=0.2.0
 author=UNB Ocean Mapping Group
 email=omg@unb.ca
-about=Provides zero-copy GDAL Virtual Raster (.vrt) loading for OMG JHC_header rasters (.r4, .sun, .8bit, .mos, .weight), live directory monitoring of Kongsberg .kmall and .all unraveling pipelines, color-coded survey tracklines by processing stage, .param lever-arm and SVP inspection, and interactive launching of tor4, addSUN, mos2, swathed -locate, and jview.
+about=Provides zero-copy GDAL Virtual Raster (.vrt) loading for OMG JHC_header rasters (.r4, .sun, .8bit, .mos, .weight, .vert_prof), live directory monitoring of Kongsberg .kmall and .all unraveling pipelines (both flat and Julian-Day subdirectory layouts), color-coded .decnav/.nav survey tracklines by Julian Day or processing stage, .param/.param_km lever-arm and SVP inspection, and interactive launching of OMG tools. Compatible with QGIS 3.x (Qt5) and QGIS 4.x (Qt6).
 tracker=https://github.com/ocean-mapping-group/ocean-mapping-group.github.io
 repository=https://github.com/ocean-mapping-group/ocean-mapping-group.github.io
+ homepage=https://ocean-mapping-group.github.io/qgis_plugin/
 tags=multibeam,sonar,bathymetry,sidescan,backscatter,kongsberg,kmall,omg,hydrography
 category=Raster
 icon=icon.png

@@ -5,12 +5,36 @@ nav_order: 4
 has_children: true
 ---
 
-# OMG Multibeam Survey & Processing Monitor — QGIS Plugin
+# OMG Multibeam Survey & Processing Monitor — QGIS Plugin (QGIS 3.x & 4.x)
 
-The **OMG Multibeam Survey & Processing Monitor** is a native **QGIS 3.x Plugin** and standalone headless CLI (`omg_qgis_cli.py`) that provides a **Qimera / CARIS HIPS-style Project & Processing Monitor** directly inside QGIS for UNB Ocean Mapping Group survey workspaces.
+The **OMG Multibeam Survey & Processing Monitor** is a native **QGIS 3.x (Qt5) and QGIS 4.x (Qt6, including 4.2.3) Plugin** and standalone headless CLI (`omg_qgis_cli.py`) that provides a **Qimera / CARIS HIPS-style Project & Processing Monitor** directly inside QGIS for UNB Ocean Mapping Group survey workspaces.
 
-> [!TIP]
-> **Explore the Live Antarctica (`02_Bransfield`) Survey Demo:** See **[Antarctica (02_Bransfield) Live Demo](bransfield-demo.html)** or open the **[Full-Screen Interactive 349-Line Map](assets/bransfield_interactive_map.html)** to inspect 349 Kongsberg EM124 multibeam lines processed from RV *Almirante Viel*.
+<div style="background: #1e293b; border: 1px solid #38bdf8; border-radius: 8px; padding: 1rem 1.25rem; margin: 1rem 0 1.5rem 0; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 1rem;">
+  <div>
+    <div style="font-weight: 700; font-size: 1rem; color: #f8fafc;">📦 Download Plugin Package for QGIS ("Install from ZIP")</div>
+    <div style="font-size: 0.85rem; color: #cbd5e1;">Compatible with <strong>QGIS 4.2.3 (Qt6)</strong> and <strong>QGIS 3.22+ (Qt5)</strong> on Windows, Linux, and macOS.</div>
+  </div>
+  <div style="display: flex; gap: 0.75rem;">
+    <a href="omg_qgis_plugin.zip" download style="background: #0284c7; color: #ffffff; padding: 0.55rem 1.1rem; border-radius: 6px; font-weight: 600; text-decoration: none; font-size: 0.9rem;">⬇ Download omg_qgis_plugin.zip</a>
+    <a href="bransfield-demo.html" style="background: #334155; color: #38bdf8; padding: 0.55rem 1.1rem; border-radius: 6px; font-weight: 600; text-decoration: none; font-size: 0.9rem;">🌐 View Antarctica Live Demo</a>
+  </div>
+</div>
+
+---
+
+## Installing in QGIS 4.2.3 (or QGIS 3.x) via "Install from ZIP"
+
+1. Grab the packaged ZIP file from either:
+   - **Direct Web Download:** [**`omg_qgis_plugin.zip`**](https://ocean-mapping-group.github.io/qgis_plugin/omg_qgis_plugin.zip)
+   - **Local Workspace Path (WSL / Linux):** `/home/iwc/coding/omg_qgis_plugin.zip` (accessible from Windows File Explorer at `\\wsl.localhost\Ubuntu\home\iwc\coding\omg_qgis_plugin.zip` or `\\wsl$\Ubuntu\home\iwc\coding\omg_qgis_plugin.zip`)
+2. Open **QGIS 4.2.3** and go to **Plugins $\rightarrow$ Manage and Install Plugins...**
+3. Select the **Install from ZIP** tab on the left.
+4. Click the **`...`** browse button, select **`omg_qgis_plugin.zip`**, and click **Install Plugin**.
+5. Once installed, click the **OMG Multibeam Monitor** sonar icon on the QGIS toolbar (or open **Raster $\rightarrow$ OMG Multibeam Monitor**).
+6. In the dock widget at the right:
+   - Set **Survey Workspace** to `W:\data\2026_Antarctica\OMG_Care2026\02_Bransfield` (or click **Browse...**).
+   - Leave **Local Output/VRT Cache Dir** set to your local folder (so `W:` is never written to).
+   - Click **Scan Workspace**, then click **Plot / Update Tracklines on QGIS Map** to display all 349 multibeam lines colored by **Julian Day (`74`–`81`)** or **Processing Stage**.
 
 ---
 
@@ -72,16 +96,6 @@ flowchart LR
     SCAN --> DOCK
     VRT --> RAS
 ```
-
----
-
-## Installation in QGIS 3.x
-
-1. Copy or symlink [`qgis_plugin/omg_qgis_plugin/`](https://github.com/ocean-mapping-group/ocean-mapping-group.github.io/tree/master/qgis_plugin/omg_qgis_plugin) into your QGIS Python plugins directory:
-   - **Linux:** `~/.local/share/QGIS/QGIS3/profiles/default/python/plugins/omg_qgis_plugin`
-   - **Windows:** `%APPDATA%\QGIS\QGIS3\profiles\default\python\plugins\omg_qgis_plugin`
-   - **macOS:** `~/Library/Application Support/QGIS/QGIS3/profiles/default/python/plugins/omg_qgis_plugin`
-2. In QGIS, open **Plugins $\rightarrow$ Manage and Install Plugins...**, enable **OMG Multibeam Survey & Processing Monitor**, and click the **OMG Monitor** toolbar button.
 
 ---
 
