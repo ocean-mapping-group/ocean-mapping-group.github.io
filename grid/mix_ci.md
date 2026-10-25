@@ -1,13 +1,24 @@
 ---
 layout: default
 title: mix_ci
-parent: Grid Tools
+parent: Bathymetric Gridding & Export (grid)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 tool_name: mix_ci
 source_path: code/grid/mix_ci.c
 category: gridding
-input_formats: [".8bit (color depth map)", ".sun (8-bit sun-illumination intensity map)", ".maskmap (8-bit stencil mask)", ".band1/.band2/.band3 (3-band RGB backdrop)"]
-output_formats: [".8bit (JHC 8-bit composite color-intensity raster)", ".ppm (24-bit RGB Portable Pixmap)"]
-related_tools: ["addSUN", "r4to8bit", "maskarray", "selectcb"]
+input_formats:
+- .8bit (color depth map)
+- .sun (8-bit sun-illumination intensity map)
+- .maskmap (8-bit stencil mask)
+- .band1/.band2/.band3 (3-band RGB backdrop)
+output_formats:
+- .8bit (JHC 8-bit composite color-intensity raster)
+- .ppm (24-bit RGB Portable Pixmap)
+related_tools:
+- addSUN
+- r4to8bit
+- maskarray
+- selectcb
 ---
 
 # mix_ci
@@ -30,8 +41,8 @@ mix_ci [OPTIONS] [-c <colormap.8bit>] [-i <intensmap.sun>] -m <resultmap>
 
 | Option | Description | Default |
 |---|---|---|
-| `-c <colormap>` | Input 8-bit `JHC_header` color-coded depth/attribute file (typically produced by [`r4to8bit`](r4to8bit.md)). Required unless `-monofil` or `-justunder` is set. | None |
-| `-i <intensmap>` | Input 8-bit `JHC_header` sun-illuminated intensity file (typically produced by [`addSUN`](addSUN.md)). Required unless `-justunder` is set. | None |
+| `-c <colormap>` | Input 8-bit `JHC_header` color-coded depth/attribute file (typically produced by [`r4to8bit`](r4to8bit.html)). Required unless `-monofil` or `-justunder` is set. | None |
+| `-i <intensmap>` | Input 8-bit `JHC_header` sun-illuminated intensity file (typically produced by [`addSUN`](addSUN.html)). Required unless `-justunder` is set. | None |
 | `-m <resultmap>` | **Required.** Output filename (8-bit `JHC_header` image by default, or 24-bit binary `P6` `.ppm` if `-ppm` is set). | None |
 | `-ppm` | Output a 24-bit true-color binary Portable Pixmap (`P6` `.ppm`) instead of an 8-bit indexed `JHC_header` raster. | Disabled (8-bit `JHC_header`) |
 | `-mix <base> <colors> <shades>` | Configure the 8-bit indexed color-intensity quantization table (`base + (c * colors / 256) * shades + (i * shades / 256)`). Sets `header.rgb_bw` to `5` (`8` colors), `6` (`10` colors), or `7` (`12` colors). | `16 8 30` |
@@ -51,7 +62,7 @@ mix_ci [OPTIONS] [-c <colormap.8bit>] [-i <intensmap.sun>] -m <resultmap>
 
 | Option | Description | Default |
 |---|---|---|
-| `-mask <maskfile>` | 8-bit `JHC_header` stencil mask file (e.g. from [`maskarray`](maskarray.md)) controlling where the foreground vs. underlay is drawn. | None |
+| `-mask <maskfile>` | 8-bit `JHC_header` stencil mask file (e.g. from [`maskarray`](maskarray.html)) controlling where the foreground vs. underlay is drawn. | None |
 | `-ignore <val>` | Mask digital number in `<maskfile>` that triggers drawing the background/underlay instead of the foreground. | `0` |
 | `-inverse` | Invert the stencil logic so the underlay is drawn where `*mask != ignore`. | Disabled |
 | `-under <underfile>` | 8-bit `JHC_header` background image drawn wherever the stencil mask triggers. | None |
@@ -78,6 +89,7 @@ mix_ci [OPTIONS] [-c <colormap.8bit>] [-i <intensmap.sun>] -m <resultmap>
 ## Examples
 
 **1. Create a standard 8-bit color-shaded bathymetry grid (`JHC_header`) from depth `.8bit` and sunshade `.sun`:**
+
 ```bash
 r4to8bit -low -200 -high -10 survey.r4 survey.8bit
 addSUN -elev 30 -azi 315 -exag 5 survey.r4 survey.sun
@@ -85,6 +97,7 @@ mix_ci -c survey.8bit -i survey.sun -m survey_ci.8bit
 ```
 
 **2. Create a 24-bit true-color `.ppm` of sun-shaded bathymetry composited over a sidescan mosaic background:**
+
 ```bash
 maskarray survey.r4
 mix_ci -ppm \
@@ -95,6 +108,7 @@ mix_ci -ppm \
 ```
 
 **3. Render a 3-band RGB chart backdrop (`chart.band1`, `.band2`, `.band3`) beneath sun-shaded bathymetry:**
+
 ```bash
 mix_ci -ppm -c survey.8bit -i survey.sun -mask survey.r4.maskmap -ignore 0 -urgb chart -m chart_bathy.ppm
 ```
@@ -103,5 +117,5 @@ mix_ci -ppm -c survey.8bit -i survey.sun -mask survey.r4.maskmap -ignore 0 -urgb
 
 ## Workflow Context
 
-- **Upstream:** [`r4to8bit`](r4to8bit.md) (generates `-c`), [`addSUN`](addSUN.md) (generates `-i`), and [`maskarray`](maskarray.md) (generates `-mask`).
-- **Downstream:** View 8-bit `JHC_header` outputs in `jview` (or select palettes with [`selectcb`](selectcb.md)), or convert `.ppm` outputs to PNG/TIFF for publication.
+- **Upstream:** [`r4to8bit`](r4to8bit.html) (generates `-c`), [`addSUN`](addSUN.html) (generates `-i`), and [`maskarray`](maskarray.html) (generates `-mask`).
+- **Downstream:** View 8-bit `JHC_header` outputs in `jview` (or select palettes with [`selectcb`](selectcb.html)), or convert `.ppm` outputs to PNG/TIFF for publication.

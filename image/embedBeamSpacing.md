@@ -1,14 +1,20 @@
 ---
 layout: default
 title: embedBeamSpacing
-parent: Image Tools
+parent: Raster Image Processing (image)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 19
 tool_name: embedBeamSpacing
 source_path: code/image/embedBeamSpacing.c
 category: Multibeam Water Column & Acoustic Modeling
-input_formats: ["OMG1 8-bit terrain/backscatter image"]
-output_formats: ["Annotated OMG1 8-bit image with simulated multibeam beam footprints"]
-related_tools: ["showCoverage", "stretchacres", "OMGtoPS"]
+input_formats:
+- OMG1 8-bit terrain/backscatter image
+output_formats:
+- Annotated OMG1 8-bit image with simulated multibeam beam footprints
+related_tools:
+- showCoverage
+- stretchacres
+- OMGtoPS
 ---
 
 # embedBeamSpacing
@@ -17,6 +23,7 @@ related_tools: ["showCoverage", "stretchacres", "OMGtoPS"]
 `embedBeamSpacing` (written by John Hughes Clarke, May 2014) models and draws multibeam echo-sounder across-track/along-track beam spacing crosses and actual `-3 dB` elliptical beam footprints (`fa_beamwidth × ps_beamwidth`) directly onto a georeferenced 8-bit `OMG1` seafloor image. It supports single-sector, multi-sector yaw/pitch-stabilized (`-no_sectors 3`), and dual-swath (`-multi_swath`) Kongsberg EM-style transmission geometries.
 
 ## CLI Options & Usage
+
 ```bash
 embedBeamSpacing -in <infile> -out <outfile> \
   [-depth <m>] [-angle_on_target <deg>] [-speed_knots <kn>] \

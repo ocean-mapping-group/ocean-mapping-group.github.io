@@ -1,14 +1,25 @@
 ---
 layout: default
 title: PNAVtoNav
-parent: Navigation Tools
+parent: Navigation Processing (nav)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 10
 tool_name: PNAVtoNav
 source_path: code/nav/PNAVtoNav.c
 category: Navigation & Georeferencing
-input_formats: ["Kongsberg HUGIN AUV PNAV ASCII exports (TopsideAUVPos, TopsideShipNav, DGPSHiPAPData, GPSData, DepthData, PressureData, DVLData, CTDData, MotionSensorData, HeadingData)", "NavLab Binary Trajectory & Binary Pressure"]
-output_formats: [".nav (jcu_nav_rec binary)", ".orientation (OMG_HDCS_attitude v3)", ".jwc (OMG watercolumn SVP + ASCII text)"]
-related_tools: ["mergeNav", "mergeAtt", "newMergeAtt", "QNSYtoNav", "stripNav"]
+input_formats:
+- Kongsberg HUGIN AUV PNAV ASCII exports (TopsideAUVPos, TopsideShipNav, DGPSHiPAPData, GPSData, DepthData, PressureData, DVLData, CTDData, MotionSensorData, HeadingData)
+- NavLab Binary Trajectory & Binary Pressure
+output_formats:
+- .nav (jcu_nav_rec binary)
+- .orientation (OMG_HDCS_attitude v3)
+- .jwc (OMG watercolumn SVP + ASCII text)
+related_tools:
+- mergeNav
+- mergeAtt
+- newMergeAtt
+- QNSYtoNav
+- stripNav
 ---
 
 # PNAVtoNav
@@ -30,22 +41,26 @@ PNAVtoNav [SUBFORMAT_FLAG] [OPTIONS] -comp <output_file> <input_file(s)>
 ### Common Workflow Examples
 
 **1. Convert HUGIN NavLab binary trajectory into an OMG `.nav` file (with AUV depth stored in `azi`):**
+
 ```bash
 PNAVtoNav -Binary_Trajectory -comp auv_navlab.nav navlab_traj.bin
 ```
 
 **2. Convert onboard AUV `DGPSHiPAPData.txt` (radians) or topside `TopsideAUVPos.txt` (degrees) to `.nav`:**
+
 ```bash
 PNAVtoNav -DGPSHiPAPData -comp hipap_auv.nav DGPSHiPAPData.txt
 PNAVtoNav -TopsideAUVPos -comp topside_auv.nav TopsideAUVPos.txt
 ```
 
 **3. Convert AUV `MotionSensorData.txt` or `HeadingData.txt` into an OMG `.orientation` attitude file:**
+
 ```bash
 PNAVtoNav -MotionSensorData -comp auv_motion.orientation MotionSensorData.txt
 ```
 
 **4. Convert AUV `ctd.txt` into an OMG `.jwc` watercolumn SVP file:**
+
 ```bash
 PNAVtoNav -CTDData -comp auv_ctd.txt ctd.txt
 # Produces auv_ctd.txt (ASCII) and auv_ctd.txt.jwc (binary watercolumn SVP)

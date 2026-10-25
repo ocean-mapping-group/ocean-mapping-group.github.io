@@ -1,14 +1,27 @@
 ---
 layout: default
 title: SE_global
-parent: SwathEd (SE) Tools
+parent: Swath Editor — swathed (SE)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 24
 tool_name: SE_global
 source_path: code/SE/SE_global.c
 category: Interactive QC & Editing (SwathEd)
-input_formats: [".merged", ".param", ".watercol", ".WC_Phase1", ".waveform", ".sonar_settings", ".target"]
+input_formats:
+- .merged
+- .param
+- .watercol
+- .WC_Phase1
+- .waveform
+- .sonar_settings
+- .target
 output_formats: []
-related_tools: ["swathed", "SE_init_variables", "SE_mainwin", "SE_omgIOwin", "SE_GEOwindows"]
+related_tools:
+- swathed
+- SE_init_variables
+- SE_mainwin
+- SE_omgIOwin
+- SE_GEOwindows
 ---
 
 # `SE_global.c` & `SE_global.h` — Global Data Structures, Constants & Dynamic Memory Allocator
@@ -38,12 +51,12 @@ Originally, `SE_global.h` declared large static arrays sized for `MAXFILES` (1,0
 ## Key Global Buffers & State Variables
 
 ### 1. The 100-Swath Working Matrices (`[SE_NO_MAX][SE_NO_SWATHS]`)
-When [`SE_omgIOwin.c`](SE_omgIOwin.md) (`prime_array`) loads a 100-ping block starting at `in_recnum`, it populates the following core 2D arrays:
+When [`SE_omgIOwin.c`](SE_omgIOwin.html) (`prime_array`) loads a 100-ping block starting at `in_recnum`, it populates the following core 2D arrays:
 - `float box[SE_NO_MAX][SE_NO_SWATHS]`: Working beam depths (meters). **Sign convention:** positive values (`> 0.0`) represent valid unflagged soundings; negative values (`< 0.0`) represent flagged/rejected soundings; `0.0` indicates an empty/invalid beam slot.
 - `float offsets[SE_NO_MAX][SE_NO_SWATHS]`: Across-track horizontal distances (meters, relative to the sonar transducer).
 - `float rot_box[][]`, `rot_offsets[][]`: Slope-detrended depths and across-track offsets when `detrend_flag` is active.
 - `float unrot_box[][]`, `unrot_offsets[][]`: Original un-detrended depths and offsets preserved during detrended viewing.
-- `float median_box[][]`, `std_dev_box[][]`: Local median-filtered depths and standard deviations used by the median filter in [`SE_mainwin.c`](SE_mainwin.md).
+- `float median_box[][]`, `std_dev_box[][]`: Local median-filtered depths and standard deviations used by the median filter in [`SE_mainwin.c`](SE_mainwin.html).
 - `unsigned char box_flags[SE_NO_MAX][SE_NO_SWATHS]`: 8-bit shift-register undo history per sounding (tracks the last 8 flagging/unflagging operations for `undo()`).
 - `unsigned char box_status[SE_NO_MAX][SE_NO_SWATHS]`: Raw HDCS `beam.status` bitmask preserved from disk.
 - `float qfactors[SE_NO_MAX][SE_NO_SWATHS]`: Ifremer quality factor (`beams[j].Ifremer_qfactor`) per sounding.
@@ -57,7 +70,7 @@ When [`SE_omgIOwin.c`](SE_omgIOwin.md) (`prime_array`) loads a 100-ping block st
 
 ## Dynamic Memory Allocation (`allocate_global_memory`)
 
-Defined in `SE_global.c` and called at the very start of `main()` in [`swathed.c`](swathed.md), `allocate_global_memory()` allocates:
+Defined in `SE_global.c` and called at the very start of `main()` in [`swathed.c`](swathed.html), `allocate_global_memory()` allocates:
 1. **Per-Ping Beam Arrays (`SE_NO_MAX = 1024`):** `beams`, `extra_beams`, `usl_beams`, `prebeams`, `beam_variance`, `beam_qfactors`, `beam_depth`, `beam_offset`.
 2. **Per-Swath Count Array (`SE_NO_SWATHS = 100`):** `loaded_beams`.
 3. **Per-File Arrays (`MAXFILES = 1000`):** `parameters`, `use`, `use_status`, `done_status`, `in_area`, `rdm_count`, `rbounds`, `inname`, `supplyname`, `rdmname`, `supply_rdmname`, `refrfile`, `target_list`.
@@ -67,5 +80,5 @@ Defined in `SE_global.c` and called at the very start of `main()` in [`swathed.c
 ---
 
 ## Integration within `swathed`
-- **Startup Initialization:** Immediately after `allocate_global_memory()` runs in `swathed.c`, [`SE_init_variables.c`](SE_init_variables.md) is `#include`d inline to assign default values to all variables declared in `SE_global.h`.
+- **Startup Initialization:** Immediately after `allocate_global_memory()` runs in `swathed.c`, [`SE_init_variables.c`](SE_init_variables.html) is `#include`d inline to assign default values to all variables declared in `SE_global.h`.
 - **Cross-Module Coordination:** Every window module in `code/SE/` reads and updates `selected_swath`, `selected_beam`, `in_recnum`, `current_file`, and `box[][]` declared in `SE_global.h` to keep cursor highlighting and flagging synchronized across all open X11 windows.

@@ -1,10 +1,11 @@
 ---
 layout: default
 title: view_sel
-parent: Mock Tools
-grand_parent: sidescan
+parent: Sidescan Radiometric & Geometric Suite (sidescan)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 17
 ---
+
 # view_sel
 
 ## Description
@@ -17,6 +18,7 @@ nav_order: 17
 This tool is a powerful interactive environment for exploring the statistical relationship between backscatter and grazing angle within specific areas of interest in sidescan imagery.
 
 ## Usage
+
 ```bash
 view_sel [-table <prefix>] [-bksct <bksct_file>] [-imping <imping_file>] [-class <class_file>] [-range <low> <high>] [-dB <min_dB> <max_dB>] [-min_graz <angle>] [-view] [-image <image_file>] [-color <value>] [-top_y <y0>] [-bot_y <y1>] [-left_x <x0>] [-right_x <x1>] [-topo <topo_file>]
 ```

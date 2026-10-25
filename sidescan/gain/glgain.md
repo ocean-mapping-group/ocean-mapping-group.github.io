@@ -1,16 +1,18 @@
 ---
 layout: default
 title: glgain
-parent: Gain Tools
-grand_parent: sidescan
+parent: Sidescan Radiometric & Geometric Suite (sidescan)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 2
 ---
+
 # glgain
 
 ## Description
 `glgain` is a utility designed to apply gain adjustments to JCU GLORIA format sidescan files. It allows for independent control over the port and starboard sides, applying either multiplicative or additive gain factors. Additionally, it includes a `fixsb` flag that performs specific hardcoded manipulations on pixel values, likely for a particular sensor or data anomaly.
 
 ## Usage
+
 ```bash
 glgain [-add] [-fixsb] [-start <ping>] [-end <ping>] [-port <gain_value>] [-stbd <gain_value>] <infile> <outfile>
 ```

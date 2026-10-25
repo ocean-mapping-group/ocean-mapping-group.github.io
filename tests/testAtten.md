@@ -1,24 +1,25 @@
 ---
 layout: default
 title: testAtten
-parent: tests (Test, Simulation & Diagnostic Suite)
+parent: Acoustic & Mathematical Test Harnesses (tests)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 nav_order: 18
 tool_name: testAtten
 source_path: code/tests/testAtten.c
 category: Seawater Sound Speed & Acoustic Attenuation (tests)
 input_formats:
-  - Interactive stdin (Temp, Salinity, Depth, Frequency, pH)
-  - 8-column ASCII CTD cast (-convert)
-  - OMG j_watercolumn SVP/CTD file (-custom122, -custom710)
+- Interactive stdin (Temp, Salinity, Depth, Frequency, pH)
+- 8-column ASCII CTD cast (-convert)
+- OMG j_watercolumn SVP/CTD file (-custom122, -custom710)
 output_formats:
-  - Interactive absorption coefficient on stdout (dB/km)
-  - OMG ASCII multi-curve plot files (<outfile>, <outfile>.sal, <outfile>.tem, <outfile>.cum)
+- Interactive absorption coefficient on stdout (dB/km)
+- OMG ASCII multi-curve plot files (<outfile>, <outfile>.sal, <outfile>.tem, <outfile>.cum)
 related_tools:
-  - testSV
-  - speed2salinity
-  - speedtosalinity
-  - comboASCIIParam2
-  - BatchProcEK
+- testSV
+- speed2salinity
+- speedtosalinity
+- comboASCIIParam2
+- BatchProcEK
 ---
 
 # testAtten
@@ -62,7 +63,7 @@ testAtten [-v] (-convert | -table [-depth <m>] | -custom122 | -custom710) [<infi
 
 ## Water-Column Interpolation & Cumulative Absorption (`-custom122` / `-custom710`)
 
-In multibeam backscatter radiometric correction (such as [`deTVG`](../omg/deTVG.md) or [`read_kmall`](../kmall/read_kmall.md)), a constant absorption coefficient set in the sonar runtime parameters often differs from the true depth-integrated absorption along a ray path through a stratified thermocline/halocline.
+In multibeam backscatter radiometric correction (such as [`deTVG`](../omg/deTVG.html) or [`read_kmall`](../kmall/read_kmall.html)), a constant absorption coefficient set in the sonar runtime parameters often differs from the true depth-integrated absorption along a ray path through a stratified thermocline/halocline.
 
 In `-custom122` and `-custom710` modes, `testAtten` reads `wc_in.raw_zv[k]` from the input SVP/CTD file and performs linear depth interpolation for each depth step $z_i$:
 

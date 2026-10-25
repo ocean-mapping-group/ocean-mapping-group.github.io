@@ -1,9 +1,11 @@
 ---
 layout: default
 title: parseBIST
-parent: Plot Tools
+parent: PostScript & Vector Plotting (plot)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 129
 ---
+
 # parseBIST
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 129
 The tool supports parsing BIST reports for dual RX (receiver) systems like the EM2040 and can distinguish between port and starboard receivers.
 
 ## Usage
+
 ```bash
 parseBIST <BIST_file(s)> (-rxspecnoise | -rxelemnoise) [-dualRx2040] [-v]
 ```

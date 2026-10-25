@@ -1,16 +1,18 @@
 ---
 layout: default
 title: debeam
-parent: Beammap Tools
-grand_parent: sidescan
+parent: Sidescan Radiometric & Geometric Suite (sidescan)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 1
 ---
+
 # debeam
 
 ## Description
 `debeam` is a utility designed to normalize the amplitudes of a sidescan (GLORIA/MR1) image across the swath. It uses a depth-dependent function, empirically derived from a large number of swaths (presumably using a tool like `mabeam`), to correct for beam pattern variations. The tool performs linear interpolation between depth bins for a smoother correction.
 
 ## Usage
+
 ```bash
 debeam <meanfile> <file1> [file2 ...]
 ```

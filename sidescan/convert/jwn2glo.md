@@ -1,16 +1,18 @@
 ---
 layout: default
 title: jwn2glo
-parent: Convert Tools
-grand_parent: sidescan
+parent: Sidescan Radiometric & Geometric Suite (sidescan)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 2
 ---
+
 # jwn2glo
 
 ## Description
 `jwn2glo` is a utility designed to convert Jacques Whitford Nortech sidescan format data to JCU GLORIA format. It handles various time and position data sources within the Nortech format, allowing for flexible conversion.
 
 ## Usage
+
 ```bash
 jwn2glo [-v] [-log] [-leapyear] [-usezdatime | -usenavtime] [-usezdaDMY] [-maxpingsperfile <value>] [-range <min> <max>] [-digrate <value>] -in <infile> -out <outfile_prefix>
 ```

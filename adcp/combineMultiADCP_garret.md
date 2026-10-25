@@ -1,20 +1,21 @@
 ---
 layout: default
 title: combineMultiADCP_garret
-parent: ADCP Tools
+parent: Teledyne RDI ADCP Processing (adcp)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 5
 tool_name: combineMultiADCP_garret
 source_path: code/adcp/combineMultiADCP_garret.c
 category: adcp
 input_formats:
-  - jcu_nav Depth-Averaged ADCP Vectors (.nav)
-  - JHC Grid (.r4 / .8bit)
+- jcu_nav Depth-Averaged ADCP Vectors (.nav)
+- JHC Grid (.r4 / .8bit)
 output_formats:
-  - jcu_nav Phase-Averaged Vectors (.phase###)
+- jcu_nav Phase-Averaged Vectors (.phase###)
 related_tools:
-  - combineMultiADCP
-  - combineMultiADCP_wshiftoption
-  - calc_ellipse2
+- combineMultiADCP
+- combineMultiADCP_wshiftoption
+- calc_ellipse2
 ---
 
 # combineMultiADCP_garret
@@ -22,9 +23,10 @@ related_tools:
 ## Description
 `combineMultiADCP_garret` is a command-line utility used to process and combine depth-averaged ADCP (Acoustic Doppler Current Profiler) data from multiple tidal cycles. The tool reads data in `jcu_nav` navigation format, sorts the vectors by tidal phase and spatial location, and bins them using a provided grid. It then calculates a temporally averaged vector for each bin at discrete phase steps through the tidal cycle.
 
-This version of the tool is functionally equivalent to [`combineMultiADCP`](combineMultiADCP.md), customized for Bay of Fundy / Garrett tidal current studies.
+This version of the tool is functionally equivalent to [`combineMultiADCP`](combineMultiADCP.html), customized for Bay of Fundy / Garrett tidal current studies.
 
 ## Usage
+
 ```bash
 combineMultiADCP_garret [OPTIONS] -grid <coarseDTM> -out <outfilenameprefix> -in <infilename(s)>
 ```

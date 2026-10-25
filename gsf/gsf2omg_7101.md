@@ -1,14 +1,25 @@
 ---
 layout: default
 title: gsf2omg_7101
-parent: GSF Tools
+parent: Generic Sensor Format — GSF (gsf)
+grand_parent: 4. Multi-Vendor Sonar & LiDAR Converters
 nav_order: 2
 tool_name: gsf2omg_7101
 source_path: code/gsf/gsf2omg_7101.c
 category: Raw Data Unraveling
-input_formats: [".gsf"]
-output_formats: [".merged", ".merged.ss_data", ".sonar_settings", ".nav"]
-related_tools: ["gsf2omg", "7k2omg", "gsftest", "omg2gsf", "mergeNav"]
+input_formats:
+- .gsf
+output_formats:
+- .merged
+- .merged.ss_data
+- .sonar_settings
+- .nav
+related_tools:
+- gsf2omg
+- 7k2omg
+- gsftest
+- omg2gsf
+- mergeNav
 ---
 
 # gsf2omg_7101
@@ -17,6 +28,7 @@ related_tools: ["gsf2omg", "7k2omg", "gsftest", "omg2gsf", "mergeNav"]
 `gsf2omg_7101` converts GSF (`GSF_RECORD_SWATH_BATHYMETRY_PING`) files logged from Reson SeaBat 7101 / 7125 systems (or Kongsberg EM122 systems when `-sonar_EM122` is specified) into OMG-HDCS v4 `.merged`, `.merged.ss_data`, `.sonar_settings`, and `.nav` files using the full `gsf_lib` library. For Reson 7100-series data, it reconstructs synthetic 7k `7000` Sonar Settings records (`RESON_7K_7000_SIZE`) from the `t_gsfReson7100Specific` subrecord and extracts Bathymetric Receive Beam (`brb_inten`) snippet time series into `.merged.ss_data`.
 
 ## Usage
+
 ```bash
 gsf2omg_7101 [-sonar_EM122] -in <filename.gsf> -omg <prefix>
 ```
@@ -37,11 +49,13 @@ gsf2omg_7101 [-sonar_EM122] -in <filename.gsf> -omg <prefix>
 ## Practical Examples
 
 **1. Convert a Reson 7101/7125 GSF file into OMG-HDCS v4 files:**
+
 ```bash
 gsf2omg_7101 -in survey_7101.gsf -omg survey_7101
 ```
 
 **2. Convert a Kongsberg EM122 GSF file (e.g., USNS Maury) into OMG-HDCS v4:**
+
 ```bash
 gsf2omg_7101 -sonar_EM122 -in maury_em122.gsf -omg maury_em122
 ```

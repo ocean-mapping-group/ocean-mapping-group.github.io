@@ -1,9 +1,11 @@
 ---
 layout: default
 title: make_motionTS
-parent: QC Tools
+parent: Multibeam Quality Control (QC)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 157
 ---
+
 # make_motionTS
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 157
 This tool is useful for creating controlled test data for Quality Control (QC) purposes, such as testing motion compensation algorithms or analyzing the response of processing routines to specific types of vessel motion.
 
 ## Usage
+
 ```bash
 make_motionTS [-v] [-roll <start_time> <stop_time> <start_period> <stop_period> <peak_amplitude>] [-pitch ...] [-heading ...] [-heave ...]
 ```
@@ -43,6 +46,7 @@ make_motionTS [-v] [-roll <start_time> <stop_time> <start_period> <stop_period> 
             *   A cosine-squared `taper` is applied to the `value` to smooth the onset and offset of the motion.
             *   This `value` is added to the corresponding motion component (roll, pitch, heading, or heave) in the `timeSeries` array.
 3.  **Output:** Writes the generated `timeSeries` to an ASCII file named `fake.ts`. The output format is:
+
     ```
     <total_number_of_samples>
     <time> <roll> <pitch> <heading> <heave>

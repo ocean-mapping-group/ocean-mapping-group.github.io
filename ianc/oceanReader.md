@@ -1,14 +1,29 @@
 ---
 layout: default
 title: oceanReader
-parent: Ian Church (ianc) Tools
+parent: Ian Church — Hydrodynamic & 3D Ray-Trace Suite (ianc)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 nav_order: 9
 tool_name: oceanReader
 source_path: code/ianc/oceanReader.c
 category: Ocean Modeling & Hydrographic Utilities (ianc)
-input_formats: ["MVP .m1 Casts (.m1)", "CARIS SVP (.svp)", "ISIIS Towed Vehicle CSV", "RDI ADCP / WinADCP", "OMG Attitude (.orientation)", "OMG Binary Navigation (.nav)"]
-output_formats: ["OMG Extended SVP (.svp)", "Ocean Data View (.txt)", "OMG Binary Navigation (.nav)"]
-related_tools: ["modelAnalysis", "HycomSSP", "iwc_water", "iwc_adcp", "iwc_support"]
+input_formats:
+- MVP .m1 Casts (.m1)
+- CARIS SVP (.svp)
+- ISIIS Towed Vehicle CSV
+- RDI ADCP / WinADCP
+- OMG Attitude (.orientation)
+- OMG Binary Navigation (.nav)
+output_formats:
+- OMG Extended SVP (.svp)
+- Ocean Data View (.txt)
+- OMG Binary Navigation (.nav)
+related_tools:
+- modelAnalysis
+- HycomSSP
+- iwc_water
+- iwc_adcp
+- iwc_support
 ---
 
 # oceanReader

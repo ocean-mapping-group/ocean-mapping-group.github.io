@@ -1,14 +1,23 @@
 ---
 layout: default
 title: pdi_funcs
-parent: SwathEd (SE) Tools
+parent: Swath Editor — swathed (SE)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 35
 tool_name: pdi_funcs
 source_path: code/SE/pdi_funcs.c
 category: Interactive QC & Editing (SwathEd)
-input_formats: [".WC_Phase1", ".watercol", ".merged"]
+input_formats:
+- .WC_Phase1
+- .watercol
+- .merged
 output_formats: []
-related_tools: ["SE_PDI_LA", "bdi_funcs", "SE_BDI_DP", "SE_WaterColumn", "swathed"]
+related_tools:
+- SE_PDI_LA
+- bdi_funcs
+- SE_BDI_DP
+- SE_WaterColumn
+- swathed
 ---
 
 # `pdi_funcs.c` — Phase-Direction Indicator (PDI) Constant-Time-Slice Zero-Crossing Picker
@@ -16,7 +25,7 @@ related_tools: ["SE_PDI_LA", "bdi_funcs", "SE_BDI_DP", "SE_WaterColumn", "swathe
 ## Overview & Purpose
 `pdi_funcs.c` and `pdi_funcs.h` (authored by Leo and John E. Hughes Clarke, October 2019) implement the standalone **Phase-Direction Indicator (PDI)** sub-beam angle refinement algorithm for Kongsberg `.kmall` / `.kmwcd` water-column differential phase data (`<prefix>.WC_Phase1`).
 
-Introduced following the June 2019 USNS *Bowditch* EM124 trials (where Kongsberg `.kmwcd` datagrams began providing full split-beam differential phase time series for every receive beam in addition to amplitude), `pdi_funcs.c` builds directly on top of the amplitude-based **Beam-Direction Indicator (BDI)** picks from [`bdi_funcs.c`](bdi_funcs.md). Whereas conventional multibeam phase detection fixes a receive beam and fits a linear phase ramp across time samples (which fails near normal incidence or on steep/vertical features where the echo is only 1–2 samples long), **PDI operates at a constant Two-Way Travel Time (TWTT) slice across adjacent receive beams**, locating the exact zero-crossing of the split-beam phase difference across the receive array around each BDI amplitude peak.
+Introduced following the June 2019 USNS *Bowditch* EM124 trials (where Kongsberg `.kmwcd` datagrams began providing full split-beam differential phase time series for every receive beam in addition to amplitude), `pdi_funcs.c` builds directly on top of the amplitude-based **Beam-Direction Indicator (BDI)** picks from [`bdi_funcs.c`](bdi_funcs.html). Whereas conventional multibeam phase detection fixes a receive beam and fits a linear phase ramp across time samples (which fails near normal incidence or on steep/vertical features where the echo is only 1–2 samples long), **PDI operates at a constant Two-Way Travel Time (TWTT) slice across adjacent receive beams**, locating the exact zero-crossing of the split-beam phase difference across the receive array around each BDI amplitude peak.
 
 ---
 
@@ -62,4 +71,4 @@ For each time slice `this_TWTT > first_arrival` and each candidate BDI peak `j` 
 ---
 
 ## Integration within `swathed`
-- **Interactive Water Column Phase Inspection ([`SE_PDI_LA.c`](SE_PDI_LA.md) & [`SE_WaterColumn.c`](SE_WaterColumn.md)):** When `.WC_Phase1` is loaded (`GOT_WCP == 1` in [`SE_omgIOwin.c`](SE_omgIOwin.md)), `after_BDI_PDI_pick_Angle_Peaks()` is invoked after BDI peak picking so the user can compare BDI amplitude parabola picks (`WC_BDI_pick`) directly against PDI across-beam phase zero-crossing picks (`WC_PDI_pick`) on the 2D water-column fan and constant-time-slice diagnostic plots.
+- **Interactive Water Column Phase Inspection ([`SE_PDI_LA.c`](SE_PDI_LA.html) & [`SE_WaterColumn.c`](SE_WaterColumn.html)):** When `.WC_Phase1` is loaded (`GOT_WCP == 1` in [`SE_omgIOwin.c`](SE_omgIOwin.html)), `after_BDI_PDI_pick_Angle_Peaks()` is invoked after BDI peak picking so the user can compare BDI amplitude parabola picks (`WC_BDI_pick`) directly against PDI across-beam phase zero-crossing picks (`WC_PDI_pick`) on the 2D water-column fan and constant-time-slice diagnostic plots.

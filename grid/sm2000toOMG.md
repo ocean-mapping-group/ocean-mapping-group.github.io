@@ -1,13 +1,20 @@
 ---
 layout: default
 title: sm2000toOMG
-parent: Grid Tools
+parent: Bathymetric Gridding & Export (grid)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 tool_name: sm2000toOMG
 source_path: code/grid/sm2000toOMG.c
 category: gridding
-input_formats: ["Kongsberg Mesotech SM2000 Raw IQ Telemetry"]
-output_formats: ["OMG HDCS (.merged)", "8-bit Beamformed Magnitude/Phase Rasters", "ASCII Beam Diagnostics (dump_MP, dump_IQ)"]
-related_tools: ["weigh_grid", "mosaic"]
+input_formats:
+- Kongsberg Mesotech SM2000 Raw IQ Telemetry
+output_formats:
+- OMG HDCS (.merged)
+- 8-bit Beamformed Magnitude/Phase Rasters
+- ASCII Beam Diagnostics (dump_MP, dump_IQ)
+related_tools:
+- weigh_grid
+- mosaic
 ---
 
 # sm2000toOMG
@@ -64,6 +71,7 @@ sm2000toOMG [OPTIONS] <sm2000_fileprefix> <OMGfileprefix>
 ## Examples
 
 ### Process raw SM2000 stave data using cosine-squared shading and split-phase bottom detection
+
 ```bash
 sm2000toOMG -plusphase -cos_squared -swath_sector 120 -dBRange 15 85 raw_sm2k_01 omg_sm2k_01
 ```

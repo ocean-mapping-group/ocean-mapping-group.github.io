@@ -1,23 +1,24 @@
 ---
 layout: default
 title: makefile (sub2k)
-parent: Submetrix ISIS (sub2k) Interferometric Sonar Tools
+parent: GeoSwath+ / Submetrix 2000 CLI (sub2k)
+grand_parent: 4. Multi-Vendor Sonar & LiDAR Converters
 nav_order: 9
 tool_name: makefile
 source_path: sub2k/makefile
 category: sub2k
 input_formats:
-  - C source files (.c, .h)
+- C source files (.c, .h)
 output_formats:
-  - Executables (readSUB2K, convSUB16, testWrap, readSWA, openISIS)
-  - Object library (j_SUB2K.o)
+- Executables (readSUB2K, convSUB16, testWrap, readSWA, openISIS)
+- Object library (j_SUB2K.o)
 related_tools:
-  - makefile_BWD
-  - readSUB2K
-  - convSUB16
-  - readSWA
-  - openISIS
-  - testWrap
+- makefile_BWD
+- readSUB2K
+- convSUB16
+- readSWA
+- openISIS
+- testWrap
 ---
 
 # `makefile` (`sub2k/makefile`) — Build Configuration for Submetrix ISIS Tools

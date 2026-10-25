@@ -1,15 +1,18 @@
 ---
 layout: default
 title: parse_Bscorr.h
-parent: OMG Tools
+parent: Core Swath & .all Suite (omg)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 48
 ---
+
 # parse_Bscorr.h
 
 ## Description
 `parse_Bscorr.h` is a header file that defines the data structure and utility macros used by `parse_Bscorr.c` for handling EM710 Bscorr (Backscatter Correction) files.
 
 ## Structure
+
 ```c
 typedef struct EM710_Bscorr
 {
@@ -27,6 +30,7 @@ typedef struct EM710_Bscorr
 *   `sector_source_level_memory_allocated`: An integer flag (boolean) to track if memory for `sector_source_level` has been successfully allocated.
 
 ## Macro
+
 ```c
 #define round(x) ((x)>=0?(long)((x)+0.5):(long)((x)-0.5))
 ```

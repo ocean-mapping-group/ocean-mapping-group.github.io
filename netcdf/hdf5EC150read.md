@@ -1,14 +1,27 @@
 ---
 layout: default
 title: hdf5EC150read
-parent: NetCDF & HDF5 Tools (netcdf)
+parent: NetCDF & HDF5 Ocean/Sonar Readers (netcdf)
+grand_parent: 4. Multi-Vendor Sonar & LiDAR Converters
 nav_order: 1
 tool_name: hdf5EC150read
 source_path: code/netcdf/hdf5EC150read.c
 category: Oceanographic & Acoustic NetCDF/HDF5 Readers
-input_formats: [".nc", ".h5 (Kongsberg Simrad EC150-3C / ES38-7 SONAR-netCDF4)"]
-output_formats: [".N.r4", ".E.r4", ".D.r4", ".Q.r4", ".nav", ".motion"]
-related_tools: ["ncEC150read", "ncCopernicusRead", "ncread", "jview"]
+input_formats:
+- .nc
+- .h5 (Kongsberg Simrad EC150-3C / ES38-7 SONAR-netCDF4)
+output_formats:
+- .N.r4
+- .E.r4
+- .D.r4
+- .Q.r4
+- .nav
+- .motion
+related_tools:
+- ncEC150read
+- ncCopernicusRead
+- ncread
+- jview
 ---
 
 # hdf5EC150read
@@ -17,7 +30,7 @@ related_tools: ["ncEC150read", "ncCopernicusRead", "ncread", "jview"]
 
 `hdf5EC150read` (`code/netcdf/hdf5EC150read.c`) is a specialized HDF5 acoustic and current-profiling unpacker written by John Hughes Clarke (initiated aboard *USNS Heezen* in March 2023 and updated through September–October 2025) to extract **Kongsberg Simrad EC150-3C** combined split-beam echosounder / ADCP and **ES38-7** wideband transceiver datasets from ICES SONAR-netCDF4 (`.nc`) files.
 
-Because Kongsberg's SONAR-netCDF4 implementation stores per-ping ADCP velocity profiles and wideband complex backscatter traces as **HDF5 Variable-Length (`hvl_t` / `H5Tvlen_create`)** arrays inside nested HDF5 groups (`/Sonar/Beam_group1/ADCP/...`), standard NetCDF-C array calls in [`ncEC150read`](ncEC150read.md) could not directly unpack them. `hdf5EC150read` uses the native `libhdf5` API (`H5Fopen`, `H5Ovisit`, `H5Dopen`, `H5Tvlen_create`, `H5Dread`) to read multi-file survey lines, convert Windows NT 1601 nanosecond timestamps to Unix epoch seconds, write per-file `.nav` and `.motion` files, vertically resample/bin raw or time-averaged ADCP currents, trim sidelobe bottom echoes, and append the resulting profiles across multiple input files into continuous OMG `.r4` floating-point curtain grids (`.N.r4`, `.E.r4`, `.D.r4`, `.Q.r4`).
+Because Kongsberg's SONAR-netCDF4 implementation stores per-ping ADCP velocity profiles and wideband complex backscatter traces as **HDF5 Variable-Length (`hvl_t` / `H5Tvlen_create`)** arrays inside nested HDF5 groups (`/Sonar/Beam_group1/ADCP/...`), standard NetCDF-C array calls in [`ncEC150read`](ncEC150read.html) could not directly unpack them. `hdf5EC150read` uses the native `libhdf5` API (`H5Fopen`, `H5Ovisit`, `H5Dopen`, `H5Tvlen_create`, `H5Dread`) to read multi-file survey lines, convert Windows NT 1601 nanosecond timestamps to Unix epoch seconds, write per-file `.nav` and `.motion` files, vertically resample/bin raw or time-averaged ADCP currents, trim sidelobe bottom echoes, and append the resulting profiles across multiple input files into continuous OMG `.r4` floating-point curtain grids (`.N.r4`, `.E.r4`, `.D.r4`, `.Q.r4`).
 
 ---
 
@@ -85,4 +98,4 @@ The global `Ping_Cycle ping_cycle` structure (`code/netcdf/hdf5EC150read.c`, lin
 When `-grab_EC150_currents` is active:
 1. Each valid (non-`NaN`) sample $k$ at depth $z_k = k \cdot \text{vert\_samp\_intvl} + \text{depth\_first\_sam\_cen}$ with `quality[j][k] > 50` is accumulated into overlapping vertical bins (`vstep` spacing, `vbin` window width).
 2. To suppress acoustic sidelobe contamination near the seabed, `hdf5EC150read` inspects the 4-beam `slant_range_to_bottom[j][0..3]`, finds `min_slant_range - bin_length[j]`, projects it to vertical depth via $\cos(20^\circ)$ (`guess_vdepth = min_slant_range * cos(20.0 * M_PI / 180.0)`), and zeroes out `bin_av_geo_N/E/D` below `trim_pix = guess_vdepth / vstep`.
-3. Appends the ping columns to `<out>.N.r4`, `<out>.E.r4`, `<out>.D.r4`, and `<out>.Q.r4`, updating `JHChead.dy` and `JHChead.ymax` across all input files for seamless curtain visualization in [`jview`](../JV/jview.md).
+3. Appends the ping columns to `<out>.N.r4`, `<out>.E.r4`, `<out>.D.r4`, and `<out>.Q.r4`, updating `JHChead.dy` and `JHChead.ymax` across all input files for seamless curtain visualization in [`jview`](../JV/jview.html).

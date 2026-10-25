@@ -1,9 +1,11 @@
 ---
 layout: default
 title: correctBS
-parent: OMG Tools
+parent: Core Swath & .all Suite (omg)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 83
 ---
+
 # correctBS
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 83
 The tool uses a Digital Terrain Model (DTM) for true seabed slope, and can incorporate raytracing-derived look-up tables (LUTs) for grazing angle, aspherical spreading, and beam angles. It can also identify shadowed areas and apply a mock backscatter calculation.
 
 ## Usage
+
 ```bash
 correctBS <OMG_HDCS_merged_file(s)> -topo <DTM_file(.r4)> [OPTIONS]
 ```

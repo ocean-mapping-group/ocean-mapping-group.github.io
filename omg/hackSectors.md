@@ -1,9 +1,11 @@
 ---
 layout: default
 title: hackSectors
-parent: OMG Tools
+parent: Core Swath & .all Suite (omg)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 34
 ---
+
 # hackSectors
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 34
 The tool applies a user-specified depth adjustment to outer beams, modifying the input merged file(s) in place. It also provides diagnostic output regarding yaw steering.
 
 ## Usage
+
 ```bash
 hackSectors <-depthscale <factor> | -depthoffset <meters>> <mergefile(s)> [-v]
 ```
@@ -19,12 +22,14 @@ hackSectors <-depthscale <factor> | -depthoffset <meters>> <mergefile(s)> [-v]
 ## Arguments
 
 ### Depth Adjustment Method (Choose one)
+
 | Option | Description |
 |---|---|
 | `-depthscale <factor>` | Multiplies the `observedDepth` of affected beams by the specified `<factor>` (e.g., `1.005` to increase depth by 0.5%). |
 | `-depthoffset <meters>` | Adds a constant depth offset (in meters) to the `observedDepth` of affected beams. |
 
 ### Other Options
+
 | Option | Description |
 |---|---|
 | `<mergefile(s)>` | **Required.** One or more OMG-HDCS merged files to be corrected. The tool modifies these files in place. |

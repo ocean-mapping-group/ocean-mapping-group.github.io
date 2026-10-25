@@ -1,14 +1,21 @@
 ---
 layout: default
 title: expand
-parent: Image Tools
+parent: Raster Image Processing (image)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 20
 tool_name: expand
 source_path: code/image/expand.c
 category: Image & Raster Processing
-input_formats: ["OMG1 8-bit array (JHC_header)"]
-output_formats: ["Upsampled (or downsampled) OMG1 8-bit array"]
-related_tools: ["expandr4", "decimate", "changeAspect", "stretchacres"]
+input_formats:
+- OMG1 8-bit array (JHC_header)
+output_formats:
+- Upsampled (or downsampled) OMG1 8-bit array
+related_tools:
+- expandr4
+- decimate
+- changeAspect
+- stretchacres
 ---
 
 # expand
@@ -17,6 +24,7 @@ related_tools: ["expandr4", "decimate", "changeAspect", "stretchacres"]
 `expand` upsamples an 8-bit `OMG1` (`JHC_header`) raster by an integer factor (`-factor > 1`), or decimates it when given a negative factor (`-factor < -1`). When upsampling, it supports either pixel replication (default) or two-pass separable bilinear interpolation (`-interp`), optionally preserving masked background pixels (`-mask`, default `255`).
 
 ## CLI Options & Usage
+
 ```bash
 expand -in <infile> -out <outfile> -factor <n> [-interp] [-mask]
 ```

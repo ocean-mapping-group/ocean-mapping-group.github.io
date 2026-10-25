@@ -1,15 +1,18 @@
 ---
 layout: default
 title: getSnippetBP
-parent: OMG Tools
+parent: Core Swath & .all Suite (omg)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 31
 ---
+
 # getSnippetBP
 
 ## Description
 `getSnippetBP` is a specialized command-line utility for analyzing sidescan snippets from Reson multibeam data to derive the sonar's receive beam pattern (BP). This tool infers the receive BP by examining how backscatter intensity within a small section of the sidescan trace (the "snippet" around the bottom detection) changes with the angle relative to the beam's central axis.
 
 ## Usage
+
 ```bash
 getSnippetBP -dtm <dtm.r4> <input_merged_files(s)> [OPTIONS]
 ```

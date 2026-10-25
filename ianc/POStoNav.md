@@ -1,14 +1,20 @@
 ---
 layout: default
 title: POStoNav
-parent: Ian Church (ianc) Tools
+parent: Ian Church — Hydrodynamic & 3D Ray-Trace Suite (ianc)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 nav_order: 3
 tool_name: POStoNav
 source_path: code/ianc/POStoNav.c
 category: Ocean Modeling & Hydrographic Utilities (ianc)
-input_formats: ["GPSpace ASCII Position (.pos)"]
-output_formats: ["OMG Binary Navigation (.nav)", "Time-Reversed OMG Binary Navigation (.nav.flip)"]
-related_tools: ["Check_Nav", "areaNavEdit"]
+input_formats:
+- GPSpace ASCII Position (.pos)
+output_formats:
+- OMG Binary Navigation (.nav)
+- Time-Reversed OMG Binary Navigation (.nav.flip)
+related_tools:
+- Check_Nav
+- areaNavEdit
 ---
 
 # POStoNav
@@ -53,6 +59,7 @@ POStoNav -v -flip -skip 6 -comp merged_gps.nav day182.pos day183.pos
 
 ### Input Format: GPSpace ASCII (`.pos`)
 Each input file begins with an 8-line text header (which `POStoNav` reads and echoes to `stdout` before printing `Skipped Header`), followed by fixed-width data lines containing columns:
+
 ```text
 STATION   DD-MM-YY   HR:MN:SS     GDOP   RES   ECEF-X(m)   ECEF-Y(m)   ECEF-Z(m)   LATDD LATMN LATSS   LONDD LONMN LONSS   HGT(m) ...
 ```

@@ -1,14 +1,22 @@
 ---
 layout: default
 title: calcSpeedHead
-parent: Navigation Tools
+parent: Navigation Processing (nav)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 14
 tool_name: calcSpeedHead
 source_path: code/nav/calcSpeedHead.c
 category: Navigation & Georeferencing
-input_formats: [".nav (jcu_nav_rec binary)"]
-output_formats: [".nav (modified in-place)"]
-related_tools: ["mergeNav", "stripNav", "dumpnav", "filtnav", "avNav"]
+input_formats:
+- .nav (jcu_nav_rec binary)
+output_formats:
+- .nav (modified in-place)
+related_tools:
+- mergeNav
+- stripNav
+- dumpnav
+- filtnav
+- avNav
 ---
 
 # calcSpeedHead
@@ -32,11 +40,13 @@ calcSpeedHead [OPTIONS] <navfile(s)>
 ### Common Workflow Examples
 
 **1. Compute speed and course in-place for one or more `.nav` files:**
+
 ```bash
 calcSpeedHead merged/JD100/0001_line.nav
 ```
 
 **2. Run with quality-control warnings for time steps outside $[0.05, 0.25]\text{ s}$ and speeds outside $[1.0, 5.0]\text{ m/s}$:**
+
 ```bash
 calcSpeedHead -check -allowed_mpers 1.0 5.0 -allowed_dtime 0.05 0.25 merged/JD100/*.nav
 ```
@@ -69,6 +79,7 @@ calcSpeedHead -check -allowed_mpers 1.0 5.0 -allowed_dtime 0.05 0.25 merged/JD10
    * **Quality Checks (`-check`):** Emits `warning()` messages if `dtime < mindtime`, `dtime > maxdtime`, `dtime == 0.0`, `velocity > maxvel`, `velocity < minvel`, or `velocity == 0.0`.
    * **In-Place Record Update:** Stores `tide_rec.depth = azi * 100.0` and `tide_rec.velocity = velocity`, writes `tide_rec` back to index `k` (and on the first iteration `tide_rec_no == 0`, also copies `velocity` and `depth` back into Record `0`).
 3. At the end of each file, prints summary averages across the line:
+
    ```text
    Averages -- dtime <av_Dtime> Azi <av_Azi> Speed <av_Speed> Velocity <av_Velocity>
    ```

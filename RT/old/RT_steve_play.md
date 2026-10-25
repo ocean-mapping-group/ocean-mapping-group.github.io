@@ -1,7 +1,8 @@
 ---
 layout: default
 title: RT steve play
-parent: RT Tools
+parent: Real-Time Multibeam Display (RT)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 5
 ---
 

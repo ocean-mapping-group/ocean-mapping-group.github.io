@@ -1,9 +1,11 @@
 ---
 layout: default
 title: mergeOpWave
-parent: Optech Tools
+parent: Optech SHOALS Bathymetric LiDAR (Optech)
+grand_parent: 4. Multi-Vendor Sonar & LiDAR Converters
 nav_order: 117
 ---
+
 # mergeOpWave
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 117
 This tool is essential for linking the detailed waveform information to the final detected depths, allowing for more advanced analysis of bottom detection confidence, water column properties, and seafloor characteristics.
 
 ## Usage
+
 ```bash
 mergeOpWave -bathy <bathyfilename(s)> -waves <wavefilename(s)>
 ```

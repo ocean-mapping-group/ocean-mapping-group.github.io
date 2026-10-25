@@ -1,16 +1,18 @@
 ---
 layout: default
 title: editazi
-parent: Sidescan Tools
-grand_parent: azibat
+parent: Sidescan Radiometric & Geometric Suite (sidescan)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 1
 ---
+
 # editazi
 
 ## Description
 `editazi` is a utility used to edit the azimuth of a JCU format sidescan image to create a more coherent image. It looks for singular bad azimuths (over a threshold different from both the azimuth behind and that in front). It also has an option to handle repeated azimuth values.
 
 ## Usage
+
 ```bash
 editazi [-v] [-r] [-t <threshold>] <infile> <outfile>
 ```

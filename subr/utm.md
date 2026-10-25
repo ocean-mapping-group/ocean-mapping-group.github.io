@@ -1,12 +1,18 @@
 ---
 layout: default
 title: utm
-parent: Shared Core Libraries (subr)
-module_name: utm
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/utm.c
-header_path: code/subr/utm.h
 category: Map Projections, Ellipsoids & Geodesy
-related_tools: ["geoutm", "utmgeo", "j_proj", "geographic", "array"]
+related_tools:
+- geoutm
+- utmgeo
+- j_proj
+- geographic
+- array
+module_name: utm
+header_path: code/subr/utm.h
 ---
 
 # utm
@@ -14,7 +20,7 @@ related_tools: ["geoutm", "utmgeo", "j_proj", "geographic", "array"]
 ## Overview
 `utm` (`utm.c` / `utm.h`) provides both the forward (`geoutm`) and inverse (`utmgeo`) **Universal Transverse Mercator (UTM)** map projection transformations in a single ANSI C compilation unit.
 
-Originally implemented by A. Malinverno (March 3, 1986) from J.P. Snyder's *Map Projections — A Working Manual* (USGS Bulletin 1532, p. 68, 1982) and integrated into the Ocean Mapping Group library by John Hughes Clarke, `utm.c` supersedes the older K&R-style standalone files [`geoutm.c`](geoutm.md) and [`utmgeo.c`](utmgeo.md). It converts between geographic coordinates $(\phi, \lambda)$ in decimal degrees and standard UTM grid coordinates $(X, Y)$ in meters relative to a user-specified central meridian $\lambda_0$ (`clam`).
+Originally implemented by A. Malinverno (March 3, 1986) from J.P. Snyder's *Map Projections — A Working Manual* (USGS Bulletin 1532, p. 68, 1982) and integrated into the Ocean Mapping Group library by John Hughes Clarke, `utm.c` supersedes the older K&R-style standalone files [`geoutm.c`](geoutm.html) and [`utmgeo.c`](utmgeo.html). It converts between geographic coordinates $(\phi, \lambda)$ in decimal degrees and standard UTM grid coordinates $(X, Y)$ in meters relative to a user-specified central meridian $\lambda_0$ (`clam`).
 
 ---
 
@@ -58,4 +64,4 @@ Originally implemented by A. Malinverno (March 3, 1986) from J.P. Snyder's *Map 
 ---
 
 ## Architectural Role
-`utm` is called directly by [`j_proj`](j_proj.md) and [`array`](array.md) whenever an OMG grid or mosaic uses UTM (`utm_proj`) or Rotated UTM (`rotutm_proj`) coordinates.
+`utm` is called directly by [`j_proj`](j_proj.html) and [`array`](array.html) whenever an OMG grid or mosaic uses UTM (`utm_proj`) or Rotated UTM (`rotutm_proj`) coordinates.

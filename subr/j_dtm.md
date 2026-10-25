@@ -1,15 +1,16 @@
 ---
 layout: default
 title: j_dtm
-parent: Core Shared Libraries (subr)
-module_name: j_dtm
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/j_dtm.c
-header_path: code/subr/j_dtm.h
 category: Bathymetric Gridding & DTM Management
 related_tools:
-  - weigh_grid
-  - r4toz
-  - jview
+- weigh_grid
+- r4toz
+- jview
+module_name: j_dtm
+header_path: code/subr/j_dtm.h
 ---
 
 # `j_dtm` — Weighted Digital Terrain Model (DTM) Bundle & Header Management Library

@@ -1,15 +1,18 @@
 ---
 layout: default
 title: readDelHeave
-parent: Attitude Tools
+parent: Attitude, Heave & Heading (att)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 9
 ---
+
 # readDelHeave
 
 ## Description
 `readDelHeave` is a command-line utility for processing various types of raw heave and attitude data files from different navigation systems (e.g., Applanix POS MV, Seatex Seapath, ISS-60). It converts these raw binary or ASCII inputs into standardized OMG-HDCS (Ocean Mapping Group - Hydrographic Data Cleaning System) attitude `.orientation` files, and sometimes associated navigation (`.nav`) or ASCII files. It primarily focuses on extracting and processing heave, roll, pitch, and heading data, often including delayed heave, for use in other OMG-HDCS tools.
 
 ## Usage
+
 ```bash
 readDelHeave [OPTIONS] -comp <output_basename> <raw_input_file(s)>
 ```

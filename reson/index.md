@@ -1,9 +1,9 @@
 ---
 layout: default
-title: Reson 7k (s7k) Multibeam & Water Column Tools
-parent: Formats & Converters
+title: Reson SeaBat 7k/8k (reson)
+parent: 4. Multi-Vendor Sonar & LiDAR Converters
+nav_order: 1
 has_children: true
-nav_order: 11
 ---
 
 # Reson 7k (`s7k`) Multibeam & Water Column Tools (`reson/`)
@@ -19,11 +19,11 @@ Reson `.s7k` Data Record Frames wrap each sensor datagram in a 64-byte Data Reco
 | Tool | Source File | Primary Purpose | Input Formats | Output Formats |
 | :--- | :--- | :--- | :--- | :--- |
 | [`7k2omg`](7k2omg.html) | `reson/7k2omg.c` | Convert Reson `.s7k` bathymetry (7006/7027), sonar settings (7000), navigation (1003), attitude (1012/1013), heading (1015), and snippets (7008/7028) into OMG `.merged`, `.param`, `.orientation`, and `.bck` files | `.s7k`, `.data` | `.merged`, `.param`, `.orientation`, `.nav`, `.bck` |
-| [`7k2ss`](7k2ss.html) | `reson/7k2ss.c` | Extract Reson `.s7k` snippet/sidescan imagery (Record 7007/7008/7028) into OMG `.ss_data` sidescan traces | `.s7k` | `.ss_data` |
+| [`7k2ss`](7k2image.html) | `reson/7k2ss.c` | Extract Reson `.s7k` snippet/sidescan imagery (Record 7007/7008/7028) into OMG `.ss_data` sidescan traces | `.s7k` | `.ss_data` |
 | [`7kTool`](7kTool.html) | `reson/7kTool.c` | Interactive Motif/X11 and CLI diagnostic inspector for scanning, dumping, and graphing Reson `.s7k` Data Record Frames | `.s7k` | Diagnostic text, X11 plots |
-| [`WC2medusa`](WC2medusa.html) | `reson/WC2medusa.c` | Extract and process Reson `.s7k` water-column amplitudes and phases (Record 7018) for Medusa/water-column acoustic analysis | `.s7k` | Water-column amplitude/phase dumps |
-| [`WCIviewer_7k`](WCIviewer_7k.html) | `reson/WCIviewer_7k.c` | Convert and visualize Reson `.s7k` Beamformed Water Column (Record 7018) and snippet (7008/7028) records into OMG `.wci` water-column files | `.s7k` | `.wci` |
-| [`repack7k`](repack7k.html) | `reson/repack7k.c` | Filter, strip, or time-window large Reson `.s7k` files (e.g., removing bulky Record 7018 water-column packets while preserving bathymetry and navigation) | `.s7k` | Filtered `.s7k` |
+| [`WC2medusa`](7k2omg.html) | `reson/WC2medusa.c` | Extract and process Reson `.s7k` water-column amplitudes and phases (Record 7018) for Medusa/water-column acoustic analysis | `.s7k` | Water-column amplitude/phase dumps |
+| [`WCIviewer_7k`](7kTool.html) | `reson/WCIviewer_7k.c` | Convert and visualize Reson `.s7k` Beamformed Water Column (Record 7018) and snippet (7008/7028) records into OMG `.wci` water-column files | `.s7k` | `.wci` |
+| [`repack7k`](7kStrip.html) | `reson/repack7k.c` | Filter, strip, or time-window large Reson `.s7k` files (e.g., removing bulky Record 7018 water-column packets while preserving bathymetry and navigation) | `.s7k` | Filtered `.s7k` |
 
 ---
 
@@ -50,6 +50,7 @@ Reson `.s7k` Data Record Frames wrap each sensor datagram in a 64-byte Data Reco
 ## Typical Processing Workflows
 
 ### 1. Standard Reson `.s7k` Swath Bathymetry & Backscatter Ingestion
+
 ```bash
 # Inspect record inventory in a raw .s7k file
 7kTool -in 20120815_142000.s7k -summary
@@ -59,6 +60,7 @@ Reson `.s7k` Data Record Frames wrap each sensor datagram in a 64-byte Data Reco
 ```
 
 ### 2. Stripping Water Column Records (`7018`) to Reduce File Size
+
 ```bash
 # Create a compact .s7k file without Record 7018 water-column packets
 repack7k -in raw_with_wci.s7k -out compact_bathy.s7k -no7018

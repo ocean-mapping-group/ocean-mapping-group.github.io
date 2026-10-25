@@ -1,14 +1,22 @@
 ---
 layout: default
 title: sdf2orientation
-parent: SDF Tools
+parent: Klein Sonar Data Format — SDF (sdf)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 3
 tool_name: sdf2orientation
 source_path: code/sdf/sdf2orientation.c
 category: Attitude Extraction
-input_formats: [".sdf"]
-output_formats: [".orientation"]
-related_tools: ["sdf2omg", "sdf2nav", "sdfTool", "mergeAtt", "newMergeAtt"]
+input_formats:
+- .sdf
+output_formats:
+- .orientation
+related_tools:
+- sdf2omg
+- sdf2nav
+- sdfTool
+- mergeAtt
+- newMergeAtt
 ---
 
 # sdf2orientation
@@ -17,6 +25,7 @@ related_tools: ["sdf2omg", "sdf2nav", "sdfTool", "mergeAtt", "newMergeAtt"]
 `sdf2orientation` extracts Applanix POS/MV Group 102 attitude records (roll, pitch, heave, and heading) embedded inside Klein Sonar Data Format (`.sdf`) files and writes them to a binary OMG-HDCS v3 `.orientation` file (`<orientation_prefix>.orientation`).
 
 ## Usage
+
 ```bash
 sdf2orientation [-v] [-debug] -sdf <input_name.sdf> -orientation <orientation_prefix>
 ```
@@ -37,6 +46,7 @@ sdf2orientation [-v] [-debug] -sdf <input_name.sdf> -orientation <orientation_pr
 ## Practical Examples
 
 **1. Extract POS/MV orientation from a Klein `.sdf` file:**
+
 ```bash
 sdf2orientation -sdf line01.sdf -orientation line01
 ```

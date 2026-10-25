@@ -1,9 +1,11 @@
 ---
 layout: default
 title: DTMreject
-parent: Grid Tools
+parent: Bathymetric Gridding & Export (grid)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 22
 ---
+
 ---
 layout: default
 title: DTMreject
@@ -18,6 +20,7 @@ nav_order: 22
 This tool is essential for identifying and rejecting flyers or systematic biases in survey lines by comparing them against a trusted, previously established surface.
 
 ## Usage
+
 ```bash
 DTMreject -area <reference_dtm.r4> -away <threshold_meters> [OPTIONS] <merged_file(s)>
 ```

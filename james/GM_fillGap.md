@@ -1,14 +1,26 @@
 ---
 layout: default
 title: GM_fillGap
-parent: James Muggah (james) Tools
+parent: James Muggah — Global Mapper Tiles & Utils (james)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 nav_order: 1
 tool_name: GM_fillGap
 source_path: code/james/GM_fillGap.c
 category: Raster Processing & Web Mapping (james)
-input_formats: [".r4", ".8bit", ".sun_*"]
-output_formats: [".r4", ".8bit", ".sun_*"]
-related_tools: ["map2GMTiles", "merged2GMTiles", "weigh_grid", "jfill", "filter"]
+input_formats:
+- .r4
+- .8bit
+- .sun_*
+output_formats:
+- .r4
+- .8bit
+- .sun_*
+related_tools:
+- map2GMTiles
+- merged2GMTiles
+- weigh_grid
+- jfill
+- filter
 ---
 
 # GM_fillGap
@@ -29,11 +41,13 @@ GM_fillGap [-v] [-edgeit] [-ignore <val>] [-box <val>] [-low | -high] <infile> <
 ### Examples
 
 **1. Fill internal 1–3 pixel seams and left/right boundary drop-outs in a `.r4` bathymetry tile:**
+
 ```bash
 GM_fillGap -edgeit tile_1024_2048.r4 tile_1024_2048_filled.r4
 ```
 
 **2. Fill gaps in an 8-bit sun-illuminated mapsheet where nodata is `255`:**
+
 ```bash
 GM_fillGap -edgeit -ignore 255 tile.sun_315 tile_filled.sun_315
 ```

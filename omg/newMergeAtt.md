@@ -1,9 +1,11 @@
 ---
 layout: default
 title: newMergeAtt
-parent: OMG Tools
+parent: Core Swath & .all Suite (omg)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 45
 ---
+
 # newMergeAtt
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 45
 The tool incorporates advanced features like dynamic SVP selection based on time or distance, detailed motion compensation (including induced heave and crosstalk correction), and a high degree of configurability for sonar parameters and debugging.
 
 ## Usage
+
 ```bash
 newMergeAtt -in <input.merged> -svp svp/*.svp [OPTIONS]
 ```
@@ -25,6 +28,7 @@ newMergeAtt -in <input.merged> -svp svp/*.svp [OPTIONS]
 | `-svp_list <file>` | Provides a list file containing paths to SVP files. |
 
 ### Raytracing Options
+
 | Option | Description | Default |
 |---|---|
 | `-wc_bin <val>` | Force watercolumn resampling bin size (in meters). Default is determined by depth range. | Auto-calculated |
@@ -37,6 +41,7 @@ newMergeAtt -in <input.merged> -svp svp/*.svp [OPTIONS]
 | `-travis` | Use the new sounding reduction algorithm. | |
 
 ### Surface Sound Speed Options
+
 | Option | Description |
 |---|---|
 | `-force_surface_ss` | Force the use of surface sound speed in barrel arrays (e.g., Reson 8101). | |
@@ -46,6 +51,7 @@ newMergeAtt -in <input.merged> -svp svp/*.svp [OPTIONS]
 | `-surf_ss_file` | Force lookup of surface sound speed from a `.surf_ss` file. | |
 
 ### Heave Options
+
 | Option | Description |
 |---|---|
 | `-invert_heave` | Invert the sign of heave data (e.g., for XTF data). | |
@@ -58,6 +64,7 @@ newMergeAtt -in <input.merged> -svp svp/*.svp [OPTIONS]
 | `-use_reported_tx_draft` | Use the stored transmit draft instead of WLZ (essential for AUVs). | |
 
 ### Vessel Installation Options
+
 | Option | Description |
 |---|---|
 | `-ignore_param` | Ignore the `.param` file (effectively zeroes all offsets for debugging). | |
@@ -69,6 +76,7 @@ newMergeAtt -in <input.merged> -svp svp/*.svp [OPTIONS]
 | `-roll_compensated` | Force system to be recognized as roll compensated (beam angles are already vertically referenced). | |
 
 ### Orientation Options
+
 | Option | Description | Default |
 |---|---|
 | `-orientation_delay <sec>` | Apply a time delay to the orientation data. | `0.0` |
@@ -78,6 +86,7 @@ newMergeAtt -in <input.merged> -svp svp/*.svp [OPTIONS]
 | `-uncrosstalk <val>` | Specify a gyro offset to correct for crosstalk between roll and pitch. | `0.0` |
 
 ### SVP Selection for Multiple Profiles
+
 | Option | Description |
 |---|---|
 | `-rules <file>` | Provide a file specifying time-based rules for selecting SVPs. | |
@@ -89,6 +98,7 @@ newMergeAtt -in <input.merged> -svp svp/*.svp [OPTIONS]
 | `-converge_to <depth> <velocity>` | Quick and dirty profile extension, sets maximum depth and velocity for SVPs shallower than the specified depth. | |
 
 ### Miscellaneous Options
+
 | Option | Description | Default |
 |---|---|
 | `-just_merge` | Just merge TX orientation onto the merged file, ignoring all other raytracing options. | |

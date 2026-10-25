@@ -1,9 +1,11 @@
 ---
 layout: default
 title: multiMode2Calib
-parent: OMG Tools
+parent: Core Swath & .all Suite (omg)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 43
 ---
+
 # multiMode2Calib
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 43
 The tool can also apply a "sawtooth" correction to the beam patterns and offers options to flip the sign of the backscatter values and apply a reference dB level.
 
 ## Usage
+
 ```bash
 multiMode2Calib -allbps <input_MS_BP_scii_file(s)> -out <output_sis5_calib_file> [OPTIONS]
 ```

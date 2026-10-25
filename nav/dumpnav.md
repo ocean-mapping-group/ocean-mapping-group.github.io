@@ -1,14 +1,21 @@
 ---
 layout: default
 title: dumpnav
-parent: Navigation Tools
+parent: Navigation Processing (nav)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 16
 tool_name: dumpnav
 source_path: code/nav/dumpnav.c
 category: Navigation & Georeferencing
-input_formats: [".nav (jcu_nav_rec binary)"]
-output_formats: [".txt (ASCII text)"]
-related_tools: ["appendNav", "appendNav_asciiSecs", "stripNav", "mergeNav"]
+input_formats:
+- .nav (jcu_nav_rec binary)
+output_formats:
+- .txt (ASCII text)
+related_tools:
+- appendNav
+- appendNav_asciiSecs
+- stripNav
+- mergeNav
 ---
 
 # dumpnav
@@ -29,17 +36,20 @@ dumpnav [OPTIONS] <filename.nav>
 ### Common Workflow Examples
 
 **1. Dump a `.nav` file to `<basename>.txt` with default human-readable calendar dates (`YYYY Mon DD HH:MM:SS`):**
+
 ```bash
 dumpnav merged/JD100/0001_line.nav
 # Writes merged/JD100/0001_line.txt
 ```
 
 **2. Dump Unix epoch timestamps (with hundredths of a second), lat, lon, speed, azimuth, and depth to a custom file:**
+
 ```bash
 dumpnav -1970 -speed -azi -depth -out full_nav_dump.txt merged/JD100/0001_line.nav
 ```
 
 **3. Dump Julian Day timestamps (`YYYY JDAY HH:MM:SS`) decimated to every 10 seconds:**
+
 ```bash
 dumpnav -jday -skip 10 -out decimated_10s.txt merged/JD100/0001_line.nav
 ```
@@ -65,6 +75,7 @@ dumpnav -jday -skip 10 -out decimated_10s.txt merged/JD100/0001_line.nav
 ## Output Format Details
 
 Each line written to the output file has the structure:
+
 ```text
 <timestamp_string> <lat_deg> <lon_deg> [velocity] [azi] [depth]
 ```

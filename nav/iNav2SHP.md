@@ -1,14 +1,27 @@
 ---
 layout: default
 title: iNav2SHP
-parent: Navigation Tools
+parent: Navigation Processing (nav)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 22
 tool_name: iNav2SHP
 source_path: code/nav/iNav2SHP.c
 category: Navigation & Georeferencing
-input_formats: [".nav", "ASCII contour/XYZ", "OMG1 mapsheet (.blank, .r4)"]
-output_formats: [".shp", ".shx", ".dbf", ".prj"]
-related_tools: ["navtoSHP", "readSHP", "makeDBF", "appendNav", "sortCont"]
+input_formats:
+- .nav
+- ASCII contour/XYZ
+- OMG1 mapsheet (.blank, .r4)
+output_formats:
+- .shp
+- .shx
+- .dbf
+- .prj
+related_tools:
+- navtoSHP
+- readSHP
+- makeDBF
+- appendNav
+- sortCont
 ---
 
 # iNav2SHP
@@ -16,7 +29,7 @@ related_tools: ["navtoSHP", "readSHP", "makeDBF", "appendNav", "sortCont"]
 ## Description
 `iNav2SHP` (authored by Ian Church, Sept 2009) converts binary OMG navigation files (`.nav`), ASCII contour/XYZ files (such as output from `sortCont`), or OMG1 mapsheet headers (`.blank`, `.r4`) into complete ESRI Shapefile datasets (`.shp`, `.shx`, `.dbf`, and WGS84 `.prj`) using Shapelib (`shapefil.h`).
 
-Unlike the lightweight [`navtoSHP`](navtoSHP.md) utility (which only writes 2D polyline `.shp` and `.shx` files), `iNav2SHP` generates 3D `SHPT_*Z` geometries (`point`, `line`/`arc`, `polygon`, or `multipoint`), populates a matching dBASE `.dbf` attribute table (`PointName`, `Time`, `TimeZone`, `ContourLvl`, or `MapName`/`Resolution`), and writes a standard `GCS_WGS_1984` `.prj` projection file.
+Unlike the lightweight [`navtoSHP`](navtoSHP.html) utility (which only writes 2D polyline `.shp` and `.shx` files), `iNav2SHP` generates 3D `SHPT_*Z` geometries (`point`, `line`/`arc`, `polygon`, or `multipoint`), populates a matching dBASE `.dbf` attribute table (`PointName`, `Time`, `TimeZone`, `ContourLvl`, or `MapName`/`Resolution`), and writes a standard `GCS_WGS_1984` `.prj` projection file.
 
 ---
 
@@ -36,21 +49,25 @@ iNav2SHP -out <shp_prefix> -map <map1.blank> [<map2.blank> ...]
 ### Common Workflow Examples
 
 **1. Export a vessel trackline `.nav` file as a 3D polyline Shapefile (decimated by 10):**
+
 ```bash
 iNav2SHP -skip 10 -type line -out tracks/JD100_line1 -in merged/JD100/0001_line.nav
 ```
 
 **2. Export every 50th navigation fix as individual point features with UTC timestamps:**
+
 ```bash
 iNav2SHP -skip 50 -type point -out tracks/JD100_fixes -in merged/JD100/0001_line.nav
 ```
 
 **3. Convert `sortCont` ASCII bathy contours (`lat lon depth` separated by `0.0 0.0 0.0`) to a line Shapefile:**
+
 ```bash
 iNav2SHP -ascii -type line -out contours/bathy_10m -in contours/bathy_10m.cont
 ```
 
 **4. Create a polygon index Shapefile of all project mapsheet boundaries:**
+
 ```bash
 iNav2SHP -out gis/project_mapsheets -map maps/*.blank
 ```

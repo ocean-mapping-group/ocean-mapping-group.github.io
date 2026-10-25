@@ -1,15 +1,18 @@
 ---
 layout: default
 title: DDSsmb_read
-parent: M3 Tools
+parent: Kongsberg Mesotech M3 Sonar (M3)
+grand_parent: 4. Multi-Vendor Sonar & LiDAR Converters
 nav_order: 1
 ---
+
 # DDSsmb_read
 
 ## Description
 `DDSsmb_read` is a C program designed to convert raw Mesotech DDS (Digital Data Stream) SMB (Sonar Message Block) files, which typically contain raw element sonar data, into the Ocean Mapping Group (OMG) data format. In addition to the primary sonar data, it extracts and processes associated navigation and attitude information, outputting these into separate OMG-compatible files for further processing and analysis within the OMG ecosystem.
 
 ## Usage
+
 ```bash
 DDSsmb_read [OPTIONS] -DDSsmb <filename(s)> -out <prefix>
 ```

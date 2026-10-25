@@ -1,14 +1,25 @@
 ---
 layout: default
 title: lowrance2omg
-parent: James Muggah (james) Tools
+parent: James Muggah — Global Mapper Tiles & Utils (james)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 nav_order: 4
 tool_name: lowrance2omg
 source_path: code/james/lowrance2omg.c
 category: Sonar Format Unravelers (james)
-input_formats: [".sl2 (Lowrance Sonar Log v2)"]
-output_formats: [".merged", ".merged.ss_data", ".nav", ".trc", ".llz"]
-related_tools: ["jview", "swathed", "mergeNav", "getBounds"]
+input_formats:
+- .sl2 (Lowrance Sonar Log v2)
+output_formats:
+- .merged
+- .merged.ss_data
+- .nav
+- .trc
+- .llz
+related_tools:
+- jview
+- swathed
+- mergeNav
+- getBounds
 ---
 
 # lowrance2omg

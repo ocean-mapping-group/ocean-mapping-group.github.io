@@ -1,10 +1,11 @@
 ---
 layout: default
 title: xtf_funcs
-parent: XTF Tools
-grand_parent: sidescan
+parent: Sidescan Radiometric & Geometric Suite (sidescan)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 3
 ---
+
 # xtf_funcs
 
 ## Description

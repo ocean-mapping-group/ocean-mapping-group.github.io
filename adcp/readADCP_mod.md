@@ -1,30 +1,32 @@
 ---
 layout: default
 title: readADCP_mod
-parent: ADCP Tools
+parent: Teledyne RDI ADCP Processing (adcp)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 12
 tool_name: readADCP_mod
 source_path: code/adcp/readADCP_mod.c
 category: adcp
 input_formats:
-  - RDI ASCII ADCP
-  - jcu_nav (.nav)
-  - OMG Map (.map)
+- RDI ASCII ADCP
+- jcu_nav (.nav)
+- OMG Map (.map)
 output_formats:
-  - JHC 8-bit Profile (.prof / .stack_prof / .map_prof)
-  - jcu_nav Depth-Averaged Vectors (.nav)
+- JHC 8-bit Profile (.prof / .stack_prof / .map_prof)
+- jcu_nav Depth-Averaged Vectors (.nav)
 related_tools:
-  - readADCP
-  - readADCP_g
-  - combineMultiADCP
+- readADCP
+- readADCP_g
+- combineMultiADCP
 ---
 
 # readADCP_mod
 
 ## Description
-`readADCP_mod` is a modified variant of [`readADCP`](readADCP.md) and [`readADCP_g`](readADCP_g.md) for reading and processing RDI ASCII ADCP (Acoustic Doppler Current Profiler) files into 8-bit JHC vertical profile images (`.prof`), mapsheet sections (`.map_prof`), and depth-averaged `jcu_nav` current vector files (`.nav`). It introduces the `-min_vels_to_av` threshold to ensure depth-averaged current records are only written when a minimum number of valid vertical bins are present in the ensemble.
+`readADCP_mod` is a modified variant of [`readADCP`](readADCP.html) and [`readADCP_g`](readADCP_g.html) for reading and processing RDI ASCII ADCP (Acoustic Doppler Current Profiler) files into 8-bit JHC vertical profile images (`.prof`), mapsheet sections (`.map_prof`), and depth-averaged `jcu_nav` current vector files (`.nav`). It introduces the `-min_vels_to_av` threshold to ensure depth-averaged current records are only written when a minimum number of valid vertical bins are present in the ensemble.
 
 ## Usage
+
 ```bash
 readADCP_mod -in <infiles> -out <outfile> [OPTIONS]
 ```

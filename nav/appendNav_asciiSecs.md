@@ -1,20 +1,29 @@
 ---
 layout: default
 title: appendNav_asciiSecs
-parent: Navigation Tools
+parent: Navigation Processing (nav)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 12
 tool_name: appendNav_asciiSecs
 source_path: code/nav/appendNav_asciiSecs.c
 category: Navigation & Georeferencing
-input_formats: [".nav (jcu_nav_rec binary)", ".r4 / OMG1 mapsheet (-area)"]
-output_formats: [".nav (jcu_nav_rec binary)", "ASCII text (-ascii, -excel, -arc)"]
-related_tools: ["appendNav", "stripNav", "dumpnav", "mergeNav"]
+input_formats:
+- .nav (jcu_nav_rec binary)
+- .r4 / OMG1 mapsheet (-area)
+output_formats:
+- .nav (jcu_nav_rec binary)
+- ASCII text (-ascii, -excel, -arc)
+related_tools:
+- appendNav
+- stripNav
+- dumpnav
+- mergeNav
 ---
 
 # appendNav_asciiSecs
 
 ## Description
-`appendNav_asciiSecs` is a streamlined variant of [`appendNav`](appendNav.md) that concatenates, decimates (`-skip`), filters by quality flag (`-goodonly`), clips by geographic bounding box (`-area` or interactive `-region`) or time window (`-start` / `-end`), shifts coordinates (`-latshift` / `-lonshift`), and exports up to 1,000 binary OMG navigation files (`jcu_nav_rec`, `.nav`).
+`appendNav_asciiSecs` is a streamlined variant of [`appendNav`](appendNav.html) that concatenates, decimates (`-skip`), filters by quality flag (`-goodonly`), clips by geographic bounding box (`-area` or interactive `-region`) or time window (`-start` / `-end`), shifts coordinates (`-latshift` / `-lonshift`), and exports up to 1,000 binary OMG navigation files (`jcu_nav_rec`, `.nav`).
 
 When exporting to ASCII (`-ascii`), `appendNav_asciiSecs` formats the seconds field with hundredths-of-a-second precision (`%05.2f`, combining `tm_sec + centisecs / 100.0`) or, when `-excel` is also passed, outputs the Unix epoch timestamp in seconds (`(double)tide_rec.time`) alongside `lat`, `lon`, `azi`, and `velocity`.
 
@@ -29,21 +38,25 @@ appendNav_asciiSecs [OPTIONS] -comp <output_file> <input_nav_file(s)>
 ### Common Workflow Examples
 
 **1. Export binary `.nav` files to ASCII with fractional seconds (`%05.2f`):**
+
 ```bash
 appendNav_asciiSecs -ascii -goodonly -comp track_secs.txt merged/JD100/*.nav
 ```
 
 **2. Export binary `.nav` files to Excel-friendly ASCII with Unix epoch seconds (`-ascii -excel`):**
+
 ```bash
 appendNav_asciiSecs -ascii -excel -goodonly -comp track_epoch.txt merged/JD100/*.nav
 ```
 
 **3. Export ArcGIS CSV track points with directory and line name attributes (`-ascii -arc`):**
+
 ```bash
 appendNav_asciiSecs -ascii -arc -skip 10 -comp arc_points.csv merged/JD100/*.nav
 ```
 
 **4. Clip and concatenate binary `.nav` files within a mapsheet's geographic bounds and a UTC time window:**
+
 ```bash
 appendNav_asciiSecs -area survey_grid.r4 \
     -start 2022 180 12 00 -end 2022 180 18 30 \
@@ -80,22 +93,26 @@ Writes 48-byte `jcu_nav_rec` structures sequentially via `nav_write()`.
 
 ### 2. Standard ASCII Mode (`-ascii`)
 Each line contains 9 space-delimited columns (note `lon` precedes `lat`):
+
 ```text
  <lon_deg> <lat_deg> <YYYY> <JDAY> <HH> <MM> <SS.cc> <azi> <velocity>
 ```
 Formatted via:
+
 ```c
 fprintf(tidefile, " %13.8f %13.8f %4d %03d %02d %02d %05.2f %.2f %.2f\n", ...);
 ```
 
 ### 3. Excel ASCII Mode (`-ascii -excel`)
 Each line contains 5 space-delimited columns (`lat` precedes `lon`, followed by Unix epoch time in seconds):
+
 ```text
  <lat_deg> <lon_deg> <unix_seconds> <azi> <velocity>
 ```
 
 ### 4. ArcGIS CSV Mode (`-ascii -arc`)
 Each line contains 10 comma-separated columns:
+
 ```text
 <file_idx>,<lon_deg>,<lat_deg>,<YYYY>,<JDAY>,<HH>,<MM>,<SS.cc>,<subdir_name>,<line_basename>
 ```

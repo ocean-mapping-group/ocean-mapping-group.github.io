@@ -1,13 +1,21 @@
 ---
 layout: default
 title: r4toESRI
-parent: Grid Tools
+parent: Bathymetric Gridding & Export (grid)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 tool_name: r4toESRI
 source_path: code/grid/r4toESRI.c
 category: gridding
-input_formats: ["JHC_header (.r4 / .8bit)"]
-output_formats: ["ESRI Binary Grid (.flt + .hdr + _prj.adf)", "ESRI ASCII Grid (.asc)"]
-related_tools: ["r4toASCII", "r4toGRASS", "r4to16bit", "tifftor4"]
+input_formats:
+- JHC_header (.r4 / .8bit)
+output_formats:
+- ESRI Binary Grid (.flt + .hdr + _prj.adf)
+- ESRI ASCII Grid (.asc)
+related_tools:
+- r4toASCII
+- r4toGRASS
+- r4to16bit
+- tifftor4
 ---
 
 # r4toESRI
@@ -61,11 +69,13 @@ r4toESRI [OPTIONS] -in <infile.r4_or_8bit> -out <outfile_prefix>
 ## Examples
 
 ### Export a bathymetric `.r4` grid to ESRI binary `.flt` + `.hdr`
+
 ```bash
 r4toESRI -in harbor_bathy.r4 -out harbor_esri -CHS
 ```
 
 ### Convert an 8-bit backscatter mosaic to an ESRI ASCII grid in dB
+
 ```bash
 r4toESRI -in mosaic.8bit -out mosaic_db -dB -ascii
 ```
@@ -74,5 +84,5 @@ r4toESRI -in mosaic.8bit -out mosaic_db -dB -ascii
 
 ## Workflow Context
 
-- **Upstream**: [`weigh_grid`](weigh_grid.html), [`combine`](combine.html), [`mosaic`](mosaic.html), [`medfilt`](medfilt.html).
+- **Upstream**: [`weigh_grid`](weigh_grid.html), [`combine`](weigh_grid.html), [`mosaic`](../newmos/mos2.html), [`medfilt`](../image/index.html).
 - **Related Export Tools**: [`r4toASCII`](r4toASCII.html), [`r4toGRASS`](r4toGRASS.html), [`r4to16bit`](r4to16bit.html).

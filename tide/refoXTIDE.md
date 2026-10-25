@@ -1,13 +1,21 @@
 ---
 layout: default
 title: refoXTIDE
-parent: Tide Tools
+parent: Tidal Reduction & Constituents (tide)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 tool_name: refoXTIDE
 source_path: code/tide/refoXTIDE.c
 category: tide
-input_formats: ["XTide UNIX epoch ASCII (-m r)", "XTide V2 ASCII"]
-output_formats: ["JHC ASCII tide (jday hour min tide_m)"]
-related_tools: ["medsTide", "wlvTide", "binTide", "mergeTide"]
+input_formats:
+- XTide UNIX epoch ASCII (-m r)
+- XTide V2 ASCII
+output_formats:
+- JHC ASCII tide (jday hour min tide_m)
+related_tools:
+- medsTide
+- wlvTide
+- binTide
+- mergeTide
 ---
 
 # refoXTIDE
@@ -49,12 +57,14 @@ refoXTIDE [OPTIONS] -in <xtidefilename> -out <asciijhctide>
 ## Examples
 
 **1. Convert raw XTide epoch output (in feet) to JHC ASCII (in meters):**
+
 ```bash
 refoXTIDE -in xtide_raw_feet.txt -out tide_meters.asc
 binTide -year 1996 tide_meters.asc tide_meters.bin
 ```
 
 **2. Convert pre-formatted V2 XTide output (already in meters):**
+
 ```bash
 refoXTIDE -v2 -in xtide_v2.txt -out tide_v2.asc
 ```
@@ -63,5 +73,5 @@ refoXTIDE -v2 -in xtide_v2.txt -out tide_v2.asc
 
 ## Workflow Context
 
-- **See Also:** [`medsTide`](medsTide.md) (`-xtide` flag) and [`wlvTide`](wlvTide.md) (`-UTC` flag) for other XTide text output formats.
-- **Downstream:** [`binTide`](binTide.md) $\rightarrow$ [`mergeTide`](mergeTide.md).
+- **See Also:** [`medsTide`](medsTide.html) (`-xtide` flag) and [`wlvTide`](wlvTide.html) (`-UTC` flag) for other XTide text output formats.
+- **Downstream:** [`binTide`](binTide.html) $\rightarrow$ [`mergeTide`](mergeTide.html).

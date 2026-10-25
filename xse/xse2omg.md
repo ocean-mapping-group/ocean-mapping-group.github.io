@@ -1,14 +1,26 @@
 ---
 layout: default
 title: xse2omg
-parent: XSE Tools
+parent: L-3 / SeaBeam XSE Format (xse)
+grand_parent: 4. Multi-Vendor Sonar & LiDAR Converters
 nav_order: 1
 tool_name: xse2omg
 source_path: xse/xse2omg.c
 category: format_conversion
-input_formats: [XSE]
-output_formats: [OMG_HDCS, JCU_NAV, OMG_ORIENTATION, GLORIA, OMG_PARAM, OMG_SVP]
-related_tools: [xseTool, mergeNav, mergeOrientation, SwathEd]
+input_formats:
+- XSE
+output_formats:
+- OMG_HDCS
+- JCU_NAV
+- OMG_ORIENTATION
+- GLORIA
+- OMG_PARAM
+- OMG_SVP
+related_tools:
+- xseTool
+- mergeNav
+- mergeOrientation
+- SwathEd
 ---
 
 # xse2omg

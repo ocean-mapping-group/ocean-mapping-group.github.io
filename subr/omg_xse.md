@@ -1,14 +1,15 @@
 ---
 layout: default
 title: omg_xse
-parent: Core Shared Libraries (subr)
-module_name: omg_xse
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/omg_xse.c
-header_path: code/subr/omg_xse.h
 category: File Formats & Vendor Parsers
 related_tools:
-  - xseTool
-  - xse2omg
+- xseTool
+- xse2omg
+module_name: omg_xse
+header_path: code/subr/omg_xse.h
 ---
 
 # omg_xse

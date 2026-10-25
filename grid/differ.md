@@ -1,9 +1,11 @@
 ---
 layout: default
 title: differ
-parent: Grid Tools
+parent: Bathymetric Gridding & Export (grid)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 21
 ---
+
 ---
 layout: default
 title: differ
@@ -16,6 +18,7 @@ nav_order: 21
 `differ` is a powerful command-line utility for comparing two JHC-format 32-bit floating-point grid files (`.r4` files). Its primary function is to calculate the pixel-wise difference between two surfaces (e.g., Digital Terrain Models from different epochs). The tool also provides advanced options for statistical analysis, volumetric calculations, handling spatial misalignments, and masking.
 
 ## Usage
+
 ```bash
 differ -first <file1.r4> -second <file2.r4> -out <output.r4> [OPTIONS]
 ```
@@ -23,6 +26,7 @@ differ -first <file1.r4> -second <file2.r4> -out <output.r4> [OPTIONS]
 ## Arguments
 
 ### Core Arguments
+
 | Option | Description | Default / Example |
 |---|---|---|
 | `-first <file1.r4>` | **Required.** The path to the first input float grid file (the minuend). | `-first dtm_2022.r4` |
@@ -30,6 +34,7 @@ differ -first <file1.r4> -second <file2.r4> -out <output.r4> [OPTIONS]
 | `-out <output.r4>` | **Required.** The path for the output float grid file that will store the difference (`first - second`). | `-out difference_map.r4` |
 
 ### Feature Options
+
 | Option | Description | Default / Example |
 |---|---|---|
 | `-stats <min> <max> <step>` | Enables detailed statistical analysis. It calculates the mean and standard deviation of the differences and generates a histogram of the difference values, which is saved to `<outname>.statistics`. `<min>`, `<max>`, and `<step>` define the histogram's range and bin size. | `-stats -5.0 5.0 0.1` |

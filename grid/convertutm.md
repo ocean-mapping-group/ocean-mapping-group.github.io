@@ -1,9 +1,11 @@
 ---
 layout: default
 title: convertutm
-parent: Grid Tools
+parent: Bathymetric Gridding & Export (grid)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 15
 ---
+
 ---
 layout: default
 title: convertutm
@@ -16,6 +18,7 @@ nav_order: 15
 `convertutm` is a versatile command-line utility for converting geographical coordinates between different formats and projections. Primarily, it converts input data (read from `stdin`) from UTM (Universal Transverse Mercator) or other Cartesian-like coordinates to Latitude/Longitude, or vice-versa, and can also handle specific grid formats like USGS weird and Nbstereo. It supports various input data formats (e.g., DMS to DD, comma-separated, or standard space-separated XYZ). The output is written to `stdout`.
 
 ## Usage
+
 ```bash
 convertutm [OPTIONS] < input > output
 ```

@@ -1,8 +1,9 @@
 ---
 layout: default
-title: DE Tools
+title: Latency & Delay Editor (DE)
+parent: 2. Gridding, Mosaicking & Interactive Editors
+nav_order: 5
 has_children: true
-nav_order: 6
 ---
 
 # DE Tools

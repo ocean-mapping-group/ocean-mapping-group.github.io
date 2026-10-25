@@ -1,14 +1,21 @@
 ---
 layout: default
 title: xsonar2Nav
-parent: Navigation Tools
+parent: Navigation Processing (nav)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 35
 tool_name: xsonar2Nav
 source_path: code/nav/xsonar2Nav.c
 category: Navigation & Georeferencing
-input_formats: ["USGS XSONAR ASCII navigation"]
-output_formats: [".nav"]
-related_tools: ["video2Nav", "mergeNav", "appendNav", "stripNav"]
+input_formats:
+- USGS XSONAR ASCII navigation
+output_formats:
+- .nav
+related_tools:
+- video2Nav
+- mergeNav
+- appendNav
+- stripNav
 ---
 
 # xsonar2Nav
@@ -29,11 +36,13 @@ xsonar2Nav [-v] -year <YYYY> [-skip <N>] -comp <out_navfile> <xsonar_navfile(s)>
 ### Common Workflow Examples
 
 **1. Convert an XSONAR ASCII navigation file from a 1997 sidescan survey into `.nav` format:**
+
 ```bash
 xsonar2Nav -year 1997 -comp line01.nav xsonar_line01.txt
 ```
 
 **2. Batch-convert multiple XSONAR navigation files into a single composite `.nav` file:**
+
 ```bash
 xsonar2Nav -year 1998 -comp survey_all.nav raw_xsonar/*.nav_asc
 ```
@@ -57,6 +66,7 @@ xsonar2Nav -year 1998 -comp survey_all.nav raw_xsonar/*.nav_asc
 
 ### Input XSONAR ASCII Format
 Each line in the input file contains 8 whitespace-delimited fields parsed via `fscanf(file, "%hd%hd%hd%hd%d%lf%d%lf", ...)`:
+
 ```text
 day  hour  min  sec  latdeg  latmin  londeg  lonmin
 ```

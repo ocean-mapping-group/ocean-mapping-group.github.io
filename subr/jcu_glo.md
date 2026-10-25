@@ -1,16 +1,17 @@
 ---
 layout: default
 title: jcu_glo
-parent: Core Shared Libraries (subr)
-module_name: jcu_glo
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/jcu_glo.c
-header_path: code/subr/jcu_glo.h
 category: Sidescan & Sub-Bottom Format I/O
 related_tools:
-  - knud2glo
-  - xtf2gloria
-  - j_SUB2K
-  - jview
+- knud2glo
+- xtf2gloria
+- j_SUB2K
+- jview
+module_name: jcu_glo
+header_path: code/subr/jcu_glo.h
 ---
 
 # `jcu_glo` — JCU / GLORIA Sidescan & Sub-Bottom Image Record Format I/O Library

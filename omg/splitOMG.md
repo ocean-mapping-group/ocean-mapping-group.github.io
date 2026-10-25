@@ -1,9 +1,11 @@
 ---
 layout: default
 title: splitOMG
-parent: OMG Tools
+parent: Core Swath & .all Suite (omg)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 67
 ---
+
 # splitOMG
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 67
 Additionally, it has a specialized mode (`-into_natural_lines`) to analyze the vessel's speed and change in heading between pings, which can be used to identify natural line breaks in survey data.
 
 ## Usage
+
 ```bash
 splitOMG <OMG_HDCS_infile> <OMG_HDCS_outfile> [OPTIONS]
 ```
@@ -24,6 +27,7 @@ splitOMG <OMG_HDCS_infile> <OMG_HDCS_outfile> [OPTIONS]
 | `<OMG_HDCS_outfile>` | **Required.** The path for the new output OMG-HDCS merged file containing the subset of data. |
 
 ### Splitting Options (Choose one or more)
+
 | Option | Description |
 |---|---|
 | `-first <ping_num>` | Specifies the starting ping number (inclusive) for the subset. |
@@ -32,6 +36,7 @@ splitOMG <OMG_HDCS_infile> <OMG_HDCS_outfile> [OPTIONS]
 | `-time_end <year> <jday> <hr> <min> <sec>` | Specifies a date and time range for the subset. The tool will find the corresponding ping numbers. |
 
 ### Analysis Option
+
 | Option | Description |
 |---|---|
 | `-into_natural_lines` | Instead of splitting, this mode calculates and outputs the vessel's speed (in knots) and change in heading (in degrees) between consecutive pings. The output is an ASCII file (`<OMG_HDCS_outfile>`) with ping number, speed, and dhead. This option overrides the splitting functionality. |
@@ -39,6 +44,7 @@ splitOMG <OMG_HDCS_infile> <OMG_HDCS_outfile> [OPTIONS]
 | `-minturn` | (Present in `USAGE` but not implemented) Likely intended to filter based on minimum turn. |
 
 ### Other Options
+
 | Option | Description |
 |---|---|
 | `-v` | Enable verbose output. | |

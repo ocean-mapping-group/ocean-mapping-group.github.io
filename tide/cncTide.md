@@ -1,7 +1,8 @@
 ---
 layout: default
 title: cncTide
-parent: Tide Tools
+parent: Tidal Reduction & Constituents (tide)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 ---
 
 # cncTide
@@ -10,6 +11,7 @@ parent: Tide Tools
 `cncTide` is a utility that translates Rich Signell's tide data format into the standard OMG tide format. It reads CNC (likely Canadian Hydrographic Service) tide data files and converts them for use in ocean mapping processing workflows.
 
 ## Usage
+
 ```bash
 cncTide (-v) (-fmt 2) -y2k -tide tidefilename mergefile(s)
 ```

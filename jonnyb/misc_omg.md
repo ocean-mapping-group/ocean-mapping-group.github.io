@@ -1,14 +1,20 @@
 ---
 layout: default
 title: misc_omg
-parent: Jonathan Beaudoin (jonnyb) Tools
+parent: Jonathan Beaudoin — SVP, Refraction & Snippets (jonnyb)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 nav_order: 9
 tool_name: misc_omg
 source_path: code/jonnyb/misc_omg.c
 category: Developer Templates & Utilities (jonnyb)
-input_formats: [".merged (OMG-HDCS)"]
-output_formats: ["stdout (ASCII depth, across-track, along-track)"]
-related_tools: ["misc", "dumpSoundings", "jview"]
+input_formats:
+- .merged (OMG-HDCS)
+output_formats:
+- stdout (ASCII depth, across-track, along-track)
+related_tools:
+- misc
+- dumpSoundings
+- jview
 ---
 
 # misc_omg
@@ -53,6 +59,7 @@ misc_omg -in merged/JD120/0001_line.merged | head -n 20
    * Calls `OMG_get_rational_profile(infile, i, &profile)` to read the ping header.
    * Calls `OMG_get_rational_beams(infile, i, &num_beams, beams)` to unpack the beam array.
    * Iterates over $j \in [0, \text{numDepths}-1]$ and prints:
+
      ```text
      <beams[j].depth> <beams[j].across> <beams[j].along>
      ```

@@ -1,14 +1,20 @@
 ---
 layout: default
 title: graph_noise
-parent: MR1 Tools
+parent: HAWAII MR1 Towed Sidescan (mr1)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 3
 tool_name: graph_noise
 source_path: mr1/graph_noise.c
 category: diagnostics
-input_formats: [MR1_BIN_NOISE]
-output_formats: [ASCII_PLOT, ASCII_TABLE]
-related_tools: [mr1_noise, plotmr1]
+input_formats:
+- MR1_BIN_NOISE
+output_formats:
+- ASCII_PLOT
+- ASCII_TABLE
+related_tools:
+- mr1_noise
+- plotmr1
 ---
 
 # graph_noise

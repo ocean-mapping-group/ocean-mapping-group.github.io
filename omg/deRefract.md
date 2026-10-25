@@ -1,9 +1,11 @@
 ---
 layout: default
 title: deRefract
-parent: OMG Tools
+parent: Core Swath & .all Suite (omg)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 88
 ---
+
 # deRefract
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 88
 It allows for fine-tuning of depth and across-track values to compensate for sound speed variations in the water column and instrument-specific biases.
 
 ## Usage
+
 ```bash
 deRefract <mergefile(s)> [-v] (-coeffs | -hackfn <filename>) [OPTIONS]
 ```
@@ -24,18 +27,21 @@ deRefract <mergefile(s)> [-v] (-coeffs | -hackfn <filename>) [OPTIONS]
 | `-v` | Enable verbose output. |
 
 ### Correction Methods (Choose one)
+
 | Option | Description |
 |---|---|
 | `-coeffs` | Apply empirical correction coefficients loaded from a `.ref_coeffs` file. |
 | `-hackfn <filename>` | Apply a hack function based on an external file (`tidefilename`). This uses the older, pre-coefficient method. |
 
 ### Coefficient-Based Options (`-coeffs`)
+
 | Option | Description |
 |---|---|
 | `-depthshift` | Apply a depth shift based on the coefficient data. |
 | `-perc_depth` | Apply a percentage depth correction based on the coefficient data. |
 
 ### Older Hackfn Options (`-hackfn`)
+
 | Option | Description |
 |---|---|
 | `-beams <val>` | Specifies the number of beams for the hack function (if not 60). | `60` |
@@ -43,11 +49,13 @@ deRefract <mergefile(s)> [-v] (-coeffs | -hackfn <filename>) [OPTIONS]
 | `-roll_offset <val>` | Applies a constant roll offset (in degrees). |
 
 ### File Type
+
 | Option | Description |
 |---|---|
 | `-hdcs` | Process USL-HDCS observed depth files instead of OMG-HDCS merged files. |
 
 ### Other Options
+
 | Option | Description |
 |---|---|
 | `-mode <value>` | Only apply corrections to profiles (pings) with this specific mode value. | `999` (all modes) |

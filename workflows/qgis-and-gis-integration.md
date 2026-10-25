@@ -5,27 +5,27 @@ parent: Processing Workflows & Guides
 nav_order: 6
 category: workflows
 input_formats:
-  - .r4
-  - .8bit
-  - .sun
-  - .mos
-  - .merged
-  - .kmall
+- .r4
+- .8bit
+- .sun
+- .mos
+- .merged
+- .kmall
 output_formats:
-  - .bil
-  - .hdr
-  - .prj
-  - .tif
-  - .gpkg
-  - .copc.laz
+- .bil
+- .hdr
+- .prj
+- .tif
+- .gpkg
+- .copc.laz
 related_tools:
-  - r4toESRI
-  - r4toASCII
-  - dumpXYZ
-  - make_blank
-  - weigh_grid
-  - mos2
-  - swathed
+- r4toESRI
+- r4toASCII
+- dumpXYZ
+- make_blank
+- weigh_grid
+- mos2
+- swathed
 ---
 
 # QGIS Plugin & GIS Integration Architecture

@@ -1,17 +1,18 @@
 ---
 layout: default
 title: omg_mb1
-parent: Core Shared Libraries (subr)
-module_name: omg_mb1
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/omg_mb1.c
-header_path: code/subr/omg_mb1.h
 category: File Formats & Vendor Parsers
 related_tools:
-  - mboneTool
-  - mbone2omg
-  - makess
-  - get_ADH_SRA
-  - swathed (SE)
+- mboneTool
+- mbone2omg
+- makess
+- get_ADH_SRA
+- swathed (SE)
+module_name: omg_mb1
+header_path: code/subr/omg_mb1.h
 ---
 
 # omg_mb1

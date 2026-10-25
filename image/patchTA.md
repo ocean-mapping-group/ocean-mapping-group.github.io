@@ -1,14 +1,22 @@
 ---
 layout: default
 title: patchTA
-parent: Image Tools
+parent: Raster Image Processing (image)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 38
 tool_name: patchTA
 source_path: code/image/patchTA.c
 category: Multibeam Water Column & Acoustic Modeling
-input_formats: ["OMG1 .wcim water-column Time-Angle files"]
-output_formats: ["Composite time-windowed OMG1 water-column array"]
-related_tools: ["comboTAs", "comboVPs", "TAtoXZ", "stackPIEs", "makeWC"]
+input_formats:
+- OMG1 .wcim water-column Time-Angle files
+output_formats:
+- Composite time-windowed OMG1 water-column array
+related_tools:
+- comboTAs
+- comboVPs
+- TAtoXZ
+- stackPIEs
+- makeWC
 ---
 
 # patchTA
@@ -17,6 +25,7 @@ related_tools: ["comboTAs", "comboVPs", "TAtoXZ", "stackPIEs", "makeWC"]
 `patchTA` composites and resamples a sequence of multibeam water-column `.wcim` Time-Angle files across a user-specified time window (`-time_start` to `-time_end`, or `-time_start_1970` + `-window_sec`) into a single uniform-time-stepped 8-bit `OMG1` (`JHC_header`) echogram.
 
 ## CLI Options & Usage
+
 ```bash
 patchTA -out <outfile> -import <file1.wcim> [<file2.wcim> ...] \
   [-prime <template> | -time_start <yy/ddd/hh:mm:ss> -time_end <yy/ddd/hh:mm:ss> | \

@@ -1,15 +1,18 @@
 ---
 layout: default
 title: att2ascii
-parent: Attitude Tools
+parent: Attitude, Heave & Heading (att)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 2
 ---
+
 # att2ascii
 
 ## Description
 `att2ascii` reads multiple OMG-HDCS (Ocean Mapping Group - Hydrographic Data Cleaning System) attitude record files and outputs their contents as an ASCII listing. It supports time-bounding, subsampling, and can extract specific attitude components (heave, pitch, roll, heading) in a navigation format. It can also identify and output peak values for these components.
 
 ## Usage
+
 ```bash
 att2ascii [OPTIONS] -comp <output_filename> <att_filename(s)>.orientation
 ```

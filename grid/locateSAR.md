@@ -1,13 +1,23 @@
 ---
 layout: default
 title: locateSAR
-parent: Grid Tools
+parent: Bathymetric Gridding & Export (grid)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 tool_name: locateSAR
 source_path: code/grid/locateSAR.c
 category: gridding
-input_formats: [".r4 (topographic DTM)", ".r4 or .8bit (JPL synoptic SAR image)"]
-output_formats: [".slr (slant-range corrected radar)", ".mock (synthetic grazing-angle image)", ".depth (co-registered depth image)", ".locate (georeferenced mosaic)"]
-related_tools: ["jplto8bit", "addSUN", "r4to8bit"]
+input_formats:
+- .r4 (topographic DTM)
+- .r4 or .8bit (JPL synoptic SAR image)
+output_formats:
+- .slr (slant-range corrected radar)
+- .mock (synthetic grazing-angle image)
+- .depth (co-registered depth image)
+- .locate (georeferenced mosaic)
+related_tools:
+- jplto8bit
+- addSUN
+- r4to8bit
 ---
 
 # locateSAR
@@ -63,11 +73,13 @@ locateSAR -topo (<dep.r4> | flat) (-radar | -mock | -depth) [OPTIONS] <sar_image
 ## Examples
 
 **1. Slant-range correct a float SAR image using a topographic DTM and project onto a map grid:**
+
 ```bash
 locateSAR -topo huon_dtm.r4 -radar -locate -azi 271.0 -min -30.0 -max 0.0 sar_strip.r4
 ```
 
 **2. Generate a synthetic radar grazing-angle illumination model with cast shadows:**
+
 ```bash
 locateSAR -topo huon_dtm.r4 -mock -cast_shadow -maxangle 20 -azi 271.0 sar_strip.r4
 ```

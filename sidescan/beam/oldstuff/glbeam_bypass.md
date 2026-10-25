@@ -1,10 +1,11 @@
 ---
 layout: default
 title: glbeam_bypass
-parent: Beam Tools
-grand_parent: sidescan
+parent: Sidescan Radiometric & Geometric Suite (sidescan)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 2
 ---
+
 # glbeam_bypass
 
 ## Description
@@ -13,6 +14,7 @@ nav_order: 2
 2.  **Apply Beam Pattern:** If a beam pattern file is supplied, it applies the corrections from that file to the input GLORIA file.
 
 ## Usage
+
 ```bash
 glbeam_bypass <infile> <outfile> <beamfile_or_null>
 ```

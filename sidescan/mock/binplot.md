@@ -1,16 +1,18 @@
 ---
 layout: default
 title: binplot
-parent: Mock Tools
-grand_parent: sidescan
+parent: Sidescan Radiometric & Geometric Suite (sidescan)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 4
 ---
+
 # binplot
 
 ## Description
 `binplot` is a utility designed to visualize binary data, specifically streams of 16-bit short integers, by plotting them onto a Metafile. It creates a 2D graph, where the x-axis typically represents the index (or time) and the y-axis represents the data value. The plot dimensions, ranges, and output file are configurable.
 
 ## Usage
+
 ```bash
 binplot [-infile <file>] [-outfile <metafile>]
 ```

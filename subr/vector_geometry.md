@@ -1,18 +1,24 @@
 ---
 layout: default
 title: vector_geometry
-parent: Shared Core Libraries (subr)
-module_name: vector_geometry
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/vector_geometry.c
-header_path: code/subr/vector_geometry.h
 category: Matrix, Vector & Orientation Math
-related_tools: ["DCM_rthand", "orientation", "grazing_angle", "sonar_geometry", "jGL_draw"]
+related_tools:
+- DCM_rthand
+- orientation
+- grazing_angle
+- sonar_geometry
+- jGL_draw
+module_name: vector_geometry
+header_path: code/subr/vector_geometry.h
 ---
 
 # vector_geometry
 
 ## Overview
-`vector_geometry` (`vector_geometry.c` / `vector_geometry.h`) provides fundamental 3D Cartesian vector algebra operations—addition, subtraction, Euclidean norm, unit normalization, dot product, and right-handed cross product—operating on the single-precision `fvect` (`struct { float x, y, z; }`) type defined in [`DCM_rthand.h`](DCM_rthand.md).
+`vector_geometry` (`vector_geometry.c` / `vector_geometry.h`) provides fundamental 3D Cartesian vector algebra operations—addition, subtraction, Euclidean norm, unit normalization, dot product, and right-handed cross product—operating on the single-precision `fvect` (`struct { float x, y, z; }`) type defined in [`DCM_rthand.h`](DCM_rthand.html).
 
 It is used throughout the Ocean Mapping Group's 3D acoustic geometry, seafloor normal estimation, grazing-angle calculation, and OpenGL visualization modules.
 
@@ -20,7 +26,8 @@ It is used throughout the Ocean Mapping Group's 3D acoustic geometry, seafloor n
 
 ## Data Type Dependency
 
-From [`DCM_rthand.h`](DCM_rthand.md):
+From [`DCM_rthand.h`](DCM_rthand.html):
+
 ```c
 typedef struct {
     float x;
@@ -47,4 +54,4 @@ All functions return `0` on completion and write their output through a pointer 
 ---
 
 ## Architectural Role
-While [`orientation`](orientation.md) provides 3D Euler rotations (`rotate` / `unrotate`) on `vector_3D` and [`DCM_rthand`](DCM_rthand.md) defines direction cosine matrices (`fmatx`) and `fvect`, `vector_geometry` supplies the vector arithmetic used by [`grazing_angle`](grazing_angle.md) (computing 3D ray vectors and local DEM surface normal vectors to determine true seabed incidence angles) and 3D swath rendering routines.
+While [`orientation`](orientation.html) provides 3D Euler rotations (`rotate` / `unrotate`) on `vector_3D` and [`DCM_rthand`](DCM_rthand.html) defines direction cosine matrices (`fmatx`) and `fvect`, `vector_geometry` supplies the vector arithmetic used by [`grazing_angle`](grazing_angle.html) (computing 3D ray vectors and local DEM surface normal vectors to determine true seabed incidence angles) and 3D swath rendering routines.

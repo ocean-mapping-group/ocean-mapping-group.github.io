@@ -1,15 +1,18 @@
 ---
 layout: default
 title: embedCont
-parent: Grid Tools
+parent: Bathymetric Gridding & Export (grid)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 24
 ---
+
 # embedCont
 
 ## Description
 `embedCont` is a utility for "burning" or embedding vector data, such as contour lines or ship tracks, directly into a JHC-format 8-bit grid file (i.e., an image or mosaic). It reads line segments from a vector file and draws them onto the raster image, modifying the image file in place. This is often used as a final step in map production to overlay line work on a base image.
 
 ## Usage
+
 ```bash
 embedCont [OPTIONS] <8bit_mapsheet_file> <vector_file>
 ```

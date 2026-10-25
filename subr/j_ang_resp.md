@@ -1,16 +1,17 @@
 ---
 layout: default
 title: j_ang_resp
-parent: Core Shared Libraries (subr)
-module_name: j_ang_resp
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/j_ang_resp.c
-header_path: code/subr/j_ang_resp.h
 category: Backscatter & Seafloor Classification
 related_tools:
-  - getBeamPattern
-  - correctBS
-  - weigh_grid
-  - jview
+- getBeamPattern
+- correctBS
+- weigh_grid
+- jview
+module_name: j_ang_resp
+header_path: code/subr/j_ang_resp.h
 ---
 
 # `j_ang_resp` — Acoustic Backscatter Angular Response & Sidescan Spectral Analysis Library

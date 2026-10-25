@@ -1,9 +1,11 @@
 ---
 layout: default
 title: filterBP
-parent: OMG Tools
+parent: Core Swath & .all Suite (omg)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 97
 ---
+
 # filterBP
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 97
 This tool is useful for creating continuous beam patterns for further analysis or application, especially when the original data might have sparse coverage in certain angular bins.
 
 ## Usage
+
 ```bash
 filterBP -in <file.bp> [-out <file.bp.filt>] [-rolling] [-posTol <val>] [-negTol <val>] [-v]
 ```

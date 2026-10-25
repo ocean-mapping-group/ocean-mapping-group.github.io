@@ -1,7 +1,8 @@
 ---
 layout: default
 title: jgsf2omg
-parent: gsf
+parent: Generic Sensor Format — GSF (gsf)
+grand_parent: 4. Multi-Vendor Sonar & LiDAR Converters
 ---
 
 # jgsf2omg
@@ -10,6 +11,7 @@ parent: gsf
 `jgsf2omg` is a utility program designed to convert GSF (Generalized Sonar Format) files to OMG (Ocean Mapping Group) format. It specifically handles HIPS dumps of 7125 data logged originally in HSX, reading GSF files and outputting OMG merged files. The program supports verbose and debug modes, and can process different sonar types like SeaBat 7125.
 
 ## Usage
+
 ```bash
 jgsf2omg (-v) (-debug) (-7125) -gsf input_name -omg omg_file_prefix
 ```

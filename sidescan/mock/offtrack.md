@@ -1,10 +1,11 @@
 ---
 layout: default
 title: offtrack
-parent: Mock Tools
-grand_parent: sidescan
+parent: Sidescan Radiometric & Geometric Suite (sidescan)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 9
 ---
+
 # offtrack
 
 ## Description
@@ -17,6 +18,7 @@ nav_order: 9
 This tool integrates information from various environmental and system parameters, including detailed topography, water column sound velocity structure, beam patterns, aspherical spreading, magnetic declination, and sonar system characteristics. It also handles edge cases like cast shadows and data outside the Digital Terrain Model (DTM).
 
 ## Usage
+
 ```bash
 offtrack -topo <topo_file | flat> -water <wc_file_prefix> -image <image_file> -pix <pixel_size> [-proj_lat <lat>] [-declin <declin_val>] [-somers_delay <delay>] [-min_beam <gain>] [-clip_beam <angle>] [-port_offset <offset>] [-starboard_offset <offset>] [-mock <mock_file> | -fullslr <slr_file> | -backscatter <bksct_file_prefix> | -depth <depth_file>] [-maxangle <angle>] [-maxdepth <depth>] [-mindepth <depth>] [-min <dB>] [-max <dB>] [-nadirbias] [-nofocus] [-squared] [-cast_shadow] [-debug <record>] [-first <rec>] [-last <rec>] [-verbose]
 ```

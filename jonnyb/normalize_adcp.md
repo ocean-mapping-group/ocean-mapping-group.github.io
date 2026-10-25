@@ -1,14 +1,19 @@
 ---
 layout: default
 title: normalize_adcp
-parent: Jonathan Beaudoin (jonnyb) Tools
+parent: Jonathan Beaudoin — SVP, Refraction & Snippets (jonnyb)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 nav_order: 3
 tool_name: normalize_adcp
 source_path: code/jonnyb/gom_stuff/normalize_adcp.c
 category: Water Column & ADCP Processing (jonnyb)
-input_formats: [".r4 (OMG floating-point ADCP curtain grid)"]
-output_formats: [".r4 (range-normalized ADCP curtain grid)"]
-related_tools: ["mergeNav", "iwc_adcp"]
+input_formats:
+- .r4 (OMG floating-point ADCP curtain grid)
+output_formats:
+- .r4 (range-normalized ADCP curtain grid)
+related_tools:
+- mergeNav
+- iwc_adcp
 ---
 
 # normalize_adcp

@@ -1,14 +1,21 @@
 ---
 layout: default
 title: GSF9002toOMG
-parent: Sbat Tools
+parent: Reson SeaBat 9001/8101 Legacy (Sbat)
+grand_parent: 4. Multi-Vendor Sonar & LiDAR Converters
 nav_order: 2
 tool_name: GSF9002toOMG
 source_path: Sbat/GSF9002toOMG.c
 category: format_conversion
-input_formats: [GSF]
-output_formats: [OMG_HDCS]
-related_tools: [8101toOMG, RESON2OMG, Sbat2OMG, gsf2omg]
+input_formats:
+- GSF
+output_formats:
+- OMG_HDCS
+related_tools:
+- 8101toOMG
+- RESON2OMG
+- Sbat2OMG
+- gsf2omg
 ---
 
 # GSF9002toOMG

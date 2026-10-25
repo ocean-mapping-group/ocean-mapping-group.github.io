@@ -1,14 +1,26 @@
 ---
 layout: default
 title: stripNav
-parent: Navigation Tools
+parent: Navigation Processing (nav)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 2
 tool_name: stripNav
 source_path: code/nav/stripNav.c
 category: Navigation & Georeferencing
-input_formats: [".merged", ".ss"]
-output_formats: [".nav", ".nav.strip", "ASCII text", ".orientation"]
-related_tools: ["mergeNav", "appendNav", "doallWEB_Tide", "read_kmall", "jview"]
+input_formats:
+- .merged
+- .ss
+output_formats:
+- .nav
+- .nav.strip
+- ASCII text
+- .orientation
+related_tools:
+- mergeNav
+- appendNav
+- doallWEB_Tide
+- read_kmall
+- jview
 ---
 
 # stripNav
@@ -17,6 +29,7 @@ related_tools: ["mergeNav", "appendNav", "doallWEB_Tide", "read_kmall", "jview"]
 `stripNav` extracts a navigation time series (or attitude, tide, outer-beam positions, or average sidescan backscatter) from one or more OMG-HDCS `.merged` files or GLORIA `.ss` sidescan files and writes the output into a binary `jcu_nav_rec` file (48 bytes per record) or an ASCII table.
 
 In the Kongsberg `.kmall` unraveling pipeline (`unravel_KMALL_single`), `stripNav` is called immediately after `getBounds` and `doallWEB_Tide` to extract the ping-by-ping navigation track and merged tidal height from the `.merged` file into `<line>.nav.strip`:
+
 ```bash
 stripNav -comp merged/$SUBDIR/$LINE_NUMBER.nav.strip merged/$SUBDIR/$LINE_NUMBER.merged
 ```
@@ -33,21 +46,25 @@ stripNav [OPTIONS] -comp <output_nav_or_ascii_file> <input_file(s).merged | .ss>
 ### Common Examples
 
 **1. Extract ping-by-ping binary navigation from a `.merged` file (standard unravel step):**
+
 ```bash
 stripNav -comp merged/JD100/0001_line.nav.strip merged/JD100/0001_line.merged
 ```
 
 **2. Extract decimated navigation (every 10th ping) only for pings that have valid unflagged depths:**
+
 ```bash
 stripNav -skip 10 -with_valid_depths -comp active_survey.nav merged/JD100/*.merged
 ```
 
 **3. Dump ASCII time series of timestamp, lat/lon, time/distance step, heading, roll, pitch, and heave:**
+
 ```bash
 stripNav -ascii -plusll -plusdtdm -comp motion_dump.txt merged/JD100/0001_line.merged
 ```
 
 **4. Extract heading from a GLORIA `.ss` sidescan file into an OMG `.orientation` file (e.g., for EdgeTech systems where heading was only logged in sidescan):**
+
 ```bash
 stripNav -ss -dumpss_att extracted.orientation -comp temp.nav ss/JD100/0001_line.ss
 ```
@@ -90,10 +107,12 @@ Writes 48-byte `jcu_nav_rec` structures to the `-comp` file:
 
 ### ASCII Mode (`-ascii`)
 Each line contains:
+
 ```text
 <jday> <hour> <min> <sec> <secfrac> <unix_time> [lat lon] [dtime ddist] <heading> <roll> <pitch> <heave>
 ```
 If `-proj_re_map <mapfile>` is used, each line contains:
+
 ```text
 <mapx_px> <mapy_px> <heading_deg> <roll_deg> <pitch_deg> <heave_m> <surf_sound_speed_m_s>
 ```

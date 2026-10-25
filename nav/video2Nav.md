@@ -1,14 +1,21 @@
 ---
 layout: default
 title: video2Nav
-parent: Navigation Tools
+parent: Navigation Processing (nav)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 34
 tool_name: video2Nav
 source_path: code/nav/video2Nav.c
 category: Navigation & Georeferencing
-input_formats: ["USGS VISOE ASCII camera drift navigation"]
-output_formats: [".nav (<comp><drift_id>)"]
-related_tools: ["xsonar2Nav", "sar2Nav", "appendNav", "iNav2SHP"]
+input_formats:
+- USGS VISOE ASCII camera drift navigation
+output_formats:
+- .nav (<comp><drift_id>)
+related_tools:
+- xsonar2Nav
+- sar2Nav
+- appendNav
+- iNav2SHP
 ---
 
 # video2Nav
@@ -29,6 +36,7 @@ video2Nav [-v] [-new] [-skip <N>] -comp <out_prefix> <visoe_drift_file(s)>
 ### Common Workflow Examples
 
 **1. Split a VISOE ASCII camera drift log into individual binary `.nav` files:**
+
 ```bash
 video2Nav -comp drifts/station_ stellwagen_visoe.txt
 # If stellwagen_visoe.txt contains drifts 101, 102, 103, produces:
@@ -57,6 +65,7 @@ The input file begins with the first drift's identifier token (`string2`), follo
 * **Segment Delimiter:** `END <next_drift_id>` closes the current output `.nav` file, resets the synthetic timestamp counter (`timeindrift = 0`) and record counter (`tide_rec_no = 0`), parses `driftno` as a `float` from `<next_drift_id>`, and opens a new output file `<comp><next_drift_id>`.
 
 Example input structure:
+
 ```text
 01
 -70.25120 42.15430

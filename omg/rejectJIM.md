@@ -1,9 +1,11 @@
 ---
 layout: default
 title: rejectJIM
-parent: OMG Tools
+parent: Core Swath & .all Suite (omg)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 54
 ---
+
 # rejectJIM
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 54
 The tool aims to remove spurious soundings (often referred to as "Jim" noise, a common type of spurious noise) that appear in multibeam data, particularly in the inner swath.
 
 ## Usage
+
 ```bash
 rejectJIM <mergefile(s)> [-v] [-newstart] [-sdev <factor>]
 ```

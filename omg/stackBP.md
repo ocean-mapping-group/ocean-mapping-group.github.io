@@ -1,9 +1,11 @@
 ---
 layout: default
 title: stackBP
-parent: OMG Tools
+parent: Core Swath & .all Suite (omg)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 68
 ---
+
 # stackBP
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 68
 The averaging is weighted by the `bcount` (number of samples) in each bin, ensuring that bins with more data contribute more to the final average.
 
 ## Usage
+
 ```bash
 stackBP <beampatt_file(s)> [-verbose]
 ```

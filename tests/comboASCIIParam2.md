@@ -1,24 +1,25 @@
 ---
 layout: default
 title: comboASCIIParam2
-parent: tests (Test, Simulation & Diagnostic Suite)
+parent: Acoustic & Mathematical Test Harnesses (tests)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 nav_order: 2
 tool_name: comboASCIIParam2
 source_path: code/tests/comboASCIIParam2.c
 category: Backscatter & Multi-Spectral Grid Processing (tests)
 input_formats:
-  - .xval (ASCII frequency vector in Hz)
-  - .yval (ASCII 2D backscatter array: N_freq x 90 integer grazing bins)
-  - .zval (Optional 2-column ASCII frequency-trend calibration file: freq_kHz, BS_dB)
+- .xval (ASCII frequency vector in Hz)
+- .yval (ASCII 2D backscatter array: N_freq x 90 integer grazing bins)
+- .zval (Optional 2-column ASCII frequency-trend calibration file: freq_kHz, BS_dB)
 output_formats:
-  - ASCII 3-column table (freq_kHz, grazing_deg, BS_dB or nan)
-  - -grz ASCII 2-column frequency response curve (freq_kHz, mean_BS_dB)
-  - -frq ASCII 2-column angular response curve (grazing_deg, mean_BS_dB)
+- ASCII 3-column table (freq_kHz, grazing_deg, BS_dB or nan)
+- -grz ASCII 2-column frequency response curve (freq_kHz, mean_BS_dB)
+- -frq ASCII 2-column angular response curve (grazing_deg, mean_BS_dB)
 related_tools:
-  - comboASCIIParam
-  - testAtten
-  - fakeAR
-  - BatchProcEK
+- comboASCIIParam
+- testAtten
+- fakeAR
+- BatchProcEK
 ---
 
 # comboASCIIParam2
@@ -26,7 +27,7 @@ related_tools:
 ## Overview
 `comboASCIIParam2` (`code/tests/comboASCIIParam2.c`, authored by John Hughes Clarke in June 2020) is an enhanced multi-spectral seafloor backscatter processor created to handle a second MATLAB export format where `-xval` contains $N_x$ frequencies (in Hz, up to 200 bins) and `-yval` contains $N_x \times 90$ backscatter values pre-binned at $1^\circ$ integer grazing angles ($0^\circ$ to $89^\circ$).
 
-Compared to [`comboASCIIParam`](comboASCIIParam.md), `comboASCIIParam2` introduces three advanced acoustic processing capabilities:
+Compared to [`comboASCIIParam`](comboASCIIParam.html), `comboASCIIParam2` introduces three advanced acoustic processing capabilities:
 1. **Imperfect Frequency Calibration Detrending (`-zval`):** Reads an empirical `(freq_kHz, BS_dB)` trend file, fits a linear regression line via `do_least_squares()` (`j_ang_resp.h`), and subtracts the calibration residual from each corresponding frequency bin across all 90 grazing angles.
 2. **Altitude & Seawater Absorption SNR Masking (`-altitude`, `-MinSNR`):** Computes frequency-dependent seawater absorption $\alpha(f)$ in $\text{dB/km}$ via `calc_atten()` (`Echo_calib.h`) and two-way spherical spreading + absorption transmission loss along the slant range $R(\theta_g) = H / \sin\theta_g$, masking cells with `nan` wherever the relative signal level drops below `-MinSNR`.
 3. **Marginal Cross-Section Averaging (`-grz` and `-frq`):** Exports 1D mean backscatter vs. frequency averaged over a grazing angle window (`-minGraz` to `-maxGraz`), and 1D mean Angular Response Curves (ARC) vs. grazing angle averaged over a frequency band (`-minFreq` to `-maxFreq`).

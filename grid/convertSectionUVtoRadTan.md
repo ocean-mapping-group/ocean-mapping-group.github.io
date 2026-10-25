@@ -1,9 +1,11 @@
 ---
 layout: default
 title: convertSectionUVtoRadTan
-parent: Grid Tools
+parent: Bathymetric Gridding & Export (grid)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 14
 ---
+
 ---
 layout: default
 title: convertSectionUVtoRadTan
@@ -16,6 +18,7 @@ nav_order: 14
 `convertSectionUVtoRadTan` is a command-line utility designed to transform gridded U (eastward) and V (northward) velocity components, typically from an ocean model or ADCP data, into along-section and across-section velocity components. It specifically works with data representing a 2D cross-section extracted from a 3D model (e.g., using `extractVertSection`). It requires the U and V velocity grids and a separate ASCII file containing the azimuth of the profile at each point along the section. The output is three new JHC-format 32-bit floating-point (`.r4`) grids: one for along-section velocity, one for across-section velocity, and one for the current magnitude.
 
 ## Usage
+
 ```bash
 convertSectionUVtoRadTan -prefix <SectionPath/SectionPrefix> [OPTIONS]
 ```

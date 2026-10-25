@@ -1,27 +1,28 @@
 ---
 layout: default
 title: EK_PosMotion (Module within EKlook)
-parent: EKlook Tools
+parent: Simrad EK60/EK80 Echosounder Suite (EKlook)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 7
 tool_name: EK_PosMotion
 source_path: code/EKlook/EK_PosMotion.c
 category: EKlook
 input_formats:
-  - OMG_HDCS (.merged)
-  - OMG Attitude (.orientation / .POS_orient)
-  - JHC 8-bit Backdrop (.mos)
-  - JHC Float Area Maps (.r4)
+- OMG_HDCS (.merged)
+- OMG Attitude (.orientation / .POS_orient)
+- JHC 8-bit Backdrop (.mos)
+- JHC Float Area Maps (.r4)
 output_formats:
-  - Interactive 2D Map, 3D OpenGL Cone & Attitude Plots
+- Interactive 2D Map, 3D OpenGL Cone & Attitude Plots
 related_tools:
-  - EKlook
-  - EK_funcs
+- EKlook
+- EK_funcs
 ---
 
 # EK_PosMotion (Module within EKlook)
 
 ## Description
-`EK_PosMotion` (`code/EKlook/EK_PosMotion.c`) is an interactive GUI module within the [`EKlook`](EKlook.md) application. It manages the **"Position-Motion EK-Trace Window,"** providing an integrated 2D plan-view map of the vessel track and ray-traced bottom footprint over an 8-bit multibeam backdrop (`-backdrop`), an interactive 3D OpenGL view of the vessel, tilted transducer, and acoustic beam cone, and synchronized time-series plots of Roll, Pitch, Heave, and Heading from multiple attitude sensors.
+`EK_PosMotion` (`code/EKlook/EK_PosMotion.c`) is an interactive GUI module within the [`EKlook`](EKlook.html) application. It manages the **"Position-Motion EK-Trace Window,"** providing an integrated 2D plan-view map of the vessel track and ray-traced bottom footprint over an 8-bit multibeam backdrop (`-backdrop`), an interactive 3D OpenGL view of the vessel, tilted transducer, and acoustic beam cone, and synchronized time-series plots of Roll, Pitch, Heave, and Heading from multiple attitude sensors.
 
 ## Interactive Controls
 

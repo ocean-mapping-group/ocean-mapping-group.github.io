@@ -1,28 +1,30 @@
 ---
 layout: default
 title: makeTSmap
-parent: ADCP Tools
+parent: Teledyne RDI ADCP Processing (adcp)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 7
 tool_name: makeTSmap
 source_path: code/adcp/makeTSmap.c
 category: adcp
 input_formats:
-  - JHC Stacked Profile (.stack_prof)
-  - ASCII Stack Timestamps (.stack_ASCII)
-  - ASCII CTD Profiles
+- JHC Stacked Profile (.stack_prof)
+- ASCII Stack Timestamps (.stack_ASCII)
+- ASCII CTD Profiles
 output_formats:
-  - JHC Temperature Profile Map (.Tprof)
-  - JHC Salinity Profile Map (.Sprof)
+- JHC Temperature Profile Map (.Tprof)
+- JHC Salinity Profile Map (.Sprof)
 related_tools:
-  - readADCP
+- readADCP
 ---
 
 # makeTSmap
 
 ## Description
-`makeTSmap` is a command-line utility designed to generate time-varying temperature and salinity profile maps that are synchronized with an ADCP (Acoustic Doppler Current Profiler) time-series dataset. The tool reads a series of individual temperature and salinity (TS) profiles from ASCII CTD files, each associated with a specific timestamp, and interpolates them in both depth and time onto the grid of an existing ADCP ensemble stack (`<prefix>.stack_prof` and `<prefix>.stack_ASCII` produced by [`readADCP`](readADCP.md) `-ensem_stack`).
+`makeTSmap` is a command-line utility designed to generate time-varying temperature and salinity profile maps that are synchronized with an ADCP (Acoustic Doppler Current Profiler) time-series dataset. The tool reads a series of individual temperature and salinity (TS) profiles from ASCII CTD files, each associated with a specific timestamp, and interpolates them in both depth and time onto the grid of an existing ADCP ensemble stack (`<prefix>.stack_prof` and `<prefix>.stack_ASCII` produced by [`readADCP`](readADCP.html) `-ensem_stack`).
 
 ## Usage
+
 ```bash
 makeTSmap [OPTIONS] -guide <prefix> -out <outfilenameprefix> -in <infilename(s)>
 ```

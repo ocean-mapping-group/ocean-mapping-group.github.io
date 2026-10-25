@@ -1,16 +1,18 @@
 ---
 layout: default
 title: glbeambin
-parent: Beam Tools
-grand_parent: sidescan
+parent: Sidescan Radiometric & Geometric Suite (sidescan)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 4
 ---
+
 # glbeambin
 
 ## Description
 `glbeambin` is a utility that bins up empirical beam pattern data from a JCU GLORIA file across a series of depth windows. It processes the input GLORIA file and calculates the sum of pixel intensities and the count of pixels for port and starboard sides, within specific angle and depth bins. The output is a raw data table showing these accumulated sums and counts.
 
 ## Usage
+
 ```bash
 glbeambin <infile>
 ```

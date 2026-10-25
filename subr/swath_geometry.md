@@ -1,12 +1,16 @@
 ---
 layout: default
 title: swath_geometry
-parent: Shared Core Libraries (subr)
-module_name: swath_geometry
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/swath_geometry.c
-header_path: code/subr/swath_geometry.h
 category: Bathymetric & Swath Cleaning
-related_tools: ["OMG_HDCS_jversion", "swathed", "autoClean"]
+related_tools:
+- OMG_HDCS_jversion
+- swathed
+- autoClean
+module_name: swath_geometry
+header_path: code/subr/swath_geometry.h
 ---
 
 # swath_geometry

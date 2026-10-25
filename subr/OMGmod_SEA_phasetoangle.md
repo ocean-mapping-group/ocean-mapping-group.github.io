@@ -1,14 +1,15 @@
 ---
 layout: default
 title: OMGmod_SEA_phasetoangle
-parent: Core Shared Libraries (subr)
-module_name: OMGmod_SEA_phasetoangle
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/OMGmod_SEA_phasetoangle.c
-header_path: code/subr/OMGmod_SEA_phasetoangle.h
 category: Interferometric Phase-to-Angle Conversion
 related_tools:
-  - swathed
-  - j_SUB2K
+- swathed
+- j_SUB2K
+module_name: OMGmod_SEA_phasetoangle
+header_path: code/subr/OMGmod_SEA_phasetoangle.h
 ---
 
 # OMGmod_SEA_phasetoangle: Submetrix / SEA SwathPlus Multi-Stave Vernier Phase-to-Angle Resolver
@@ -30,6 +31,7 @@ Because stave spacings greater than $0.5\lambda$ introduce $2\pi$ phase-wrapping
 ## Key Data Structures, Constants & Macros
 
 ### Sample Structure (`cSample`)
+
 ```c
 typedef struct {
     unsigned char  m_phaseb_a;   /* Phase difference B - A (encoded 0..255 = 0..360 deg) */
@@ -44,6 +46,7 @@ typedef struct {
 ```
 
 ### Stave Spacing & Scaling Constants
+
 ```c
 const double STAVE_AB = 3.0;
 const double STAVE_BC = 3.5;
@@ -56,6 +59,7 @@ const int    LUTSZ        = 256;     /* Lookup table size for 8-bit encoded phas
 ```
 
 ### Phase Unwrapping Macro (`unam`)
+
 ```c
 #define unam(a, b, r) ((a > b) ? \
   (b + r * ((int)(0.5 + (float)(a - b) / (float)r))) : \

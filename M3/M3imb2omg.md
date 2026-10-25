@@ -1,15 +1,18 @@
 ---
 layout: default
 title: M3imb2omg
-parent: M3 Tools
+parent: Kongsberg Mesotech M3 Sonar (M3)
+grand_parent: 4. Multi-Vendor Sonar & LiDAR Converters
 nav_order: 2
 ---
+
 # M3imb2omg
 
 ## Description
 `M3imb2omg` is a highly specialized and comprehensive C program designed for the conversion of proprietary Mesotech M3 multibeam sonar data into the standardized Ocean Mapping Group (OMG) data format. It handles data from both IMB (Intensity Measurement Block) files, representing beamformed data, and PMB/PAQ (Profile/Phase Acquisition) data. The program manages the entire conversion pipeline, from parsing M3's native data structures and applying various geophysical corrections to ultimately writing a complete suite of OMG-compatible output files. These output files include merged bathymetry, watercolumn data (both amplitude and phase), navigation, attitude, and sonar parameters, making the Mesotech data fully accessible for broader OMG processing and analysis workflows.
 
 ## Usage
+
 ```bash
 M3imb2omg [OPTIONS] -M3imb <filename(s)> -omg <prefix>
 ```

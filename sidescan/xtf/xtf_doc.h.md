@@ -1,21 +1,27 @@
 ---
 layout: default
 title: xtf_doc.h
-parent: XTF Tools
-grand_parent: Sidescan Tools
+parent: Sidescan Radiometric & Geometric Suite (sidescan)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 10
 tool_name: xtf_doc.h
 source_path: code/sidescan/xtf/xtf_doc.h
 category: XTF Sidescan Conversion
-input_formats: ["C Header File (Triton XTF Rev 3 Specification)"]
-output_formats: ["Included by xtf2glo.c, xtf_funcs.c, chxtfhdr.c"]
-related_tools: ["xtf2glo", "chxtfhdr.h", "xtf_funcs.h", "new_xtf.h"]
+input_formats:
+- C Header File (Triton XTF Rev 3 Specification)
+output_formats:
+- Included by xtf2glo.c, xtf_funcs.c, chxtfhdr.c
+related_tools:
+- xtf2glo
+- chxtfhdr.h
+- xtf_funcs.h
+- new_xtf.h
 ---
 
 # xtf_doc.h
 
 ## Description
-`xtf_doc.h` is the official Triton Elics International eXtended Triton Format (`.XTF`, Revision 3, September 18, 1998, by Markespflug) C header specification included in `code/sidescan/xtf/`. It documents the binary structure of `.XTF` files and defines all packet type IDs, sonar family enumerations, and C data structures used by [`xtf2glo`](xtf2glo.md).
+`xtf_doc.h` is the official Triton Elics International eXtended Triton Format (`.XTF`, Revision 3, September 18, 1998, by Markespflug) C header specification included in `code/sidescan/xtf/`. It documents the binary structure of `.XTF` files and defines all packet type IDs, sonar family enumerations, and C data structures used by [`xtf2glo`](xtf2glo.html).
 
 ## Packet Header Type IDs (`HeaderType`)
 Every packet in an `.XTF` data stream begins with magic number `0xFACE` (`64206`) followed by a `HeaderType` byte:

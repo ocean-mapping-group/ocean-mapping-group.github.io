@@ -1,16 +1,18 @@
 ---
 layout: default
 title: ssi2glo
-parent: Convert Tools
-grand_parent: sidescan
+parent: Sidescan Radiometric & Geometric Suite (sidescan)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 4
 ---
+
 # ssi2glo
 
 ## Description
 `ssi2glo` is a utility designed to convert SSI (Side Scan International) ASCII format sidescan data to JCU GLORIA format. It reads sidescan data along with navigation and altitude information from an ASCII input file and converts it into GLORIA records.
 
 ## Usage
+
 ```bash
 ssi2glo -in <infile> -out <outfile>
 ```

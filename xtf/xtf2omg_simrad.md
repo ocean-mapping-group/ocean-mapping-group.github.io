@@ -1,14 +1,25 @@
 ---
 layout: default
 title: xtf2omg_simrad
-parent: XTF Tools
+parent: eXtended Triton Format — XTF (xtf)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 11
 tool_name: xtf2omg_simrad
 source_path: code/xtf/xtf2omg_simrad.c
 category: Raw Data Unraveling
-input_formats: [".xtf", ".idx"]
-output_formats: [".merged", ".merged.ss_data"]
-related_tools: ["em3002omg", "RTlite", "xtf2nav", "xtf2orientation", "xtf2param", "xtfTool"]
+input_formats:
+- .xtf
+- .idx
+output_formats:
+- .merged
+- .merged.ss_data
+related_tools:
+- em3002omg
+- RTlite
+- xtf2nav
+- xtf2orientation
+- xtf2param
+- xtfTool
 ---
 
 # xtf2omg_simrad
@@ -17,6 +28,7 @@ related_tools: ["em3002omg", "RTlite", "xtf2nav", "xtf2orientation", "xtf2param"
 `xtf2omg_simrad` converts Kongsberg/Simrad EM3000 and EM3002 multibeam data logged inside Triton XTF (`XTF_HEADER_BATHY`, packet ID 2) into OMG-HDCS v4 `.merged` and `.merged.ss_data` files. It parses embedded Simrad Raw Range and Beam Angle datagrams (both legacy `EM3000_RAW_TANG_CODE` and new `EM3000_NEW_RAW_TANG_CODE`) as well as Seabed Image snippet datagrams (`EM3000_IMAGE_CODE`).
 
 ## Usage
+
 ```bash
 xtf2omg_simrad (-LE | -BE) [-v] [-v_bathy] [-debug] [-dual_head] [-check_drift] -xtf <inputfile.xtf> -omg <outputfile.merged>
 ```
@@ -44,6 +56,7 @@ xtf2omg_simrad (-LE | -BE) [-v] [-v_bathy] [-debug] [-dual_head] [-check_drift] 
 ## Practical Examples
 
 **1. Convert a Little-Endian Simrad EM3000 Dual-Head XTF file:**
+
 ```bash
 xtf2omg_simrad -LE -dual_head -v -xtf em3000d_line01.xtf -omg em3000d_line01.merged
 ```

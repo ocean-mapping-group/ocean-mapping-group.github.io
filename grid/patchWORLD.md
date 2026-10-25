@@ -1,13 +1,24 @@
 ---
 layout: default
 title: patchWORLD
-parent: Grid Tools
+parent: Bathymetric Gridding & Export (grid)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 tool_name: patchWORLD
 source_path: code/grid/patchWORLD.c
 category: gridding
-input_formats: [".r4 (global/regional source grid: ETOPO5, Smith & Sandwell, EGM96, EGM08, CGG2010, GPSH, WOA01)", ".r4 (target mapsheet via -into)", ".nav (target binary navigation via -tonav)"]
-output_formats: [".r4 (modified in-place with interpolated values)", ".nav (modified in-place with interpolated value in azi)"]
-related_tools: ["make_blank", "project", "addDTM", "mergeTide", "diffTide"]
+input_formats:
+- '.r4 (global/regional source grid: ETOPO5, Smith & Sandwell, EGM96, EGM08, CGG2010, GPSH, WOA01)'
+- .r4 (target mapsheet via -into)
+- .nav (target binary navigation via -tonav)
+output_formats:
+- .r4 (modified in-place with interpolated values)
+- .nav (modified in-place with interpolated value in azi)
+related_tools:
+- make_blank
+- project
+- addDTM
+- mergeTide
+- diffTide
 ---
 
 # patchWORLD
@@ -73,6 +84,7 @@ patchWORLD (-etopo | -predict | -egm96 | -egm08 | -cgg2010 | -gpsh | -woa01 | -c
 ## Examples
 
 **1. Populate a blank UTM mapsheet with EGM2008 geoid undulation heights:**
+
 ```bash
 make_blank -float -utm -merid -66.0 fundy_geoid -boundsof merged/*.merged
 cp fundy_geoid.blank fundy_egm08.r4
@@ -80,6 +92,7 @@ patchWORLD -egm08 -source /data/geoid/EGM08_global.r4 -into fundy_egm08.r4
 ```
 
 **2. Extract CGG2010 geoid heights along a binary vessel navigation track (to subtract geoid from ellipsoidal PPK heights with `diffTide`):**
+
 ```bash
 cp ppk_ellipsoid.bin geoid_along_track.bin
 patchWORLD -cgg2010 -source /data/geoid/CGG2010.r4 -tonav geoid_along_track.bin
@@ -87,6 +100,7 @@ diffTide -tide1 ppk_ellipsoid.bin -tide2 geoid_along_track.bin -out orthometric_
 ```
 
 **3. Interactively query Smith & Sandwell predicted bathymetry at specific coordinates:**
+
 ```bash
 patchWORLD -predict -source /data/world/topo_8.2.r4 -test
 ```
@@ -95,5 +109,5 @@ patchWORLD -predict -source /data/world/topo_8.2.r4 -test
 
 ## Workflow Context
 
-- **Geoid & Vertical Datum Workflows:** `patchWORLD -tonav` + [`diffTide`](../tide/diffTide.md) + [`mergeTide`](../tide/mergeTide.md) allows converting ellipsoidal GNSS PPK trajectories (`GrafNav_2_OMG` / `posProc_2_OMG`) to orthometric (MSL/geoid) water levels along the vessel track.
-- **Regional Bathymetry Compilation:** `patchWORLD -into` + [`addDTM`](addDTM.md) allows filling unmapped offshore background areas of a survey mapsheet with Smith & Sandwell (`-predict`) or ETOPO (`-etopo`) bathymetry.
+- **Geoid & Vertical Datum Workflows:** `patchWORLD -tonav` + [`diffTide`](../tide/diffTide.html) + [`mergeTide`](../tide/mergeTide.html) allows converting ellipsoidal GNSS PPK trajectories (`GrafNav_2_OMG` / `posProc_2_OMG`) to orthometric (MSL/geoid) water levels along the vessel track.
+- **Regional Bathymetry Compilation:** `patchWORLD -into` + [`addDTM`](addDTM.html) allows filling unmapped offshore background areas of a survey mapsheet with Smith & Sandwell (`-predict`) or ETOPO (`-etopo`) bathymetry.

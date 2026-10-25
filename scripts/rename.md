@@ -1,11 +1,15 @@
 ---
 layout: default
 title: rename
-parent: Helper Scripts
+parent: Automated Processing Scripts (scripts)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 tool_name: rename
 source_path: code/scripts/rename
 category: Batch Processing & File Management Scripts
-related_tools: ["get_prefix", "tomos", "tor4"]
+related_tools:
+- get_prefix
+- tomos
+- tor4
 ---
 
 # rename

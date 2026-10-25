@@ -1,22 +1,30 @@
 ---
 layout: default
 title: expandr4
-parent: Image Tools
+parent: Raster Image Processing (image)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 21
 tool_name: expandr4
 source_path: code/image/expandr4.c
 category: Image & Raster Processing
-input_formats: ["OMG1 32-bit float grid (.r4)"]
-output_formats: ["Upsampled (or downsampled) OMG1 32-bit float grid (.r4)"]
-related_tools: ["expand", "decr4", "changeAspect", "patchArea"]
+input_formats:
+- OMG1 32-bit float grid (.r4)
+output_formats:
+- Upsampled (or downsampled) OMG1 32-bit float grid (.r4)
+related_tools:
+- expand
+- decr4
+- changeAspect
+- patchArea
 ---
 
 # expandr4
 
 ## Description
-`expandr4` is the 32-bit floating-point (`data_type = 3`, `.r4`) counterpart to [`expand`](expand.md). It upsamples (when `-factor > 1`) or downsamples (when `-factor < -1`) a georeferenced `OMG1` `.r4` bathymetric or backscatter grid using either nearest-neighbor block replication or two-pass bilinear interpolation (`-interp`) with optional no-data masking (`-mask`, `99999.0`).
+`expandr4` is the 32-bit floating-point (`data_type = 3`, `.r4`) counterpart to [`expand`](expand.html). It upsamples (when `-factor > 1`) or downsamples (when `-factor < -1`) a georeferenced `OMG1` `.r4` bathymetric or backscatter grid using either nearest-neighbor block replication or two-pass bilinear interpolation (`-interp`) with optional no-data masking (`-mask`, `99999.0`).
 
 ## CLI Options & Usage
+
 ```bash
 expandr4 -in <infile.r4> -out <outfile.r4> -factor <n> [-interp] [-mask]
 ```

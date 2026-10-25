@@ -1,9 +1,11 @@
 ---
 layout: default
 title: useCMG
-parent: OMG Tools
+parent: Core Swath & .all Suite (omg)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 76
 ---
+
 # useCMG
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 76
 This tool is particularly useful for improving navigation accuracy, especially in situations where the raw gyro heading might be noisy or subject to long-term drift.
 
 ## Usage
+
 ```bash
 useCMG <OMG_HDCS_datafile(s)> [-filtlen <value>] [-test] [-v]
 ```

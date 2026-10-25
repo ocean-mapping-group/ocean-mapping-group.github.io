@@ -1,14 +1,20 @@
 ---
 layout: default
 title: dehypack
-parent: Hypack Tools (hypack)
+parent: HYPACK HSX / RAW Converters (hypack)
+grand_parent: 4. Multi-Vendor Sonar & LiDAR Converters
 nav_order: 1
 tool_name: dehypack
 source_path: code/hypack/dehypack.c
 category: Raw Data Unraveling & Format Conversion
-input_formats: ["HYPACK binary-framed sonar file"]
-output_formats: ["Unframed raw sonar binary file"]
-related_tools: ["hypack2omg", "RTlite", "read_kmall"]
+input_formats:
+- HYPACK binary-framed sonar file
+output_formats:
+- Unframed raw sonar binary file
+related_tools:
+- hypack2omg
+- RTlite
+- read_kmall
 ---
 
 # dehypack
@@ -67,4 +73,4 @@ dehypack [-v] [-debug] -in <input_name> -out <output_name>
 
 ## Architectural Fit
 
-In the OMG software suite, `dehypack` serves as a pre-processor whenever raw binary multibeam or sidescan data logged inside HYPACK needs to be passed to native binary decoders (as opposed to ASCII HYSWEEP `.HSX` files, which are unpacked directly by [`hypack2omg`](hypack2omg.md)).
+In the OMG software suite, `dehypack` serves as a pre-processor whenever raw binary multibeam or sidescan data logged inside HYPACK needs to be passed to native binary decoders (as opposed to ASCII HYSWEEP `.HSX` files, which are unpacked directly by [`hypack2omg`](hypack2omg.html)).

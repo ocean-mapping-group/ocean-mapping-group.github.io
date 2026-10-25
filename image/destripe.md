@@ -1,14 +1,22 @@
 ---
 layout: default
 title: destripe (image)
-parent: Image Tools
+parent: Raster Image Processing (image)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 17
 tool_name: destripe
 source_path: code/image/destripe.c
 category: Satellite, SAR & Format Conversion
-input_formats: ["ACRES 8-bit Landsat MSS image", "Optional 6-detector ratio file (-ratio)"]
-output_formats: ["Destriped ACRES 8-bit image (<infile>.des)"]
-related_tools: ["lsfilter", "add_hilo", "limit_change", "fix_zigzag"]
+input_formats:
+- ACRES 8-bit Landsat MSS image
+- Optional 6-detector ratio file (-ratio)
+output_formats:
+- Destriped ACRES 8-bit image (<infile>.des)
+related_tools:
+- lsfilter
+- add_hilo
+- limit_change
+- fix_zigzag
 ---
 
 # destripe (`image`)
@@ -17,6 +25,7 @@ related_tools: ["lsfilter", "add_hilo", "limit_change", "fix_zigzag"]
 `destripe` (`code/image/destripe.c`, written by A. Y. / JCU, May 1990) removes 6-line periodic radiometric detector striping from ACRES-format Landsat MSS (Multispectral Scanner) imagery. Because Landsat MSS sweeps 6 detectors per spectral band on each mirror scan, detector gain drift creates a 6-row repeating stripe pattern. `destripe` either applies an external 6-detector gain/offset table (`-ratio`) or automatically calibrates detectors 2–6 against detector 1 using inter-line difference histograms and linear regression.
 
 ## CLI Options & Usage
+
 ```bash
 destripe -in <acres_file> [-ratio <ratio_file>]
 ```

@@ -1,9 +1,17 @@
+---
+layout: default
+title: DelayEditor
+parent: Latency & Delay Editor (DE)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
+---
+
 # DelayEditor
 
 ## Description
 `DelayEditor` is an interactive X-window application used for analyzing, visualizing, and correcting various motion-related issues in multibeam sonar data. It runs through a merged bathymetry file (or HDCS/USL formats) and allows the user to interactively adjust parameters like roll delay, lag, scale factor, and lever arms. It can also apply corrections for heave drift, pitch stabilization, and yaw misalignment for dual-head systems. The tool plots various parameters over time, displays bathymetry and imagery, and provides functions for correlating motion data and performing FFT analysis to identify periodic errors. It can output a corrected merged file or an ASCII plot file.
 
 ## Usage
+
 ```bash
 DelayEditor [OPTIONS] <datafile>
 ```

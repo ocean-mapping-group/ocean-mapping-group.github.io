@@ -1,12 +1,18 @@
 ---
 layout: default
 title: water
-parent: Shared Core Libraries (subr)
-module_name: water
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/water.c
-header_path: code/subr/water.h
 category: Raytracing, Sound Speed & Geolocation
-related_tools: ["soundspeed", "r_atten", "j_watercolumn", "jb_watercolumn", "svp_tool"]
+related_tools:
+- soundspeed
+- r_atten
+- j_watercolumn
+- jb_watercolumn
+- svp_tool
+module_name: water
+header_path: code/subr/water.h
 ---
 
 # water
@@ -14,7 +20,7 @@ related_tools: ["soundspeed", "r_atten", "j_watercolumn", "jb_watercolumn", "svp
 ## Overview
 `water` (`water.c` / `water.h`) implements the **UNESCO (Fofonoff & Millard, 1983) / EOS-80 physical oceanography algorithms** for computing fundamental thermodynamic properties of seawater: adiabatic temperature gradient, potential temperature, in-situ temperature, practical salinity (PSS-78) from electrical conductivity, seawater density ($\rho$ and $\sigma_t$), and the freezing point of seawater.
 
-Together with [`soundspeed`](soundspeed.md) and [`r_atten`](r_atten.md), `water` enables CTD profile ingestion, water-mass property analysis, and physical-oceanographic preprocessing for acoustic raytracing and absorption modeling.
+Together with [`soundspeed`](soundspeed.html) and [`r_atten`](r_atten.html), `water` enables CTD profile ingestion, water-mass property analysis, and physical-oceanographic preprocessing for acoustic raytracing and absorption modeling.
 
 ---
 
@@ -34,4 +40,4 @@ Together with [`soundspeed`](soundspeed.md) and [`r_atten`](r_atten.md), `water`
 ---
 
 ## Architectural Role
-`water` is paired with [`soundspeed`](soundspeed.md) in CTD and Oceanographic model readers (such as [`j_SalishSeaCast`](j_SalishSeaCast.md), [`j_SSCOFS`](j_SSCOFS.md), and [`svp_tool`](../svp/svp_tool.md)) where model outputs or CTD casts provide potential temperature or conductivity rather than in-situ temperature and practical salinity.
+`water` is paired with [`soundspeed`](soundspeed.html) in CTD and Oceanographic model readers (such as [`j_SalishSeaCast`](j_SalishSeaCast.html), [`j_SSCOFS`](j_SSCOFS.html), and [`svp_tool`](../JV/JV_svpedit.html)) where model outputs or CTD casts provide potential temperature or conductivity rather than in-situ temperature and practical salinity.

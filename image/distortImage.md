@@ -1,14 +1,23 @@
 ---
 layout: default
 title: distortImage
-parent: Image Tools
+parent: Raster Image Processing (image)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 18
 tool_name: distortImage
 source_path: code/image/distortImage.c
 category: Image & Raster Processing
-input_formats: ["OMG1 8-bit input image", "OMG1 8-bit reference image (-ref)", "2-point control file (-coords)"]
-output_formats: ["Warped/registered OMG1 8-bit image"]
-related_tools: ["control_points", "patchArea", "rotateimage", "subimage"]
+input_formats:
+- OMG1 8-bit input image
+- OMG1 8-bit reference image (-ref)
+- 2-point control file (-coords)
+output_formats:
+- Warped/registered OMG1 8-bit image
+related_tools:
+- control_points
+- patchArea
+- rotateimage
+- subimage
 ---
 
 # distortImage
@@ -17,6 +26,7 @@ related_tools: ["control_points", "patchArea", "rotateimage", "subimage"]
 `distortImage` geometrically warps (translates, rotates, and isotropically scales) an 8-bit `OMG1` (`JHC_header`) image onto either an existing reference `OMG1` image (`-ref`) or a WGS84 Mercator grid (`-geo`) using a two-point control file (`-coords`).
 
 ## CLI Options & Usage
+
 ```bash
 distortImage -in <infile> -out <outfile> -coords <cfile> \
   [-ref <reffile> | -geo [-projlat <deg>]] \

@@ -1,13 +1,20 @@
 ---
 layout: default
 title: makemesh
-parent: Grid Tools
+parent: Bathymetric Gridding & Export (grid)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 tool_name: makemesh
 source_path: code/grid/makemesh.c
 category: gridding
-input_formats: ["JHC_header (optional reference image via -getsizeimage)"]
-output_formats: [".8bit (JHC 8-bit mesh, colorbar, or phase-difference pattern)"]
-related_tools: ["make_blank", "selectcb", "mix_ci", "maskarray"]
+input_formats:
+- JHC_header (optional reference image via -getsizeimage)
+output_formats:
+- .8bit (JHC 8-bit mesh, colorbar, or phase-difference pattern)
+related_tools:
+- make_blank
+- selectcb
+- mix_ci
+- maskarray
 ---
 
 # makemesh
@@ -52,7 +59,7 @@ makemesh (-xlen <nx> -ylen <ny> | -getsizeimage <ref_file>) [OPTIONS] -out <file
 1. **Header Initialization:** Either reads an existing `JHC_header` via `-getsizeimage` or constructs a new `OMG1` header with `dx = xlen`, `dy = ylen`, and `data_type = 1` (8-bit unsigned char).
 2. **Pattern Generation:**
    - **Mesh Mode (default):** Sets pixel `(j, i)` to `MESH_LINE` whenever `i % spacing == yoffset` or `j % spacing == xoffset`, and `MESH_BACK` otherwise.
-   - **Colorbar Mode (`-colorbar`):** Maps horizontal position `j` across 30 intensity shades and vertical position `i` across 8 color bands (`DN = 16 .. 255`), matching the default [`mix_ci`](mix_ci.md) color-intensity table.
+   - **Colorbar Mode (`-colorbar`):** Maps horizontal position `j` across 30 intensity shades and vertical position `i` across 8 color bands (`DN = 16 .. 255`), matching the default [`mix_ci`](mix_ci.html) color-intensity table.
    - **Phase-Difference Mode (`-wavelengths` or `-mount_angle`):** Within a circle of radius $\min(\text{xlen}, \text{ylen})/2$, computes polar angle $\theta$ relative to `mount_angle`, evaluates wrapped phase path difference $\Delta\lambda = \text{frac}(d/\lambda \cdot \sin\theta) \in [-0.5, 0.5)$, and maps it to palette indices `16..254`.
 
 ---
@@ -60,16 +67,19 @@ makemesh (-xlen <nx> -ylen <ny> | -getsizeimage <ref_file>) [OPTIONS] -out <file
 ## Examples
 
 **1. Create a 20-pixel mesh matching the dimensions and projection of an existing `.r4` grid:**
+
 ```bash
 makemesh -getsizeimage survey.r4 -spacing 20 -line 0 -back 255 -out survey_mesh.8bit
 ```
 
 **2. Create a 2D color-intensity legend bar for `mix_ci` maps:**
+
 ```bash
 makemesh -xlen 100 -ylen 400 -colorbar -out ci_legend.8bit
 ```
 
 **3. Generate a 2-wavelength interferometric sonar phase-wrap diagram tilted at 30°:**
+
 ```bash
 makemesh -xlen 500 -ylen 500 -wavelengths 2.0 -mount_angle 30.0 -out interf_phase.8bit
 ```
@@ -78,4 +88,4 @@ makemesh -xlen 500 -ylen 500 -wavelengths 2.0 -mount_angle 30.0 -out interf_phas
 
 ## Workflow Context
 
-- Mesh grids generated with `-getsizeimage` can be reprojected with [`project`](project.md) to visualize map distortion or overlaid onto imagery via [`add8bit`](add8bit.md) / [`mix_ci`](mix_ci.md).
+- Mesh grids generated with `-getsizeimage` can be reprojected with [`project`](project.html) to visualize map distortion or overlaid onto imagery via [`add8bit`](add8bit.html) / [`mix_ci`](mix_ci.html).

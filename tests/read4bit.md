@@ -1,20 +1,21 @@
 ---
 layout: default
 title: read4bit
-parent: tests (Test, Simulation & Diagnostic Suite)
+parent: Acoustic & Mathematical Test Harnesses (tests)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 nav_order: 12
 tool_name: read4bit
 source_path: code/tests/read4bit.c
 category: Binary Format & Bit-Level Diagnostics (tests)
 input_formats:
-  - Binary file containing 4-bit nibble-packed bytes
+- Binary file containing 4-bit nibble-packed bytes
 output_formats:
-  - Binary file with high-nibble masked bytes (onebyte & 0xF0)
-  - Optional verbose bit-level ASCII trace on stdout (-v)
+- Binary file with high-nibble masked bytes (onebyte & 0xF0)
+- Optional verbose bit-level ASCII trace on stdout (-v)
 related_tools:
-  - getCR
-  - stripRawDoc
-  - test64
+- getCR
+- stripRawDoc
+- test64
 ---
 
 # read4bit
@@ -67,6 +68,7 @@ Inside the main byte loop (`while ((i = getc(infile)) != -1)`):
 read4bit -v packed_4bit.bin unpacked_high_nibble.bin | head -n 20
 ```
 Sample `-v` output for byte `0xA5` (`165`, binary `10100101`, LSB-first `-10100101`):
+
 ```text
 -10100101-00000000-00000000-00000000
 -10100101

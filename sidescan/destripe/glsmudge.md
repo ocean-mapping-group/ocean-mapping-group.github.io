@@ -1,16 +1,18 @@
 ---
 layout: default
 title: glsmudge
-parent: Destripe Tools
-grand_parent: sidescan
+parent: Sidescan Radiometric & Geometric Suite (sidescan)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 8
 ---
+
 # glsmudge
 
 ## Description
 `glsmudge` is a utility designed to "smudge" the low-pass data of a JCU GLORIA format sidescan file. This process aims to remove long-wavelength stripes by linearly interpolating the pixel intensities between two specified reference records (`-first` and `-last`). This is typically applied to the `.low` component resulting from a destriping operation.
 
 ## Usage
+
 ```bash
 glsmudge [-first <record_number>] [-last <record_number>] <infile_prefix>
 ```

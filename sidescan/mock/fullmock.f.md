@@ -1,21 +1,28 @@
 ---
 layout: default
 title: fullmock.f
-parent: Mock Tools
-grand_parent: Sidescan Tools
+parent: Sidescan Radiometric & Geometric Suite (sidescan)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 19
 tool_name: fullmock (mockss)
 source_path: code/sidescan/mock/fullmock.f
 category: Sidescan & Backscatter Modeling
-input_formats: ["Ray-traced grazing angle table (175x750)", "Bathymetric DTM (512x512 float)", "GLORIA / SeaMARC I track file"]
-output_formats: ["Synthetic grazing-angle difference array (512x512 float)"]
-related_tools: ["ssmock.f", "rrmos.f", "synthetic"]
+input_formats:
+- Ray-traced grazing angle table (175x750)
+- Bathymetric DTM (512x512 float)
+- GLORIA / SeaMARC I track file
+output_formats:
+- Synthetic grazing-angle difference array (512x512 float)
+related_tools:
+- ssmock.f
+- rrmos.f
+- synthetic
 ---
 
 # fullmock.f (`mockss`)
 
 ## Description
-`fullmock.f` is a Fortran 77 synthetic sidescan forward-modeling program (`program mockss`, written by John Hughes Clarke, 1989) that improves upon flat-earth straight-line ray geometry ([`ssmock.f`](ssmock.f.md)) by incorporating a pre-computed 2D ray-traced grazing-angle lookup table (`grazearray(175, 750)`) alongside a 512×512 bathymetric Digital Terrain Model (`rbathy`) and an actual SeaMARC I or GLORIA ship track file.
+`fullmock.f` is a Fortran 77 synthetic sidescan forward-modeling program (`program mockss`, written by John Hughes Clarke, 1989) that improves upon flat-earth straight-line ray geometry ([`ssmock.f`](ssmock.f.html)) by incorporating a pre-computed 2D ray-traced grazing-angle lookup table (`grazearray(175, 750)`) alongside a 512×512 bathymetric Digital Terrain Model (`rbathy`) and an actual SeaMARC I or GLORIA ship track file.
 
 ## Interactive Inputs
 When executed, `fullmock` prompts for:

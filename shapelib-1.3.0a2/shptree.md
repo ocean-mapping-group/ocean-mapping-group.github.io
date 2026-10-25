@@ -1,14 +1,22 @@
 ---
 layout: default
 title: shptree
-parent: Shapelib GIS Library & Tools (shapelib-1.3.0a2)
+parent: ESRI Shapefile C Library (shapelib-1.3.0a2)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 nav_order: 12
-module_name: shptree
 source_path: code/shapelib-1.3.0a2/shptree.c
 category: GIS & ESRI Shapefile Library / Tools
-input_formats: [".shp", ".shx", ".qix (spatial quadtree index)"]
-output_formats: [".qix (spatial quadtree index)"]
-related_tools: ["shptreedump", "shpopen", "safileio"]
+input_formats:
+- .shp
+- .shx
+- .qix (spatial quadtree index)
+output_formats:
+- .qix (spatial quadtree index)
+related_tools:
+- shptreedump
+- shpopen
+- safileio
+module_name: shptree
 ---
 
 # shptree (`shptree.c`)
@@ -69,4 +77,4 @@ typedef struct
 
 ## Architectural Fit
 
-`shptree.o` provides fast 2D/3D spatial indexing for Shapelib-based tools and is exercised directly by the [`shptreedump`](shptreedump.md) CLI utility.
+`shptree.o` provides fast 2D/3D spatial indexing for Shapelib-based tools and is exercised directly by the [`shptreedump`](shptreedump.html) CLI utility.

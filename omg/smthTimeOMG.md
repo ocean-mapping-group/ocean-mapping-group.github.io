@@ -1,9 +1,11 @@
 ---
 layout: default
 title: smthTimeOMG
-parent: OMG Tools
+parent: Core Swath & .all Suite (omg)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 66
 ---
+
 # smthTimeOMG
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 66
 The tool applies a moving average filter to the `timeOffset` values and can also apply a constant time shift.
 
 ## Usage
+
 ```bash
 smthTimeOMG <OMG_HDCS_datafile(s)> [-v] [-test] [-filtlen <value>] [-Tshift <value>]
 ```

@@ -1,9 +1,11 @@
 ---
 layout: default
 title: RTlite
-parent: RTLite Tools
+parent: Real-Time KMALL/ALL Monitor (RTLite)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 188
 ---
+
 # RTlite
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 188
 It handles various aspects of data conversion, including byte order, time synchronization, quality flagging, and the extraction of bathymetry, sidescan, attitude, navigation, and watercolumn data.
 
 ## Usage
+
 ```bash
 RTlite [OPTIONS] [<input_file_options>]
 ```
@@ -29,12 +32,14 @@ RTlite [OPTIONS] [<input_file_options>]
     *   `-outprefix <output_filepath_prefix>`: Optional. Full path prefix for output files. If not supplied, outputs will be in the input file's directory.
 
 ### Verbosity Options
+
 | Option | Description |
 |---|---|
 | `-quiet` | Suppress verbose output. |
 | `-turn_on_verbose <depth_telegram_num>` | Turn on verbose output after a specific depth telegram number. |
 
 ### Positioning Options
+
 | Option | Description |
 |---|---|
 | `-posnav` | Enable POS/MV navigation flagging. |
@@ -51,6 +56,7 @@ RTlite [OPTIONS] [<input_file_options>]
 | `-auto_write_primary_nav` | Automatically write the primary navigation system to the `.nav` file. |
 
 ### Attitude Options
+
 | Option | Description |
 |---|---|
 | `-2motions` | Process data from two motion sensors. |
@@ -58,6 +64,7 @@ RTlite [OPTIONS] [<input_file_options>]
 | `-auto_write_primary_orientation` | Automatically write the primary orientation system to the `.orientation` file. |
 
 ### Seabed Imagery Options
+
 | Option | Description |
 |---|---|
 | `-suppress_sk` / `-unsuppress_sk` | Suppress/unsuppress skipped records. |
@@ -67,6 +74,7 @@ RTlite [OPTIONS] [<input_file_options>]
 | `-store_16bit` | Write merged 16-bit sidescan data (`merged.16_ss_data`). |
 
 ### Miscellaneous Options
+
 | Option | Description |
 |---|---|
 | `-noLength` | Ignore telegram length checks. |
@@ -84,18 +92,21 @@ RTlite [OPTIONS] [<input_file_options>]
 | `-float_twtt` | Write float TWTT. |
 
 ### Input File Format Selection (Auto-detected now, but can be forced)
+
 | Option | Description |
 |---|---|
 | `-em100` / `-em120` / `-em300` / `-em1000` / `-em1002` / `-em3000` / `-em3000d` / `-em3002` / `-em3002d` / `-em710` / `-em122` / `-em302` / `-em2040` / `-em12s` / `-em121a` | Specify the Simrad sonar model. |
 | `-force_swap` / `-LE` / `-BE` | Force byte swapping (Little Endian / Big Endian). |
 
 ### Output File Version Options
+
 | Option | Description |
 |---|---|
 | `-packdown` | Use version 2 output format. |
 | `-version1` / `-version2` / `-version3` / `-version4` / `-v1` / `-v2` / `-v3` / `-v4` | Specify the OMG-HDCS file version. |
 
 ### Water Column Options
+
 | Option | Description |
 |---|---|
 | `-unpack_watercol` | Unpack watercolumn data. |
@@ -153,5 +164,6 @@ RTlite [OPTIONS] [<input_file_options>]
 
 ## Note
 `RTlite` is designed for non-interactive batch processing, making it suitable for automated data conversion workflows. It reuses much of the core data parsing logic from the interactive `RT` tool.
+
 ```
 ```

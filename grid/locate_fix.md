@@ -1,13 +1,23 @@
 ---
 layout: default
 title: locate_fix
-parent: Grid Tools
+parent: Bathymetric Gridding & Export (grid)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 tool_name: locate_fix
 source_path: code/grid/locate_fix.c
 category: gridding
-input_formats: ["JHC_header mapsheet (.r4 / .8bit / .blank)", "ASCII lat lon depth (or pixX pixY depth)"]
-output_formats: [".gridvals (ASCII pixX pixY depth or lat lon depth)", "stdout interactive coordinates"]
-related_tools: ["convertutm", "utm", "testutm", "make_blank", "edhead"]
+input_formats:
+- JHC_header mapsheet (.r4 / .8bit / .blank)
+- ASCII lat lon depth (or pixX pixY depth)
+output_formats:
+- .gridvals (ASCII pixX pixY depth or lat lon depth)
+- stdout interactive coordinates
+related_tools:
+- convertutm
+- utm
+- testutm
+- make_blank
+- edhead
 ---
 
 # locate_fix
@@ -53,17 +63,20 @@ locate_fix [OPTIONS] -map <area.base> [-in <datafile>]
 ## Examples
 
 **1. Interactive decimal-degree to pixel lookup on a mapsheet:**
+
 ```bash
 locate_fix -map survey_area.r4 -decdeg
 ```
 
 **2. Batch-convert an ASCII `lat lon depth` file into pixel coordinates within `survey_area.r4`:**
+
 ```bash
 locate_fix -map survey_area.r4 -geo2pix -in cores.llz
 # Writes cores.llz.gridvals
 ```
 
 **3. Batch-convert pixel picks (`pixX pixY z`) back into geographic `lat lon z`:**
+
 ```bash
 locate_fix -map survey_area.r4 -pix2geo -in picked_features.xy
 # Writes picked_features.xy.gridvals

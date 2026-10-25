@@ -1,13 +1,20 @@
 ---
 layout: default
 title: readBlueFile
-parent: Tide Tools
+parent: Tidal Reduction & Constituents (tide)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 tool_name: readBlueFile
 source_path: code/tide/readBlueFile.c
 category: tide
-input_formats: ["CHS Harmonic Constituent BlueFile"]
-output_formats: ["outlist (lat lon station_name)", "stdout harmonic constituents"]
-related_tools: ["makeTideSeries", "convCHSpredTide", "medsTide"]
+input_formats:
+- CHS Harmonic Constituent BlueFile
+output_formats:
+- outlist (lat lon station_name)
+- stdout harmonic constituents
+related_tools:
+- makeTideSeries
+- convCHSpredTide
+- medsTide
 ---
 
 # readBlueFile
@@ -47,6 +54,7 @@ readBlueFile [OPTIONS] -in <bluefile>
 ## Examples
 
 **Extract station coordinates (`outlist`) and harmonic constituents from a CHS BlueFile:**
+
 ```bash
 readBlueFile -in chs_atlantic.blu > constituents_dump.txt
 head outlist

@@ -1,16 +1,18 @@
 ---
 layout: default
 title: destripe
-parent: Destripe Tools
-grand_parent: sidescan
+parent: Sidescan Radiometric & Geometric Suite (sidescan)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 1
 ---
+
 # destripe
 
 ## Description
 `destripe` is a utility designed to destripe JCU GLORIA format merged sidescan files. It employs a high/low pass filter technique, based on Chavez (1986), to remove striping artifacts from the imagery. The tool allows for customization of filter length and width, and can operate in either high-pass or low-pass mode.
 
 ## Usage
+
 ```bash
 destripe [-filtlen <length>] [-filtwidth <width>] [-low | -high] [-wrap] [-skip <count>] <infile_prefix>
 ```

@@ -1,16 +1,18 @@
 ---
 layout: default
 title: openISIS
-parent: SUB2K Tools
-grand_parent: code
+parent: GeoSwath+ / Submetrix 2000 CLI (sub2k)
+grand_parent: 4. Multi-Vendor Sonar & LiDAR Converters
 nav_order: 4
 ---
+
 # openISIS
 
 ## Description
 `openISIS` is a utility designed to parse ISIS Submetrix 2000 data files and convert the extracted information into OMG_HDCS (Ocean Mapping Group Hydrographic Data Collection System) format. It processes various ISIS Generic Block (GBH) data types, including ping times, control status, raw sidescan imagery, PRANG (Phase Range, which likely corresponds to phase-derived bathymetry), and attitude data (roll, pitch, heading, vertical displacement, depth, missed times). The tool combines this information to produce both JCU GLORIA records (for sidescan and derived products like fish depth and total depth) and structured OMG_HDCS files.
 
 ## Usage
+
 ```bash
 openISIS [-v] [-dump] [-omg] [-skip <value>] -out <outfile_prefix> <rawISISfiles(s)>
 ```

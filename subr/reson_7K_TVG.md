@@ -1,15 +1,16 @@
 ---
 layout: default
 title: reson_7K_TVG
-parent: Core Shared Libraries (subr)
-module_name: reson_7K_TVG
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/reson_7K_TVG.c
-header_path: code/subr/reson_7K_TVG.h
 category: Acoustic Modeling, Backscatter & TVG
 related_tools:
-  - omg2gsf
-  - reson_calibration
-  - Echo_calib
+- omg2gsf
+- reson_calibration
+- Echo_calib
+module_name: reson_7K_TVG
+header_path: code/subr/reson_7K_TVG.h
 ---
 
 # `reson_7K_TVG` — Reson 7K Time-Varying Gain (TVG) Lookup Interface
@@ -54,6 +55,7 @@ typedef struct {
 ## Public Functions & Signatures
 
 ### `build_Reson_7K_TVG`
+
 ```c
 int build_Reson_7K_TVG(
     Reson_7K_TVG *tvg,
@@ -64,6 +66,7 @@ int build_Reson_7K_TVG(
 - **Behavior**: In the current UNB SwathEd implementation, logs `warning("Reson 7125/7111 TVG is not implemented in UNB SwathEd")` and returns `0`.
 
 ### `get_Reson_7K_TVG`
+
 ```c
 float get_Reson_7K_TVG(Reson_7K_TVG *tvg, float twtt);
 ```

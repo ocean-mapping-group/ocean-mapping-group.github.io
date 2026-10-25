@@ -1,14 +1,20 @@
 ---
 layout: default
 title: upKnudSEGY
-parent: Knudsen Tools
+parent: Knudsen Chirp Sub-Bottom (knudsen)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 15
 tool_name: upKnudSEGY
 source_path: knudsen/upKnudSEGY.c
 category: format_conversion
-input_formats: [SEGY_KNUDSEN]
-output_formats: [BINARY_RASTER]
-related_tools: [readSB_SEGY, knud2glo, makeSeisPlot]
+input_formats:
+- SEGY_KNUDSEN
+output_formats:
+- BINARY_RASTER
+related_tools:
+- readSB_SEGY
+- knud2glo
+- makeSeisPlot
 ---
 
 # upKnudSEGY

@@ -1,16 +1,18 @@
 ---
 layout: default
 title: destripe_hack
-parent: Destripe Tools
-grand_parent: sidescan
+parent: Sidescan Radiometric & Geometric Suite (sidescan)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 2
 ---
+
 # destripe_hack
 
 ## Description
 `destripe_hack` is a specialized utility for destriping JCU GLORIA format merged sidescan files. Similar to `destripe.c`, it utilizes a high/low pass filter technique, based on Chavez (1986), to remove striping artifacts. This version includes an `edge` parameter, suggesting custom handling for image edges, and some array sizes appear hardcoded (e.g., `GLORIA_SIDESIZE * 2`).
 
 ## Usage
+
 ```bash
 destripe_hack [-filtlen <length>] [-filtwidth <width>] [-low | -high] [-skip <count>] [-edge <value>] <infile_prefix>
 ```

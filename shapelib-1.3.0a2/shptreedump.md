@@ -1,21 +1,30 @@
 ---
 layout: default
 title: shptreedump
-parent: Shapelib GIS Library & Tools (shapelib-1.3.0a2)
+parent: ESRI Shapefile C Library (shapelib-1.3.0a2)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 nav_order: 13
 tool_name: shptreedump
 source_path: code/shapelib-1.3.0a2/shptreedump.c
 category: GIS & ESRI Shapefile Library / Tools
-input_formats: [".shp", ".shx", ".qix (spatial quadtree index)"]
-output_formats: [".qix (spatial quadtree index)", "STDOUT quadtree hierarchy or search results"]
-related_tools: ["shptree", "shpdump", "shpopen"]
+input_formats:
+- .shp
+- .shx
+- .qix (spatial quadtree index)
+output_formats:
+- .qix (spatial quadtree index)
+- STDOUT quadtree hierarchy or search results
+related_tools:
+- shptree
+- shpdump
+- shpopen
 ---
 
 # shptreedump
 
 ## Overview
 
-`shptreedump` (`code/shapelib-1.3.0a2/shptreedump.c`) is a command-line spatial indexing, inspection, and query utility authored by Frank Warmerdam that exercises the [`shptree`](shptree.md) quadtree API (`SHPCreateTree`, `SHPTreeTrimExtraNodes`, `SHPWriteTree`, `SHPTreeFindLikelyShapes`, and `SHPSearchDiskTree`).
+`shptreedump` (`code/shapelib-1.3.0a2/shptreedump.c`) is a command-line spatial indexing, inspection, and query utility authored by Frank Warmerdam that exercises the [`shptree`](shptree.html) quadtree API (`SHPCreateTree`, `SHPTreeTrimExtraNodes`, `SHPWriteTree`, `SHPTreeFindLikelyShapes`, and `SHPSearchDiskTree`).
 
 It serves three primary functions:
 1. **ASCII Tree Visualization**: Builds an in-memory quadtree for a `.shp` file and prints a hierarchical, indented S-expression dump of every `SHPTreeNode`, its bounding box, and the shape IDs (or full vertex geometries with `-v`) stored at that node.

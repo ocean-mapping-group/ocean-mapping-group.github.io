@@ -1,14 +1,15 @@
 ---
 layout: default
 title: mr1_raw
-parent: Core Shared Libraries (subr)
-module_name: mr1_raw
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/mr1_raw.c
-header_path: code/subr/mr1_raw.h
 category: Sonar Format I/O & Interferometric Processing (MR1)
 related_tools:
-  - MR1toOMG
-  - mr1_proc
+- MR1toOMG
+- mr1_proc
+module_name: mr1_raw
+header_path: code/subr/mr1_raw.h
 ---
 
 # `mr1_raw` — HIG Hawaii MR1 Raw Packet Structures, Quadrature Phase & TVG Math Library
@@ -26,6 +27,7 @@ related_tools:
 - `out_samp`: Dual-stave unpacked complex sample `{ fcomplex A, B; }` representing upper (`A`) and lower (`B`) receiver stave pairs.
 - `raw_samp`: Raw 16-bit integer quadrature sample `{ short ar, br, ai, bi; }` as logged by the MR1 hardware.
 - `packet`: Raw 64-sample acoustic telemetry packet:
+
   ```c
   typedef struct {
       short seq_no;        /* Odd = Port, Even = Starboard           */

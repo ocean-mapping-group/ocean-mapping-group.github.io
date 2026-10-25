@@ -1,16 +1,18 @@
 ---
 layout: default
 title: beams
-parent: Mock Tools
-grand_parent: sidescan
+parent: Sidescan Radiometric & Geometric Suite (sidescan)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 3
 ---
+
 # beams
 
 ## Description
 `beams` is a utility designed to calculate GLORIA's beam directivity functions, commonly known as beam patterns. It can compute either horizontal or vertical beam patterns, taking into account various physical parameters of the GLORIA sonar system, such as array length, array width, transducer spacing, and operating frequency. The output can be presented in linear power, linear pressure, or decibel (dB) scale.
 
 ## Usage
+
 ```bash
 beams [-l] [-p] [-h] [-s] [-i <increment>] [-m <max_angle>]
 ```

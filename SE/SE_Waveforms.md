@@ -1,19 +1,24 @@
 ---
 layout: default
 title: SE_Waveforms
-parent: SwathEd (SE) Tools
+parent: Swath Editor — swathed (SE)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 19
 tool_name: SE_Waveforms
 source_path: code/SE/SE_Waveforms.c
 category: Interactive QC & Editing (SwathEd)
-input_formats: [".merged", ".waveform"]
+input_formats:
+- .merged
+- .waveform
 output_formats: []
-related_tools: ["swathed", "SE_WaterColumn"]
+related_tools:
+- swathed
+- SE_WaterColumn
 ---
 
 # `SE_Waveforms` — Airborne Bathymetric LiDAR Multi-Channel Waveform Analysis Toolkit
 
-`SE_Waveforms` (`code/SE/SE_Waveforms.c`, `code/SE/SE_Waveforms.h`) implements the `"Waveform Analysis Toolkit"` (`Waveform_widget`) in [`swathed`](swathed.md). Authored by John E. Hughes Clarke (June 2005) incorporating Pim Kuus's (`pm_Process_Wave`, `pm_waveform.h`) derivative-based optical pulse analysis algorithms, it provides an interactive X11 viewer for inspecting 4-channel Airborne Laser Bathymetry (ALB / SHOALS LiDAR) time-series waveforms stored in `.waveform` files alongside `.merged` sounding records.
+`SE_Waveforms` (`code/SE/SE_Waveforms.c`, `code/SE/SE_Waveforms.h`) implements the `"Waveform Analysis Toolkit"` (`Waveform_widget`) in [`swathed`](swathed.html). Authored by John E. Hughes Clarke (June 2005) incorporating Pim Kuus's (`pm_Process_Wave`, `pm_waveform.h`) derivative-based optical pulse analysis algorithms, it provides an interactive X11 viewer for inspecting 4-channel Airborne Laser Bathymetry (ALB / SHOALS LiDAR) time-series waveforms stored in `.waveform` files alongside `.merged` sounding records.
 
 ---
 

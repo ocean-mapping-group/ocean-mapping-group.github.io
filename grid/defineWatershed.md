@@ -1,9 +1,11 @@
 ---
 layout: default
 title: defineWatershed
-parent: Grid Tools
+parent: Bathymetric Gridding & Export (grid)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 19
 ---
+
 ---
 layout: default
 title: defineWatershed
@@ -20,6 +22,7 @@ The tool can operate in two modes:
 2.  **Downslope-Constrained Search:** By using a pre-computed `.downSlope` file (from `defineDownSlope`), it performs a more hydrologically accurate analysis, ensuring that a candidate pixel not only is uphill but also naturally drains towards a pixel already in the watershed.
 
 ## Usage
+
 ```bash
 defineWatershed -startcoord <x> <y> [OPTIONS] <floatfile> [8bitfile]
 ```

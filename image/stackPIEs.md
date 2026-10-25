@@ -1,14 +1,23 @@
 ---
 layout: default
 title: stackPIEs
-parent: Image Tools
+parent: Raster Image Processing (image)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 48
 tool_name: stackPIEs
 source_path: code/image/stackPIEs.c
 category: Multibeam Water Column & Acoustic Modeling
-input_formats: ["OMG1 .wcim water-column polar fan ('pie') images"]
-output_formats: ["Stacked/averaged .wcim or .pgm water-column fan images", "Optional horiz/vert slice composites"]
-related_tools: ["TAtoXZ", "patchTA", "comboTAs", "comboVPs", "stretchacres"]
+input_formats:
+- OMG1 .wcim water-column polar fan ('pie') images
+output_formats:
+- Stacked/averaged .wcim or .pgm water-column fan images
+- Optional horiz/vert slice composites
+related_tools:
+- TAtoXZ
+- patchTA
+- comboTAs
+- comboVPs
+- stretchacres
 ---
 
 # stackPIEs
@@ -17,6 +26,7 @@ related_tools: ["TAtoXZ", "patchTA", "comboTAs", "comboVPs", "stretchacres"]
 `stackPIEs` (written by John Hughes Clarke, 2002) stacks and averages sliding windows of multibeam water-column polar fan ("pie") `.wcim` images to suppress acoustic speckle, optionally overlaying range/depth graticules (`-add_graticule`), frame sequence counters (`-add_sequence`), tidal vertical datum shifts (`-tide`), rotational cross-correlation alignment (`-try_rot_correl`), and simultaneous horizontal/vertical curtain slices (`-appendSlice`).
 
 ## CLI Options & Usage
+
 ```bash
 stackPIEs [-stack <n>] [-nostacks <max>] [-preserve_frame_no] [-startframeno <n>] \
   [-add_graticule] [-add_sequence] [-pgm] [-str_result <min> <max>] \

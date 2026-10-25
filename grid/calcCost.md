@@ -1,9 +1,11 @@
 ---
 layout: default
 title: calcCost
-parent: Grid Tools
+parent: Bathymetric Gridding & Export (grid)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 9
 ---
+
 ---
 layout: default
 title: calcCost
@@ -16,6 +18,7 @@ nav_order: 9
 `calcCost` is a command-line utility for performing a detailed cost-benefit analysis and logistical planning for bathymetric surveys. It takes a Digital Terrain Model (DTM) as input and evaluates the optimal sonar system (from a predefined list or user-defined specifications) for mapping different depth zones. For each pixel in the DTM, it calculates the most cost-effective sonar, the associated survey area, estimated survey days, data volume, and total cost, including transit to/from home ports. It supports various currency conversions and outputs detailed reports on survey parameters and costs.
 
 ## Usage
+
 ```bash
 calcCost [OPTIONS] -dtm <dtm_file.r4> -out <params_file>
 ```

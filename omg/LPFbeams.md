@@ -1,9 +1,11 @@
 ---
 layout: default
 title: LPFbeams
-parent: OMG Tools
+parent: Core Swath & .all Suite (omg)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 36
 ---
+
 # LPFbeams
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 36
 The tool operates on a user-defined range of pings and beams, calculating a weighted average of depths within a specified window. The input merged file is modified in place.
 
 ## Usage
+
 ```bash
 LPFbeams <merged_file> [OPTIONS]
 ```

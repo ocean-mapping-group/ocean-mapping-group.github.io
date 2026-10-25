@@ -1,9 +1,11 @@
 ---
 layout: default
 title: 8k2omg
-parent: Reson Tools
+parent: Reson SeaBat 7k/8k (reson)
+grand_parent: 4. Multi-Vendor Sonar & LiDAR Converters
 nav_order: 182
 ---
+
 # 8k2omg
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 182
 This tool provides a bridge for older Reson data to be processed and integrated within the modern OMG toolkit. It handles various aspects of the conversion, including time synchronization, quality flags, and basic sonar calibration parameters.
 
 ## Usage
+
 ```bash
 8k2omg -81x <input_name> -omg <omg_prefix> [-v] [-debug] [-ER]
 ```

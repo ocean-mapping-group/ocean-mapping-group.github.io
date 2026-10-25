@@ -1,14 +1,22 @@
 ---
 layout: default
 title: avNav
-parent: Navigation Tools
+parent: Navigation Processing (nav)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 13
 tool_name: avNav
 source_path: code/nav/avNav.c
 category: Navigation & Georeferencing
-input_formats: [".nav (jcu_nav_rec binary)"]
-output_formats: [".nav (jcu_nav_rec binary)"]
-related_tools: ["filtnav", "mergeNav", "stripNav", "appendNav", "AuketoNav"]
+input_formats:
+- .nav (jcu_nav_rec binary)
+output_formats:
+- .nav (jcu_nav_rec binary)
+related_tools:
+- filtnav
+- mergeNav
+- stripNav
+- appendNav
+- AuketoNav
 ---
 
 # avNav
@@ -30,16 +38,19 @@ avNav [OPTIONS] -comp <output.nav> <input_nav_file(s)>
 ### Common Workflow Examples
 
 **1. Smooth a `.nav` file with a 10-sample moving average while keeping the original number of records and vector-averaging azimuth:**
+
 ```bash
 avNav -nosmooth 10 -keeporignumrec -realazi -comp smoothed.nav raw_line.nav
 ```
 
 **2. Extract low-frequency RTK altitude / heave drift stored in `azi` using a $\pm 60\text{ s}$ cosine-squared taper:**
+
 ```bash
 avNav -cos_taper 60 -comp lowpass_rtk_tide.nav rtk_height.nav
 ```
 
 **3. Low-pass filter vessel velocity (`tide_rec.velocity`) using a $\pm 30\text{ s}$ cosine-squared taper:**
+
 ```bash
 avNav -cos_taper 30 -do_vel -comp smooth_vel.nav line01.nav
 ```

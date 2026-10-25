@@ -1,10 +1,11 @@
 ---
 layout: default
 title: array
-parent: Subr Tools
-grand_parent: code
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 nav_order: 3
 ---
+
 # array
 
 ## Description
@@ -22,6 +23,7 @@ This library serves as a foundational component for many tools within the GEMINI
 ## Data Structures
 
 ### `SW_header` (Swath Header)
+
 ```c
 typedef struct {
     int dx, dy;                 // Dimensions (width, height)
@@ -31,6 +33,7 @@ typedef struct {
 ```
 
 ### `JHC_header` (JHC Generic Header)
+
 ```c
 typedef struct {
     char header_name[4];        // Identifier, e.g., "OMG1"
@@ -62,6 +65,7 @@ typedef struct {
 ```
 
 ### `Map` (Generic Map Structure)
+
 ```c
 typedef struct {
     JHC_header header;          // Associated JHC header

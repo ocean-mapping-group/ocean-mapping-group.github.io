@@ -1,14 +1,23 @@
 ---
 layout: default
 title: fcv30-2glo
-parent: Knudsen Tools
+parent: Knudsen Chirp Sub-Bottom (knudsen)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 3
 tool_name: fcv30-2glo
 source_path: knudsen/fcv30-2glo.c
 category: format_conversion
-input_formats: [HAC_FCV30]
-output_formats: [OMG_HDCS, OMG_SS_DATA, JCU_NAV, BINARY_RASTER]
-related_tools: [knud2glo, readEA600, makeSeisPlot]
+input_formats:
+- HAC_FCV30
+output_formats:
+- OMG_HDCS
+- OMG_SS_DATA
+- JCU_NAV
+- BINARY_RASTER
+related_tools:
+- knud2glo
+- readEA600
+- makeSeisPlot
 ---
 
 # fcv30-2glo

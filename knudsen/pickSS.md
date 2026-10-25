@@ -1,14 +1,22 @@
 ---
 layout: default
 title: pickSS
-parent: Knudsen Tools
+parent: Knudsen Chirp Sub-Bottom (knudsen)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 11
 tool_name: pickSS
 source_path: knudsen/pickSS.c
 category: bathymetry_processing
-input_formats: [OMG_HDCS, OMG_SS_DATA]
-output_formats: [ASCII_PICKS, OMG_HDCS]
-related_tools: [make_knudsen_ss, makeSeisPlot, knud2glo]
+input_formats:
+- OMG_HDCS
+- OMG_SS_DATA
+output_formats:
+- ASCII_PICKS
+- OMG_HDCS
+related_tools:
+- make_knudsen_ss
+- makeSeisPlot
+- knud2glo
 ---
 
 # pickSS

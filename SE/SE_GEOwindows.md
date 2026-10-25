@@ -1,19 +1,39 @@
 ---
 layout: default
 title: SE_GEOwindows
-parent: SwathEd (SE) Tools
+parent: Swath Editor — swathed (SE)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 9
 tool_name: SE_GEOwindows
 source_path: code/SE/SE_GEOwindows.c
 category: Interactive QC & Editing (SwathEd)
-input_formats: [".r4", ".8bit", ".mos", ".merged", ".merged.100_ping_bounds", ".merged.global_bounds", ".lookup", ".cleaned_areas", ".tgt"]
-output_formats: [".lookup", ".cleaned_areas", ".tgt"]
-related_tools: ["swathed", "SE_TOOLBOXwin", "SE_2Dwindow", "SE_PATCHwin", "SE_BSwindow", "getBounds", "jview"]
+input_formats:
+- .r4
+- .8bit
+- .mos
+- .merged
+- .merged.100_ping_bounds
+- .merged.global_bounds
+- .lookup
+- .cleaned_areas
+- .tgt
+output_formats:
+- .lookup
+- .cleaned_areas
+- .tgt
+related_tools:
+- swathed
+- SE_TOOLBOXwin
+- SE_2Dwindow
+- SE_PATCHwin
+- SE_BSwindow
+- getBounds
+- jview
 ---
 
 # `SE_GEOwindows` — Geographic Coverage & Sub-Area Map Windows
 
-`SE_GEOwindows` (`code/SE/SE_GEOwindows.c`, `code/SE/SE_GEOwindows.h`) manages the geographic map windows in [`swathed`](swathed.md): the full-area overview window (`sub_window[1]`, titled `"Terrain Coverage : <grid>"` or `"Geographic Coverage"`) and the zoomable sub-area window (`sub_window[2]`, titled `"sub_area"`). Authored by John E. Hughes Clarke (July 1999), it links georeferenced gridded bathymetry (`.r4`) and sidescan/backscatter mosaics (`.8bit`/`.mos`) directly to multibeam survey lines (`.merged`), supporting spatial ping lookup, sun-illuminated relief generation, corridor selection for [`SE_2Dwindow`](SE_2Dwindow.md) and [`SE_PATCHwin`](SE_PATCHwin.md), and target/cleaned-box tracking.
+`SE_GEOwindows` (`code/SE/SE_GEOwindows.c`, `code/SE/SE_GEOwindows.h`) manages the geographic map windows in [`swathed`](swathed.html): the full-area overview window (`sub_window[1]`, titled `"Terrain Coverage : <grid>"` or `"Geographic Coverage"`) and the zoomable sub-area window (`sub_window[2]`, titled `"sub_area"`). Authored by John E. Hughes Clarke (July 1999), it links georeferenced gridded bathymetry (`.r4`) and sidescan/backscatter mosaics (`.8bit`/`.mos`) directly to multibeam survey lines (`.merged`), supporting spatial ping lookup, sun-illuminated relief generation, corridor selection for [`SE_2Dwindow`](SE_2Dwindow.html) and [`SE_PATCHwin`](SE_PATCHwin.html), and target/cleaned-box tracking.
 
 ---
 
@@ -31,7 +51,7 @@ related_tools: ["swathed", "SE_TOOLBOXwin", "SE_2Dwindow", "SE_PATCHwin", "SE_BS
 ## Core Subsystems & Algorithms
 
 ### 1. Synthetic Sun-Illuminated Relief (`setup_sunmap`)
-When displaying a `.r4` bathymetric grid, `setup_sunmap()` computes a shaded-relief byte array (`sun_array`) controlled interactively by [`SE_TOOLBOXwin`](SE_TOOLBOXwin.md):
+When displaying a `.r4` bathymetric grid, `setup_sunmap()` computes a shaded-relief byte array (`sun_array`) controlled interactively by [`SE_TOOLBOXwin`](SE_TOOLBOXwin.html):
 * Evaluates local east-west and north-south depth gradients (`dz/dx`, `dz/dy`), scales them by vertical exaggeration (`exag`), and computes the surface normal dot product against the illumination vector defined by `azi` ($0^\circ, 90^\circ, 180^\circ, 270^\circ$) and `elev` ($0^\circ\text{–}90^\circ$).
 * Depending on `colormap_flag` (`SUN`, `DEPTH`, or `SS_IMAGE`), `prime_main_area()` and `prime_sub_area()` blend depth hue and sun-illumination intensity into 8-bit/24-bit XImage buffers (`main_image`, `sub_image`).
 
@@ -43,7 +63,7 @@ To allow instant middle-click jumping from any pixel on the map to the correspon
 
 ### 3. Spatial Indexing & Corridor Overlays
 * **Fast Bounding-Box Culling (`check_swath_in_area`, `check_random_in_area`):** Reads `<line>.merged.100_ping_bounds` (`swath_bounds`) to test whether 100-ping segments intersect a geographic sub-box before reading full `.merged` records.
-* **Rotatable Corridor Box (`plot_rot_box`):** Renders the oriented rectangular corridor (`Ecen`, `Ncen`, `rect_width`, `rect_height`, `rect_angle`) used by [`SE_2Dwindow`](SE_2Dwindow.md), [`SE_BSwindow`](SE_BSwindow.md), and [`SE_PATCHwin`](SE_PATCHwin.md), drawing the viewing-direction arrow (`NORTH`, `SOUTH`, `EAST`, `WEST`) and slice bounds.
+* **Rotatable Corridor Box (`plot_rot_box`):** Renders the oriented rectangular corridor (`Ecen`, `Ncen`, `rect_width`, `rect_height`, `rect_angle`) used by [`SE_2Dwindow`](SE_2Dwindow.html), [`SE_BSwindow`](SE_BSwindow.html), and [`SE_PATCHwin`](SE_PATCHwin.html), drawing the viewing-direction arrow (`NORTH`, `SOUTH`, `EAST`, `WEST`) and slice bounds.
 * **Cleaned Area & Target Overlays:**
   * `load_cleaned()` and `dump_cleaned()` read/write `<prefix>.cleaned_areas`, rendering completed editing sub-boxes in red on `sub_window[1]` (marked via `c` in `sub_window[2]`, cleared via `n`).
   * `load_targets()`, `add_target()`, `write_targets()`, and `load_vectbin()` overlay point targets (`.tgt` / target files) and binary coastline/contour vectors on both map windows.

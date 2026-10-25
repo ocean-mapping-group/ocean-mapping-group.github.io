@@ -1,22 +1,30 @@
 ---
 layout: default
 title: comboVPs
-parent: Image Tools
+parent: Raster Image Processing (image)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 12
 tool_name: comboVPs
 source_path: code/image/comboVPs.c
 category: Multibeam Water Column & Acoustic Modeling
-input_formats: ["OMG1 .vert_prof water-column vertical profiles"]
-output_formats: ["Concatenated .vert_prof vertical profile (OMG1)"]
-related_tools: ["comboTAs", "makeWC", "fillGap", "stretchacres"]
+input_formats:
+- OMG1 .vert_prof water-column vertical profiles
+output_formats:
+- Concatenated .vert_prof vertical profile (OMG1)
+related_tools:
+- comboTAs
+- makeWC
+- fillGap
+- stretchacres
 ---
 
 # comboVPs
 
 ## Description
-`comboVPs` concatenates multiple along-track multibeam water-column vertical profile files (`*.vert_prof`, produced by [`makeWC`](../omg/makeWC.md) or [`comboTAs`](comboTAs.md)) side-by-side into a single long-line `.vert_prof` echogram in `OMG1` (`JHC_header`) format.
+`comboVPs` concatenates multiple along-track multibeam water-column vertical profile files (`*.vert_prof`, produced by [`makeWC`](../omg/makeWC.html) or [`comboTAs`](comboTAs.html)) side-by-side into a single long-line `.vert_prof` echogram in `OMG1` (`JHC_header`) format.
 
 ## CLI Options & Usage
+
 ```bash
 comboVPs [-v] -out <comboprefix> <file1.vert_prof> [<file2.vert_prof> ...]
 ```

@@ -1,13 +1,21 @@
 ---
 layout: default
 title: maskarray
-parent: Grid Tools
+parent: Bathymetric Gridding & Export (grid)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 tool_name: maskarray
 source_path: code/grid/maskarray.c
 category: gridding
-input_formats: [".r4 (JHC 32-bit float grid)", ".8bit (JHC 8-bit unsigned char grid)"]
-output_formats: [".maskmap (JHC 8-bit binary stencil mask: 0 = nodata, 255 = valid)"]
-related_tools: ["mix_ci", "mask", "r4to8bit", "add8bit"]
+input_formats:
+- .r4 (JHC 32-bit float grid)
+- .8bit (JHC 8-bit unsigned char grid)
+output_formats:
+- '.maskmap (JHC 8-bit binary stencil mask: 0 = nodata, 255 = valid)'
+related_tools:
+- mix_ci
+- mask
+- r4to8bit
+- add8bit
 ---
 
 # maskarray
@@ -38,6 +46,7 @@ maskarray [-8bit] [-ignore <val>] [-m <maskfile>] <bathfile>
 1. Reads the `JHC_header` from `<bathfile>`, sets `header.data_type = 1` (8-bit), and writes the updated header to the output mask file.
 2. Scans `<bathfile>` row-by-row (`jswapfloat_fread` for float grids, `fread` for `-8bit` grids).
 3. Evaluates each pixel:
+
    ```c
    *q = (*p != ignore) * 255;
    ```
@@ -48,12 +57,14 @@ maskarray [-8bit] [-ignore <val>] [-m <maskfile>] <bathfile>
 ## Examples
 
 **1. Create a valid-data stencil mask from a bathymetric `.r4` grid (where `0.0` is nodata):**
+
 ```bash
 maskarray survey.r4
 # Creates survey.r4.maskmap
 ```
 
 **2. Create a stencil mask from an 8-bit sidescan mosaic where `255` represents background nodata:**
+
 ```bash
 maskarray -8bit -ignore 255 -m sidescan.mask survey.mos
 ```
@@ -62,4 +73,4 @@ maskarray -8bit -ignore 255 -m sidescan.mask survey.mos
 
 ## Workflow Context
 
-- **Downstream:** Pass the resulting `.maskmap` to [`mix_ci`](mix_ci.md) (`-mask <maskfile> -ignore 0`) to composite sun-illuminated bathymetry over a background sidescan mosaic, satellite image, or land backdrop.
+- **Downstream:** Pass the resulting `.maskmap` to [`mix_ci`](mix_ci.html) (`-mask <maskfile> -ignore 0`) to composite sun-illuminated bathymetry over a background sidescan mosaic, satellite image, or land backdrop.

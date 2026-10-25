@@ -1,14 +1,23 @@
 ---
 layout: default
 title: SE_mainwin
-parent: SwathEd (SE) Tools
+parent: Swath Editor — swathed (SE)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 27
 tool_name: SE_mainwin
 source_path: code/SE/SE_mainwin.c
 category: Interactive QC & Editing (SwathEd)
-input_formats: [".merged", ".param"]
-output_formats: ["qfactors.dat"]
-related_tools: ["swathed", "SE_omgIOwin", "SE_filters", "SE_AUTOFLAGwin", "SE_event_loop"]
+input_formats:
+- .merged
+- .param
+output_formats:
+- qfactors.dat
+related_tools:
+- swathed
+- SE_omgIOwin
+- SE_filters
+- SE_AUTOFLAGwin
+- SE_event_loop
 ---
 
 # `SE_mainwin.c` — Core Multi-Pane Swath Profile & Beam Editor Window
@@ -53,5 +62,5 @@ Beyond rendering and cursor synchronization (`beam_update`, `highlight_beam`), `
 ---
 
 ## Integration within `swathed`
-- **Data Loading & Saving:** Relies on [`SE_omgIOwin.c`](SE_omgIOwin.md) (`prime_array` and `dump_array`) to populate `box[][]` and `offsets[][]` from `.merged` files and write modified status flags back to disk.
-- **Cross-Window Cursor Sync (`highlight_beam`):** Moving the mouse cursor (`beam_update`) or pressing arrow keys updates `selected_swath` and `selected_beam`, calling `highlight_beam()` to draw synchronized crosshairs in `graphic_window[0..5]` and refresh open water-column ([`SE_WaterColumn.c`](SE_WaterColumn.md)), waveform ([`SE_Waveforms.c`](SE_Waveforms.md)), phase bathymetry ([`SE_PhaseBathy.c`](SE_PhaseBathy.md)), and Anand backscatter ([`SE_AnandBS.c`](SE_AnandBS.md)) windows.
+- **Data Loading & Saving:** Relies on [`SE_omgIOwin.c`](SE_omgIOwin.html) (`prime_array` and `dump_array`) to populate `box[][]` and `offsets[][]` from `.merged` files and write modified status flags back to disk.
+- **Cross-Window Cursor Sync (`highlight_beam`):** Moving the mouse cursor (`beam_update`) or pressing arrow keys updates `selected_swath` and `selected_beam`, calling `highlight_beam()` to draw synchronized crosshairs in `graphic_window[0..5]` and refresh open water-column ([`SE_WaterColumn.c`](SE_WaterColumn.html)), waveform ([`SE_Waveforms.c`](SE_Waveforms.html)), phase bathymetry ([`SE_PhaseBathy.c`](SE_PhaseBathy.html)), and Anand backscatter ([`SE_AnandBS.c`](SE_AnandBS.html)) windows.

@@ -1,16 +1,17 @@
 ---
 layout: default
 title: omg_jsf
-parent: Core Shared Libraries (subr)
-module_name: omg_jsf
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/omg_jsf.c
-header_path: code/subr/omg_jsf.h
 category: File Formats & Vendor Parsers
 related_tools:
-  - jsfTool
-  - jsf2omg
-  - jsf2nav
-  - jsf2orientation
+- jsfTool
+- jsf2omg
+- jsf2nav
+- jsf2orientation
+module_name: omg_jsf
+header_path: code/subr/omg_jsf.h
 ---
 
 # omg_jsf

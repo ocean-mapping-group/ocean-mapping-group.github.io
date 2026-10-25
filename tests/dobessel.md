@@ -1,19 +1,20 @@
 ---
 layout: default
 title: dobessel
-parent: tests (Test, Simulation & Diagnostic Suite)
+parent: Acoustic & Mathematical Test Harnesses (tests)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 nav_order: 3
 tool_name: dobessel
 source_path: code/tests/dobessel.c
 category: Mathematical & Acoustic Benchmarks (tests)
 input_formats:
-  - Interactive stdin prompts (integer order n, accuracy epsilon)
+- Interactive stdin prompts (integer order n, accuracy epsilon)
 output_formats:
-  - besselSeriesPlotn0.txt (2-column tab-separated ASCII table: x, J_n(x))
+- besselSeriesPlotn0.txt (2-column tab-separated ASCII table: x, J_n(x))
 related_tools:
-  - testSphereTS
-  - mkbp
-  - bpdemo
+- testSphereTS
+- mkbp
+- bpdemo
 ---
 
 # dobessel
@@ -21,7 +22,7 @@ related_tools:
 ## Overview
 `dobessel` (`code/tests/dobessel.c`) is a standalone numerical test utility that computes the cylindrical Bessel function of the first kind $J_n(x)$ of integer order $n$ across the domain $x \in [0.0, 10.0]$ in increments of $\Delta x = 0.1$ using an iterative power-series ratio expansion. It prompts the user interactively for the integer order $n$ and convergence tolerance $\epsilon$ (`eps`), and writes the resulting $(x, J_n(x))$ curve to `besselSeriesPlotn0.txt`.
 
-In the OMG codebase, Bessel functions are fundamental to both circular planar transducer directivity modeling ($J_1(x)$ in [`mkbp`](../labs/mkbp.md) and [`bpdemo`](../bpdemo/bpdemo.md)) and spherical elastic target strength modeling ($j_\ell(x) = \sqrt{\frac{\pi}{2x}} J_{\ell+1/2}(x)$ in [`testSphereTS`](testSphereTS.md)).
+In the OMG codebase, Bessel functions are fundamental to both circular planar transducer directivity modeling ($J_1(x)$ in [`mkbp`](../labs/mkbp.html) and [`bpdemo`](../bpdemo/BPdemo.html)) and spherical elastic target strength modeling ($j_\ell(x) = \sqrt{\frac{\pi}{2x}} J_{\ell+1/2}(x)$ in [`testSphereTS`](testSphereTS.html)).
 
 ---
 
@@ -36,6 +37,7 @@ The program takes no command-line flags and prompts on `stdin` for two parameter
 2. **`Enter the desired accuracy:`** (`double eps`) — Relative convergence threshold $\left|\frac{t_k}{\text{sum}}\right| \le \epsilon$ used to terminate the infinite series at each $x$ step (e.g., `1e-8`).
 
 ### Example Session
+
 ```bash
 dobessel <<EOF
 0
@@ -71,6 +73,7 @@ Rather than re-evaluating factorials and high powers of $x$ at every iteration $
 ## Output File Format
 
 * **`besselSeriesPlotn0.txt`**: Two-column tab-separated ASCII file containing 101 rows for $x = 0.0, 0.1, 0.2, \dots, 10.0$:
+
   ```text
   0.000000	1.000000
   0.100000	0.997502

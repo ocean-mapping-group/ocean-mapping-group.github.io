@@ -1,9 +1,11 @@
 ---
 layout: default
 title: edsumm
-parent: OMG Tools
+parent: Core Swath & .all Suite (omg)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 95
 ---
+
 # edsumm
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 95
 This tool is useful for correcting metadata errors, adjusting file parameters, or updating descriptive labels after data acquisition or processing.
 
 ## Usage
+
 ```bash
 edsumm <file> [-verbose] [-addtag]
 ```

@@ -1,10 +1,11 @@
 ---
 layout: default
 title: readSWA
-parent: SUB2K Tools
-grand_parent: code
+parent: GeoSwath+ / Submetrix 2000 CLI (sub2k)
+grand_parent: 4. Multi-Vendor Sonar & LiDAR Converters
 nav_order: 7
 ---
+
 # readSWA
 
 ## Description
@@ -15,6 +16,7 @@ nav_order: 7
 The tool handles various components of SWA data, including position, time, attitude (heading, roll, pitch, transducer depth, tide), and multibeam depth soundings, to integrate them into standardized formats for further hydrographic analysis.
 
 ## Usage
+
 ```bash
 readSWA [-v] [-omg | -ascii [-across]] [-azishift <degrees>] [-out <outfile_prefix>] <swafile(s)>
 ```

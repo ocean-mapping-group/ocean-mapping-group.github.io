@@ -1,13 +1,14 @@
 ---
 layout: default
 title: omg_sbet
-parent: Core Shared Libraries (subr)
-module_name: omg_sbet
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/omg_sbet.c
-header_path: code/subr/omg_sbet.h
 category: Navigation, Attitude & Geodesy
 related_tools:
-  - sbet2nav
+- sbet2nav
+module_name: omg_sbet
+header_path: code/subr/omg_sbet.h
 ---
 
 # omg_sbet

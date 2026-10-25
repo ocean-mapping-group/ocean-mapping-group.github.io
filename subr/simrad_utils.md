@@ -1,19 +1,20 @@
 ---
 layout: default
 title: simrad_utils
-parent: Core Shared Libraries (subr)
-module_name: simrad_utils
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/simrad_utils.c
-header_path: code/subr/simrad_utils.h
 category: Multibeam Vendor Parsers
 related_tools:
-  - RT
-  - RTlite
-  - RTlite_unravel
-  - xtfTool
-  - xtf2omg_simrad
-  - simrad_reader
-  - EM_unpack
+- RT
+- RTlite
+- RTlite_unravel
+- xtfTool
+- xtf2omg_simrad
+- simrad_reader
+- EM_unpack
+module_name: simrad_utils
+header_path: code/subr/simrad_utils.h
 ---
 
 # `simrad_utils` — Kongsberg Simrad `.all` Byte-Order & Sonar Model Detection
@@ -41,6 +42,7 @@ Defined in `code/subr/simrad_utils.h`:
 ## Public Functions & Signatures
 
 ### `guess_simrad_byte_order`
+
 ```c
 int guess_simrad_byte_order(FILE *infile);
 ```
@@ -55,6 +57,7 @@ int guess_simrad_byte_order(FILE *infile);
      - Returns `SIMRAD_UNKNOWN_BYTE_ORDER` (`-1`) otherwise.
 
 ### `get_model`
+
 ```c
 int get_model(FILE *infile, int byte_order);
 ```
@@ -66,6 +69,7 @@ int get_model(FILE *infile, int byte_order);
   4. Restores `initial_file_position` and returns `model`.
 
 ### `old_guess_simrad_byte_order`
+
 ```c
 int old_guess_simrad_byte_order(FILE *infile);
 ```

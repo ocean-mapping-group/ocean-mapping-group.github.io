@@ -1,9 +1,11 @@
 ---
 layout: default
 title: buildray
-parent: Ray Tools
+parent: Ray-Tracing & Refraction (ray)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 163
 ---
+
 # buildray
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 163
 The generated lookup arrays are useful for correcting sonar measurements, image rectification (e.g., for side-scan sonar), and other applications requiring knowledge of sound propagation through water.
 
 ## Usage
+
 ```bash
 buildray -pro <svp_handle> [-range <val>] [-depth <val>] [-spacing <step> <start> <finish>] [-layerthick <val>] [-rangeres <val>] [-fishdep <val>] [-graze] [-beam] [-time] [-simradsvp] [-NEWsvp] [-verbose]
 ```

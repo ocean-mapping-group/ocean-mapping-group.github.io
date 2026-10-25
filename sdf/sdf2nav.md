@@ -1,14 +1,21 @@
 ---
 layout: default
 title: sdf2nav
-parent: SDF Tools
+parent: Klein Sonar Data Format — SDF (sdf)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 1
 tool_name: sdf2nav
 source_path: code/sdf/sdf2nav.c
 category: Navigation Extraction
-input_formats: [".sdf"]
-output_formats: [".nav"]
-related_tools: ["sdf2omg", "sdf2orientation", "sdfTool", "mergeNav"]
+input_formats:
+- .sdf
+output_formats:
+- .nav
+related_tools:
+- sdf2omg
+- sdf2orientation
+- sdfTool
+- mergeNav
 ---
 
 # sdf2nav
@@ -17,6 +24,7 @@ related_tools: ["sdf2omg", "sdf2orientation", "sdfTool", "mergeNav"]
 `sdf2nav` extracts Applanix POS/MV Group 102 navigation fixes embedded inside Klein Sonar Data Format (`.sdf`) records and writes them to a binary OMG `jcu_nav_rec` navigation file (`<nav_file_prefix>.nav`).
 
 ## Usage
+
 ```bash
 sdf2nav [-v] [-debug] -sdf <input_name.sdf> -nav <nav_file_prefix>
 ```
@@ -37,6 +45,7 @@ sdf2nav [-v] [-debug] -sdf <input_name.sdf> -nav <nav_file_prefix>
 ## Practical Examples
 
 **1. Extract POS/MV navigation from a Klein HydroChart `.sdf` file:**
+
 ```bash
 sdf2nav -sdf line01.sdf -nav line01
 ```

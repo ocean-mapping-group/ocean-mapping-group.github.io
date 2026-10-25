@@ -1,14 +1,26 @@
 ---
 layout: default
 title: SE_3D
-parent: SwathEd (SE) Tools
+parent: Swath Editor — swathed (SE)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 4
 tool_name: SE_3D
 source_path: code/SE/SE_3D.c
 category: Interactive QC & Editing (SwathEd)
-input_formats: [".merged", ".watercol", ".r4", ".target", "WC_3D_Geometry"]
-output_formats: ["WC_3D_Geometry", "3dim_azi_XXX.ppm"]
-related_tools: ["swathed", "SE_WaterColumn", "SE_GEOwindows", "c_wcl_TOOLBOX"]
+input_formats:
+- .merged
+- .watercol
+- .r4
+- .target
+- WC_3D_Geometry
+output_formats:
+- WC_3D_Geometry
+- 3dim_azi_XXX.ppm
+related_tools:
+- swathed
+- SE_WaterColumn
+- SE_GEOwindows
+- c_wcl_TOOLBOX
 ---
 
 # `SE_3D.c` - 3D OpenGL Visualization and Watercolumn Editing Tool

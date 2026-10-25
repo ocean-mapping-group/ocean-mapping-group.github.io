@@ -1,13 +1,21 @@
 ---
 layout: default
 title: GrafNav_2_OMG
-parent: Tide Tools
+parent: Tidal Reduction & Constituents (tide)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 tool_name: GrafNav_2_OMG
 source_path: code/tide/GrafNav_2_OMG.c
 category: tide
-input_formats: ["GrafNav PPK ASCII (.txt / .pos)"]
-output_formats: [".nav (binary jcu_nav_rec tide)", "ASCII tide (time lat lon height)"]
-related_tools: ["posProc_2_OMG", "binTide", "mergeTide", "diffTide"]
+input_formats:
+- GrafNav PPK ASCII (.txt / .pos)
+output_formats:
+- .nav (binary jcu_nav_rec tide)
+- ASCII tide (time lat lon height)
+related_tools:
+- posProc_2_OMG
+- binTide
+- mergeTide
+- diffTide
 ---
 
 # GrafNav_2_OMG
@@ -16,7 +24,7 @@ related_tools: ["posProc_2_OMG", "binTide", "mergeTide", "diffTide"]
 
 `GrafNav_2_OMG` converts post-processed kinematic (PPK) GNSS output files from Waypoint **GrafNav** into an OMG binary `jcu_nav_rec` tide/navigation file (or an optional 4-column ASCII file). Ellipsoidal or orthometric height from the PPK solution is stored in the `bin_nav.azi` field, while timestamps are converted to UTC epoch seconds (`time` and `centisecs`) and horizontal positions are stored in `bin_nav.lat` and `bin_nav.lon`.
 
-The resulting binary file can be merged directly into OMG-HDCS `.merged` multibeam files using [`mergeTide`](mergeTide.md) (for example with `-RTK` or standard tide application).
+The resulting binary file can be merged directly into OMG-HDCS `.merged` multibeam files using [`mergeTide`](mergeTide.html) (for example with `-RTK` or standard tide application).
 
 ---
 
@@ -53,16 +61,19 @@ GrafNav_2_OMG [OPTIONS] -in <posprocfilename> -out <mytideformatname>
 ## Examples
 
 **1. Convert standard GrafNav PPK export to binary OMG tide format:**
+
 ```bash
 GrafNav_2_OMG -in grafnav_export.txt -out rtk_tide.bin
 ```
 
 **2. Convert a GrafNav export with 22 header lines and DMS coordinates:**
+
 ```bash
 GrafNav_2_OMG -lines_to_skip 22 -mdy_dms -in grafnav_dms.pos -out rtk_tide.bin
 ```
 
 **3. Export to 4-column ASCII for inspection:**
+
 ```bash
 GrafNav_2_OMG -ascii -in grafnav_export.txt -out rtk_tide.txt
 ```
@@ -72,5 +83,5 @@ GrafNav_2_OMG -ascii -in grafnav_export.txt -out rtk_tide.txt
 ## Workflow Context
 
 - **Upstream:** Waypoint GrafNav GNSS post-processing software.
-- **Downstream:** [`mergeTide`](mergeTide.md) (to apply PPK/RTK heights to `.merged` multibeam lines) or [`diffTide`](diffTide.md) (to compare PPK heights against gauge tides or another navigation source).
-- **Related Alternative:** [`posProc_2_OMG`](posProc_2_OMG.md) performs the equivalent conversion for Applanix POSPac / PosProc outputs.
+- **Downstream:** [`mergeTide`](mergeTide.html) (to apply PPK/RTK heights to `.merged` multibeam lines) or [`diffTide`](diffTide.html) (to compare PPK heights against gauge tides or another navigation source).
+- **Related Alternative:** [`posProc_2_OMG`](posProc_2_OMG.html) performs the equivalent conversion for Applanix POSPac / PosProc outputs.

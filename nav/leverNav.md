@@ -1,14 +1,24 @@
 ---
 layout: default
 title: leverNav
-parent: Navigation Tools
+parent: Navigation Processing (nav)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 23
 tool_name: leverNav
 source_path: code/nav/leverNav.c
 category: Navigation & Georeferencing
-input_formats: [".nav", ".orientation", ".orientation_1", ".orientation_2"]
-output_formats: [".nav.at_RP"]
-related_tools: ["mergeNav", "PNAVtoNav", "NMEAtoNav", "stripNav"]
+input_formats:
+- .nav
+- .orientation
+- .orientation_1
+- .orientation_2
+output_formats:
+- .nav.at_RP
+related_tools:
+- mergeNav
+- PNAVtoNav
+- NMEAtoNav
+- stripNav
 ---
 
 # leverNav
@@ -24,7 +34,7 @@ It writes a new binary navigation file named `<prefix>.nav.at_RP` containing the
 >    * **X (+ve forward / ahead):** Positive if the RP is forward of the antenna.
 >    * **Y (+ve starboard / right):** Positive if the RP is starboard of the antenna.
 >    * **Z (+ve downward / below):** Positive if the RP is below the antenna.
-> 2. **Ellipsoid Height in `azi`:** `leverNav` assumes the input `<prefix>.nav` file stores the antenna's **ellipsoid height (positive upward, in meters)** in the `jcu_nav_rec.azi` field (as produced by RTK importers like [`NMEAtoNav`](NMEAtoNav.md), [`PNAVtoNav`](PNAVtoNav.md), or [`toNav -new`](toNav.md)). Because $Z$ is positive downward, the vertically rotated offset `GEO_ant_to_RP.z` is subtracted from `Antenna_pos.azi` to yield the RP ellipsoid height.
+> 2. **Ellipsoid Height in `azi`:** `leverNav` assumes the input `<prefix>.nav` file stores the antenna's **ellipsoid height (positive upward, in meters)** in the `jcu_nav_rec.azi` field (as produced by RTK importers like [`NMEAtoNav`](NMEAtoNav.html), [`PNAVtoNav`](PNAVtoNav.html), or [`toNav -new`](toNav.html)). Because $Z$ is positive downward, the vertically rotated offset `GEO_ant_to_RP.z` is subtracted from `Antenna_pos.azi` to yield the RP ellipsoid height.
 
 ---
 
@@ -37,6 +47,7 @@ leverNav -ant_to_RP <X> <Y> <Z> [-orient <0|1|2>] [-v] <RTK_nav_file_prefix>
 ### Common Workflow Examples
 
 **1. Translate RTK antenna navigation to the vessel Reference Point using `.orientation_1`:**
+
 ```bash
 # Antenna is 19.5m aft, 2.0m port, and 30.0m above the RP:
 # Vector from antenna to RP is (+19.5 forward, +2.0 stbd, +30.0 down)
@@ -45,6 +56,7 @@ leverNav -ant_to_RP 19.5 2.0 30.0 -orient 1 merged/JD100/0001_line
 ```
 
 **2. Interactive 3D rotation matrix verification (`-test` mode):**
+
 ```bash
 leverNav -ant_to_RP 10.0 0.0 5.0 -test merged/JD100/0001_line
 # Prompts on stdin for: roll pitch heading (enter 0 0 0 to exit)

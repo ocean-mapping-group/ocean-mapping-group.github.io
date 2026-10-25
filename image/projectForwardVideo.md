@@ -1,14 +1,22 @@
 ---
 layout: default
 title: projectForwardVideo
-parent: Image Tools
+parent: Raster Image Processing (image)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 39
 tool_name: projectForwardVideo
 source_path: code/image/projectForwardVideo.c
 category: Multibeam Water Column & Acoustic Modeling
-input_formats: ["OMG1 8-bit forward-looking video frame"]
-output_formats: ["Annotated camera frame (<outfile>)", "Georeferenced plan-view sea-surface map (<outfile>.map)"]
-related_tools: ["TAtoXZ", "stackPIEs", "patchArea", "distortImage"]
+input_formats:
+- OMG1 8-bit forward-looking video frame
+output_formats:
+- Annotated camera frame (<outfile>)
+- Georeferenced plan-view sea-surface map (<outfile>.map)
+related_tools:
+- TAtoXZ
+- stackPIEs
+- patchArea
+- distortImage
 ---
 
 # projectForwardVideo
@@ -17,6 +25,7 @@ related_tools: ["TAtoXZ", "stackPIEs", "patchArea", "distortImage"]
 `projectForwardVideo` orthorectifies a shipboard oblique forward-looking video camera frame (in 8-bit `OMG1` format) onto a flat sea-surface plan-view grid (`<outfile>.map`, `600 × 600` pixels at `1.0 m` resolution in rotated Mercator coordinates) so that surface slicks, boil fronts, or wake features can be directly correlated with subsurface multibeam water-column imagery.
 
 ## CLI Options & Usage
+
 ```bash
 projectForwardVideo -in <video_frame.8bit> -out <outfile> \
   [-xfactor <fx>] [-yfactor <fy>]

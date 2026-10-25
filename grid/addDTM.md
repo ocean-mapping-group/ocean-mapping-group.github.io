@@ -1,9 +1,11 @@
 ---
 layout: default
 title: addDTM
-parent: Grid Tools
+parent: Bathymetric Gridding & Export (grid)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 3
 ---
+
 ---
 layout: default
 title: addDTM
@@ -16,6 +18,7 @@ nav_order: 3
 `addDTM` is a command-line utility for combining two JHC-format 32-bit floating-point grid files (`.r4` files) or adding a constant value to a base grid. It takes a "base" grid and an "on-top" grid (or a constant), applies a multiplier and offset to the "on-top" data, and then adds (or subtracts) it to the base grid. The result is a new 32-bit floating-point grid file. This tool is useful for creating synthetic bathymetry, applying corrections, or combining different terrain models.
 
 ## Usage
+
 ```bash
 addDTM [OPTIONS] -base <base_r4_file> [-ontop <second_r4_file> | -addConstant <value>] -out <output_r4_file>
 ```

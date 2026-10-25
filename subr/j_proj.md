@@ -1,17 +1,18 @@
 ---
 layout: default
 title: j_proj
-parent: Core Shared Libraries (subr)
-module_name: j_proj
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/j_proj.c
-header_path: code/subr/j_proj.h
 category: Map Projections & Coordinate Transformations
 related_tools:
-  - weigh_grid
-  - makess
-  - jview
-  - r4toz
-  - j_SalishSeaCast
+- weigh_grid
+- makess
+- jview
+- r4toz
+- j_SalishSeaCast
+module_name: j_proj
+header_path: code/subr/j_proj.h
 ---
 
 # `j_proj` — Unified Map Projection & Raster Grid Coordinate Transformation Dispatcher

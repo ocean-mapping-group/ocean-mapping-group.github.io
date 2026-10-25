@@ -1,10 +1,11 @@
 ---
 layout: default
 title: addheader
-parent: Merge Tools
-grand_parent: sidescan
+parent: Sidescan Radiometric & Geometric Suite (sidescan)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 1
 ---
+
 # addheader
 
 ## Description
@@ -14,10 +15,12 @@ nav_order: 1
 
 ## Usage
 **Adding a header:**
+
 ```bash
 addheader imagefile merfile [-ping <rate>] [-pixel_size <size>] [-shallow <depth>] [-deep <depth>]
 ```
 **Subtracting a header (Extracting image data):**
+
 ```bash
 addheader -sub imagefile merfile
 ```

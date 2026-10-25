@@ -1,9 +1,11 @@
 ---
 layout: default
 title: plotFFT_BF
-parent: Plot Tools
+parent: PostScript & Vector Plotting (plot)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 139
 ---
+
 # plotFFT_BF
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 139
 The tool allows for interactive visualization of how the phase differences across the array create a focused beam in a particular direction. It can plot the array configuration, incoming wavelets, amplitude time series, and the final power distribution.
 
 ## Usage
+
 ```bash
 plotFFT_BF [-fft_only] [-size <dx> <dy>] [-sigrange <min> <max>] [-angle <val>] [-v] [-outfile <filenm>]
 ```

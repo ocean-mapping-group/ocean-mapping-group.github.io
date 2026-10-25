@@ -1,16 +1,17 @@
 ---
 layout: default
 title: polarstereo
-parent: Core Shared Libraries (subr)
-module_name: polarstereo
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/polarstereo.c
-header_path: code/subr/polarstereo.h
 category: Navigation, Attitude & Geodesy
 related_tools:
-  - j_proj
-  - jview (JV)
-  - swathed (SE)
-  - weigh_grid
+- j_proj
+- jview (JV)
+- swathed (SE)
+- weigh_grid
+module_name: polarstereo
+header_path: code/subr/polarstereo.h
 ---
 
 # polarstereo

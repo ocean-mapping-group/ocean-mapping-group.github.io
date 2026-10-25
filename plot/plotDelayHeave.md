@@ -1,9 +1,11 @@
 ---
 layout: default
 title: plotDelayHeave
-parent: Plot Tools
+parent: PostScript & Vector Plotting (plot)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 137
 ---
+
 # plotDelayHeave
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 137
 The tool calculates and displays differences between different heave measurements, performs trend removal, and can apply high-pass filters, all crucial for analyzing and correcting vertical motion in hydrographic surveys. It is designed to handle large datasets by dumping intermediate results to disk.
 
 ## Usage
+
 ```bash
 plotDelayHeave -infile <base_name> [-outfile <filename.meta>] [-size <dx> <dy>] [-start <yr> <jday> <hr> <min>] [-end <yr> <jday> <hr> <min>] [-xrange <min> <max>] [-dep] [-atten <val>] [-delay <val>] [-skip <val>] <merged_file(s)...>
 ```

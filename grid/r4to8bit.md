@@ -1,20 +1,28 @@
 ---
 layout: default
 title: r4to8bit
-parent: grid Tools
+parent: Bathymetric Gridding & Export (grid)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 3
 tool_name: r4to8bit
 source_path: code/grid/r4to8bit.c
 category: Gridding & Bathymetric Surface Generation
-input_formats: [".r4"]
-output_formats: [".8bit"]
-related_tools: ["weigh_grid", "addSUN", "jview", "stretchacres", "edhead"]
+input_formats:
+- .r4
+output_formats:
+- .8bit
+related_tools:
+- weigh_grid
+- addSUN
+- jview
+- stretchacres
+- edhead
 ---
 
 # r4to8bit
 
 ## Description
-`r4to8bit` converts an OMG1 `JHC_header` 32-bit floating-point grid (`<prefix>.r4`, where `header.data_type == 3`) into an 8-bit unsigned char grid (`<prefix>.8bit`, where `header.data_type == 1`), scaling the floating-point values into the 0–255 byte range so the surface can be displayed in [`jview`](../JV/jview.md) or combined with a sun-illuminated shaded relief image from [`addSUN`](addSUN.md).
+`r4to8bit` converts an OMG1 `JHC_header` 32-bit floating-point grid (`<prefix>.r4`, where `header.data_type == 3`) into an 8-bit unsigned char grid (`<prefix>.8bit`, where `header.data_type == 1`), scaling the floating-point values into the 0–255 byte range so the surface can be displayed in [`jview`](../JV/jview.html) or combined with a sun-illuminated shaded relief image from [`addSUN`](addSUN.html).
 
 If `-low` and `-high` depth limits are not specified on the command line, `r4to8bit` automatically scans the entire `.r4` array to find the minimum and maximum non-zero values, updates `min_value` and `max_value` in both the `.r4` and `.8bit` file headers, and linearly (or piecewise-linearly via `-middle`) maps values to `[0, 255]`. Unpopulated grid cells matching `-ignore` (default `0.0`) are mapped to `0`.
 
@@ -30,17 +38,20 @@ r4to8bit [OPTIONS] <floatfile_or_prefix> [8bitfile]
 ### Common Workflow Examples
 
 **1. Auto-scale a `.r4` bathymetry grid to `.8bit` using its full depth range:**
+
 ```bash
 r4to8bit bay_2m
 # Reads bay_2m.r4, finds min/max depth, writes bay_2m.8bit
 ```
 
 **2. Convert a `.r4` grid over a fixed depth window (-150 m to -10 m), reserving DN 0–15 for UI colors:**
+
 ```bash
 r4to8bit -low -150.0 -high -10.0 -no16 -no255 bay_2m.r4 bay_2m_clipped.8bit
 ```
 
 **3. Scale a grid within $\pm 5\text{ m}$ of its mean depth (`-range_about_mean 10`):**
+
 ```bash
 r4to8bit -range_about_mean 10 bay_2m
 ```

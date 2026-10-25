@@ -1,16 +1,18 @@
 ---
 layout: default
 title: gledit
-parent: Edit Tools
-grand_parent: sidescan
+parent: Sidescan Radiometric & Geometric Suite (sidescan)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 1
 ---
+
 # gledit
 
 ## Description
 `gledit` is an interactive command-line utility for displaying and editing header information within a JCU GLORIA record file. It provides a simple interface for navigating through records and modifying specific header fields such as altitude, heading, fishdepth, latitude, and longitude.
 
 ## Usage
+
 ```bash
 gledit <filename>
 ```

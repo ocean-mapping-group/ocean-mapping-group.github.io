@@ -1,9 +1,11 @@
 ---
 layout: default
 title: fixarray
-parent: Grid Tools
+parent: Bathymetric Gridding & Export (grid)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 33
 ---
+
 ---
 layout: default
 title: fixarray
@@ -18,6 +20,7 @@ nav_order: 33
 This tool is primarily used for data archeology to ensure backward compatibility with older datasets.
 
 ## Usage
+
 ```bash
 fixarray [-really_old] <-8bit | -float> <badfile> <goodfile>
 ```

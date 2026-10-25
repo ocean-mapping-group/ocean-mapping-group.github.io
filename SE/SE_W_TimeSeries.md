@@ -1,19 +1,30 @@
 ---
 layout: default
 title: SE_W_TimeSeries
-parent: SwathEd (SE) Tools
+parent: Swath Editor — swathed (SE)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 17
 tool_name: SE_W_TimeSeries
 source_path: code/SE/SE_W_TimeSeries.c
 category: Interactive QC & Editing (SwathEd)
-input_formats: [".merged", ".lph", ".rtk", ".2ndAtt"]
-output_formats: [".fixed.merged", "Xplot.out"]
-related_tools: ["swathed", "fix_TimeSeries", "newMergeAtt", "SE_REFTOOLwin"]
+input_formats:
+- .merged
+- .lph
+- .rtk
+- .2ndAtt
+output_formats:
+- .fixed.merged
+- Xplot.out
+related_tools:
+- swathed
+- fix_TimeSeries
+- newMergeAtt
+- SE_REFTOOLwin
 ---
 
 # `SE_W_TimeSeries` — Full-Line Motion, Attitude & Seafloor Slope Time-Series Analysis Toolkit
 
-`SE_W_TimeSeries` (`code/SE/SE_W_TimeSeries.c`, `code/SE/SE_W_TimeSeries.h`) implements a three-widget X11 diagnostic and motion-compensation suite in [`swathed`](swathed.md). Authored by John E. Hughes Clarke (January 2003, ported and expanded from `DelayEditor`), it loads up to 79 simultaneous ping-by-ping time series (`TS_NO_VARIABLES = 79`) across an entire `.merged` survey line to diagnose roll, pitch, yaw, heave, delayed heave (`.lph`), RTK antenna height (`.rtk`), secondary attitude sensors (`.2ndAtt`), transmit sector steering, and seafloor slope residuals ("wobbles").
+`SE_W_TimeSeries` (`code/SE/SE_W_TimeSeries.c`, `code/SE/SE_W_TimeSeries.h`) implements a three-widget X11 diagnostic and motion-compensation suite in [`swathed`](swathed.html). Authored by John E. Hughes Clarke (January 2003, ported and expanded from `DelayEditor`), it loads up to 79 simultaneous ping-by-ping time series (`TS_NO_VARIABLES = 79`) across an entire `.merged` survey line to diagnose roll, pitch, yaw, heave, delayed heave (`.lph`), RTK antenna height (`.rtk`), secondary attitude sensors (`.2ndAtt`), transmit sector steering, and seafloor slope residuals ("wobbles").
 
 ---
 
@@ -54,5 +65,5 @@ Enabled via the `-ts` command-line flag and mapped by clicking the **`TS`** icon
 ## Motion Residual Simulation & Correction
 
 * **Fast Empirical Correction (`correct_dataset` — `Correct Data` button):** Applies slider gains, phase lags, and lever arms directly to the in-memory `box[j][i]` and `offsets[j][i]` arrays for immediate visual feedback.
-* **Rigorous 3D Ray Re-Merging (`correct_dataset_properly` — `ProperCorrect` button):** Re-runs the full [`newMergeAtt`](../merge/newMergeAtt.md) 3D coordinate transformation (`remerge_swath()`) across every beam in the survey line.
-* **Export (`write_out_modified` — `WriteOutFixed` button):** Writes the motion-corrected survey line to `<line_prefix>.fixed.merged` (paralleling standalone tool [`fix_TimeSeries`](fix_TimeSeries.md)).
+* **Rigorous 3D Ray Re-Merging (`correct_dataset_properly` — `ProperCorrect` button):** Re-runs the full [`newMergeAtt`](../omg/newMergeAtt.html) 3D coordinate transformation (`remerge_swath()`) across every beam in the survey line.
+* **Export (`write_out_modified` — `WriteOutFixed` button):** Writes the motion-corrected survey line to `<line_prefix>.fixed.merged` (paralleling standalone tool [`fix_TimeSeries`](fix_TimeSeries.html)).

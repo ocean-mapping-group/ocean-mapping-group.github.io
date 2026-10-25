@@ -1,20 +1,21 @@
 ---
 layout: default
 title: interpMRU
-parent: tests (Test, Simulation & Diagnostic Suite)
+parent: Acoustic & Mathematical Test Harnesses (tests)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 nav_order: 9
 tool_name: interpMRU
 source_path: code/tests/interpMRU.c
 category: Attitude & Serial Sensor Diagnostics (tests)
 input_formats:
-  - /dev/ttyd2 (Serial binary stream with 'q' 25-byte MRU frames)
+- /dev/ttyd2 (Serial binary stream with 'q' 25-byte MRU frames)
 output_formats:
-  - Console diagnostic stream (pitch, roll, yaw, X/Y/Z accelerations, checksum)
+- Console diagnostic stream (pitch, roll, yaw, X/Y/Z accelerations, checksum)
 related_tools:
-  - twistVRU
-  - testrot
-  - testFIR
-  - newMergeAtt
+- twistVRU
+- testrot
+- testFIR
+- newMergeAtt
 ---
 
 # interpMRU
@@ -71,4 +72,4 @@ token 65 A
  accels   X 0.041000 Y -0.112000 Z 9.814000
 checksum 142
 ```
-For offline processing and merging of attitude data into OMG `.merged` files, see [`mergeAtt`](../att/mergeAtt.md) and [`newMergeAtt`](../att/newMergeAtt.md).
+For offline processing and merging of attitude data into OMG `.merged` files, see [`mergeAtt`](../omg/mergeAtt.html) and [`newMergeAtt`](../omg/newMergeAtt.html).

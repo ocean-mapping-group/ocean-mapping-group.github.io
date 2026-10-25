@@ -1,21 +1,33 @@
 ---
 layout: default
 title: SE_BSwindow
-parent: SwathEd (SE) Tools
+parent: Swath Editor — swathed (SE)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 8
 tool_name: SE_BSwindow
 source_path: code/SE/SE_BSwindow.c
 category: Interactive QC & Editing (SwathEd)
-input_formats: [".merged", ".merged.100_ping_bounds", ".r4", ".8bit", ".ss"]
-output_formats: ["BS_plot"]
-related_tools: ["swathed", "SE_AnandBS", "SE_GEOwindows", "SE_2Dwindow", "make_mos"]
+input_formats:
+- .merged
+- .merged.100_ping_bounds
+- .r4
+- .8bit
+- .ss
+output_formats:
+- BS_plot
+related_tools:
+- swathed
+- SE_AnandBS
+- SE_GEOwindows
+- SE_2Dwindow
+- make_mos
 ---
 
 # `SE_BSwindow` — Backscatter Angular Response & Classification Tool
 
-`SE_BSwindow` (`code/SE/SE_BSwindow.c`, `code/SE/SE_BSwindow.h`) is the classic X11 `"Backscatter Classification Tool "` in [`swathed`](swathed.md), authored by John E. Hughes Clarke (April 1999). It extracts per-beam seabed backscatter amplitudes (`beams[j].reflectivity`) and plots grazing angle ($0^\circ\text{–}90^\circ$) versus backscatter strength ($\text{dB}$, `0` to `-70` dB), enabling interactive evaluation of radiometric and geometric corrections (seafloor slope, inverse Lambert's law, spherical vs. aspherical spreading, insonified area, and ray refraction).
+`SE_BSwindow` (`code/SE/SE_BSwindow.c`, `code/SE/SE_BSwindow.h`) is the classic X11 `"Backscatter Classification Tool "` in [`swathed`](swathed.html), authored by John E. Hughes Clarke (April 1999). It extracts per-beam seabed backscatter amplitudes (`beams[j].reflectivity`) and plots grazing angle ($0^\circ\text{–}90^\circ$) versus backscatter strength ($\text{dB}$, `0` to `-70` dB), enabling interactive evaluation of radiometric and geometric corrections (seafloor slope, inverse Lambert's law, spherical vs. aspherical spreading, insonified area, and ray refraction).
 
-> **Note:** In recent `swathed` builds (`SE_event_loop.c`, March 2024), clicking the `Class` icon (`icon_window[10]`) defaults to launching the expanded [`SE_AnandBS`](SE_AnandBS.md) toolkit (`show_ABS`), while `SE_BSwindow` remains compiled and accessible for sub-area and subset angular response inspection.
+> **Note:** In recent `swathed` builds (`SE_event_loop.c`, March 2024), clicking the `Class` icon (`icon_window[10]`) defaults to launching the expanded [`SE_AnandBS`](SE_AnandBS.html) toolkit (`show_ABS`), while `SE_BSwindow` remains compiled and accessible for sub-area and subset angular response inspection.
 
 ---
 

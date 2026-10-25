@@ -1,15 +1,18 @@
 ---
 layout: default
 title: appendAtt
-parent: Attitude Tools
+parent: Attitude, Heave & Heading (att)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 1
 ---
+
 # appendAtt
 
 ## Description
 `appendAtt` is a command-line utility designed to append multiple OMG-HDCS (Ocean Mapping Group - Hydrographic Data Cleaning System) attitude record files into a single output file. It sorts the input files based on the time of their first record. It also supports time-bounding the appended data and applying an optional time shift to the input records.
 
 ## Usage
+
 ```bash
 appendAtt [OPTIONS] -out <output_filename> <input_filename(s)>.orientation
 ```

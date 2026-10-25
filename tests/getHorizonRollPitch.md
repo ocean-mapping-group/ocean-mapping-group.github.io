@@ -1,20 +1,21 @@
 ---
 layout: default
 title: getHorizonRollPitch
-parent: tests (Test, Simulation & Diagnostic Suite)
+parent: Acoustic & Mathematical Test Harnesses (tests)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 nav_order: 8
 tool_name: getHorizonRollPitch
 source_path: code/tests/getHorizonRollPitch.c
 category: Attitude Error & Geometry Plotting (tests)
 input_formats:
-  - Left-side 2-column ASCII intensity/gradient profile (xval, yval)
-  - Right-side 2-column ASCII intensity/gradient profile (xval, yval)
+- Left-side 2-column ASCII intensity/gradient profile (xval, yval)
+- Right-side 2-column ASCII intensity/gradient profile (xval, yval)
 output_formats:
-  - temp.rollpitch (ASCII report of left/right horizon positions, roll, pitch, and vertical pixel shift)
+- temp.rollpitch (ASCII report of left/right horizon positions, roll, pitch, and vertical pixel shift)
 related_tools:
-  - twistVRU
-  - testrot
-  - DelayEditor
+- twistVRU
+- testrot
+- DelayEditor
 ---
 
 # getHorizonRollPitch
@@ -68,6 +69,7 @@ getHorizonRollPitch [-v] [-threshold <val>] [-acrossdist <px>] \
 ## Output File (`temp.rollpitch`)
 
 `getHorizonRollPitch` always writes its results to `temp.rollpitch` in the current working directory (as well as printing summary lines to `stdout`):
+
 ```text
  left  482.000000
  right  514.000000

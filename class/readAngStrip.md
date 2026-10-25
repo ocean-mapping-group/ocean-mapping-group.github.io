@@ -1,15 +1,18 @@
 ---
 layout: default
 title: readAngStrip
-parent: Classification Tools
+parent: Angular Response & Classification (class)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 7
 ---
+
 # readAngStrip
 
 ## Description
 `readAngStrip` is an interactive command-line utility for reading and displaying the contents of a single Angular Response (AR) file, which contains binary `JEM_Angular_Response` structures. It allows the user to interactively select and view individual stacked angular response records (referred to as "stacks") within the file. The tool provides a detailed listing of the parameters within the selected AR record, including geographical coordinates, time information, and various backscatter and sigma values.
 
 ## Usage
+
 ```bash
 readAngStrip [OPTIONS] <AR_file>
 ```

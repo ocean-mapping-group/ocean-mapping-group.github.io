@@ -1,9 +1,11 @@
 ---
 layout: default
 title: targethunt
-parent: OMG Tools
+parent: Core Swath & .all Suite (omg)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 70
 ---
+
 # targethunt
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 70
 The tool can output lists of detected targets and can optionally mark these targets directly within the water column data. It supports processing multiple merged files and offers extensive control over search parameters, output verbosity, and debugging information.
 
 ## Usage
+
 ```bash
 targethunt -infile <inputfile(s)> [OPTIONS]
 ```
@@ -23,6 +26,7 @@ targethunt -infile <inputfile(s)> [OPTIONS]
 | `-infile <inputfile(s)>` | **Required.** One or more paths to OMG-HDCS merged files containing water column data. | |
 
 ### Help & Verbosity
+
 | Option | Description | Default |
 |---|---|
 | `-h` | Shows the help text. | |
@@ -32,6 +36,7 @@ targethunt -infile <inputfile(s)> [OPTIONS]
 | `-noinfo` | Does not print software information in the output. | |
 
 ### Input/Output Files
+
 | Option | Description |
 |---|---|
 | `-output` | Will print an output ASCII list of targets. | |
@@ -40,6 +45,7 @@ targethunt -infile <inputfile(s)> [OPTIONS]
 | `-printOnly` | Prints the existing target list (from a `.tgt` file) and exits, without processing WCL data. | |
 
 ### Target Detection Parameters
+
 | Option | Description | Default |
 |---|---|
 | `-setThresh <val>` | Sets a static intensity threshold value. | |
@@ -64,6 +70,7 @@ targethunt -infile <inputfile(s)> [OPTIONS]
 | `-keepdetections` | Keeps all detections after target hunt (does not exclude them). | |
 
 ### Area Filtering
+
 | Option | Description |
 |---|---|
 | `-insideArea <minLat> <minLon> <maxLat> <maxLon>` | Searches only within a specified geographic area (Lat/Lon in `deg.min.sec` format). |
@@ -71,6 +78,7 @@ targethunt -infile <inputfile(s)> [OPTIONS]
 | `-boxArea <boxHeaderFile>` | (Currently commented out in code) Intended to search only inside an area defined by a `Box.header` file. |
 
 ### Dumping/Debugging Data
+
 | Option | Description |
 |---|---|
 | `-dumpThresh` | Dumps all threshold values to a file. | |

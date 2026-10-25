@@ -1,9 +1,11 @@
 ---
 layout: default
 title: replaceOMG
-parent: OMG Tools
+parent: Core Swath & .all Suite (omg)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 57
 ---
+
 # replaceOMG
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 57
 The tool currently supports replacing either motion data (roll, pitch, heave, heading) or beam status flags and some profile-level sonar settings.
 
 ## Usage
+
 ```bash
 replaceOMG <ok_OMG_HDCS_infile> <corrupted_OMG_HDCS_outfile> [OPTIONS]
 ```

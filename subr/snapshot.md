@@ -1,14 +1,15 @@
 ---
 layout: default
 title: snapshot
-parent: Core Shared Libraries (subr)
-module_name: snapshot
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/snapshot.c
-header_path: code/subr/snapshot.h
 category: Multibeam Vendor Parsers
 related_tools:
-  - read_snapshot
-  - snapshot2pgm
+- read_snapshot
+- snapshot2pgm
+module_name: snapshot
+header_path: code/subr/snapshot.h
 ---
 
 # `snapshot` — Reson SeaBat Beamformed Amplitude & Phase Snapshot Parser

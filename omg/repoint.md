@@ -1,9 +1,11 @@
 ---
 layout: default
 title: repoint
-parent: OMG Tools
+parent: Core Swath & .all Suite (omg)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 58
 ---
+
 # repoint
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 58
 It can either use a constant specified sound speed or interpolate from a `.surf_ss` file to determine the correct surface sound speed for each ping.
 
 ## Usage
+
 ```bash
 repoint -in <filename.merged> (-ssp_file <ssp.bin> | -speed <val>) [OPTIONS]
 ```

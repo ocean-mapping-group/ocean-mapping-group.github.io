@@ -1,31 +1,32 @@
 ---
 layout: default
 title: EKlook
-parent: EKlook Tools
+parent: Simrad EK60/EK80 Echosounder Suite (EKlook)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 9
 tool_name: EKlook
 source_path: code/EKlook/EKlook.c
 category: EKlook
 input_formats:
-  - JHC Float Trace Arrays (.MF_dB, .Raw_dB, .PS_phase, .FA_phase, .MF_IQ)
-  - OMG_HDCS (.merged)
-  - OMG Attitude (.orientation)
-  - Pulse Replica (.pulse)
-  - JHC 8-bit Backdrop (.mos)
-  - JHC Float Area Maps (.r4)
-  - Sphere TS Reference (.dat)
+- JHC Float Trace Arrays (.MF_dB, .Raw_dB, .PS_phase, .FA_phase, .MF_IQ)
+- OMG_HDCS (.merged)
+- OMG Attitude (.orientation)
+- Pulse Replica (.pulse)
+- JHC 8-bit Backdrop (.mos)
+- JHC Float Area Maps (.r4)
+- Sphere TS Reference (.dat)
 output_formats:
-  - Bottom Track Guide (.BottomTrackGuide)
-  - Ping Parameters (.ping_Params)
-  - Angular Response Curves (.ARC_fullBW, .ARC_3D, .ARC_FFTbins, .ARC_FFT3D)
+- Bottom Track Guide (.BottomTrackGuide)
+- Ping Parameters (.ping_Params)
+- Angular Response Curves (.ARC_fullBW, .ARC_3D, .ARC_FFTbins, .ARC_FFT3D)
 related_tools:
-  - BatchProcEK
-  - comboCalibEK_ARCs
-  - EK_ZoomImage
-  - EK_BottomBS
-  - EK_Polar
-  - EK_FFT
-  - EK_PosMotion
+- BatchProcEK
+- comboCalibEK_ARCs
+- EK_ZoomImage
+- EK_BottomBS
+- EK_Polar
+- EK_FFT
+- EK_PosMotion
 ---
 
 # EKlook
@@ -34,6 +35,7 @@ related_tools:
 `EKlook` is an interactive 6-window X11/Motif application designed for visualizing, calibrating, and analyzing Kongsberg Simrad EK60 and broadband EK80 split-beam echosounder data unpacked by `readEA600`. It allows users to examine uncompressed and matched-filtered trace power (`.Raw_dB`, `.MF_dB`), complex IQ waveforms (`.MF_IQ`), Fore–Aft and Port–Starboard split-beam phase angles (`.FA_phase`, `.PS_phase`), bottom detections, windowed FFT spectra, and broadband Angular Response Curves (ARCs).
 
 ## Usage
+
 ```bash
 EKlook [OPTIONS] -prefix <EK_file_prefix>
 ```
@@ -57,12 +59,12 @@ EKlook [OPTIONS] -prefix <EK_file_prefix>
 
 `EKlook` orchestrates six interactive windows:
 *   **Main Thumbnail & Power Histogram Window:** Overview of the entire file's trace power and dB distribution.
-*   **[ZOOM EK-Trace Window](EK_ZoomImage.md):** Zoomed-in viewing of trace segments and single-ping power, I/Q, and split-beam phase profiles (`EK_ZoomImage.c`).
-*   **[FFT EK-Trace Window](EK_FFT.md):** Windowed Fast Fourier Transform spectral analysis of complex `.MF_IQ` trace segments (`EK_FFT.c`).
-*   **[POLAR EK-Trace Window](EK_Polar.md):** Polar bullseye plots of target strength and split-beam mechanical angles (`EK_Polar.c`).
-*   **[BOTTOM Detect / ARC Window](EK_BottomBS.md):** Interactive bottom detection (`dBdrop`, `phaseOffZero`) and Angular Response Curve (ARC) generation (`EK_BottomBS.c`).
-*   **[Position-Motion EK-Trace Window](EK_PosMotion.md):** 2D geographic map backdrop, 3D OpenGL beam footprint cone, and attitude time-series view (`EK_PosMotion.c`).
+*   **[ZOOM EK-Trace Window](EK_ZoomImage.html):** Zoomed-in viewing of trace segments and single-ping power, I/Q, and split-beam phase profiles (`EK_ZoomImage.c`).
+*   **[FFT EK-Trace Window](EK_FFT.html):** Windowed Fast Fourier Transform spectral analysis of complex `.MF_IQ` trace segments (`EK_FFT.c`).
+*   **[POLAR EK-Trace Window](EK_Polar.html):** Polar bullseye plots of target strength and split-beam mechanical angles (`EK_Polar.c`).
+*   **[BOTTOM Detect / ARC Window](EK_BottomBS.html):** Interactive bottom detection (`dBdrop`, `phaseOffZero`) and Angular Response Curve (ARC) generation (`EK_BottomBS.c`).
+*   **[Position-Motion EK-Trace Window](EK_PosMotion.html):** 2D geographic map backdrop, 3D OpenGL beam footprint cone, and attitude time-series view (`EK_PosMotion.c`).
 
 ## See Also
-* [Simrad EA600 / EK60 / EK80 Broadband Echosounder Workflow](../workflows/ek60-ek80-echosounder-workflow.md)
-* [`BatchProcEK`](BatchProcEK.md), [`comboCalibEK_ARCs`](comboCalibEK_ARCs.md)
+* [Simrad EA600 / EK60 / EK80 Broadband Echosounder Workflow](../workflows/ek60-ek80-echosounder-workflow.html)
+* [`BatchProcEK`](BatchProcEK.html), [`comboCalibEK_ARCs`](comboCalibEK_ARCs.html)

@@ -1,16 +1,18 @@
 ---
 layout: default
 title: joinbeam
-parent: Beammap Tools
-grand_parent: sidescan
+parent: Sidescan Radiometric & Geometric Suite (sidescan)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 2
 ---
+
 # joinbeam
 
 ## Description
 `joinbeam` is a utility that processes a list of JCU GLORIA files. Its primary purpose is to ensure continuity between adjacent files, preventing gaps or discontinuities when these files are later mosaicked. It achieves this by selectively replacing or appending the first record of a subsequent file to the end of the preceding file, based on the time difference between their last and first records, respectively.
 
 ## Usage
+
 ```bash
 joinbeam <file1> <file2> ... <filen>
 ```

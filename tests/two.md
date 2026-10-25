@@ -1,20 +1,21 @@
 ---
 layout: default
 title: two
-parent: tests (Test, Simulation & Diagnostic Suite)
+parent: Acoustic & Mathematical Test Harnesses (tests)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 nav_order: 28
 tool_name: two
 source_path: code/tests/two.c
 category: Seawater Sound Speed & Oceanographic Functions (tests)
 input_formats:
-  - C function arguments: double t (temperature °C), double p (pressure kg/cm²), double s (salinity ppt)
+- C function arguments: double t (temperature °C), double p (pressure kg/cm²), double s (salinity ppt)
 output_formats:
-  - Return value: double vchemilli (sound speed in m/s)
+- Return value: double vchemilli (sound speed in m/s)
 related_tools:
-  - one
-  - testSV
-  - speedtosalinity
-  - speed2salinity
+- one
+- testSV
+- speedtosalinity
+- speed2salinity
 ---
 
 # two (`vchemilli`)
@@ -22,7 +23,7 @@ related_tools:
 ## Overview
 `two.c` (`code/tests/two.c`) is a 73-line standalone C function module implementing `double vchemilli(double t, double p, double s)`, the **corrected** empirical equation of **Chen & Millero (1977)** (*"Speed of sound in seawater at high pressures"*, *J. Acoust. Soc. Am.*, Vol. 62, No. 5, pp. 1129–1135) for computing the speed of sound in seawater from temperature $t$ ($^\circ\text{C}$), pressure $p$ ($\text{kg/cm}^2$), and salinity $s$ (parts per thousand / PSU).
 
-In the OMG `code/tests/` directory, `two.c` serves as the debugged companion to [`one.c`](one.md): it fixes the typographical error in polynomial coefficient `a3` (`1.0405e-12 * pow(t, 4)` instead of `1.0405e-12 + pow(t, 4)`), replaces `pow(p, 3)` in `a4` with direct multiplication `p * p * p`, and includes a block of French diagnostic `printf("a1 vaut %lf\n", a1);` statements (lines 55–69, commented out) used to verify each intermediate coefficient (`a1`–`a10`, `cw`, `cc`, `aa`, `bb`, `dd`) against reference tables.
+In the OMG `code/tests/` directory, `two.c` serves as the debugged companion to [`one.c`](one.html): it fixes the typographical error in polynomial coefficient `a3` (`1.0405e-12 * pow(t, 4)` instead of `1.0405e-12 + pow(t, 4)`), replaces `pow(p, 3)` in `a4` with direct multiplication `p * p * p`, and includes a block of French diagnostic `printf("a1 vaut %lf\n", a1);` statements (lines 55–69, commented out) used to verify each intermediate coefficient (`a1`–`a10`, `cw`, `cc`, `aa`, `bb`, `dd`) against reference tables.
 
 ---
 
@@ -76,6 +77,6 @@ $$c(t, p, s) = C_w(t, p) - C_c(t, p) + A(t, p)\,s + B(t, p)\,s^{3/2} + D(p)\,s^2
 
 | File | Function Name | `a3` Term ($t^4$ coefficient) | Status |
 | :--- | :--- | :--- | :--- |
-| [`one.c`](one.md) | `this_vchemilli` | `1.0405e-12 + pow(t, 4)` | Buggy (`+` instead of `*`) |
+| [`one.c`](one.html) | `this_vchemilli` | `1.0405e-12 + pow(t, 4)` | Buggy (`+` instead of `*`) |
 | **`two.c`** | `vchemilli` | `1.0405e-12 * pow(t, 4)` | **Corrected** (includes `a1..dd` debug print block) |
-| [`testSV.c`](testSV.md) | `this_vchemilli` / `ChenMillero` | `1.0405e-12 * pow(t, 4)` | **Corrected** standalone executable |
+| [`testSV.c`](testSV.html) | `this_vchemilli` / `ChenMillero` | `1.0405e-12 * pow(t, 4)` | **Corrected** standalone executable |

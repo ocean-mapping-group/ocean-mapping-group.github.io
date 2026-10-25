@@ -1,27 +1,28 @@
 ---
 layout: default
 title: EK_BottomBS (Module within EKlook)
-parent: EKlook Tools
+parent: Simrad EK60/EK80 Echosounder Suite (EKlook)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 3
 tool_name: EK_BottomBS
 source_path: code/EKlook/EK_BottomBS.c
 category: EKlook
 input_formats:
-  - In-Memory EKlook Trace & Phase Arrays
+- In-Memory EKlook Trace & Phase Arrays
 output_formats:
-  - Bottom Track Guide (.BottomTrackGuide)
-  - Angular Response Curves (.ARC_fullBW, .ARC_3D, .ARC_FFTbins, .ARC_FFT3D)
+- Bottom Track Guide (.BottomTrackGuide)
+- Angular Response Curves (.ARC_fullBW, .ARC_3D, .ARC_FFTbins, .ARC_FFT3D)
 related_tools:
-  - EKlook
-  - BatchProcEK
-  - comboCalibEK_ARCs
-  - EK_funcs
+- EKlook
+- BatchProcEK
+- comboCalibEK_ARCs
+- EK_funcs
 ---
 
 # EK_BottomBS (Module within EKlook)
 
 ## Description
-`EK_BottomBS` (`code/EKlook/EK_BottomBS.c`) is an interactive GUI module within the [`EKlook`](EKlook.md) application. It manages the **"BOTTOM Detect / ARC Window,"** allowing users to interactively tune bottom-detection parameters (`dBdrop`, `phaseOffZero`), toggle radiometric/geometric corrections (Transmission Loss, Beam Pattern, Ensonified Area), inspect sub-window FFT spectra across the seafloor echo envelope, and stack or export broadband Angular Response Curves (ARCs).
+`EK_BottomBS` (`code/EKlook/EK_BottomBS.c`) is an interactive GUI module within the [`EKlook`](EKlook.html) application. It manages the **"BOTTOM Detect / ARC Window,"** allowing users to interactively tune bottom-detection parameters (`dBdrop`, `phaseOffZero`), toggle radiometric/geometric corrections (Transmission Loss, Beam Pattern, Ensonified Area), inspect sub-window FFT spectra across the seafloor echo envelope, and stack or export broadband Angular Response Curves (ARCs).
 
 ## Interactive Controls
 
@@ -34,7 +35,7 @@ related_tools:
 | `depthGuide` | Toggles the use of Nadir Depth as a guide for bottom detection. | `useNadirDepthGuide` |
 | `mountGuide` | Toggles the use of Mount Angle as a guide for bottom detection. | `useMountAngleGuide` |
 | **Buttons (ARC Operations)** | | |
-| `dump BStrack` | Saves bottom track parameters to `<prefix>.BottomTrackGuide` for use in [`BatchProcEK`](BatchProcEK.md). | |
+| `dump BStrack` | Saves bottom track parameters to `<prefix>.BottomTrackGuide` for use in [`BatchProcEK`](BatchProcEK.html). | |
 | `flushARC` | Clears the accumulated Angular Response Curves (ARCs). | `ARC_cummulative`, `ARC_byPing` |
 | `dump ARC` | Writes the current accumulated ARC to disk. | `ARC_cummulative` |
 | `stack all ARC` | Stacks all valid ping envelopes into a cumulative ARC and writes it to disk. | `ARC_cummulative` |

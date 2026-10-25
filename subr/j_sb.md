@@ -1,14 +1,15 @@
 ---
 layout: default
 title: j_sb
-parent: Core Shared Libraries (subr)
-module_name: j_sb
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/j_sb.c
-header_path: code/subr/j_sb.h
 category: Sonar Format I/O (SeaBeam)
 related_tools:
-  - sb2omg
-  - weigh_grid
+- sb2omg
+- weigh_grid
+module_name: j_sb
+header_path: code/subr/j_sb.h
 ---
 
 # `j_sb` — Scripps Institution of Oceanography (SIO) SeaBeam 2000 Format I/O Library

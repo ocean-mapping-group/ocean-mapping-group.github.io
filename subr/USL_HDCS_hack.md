@@ -1,17 +1,18 @@
 ---
 layout: default
 title: USL_HDCS_hack
-parent: Core Shared Libraries (subr)
-module_name: USL_HDCS_hack
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/USL_HDCS_hack.c
-header_path: code/subr/USL_HDCS_hack.h
 category: Sonar Format Parsers & Binary I/O
 related_tools:
-  - readHDCS
-  - deHump
-  - deRefract
-  - DelayEditor
-  - swathed
+- readHDCS
+- deHump
+- deRefract
+- DelayEditor
+- swathed
+module_name: USL_HDCS_hack
+header_path: code/subr/USL_HDCS_hack.h
 ---
 
 # USL_HDCS_hack: CARIS HIPS (Universal Systems Ltd.) Observed & Processed HDCS Reader/Writer
@@ -31,6 +32,7 @@ related_tools:
 * **`USL_HDCS_proc_index_summary_header` (`52` bytes)** & **`USL_HDCS_obs_index_summary` (`24` bytes)**: Summary headers for the companion `TmIndex` index files (`subFileID = 3`), specifying `noBlocks`.
 
 ### Profile & Beam Structures
+
 ```c
 /* Version 2 Observed Profile Header (20 bytes) */
 typedef struct USL_HDCS_obs_profile_header {
@@ -76,6 +78,7 @@ typedef struct USL_HDCS_proc_beam {
 ```
 
 ### Block Index Structures (`USL_HDCS_index_block` & `TmIndex`)
+
 ```c
 typedef struct USL_HDCS_index_block {
     int noRecordsInBlock;

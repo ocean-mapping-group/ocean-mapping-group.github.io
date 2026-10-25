@@ -1,14 +1,25 @@
 ---
 layout: default
 title: SE_sswindow
-parent: SwathEd (SE) Tools
+parent: Swath Editor — swathed (SE)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 29
 tool_name: SE_sswindow
 source_path: code/SE/SE_sswindow.c
 category: Interactive QC & Editing (SwathEd)
-input_formats: [".merged", ".ss_data", ".16_data", ".ph_data", ".ph16_data"]
+input_formats:
+- .merged
+- .ss_data
+- .16_data
+- .ph_data
+- .ph16_data
 output_formats: []
-related_tools: ["swathed", "SE_mainwin", "SE_omgIOwin", "SE_BSwindow", "SE_AnandBS"]
+related_tools:
+- swathed
+- SE_mainwin
+- SE_omgIOwin
+- SE_BSwindow
+- SE_AnandBS
 ---
 
 # `SE_sswindow.c` — Interactive Raw Sidescan, Snippet Trace & Phase Viewer Window
@@ -24,7 +35,7 @@ When a `.merged` line has an accompanying `<line>.merged.ss_data` (8-bit or 16-b
 
 Calling `view_sidescan()` creates a top-level parent window `sub_window[16]` ($906 \times 392$ px) titled according to the active `summary.toolType` (e.g., `"EM12D/12S/121A/1002/1000/950/300/3000S/3002/3000D Raw Sidescan Data"`, `"Seabeam 2000 Strip Sidescan Data"`, `"ISIS Submetrix 2000 Sidescan Data"`, `"ATLAS Hydrosweep MD2/30 Sidescan Data"`), divided into two child windows:
 1. **`sub_window[13]` ($900 \times 300$ px, upper canvas):** Renders the single-ping detailed plot for `rec_no = in_recnum + selected_swath` in one of four user-selectable coordinate modes (`ssplot_type`).
-2. **`sub_window[15]` ($900 \times 80$ px, lower canvas):** Renders the 80-ping 8-bit/24-bit sidescan waterfall image (`strip_image` / `strip_data`, populated by `load_up_strip()` in [`SE_omgIOwin.c`](SE_omgIOwin.md)) with a horizontal indicator line marking the currently selected swath.
+2. **`sub_window[15]` ($900 \times 80$ px, lower canvas):** Renders the 80-ping 8-bit/24-bit sidescan waterfall image (`strip_image` / `strip_data`, populated by `load_up_strip()` in [`SE_omgIOwin.c`](SE_omgIOwin.html)) with a horizontal indicator line marking the currently selected swath.
 
 ---
 
@@ -60,4 +71,4 @@ When editing dual-head interferometric sonar data (`summary.toolType == ISIS_Sub
 
 ## Integration within `swathed`
 - **Invocation:** Activated from the `swathed` toolbox or keyboard shortcut when `got_ss == 1` (`.ss_data` present).
-- **Synchronization:** Automatically updated by `setup_for_next80()` and `beam_update()` in [`SE_mainwin.c`](SE_mainwin.md) whenever the user changes the selected ping (`selected_swath`) or beam (`selected_beam`), or advances to a new 100-ping block (`prime_array` in [`SE_omgIOwin.c`](SE_omgIOwin.md)).
+- **Synchronization:** Automatically updated by `setup_for_next80()` and `beam_update()` in [`SE_mainwin.c`](SE_mainwin.html) whenever the user changes the selected ping (`selected_swath`) or beam (`selected_beam`), or advances to a new 100-ping block (`prime_array` in [`SE_omgIOwin.c`](SE_omgIOwin.html)).

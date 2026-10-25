@@ -1,9 +1,11 @@
 ---
 layout: default
 title: edhead
-parent: Grid Tools
+parent: Bathymetric Gridding & Export (grid)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 23
 ---
+
 ---
 layout: default
 title: edhead
@@ -19,14 +21,17 @@ nav_order: 23
 `edhead` can be run in several modes:
 
 1.  **Show Header Info:**
+
     ```bash
     edhead -show <grid_file>
     ```
 2.  **Export Georeferencing Data:**
+
     ```bash
     edhead <export_option> <grid_file>
     ```
 3.  **Interactive Edit:**
+
     ```bash
     edhead <grid_file>
     ```
@@ -51,6 +56,7 @@ These options run non-interactively to display information or generate metadata 
 | `-proj_long <longitude>` | Specifies the projection longitude to be used when exporting georeferencing for Mercator-projected grids. Essential for ensuring correct alignment in external programs. |
 
 ### File Manipulation Options
+
 | Option | Description |
 |---|---|
 | `-replacehead <source_grid_file>` | Copies the header from `<source_grid_file>` and overwrites the header of the main input grid file. |

@@ -1,9 +1,11 @@
 ---
 layout: default
 title: traceRay
-parent: Ray Tools
+parent: Ray-Tracing & Refraction (ray)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 173
 ---
+
 # traceRay
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 173
 This tool is useful for understanding sound propagation behavior in different oceanographic conditions and for visualizing how SVP variations affect ray bending.
 
 ## Usage
+
 ```bash
 traceRay -pro <svp_handle> [-fishdep <val>] [-layerthick <val>] [-spacing <step> <start> <finish>] [-range <val>] [-depth <val>] [-verbose]
 ```

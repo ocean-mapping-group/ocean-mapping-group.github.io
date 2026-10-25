@@ -1,11 +1,17 @@
 ---
 layout: default
-title: Hypack Tools (hypack)
+title: HYPACK HSX / RAW Converters (hypack)
+parent: 4. Multi-Vendor Sonar & LiDAR Converters
+nav_order: 14
 has_children: true
-nav_order: 26
-category: Raw Data Unraveling & Format Conversion
 source_path: code/hypack/
-related_tools: ["dehypack", "hypack2omg", "mergeNav", "mergeAtt", "mergeTide"]
+category: Raw Data Unraveling & Format Conversion
+related_tools:
+- dehypack
+- hypack2omg
+- mergeNav
+- mergeAtt
+- mergeTide
 ---
 
 # Hypack Tools (`hypack/`)
@@ -22,8 +28,8 @@ Authored primarily by Jonathan Beaudoin (`jonnyb`) with enhancements by John Hug
 
 | Tool | Source File | Primary Role | Input Formats | Output Formats |
 | :--- | :--- | :--- | :--- | :--- |
-| **[`dehypack`](dehypack.md)** | `code/hypack/dehypack.c` | Strips 4-byte little-endian record-length framing headers from HYPACK binary-wrapped sonar logs to recover the native underlying sonar byte stream. | HYPACK framed binary log | Native unframed sonar binary stream |
-| **[`hypack2omg`](hypack2omg.md)** | `code/hypack/hypack2omg.c` | Unpacks ASCII HYSWEEP `.HSX` multibeam survey files (`POS`, `TID`, `HCP`, `GYR`, `RMB` records and header tables) into OMG-HDCS v2/v4 `.merged`, `.nav`, `.tide`, `.orientation`, `.heading`, and `.param` files. | `.hsx` (HYPACK HYSWEEP ASCII) | `.merged`, `.nav`, `.tide`, `.orientation`, `.heading`, `.param` |
+| **[`dehypack`](dehypack.html)** | `code/hypack/dehypack.c` | Strips 4-byte little-endian record-length framing headers from HYPACK binary-wrapped sonar logs to recover the native underlying sonar byte stream. | HYPACK framed binary log | Native unframed sonar binary stream |
+| **[`hypack2omg`](hypack2omg.html)** | `code/hypack/hypack2omg.c` | Unpacks ASCII HYSWEEP `.HSX` multibeam survey files (`POS`, `TID`, `HCP`, `GYR`, `RMB` records and header tables) into OMG-HDCS v2/v4 `.merged`, `.nav`, `.tide`, `.orientation`, `.heading`, and `.param` files. | `.hsx` (HYPACK HYSWEEP ASCII) | `.merged`, `.nav`, `.tide`, `.orientation`, `.heading`, `.param` |
 
 ---
 

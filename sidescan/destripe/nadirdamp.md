@@ -1,16 +1,18 @@
 ---
 layout: default
 title: nadirdamp
-parent: Destripe Tools
-grand_parent: sidescan
+parent: Sidescan Radiometric & Geometric Suite (sidescan)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 9
 ---
+
 # nadirdamp
 
 ## Description
 `nadirdamp` is a utility designed to dampen out low-frequency ridges that often appear in the nadir region of JCU GLORIA format sidescan files. It achieves this by applying a linear interpolation across a defined "widthzone" around the nadir, effectively smoothing out anomalies in that area. This tool is typically applied to the `.low` component resulting from a destriping operation.
 
 ## Usage
+
 ```bash
 nadirdamp [-widthzone <pixels>] <infile_prefix>
 ```

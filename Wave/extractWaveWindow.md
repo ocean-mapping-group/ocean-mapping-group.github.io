@@ -1,13 +1,23 @@
 ---
 layout: default
 title: extractWaveWindow
-parent: Acoustic WAV Processing (Wave)
+parent: Acoustic WAV Waveform Tools (Wave)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 tool_name: extractWaveWindow
 source_path: code/Wave/extractWaveWindow.c
 category: Passive Acoustics & Hydrophone WAV Processing
-input_formats: [".wav (RIFF/WAVE 16-bit PCM)", ".wav.datetime"]
-output_formats: [".wav", ".wav.list", ".wav.datetime"]
-related_tools: ["readWave", "jwave_subr", "j_wav_io", "stdtime"]
+input_formats:
+- .wav (RIFF/WAVE 16-bit PCM)
+- .wav.datetime
+output_formats:
+- .wav
+- .wav.list
+- .wav.datetime
+related_tools:
+- readWave
+- jwave_subr
+- j_wav_io
+- stdtime
 ---
 
 # extractWaveWindow
@@ -15,7 +25,7 @@ related_tools: ["readWave", "jwave_subr", "j_wav_io", "stdtime"]
 ## Overview
 `extractWaveWindow` (`code/Wave/extractWaveWindow.c`, written by John E. Hughes Clarke, March 2019) extracts and concatenates a precise UTC time window across a sequence of timestamped hydrophone/acoustic `.wav` files into a single contiguous RIFF/WAVE output file (`-out <new.wav>`), optionally applying a linear amplitude gain multiplier (`-gainout`).
 
-Each input `.wav` file is expected to have a companion `<file>.wav.datetime` two-line ASCII sidecar file containing the file's start and end UTC date/time and 1970 Unix epoch seconds. `extractWaveWindow` classifies each input `.wav` file into one of four overlap cases (`useful[i] = 1..4`: overlaps start of window, overlaps end of window, completely inside window, or completely envelopes window), splices the exact sample ranges using [`jwave_subr`](../subr/jwave_subr.md) (`read_in_wave_head`, `read_in_wave_body`, `write_out_wave_head`, `write_out_wave_body`), and writes provenance metadata to `<out.wav>.list` and `<out.wav>.datetime`.
+Each input `.wav` file is expected to have a companion `<file>.wav.datetime` two-line ASCII sidecar file containing the file's start and end UTC date/time and 1970 Unix epoch seconds. `extractWaveWindow` classifies each input `.wav` file into one of four overlap cases (`useful[i] = 1..4`: overlaps start of window, overlaps end of window, completely inside window, or completely envelopes window), splices the exact sample ranges using [`jwave_subr`](../subr/jwave_subr.html) (`read_in_wave_head`, `read_in_wave_body`, `write_out_wave_head`, `write_out_wave_body`), and writes provenance metadata to `<out.wav>.list` and `<out.wav>.datetime`.
 
 ---
 

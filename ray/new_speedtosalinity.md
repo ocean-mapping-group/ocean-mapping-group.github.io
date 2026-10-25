@@ -1,9 +1,11 @@
 ---
 layout: default
 title: new_speedtosalinity
-parent: Ray Tools
+parent: Ray-Tracing & Refraction (ray)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 166
 ---
+
 # new_speedtosalinity
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 166
 This tool is essential for oceanographic applications where direct salinity measurements are unavailable, but sound velocity, temperature, and depth are known. It allows for the reconstruction of salinity profiles for use in various oceanographic models.
 
 ## Usage
+
 ```bash
 new_speedtosalinity -in <infile> -out <outfile> (-wilson | -cml) [-v] [-test]
 ```

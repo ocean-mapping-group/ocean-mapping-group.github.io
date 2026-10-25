@@ -1,19 +1,38 @@
 ---
 layout: default
 title: SE_WaterColumn
-parent: SwathEd (SE) Tools
+parent: Swath Editor — swathed (SE)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 18
 tool_name: SE_WaterColumn
 source_path: code/SE/SE_WaterColumn.c
 category: Interactive QC & Editing (SwathEd)
-input_formats: [".merged", ".watercol", ".WC_Phase1", ".WC_Phase2", ".wc2d", ".extra", ".tgt", "WC_gains"]
-output_formats: [".tgt", "WC_gains", "wc_XXXXX.ppm", "multiwc_XXXXX.ppm"]
-related_tools: ["swathed", "SE_3D", "SE_BDI_DP", "SE_PDI_LA", "c_wcl_TOOLBOX", "j_EM_watercolumn"]
+input_formats:
+- .merged
+- .watercol
+- .WC_Phase1
+- .WC_Phase2
+- .wc2d
+- .extra
+- .tgt
+- WC_gains
+output_formats:
+- .tgt
+- WC_gains
+- wc_XXXXX.ppm
+- multiwc_XXXXX.ppm
+related_tools:
+- swathed
+- SE_3D
+- SE_BDI_DP
+- SE_PDI_LA
+- c_wcl_TOOLBOX
+- j_EM_watercolumn
 ---
 
 # `SE_WaterColumn` — Multibeam Water Column Polar Fan & Time-Series Analysis Toolkit
 
-`SE_WaterColumn` (`code/SE/SE_WaterColumn.c`, `code/SE/SE_WaterColumn.h`) is the primary interactive X11 water column visualization, target picking, and bottom-detection diagnostic engine in [`swathed`](swathed.md). Authored by John E. Hughes Clarke (June 2005–2021) with contributions from Jonathan Beaudoin (compression, along-track stack filtering, `.tgt` target management) and Carlos Rubio (`c_wcl_TOOLBOX` target hunter and beam-pattern compensation), it renders 80-ping blocks of Kongsberg EM (`.watercol`, `.kmall`), Reson 7k, and Mesotech M3 water column datagrams (`j_EM_watercolumn`) alongside split-beam phase (`.WC_Phase1`/`.WC_Phase2`) and multi-detect (`.extra`) soundings.
+`SE_WaterColumn` (`code/SE/SE_WaterColumn.c`, `code/SE/SE_WaterColumn.h`) is the primary interactive X11 water column visualization, target picking, and bottom-detection diagnostic engine in [`swathed`](swathed.html). Authored by John E. Hughes Clarke (June 2005–2021) with contributions from Jonathan Beaudoin (compression, along-track stack filtering, `.tgt` target management) and Carlos Rubio (`c_wcl_TOOLBOX` target hunter and beam-pattern compensation), it renders 80-ping blocks of Kongsberg EM (`.watercol`, `.kmall`), Reson 7k, and Mesotech M3 water column datagrams (`j_EM_watercolumn`) alongside split-beam phase (`.WC_Phase1`/`.WC_Phase2`) and multi-detect (`.extra`) soundings.
 
 ---
 
@@ -41,17 +60,17 @@ Launched by clicking the **`WC`** icon (`icon_window[16]`) when `-wc` is enabled
 | Slider `1` | `WC Compression` | Sets wavelet/DCT compression ratio (`watercolumn_compression_factor`, `1` to `100`) for `compress_watercolumn()`. |
 | Button `0` | `BTRK beams` | Cycles `show_BTRK_BEAMS` (`0..3`) to overlay `.merged` bottom-tracker soundings (with optional $\pm 1$ ping sync offset diagnostics). |
 | Button `1` | `PHYS beams` | Cycles `show_PHYS_BEAMS` (`0..3`) to overlay WC telegram bottom picks and `.extra` multi-detects. |
-| Button `2` | `3D Widget` | Opens the OpenGL 3D water column veil and point-cloud viewer ([`SE_3D`](SE_3D.md)). |
+| Button `2` | `3D Widget` | Opens the OpenGL 3D water column veil and point-cloud viewer ([`SE_3D`](SE_3D.html)). |
 | Button `3` | `Before R0` | Toggles `whether_to_suppress_after_1st_arrival` to blank echoes beyond the minimum slant range $R_0$ (`WC_first_arrival`). |
 | Button `4` | `Finish Calc.` | Calls `finish_WC_loading()` to complete background scan-conversion of all 80 swaths in the current block. |
 | Button `5` / `6` | `Load Gains` / `Dump_Gains` | Reads or writes per-sector transmit gain offsets and sector/swath mute masks (`Sector_Gains[3][9]`, `Sector_OnOff[3][9]`) to `WC_gains`. |
 | Button `7` | `First Track` | Toggles `show_FIRST_TRACK` ($R_0$ minimum slant range arc, corrected for inter-sector `tx_time_offset`). |
 | Button `8` | `Targets` | Toggles `show_TARGETS` and loads `<line>.tgt` files (`WC_load_target_files()`). |
 | Button `9` | `Filter` | Toggles `WC_show_filtered` (`filter_wc()`, `calc_filt()`) to average linear intensity across a running `WC_filt_window` (default 5-ping) stack. |
-| Button `10` | `Target Hunt` | Launches Carlos Rubio's automated water column target detector (`target_widget` in [`c_wcl_TOOLBOX`](c_wcl_TOOLBOX.md)). |
-| Button `11` | `BDI Track` | Launches the Bottom Detection Indicator toolkit ([`SE_BDI_DP`](SE_BDI_DP.md)). |
+| Button `10` | `Target Hunt` | Launches Carlos Rubio's automated water column target detector (`target_widget` in [`c_wcl_TOOLBOX`](c_wcl_TOOLBOX.html)). |
+| Button `11` | `BDI Track` | Launches the Bottom Detection Indicator toolkit ([`SE_BDI_DP`](SE_BDI_DP.html)). |
 | Button `12` | `Amp/Phase` | Toggles `show_wcp` between water column amplitude (`WCim_c`) and split-beam differential phase (`WCPim_c`) polar fan display. |
-| Button `13` | `PDI Track` | Launches the Phase Detection Indicator toolkit ([`SE_PDI_LA`](SE_PDI_LA.md)). |
+| Button `13` | `PDI Track` | Launches the Phase Detection Indicator toolkit ([`SE_PDI_LA`](SE_PDI_LA.html)). |
 
 ---
 

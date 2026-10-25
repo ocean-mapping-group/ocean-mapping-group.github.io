@@ -1,9 +1,11 @@
 ---
 layout: default
 title: r2sonicTool
-parent: R2Sonic Tools
+parent: R2Sonic 2020/2022/2024 (r2sonic)
+grand_parent: 4. Multi-Vendor Sonar & LiDAR Converters
 nav_order: 162
 ---
+
 # r2sonicTool
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 162
 This tool is primarily used for inspecting the raw structure and content of `.r2s` files, verifying data integrity, and understanding the details of R2Sonic's proprietary data formats. It's a valuable tool for developers and advanced users needing to debug or gain insight into R2Sonic data.
 
 ## Usage
+
 ```bash
 r2sonicTool -in <input.r2s> [-vb] [-vs] [-vt] [-vw] [-v]
 ```

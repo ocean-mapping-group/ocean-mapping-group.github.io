@@ -1,14 +1,22 @@
 ---
 layout: default
 title: gsfTool
-parent: GSF Tools
+parent: Generic Sensor Format — GSF (gsf)
+grand_parent: 4. Multi-Vendor Sonar & LiDAR Converters
 nav_order: 6
 tool_name: gsfTool
 source_path: code/gsf/gsfTool.c
 category: Diagnostics & Indexing
-input_formats: [".gsf"]
-output_formats: ["stdout (ASCII record inventory & dumps)"]
-related_tools: ["gsftest", "gsf2omg", "gsf2orientation", "gsf2param", "gsf2svp"]
+input_formats:
+- .gsf
+output_formats:
+- stdout (ASCII record inventory & dumps)
+related_tools:
+- gsftest
+- gsf2omg
+- gsf2orientation
+- gsf2param
+- gsf2svp
 ---
 
 # gsfTool
@@ -17,6 +25,7 @@ related_tools: ["gsftest", "gsf2omg", "gsf2orientation", "gsf2param", "gsf2svp"]
 `gsfTool` is a fast diagnostic utility based on the lightweight `omg_gsf` parser that scans a Generic Sensor Format (`.gsf`) file, validates 4-byte record alignment, prints the GSF version header, optionally dumps specific record types (`-vid`), and outputs a summary count of all record types encountered.
 
 ## Usage
+
 ```bash
 gsfTool [-v] [-vid <ID>] -in <inputfile.gsf>
 ```
@@ -37,11 +46,13 @@ gsfTool [-v] [-vid <ID>] -in <inputfile.gsf>
 ## Practical Examples
 
 **1. Print a record inventory of a GSF file:**
+
 ```bash
 gsfTool -in survey01.gsf
 ```
 
 **2. Dump all Sensor Parameters (ID 5) and Sound Velocity Profiles (ID 3):**
+
 ```bash
 gsfTool -vid 5 -vid 3 -in survey01.gsf
 ```

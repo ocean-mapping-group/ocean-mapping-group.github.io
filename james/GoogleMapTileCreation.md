@@ -1,14 +1,23 @@
 ---
 layout: default
 title: GoogleMapTileCreation
-parent: James Muggah (james) Tools
+parent: James Muggah — Global Mapper Tiles & Utils (james)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 nav_order: 2
 tool_name: GoogleMapTileCreation
 source_path: code/james/GoogleMapTileCreation.c
 category: Raster Processing & Web Mapping (james)
-input_formats: [".sun_315 / .r4 / .8bit (basemap)", ".nav / .decnav", ".r4 (mapsheets)", ".txt (ASCII lat/lon)"]
-output_formats: [".txt (pixel coordinate index)"]
-related_tools: ["map2GMTiles", "merged2GMTiles", "GM_fillGap"]
+input_formats:
+- .sun_315 / .r4 / .8bit (basemap)
+- .nav / .decnav
+- .r4 (mapsheets)
+- .txt (ASCII lat/lon)
+output_formats:
+- .txt (pixel coordinate index)
+related_tools:
+- map2GMTiles
+- merged2GMTiles
+- GM_fillGap
 ---
 
 # GoogleMapTileCreation
@@ -33,6 +42,7 @@ GoogleMapTileCreation [-v] [-keep_out] -basemap <basemap_file> \
 ### Examples
 
 **1. Index which basemap pixels are crossed by a `.decnav` file and map back to `.merged` path:**
+
 ```bash
 GoogleMapTileCreation -basemap arctic_overview.sun_315 \
     -nav /survey/decnav/2010/line001.decnav -skip 600 \
@@ -40,6 +50,7 @@ GoogleMapTileCreation -basemap arctic_overview.sun_315 \
 ```
 
 **2. Output the 4 (or 5 closed-polygon) pixel corners of `.r4` mapsheets on a basemap:**
+
 ```bash
 GoogleMapTileCreation -basemap arctic_overview.sun_315 \
     -map sheet1.r4 sheet2.r4 -repeat_ul -name \
@@ -47,6 +58,7 @@ GoogleMapTileCreation -basemap arctic_overview.sun_315 \
 ```
 
 **3. Project an ASCII list of `<lat> <lon>` points onto basemap pixel coordinates:**
+
 ```bash
 GoogleMapTileCreation -basemap bay.sun_315 -ascii waypoints.txt -out waypoints_px.txt
 ```
@@ -73,14 +85,17 @@ GoogleMapTileCreation -basemap bay.sun_315 -ascii waypoints.txt -out waypoints_p
 ## Output Formats
 
 * **`-nav` mode:** Appends one line per accepted nav fix:
+
   ```text
   <x_pixel> <y_pixel> <path_with_/merged/_and_.merged>
   ```
 * **`-map` mode:** Appends one line per mapsheet containing the 4 (or 5 with `-repeat_ul`) projected corner pixel coordinate pairs:
+
   ```text
   [<map_filename>] <x_ul> <y_ul> <x_ll> <y_ll> <x_lr> <y_lr> <x_ur> <y_ur> [<x_ul> <y_ul>]
   ```
 * **`-ascii` mode:** Appends one line per input coordinate pair:
+
   ```text
   <x_pixel> <y_pixel>
   ```

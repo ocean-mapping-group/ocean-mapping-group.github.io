@@ -1,16 +1,18 @@
 ---
 layout: default
 title: restructure_glo
-parent: Convert Tools
-grand_parent: sidescan
+parent: Sidescan Radiometric & Geometric Suite (sidescan)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 3
 ---
+
 # restructure_glo
 
 ## Description
 `restructure_glo` is a utility designed to restructure a merged JCU format GLORIA file from an Apollo header structure (128 bytes) to a SUN header structure (136 bytes). This conversion involves shifting various data blocks within each record to accommodate the larger header size.
 
 ## Usage
+
 ```bash
 restructure_glo -in <infile> -out <outfile>
 ```

@@ -1,14 +1,18 @@
 ---
 layout: default
 title: xseTool
-parent: XSE Tools
+parent: L-3 / SeaBeam XSE Format (xse)
+grand_parent: 4. Multi-Vendor Sonar & LiDAR Converters
 nav_order: 2
 tool_name: xseTool
 source_path: xse/xseTool.c
 category: diagnostics
-input_formats: [XSE]
-output_formats: [ASCII_STDOUT]
-related_tools: [xse2omg]
+input_formats:
+- XSE
+output_formats:
+- ASCII_STDOUT
+related_tools:
+- xse2omg
 ---
 
 # xseTool

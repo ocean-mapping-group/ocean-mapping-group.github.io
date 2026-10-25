@@ -1,9 +1,11 @@
 ---
 layout: default
 title: packOMG
-parent: OMG Tools
+parent: Core Swath & .all Suite (omg)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 46
 ---
+
 # packOMG
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 46
 The tool reads each profile and its associated beams from the input file and writes them to a new output file in the specified packed format.
 
 ## Usage
+
 ```bash
 packOMG <OMG_HDCS_infile> <OMG_HDCS_outfile> [OPTIONS]
 ```

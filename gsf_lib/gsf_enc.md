@@ -1,14 +1,22 @@
 ---
 layout: default
 title: gsf_enc
-parent: GSF Library (gsf_lib)
+parent: Embedded GSF C Library (gsf_lib)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 nav_order: 3
 tool_name: gsf_enc
 source_path: code/gsf_lib/gsf_enc.c
 category: GSF Library Module
-input_formats: ["gsfRecords (in-memory C structs)"]
-output_formats: [".gsf"]
-related_tools: ["gsf", "gsf_dec", "gsf_indx", "gsf_info", "omg2gsf"]
+input_formats:
+- gsfRecords (in-memory C structs)
+output_formats:
+- .gsf
+related_tools:
+- gsf
+- gsf_dec
+- gsf_indx
+- gsf_info
+- omg2gsf
 ---
 
 # gsf_enc (`gsf_enc.c` / `gsf_enc.h`)

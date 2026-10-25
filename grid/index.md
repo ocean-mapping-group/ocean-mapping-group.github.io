@@ -1,8 +1,9 @@
 ---
 layout: default
-title: Grid Tools
+title: Bathymetric Gridding & Export (grid)
+parent: 2. Gridding, Mosaicking & Interactive Editors
+nav_order: 1
 has_children: true
-nav_order: 11
 ---
 
 # Grid Tools

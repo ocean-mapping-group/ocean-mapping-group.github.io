@@ -1,14 +1,23 @@
 ---
 layout: default
 title: flagNav
-parent: Navigation Tools
+parent: Navigation Processing (nav)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 20
 tool_name: flagNav
 source_path: code/nav/flagNav.c
 category: Navigation & Georeferencing
-input_formats: [".nav"]
-output_formats: [".nav (modified in-place)"]
-related_tools: ["toNav", "NMEAtoNav", "PNAVtoNav", "mergeNav", "appendNav", "navedit"]
+input_formats:
+- .nav
+output_formats:
+- .nav (modified in-place)
+related_tools:
+- toNav
+- NMEAtoNav
+- PNAVtoNav
+- mergeNav
+- appendNav
+- navedit
 ---
 
 # flagNav
@@ -17,12 +26,12 @@ related_tools: ["toNav", "NMEAtoNav", "PNAVtoNav", "mergeNav", "appendNav", "nav
 `flagNav` is an in-place quality-control utility for binary OMG navigation files (`jcu_nav_rec`, 48 bytes per record). It inspects the positioning quality indicator stored in `flag[1]` of each navigation record (such as GPS fix quality, differential mode, or PNAV solution flag) and sets the master validity flag `flag[3]` based on a user-specified acceptance threshold (`-accept`).
 
 In the OMG navigation architecture:
-* `flag[3] == 0` indicates an **accepted (valid)** navigation fix that will be used by [`mergeNav`](mergeNav.md) and [`appendNav -goodonly`](appendNav.md).
+* `flag[3] == 0` indicates an **accepted (valid)** navigation fix that will be used by [`mergeNav`](mergeNav.html) and [`appendNav -goodonly`](appendNav.html).
 * `flag[3] == 1` indicates a **rejected (flagged)** navigation fix that `mergeNav` and `appendNav -goodonly` will skip during interpolation or export (unless `mergeNav -allnavok` is explicitly specified).
 
 > [!CAUTION]
 > **In-Place Modification:**
-> `flagNav` opens each input `.nav` file in read/write mode (`"r+"`) and overwrites `flag[3]` directly in the original file. Back up raw `.nav` files before running `flagNav` if you need to preserve pre-existing manual flag edits made in [`navedit`](navedit.md).
+> `flagNav` opens each input `.nav` file in read/write mode (`"r+"`) and overwrites `flag[3]` directly in the original file. Back up raw `.nav` files before running `flagNav` if you need to preserve pre-existing manual flag edits made in [`navedit`](navedit.html).
 
 ---
 
@@ -35,16 +44,19 @@ flagNav [-v] [-accept <min_flag1_val>] <navfile(s)>
 ### Common Workflow Examples
 
 **1. Accept only differential/RTK or higher-grade fixes (`flag[1] >= 3`):**
+
 ```bash
 flagNav -accept 3 merged/JD100/0001_line.nav
 ```
 
 **2. Batch-flag multiple navigation files with verbose record-by-record reporting:**
+
 ```bash
 flagNav -v -accept 2 proc_nav/day100_*.nav
 ```
 
 **3. Reset all fixes with `flag[1] >= 1` to valid (`flag[3] = 0`):**
+
 ```bash
 flagNav -accept 1 merged/JD100/*.nav
 ```

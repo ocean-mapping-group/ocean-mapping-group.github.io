@@ -1,9 +1,11 @@
 ---
 layout: default
 title: calcXYZ
-parent: Grid Tools
+parent: Bathymetric Gridding & Export (grid)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 10
 ---
+
 ---
 layout: default
 title: calcXYZ
@@ -16,6 +18,7 @@ nav_order: 10
 `calcXYZ` is a command-line utility designed to generate XYZ coordinate data (suitable for gridding with `surface.c`) from stereo imagery or other parallax-derived inputs. It takes a correlation coefficient map (indicating data quality) and a parallax map as input. For valid points, it calculates the 3D position based on camera geometry parameters (focal length, camera separation) and outputs them as an ASCII XYZ file. It can also process sub-pixel parallax solutions.
 
 ## Usage
+
 ```bash
 calcXYZ [OPTIONS] -coeff <coeff_map.8bit> -parallax <parallax_map.8bit> -out <output.xyz>
 ```

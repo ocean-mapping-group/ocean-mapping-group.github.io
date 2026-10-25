@@ -1,14 +1,26 @@
 ---
 layout: default
 title: appendNav
-parent: Navigation Tools
+parent: Navigation Processing (nav)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 3
 tool_name: appendNav
 source_path: code/nav/appendNav.c
 category: Navigation & Georeferencing
-input_formats: [".nav"]
-output_formats: [".nav", ".decnav", "ASCII text", ".kml", ".curr", ".avcr"]
-related_tools: ["read_kmall", "mergeNav", "stripNav", "jview"]
+input_formats:
+- .nav
+output_formats:
+- .nav
+- .decnav
+- ASCII text
+- .kml
+- .curr
+- .avcr
+related_tools:
+- read_kmall
+- mergeNav
+- stripNav
+- jview
 ---
 
 # appendNav
@@ -17,6 +29,7 @@ related_tools: ["read_kmall", "mergeNav", "stripNav", "jview"]
 `appendNav` concatenates, decimates, time-sorts, clips (by geographic bounding box or time window), and exports one or more binary OMG navigation files (`.nav`, `jcu_nav_rec` format). It can handle up to 10,000 input `.nav` files in a single invocation.
 
 In the Kongsberg `.kmall` unraveling workflow (`unravel_KMALL_single` and `unravel_KMALL_2500m_RevHplus_netatt2`), `appendNav` is used to create a 10x decimated navigation file in the `decnav/<subdir>/` directory for fast trackline plotting in `jview`:
+
 ```bash
 appendNav -skip 10 -comp decnav/$SUBDIR/$LINE_NUMBER.decnav merged/$SUBDIR/$LINE_NUMBER.nav
 ```
@@ -32,22 +45,26 @@ appendNav [OPTIONS] -comp <output_file> <input_nav_file(s)>
 ### Common Workflow Examples
 
 **1. Decimate a line's navigation by a factor of 10 (standard Kongsberg unravel pipeline):**
+
 ```bash
 appendNav -skip 10 -comp decnav/JD100/0001_line.decnav merged/JD100/0001_line.nav
 ```
 
 **2. Concatenate and chronologically sort all decimated nav files from a survey into a single master trackline:**
+
 ```bash
 appendNav -presortnav -goodonly -comp master_survey.nav decnav/JD*/*.decnav
 ```
 
 **3. Export navigation to Google Earth KML or comma-separated ASCII:**
+
 ```bash
 appendNav -kmlpath -skip 5 -comp survey_track.kml decnav/JD100/*.decnav
 appendNav -ascii_comma -with_1970_time -comp survey_track.csv decnav/JD100/*.decnav
 ```
 
 **4. Clip navigation to the exact time bounds of a `.merged` file or the geographic bounds of a mapsheet:**
+
 ```bash
 appendNav -timeboundsof merged/JD100/0001_line.merged -comp line1_clipped.nav raw_posmv.nav
 appendNav -area region.r4 -comp in_region.nav decnav/JD*/*.decnav

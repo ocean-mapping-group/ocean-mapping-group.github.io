@@ -1,8 +1,9 @@
 ---
 layout: default
-title: Sbat Tools
+title: Reson SeaBat 9001/8101 Legacy (Sbat)
+parent: 4. Multi-Vendor Sonar & LiDAR Converters
+nav_order: 2
 has_children: true
-nav_order: 21
 ---
 
 # Sbat Tools

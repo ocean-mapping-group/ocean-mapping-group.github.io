@@ -1,13 +1,21 @@
 ---
 layout: default
 title: read_dem
-parent: Grid Tools
+parent: Bathymetric Gridding & Export (grid)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 tool_name: read_dem
 source_path: code/grid/read_dem.c
 category: gridding
-input_formats: ["USGS ASCII DEM (7.5-minute / 1-degree)", "USGS SDTS ISO-8211 (.tar)"]
-output_formats: ["16-bit Binary Band-Sequential Array (.bsq)", "ASCII Header Report"]
-related_tools: ["readUSGS_DEM", "USGS_30sec_to_JHC", "r4to16bit"]
+input_formats:
+- USGS ASCII DEM (7.5-minute / 1-degree)
+- USGS SDTS ISO-8211 (.tar)
+output_formats:
+- 16-bit Binary Band-Sequential Array (.bsq)
+- ASCII Header Report
+related_tools:
+- readUSGS_DEM
+- USGS_30sec_to_JHC
+- r4to16bit
 ---
 
 # read_dem
@@ -48,6 +56,7 @@ read_dem <indem> <outbsq> [outhdr] [nodataval]
 ## Examples
 
 ### Convert an SDTS `.tar` DEM archive to a 16-bit binary raster and header file
+
 ```bash
 read_dem 1601234.dem.sdts.tar quad.bsq quad.hdr -9999
 ```

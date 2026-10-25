@@ -1,19 +1,25 @@
 ---
 layout: default
 title: SE_Weekley_Goodrich_Cornman
-parent: SwathEd (SE) Tools
+parent: Swath Editor — swathed (SE)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 20
 tool_name: SE_Weekley_Goodrich_Cornman
 source_path: code/SE/SE_Weekley_Goodrich_Cornman.c
 category: Interactive QC & Editing (SwathEd)
-input_formats: [".merged"]
-output_formats: [".merged (beam status flags updated in-place)"]
-related_tools: ["swathed", "SE_filters", "SE_AUTOFLAGwin"]
+input_formats:
+- .merged
+output_formats:
+- .merged (beam status flags updated in-place)
+related_tools:
+- swathed
+- SE_filters
+- SE_AUTOFLAGwin
 ---
 
 # `SE_Weekley_Goodrich_Cornman` — Neighbor-Depth Phase-Space Outlier Filter (`WGC Tool`)
 
-`SE_Weekley_Goodrich_Cornman` (`code/SE/SE_Weekley_Goodrich_Cornman.c`, `code/SE/SE_Weekley_Goodrich_Cornman.h`) implements the `"WGC Tool"` (`sub_window[59..61]`) in [`swathed`](swathed.md). Authored by Jonathan Beaudoin (February 2011) after the Weekley–Goodrich–Cornman lag-1 scatter/phase-space outlier detection method, it plots adjacent sounding depths against one another—$z(b, p)$ vs. $z(b, p+1)$ along-track and $z(b, p)$ vs. $z(b+1, p)$ across-track—and flags soundings whose orthogonal distance from the 1:1 identity line ($y = x$, slope $45^\circ$) exceeds a configurable threshold (`weekley_filter_width`).
+`SE_Weekley_Goodrich_Cornman` (`code/SE/SE_Weekley_Goodrich_Cornman.c`, `code/SE/SE_Weekley_Goodrich_Cornman.h`) implements the `"WGC Tool"` (`sub_window[59..61]`) in [`swathed`](swathed.html). Authored by Jonathan Beaudoin (February 2011) after the Weekley–Goodrich–Cornman lag-1 scatter/phase-space outlier detection method, it plots adjacent sounding depths against one another—$z(b, p)$ vs. $z(b, p+1)$ along-track and $z(b, p)$ vs. $z(b+1, p)$ across-track—and flags soundings whose orthogonal distance from the 1:1 identity line ($y = x$, slope $45^\circ$) exceeds a configurable threshold (`weekley_filter_width`).
 
 ---
 

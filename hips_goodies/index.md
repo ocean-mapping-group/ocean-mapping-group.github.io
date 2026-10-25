@@ -1,11 +1,16 @@
 ---
 layout: default
-title: HIPS Goodies (hips_goodies)
+title: CARIS HIPS Integration Utilities (hips_goodies)
+parent: 4. Multi-Vendor Sonar & LiDAR Converters
+nav_order: 15
 has_children: true
-nav_order: 25
-category: Caris HIPS Conversion Utilities
 source_path: code/hips_goodies/
-related_tools: ["heli2caris", "mvp2hips", "read_kmall", "mergeAtt"]
+category: Caris HIPS Conversion Utilities
+related_tools:
+- heli2caris
+- mvp2hips
+- read_kmall
+- mergeAtt
 ---
 
 # HIPS Goodies (`hips_goodies/`)
@@ -22,8 +27,8 @@ During joint CHS/UNB hydrographic and Arctic coastal mapping surveys, shoreline 
 
 | Tool / Source File | Primary Role | Input Formats | Output Formats |
 | :--- | :--- | :--- | :--- |
-| **[`heli2caris`](heli2caris.md)** (`heli2caris.c` / `helo2caris.cpp`) | Interactive converter that parses raw helicopter GPS logs (OEM4, PRTKA, or NMEA GGA) and writes CARIS FOF/NTX shoreline feature batch scripts with feature codes (`clsl`, `cllwrlltsm`, `cllw`, or custom). | Raw ASCII GPS logs (`.gps`, `.txt`, `.log`) | CARIS batch command / feature input file |
-| **[`mvp2hips`](mvp2hips.md)** (`mvp2hips.c`) | Converts Moving Vessel Profiler (`xxxc` calculated ASCII files, e.g., `jul08.001c`) into CARIS HIPS `SVP_VERSION_2` `.svp` sound velocity profile files. | Calculated MVP ASCII file (`.001c`, `.svp`) | CARIS HIPS `.svp` (`SVP_VERISON_2`) |
+| **[`heli2caris`](heli2caris.html)** (`heli2caris.c` / `helo2caris.cpp`) | Interactive converter that parses raw helicopter GPS logs (OEM4, PRTKA, or NMEA GGA) and writes CARIS FOF/NTX shoreline feature batch scripts with feature codes (`clsl`, `cllwrlltsm`, `cllw`, or custom). | Raw ASCII GPS logs (`.gps`, `.txt`, `.log`) | CARIS batch command / feature input file |
+| **[`mvp2hips`](mvp2hips.html)** (`mvp2hips.c`) | Converts Moving Vessel Profiler (`xxxc` calculated ASCII files, e.g., `jul08.001c`) into CARIS HIPS `SVP_VERSION_2` `.svp` sound velocity profile files. | Calculated MVP ASCII file (`.001c`, `.svp`) | CARIS HIPS `.svp` (`SVP_VERISON_2`) |
 
 ---
 

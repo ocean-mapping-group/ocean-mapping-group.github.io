@@ -1,20 +1,21 @@
 ---
 layout: default
 title: example
-parent: labs (Teaching & Coursework Labs)
+parent: Graduate Course Lab Exercises (labs)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 nav_order: 2
 tool_name: example
 source_path: code/labs/example.c
 category: Educational Labs & Acoustic Signal Processing (labs)
 input_formats:
-  - ASCII 2-column time-series files (time, amplitude)
+- ASCII 2-column time-series files (time, amplitude)
 output_formats:
-  - ASCII 2-column time-series file (time, amplitude)
+- ASCII 2-column time-series file (time, amplitude)
 related_tools:
-  - testChirp
-  - testNormConv
-  - EM_unpack
-  - mkbp
+- testChirp
+- testNormConv
+- EM_unpack
+- mkbp
 ---
 
 # example
@@ -52,6 +53,7 @@ The program allocates three static 2D floating-point arrays capable of holding u
 
 ### 2. Discrete Time-Domain Convolution (`doconv`)
 In the main loop (`for (i = 0; i < no_impulse_samples; i++)`), the program invokes:
+
 ```c
 doconv(impulse[1] + i, pulse[1], no_pulse_samples);
 ```
@@ -70,7 +72,7 @@ Students must also ensure that index offsets $n - k$ or $n + k$ do not overrun t
 ## Workflow Context & Examples
 
 ### Pairing with `testChirp` for Lab Exercises
-In OMG coursework, [`testChirp`](../tests/testChirp.md) (`code/tests/testChirp.c`) is used to generate synthetic CW or FM chirp waveforms (`pulse.ascii`) and multi-target seabed reflection series (`impulse.ascii`):
+In OMG coursework, [`testChirp`](../tests/testChirp.html) (`code/tests/testChirp.c`) is used to generate synthetic CW or FM chirp waveforms (`pulse.ascii`) and multi-target seabed reflection series (`impulse.ascii`):
 
 ```bash
 # 1. Generate pulse.ascii and impulse.ascii using testChirp
@@ -80,4 +82,4 @@ testChirp -pulse_length_ms 1.0 -start_freq_kHz 10 -stop_freq_kHz 100
 example -pulse pulse.ascii -impul impulse.ascii -out convolved_output.ascii
 ```
 
-For production complex-valued ($I/Q$) matched filtering and FFT-accelerated convolution on Simrad EK80 broadband data, see [`testNormConv`](../tests/testNormConv.md) (`code/tests/testNormConv.c`).
+For production complex-valued ($I/Q$) matched filtering and FFT-accelerated convolution on Simrad EK80 broadband data, see [`testNormConv`](../tests/testNormConv.html) (`code/tests/testNormConv.c`).

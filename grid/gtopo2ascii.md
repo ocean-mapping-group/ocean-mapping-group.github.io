@@ -1,9 +1,11 @@
 ---
 layout: default
 title: gtopo2ascii
-parent: Grid Tools
+parent: Bathymetric Gridding & Export (grid)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 35
 ---
+
 ---
 layout: default
 title: gtopo2ascii
@@ -18,6 +20,7 @@ nav_order: 35
 The tool reads a binary `.DEM` file containing 16-bit integer elevation data and its corresponding ASCII `.HDR` header file. It uses the metadata from the header to correctly interpret the binary data, calculate the geographic coordinate for each pixel, and stream the results to standard output.
 
 ## Usage
+
 ```bash
 gtopo2ascii -in <file_prefix> [OPTIONS] > output.xyz
 ```

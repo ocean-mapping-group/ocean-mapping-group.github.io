@@ -1,18 +1,19 @@
 ---
 layout: default
 title: test64
-parent: tests (Test, Simulation & Diagnostic Suite)
+parent: Acoustic & Mathematical Test Harnesses (tests)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 nav_order: 17
 tool_name: test64
 source_path: code/tests/test64.c
 category: System Architecture & Endianness Diagnostics (tests)
 input_formats:
-  - Optional binary/ASCII file (<inname>) to test fseek/ftell
+- Optional binary/ASCII file (<inname>) to test fseek/ftell
 output_formats:
-  - Console diagnostic report (endianness macros, C data type byte sizes, file byte length)
+- Console diagnostic report (endianness macros, C data type byte sizes, file byte length)
 related_tools:
-  - read4bit
-  - EM_unpack
+- read4bit
+- EM_unpack
 ---
 
 # test64
@@ -72,6 +73,7 @@ where the five `sizeof` integers correspond to:
 test64 survey_line_001.merged
 ```
 Sample output:
+
 ```text
  INTEL 1 MOTOROLA 0
  8 4 2 4 8 

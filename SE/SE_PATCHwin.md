@@ -1,19 +1,32 @@
 ---
 layout: default
 title: SE_PATCHwin
-parent: SwathEd (SE) Tools
+parent: Swath Editor — swathed (SE)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 11
 tool_name: SE_PATCHwin
 source_path: code/SE/SE_PATCHwin.c
 category: Interactive QC & Editing (SwathEd)
-input_formats: [".merged", ".merged.100_ping_bounds", ".r4", ".lph", ".rtk"]
-output_formats: ["PATCH.plot", "patch_XXXX.ppm"]
-related_tools: ["swathed", "SE_GEOwindows", "SE_2Dwindow", "SE_LineListwin", "newMergeAtt"]
+input_formats:
+- .merged
+- .merged.100_ping_bounds
+- .r4
+- .lph
+- .rtk
+output_formats:
+- PATCH.plot
+- patch_XXXX.ppm
+related_tools:
+- swathed
+- SE_GEOwindows
+- SE_2Dwindow
+- SE_LineListwin
+- newMergeAtt
 ---
 
 # `SE_PATCHwin` — Interactive Multibeam Patch Test & Lever-Arm Calibration Toolkit
 
-`SE_PATCHwin` (`code/SE/SE_PATCHwin.c`, `code/SE/SE_PATCHwin.h`) implements the `"PATCH TEST ToolKit"` (`sub_window[43..54]`) in [`swathed`](swathed.md). Authored by John E. Hughes Clarke (April/July 1999) with automated solver and dual-head extensions by Jonathan Beaudoin (2012), it provides an interactive 3D ray/lever-arm recalculation engine for calibrating multibeam angular mounting alignments (**Roll**, **Pitch**, **Gyro/Heading**), positioning **Time Delay** (latency), and GPS/motion sensor **Transducer-to-Antenna Lever Arms** ($\Delta X, \Delta Y, \Delta Z$).
+`SE_PATCHwin` (`code/SE/SE_PATCHwin.c`, `code/SE/SE_PATCHwin.h`) implements the `"PATCH TEST ToolKit"` (`sub_window[43..54]`) in [`swathed`](swathed.html). Authored by John E. Hughes Clarke (April/July 1999) with automated solver and dual-head extensions by Jonathan Beaudoin (2012), it provides an interactive 3D ray/lever-arm recalculation engine for calibrating multibeam angular mounting alignments (**Roll**, **Pitch**, **Gyro/Heading**), positioning **Time Delay** (latency), and GPS/motion sensor **Transducer-to-Antenna Lever Arms** ($\Delta X, \Delta Y, \Delta Z$).
 
 ---
 

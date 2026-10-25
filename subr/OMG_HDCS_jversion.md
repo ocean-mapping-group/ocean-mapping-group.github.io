@@ -1,20 +1,21 @@
 ---
 layout: default
 title: OMG_HDCS_jversion
-parent: Core Shared Libraries (subr)
-module_name: OMG_HDCS_jversion
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/OMG_HDCS_jversion.c
-header_path: code/subr/OMG_HDCS_jversion.h
 category: Core Swath Data Format & I/O Engine
 related_tools:
-  - swathed
-  - jview
-  - RT
-  - RTLite
-  - DelayEditor
-  - dumpXYZ
-  - unrollOMG
-  - makeWC
+- swathed
+- jview
+- RT
+- RTLite
+- DelayEditor
+- dumpXYZ
+- unrollOMG
+- makeWC
+module_name: OMG_HDCS_jversion
+header_path: code/subr/OMG_HDCS_jversion.h
 ---
 
 # OMG_HDCS_jversion: The Core OMG Swath Bathymetry, Attitude & Imagery I/O Engine

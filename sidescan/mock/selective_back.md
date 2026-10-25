@@ -1,16 +1,18 @@
 ---
 layout: default
 title: selective_back
-parent: Mock Tools
-grand_parent: sidescan
+parent: Sidescan Radiometric & Geometric Suite (sidescan)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 11
 ---
+
 # selective_back
 
 ## Description
 `selective_back` is a utility designed for advanced analysis of backscatter strength and grazing angle mosaics. Similar to `build_back_mos`, it processes input backscatter and impinging (grazing) angle images to understand their statistical relationship. However, `selective_back` offers more flexibility by allowing analysis either within a user-defined geographic region (`-top_y`, `-bot_y`, `-left_x`, `-right_x`) or specifically for pixels within a certain value range of an external classification image (`-class`, `-range`). It computes mean and standard deviation of backscatter for various grazing angle bins and can visualize these statistics or apply color coding to an image.
 
 ## Usage
+
 ```bash
 selective_back [-image <image_file>] [-color <value>] [-dB <min_dB> <max_dB>] [-table <prefix>] [(-top_y <y0> -bot_y <y1> -left_x <x0> -right_x <x1>) | (-class <class_file> -range <low> <high>)] [-bksct <bksct_file> -imping <imping_file>]
 ```

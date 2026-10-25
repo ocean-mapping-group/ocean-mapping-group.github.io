@@ -1,14 +1,20 @@
 ---
 layout: default
 title: qualityFlag
-parent: ELAC Tools
+parent: ELAC BottomChart Multibeam (elac)
+grand_parent: 4. Multi-Vendor Sonar & LiDAR Converters
 nav_order: 1
 tool_name: qualityFlag
 source_path: elac/qualityFlag.c
 category: bathymetry_filtering
-input_formats: [OMG_HDCS]
-output_formats: [OMG_HDCS]
-related_tools: [refoELAC, elac2omg, SwathEd]
+input_formats:
+- OMG_HDCS
+output_formats:
+- OMG_HDCS
+related_tools:
+- refoELAC
+- elac2omg
+- SwathEd
 ---
 
 # qualityFlag

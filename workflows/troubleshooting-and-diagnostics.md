@@ -5,23 +5,23 @@ parent: Processing Workflows & Guides
 nav_order: 5
 category: workflows
 related_tools:
-  - read_kmall
-  - RTlite
-  - moveOverWCinfo
-  - stripNav
-  - appendNav
-  - mergeNav
-  - newMergeAtt
-  - mergeAtt
-  - mergeHeave
-  - mergeTide
-  - deTVG
-  - makess
-  - make_blank
-  - weigh_grid
-  - mos2
-  - swathed
-  - jview
+- read_kmall
+- RTlite
+- moveOverWCinfo
+- stripNav
+- appendNav
+- mergeNav
+- newMergeAtt
+- mergeAtt
+- mergeHeave
+- mergeTide
+- deTVG
+- makess
+- make_blank
+- weigh_grid
+- mos2
+- swathed
+- jview
 ---
 
 # Troubleshooting & Diagnostics Reference

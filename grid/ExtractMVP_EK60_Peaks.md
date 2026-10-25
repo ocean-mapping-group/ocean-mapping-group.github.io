@@ -1,9 +1,11 @@
 ---
 layout: default
 title: ExtractMVP_EK60_Peaks
-parent: Grid Tools
+parent: Bathymetric Gridding & Export (grid)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 25
 ---
+
 ---
 layout: default
 title: ExtractMVP_EK60_Peaks
@@ -18,6 +20,7 @@ nav_order: 25
 This tool is part of a workflow for tracking specific oceanographic layers (e.g., thermoclines, scattering layers) across a survey area.
 
 ## Usage
+
 ```bash
 ExtractMVP_EK60_Peaks -outfile <output.ascii> -alltxtfiles <file1.txt> ... [OPTIONS]
 ```

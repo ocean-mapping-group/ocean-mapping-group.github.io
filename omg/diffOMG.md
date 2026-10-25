@@ -1,9 +1,11 @@
 ---
 layout: default
 title: diffOMG
-parent: OMG Tools
+parent: Core Swath & .all Suite (omg)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 90
 ---
+
 # diffOMG
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 90
 This tool is invaluable for quality control, verifying data processing steps, and analyzing subtle differences between datasets.
 
 ## Usage
+
 ```bash
 diffOMG -first <OMG_HDCS_datafile1> -second <OMG_HDCS_datafile2> -out <diff.r4file> [OPTIONS]
 ```

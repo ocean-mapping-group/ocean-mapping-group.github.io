@@ -1,16 +1,18 @@
 ---
 layout: default
 title: glmerge
-parent: Merge Tools
-grand_parent: sidescan
+parent: Sidescan Radiometric & Geometric Suite (sidescan)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 4
 ---
+
 # glmerge
 
 ## Description
 `glmerge` is a utility designed to merge Seabeam navigation and depth information onto a raw IOS (Institute of Ocean Sciences) format GLORIA file. The processed data, combining the sidescan imagery with accurate navigation and depth, is then written out as a JCU GLORIA record file. This tool performs time-based interpolation to synchronize the two different datasets.
 
 ## Usage
+
 ```bash
 glmerge [-declin <degrees>] [-layback <value>] [-azi] [-isolated <time_gap_window>] [-ping <rate>] [-timehack <seconds>] <cbfile> <iosfile_prefix>
 ```

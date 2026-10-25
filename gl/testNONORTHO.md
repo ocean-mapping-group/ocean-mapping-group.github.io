@@ -1,17 +1,22 @@
 ---
 layout: default
 title: testNONORTHO
-parent: gl Tools
+parent: OpenGL 3D Visualization (gl)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 tool_name: testNONORTHO
 source_path: code/gl/testNONORTHO.c
 category: 3D OpenGL Swath & Sonar Geometry Simulation
-related_tools: ["synSwath", "SYN_NONORTHO", "j_non_ortho_cones", "DCM_rthand"]
+related_tools:
+- synSwath
+- SYN_NONORTHO
+- j_non_ortho_cones
+- DCM_rthand
 ---
 
 # testNONORTHO
 
 ## Overview
-`testNONORTHO` is an interactive command-line diagnostic utility written by John E. Hughes Clarke (November 2000) to test and verify 3D non-orthogonal transmit/receive cone intersection geometry (`calc_nonorthogonal_cones_010` from [`j_non_ortho_cones`](../subr/j_non_ortho_cones.md)).
+`testNONORTHO` is an interactive command-line diagnostic utility written by John E. Hughes Clarke (November 2000) to test and verify 3D non-orthogonal transmit/receive cone intersection geometry (`calc_nonorthogonal_cones_010` from [`j_non_ortho_cones`](../subr/j_non_ortho_cones.html)).
 
 In multibeam echosounders where the transmit line array and receive line array are mounted on separate hull frames, tilted separately, or evaluated at distinct transmit and receive instants (dynamic motion between transmit and receive), the transmit and receive acoustic cones are no longer mutually orthogonal. `testNONORTHO` allows interactive entry of arbitrary mounting angles, instantaneous platform orientations, and steering angles to inspect the resulting 3D unit beam vector $(X, Y, Z)$ and geographic azimuth/depression angle in the local-level reference frame.
 
@@ -35,8 +40,9 @@ When executed, `testNONORTHO` enters a loop prompting for six sets of angles (in
 
 ## Computation & Output
 
-1. Sets `ortho_calc_type = MB_NONORTHO` and sets `LL_beam_vect.x = -999.0` to enable verbose internal step-by-step debug output inside [`j_non_ortho_cones`](../subr/j_non_ortho_cones.md).
+1. Sets `ortho_calc_type = MB_NONORTHO` and sets `LL_beam_vect.x = -999.0` to enable verbose internal step-by-step debug output inside [`j_non_ortho_cones`](../subr/j_non_ortho_cones.html).
 2. Calls:
+
    ```c
    calc_nonorthogonal_cones_010(Tx_mount, Rc_mount, Tx_orient, Rc_orient,
                                 &LL_beam_vect, (float)cone_pitch, (float)cone_roll);
@@ -46,6 +52,7 @@ When executed, `testNONORTHO` enters a loop prompting for six sets of angles (in
    * $\text{Radial} = \sqrt{X^2 + Y^2}$
    * $\text{Depression} = \arctan\left(\frac{Z}{\text{Radial}}\right) \times \frac{180}{\pi}$
 4. Prints the Cartesian components and derived azimuth and depression angles:
+
    ```text
    X <x> Y <y> Z <z> -- azi <deg> dep <deg>
    ```
@@ -53,4 +60,4 @@ When executed, `testNONORTHO` enters a loop prompting for six sets of angles (in
 ---
 
 ## Architectural Role
-`testNONORTHO` serves as the standalone mathematical verification harness for [`j_non_ortho_cones.c`](../subr/j_non_ortho_cones.md) and [`SYN_NONORTHO.c`](SYN_NONORTHO.md), which underpin both 3D cone intersection visualization in [`synSwath`](synSwath.md) and operational multibeam re-pointing in [`repoint`](../omg/repoint.md).
+`testNONORTHO` serves as the standalone mathematical verification harness for [`j_non_ortho_cones.c`](../subr/j_non_ortho_cones.html) and [`SYN_NONORTHO.c`](SYN_NONORTHO.html), which underpin both 3D cone intersection visualization in [`synSwath`](synSwath.html) and operational multibeam re-pointing in [`repoint`](../omg/repoint.html).

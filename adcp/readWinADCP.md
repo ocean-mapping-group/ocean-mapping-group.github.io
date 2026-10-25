@@ -1,18 +1,19 @@
 ---
 layout: default
 title: readWinADCP
-parent: ADCP Tools
+parent: Teledyne RDI ADCP Processing (adcp)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 14
 tool_name: readWinADCP
 source_path: code/adcp/readWinADCP.c
 category: adcp
 input_formats:
-  - WinADCP Tabular ASCII Export
+- WinADCP Tabular ASCII Export
 output_formats:
-  - JHC 8-bit Velocity Magnitude Image (.mag)
-  - Per-Stack ASCII Profiles (.stack####)
+- JHC 8-bit Velocity Magnitude Image (.mag)
+- Per-Stack ASCII Profiles (.stack####)
 related_tools:
-  - readADCP
+- readADCP
 ---
 
 # readWinADCP
@@ -21,6 +22,7 @@ related_tools:
 `readWinADCP` is a command-line utility designed to read and stack tabular ASCII data files exported from Teledyne RDI's WinADCP software. It reads ADCP ensembles from the text file, vector-averages the North and East velocity components and backscatter over groups of `-stack <N>` ensembles, and outputs both per-stack ASCII profile tables (`<outfile>.stack####`) and an 8-bit JHC velocity magnitude image (`<outfile>.mag`).
 
 ## Usage
+
 ```bash
 readWinADCP -in <infile> -out <outfile> -nobins <num> [OPTIONS]
 ```

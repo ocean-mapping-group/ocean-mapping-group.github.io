@@ -1,9 +1,11 @@
 ---
 layout: default
 title: plotGS
-parent: Plot Tools
+parent: PostScript & Vector Plotting (plot)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 141
 ---
+
 # plotGS
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 141
 This tool is useful for rapidly visualizing sedimentological data, allowing for quick comparison of different samples or characterization of sediment types.
 
 ## Usage
+
 ```bash
 plotGS <infile(s)> [-outfile <filename.meta>] [-size <dx> <dy>] [-yrange <min> <max>] [-pgc] [-v]
 ```

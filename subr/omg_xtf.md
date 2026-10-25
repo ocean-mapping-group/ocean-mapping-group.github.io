@@ -1,24 +1,25 @@
 ---
 layout: default
 title: omg_xtf
-parent: Core Shared Libraries (subr)
-module_name: omg_xtf
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/omg_xtf.c
-header_path: code/subr/omg_xtf.h
 category: File Formats & Vendor Parsers
 related_tools:
-  - xtfTool
-  - xtf2omg_reson
-  - xtf2omg_r2sonic
-  - xtf2omg_simrad
-  - klein2omg
-  - elac2omg
-  - xtf2nav
-  - xtf2orientation
-  - xtf2param
-  - extractSnippet
-  - extractRI
-  - stripSS
+- xtfTool
+- xtf2omg_reson
+- xtf2omg_r2sonic
+- xtf2omg_simrad
+- klein2omg
+- elac2omg
+- xtf2nav
+- xtf2orientation
+- xtf2param
+- extractSnippet
+- extractRI
+- stripSS
+module_name: omg_xtf
+header_path: code/subr/omg_xtf.h
 ---
 
 # omg_xtf

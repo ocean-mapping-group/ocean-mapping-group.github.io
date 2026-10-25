@@ -1,8 +1,9 @@
 ---
 layout: default
-title: SEGY Tools
+title: SEG-Y Sub-Bottom & Seismic (segy)
+parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
+nav_order: 6
 has_children: true
-nav_order: 22
 ---
 
 # SEGY Tools

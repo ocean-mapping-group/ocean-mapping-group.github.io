@@ -1,16 +1,18 @@
 ---
 layout: default
 title: glreplace
-parent: Destripe Tools
-grand_parent: sidescan
+parent: Sidescan Radiometric & Geometric Suite (sidescan)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 7
 ---
+
 # glreplace
 
 ## Description
 `glreplace` is a utility designed to replace the image data (sidescan pixel values) of one JCU GLORIA format file with the image data from a second GLORIA file, while retaining the header information from the first file. This effectively allows for updating the imagery of a GLORIA file without altering its navigational or other metadata.
 
 ## Usage
+
 ```bash
 glreplace <header_file> <image_file> <outfile>
 ```

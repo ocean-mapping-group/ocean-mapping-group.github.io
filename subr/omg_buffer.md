@@ -1,15 +1,16 @@
 ---
 layout: default
 title: omg_buffer
-parent: Core Shared Libraries (subr)
-module_name: omg_buffer
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/omg_buffer.c
-header_path: code/subr/omg_buffer.h
 category: Memory Management & Dynamic Buffers
 related_tools:
-  - normalization
-  - newGetBP
-  - s7k / kmall / gsf packet readers
+- normalization
+- newGetBP
+- s7k / kmall / gsf packet readers
+module_name: omg_buffer
+header_path: code/subr/omg_buffer.h
 ---
 
 # `omg_buffer` — Dynamic Resizable Byte & Double Buffer Management Library
@@ -28,6 +29,7 @@ In July 2015, `OMG_Buffer_double` was added to apply the same grow-on-demand pat
 
 ### `OMG_Buffer`
 Dynamic byte buffer for raw binary I/O:
+
 ```c
 typedef struct {
     unsigned char *buffer;      /* Pointer to heap-allocated byte array             */
@@ -38,6 +40,7 @@ typedef struct {
 
 ### `OMG_Buffer_double`
 Dynamic double-precision floating-point array buffer:
+
 ```c
 typedef struct {
     double       *buffer;      /* Pointer to heap-allocated double array            */

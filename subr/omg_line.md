@@ -1,14 +1,15 @@
 ---
 layout: default
 title: omg_line
-parent: Core Shared Libraries (subr)
-module_name: omg_line
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/omg_line.c
-header_path: code/subr/omg_line.h
 category: Survey Planning & Geometry
 related_tools:
-  - jview (JV)
-  - line_export
+- jview (JV)
+- line_export
+module_name: omg_line
+header_path: code/subr/omg_line.h
 ---
 
 # omg_line

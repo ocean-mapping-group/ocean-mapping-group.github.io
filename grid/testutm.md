@@ -1,13 +1,19 @@
 ---
 layout: default
 title: testutm
-parent: Grid Tools
+parent: Bathymetric Gridding & Export (grid)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 tool_name: testutm
 source_path: code/grid/testutm.c
 category: gridding
-input_formats: ["Interactive stdin Coordinates"]
-output_formats: ["stdout Projected / Geographic Coordinates"]
-related_tools: ["convertutm", "project", "locate_fix"]
+input_formats:
+- Interactive stdin Coordinates
+output_formats:
+- stdout Projected / Geographic Coordinates
+related_tools:
+- convertutm
+- project
+- locate_fix
 ---
 
 # testutm
@@ -46,10 +52,12 @@ All projection parameters and coordinate pairs are prompted interactively from `
 ## Examples
 
 ### Run the interactive coordinate transformation calculator
+
 ```bash
 testutm
 ```
 Example interactive session (WGS84 UTM forward conversion at central meridian -69°):
+
 ```text
  UTM (1) or NB stereo (2) or Merc (3)?
 1

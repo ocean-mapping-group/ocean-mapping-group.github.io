@@ -1,13 +1,19 @@
 ---
 layout: default
 title: noaaTide
-parent: Tide Tools
+parent: Tidal Reduction & Constituents (tide)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 tool_name: noaaTide
 source_path: code/tide/noaaTide.c
 category: tide
-input_formats: ["Legacy NOAA 8-column DCP ASCII tide"]
-output_formats: ["JHC ASCII tide (jday hour min tide)"]
-related_tools: ["noaaTC_Tide", "binTide", "mergeTide"]
+input_formats:
+- Legacy NOAA 8-column DCP ASCII tide
+output_formats:
+- JHC ASCII tide (jday hour min tide)
+related_tools:
+- noaaTC_Tide
+- binTide
+- mergeTide
 ---
 
 # noaaTide
@@ -36,6 +42,7 @@ noaaTide [OPTIONS] <infilename> <outfilename>
 ## How It Works
 
 1. Reads 8 whitespace-separated tokens per record:
+
    ```c
    fscanf(floatfile, "%d%d%s%s%f%d%d%d", &sid, &dcp, &str1, &str2, &rtide, &flat, &rofc, &t_flag)
    ```
@@ -47,6 +54,7 @@ noaaTide [OPTIONS] <infilename> <outfilename>
 ## Examples
 
 **Convert a legacy NOAA DCP tide file with a +5 hour timezone shift to UTC:**
+
 ```bash
 noaaTide -shift 0 5 0 noaa_dcp.raw noaa_utc.asc
 binTide -year 1994 noaa_utc.asc noaa_utc.bin
@@ -57,5 +65,5 @@ binTide -year 1994 noaa_utc.asc noaa_utc.bin
 ## Workflow Context
 
 - **Upstream:** Legacy NOAA NOS/DCP water level logs.
-- **Modern Alternative:** Use [`noaaTC_Tide`](noaaTC_Tide.md) for modern NOAA CO-OPS Tides & Currents web exports.
-- **Downstream:** [`binTide`](binTide.md) $\rightarrow$ [`mergeTide`](mergeTide.md).
+- **Modern Alternative:** Use [`noaaTC_Tide`](noaaTC_Tide.html) for modern NOAA CO-OPS Tides & Currents web exports.
+- **Downstream:** [`binTide`](binTide.html) $\rightarrow$ [`mergeTide`](mergeTide.html).

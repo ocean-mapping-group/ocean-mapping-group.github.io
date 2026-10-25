@@ -1,14 +1,15 @@
 ---
 layout: default
 title: c_wcpick
-parent: Core Shared Libraries (subr)
-module_name: c_wcpick
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/c_wcpick.c
-header_path: code/subr/c_wcpick.h
 category: Water Column Target Detection & Picking
 related_tools:
-  - swathed
-  - targethunt
+- swathed
+- targethunt
+module_name: c_wcpick
+header_path: code/subr/c_wcpick.h
 ---
 
 # c_wcpick: 3D Water-Column Target Hunting, Sidelobe Suppression & Picking Interface
@@ -21,6 +22,7 @@ related_tools:
 ## Key Constants, Global Parameters & Data Structures
 
 ### Detection & Shading Constants
+
 ```c
 #define C_RESET_THRESHOLD -127
 #define C_MAXTARGETSIZE     20
@@ -52,6 +54,7 @@ related_tools:
   * `c_user_noPatternMatchRange`, `c_user_noPatternMatchAcross`, `c_user_noPatternMatchAlong`: Toggle 3D point-spread-function (PSF) sidelobe pattern matching in range, across-track, and along-track dimensions.
 
 ### Target Shape Modeling Structures (`targetPiece` & `targetShape`)
+
 ```c
 typedef struct {
     double sizex;        /* Expected size of target piece across-track (m) */

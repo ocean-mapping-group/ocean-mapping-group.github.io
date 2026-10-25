@@ -1,9 +1,11 @@
 ---
 layout: default
 title: defineDownSlope
-parent: Grid Tools
+parent: Bathymetric Gridding & Export (grid)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 18
 ---
+
 ---
 layout: default
 title: defineDownSlope
@@ -16,6 +18,7 @@ nav_order: 18
 `defineDownSlope` is a command-line utility that analyzes a JHC-format 32-bit floating-point grid file (`.r4`), typically representing a Digital Terrain Model (DTM). For each pixel, it examines the eight neighboring pixels to determine the direction of the steepest descent. The output is an 8-bit JHC grid file where each pixel's value encodes the downslope direction, or indicates if it's a local minimum (a pit). This is useful for basic hydrological analysis and visualizing surface flow paths.
 
 ## Usage
+
 ```bash
 defineDownSlope [-v] <floatfile_prefix>
 ```

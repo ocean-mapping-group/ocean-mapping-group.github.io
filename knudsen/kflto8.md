@@ -1,14 +1,23 @@
 ---
 layout: default
 title: kflto8
-parent: Knudsen Tools
+parent: Knudsen Chirp Sub-Bottom (knudsen)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 5
 tool_name: kflto8
 source_path: knudsen/kflto8.c
 category: radiometric_processing
-input_formats: [OMG_FL_DATA, OMG_HDCS]
-output_formats: [OMG_SS_DATA]
-related_tools: [k16to8, readSB_SEGY, readixBlueXTF, readEA600, makeSeisPlot]
+input_formats:
+- OMG_FL_DATA
+- OMG_HDCS
+output_formats:
+- OMG_SS_DATA
+related_tools:
+- k16to8
+- readSB_SEGY
+- readixBlueXTF
+- readEA600
+- makeSeisPlot
 ---
 
 # kflto8

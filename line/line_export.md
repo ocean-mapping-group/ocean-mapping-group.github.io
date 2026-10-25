@@ -1,19 +1,27 @@
 ---
 layout: default
 title: line_export
-parent: Survey Line Export (line)
+parent: Survey Line Export Utilities (line)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 tool_name: line_export
 source_path: code/line/line_export.c
 category: Survey Planning & Navigation Export
-input_formats: [".lines (OMG_Line_List)", ".r4 / .blank (JHC_header)"]
-output_formats: [".lnw (Hypack Planned Lines)", ".asciiplan (Kongsberg SIS Planned Lines)"]
-related_tools: ["jview", "omg_line", "hypack2omg"]
+input_formats:
+- .lines (OMG_Line_List)
+- .r4 / .blank (JHC_header)
+output_formats:
+- .lnw (Hypack Planned Lines)
+- .asciiplan (Kongsberg SIS Planned Lines)
+related_tools:
+- jview
+- omg_line
+- hypack2omg
 ---
 
 # line_export
 
 ## Overview
-`line_export` (`code/line/line_export.c`) converts interactive survey line plans saved from [`jview`](../JV/jview.md) (`.lines` files, parsed via [`omg_line`](../subr/omg_line.md)) into third-party hydrographic acquisition line-planning formats:
+`line_export` (`code/line/line_export.c`) converts interactive survey line plans saved from [`jview`](../JV/jview.html) (`.lines` files, parsed via [`omg_line`](../subr/omg_line.html)) into third-party hydrographic acquisition line-planning formats:
 1. **HYPACK Planned Lines (`.lnw`)** — Projected into UTM Easting/Northing coordinates (`geoutm`) either as discrete 2-point survey lines (`LIN 2` / `PTS` / `LNN` / `EOL`) or as a single continuous multi-waypoint route (`-do_route`).
 2. **Kongsberg Seafloor Information System (`.asciiplan`)** — Exported in geographic WGS84 decimal degrees (`DEG` header followed by `_LINE` records with timestamps).
 
@@ -49,6 +57,7 @@ line_export -sis -in patch_test.lines -map area.r4 [-out patch_test.asciiplan]
 
 ### 1. HYPACK `.lnw` Format (`-hypack`)
 * **Standard mode (default):**
+
   ```text
   LNS <num_lines>
   LIN 2
@@ -59,6 +68,7 @@ line_export -sis -in patch_test.lines -map area.r4 [-out patch_test.asciiplan]
   ...
   ```
 * **Route mode (`-do_route`):**
+
   ```text
   LNS 1
   LIN <2 * num_lines>
@@ -70,6 +80,7 @@ line_export -sis -in patch_test.lines -map area.r4 [-out patch_test.asciiplan]
   ```
 
 ### 2. Kongsberg SIS `.asciiplan` Format (`-sis`)
+
 ```text
 DEG
 Exported from UNB/OMG line file

@@ -1,14 +1,22 @@
 ---
 layout: default
 title: gsf_indx
-parent: GSF Library (gsf_lib)
+parent: Embedded GSF C Library (gsf_lib)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 nav_order: 4
 tool_name: gsf_indx
 source_path: code/gsf_lib/gsf_indx.c
 category: GSF Library Module
-input_formats: [".gsf", ".ndx"]
-output_formats: [".ndx"]
-related_tools: ["gsf", "gsf_dec", "gsf_enc", "gsf_info"]
+input_formats:
+- .gsf
+- .ndx
+output_formats:
+- .ndx
+related_tools:
+- gsf
+- gsf_dec
+- gsf_enc
+- gsf_info
 ---
 
 # gsf_indx (`gsf_indx.c` / `gsf_indx.h`)

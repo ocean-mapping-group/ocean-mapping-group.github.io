@@ -1,9 +1,11 @@
 ---
 layout: default
 title: updateSSheader
-parent: OMG Tools
+parent: Core Swath & .all Suite (omg)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 75
 ---
+
 # updateSSheader
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 75
 This tool is useful for synchronizing metadata between related multibeam and sidescan datasets, especially when the sidescan file is generated from the merged data.
 
 ## Usage
+
 ```bash
 updateSSheader <input_omg_file(.merged)> <updated_slrss_file(.ss_usually)> [OPTIONS]
 ```

@@ -1,22 +1,23 @@
 ---
 layout: default
 title: testNormConv
-parent: tests (Test, Simulation & Diagnostic Suite)
+parent: Acoustic & Mathematical Test Harnesses (tests)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 nav_order: 21
 tool_name: testNormConv
 source_path: code/tests/testNormConv.c
 category: Chirp Waveforms, Matched Filtering & Signal Processing (tests)
 input_formats:
-  - -mf (3-column ASCII matched filter replica: index, I, Q)
-  - -sig (2-column ASCII raw complex receiver trace: I, Q)
+- -mf (3-column ASCII matched filter replica: index, I, Q)
+- -sig (2-column ASCII raw complex receiver trace: I, Q)
 output_formats:
-  - -out (3-column ASCII time-domain complex convolution output: index, I, Q)
-  - temp.padraw, temp.padmf, temp.fft.padraw, temp.fft.padmf, temp.fft.multi, temp.ifft.multi
+- -out (3-column ASCII time-domain complex convolution output: index, I, Q)
+- temp.padraw, temp.padmf, temp.fft.padraw, temp.fft.padmf, temp.fft.multi, temp.ifft.multi
 related_tools:
-  - readJSON
-  - testChirp
-  - example
-  - EKlook
+- readJSON
+- testChirp
+- example
+- EKlook
 ---
 
 # testNormConv

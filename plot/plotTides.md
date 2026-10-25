@@ -1,9 +1,11 @@
 ---
 layout: default
 title: plotTides
-parent: Plot Tools
+parent: PostScript & Vector Plotting (plot)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 147
 ---
+
 # plotTides
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 147
 This tool is invaluable for quality control of tidal corrections, assessing vessel motion, and understanding the temporal coverage of multibeam surveys. It supports various input formats (binary tide files, attitude files, navigation files) and offers extensive customization for plot appearance and data analysis.
 
 ## Usage
+
 ```bash
 plotTides -infile <file1> [-infile <file2> ...] [-outfile <filename.meta>] [OPTIONS] [<merged_file(s)...>]
 ```
@@ -25,6 +28,7 @@ plotTides -infile <file1> [-infile <file2> ...] [-outfile <filename.meta>] [OPTI
 | `<merged_file(s)...>` | (Optional) One or more merged files. Their time extents will be indicated on the plot. |
 
 ### Data Source & Type
+
 | Option | Description | Default |
 |---|---|
 | `-dep` | Plot depth from the tide file. | |
@@ -39,6 +43,7 @@ plotTides -infile <file1> [-infile <file2> ...] [-outfile <filename.meta>] [OPTI
 | `-addGPSrolloverwraps <val>` | Adjusts timestamps for GPS week rollovers by `val` * 1024 weeks (e.g., for POS dated EM data). | `0` |
 
 ### Time Range & Display
+
 | Option | Description | Default |
 |---|---|
 | `-start <yr> <jday> <hr> <min>` | Sets the plot's X-axis start time. | |
@@ -57,6 +62,7 @@ plotTides -infile <file1> [-infile <file2> ...] [-outfile <filename.meta>] [OPTI
 | `-domonths` | Labels months on the X-axis. | |
 
 ### Data Filtering & Processing
+
 | Option | Description | Default |
 |---|---|---|
 | `-atten <val>` | Attenuation factor to apply to Y-values. | `1.0` |
@@ -67,6 +73,7 @@ plotTides -infile <file1> [-infile <file2> ...] [-outfile <filename.meta>] [OPTI
 | `-calcwin <min> <max>` | Defines time windows (in minutes since SOF) for calculating average RTK bias. Can be used multiple times. | |
 
 ### Plotting Style & Annotations
+
 | Option | Description | Default |
 |---|---|
 | `-raster` | Generates a raster image of the plot (instead of line plots). | |

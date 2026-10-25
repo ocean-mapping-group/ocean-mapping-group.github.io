@@ -1,9 +1,11 @@
 ---
 layout: default
 title: Switch
-parent: Ray Tools
+parent: Ray-Tracing & Refraction (ray)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 172
 ---
+
 # Switch
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 172
 The tool takes pre-computed lookup tables for beam angle (`.beam_angle`), time of flight (`.time_lag`), and an angle-time depth lookup table (e.g., from `Ray.c`), and uses them to interpolate depth values into a new grid representing across-track distance and depth.
 
 ## Usage
+
 ```bash
 Switch -locate <ATFilename> -pro <svp_handle>
 ```

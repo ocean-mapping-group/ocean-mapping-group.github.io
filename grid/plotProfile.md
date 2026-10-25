@@ -1,13 +1,21 @@
 ---
 layout: default
 title: plotProfile
-parent: Grid Tools
+parent: Bathymetric Gridding & Export (grid)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 tool_name: plotProfile
 source_path: code/grid/plotProfile.c
 category: gridding
-input_formats: [".r4 (JHC 32-bit float grid)", ".8bit (JHC 8-bit unsigned char grid)"]
-output_formats: [".meta (OMG plotlib vector metafile)", "plot.list (ASCII distance vs. value listing)"]
-related_tools: ["extractProfile", "extractNodeProf", "makeStrat"]
+input_formats:
+- .r4 (JHC 32-bit float grid)
+- .8bit (JHC 8-bit unsigned char grid)
+output_formats:
+- .meta (OMG plotlib vector metafile)
+- plot.list (ASCII distance vs. value listing)
+related_tools:
+- extractProfile
+- extractNodeProf
+- makeStrat
 ---
 
 # plotProfile
@@ -49,6 +57,7 @@ plotProfile [OPTIONS] -start <sx> <sy> -end <ex> <ey> [-outfile <file.meta>] <in
 ## Examples
 
 **Extract and plot a bathymetric cross-section between pixel `(100, 250)` and `(850, 600)`:**
+
 ```bash
 plotProfile -yrange -120 -10 -start 100 250 -end 850 600 -outfile canyon_prof.meta canyon.r4
 # Also writes 2-column ASCII profile to plot.list
@@ -58,4 +67,4 @@ plotProfile -yrange -120 -10 -start 100 250 -end 850 600 -outfile canyon_prof.me
 
 ## Workflow Context
 
-- **See Also:** [`extractProfile`](extractProfile.md) and [`extractNodeProf`](extractNodeProf.md) for non-graphical profile extraction, and [`locate_fix`](locate_fix.md) to convert geographic `(lat, lon)` endpoints into pixel `(sx, sy)` coordinates.
+- **See Also:** [`extractProfile`](extractProfile.html) and [`extractNodeProf`](extractNodeProf.html) for non-graphical profile extraction, and [`locate_fix`](locate_fix.html) to convert geographic `(lat, lon)` endpoints into pixel `(sx, sy)` coordinates.

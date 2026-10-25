@@ -1,16 +1,18 @@
 ---
 layout: default
 title: glbeam_spline
-parent: Beam Tools
-grand_parent: sidescan
+parent: Sidescan Radiometric & Geometric Suite (sidescan)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 3
 ---
+
 # glbeam_spline
 
 ## Description
 `glbeam_spline` is a program to accomplish beam pattern correction of a JCU GLORIA file. This tool uses spline interpolation to obtain a smooth correction, making it a more refined approach to beam pattern correction compared to simpler methods.
 
 ## Usage
+
 ```bash
 glbeam_spline <infile> <outfile> <beamfile_or_null>
 ```

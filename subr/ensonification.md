@@ -1,20 +1,21 @@
 ---
 layout: default
 title: ensonification
-parent: Core Shared Libraries (subr)
-module_name: ensonification
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/ensonification.c
-header_path: code/subr/ensonification.h
 category: Acoustic Backscatter & Sidescan Calibration
 related_tools:
-  - Echo_calib
-  - swathed
-  - applySectBP
-  - get8101BeamPattern
-  - getAngularResponse
-  - getSnippetBP
-  - getSnippetVariance
-  - get_ADH_SRA
+- Echo_calib
+- swathed
+- applySectBP
+- get8101BeamPattern
+- getAngularResponse
+- getSnippetBP
+- getSnippetVariance
+- get_ADH_SRA
+module_name: ensonification
+header_path: code/subr/ensonification.h
 ---
 
 # ensonification: Instantaneous Seafloor Ensonified Area & Minimum Slant Range Interface

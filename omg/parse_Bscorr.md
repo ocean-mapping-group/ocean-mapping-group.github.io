@@ -1,9 +1,11 @@
 ---
 layout: default
 title: parse_Bscorr
-parent: OMG Tools
+parent: Core Swath & .all Suite (omg)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 47
 ---
+
 # parse_Bscorr
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 47
 The primary use case is to convert manufacturer-provided backscatter correction tables into a format compatible with OMG tools for further analysis or application.
 
 ## Usage
+
 ```bash
 parse_Bscorr <file.Bscorr_XXX> [-EM710] [-interpolate <val>] [-out <outname>] [-v]
 ```

@@ -1,20 +1,27 @@
 ---
 layout: default
 title: convTide
-parent: Tide Tools
+parent: Tidal Reduction & Constituents (tide)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 tool_name: convTide
 source_path: code/tide/convTide.c
 category: tide
-input_formats: ["COWLIS ASCII tide"]
-output_formats: ["JHC ASCII tide (jday hour min tide)"]
-related_tools: ["binTide", "mergeTide", "medsTide", "switchTide"]
+input_formats:
+- COWLIS ASCII tide
+output_formats:
+- JHC ASCII tide (jday hour min tide)
+related_tools:
+- binTide
+- mergeTide
+- medsTide
+- switchTide
 ---
 
 # convTide
 
 ## Overview
 
-`convTide` converts Coastal Ocean Water Level Information System (COWLIS) ASCII tide gauge files into the JHC ASCII tide format (`jday hour min tide` or `year jday hour min tide` with `-V2_outyear`) for subsequent binary conversion via [`binTide`](binTide.md).
+`convTide` converts Coastal Ocean Water Level Information System (COWLIS) ASCII tide gauge files into the JHC ASCII tide format (`jday hour min tide` or `year jday hour min tide` with `-V2_outyear`) for subsequent binary conversion via [`binTide`](binTide.html).
 
 ---
 
@@ -54,12 +61,14 @@ convTide [OPTIONS] <infilename> <outfilename>
 ## Examples
 
 **1. Convert a 4-digit-year COWLIS file with year output for `binTide -V2`:**
+
 ```bash
 convTide -y2k -V2_outyear -type_2 cowlis_2004.txt tide_2004.asc
 binTide -V2 tide_2004.asc tide_2004.bin
 ```
 
 **2. Convert a legacy 2-digit-year DMY file in a leap year:**
+
 ```bash
 convTide -DMY -leapyear cowlis_96.dat tide_96.asc
 ```
@@ -69,4 +78,4 @@ convTide -DMY -leapyear cowlis_96.dat tide_96.asc
 ## Workflow Context
 
 - **Upstream:** Raw COWLIS water level text files.
-- **Downstream:** [`binTide`](binTide.md) $\rightarrow$ [`mergeTide`](mergeTide.md).
+- **Downstream:** [`binTide`](binTide.html) $\rightarrow$ [`mergeTide`](mergeTide.html).

@@ -1,16 +1,17 @@
 ---
 layout: default
 title: r_atten
-parent: Core Shared Libraries (subr)
-module_name: r_atten
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/r_atten.c
-header_path: code/subr/r_atten.h
 category: Acoustic & Bathymetric Processing
 related_tools:
-  - makess
-  - getBeamPattern
-  - newGetBP
-  - get_ADH_SRA
+- makess
+- getBeamPattern
+- newGetBP
+- get_ADH_SRA
+module_name: r_atten
+header_path: code/subr/r_atten.h
 ---
 
 # r_atten

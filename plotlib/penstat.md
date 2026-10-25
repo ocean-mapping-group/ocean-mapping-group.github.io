@@ -1,9 +1,11 @@
 ---
 layout: default
 title: penstat
-parent: Plotlib Tools
+parent: PostScript & Vector Plot Library (plotlib)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 nav_order: 150
 ---
+
 # penstat
 
 ## Description

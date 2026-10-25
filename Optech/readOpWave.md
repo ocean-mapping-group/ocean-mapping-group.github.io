@@ -1,9 +1,11 @@
 ---
 layout: default
 title: readOpWave
-parent: Optech Tools
+parent: Optech SHOALS Bathymetric LiDAR (Optech)
+grand_parent: 4. Multi-Vendor Sonar & LiDAR Converters
 nav_order: 120
 ---
+
 # readOpWave
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 120
 This tool essentially "unpacks" the ASCII waveform data into a more efficient binary representation, facilitating faster access and integration into the OMG processing pipeline.
 
 ## Usage
+
 ```bash
 readOpWave <infile> <outfile_prefix> [-noraman] [-v]
 ```

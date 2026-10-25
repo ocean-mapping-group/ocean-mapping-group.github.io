@@ -1,19 +1,20 @@
 ---
 layout: default
 title: readJSON
-parent: tests (Test, Simulation & Diagnostic Suite)
+parent: Acoustic & Mathematical Test Harnesses (tests)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 nav_order: 13
 tool_name: readJSON
 source_path: code/tests/readJSON.c
 category: Binary/JSON Format Inspection (tests)
 input_formats:
-  - .json (CRIMAC / Kongsberg Simrad EK80 processing metadata & filter JSON files)
+- .json (CRIMAC / Kongsberg Simrad EK80 processing metadata & filter JSON files)
 output_formats:
-  - Recursive typed key-value and array dump on stdout
+- Recursive typed key-value and array dump on stdout
 related_tools:
-  - testNormConv
-  - EKlook
-  - BatchProcEK
+- testNormConv
+- EKlook
+- BatchProcEK
 ---
 
 # readJSON
@@ -74,4 +75,4 @@ In `main()`, `readJSON` declares `json_object` pointers corresponding to standar
 # Inspect the full hierarchy of a CRIMAC EK80 JSON dump
 readJSON -in crimac_ek80_ping.json -out dump.txt | less
 ```
-To test matched-filter complex convolution on extracted EK80 $I/Q$ filter and trace arrays, see [`testNormConv`](testNormConv.md).
+To test matched-filter complex convolution on extracted EK80 $I/Q$ filter and trace arrays, see [`testNormConv`](testNormConv.html).

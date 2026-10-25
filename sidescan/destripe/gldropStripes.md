@@ -1,16 +1,18 @@
 ---
 layout: default
 title: gldropStripes
-parent: Destripe Tools
-grand_parent: sidescan
+parent: Sidescan Radiometric & Geometric Suite (sidescan)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 6
 ---
+
 # gldropStripes
 
 ## Description
 `gldropStripes` is a utility designed to detect and remove "black stripes" (anomalously low-intensity pings) from JCU GLORIA format sidescan files. It achieves this by calculating an average intensity within a specified inboard and outboard range for each ping, then comparing this average to a running median. Pings that deviate significantly from the median are considered striped and are rejected from the output.
 
 ## Usage
+
 ```bash
 gldropStripes [-inboard <value>] [-outboard <value>] [-median <value>] [-reject <value>] [-verbose] -in <infile> -out <outfile>
 ```

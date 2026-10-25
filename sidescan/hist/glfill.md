@@ -1,16 +1,18 @@
 ---
 layout: default
 title: glfill
-parent: Histogram Tools
-grand_parent: sidescan
+parent: Sidescan Radiometric & Geometric Suite (sidescan)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 1
 ---
+
 # glfill
 
 ## Description
 `glfill` is a utility designed to fill in invalid data (typically pixels with a value of 255) or anomalously low-level data within JCU GLORIA format files. This is particularly useful for data types like EM-12 multibeam, where data dropouts or weak returns can create gaps or stripes. The tool employs interpolation techniques based on neighboring pixels and optionally utilizes a running average of intensities to identify and correct low-level data.
 
 ## Usage
+
 ```bash
 glfill [-invalid <value>] [-replace] [-lower_level <value>] [-throwout] [-level_below_average <value>] <rawfile> <fillfile>
 ```

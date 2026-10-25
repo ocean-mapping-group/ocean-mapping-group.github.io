@@ -1,14 +1,22 @@
 ---
 layout: default
 title: landsat2acres
-parent: Image Tools
+parent: Raster Image Processing (image)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 28
 tool_name: landsat2acres
 source_path: code/image/landsat2acres.c
 category: Satellite, SAR & Format Conversion
-input_formats: ["4-band BIL Landsat MSS raw image"]
-output_formats: ["Four ACRES 8-bit band files (.band1 .. .band4)"]
-related_tools: ["czcs2acres", "addheader", "destripe", "fix_zigzag", "lsfilter"]
+input_formats:
+- 4-band BIL Landsat MSS raw image
+output_formats:
+- Four ACRES 8-bit band files (.band1 .. .band4)
+related_tools:
+- czcs2acres
+- addheader
+- destripe
+- fix_zigzag
+- lsfilter
 ---
 
 # landsat2acres
@@ -17,6 +25,7 @@ related_tools: ["czcs2acres", "addheader", "destripe", "fix_zigzag", "lsfilter"]
 `landsat2acres` de-interleaves a 4-band Band-Interleaved-by-Line (BIL) Landsat MSS raw tape file into four single-band ACRES-format 8-bit image files (`<out>.band1` through `<out>.band4`).
 
 ## CLI Options & Usage
+
 ```bash
 landsat2acres -in <raw_landsat> -out <acres_prefix> [-rows <n>] [-cols <n>]
 ```

@@ -1,24 +1,25 @@
 ---
 layout: default
 title: EK_init (Initialization Function within EKlook)
-parent: EKlook Tools
+parent: Simrad EK60/EK80 Echosounder Suite (EKlook)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 11
 tool_name: EK_init
 source_path: code/EKlook/EK_init.c
 category: EKlook
 input_formats:
-  - Internal Default Parameters
+- Internal Default Parameters
 output_formats:
-  - Initialized EKlook Global State
+- Initialized EKlook Global State
 related_tools:
-  - EKlook
-  - EK_funcs
+- EKlook
+- EK_funcs
 ---
 
 # EK_init (Initialization Function within EKlook)
 
 ## Description
-`EK_init` (`code/EKlook/EK_init.c`) defines `eklook_init()`, which initializes global oceanographic, electrical, radiometric, and GUI window parameters when [`EKlook`](EKlook.md) starts up.
+`EK_init` (`code/EKlook/EK_init.c`) defines `eklook_init()`, which initializes global oceanographic, electrical, radiometric, and GUI window parameters when [`EKlook`](EKlook.html) starts up.
 
 ## Key Initialized Variables and Default Values
 

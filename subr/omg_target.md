@@ -1,17 +1,18 @@
 ---
 layout: default
 title: omg_target
-parent: Core Shared Libraries (subr)
-module_name: omg_target
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/omg_target.c
-header_path: code/subr/omg_target.h
 category: Target Picking & Georeferencing
 related_tools:
-  - targethunt
-  - swathed (SE)
-  - target_georeference
-  - target_dump
-  - target_test
+- targethunt
+- swathed (SE)
+- target_georeference
+- target_dump
+- target_test
+module_name: omg_target
+header_path: code/subr/omg_target.h
 ---
 
 # omg_target

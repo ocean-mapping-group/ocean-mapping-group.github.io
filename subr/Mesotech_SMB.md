@@ -1,13 +1,14 @@
 ---
 layout: default
 title: Mesotech_SMB
-parent: Core Shared Libraries (subr)
-module_name: Mesotech_SMB
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/Mesotech_SMB.c
-header_path: code/subr/Mesotech_SMB.h
 category: Sonar Format Parsers & Binary I/O
 related_tools:
-  - DDSsmb_read
+- DDSsmb_read
+module_name: Mesotech_SMB
+header_path: code/subr/Mesotech_SMB.h
 ---
 
 # Mesotech_SMB: Kongsberg Mesotech SM2000 / DDS9001 (.smb) Tuple Stream Parser
@@ -20,6 +21,7 @@ related_tools:
 ## Key Data Structures & Constants
 
 ### Tuple Header & Footer Structures
+
 ```c
 #define SMB_TUPLE_HEADER_SIZE 16
 typedef struct {

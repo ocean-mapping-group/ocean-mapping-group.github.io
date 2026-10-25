@@ -1,9 +1,11 @@
 ---
 layout: default
 title: processSHOALSdepths
-parent: Optech Tools
+parent: Optech SHOALS Bathymetric LiDAR (Optech)
+grand_parent: 4. Multi-Vendor Sonar & LiDAR Converters
 nav_order: 118
 ---
+
 # processSHOALSdepths
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 118
 The tool aims to provide a more refined depth estimate by analyzing the full waveform, accounting for different water column conditions (e.g., clear, turbid, deep water) and the characteristics of PMT (Photo-Multiplier Tube) and GAPD (Green Avalanche Photodiode) channels.
 
 ## Usage
+
 ```bash
 processSHOALSdepths <OMG_HDCS_datafile(s)> [-v] [-area <array.file>] [-scan_range <first> <last>]
 ```

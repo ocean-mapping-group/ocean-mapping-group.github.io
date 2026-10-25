@@ -1,14 +1,20 @@
 ---
 layout: default
 title: mr1_raw
-parent: MR1 Tools
+parent: HAWAII MR1 Towed Sidescan (mr1)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 8
 tool_name: mr1_raw
 source_path: mr1/mr1_raw.c
 category: library_module
-input_formats: [MR1_RAW]
-output_formats: [ASCII_STDOUT]
-related_tools: [mr1_proc, plotmr1, mr1_noise]
+input_formats:
+- MR1_RAW
+output_formats:
+- ASCII_STDOUT
+related_tools:
+- mr1_proc
+- plotmr1
+- mr1_noise
 ---
 
 # mr1_raw

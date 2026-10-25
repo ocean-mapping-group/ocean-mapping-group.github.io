@@ -1,13 +1,19 @@
 ---
 layout: default
 title: tifftor4
-parent: Grid Tools
+parent: Bathymetric Gridding & Export (grid)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 tool_name: tifftor4
 source_path: code/grid/tifftor4.c
 category: gridding
-input_formats: ["TIFF / GeoTIFF (.tif)"]
-output_formats: ["JHC_header (.r4)"]
-related_tools: ["8bittor4", "r4to8bit", "r4toESRI"]
+input_formats:
+- TIFF / GeoTIFF (.tif)
+output_formats:
+- JHC_header (.r4)
+related_tools:
+- 8bittor4
+- r4to8bit
+- r4toESRI
 ---
 
 # tifftor4
@@ -54,6 +60,7 @@ tifftor4 [-dB] [-min <DN>] [-max <DN>] [-low <val>] [-high <val>] [-ignore <val>
 ## Examples
 
 ### Inspect a TIFF file and write an `.r4` header with 5 m grid spacing
+
 ```bash
 tifftor4 -xystep 5.0 survey_bathy.tif survey_bathy.r4
 ```

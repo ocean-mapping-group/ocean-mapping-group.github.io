@@ -5,34 +5,34 @@ parent: Processing Workflows & Guides
 nav_order: 2
 category: workflows
 input_formats:
-  - .kmall
-  - .kmwcd
-  - .tide
+- .kmall
+- .kmwcd
+- .tide
 output_formats:
-  - .merged
-  - .param
-  - .nav
-  - .orientation
-  - .ss_data
-  - .16_data
-  - .sectors
-  - .sv_filtered
-  - .watercol
-  - .WC_Phase1
-  - .ss
+- .merged
+- .param
+- .nav
+- .orientation
+- .ss_data
+- .16_data
+- .sectors
+- .sv_filtered
+- .watercol
+- .WC_Phase1
+- .ss
 related_tools:
-  - read_kmall
-  - moveOverWCinfo
-  - stripNav
-  - appendNav
-  - mergeNav
-  - newMergeAtt
-  - mergeAtt
-  - mergeHeave
-  - mergeTide
-  - makess
-  - getBounds
-  - unravel_KMALL_2500m_RevHplus_netatt2_parallel
+- read_kmall
+- moveOverWCinfo
+- stripNav
+- appendNav
+- mergeNav
+- newMergeAtt
+- mergeAtt
+- mergeHeave
+- mergeTide
+- makess
+- getBounds
+- unravel_KMALL_2500m_RevHplus_netatt2_parallel
 ---
 
 # Kongsberg `.kmall` & `.kmwcd` Unraveling Workflow

@@ -1,13 +1,19 @@
 ---
 layout: default
 title: jplto8bit
-parent: Grid Tools
+parent: Bathymetric Gridding & Export (grid)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 tool_name: jplto8bit
 source_path: code/grid/jplto8bit.c
 category: gridding
-input_formats: [".r4 (JHC 32-bit float SAR/backscatter array)"]
-output_formats: [".8bit (JHC 8-bit unsigned char array)"]
-related_tools: ["r4to8bit", "locateSAR", "8bittor4"]
+input_formats:
+- .r4 (JHC 32-bit float SAR/backscatter array)
+output_formats:
+- .8bit (JHC 8-bit unsigned char array)
+related_tools:
+- r4to8bit
+- locateSAR
+- 8bittor4
 ---
 
 # jplto8bit
@@ -50,6 +56,7 @@ jplto8bit [-low <min>] [-middle <mid>] [-high <max>] [-nozero] <floatfile> <8bit
 ## Examples
 
 **Normalize and convert a JPL SAR floating-point image to 8-bit:**
+
 ```bash
 jplto8bit -low 0.0 -middle 0.25 -high 1.0 -nozero jpl_sar.r4 jpl_sar.8bit
 ```
@@ -58,4 +65,4 @@ jplto8bit -low 0.0 -middle 0.25 -high 1.0 -nozero jpl_sar.r4 jpl_sar.8bit
 
 ## Workflow Context
 
-- **See Also:** [`locateSAR`](locateSAR.md) (for slant-range terrain correction of JPL SAR imagery) and [`r4to8bit`](r4to8bit.md) (for standard general-purpose `.r4` to `.8bit` conversion without JPL SAR cross-track normalization).
+- **See Also:** [`locateSAR`](locateSAR.html) (for slant-range terrain correction of JPL SAR imagery) and [`r4to8bit`](r4to8bit.html) (for standard general-purpose `.r4` to `.8bit` conversion without JPL SAR cross-track normalization).

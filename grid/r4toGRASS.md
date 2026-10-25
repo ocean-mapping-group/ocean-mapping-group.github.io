@@ -1,13 +1,20 @@
 ---
 layout: default
 title: r4toGRASS
-parent: Grid Tools
+parent: Bathymetric Gridding & Export (grid)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 tool_name: r4toGRASS
 source_path: code/grid/r4toGRASS.c
 category: gridding
-input_formats: ["JHC_header (.r4)"]
-output_formats: ["GRASS GIS Header (.grass_head)", "GRASS GIS Raster Data (.grass_data)"]
-related_tools: ["r4toESRI", "r4toASCII", "r4to16bit"]
+input_formats:
+- JHC_header (.r4)
+output_formats:
+- GRASS GIS Header (.grass_head)
+- GRASS GIS Raster Data (.grass_data)
+related_tools:
+- r4toESRI
+- r4toASCII
+- r4to16bit
 ---
 
 # r4toGRASS
@@ -41,6 +48,7 @@ r4toGRASS [-v] -merid <central_merid> <r4prefix>
    - Otherwise, projects the geographic bounds (`xmin`, `ymin`) and (`xmax`, `ymax`) to UTM meters using `geoutm` with the specified `central_merid`.
 2. **GRASS Header & Data Export**:
    - Writes `<r4prefix>.grass_head` containing:
+
      ```
      proj:       1
      zone:       <zone>
@@ -62,6 +70,7 @@ r4toGRASS [-v] -merid <central_merid> <r4prefix>
 ## Examples
 
 ### Convert a UTM `.r4` grid (Zone 19, central meridian -69°) to GRASS GIS format
+
 ```bash
 r4toGRASS -v -merid -69.0 bay_bathy
 ```
@@ -70,5 +79,5 @@ r4toGRASS -v -merid -69.0 bay_bathy
 
 ## Workflow Context
 
-- **Upstream**: [`weigh_grid`](weigh_grid.html), [`combine`](combine.html).
+- **Upstream**: [`weigh_grid`](weigh_grid.html), [`combine`](weigh_grid.html).
 - **Related Export Tools**: [`r4toESRI`](r4toESRI.html), [`r4toASCII`](r4toASCII.html).

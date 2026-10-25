@@ -1,16 +1,17 @@
 ---
 layout: default
 title: nbstereo
-parent: Core Shared Libraries (subr)
-module_name: nbstereo
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/nbstereo.c
-header_path: code/subr/nbstereo.h
 category: Map Projections & Coordinate Transformations
 related_tools:
-  - j_proj
-  - weigh_grid
-  - makess
-  - jview
+- j_proj
+- weigh_grid
+- makess
+- jview
+module_name: nbstereo
+header_path: code/subr/nbstereo.h
 ---
 
 # `nbstereo` — New Brunswick Double Stereographic Map Projection Library

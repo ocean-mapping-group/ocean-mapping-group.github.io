@@ -1,14 +1,20 @@
 ---
 layout: default
 title: combineMW
-parent: MR1 Tools
+parent: HAWAII MR1 Towed Sidescan (mr1)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 1
 tool_name: combineMW
 source_path: mr1/combineMW.c
 category: navigation_processing
-input_formats: [MOANA_WAVE_ASCII]
-output_formats: [ASCII_XYZ]
-related_tools: [mergeMWascii, subsetAscii, swapascii]
+input_formats:
+- MOANA_WAVE_ASCII
+output_formats:
+- ASCII_XYZ
+related_tools:
+- mergeMWascii
+- subsetAscii
+- swapascii
 ---
 
 # combineMW

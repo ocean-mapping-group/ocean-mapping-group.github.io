@@ -1,14 +1,15 @@
 ---
 layout: default
 title: j_wav_io
-parent: Core Shared Libraries (subr)
-module_name: j_wav_io
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/j_wav_io.c
-header_path: code/subr/j_wav_io.h
 category: Acoustic Waveform & Audio I/O
 related_tools:
-  - readWave
-  - hydrophone / acoustic playback tools
+- readWave
+- hydrophone / acoustic playback tools
+module_name: j_wav_io
+header_path: code/subr/j_wav_io.h
 ---
 
 # `j_wav_io` — RIFF WAVE Audio File I/O, Timestamping & ALSA Playback Library

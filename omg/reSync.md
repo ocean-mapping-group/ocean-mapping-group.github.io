@@ -1,9 +1,11 @@
 ---
 layout: default
 title: reSync
-parent: OMG Tools
+parent: Core Swath & .all Suite (omg)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 60
 ---
+
 # reSync
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 60
 It identifies sequences of pings where sidescan data is missing for beams that have depth detections, and then attempts to restore this information by copying it from the previous ping's beams. This process can lead to some loss of specific sidescan data if there are no common beams with sidescan.
 
 ## Usage
+
 ```bash
 reSync <mergefile(s)> [-v] [-testonly]
 ```

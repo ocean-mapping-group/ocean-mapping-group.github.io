@@ -1,14 +1,23 @@
 ---
 layout: default
 title: stripSS
-parent: XTF Tools
+parent: eXtended Triton Format — XTF (xtf)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 6
 tool_name: stripSS
 source_path: code/xtf/stripSS.c
 category: Backscatter & Image Processing
-input_formats: [".xtf"]
-output_formats: [".8bit", ".pgm", ".ascii"]
-related_tools: ["extractRI", "extractSnippet", "getTVG", "xtfTool"]
+input_formats:
+- .xtf
+output_formats:
+- .8bit
+- .pgm
+- .ascii
+related_tools:
+- extractRI
+- extractSnippet
+- getTVG
+- xtfTool
 ---
 
 # stripSS
@@ -17,6 +26,7 @@ related_tools: ["extractRI", "extractSnippet", "getTVG", "xtfTool"]
 `stripSS` extracts sidescan trace packets (`XTF_HEADER_SONAR`, packet ID 0) from an XTF file and generates an 8-bit waterfall raster image in OMG/JHC (`.8bit`) or Portable Graymap (`.pgm`) format, plus an optional `.ascii` dump. For Reson XTF files that also contain bathymetry packets (`XTF_HEADER_BATHY`, ID 2), `stripSS` can automatically clip water-column noise, overlay bottom-track sounding picks, remove empirical TVG spreading loss, and plot 50-pixel-wide strips of transmit power, receiver gain, and pulse width along the left edge of the image.
 
 ## Usage
+
 ```bash
 stripSS [OPTIONS] -in <inputfile.xtf>
 ```
@@ -46,11 +56,13 @@ stripSS [OPTIONS] -in <inputfile.xtf>
 ## Practical Examples
 
 **1. Generate a logarithmically stretched PGM sidescan waterfall with Reson gain/power/pulse strips:**
+
 ```bash
 stripSS -v -pgm -slog -plot -in reson_line01.xtf
 ```
 
 **2. Remove TVG spreading and overlay multibeam bottom detections:**
+
 ```bash
 stripSS -pgm -no_TVG -db_shift 15.0 -bt -in reson_line01.xtf
 ```

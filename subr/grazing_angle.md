@@ -1,19 +1,20 @@
 ---
 layout: default
 title: grazing_angle
-parent: Core Shared Libraries (subr)
-module_name: grazing_angle
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/grazing_angle.c
-header_path: code/subr/grazing_angle.h
-category: "Acoustic Backscatter, Radiometry & Calibration"
+category: Acoustic Backscatter, Radiometry & Calibration
 related_tools:
-  - Echo_calib
-  - jview
-  - EKlook
-  - DelayEditor
-  - getAngularResponse
-  - get_ADH_SRA
-  - applySectBP
+- Echo_calib
+- jview
+- EKlook
+- DelayEditor
+- getAngularResponse
+- get_ADH_SRA
+- applySectBP
+module_name: grazing_angle
+header_path: code/subr/grazing_angle.h
 ---
 
 # `grazing_angle` — 3D Beam-Seafloor Incidence and Grazing Angle Engine
@@ -32,6 +33,7 @@ The `grazing_angle` module (`code/subr/grazing_angle.c` and `code/subr/grazing_a
 - `#define GET_FROM_GRAFILE 3`: Read precomputed Grazing Angles (`GRA`) from an auxiliary `.r4` file.
 
 ### 2. Core Data Structures
+
 ```c
 typedef struct {
     int ping_number;
@@ -61,6 +63,7 @@ typedef struct {
 ## Public Functions & Signatures
 
 ### 1. 2D Across-Track Profile Grazing Angles
+
 ```c
 int get_grazing_angles(OMG_HDCS_summary_header summary, OMG_HDCS_profile_header profile,
                        OMG_HDCS_beam *beams, float *grazing_angles,
@@ -69,6 +72,7 @@ int get_grazing_angles(OMG_HDCS_summary_header summary, OMG_HDCS_profile_header 
 - **Purpose:** Fast 1D/2D calculation for a single ping. Computes nominal flat-bottom grazing angle $\theta_g = \arctan(Z / R_{\text{horiz}})$ (accounting for transducer draft, heave, and AUV depth via `GA_AUV_draft`). When `apply_local_slope` is non-zero, estimates local across-track seabed slope from the nearest valid port and starboard neighbor beams and subtracts the apparent slope angle.
 
 ### 2. Full 3D Swath-Patch Plane-Fit Grazing Angles
+
 ```c
 int get_full_grazing_angles(FILE *infile, float *grazing_angles, int ping_number,
                             int max_no_pings, OMG_HDCS_sonar_params *sonar_parameters);
@@ -87,6 +91,7 @@ fvect least_square_plane_ADH(fvect **points, int **valid_points);
   4. Computes the dot product between the incoming 3D beam vector and $\hat{\mathbf{n}}$ to derive the true 3D grazing angle.
 
 ### 3. Reference DTM 3D Grazing Angles
+
 ```c
 int get_dtm_grazing_angles(FILE *infile, JHC_header *dtm_header, float *dtm,
                            float *grazing_angles, int ping_number,

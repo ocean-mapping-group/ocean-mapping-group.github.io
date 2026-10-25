@@ -1,14 +1,22 @@
 ---
 layout: default
 title: AGCtoNav
-parent: Navigation Tools
+parent: Navigation Processing (nav)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 4
 tool_name: AGCtoNav
 source_path: code/nav/AGCtoNav.c
 category: Navigation & Georeferencing
-input_formats: ["ASCII text (AGC, JGSPEC, NRL Joan, DAPSY, OIC UTM nav)"]
-output_formats: [".nav (jcu_nav_rec binary)"]
-related_tools: ["Generic_to_Nav", "NMEAtoNav", "QNSYtoNav", "mergeNav", "appendNav"]
+input_formats:
+- ASCII text (AGC, JGSPEC, NRL Joan, DAPSY, OIC UTM nav)
+output_formats:
+- .nav (jcu_nav_rec binary)
+related_tools:
+- Generic_to_Nav
+- NMEAtoNav
+- QNSYtoNav
+- mergeNav
+- appendNav
 ---
 
 # AGCtoNav
@@ -29,21 +37,25 @@ AGCtoNav [OPTIONS] -comp <output.nav> <input_ascii_file(s)>
 ### Common Workflow Examples
 
 **1. Convert standard AGC ASCII navigation files for a given survey year:**
+
 ```bash
 AGCtoNav -year 1995 -comp line01.nav raw_agc_01.txt raw_agc_02.txt
 ```
 
 **2. Convert Oceanic Imaging Consultants (`-oicnav`) UTM navigation using WGS84 and central meridian -123°:**
+
 ```bash
 AGCtoNav -oicnav -merid -123.0 -comp oic_track.nav line1.oicnav
 ```
 
 **3. Convert OIC UTM navigation on NAD27 datum:**
+
 ```bash
 AGCtoNav -oicnav -nad27 -merid -63.0 -comp oic_nad27.nav line1.oicnav
 ```
 
 **4. Convert NRL (`-nrl_joan`), DAPSY (`-dapsy`), or JGSPEC (`-jgspec`) ASCII logs:**
+
 ```bash
 AGCtoNav -nrl_joan -comp nrl_track.nav nrl_nav.txt
 AGCtoNav -dapsy -comp dapsy_track.nav dapsy_nav.txt
@@ -77,12 +89,14 @@ AGCtoNav -jgspec -comp jgspec_track.nav jgspec_nav.txt
 ### Input ASCII Formats
 
 1. **Default AGC Format (3 columns):**
+
    ```text
    <DDDHHMMSS> <lat_deg> <lon_deg>
    ```
    * Column 1 (`string`): 9-character packed string where characters `0..2` are Julian Day (`day`), `3..4` are `hour`, `5..6` are `min`, and `7..8` are `sec`. Requires `-year <YYYY>` on the command line to compute Unix epoch time via `stdtime_from_jul_day(year, day, hour, min, sec)`.
 
 2. **JGSPEC Format (`-jgspec`, 5 columns):**
+
    ```text
    <id_str> <YYMMDD> <HHMMdd> <lat_deg> <lon_deg>
    ```
@@ -90,18 +104,21 @@ AGCtoNav -jgspec -comp jgspec_track.nav jgspec_nav.txt
    * `<HHMMdd>` (`str3`): 2-digit hour, 2-digit minute, and 2-digit tenths of a minute (`sec = decmin * 6.0`). Only writes a fix when the first 5 characters of `str3` differ from the previous record (`strncmp(str3, last_str3, 5)`).
 
 3. **NRL Joan Format (`-nrl_joan`, 8 columns):**
+
    ```text
    <year> <jday> <hour> <min> <sec> <millisec> <lat_deg> <lon_deg>
    ```
    * Converts `millisec` to hundredths of a second: `tide_rec.centisecs = millisec / 10`.
 
 4. **DAPSY Format (`-dapsy`, 7 columns):**
+
    ```text
    <year> <jday> <hour> <min> <sec> <lat_deg> <lon_deg>
    ```
    * Sets `tide_rec.centisecs = 0`.
 
 5. **OIC UTM Format (`-oicnav`, 5 columns):**
+
    ```text
    <unix_time_sec> <heading_deg> <course_deg> <easting_m> <northing_m>
    ```

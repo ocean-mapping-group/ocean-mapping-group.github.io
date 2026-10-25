@@ -1,9 +1,11 @@
 ---
 layout: default
 title: shiftSStraces
-parent: OMG Tools
+parent: Core Swath & .all Suite (omg)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 61
 ---
+
 # shiftSStraces
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 61
 This could be useful for specific debugging scenarios, correcting acquisition errors where sidescan samples are misregistered relative to their intended beam, or artistic manipulation.
 
 ## Usage
+
 ```bash
 shiftSStraces <OMG_HDCS_datafile(s)> -shift <value> [-v]
 ```

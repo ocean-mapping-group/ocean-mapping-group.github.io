@@ -1,14 +1,15 @@
 ---
 layout: default
 title: dspectra
-parent: Core Shared Libraries (subr)
-module_name: dspectra
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/dspectra.c
-header_path: code/subr/dspectra.h
 category: 2D Spectral Analysis & Image Processing
 related_tools:
-  - fft2dimage
-  - jview
+- fft2dimage
+- jview
+module_name: dspectra
+header_path: code/subr/dspectra.h
 ---
 
 # dspectra: 2D Fast Fourier Transform (FFT) DTM Bedform Wavelength & Azimuth Analysis
@@ -27,6 +28,7 @@ related_tools:
 ## Key Constants & Data Structures
 
 ### Spectral Peak & Cluster Structures (`d_wave_cluster`, `d_spectra_analysis`)
+
 ```c
 #define MAX_CLUSTERS  10
 #define MAX_FFT_WIDTH 1024
@@ -48,6 +50,7 @@ typedef struct {
 ```
 
 ### 1D Azimuthal Slice Structure (`custom_slices`)
+
 ```c
 typedef struct {
     float dtm_peak_azi[MAX_FFT_WIDTH]; /* DTM profile along dominant peak azimuth */

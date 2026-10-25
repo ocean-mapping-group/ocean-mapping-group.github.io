@@ -1,8 +1,9 @@
 ---
 layout: default
-title: Knudsen Tools
+title: Knudsen Chirp Sub-Bottom (knudsen)
+parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
+nav_order: 7
 has_children: true
-nav_order: 11
 ---
 
 # Knudsen Tools

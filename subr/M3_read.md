@@ -1,13 +1,14 @@
 ---
 layout: default
 title: M3_read
-parent: Core Shared Libraries (subr)
-module_name: M3_read
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/M3_read.c
-header_path: code/subr/M3_read.h
 category: Sonar Format Parsers & Binary I/O
 related_tools:
-  - M3imb2omg
+- M3imb2omg
+module_name: M3_read
+header_path: code/subr/M3_read.h
 ---
 
 # M3_read: Kongsberg Mesotech M3 Multibeam (.imb / .pmb / .paq) Parser
@@ -25,6 +26,7 @@ related_tools:
 ## Key Data Structures & Constants
 
 ### Framing Structures (`M3_Packet_Header` & `M3_Packet_Footer`)
+
 ```c
 #define M3_PACKET_HEADER_SIZE 56
 typedef struct {
@@ -45,6 +47,7 @@ typedef struct {
 ### Imaging Multibeam Structures (`M3_Data_Header`, `M3_Sample`, `M3_Data_Body`)
 * **`M3_Data_Header` (`M3_DATA_HEADER_SIZE = 8512`)**: Stores full ping metadata for `.imb` records, including `dwVersion`, `dwSonarID`, `dwTimeSec`, `dwTimeMillisec`, `fVelocitySound`, `nNumSamples`, `fNearRange`, `fFarRange`, `fSWST`, `fSWL`, `nNumBeams`, `fBeamList[1024]`, `dwSonarFreq`, `dwPulseLength`, `TVGParameters` (`M3_TVG_Params`), attitude (`fCompassHeading`, `fPitch`, `fRoll`, `fDepth`), lever-arm offsets, rotator offsets (`M3_Rotator_Offsets[3]`), and lat/lon.
 * **`M3_Sample`**: Holds per-beam, per-sample acoustic values:
+
   ```c
   typedef struct {
       float I, Q;
@@ -61,6 +64,7 @@ typedef struct {
 * **`M3_PMB_Solution` & `M3_PMB_Data_Trace`**: Stores up to 10 bottom-detection solutions per beam (`fProfileSampleNo`, `fBeamAngleOffset`, `shAmp10dB`, `byQualityFactor`, `byDetectionInfo`, `wDetWinLenSamples`).
 
 ### Fast Seek Index (`OMG_M3_Index_Record`)
+
 ```c
 #define OMG_M3_INDEX_RECLEN 24
 typedef struct {

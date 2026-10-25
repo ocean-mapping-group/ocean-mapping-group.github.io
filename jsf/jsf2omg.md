@@ -1,14 +1,26 @@
 ---
 layout: default
 title: jsf2omg
-parent: JSF Tools
+parent: EdgeTech JSF Sidescan & Sub-Bottom (jsf)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 3
 tool_name: jsf2omg
 source_path: code/jsf/jsf2omg.c
 category: Raw Data Unraveling
-input_formats: [".jsf"]
-output_formats: [".merged", ".merged.ss_data", ".sonar_settings", ".param"]
-related_tools: ["jsf2nav", "jsf2orientation", "jsf2glo", "jsfTool", "mergeAtt", "mergeNav"]
+input_formats:
+- .jsf
+output_formats:
+- .merged
+- .merged.ss_data
+- .sonar_settings
+- .param
+related_tools:
+- jsf2nav
+- jsf2orientation
+- jsf2glo
+- jsfTool
+- mergeAtt
+- mergeNav
 ---
 
 # jsf2omg
@@ -17,6 +29,7 @@ related_tools: ["jsf2nav", "jsf2orientation", "jsf2glo", "jsfTool", "mergeAtt", 
 `jsf2omg` converts EdgeTech interferometric bathymetry data (`JSF_Bathymetric_3000_Data`, message type `3000`) and pressure/sound-speed sensor data (`JSF_Pressure_3002_Data`, message type `3002`) from an EdgeTech `.jsf` file (such as EdgeTech 4600, 6205, or Gavia AUV 2205 systems) into a 1000-beam OMG-HDCS v4 `.merged` file (`toolType = EdgeTech_4600`), along with a `.param` file containing the $60^\circ$ port/starboard transducer mount angles. Because interferometric sonars produce thousands of raw angle/range samples per ping channel, `jsf2omg` filters samples by quality factor, amplitude, angle, and water-column/non-seabed flags, and averages them into 1000 across-track spatial bins (500 port, 500 starboard) or preserves raw sample indices when `-dontbin` is specified.
 
 ## Usage
+
 ```bash
 jsf2omg (-bin <m> | -dontbin) [OPTIONS] -jsf <input_name.jsf> -omg <omg_file_prefix>
 ```
@@ -49,6 +62,7 @@ jsf2omg (-bin <m> | -dontbin) [OPTIONS] -jsf <input_name.jsf> -omg <omg_file_pre
 ## Practical Examples
 
 **1. Convert an EdgeTech 4600/6205 JSF file using 0.20 m across-track bins:**
+
 ```bash
 jsf2omg -bin 0.20 -min_qf 0.75 -ignore_wc -ignore_nonseabed -jsf line01.jsf -omg line01
 ```

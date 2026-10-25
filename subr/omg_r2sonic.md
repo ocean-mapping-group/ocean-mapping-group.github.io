@@ -1,20 +1,21 @@
 ---
 layout: default
 title: omg_r2sonic
-parent: Core Shared Libraries (subr)
-module_name: omg_r2sonic
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/omg_r2sonic.c
-header_path: code/subr/omg_r2sonic.h
 category: File Formats & Vendor Parsers
 related_tools:
-  - r2sonicTool
-  - r2sonic2omg
-  - r2sonic2image
-  - r2sonic_extract_truepix
-  - xtf2omg_r2sonic
-  - xtfTool
-  - omg2gsf
-  - swathed (SE)
+- r2sonicTool
+- r2sonic2omg
+- r2sonic2image
+- r2sonic_extract_truepix
+- xtf2omg_r2sonic
+- xtfTool
+- omg2gsf
+- swathed (SE)
+module_name: omg_r2sonic
+header_path: code/subr/omg_r2sonic.h
 ---
 
 # omg_r2sonic

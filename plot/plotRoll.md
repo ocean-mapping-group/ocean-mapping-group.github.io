@@ -1,9 +1,11 @@
 ---
 layout: default
 title: plotRoll
-parent: Plot Tools
+parent: PostScript & Vector Plotting (plot)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 144
 ---
+
 # plotRoll
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 144
 This tool is useful for understanding the impact of motion sensor accuracy on sounding quality and for determining acceptable limits for roll compensation, particularly in the context of system calibration and survey planning.
 
 ## Usage
+
 ```bash
 plotRoll [-range] [-outfile <filename.meta>] [-size <dx> <dy>] [-yrange <min> <max>]
 ```

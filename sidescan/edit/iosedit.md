@@ -1,16 +1,18 @@
---- 
+---
 layout: default
 title: iosedit
-parent: Edit Tools
-grand_parent: sidescan
+parent: Sidescan Radiometric & Geometric Suite (sidescan)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 3
 ---
+
 # iosedit
 
 ## Description
 `iosedit` is an interactive command-line utility for displaying and attempting to edit header information within an IOS (Institute of Ocean Sciences) GLORIA record file. It provides a basic interface for navigating through records and displaying parsed header fields such as pass number, line number, heading, time, and other IOS-specific details. While it presents an option to change the heading, the functionality to actually write the change back to the file is noted as "not actually implemented" in the source code.
 
 ## Usage
+
 ```bash
 iosedit <filename>
 ```

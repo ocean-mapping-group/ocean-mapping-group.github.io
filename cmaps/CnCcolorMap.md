@@ -1,7 +1,8 @@
 ---
 layout: default
 title: CnCcolorMap
-parent: Colormap Tools
+parent: Bathymetric & Backscatter Colormaps (cmaps)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 1
 ---
 
@@ -13,6 +14,7 @@ nav_order: 1
 This tool is useful for creating custom color palettes for use in visualization software.
 
 ## Usage
+
 ```bash
 CnCcolorMap -b <h:s:v> -e <h:s:v> -i <intervals> [ -o <outfile> ]
 ```

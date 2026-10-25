@@ -1,9 +1,11 @@
 ---
 layout: default
 title: r2sonic2omg
-parent: R2Sonic Tools
+parent: R2Sonic 2020/2022/2024 (r2sonic)
+grand_parent: 4. Multi-Vendor Sonar & LiDAR Converters
 nav_order: 161
 ---
+
 # r2sonic2omg
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 161
 It allows for optional roll stabilization and provides flags to skip certain data types, making it flexible for different processing workflows. The output merged file is a foundational format for further processing and visualization within the OMG toolkit.
 
 ## Usage
+
 ```bash
 r2sonic2omg -r2s <input.r2s> -omg <omg_file_prefix> [-skip_fts] [-skip_truepix] [-roll_stabilize] [-v]
 ```

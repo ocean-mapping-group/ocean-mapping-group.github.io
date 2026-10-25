@@ -1,14 +1,26 @@
 ---
 layout: default
 title: knud2glo
-parent: Knudsen Tools
+parent: Knudsen Chirp Sub-Bottom (knudsen)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 6
 tool_name: knud2glo
 source_path: knudsen/knud2glo.c
 category: format_conversion
-input_formats: [KNUDSEN_KEL]
-output_formats: [OMG_HDCS, OMG_SS_DATA, OMG_16_DATA, GLORIA, JCU_NAV, ASCII_XYZ]
-related_tools: [k16to8, makeSeisPlot, make_knudsen_ss, pickSS]
+input_formats:
+- KNUDSEN_KEL
+output_formats:
+- OMG_HDCS
+- OMG_SS_DATA
+- OMG_16_DATA
+- GLORIA
+- JCU_NAV
+- ASCII_XYZ
+related_tools:
+- k16to8
+- makeSeisPlot
+- make_knudsen_ss
+- pickSS
 ---
 
 # knud2glo

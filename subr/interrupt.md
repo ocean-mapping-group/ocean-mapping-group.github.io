@@ -1,16 +1,17 @@
 ---
 layout: default
 title: interrupt
-parent: Core Shared Libraries (subr)
-module_name: interrupt
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/interrupt.c
-header_path: code/subr/interrupt.h
-category: "System Utilities, Memory & File I/O"
+category: System Utilities, Memory & File I/O
 related_tools:
-  - mos2
-  - weigh_grid
-  - swathed
-  - RT
+- mos2
+- weigh_grid
+- swathed
+- RT
+module_name: interrupt
+header_path: code/subr/interrupt.h
 ---
 
 # `interrupt` — Graceful POSIX Signal Trapping for Long-Running Processes
@@ -33,6 +34,7 @@ extern int interrupt_flag;
 ## Public Functions & Signatures
 
 ### 1. Enable Signal Trapping
+
 ```c
 void interrupt_trap(void);
 ```
@@ -40,12 +42,14 @@ void interrupt_trap(void);
 - **Error Handling:** If `signal()` returns `-1` (`SIG_ERR`), calls `error("interrupt_trap: failed to trap signal ...")` via `code/subr/error.c`.
 
 ### 2. Restore Original Signal Handlers
+
 ```c
 void interrupt_untrap(void);
 ```
 - **Purpose:** Restores the saved signal handlers (`oldHUPhandler` and `oldINThandler`) for `SIGHUP` and `SIGINT`. Typically called once a batch ping loop finishes and the program is ready to flush its cache and exit normally.
 
 ### 3. Asynchronous Signal Callback
+
 ```c
 void interrupt_handler(int sig, int code, int scp);
 ```

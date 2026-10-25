@@ -1,9 +1,11 @@
 ---
 layout: default
 title: make_Optech_prof
-parent: Optech Tools
+parent: Optech SHOALS Bathymetric LiDAR (Optech)
+grand_parent: 4. Multi-Vendor Sonar & LiDAR Converters
 nav_order: 114
 ---
+
 # make_Optech_prof
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 114
 The tool allows for filtering by geographic area, specific beam number, or azimuth angle, making it useful for detailed inspection and analysis of individual waveform characteristics.
 
 ## Usage
+
 ```bash
 make_Optech_prof <OMG_HDCS_datafile(s)> -out <outfile> [OPTIONS]
 ```
@@ -24,6 +27,7 @@ make_Optech_prof <OMG_HDCS_datafile(s)> -out <outfile> [OPTIONS]
 | `-out <outfile>` | **Required.** The path for the output JHC `.r4` (float grid) file containing the detrended waveform traces. |
 
 ### Waveform Type Selection (Choose one)
+
 | Option | Description |
 |---|---|
 | `-pmt` | Process PMT (Photo-Multiplier Tube) waveforms. |
@@ -32,6 +36,7 @@ make_Optech_prof <OMG_HDCS_datafile(s)> -out <outfile> [OPTIONS]
 | `-raman` | Process RAMAN waveforms. |
 
 ### Output/Filtering Options
+
 | Option | Description | Default / Example |
 |---|---|---|
 | `-nadir_beam` | (Not implemented) Intended to dump nadir beam info only. | |

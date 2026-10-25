@@ -1,13 +1,14 @@
 ---
 layout: default
 title: elac
-parent: Core Shared Libraries (subr)
-module_name: elac
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/elac.c
-header_path: code/subr/elac.h
 category: Sonar Format Parsers & Binary I/O
 related_tools:
-  - elac2omg
+- elac2omg
+module_name: elac
+header_path: code/subr/elac.h
 ---
 
 # elac: Honeywell / L-3 ELAC Nautik HydroStar Bathymetry Parser
@@ -20,6 +21,7 @@ related_tools:
 ## Key Constants & Data Structures
 
 ### `HYDROSTARBATHYHEADER` (`HYDROSTARBATHYHEADER_SIZE = 72` bytes)
+
 ```c
 typedef struct {
     int            iSizeofThisStruct;      /* sizeof(HYDROSTARBATHYHEADER) */
@@ -39,6 +41,7 @@ typedef struct {
 ```
 
 ### `HYDROSTARBEAMDATA` (`HYDROSTARBEAMDATA_SIZE = 57` bytes)
+
 ```c
 typedef struct {
     int           iBeamNumber;   /* Absolute beam index within the swath */

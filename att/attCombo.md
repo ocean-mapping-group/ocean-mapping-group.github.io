@@ -1,15 +1,18 @@
 ---
 layout: default
 title: attCombo
-parent: Attitude Tools
+parent: Attitude, Heave & Heading (att)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 3
 ---
+
 # attCombo
 
 ## Description
 `attCombo` blends two near-synchronous OMG-HDCS (Ocean Mapping Group - Hydrographic Data Cleaning System) attitude streams (e.g., from different sensors like F180 and MRU-6) into a single, combined attitude file. It allows for combining high-frequency (HF) and low-frequency (LF) components of roll, pitch, and heave from either of the two input files, or setting them to zero. Heading is selected from one of the two sources without blending. The tool uses a cosine-tapered time-domain filter for blending.
 
 ## Usage
+
 ```bash
 attCombo [OPTIONS] <basename>
 ```

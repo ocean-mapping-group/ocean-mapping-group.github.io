@@ -1,9 +1,11 @@
 ---
 layout: default
 title: addWG
-parent: Grid Tools
+parent: Bathymetric Gridding & Export (grid)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 7
 ---
+
 ---
 layout: default
 title: addWG
@@ -16,6 +18,7 @@ nav_order: 7
 `addWG` is a command-line utility for combining multiple JHC-format 32-bit floating-point grid files (Digital Terrain Models, `.r4` files) into a single, weighted-average output grid. It can either use explicit weight grids (`.r4_weights` and `.r4_weight_depth`) or apply a default weight to each input grid. It also supports applying vertical offsets to individual input grids before combining. This tool is typically used to merge multiple overlapping bathymetric surveys while accounting for their relative quality or reliability.
 
 ## Usage
+
 ```bash
 addWG [OPTIONS] -out <output_file.r4>
 ```

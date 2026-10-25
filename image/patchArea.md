@@ -1,14 +1,21 @@
 ---
 layout: default
 title: patchArea
-parent: Image Tools
+parent: Raster Image Processing (image)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 36
 tool_name: patchArea
 source_path: code/image/patchArea.c
 category: Mosaicking & Patching
-input_formats: ["Georeferenced OMG1 8-bit or 32-bit float (.r4, .r4.gz) mapsheets"]
-output_formats: ["Merged/reprojected OMG1 8-bit or 32-bit float (.r4) mapsheet"]
-related_tools: ["patchArea_MercOnly", "paster4", "pastemos", "subimage"]
+input_formats:
+- Georeferenced OMG1 8-bit or 32-bit float (.r4, .r4.gz) mapsheets
+output_formats:
+- Merged/reprojected OMG1 8-bit or 32-bit float (.r4) mapsheet
+related_tools:
+- patchArea_MercOnly
+- paster4
+- pastemos
+- subimage
 ---
 
 # patchArea
@@ -17,6 +24,7 @@ related_tools: ["patchArea_MercOnly", "paster4", "pastemos", "subimage"]
 `patchArea` is the Ocean Mapping Group's primary multi-projection raster merging and reprojection engine for georeferenced 8-bit (`data_type = 1`) and 32-bit floating-point (`data_type = 3`, `.r4`, including gzip-compressed `.gz` files) `OMG1` mapsheets. Given an existing or newly defined target mapsheet (`-out`), it reprojects and patches any number of input mapsheets (`-import` or interactive) across Geographic, Mercator, UTM, Transverse Mercator, Lambert Conformal Conic, Stereographic (`UNB`), Polar Stereographic, and Rectangular projections, automatically downsampling higher-resolution source grids (`downgrade_image`) to prevent spatial aliasing.
 
 ## CLI Options & Usage
+
 ```bash
 patchArea -out <target_map> [-prime <template_map>] \
   [-import <in1> <in2> ...] [-back <val>] [-ignore <val>] \

@@ -1,14 +1,22 @@
 ---
 layout: default
 title: SE_filters
-parent: SwathEd (SE) Tools
+parent: Swath Editor — swathed (SE)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 22
 tool_name: SE_filters
 source_path: code/SE/SE_filters.c
 category: Interactive QC & Editing (SwathEd)
-input_formats: [".merged", ".param"]
-output_formats: [".merged (beam status flags updated via dump_array)"]
-related_tools: ["swathed", "SE_mainwin", "SE_AUTOFLAGwin", "SE_omgIOwin"]
+input_formats:
+- .merged
+- .param
+output_formats:
+- .merged (beam status flags updated via dump_array)
+related_tools:
+- swathed
+- SE_mainwin
+- SE_AUTOFLAGwin
+- SE_omgIOwin
 ---
 
 # `SE_filters.c` — Specialized Bathymetric Outlier & Sector Artifact Filters
@@ -56,6 +64,6 @@ Developed during the May 2005 Lake Powell survey, `get_mode()` and `depowell()` 
 ---
 
 ## Integration within `swathed`
-- **Startup & Batch Pre-Filtering:** Invoked from [`SE_omgIOwin.c`](SE_omgIOwin.md) (`prime_array`) when `-pre_detrench` (`predetrench`) is specified on the `swathed` command line.
-- **Interactive Hotkeys & Main Window Display:** Controlled via keyboard shortcuts in [`SE_event_loop.c`](SE_event_loop.md) and visualized in [`SE_mainwin.c`](SE_mainwin.md) (`graphic_window[1]`), which draws the shaded polygon sector bounds when `show_detrench_sector` is active and `[` / `]` wall indicators when `using_powell` is enabled.
-- **Undo Support:** All four filter routines increment `box_flags[j][i]` and `some_flagged`, allowing interactive reversal via `undo()` in [`SE_mainwin.c`](SE_mainwin.md) and persistent write-back via `dump_array()` in [`SE_omgIOwin.c`](SE_omgIOwin.md).
+- **Startup & Batch Pre-Filtering:** Invoked from [`SE_omgIOwin.c`](SE_omgIOwin.html) (`prime_array`) when `-pre_detrench` (`predetrench`) is specified on the `swathed` command line.
+- **Interactive Hotkeys & Main Window Display:** Controlled via keyboard shortcuts in [`SE_event_loop.c`](SE_event_loop.html) and visualized in [`SE_mainwin.c`](SE_mainwin.html) (`graphic_window[1]`), which draws the shaded polygon sector bounds when `show_detrench_sector` is active and `[` / `]` wall indicators when `using_powell` is enabled.
+- **Undo Support:** All four filter routines increment `box_flags[j][i]` and `some_flagged`, allowing interactive reversal via `undo()` in [`SE_mainwin.c`](SE_mainwin.html) and persistent write-back via `dump_array()` in [`SE_omgIOwin.c`](SE_omgIOwin.html).

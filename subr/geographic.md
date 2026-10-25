@@ -1,20 +1,21 @@
 ---
 layout: default
 title: geographic
-parent: Core Shared Libraries (subr)
-module_name: geographic
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/geographic.c
-header_path: code/subr/geographic.h
-category: "Geodesy, Map Projections & Coordinate Transforms"
+category: Geodesy, Map Projections & Coordinate Transforms
 related_tools:
-  - grazing_angle
-  - swathed
-  - EKlook
-  - tidecor2.42
-  - synSwath
-  - edhead
-  - make_blank
-  - r4toESRI
+- grazing_angle
+- swathed
+- EKlook
+- tidecor2.42
+- synSwath
+- edhead
+- make_blank
+- r4toESRI
+module_name: geographic
+header_path: code/subr/geographic.h
 ---
 
 # `geographic` — WGS84 Ellipsoidal Curvature, Scale Factors, and Geodesic Distance
@@ -37,6 +38,7 @@ The `geographic` module (`code/subr/geographic.c` and `code/subr/geographic.h`) 
 ## Public Functions & Signatures
 
 ### 1. Ellipsoidal Radii of Curvature & Local Scale Factors
+
 ```c
 int radii_of_curvature(double latitude, double *M, double *N);
 int get_lat_lon_scales(double base_latitude, double *lat_scale, double *lon_scale);
@@ -51,6 +53,7 @@ int get_lat_lon_scales(double base_latitude, double *lat_scale, double *lon_scal
   - `*lon_scale` $= N \cdot \cos\phi \cdot \frac{\pi}{180}$
 
 ### 2. UTM Zone and Central Meridian Lookups
+
 ```c
 signed int gimme_UTM_meridian(unsigned int zone);
 unsigned int gimme_UTM_zone(float longitude);
@@ -59,6 +62,7 @@ unsigned int gimme_UTM_zone(float longitude);
 - **`gimme_UTM_zone()`:** Validates that `longitude` is a valid central meridian (an odd multiple of $3^\circ$ within $[-180^\circ, +180^\circ]$) and returns the corresponding UTM zone number $((longitude + 177.0) / 6 + 1)$, or `0` if invalid.
 
 ### 3. Three-Tier Geographic Distance Functions
+
 ```c
 double compute_distance(double lat1, double lon1, double lat2, double lon2);
 double compute_distance_ian(double lat1, double lon1, double lat2, double lon2);

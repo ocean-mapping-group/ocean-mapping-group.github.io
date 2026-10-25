@@ -1,14 +1,20 @@
 ---
 layout: default
 title: iwc_model
-parent: Ian Church (ianc) Tools
+parent: Ian Church — Hydrodynamic & 3D Ray-Trace Suite (ianc)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 nav_order: 12
 tool_name: iwc_model
 source_path: code/ianc/subr/iwc_model.c
 category: Ocean Modeling & Hydrographic Utilities (ianc)
-input_formats: ["OPeNDAP / THREDDS Catalog URLs"]
-output_formats: ["Predefined C Macros for Operational Ocean Model Endpoints"]
-related_tools: ["modelMerge", "HycomSSP", "modelAnalysis"]
+input_formats:
+- OPeNDAP / THREDDS Catalog URLs
+output_formats:
+- Predefined C Macros for Operational Ocean Model Endpoints
+related_tools:
+- modelMerge
+- HycomSSP
+- modelAnalysis
 ---
 
 # iwc_model

@@ -1,9 +1,11 @@
 ---
 layout: default
 title: asciiplot
-parent: Plot Tools
+parent: PostScript & Vector Plotting (plot)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 124
 ---
+
 # asciiplot
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 124
 The tool is highly configurable, allowing users to specify X and Y axis ranges, plot multiple datasets, control line and point styles, add labels, and highlight specific slices or plots. It supports various data formats, including simple columns, and specialized binary formats.
 
 ## Usage
+
 ```bash
 asciiplot [-infile file1 ...] [-infilQ fileN QstringN] [OPTIONS]
 ```
@@ -25,6 +28,7 @@ asciiplot [-infile file1 ...] [-infilQ fileN QstringN] [OPTIONS]
 | `-outfile <metafile_name>` | Specifies the output PostScript metafile name. | `plot.meta` |
 
 ### Plot Customization
+
 | Option | Description |
 |---|---|
 | `-dumb` | Enables interactive input for plot parameters (e.g., plot size, X/Y bounds). |
@@ -58,6 +62,7 @@ asciiplot [-infile file1 ...] [-infilQ fileN QstringN] [OPTIONS]
 | `-new` | (Present in `USAGE` but not fully implemented) Likely for new plot type. |
 
 ### OMG Binary Input (`-omgbin`)
+
 | Option | Description |
 |---|---|
 | `-omgbin` | Interprets the input file as a binary JHC `.r4` array. Requires `-dumb`. |
@@ -69,6 +74,7 @@ asciiplot [-infile file1 ...] [-infilQ fileN QstringN] [OPTIONS]
 | `-highlight_plot <val>` | For `omgbin` input, highlights a specific plot number. |
 
 ### Titles and Labels
+
 | Option | Description |
 |---|---|
 | `-tit1 <string>` | Sets the main title (top center). |

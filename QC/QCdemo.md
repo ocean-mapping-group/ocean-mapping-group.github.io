@@ -1,9 +1,11 @@
 ---
 layout: default
 title: QCdemo
-parent: QC Tools
+parent: Multibeam Quality Control (QC)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 158
 ---
+
 # QCdemo
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 158
 The tool processes synthetic time-series attitude data, calculates derived attitude and heave errors, and then simulates sonar pings over a seabed model to visualize beam footprints and error propagation.
 
 ## Usage
+
 ```bash
 QCdemo -ts <ascii_attitude_list> [OPTIONS]
 ```
@@ -26,6 +29,7 @@ QCdemo -ts <ascii_attitude_list> [OPTIONS]
 | `-background` | Runs in background (non-graphical) mode and pings away until a certain along-track distance is covered. |
 
 ### Sonar & Stabilization
+
 | Option | Description |
 |---|---|
 | `-EA` | Equiangular beam mode. |
@@ -35,6 +39,7 @@ QCdemo -ts <ascii_attitude_list> [OPTIONS]
 | `-beam_hop` | Enables beam hopping. |
 
 ### Error & Correction Parameters
+
 | Option | Description | Default / Example |
 |---|---|
 | `-attitude_scale <val>` | Scales the applied attitude. | `1.0` |
@@ -48,6 +53,7 @@ QCdemo -ts <ascii_attitude_list> [OPTIONS]
 | `-noise_level <val>` | Noise level for depth measurements (0-10, 0=none, 10=really noisy). | `0.0` |
 
 ### Seabed Model
+
 | Option | Description |
 |---|---|
 | `-oscillate_slope <const> <amp> <period>` | Oscillating seabed slope (degrees), with constant, amplitude, and period (seconds). |

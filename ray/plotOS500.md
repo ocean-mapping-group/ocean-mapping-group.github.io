@@ -1,9 +1,11 @@
 ---
 layout: default
 title: plotOS500
-parent: Ray Tools
+parent: Ray-Tracing & Refraction (ray)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 167
 ---
+
 # plotOS500
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 167
 This tool is crucial for handling raw CTD data, organizing it into usable formats, and optionally preparing it for visualization (e.g., as arrays for plotting profiles over time or depth).
 
 ## Usage
+
 ```bash
 plotOS500 <OS500_prefix> [-bytime | -bydepth] [-fulldate] [-up | -down | -updown] [-array <maxz> <dz>] [-v]
 ```

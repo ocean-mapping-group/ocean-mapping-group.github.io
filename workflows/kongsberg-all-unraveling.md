@@ -5,30 +5,30 @@ parent: Processing Workflows & Guides
 nav_order: 3
 category: workflows
 input_formats:
-  - .all
-  - .wcd
+- .all
+- .wcd
 output_formats:
-  - .merged
-  - .param
-  - .nav
-  - .orientation
-  - .ss_data
-  - .16_data
-  - .ss_data_deTVG
-  - .sectors
-  - .sv_filtered
-  - .watercol
-  - .ss
+- .merged
+- .param
+- .nav
+- .orientation
+- .ss_data
+- .16_data
+- .ss_data_deTVG
+- .sectors
+- .sv_filtered
+- .watercol
+- .ss
 related_tools:
-  - RTlite
-  - bunravel
-  - stripNav
-  - appendNav
-  - mergeNav
-  - mergeAtt
-  - newMergeAtt
-  - deTVG
-  - makess
+- RTlite
+- bunravel
+- stripNav
+- appendNav
+- mergeNav
+- mergeAtt
+- newMergeAtt
+- deTVG
+- makess
 ---
 
 # Kongsberg `.all` & `.wcd` Legacy Unraveling Workflow

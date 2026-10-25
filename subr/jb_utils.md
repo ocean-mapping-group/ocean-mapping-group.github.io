@@ -1,16 +1,17 @@
 ---
 layout: default
 title: jb_utils
-parent: Core Shared Libraries (subr)
-module_name: jb_utils
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/jb_utils.c
-header_path: code/subr/jb_utils.h
 category: General Utilities, Sorting & Image Header I/O
 related_tools:
-  - j_SUB2K
-  - jb_watercolumn
-  - soundscape
-  - image export utilities
+- j_SUB2K
+- jb_watercolumn
+- soundscape
+- image export utilities
+module_name: jb_utils
+header_path: code/subr/jb_utils.h
 ---
 
 # `jb_utils` — General Purpose String, `qsort` Comparator, Color Space & Raster Header Utilities

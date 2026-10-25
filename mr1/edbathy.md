@@ -1,14 +1,23 @@
 ---
 layout: default
 title: edbathy
-parent: MR1 Tools
+parent: HAWAII MR1 Towed Sidescan (mr1)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 2
 tool_name: edbathy
 source_path: mr1/edbathy.c
 category: interactive_editing
-input_formats: [OMG_MR1_SS, OMG_MR1_ZX, MR1_LUT]
-output_formats: [OMG_MR1_ZX, MR1_LUT]
-related_tools: [plotmr1, mr1_proc, mergeMWascii]
+input_formats:
+- OMG_MR1_SS
+- OMG_MR1_ZX
+- MR1_LUT
+output_formats:
+- OMG_MR1_ZX
+- MR1_LUT
+related_tools:
+- plotmr1
+- mr1_proc
+- mergeMWascii
 ---
 
 # edbathy

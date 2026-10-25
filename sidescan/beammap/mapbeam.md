@@ -1,16 +1,18 @@
 ---
 layout: default
 title: mapbeam
-parent: Beammap Tools
-grand_parent: sidescan
+parent: Sidescan Radiometric & Geometric Suite (sidescan)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 3
 ---
+
 # mapbeam
 
 ## Description
 `mapbeam` is a utility that scans JCU GLORIA/MR1 format sidescan files to stack their across-track profiles. It organizes this data according to a series of depth bins, effectively computing a depth-dependent angular function or beammap. This tool is designed as a faster alternative to older beam pattern correction methods like `glbeam_bydepth.c`, providing an empirical representation of the beam pattern.
 
 ## Usage
+
 ```bash
 mapbeam [-maxdep <depth>] [-mindep <depth>] [-depbin <count>] <basename> <datafile1> [datafile2 ...]
 ```

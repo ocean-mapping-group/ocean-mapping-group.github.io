@@ -1,21 +1,22 @@
 ---
 layout: default
 title: testFIR
-parent: tests (Test, Simulation & Diagnostic Suite)
+parent: Acoustic & Mathematical Test Harnesses (tests)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 nav_order: 20
 tool_name: testFIR
 source_path: code/tests/testFIR.c
 category: Chirp Waveforms, Matched Filtering & Signal Processing (tests)
 input_formats:
-  - Command-line synthetic heave wave (-sine), step offset (-step), and accelerometer bias (-bias) parameters
+- Command-line synthetic heave wave (-sine), step offset (-step), and accelerometer bias (-bias) parameters
 output_formats:
-  - timedom.ascii (9-curve or 4-curve OMG ASCII time-domain plot file)
-  - fft.ascii (OMG ASCII period-domain FFT amplitude spectrum plot file)
+- timedom.ascii (9-curve or 4-curve OMG ASCII time-domain plot file)
+- fft.ascii (OMG ASCII period-domain FFT amplitude spectrum plot file)
 related_tools:
-  - DelayEditor
-  - mergeHeave
-  - interpMRU
-  - testChirp
+- DelayEditor
+- mergeHeave
+- interpMRU
+- testChirp
 ---
 
 # testFIR
@@ -95,4 +96,4 @@ $$z_{\text{low}}[i] = \alpha + (M - 1)\beta, \qquad z_{\text{high}}[i] = \hat{z}
 # an accelerometer bias of 0.00005 m/s^2, and a 60 s FFT high-pass cutoff
 testFIR -v -sine 6.0 1.0 -sine 12.0 0.5 -step 0.2 5 1000 -bias 0.00005 -fft_cutoff_period 60.0
 ```
-For production heave drift filtering on multibeam `.merged` files, see [`DelayEditor`](../DE/DelayEditor.md) (`-heave_drift -avpings`).
+For production heave drift filtering on multibeam `.merged` files, see [`DelayEditor`](../DE/DelayEditor.html) (`-heave_drift -avpings`).

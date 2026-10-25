@@ -1,32 +1,34 @@
 ---
 layout: default
 title: BatchProcEK
-parent: EKlook Tools
+parent: Simrad EK60/EK80 Echosounder Suite (EKlook)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 1
 tool_name: BatchProcEK
 source_path: code/EKlook/BatchProcEK.c
 category: EKlook
 input_formats:
-  - OMG_HDCS (.merged)
-  - JHC Float Trace Arrays (.MF_dB, .Raw_dB, .PS_phase, .FA_phase, .MF_IQ)
-  - Bottom Track Guide (.BottomTrackGuide)
-  - JHC Float Area Maps (.r4)
+- OMG_HDCS (.merged)
+- JHC Float Trace Arrays (.MF_dB, .Raw_dB, .PS_phase, .FA_phase, .MF_IQ)
+- Bottom Track Guide (.BottomTrackGuide)
+- JHC Float Area Maps (.r4)
 output_formats:
-  - Full-Bandwidth ARC (.ARC_fullBW, .ARC_3D, .ARC_3D.trim)
-  - Spectral FFT ARC (.ARC_FFTbins, .ARC_FFT3D, .ARC_FFT3D.trim)
+- Full-Bandwidth ARC (.ARC_fullBW, .ARC_3D, .ARC_3D.trim)
+- Spectral FFT ARC (.ARC_FFTbins, .ARC_FFT3D, .ARC_FFT3D.trim)
 related_tools:
-  - EKlook
-  - comboCalibEK_ARCs
-  - EK_BottomBS
-  - EK_funcs
+- EKlook
+- comboCalibEK_ARCs
+- EK_BottomBS
+- EK_funcs
 ---
 
 # BatchProcEK
 
 ## Description
-`BatchProcEK` is a command-line utility for batch processing Kongsberg Simrad EK60/EK80 echosounder files, extracting bottom backscatter ($BS$) values, and compiling both full-bandwidth and spectral FFT Angular Response Curves (ARCs). It is designed to be run after interactive parameter tuning and bottom-track guide creation (`<prefix>.BottomTrackGuide`) in [`EKlook`](EKlook.md), and its output ARC files feed directly into [`comboCalibEK_ARCs`](comboCalibEK_ARCs.md).
+`BatchProcEK` is a command-line utility for batch processing Kongsberg Simrad EK60/EK80 echosounder files, extracting bottom backscatter ($BS$) values, and compiling both full-bandwidth and spectral FFT Angular Response Curves (ARCs). It is designed to be run after interactive parameter tuning and bottom-track guide creation (`<prefix>.BottomTrackGuide`) in [`EKlook`](EKlook.html), and its output ARC files feed directly into [`comboCalibEK_ARCs`](comboCalibEK_ARCs.html).
 
 ## Usage
+
 ```bash
 BatchProcEK [OPTIONS] -ins <procEK_dir/EK_file_prefix*.merged>
 ```

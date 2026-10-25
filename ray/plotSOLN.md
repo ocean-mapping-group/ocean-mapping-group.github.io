@@ -1,9 +1,11 @@
 ---
 layout: default
 title: plotSOLN
-parent: Ray Tools
+parent: Ray-Tracing & Refraction (ray)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 168
 ---
+
 # plotSOLN
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 168
 This tool is useful for analyzing the results of ray tracing, especially when comparing different sound velocity profiles or understanding the spatial distribution of depth errors caused by sound speed variations.
 
 ## Usage
+
 ```bash
 plotSOLN -infile <file1> [-infile <file2> ...] [-outfile <filename.meta>] [-size <dx> <dy>] [-xrange <min> <max>] [-yrange <min> <max>] [-tit1 <string>] [-tit2 <string>] [-v] [-sparse] [-together]
 ```

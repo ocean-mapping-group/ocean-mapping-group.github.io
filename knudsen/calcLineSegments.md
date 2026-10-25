@@ -1,14 +1,19 @@
 ---
 layout: default
 title: calcLineSegments
-parent: Knudsen Tools
+parent: Knudsen Chirp Sub-Bottom (knudsen)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 1
 tool_name: calcLineSegments
 source_path: knudsen/calcLineSegments.c
 category: navigation_processing
-input_formats: [OMG_HDCS]
-output_formats: [ASCII_STDOUT]
-related_tools: [knud2glo, makeSeisPlot]
+input_formats:
+- OMG_HDCS
+output_formats:
+- ASCII_STDOUT
+related_tools:
+- knud2glo
+- makeSeisPlot
 ---
 
 # calcLineSegments

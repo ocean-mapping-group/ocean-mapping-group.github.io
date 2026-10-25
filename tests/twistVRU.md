@@ -1,20 +1,21 @@
 ---
 layout: default
 title: twistVRU
-parent: tests (Test, Simulation & Diagnostic Suite)
+parent: Acoustic & Mathematical Test Harnesses (tests)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 nav_order: 27
 tool_name: twistVRU
 source_path: code/tests/twistVRU.c
 category: Attitude Error & Lever-Arm Coordinate Rotations (tests)
 input_formats:
-  - Interactive stdin prompts: direction (1=OBSERVED->REAL, 2=REAL->OBSERVED, 0=QUIT), YAW_misalign (deg), and roll/pitch pair (deg)
+- Interactive stdin prompts: direction (1=OBSERVED->REAL, 2=REAL->OBSERVED, 0=QUIT), YAW_misalign (deg), and roll/pitch pair (deg)
 output_formats:
-  - Converted TRUE or OBSERVED roll and pitch angles (degrees) on stdout
+- Converted TRUE or OBSERVED roll and pitch angles (degrees) on stdout
 related_tools:
-  - testrot
-  - DelayEditor
-  - getHorizonRollPitch
-  - newMergeAtt
+- testrot
+- DelayEditor
+- getHorizonRollPitch
+- newMergeAtt
 ---
 
 # twistVRU
@@ -33,6 +34,7 @@ twistVRU
 ```
 
 `twistVRU` takes no command-line flags and runs an interactive menu loop on `stdin`:
+
 ```text
  which direction:
     OBSERVED->REAL (1):
@@ -98,4 +100,4 @@ $ twistVRU
  TRUE roll and PITCH:
  10.000000 0.000000
 ```
-For interactive motion delay, scale factor, and dual-head yaw misalignment analysis on `.merged` survey lines, see [`DelayEditor`](../DE/DelayEditor.md).
+For interactive motion delay, scale factor, and dual-head yaw misalignment analysis on `.merged` survey lines, see [`DelayEditor`](../DE/DelayEditor.html).

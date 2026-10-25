@@ -1,14 +1,25 @@
 ---
 layout: default
 title: shpadd
-parent: Shapelib GIS Library & Tools (shapelib-1.3.0a2)
+parent: ESRI Shapefile C Library (shapelib-1.3.0a2)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 nav_order: 6
 tool_name: shpadd
 source_path: code/shapelib-1.3.0a2/shpadd.c
 category: GIS & ESRI Shapefile Library / Tools
-input_formats: [".shp", ".shx", "CLI vertex coordinate stream"]
-output_formats: [".shp", ".shx (with appended shape entity)"]
-related_tools: ["shpcreate", "shpdump", "shpopen", "dbfadd", "dbfcreate"]
+input_formats:
+- .shp
+- .shx
+- CLI vertex coordinate stream
+output_formats:
+- .shp
+- .shx (with appended shape entity)
+related_tools:
+- shpcreate
+- shpdump
+- shpopen
+- dbfadd
+- dbfcreate
 ---
 
 # shpadd
@@ -17,7 +28,7 @@ related_tools: ["shpcreate", "shpdump", "shpopen", "dbfadd", "dbfcreate"]
 
 `shpadd` (`code/shapelib-1.3.0a2/shpadd.c`) is a command-line utility authored by Frank Warmerdam for appending a new geometric shape (2D, 3D `Z`, Measured `M`, or 4D `ZM`, with single or multiple rings/parts)—or a `SHPT_NULL` shape—to an existing ESRI Shapefile (`.shp` and `.shx`).
 
-Together with [`shpcreate`](shpcreate.md), [`dbfcreate`](dbfcreate.md), and [`dbfadd`](dbfadd.md), `shpadd` allows shell scripts and batch hydrographic pipelines to construct complete point, polyline (`ARC`), polygon, or multipoint shapefiles directly from command-line coordinate lists without writing custom C programs.
+Together with [`shpcreate`](shpcreate.html), [`dbfcreate`](dbfcreate.html), and [`dbfadd`](dbfadd.html), `shpadd` allows shell scripts and batch hydrographic pipelines to construct complete point, polyline (`ARC`), polygon, or multipoint shapefiles directly from command-line coordinate lists without writing custom C programs.
 
 ---
 

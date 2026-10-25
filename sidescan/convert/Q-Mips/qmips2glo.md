@@ -1,16 +1,18 @@
 ---
 layout: default
 title: qmips2glo
-parent: Q-Mips Tools
-grand_parent: Convert Tools
+parent: Sidescan Radiometric & Geometric Suite (sidescan)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 1
 ---
+
 # qmips2glo
 
 ## Description
 `qmips2glo` is a utility designed to convert QMIPS sidescan format data to JCU GLORIA format. It handles 8-bit or 16-bit QMIPS data, applies optional logarithmic scaling, and converts it into GLORIA records, generating two output files for different channels (e.g., channel 1 and channel 2).
 
 ## Usage
+
 ```bash
 qmips2glo [-v] [-log] [-reverse] [-swapsides] [-merid <value>] [-timeseries] [-in <infile>] -out <outfile_prefix>
 ```

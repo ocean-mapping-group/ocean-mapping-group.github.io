@@ -1,9 +1,11 @@
 ---
 layout: default
 title: modProfHead
-parent: OMG Tools
+parent: Core Swath & .all Suite (omg)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 41
 ---
+
 # modProfHead
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 41
 While the code contains commented-out sections for other modifications (like adjusting `numDepths` or `processedDepth` values), its active functionality is focused on time shifting.
 
 ## Usage
+
 ```bash
 modProfHead <mergefile(s)> [OPTIONS]
 ```

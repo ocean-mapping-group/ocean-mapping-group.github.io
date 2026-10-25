@@ -1,14 +1,22 @@
 ---
 layout: default
 title: sumNav
-parent: Navigation Tools
+parent: Navigation Processing (nav)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 31
 tool_name: sumNav
 source_path: code/nav/sumNav.c
 category: Navigation & Georeferencing
-input_formats: [".nav", "ASCII XYZ/LLZ trackline"]
-output_formats: ["ASCII summary statistics (stdout)"]
-related_tools: ["appendNav", "stripNav", "navedit", "calcSpeedHead"]
+input_formats:
+- .nav
+- ASCII XYZ/LLZ trackline
+output_formats:
+- ASCII summary statistics (stdout)
+related_tools:
+- appendNav
+- stripNav
+- navedit
+- calcSpeedHead
 ---
 
 # sumNav
@@ -33,10 +41,12 @@ sumNav -ascii [-speed_knots <kts>] [-maxjump <km>] <ascii_file(s)>
 ### Common Workflow Examples
 
 **1. Compute line kilometers and hours for all survey lines in a Julian Day directory:**
+
 ```bash
 sumNav -skip 10 merged/JD100/*.nav
 ```
 Example output:
+
 ```text
  3 file(s) being read
  merged/JD100/0001_line.nav : 4500 
@@ -46,6 +56,7 @@ Example output:
 ```
 
 **2. Estimate survey duration at 7.5 knots for a set of planned ASCII waypoint lines:**
+
 ```bash
 sumNav -ascii -speed_knots 7.5 -maxjump 50.0 planned_lines/*.llz
 ```

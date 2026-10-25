@@ -1,19 +1,26 @@
 ---
 layout: default
 title: SE_SUBBOTwin
-parent: SwathEd (SE) Tools
+parent: Swath Editor — swathed (SE)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 15
 tool_name: SE_SUBBOTwin
 source_path: code/SE/SE_SUBBOTwin.c
 category: Interactive QC & Editing (SwathEd)
-input_formats: [".merged", ".sub", ".raw_ping"]
-output_formats: [".merged (updated observedDepth and race_track bottom picks)"]
-related_tools: ["swathed", "j_sub"]
+input_formats:
+- .merged
+- .sub
+- .raw_ping
+output_formats:
+- .merged (updated observedDepth and race_track bottom picks)
+related_tools:
+- swathed
+- j_sub
 ---
 
 # `SE_SUBBOTwin` — Vertical Incidence & Sub-Bottom Profiler Time-Series Viewer
 
-`SE_SUBBOTwin` (`code/SE/SE_SUBBOTwin.c`, `code/SE/SE_SUBBOTwin.h`) implements the `"Vertical Incidence Time Series Viewer"` (`sub_window[SUBBOT_OFFSET .. SUBBOT_OFFSET + 15]`, where `SUBBOT_OFFSET = 76`) in [`swathed`](swathed.md). Authored by John E. Hughes Clarke (January 2000) with manual bottom-repicking additions by Jonathan Beaudoin (November 2007), it provides a dedicated seismic/echogram waterfall, full-waveform trace inspector, 1D FFT spectral filter, and bottom-tracker editor for single-beam / dual-frequency normal-incidence and chirp sub-bottom profilers (e.g., Knudsen 320B/320M, Simrad EA500, and Kongsberg SBP120).
+`SE_SUBBOTwin` (`code/SE/SE_SUBBOTwin.c`, `code/SE/SE_SUBBOTwin.h`) implements the `"Vertical Incidence Time Series Viewer"` (`sub_window[SUBBOT_OFFSET .. SUBBOT_OFFSET + 15]`, where `SUBBOT_OFFSET = 76`) in [`swathed`](swathed.html). Authored by John E. Hughes Clarke (January 2000) with manual bottom-repicking additions by Jonathan Beaudoin (November 2007), it provides a dedicated seismic/echogram waterfall, full-waveform trace inspector, 1D FFT spectral filter, and bottom-tracker editor for single-beam / dual-frequency normal-incidence and chirp sub-bottom profilers (e.g., Knudsen 320B/320M, Simrad EA500, and Kongsberg SBP120).
 
 ---
 
@@ -22,6 +29,7 @@ related_tools: ["swathed", "j_sub"]
 Launched automatically when clicking the **`ss`** icon (`icon_window[7]`) on a `Knudsen_320` dataset (or via `-sub`), `view_subbottom_box()` creates top-level form `sub_window[76]` (`1025 × 820` px) containing:
 
 ### Waterfall, Trace, and Spectral Windows
+
 | Window | Dimensions | Function | Description |
 | :--- | :--- | :--- | :--- |
 | `sub_window[77]` (`+1`) | `600 × 200` | `load_deci()` | **Decimated 600-Ping Echogram Overview:** Displays 600 consecutive pings (`NO_SUB_SWATHS = 600`) across the full recorded depth window (`top_depth` to `bot_depth`), marking heave (`RED`), tide (`BLUE`), and active bottom picks (`GREEN`). |

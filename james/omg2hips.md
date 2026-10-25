@@ -1,14 +1,19 @@
 ---
 layout: default
 title: omg2hips
-parent: James Muggah (james) Tools
+parent: James Muggah — Global Mapper Tiles & Utils (james)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 nav_order: 7
 tool_name: omg2hips
 source_path: code/james/omg2hips.c
 category: Sonar Format Converters (james)
-input_formats: [".merged (OMG-HDCS v3/v4)"]
-output_formats: [".merged (CARIS HIPS-compatible HDCS summary header)"]
-related_tools: ["jview", "swathed"]
+input_formats:
+- .merged (OMG-HDCS v3/v4)
+output_formats:
+- .merged (CARIS HIPS-compatible HDCS summary header)
+related_tools:
+- jview
+- swathed
 ---
 
 # omg2hips

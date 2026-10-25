@@ -1,16 +1,17 @@
 ---
 layout: default
 title: jb_watercolumn
-parent: Core Shared Libraries (subr)
-module_name: jb_watercolumn
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/jb_watercolumn.c
-header_path: code/subr/jb_watercolumn.h
 category: Water Column Uncertainty, SVP Thinning & Raytracing Rules
 related_tools:
-  - soundscape
-  - mergeAtt
-  - newMergeAtt
-  - testSV
+- soundscape
+- mergeAtt
+- newMergeAtt
+- testSV
+module_name: jb_watercolumn
+header_path: code/subr/jb_watercolumn.h
 ---
 
 # `jb_watercolumn` — SVP Uncertainty Wedge Comparison, Douglas-Peucker Thinning & Raytracing Rules Library

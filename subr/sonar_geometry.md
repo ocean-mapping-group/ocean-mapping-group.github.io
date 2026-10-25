@@ -1,12 +1,19 @@
 ---
 layout: default
 title: sonar_geometry
-parent: Shared Core Libraries (subr)
-module_name: sonar_geometry
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/sonar_geometry.c
-header_path: code/subr/sonar_geometry.h
 category: Raytracing, Sound Speed & Geolocation
-related_tools: ["newMergeAtt", "svp_tool", "j_watercolumn", "jb_watercolumn", "orientation", "OMG_HDCS_jversion"]
+related_tools:
+- newMergeAtt
+- svp_tool
+- j_watercolumn
+- jb_watercolumn
+- orientation
+- OMG_HDCS_jversion
+module_name: sonar_geometry
+header_path: code/subr/sonar_geometry.h
 ---
 
 # sonar_geometry
@@ -55,4 +62,4 @@ It handles over 25 distinct sonar architectures—including Mills Cross systems,
 ---
 
 ## Architectural Role
-`sonar_geometry` is the core physics engine behind [`newMergeAtt`](../omg/newMergeAtt.md) and [`svp_tool`](../svp/svp_tool.md). Centralizing all sonar-specific array geometries, sector firing delays, attitude interpolations, and cone intersections in `sonar_geometry.c` guarantees identical bathymetric reduction across interactive refraction editors and batch processing pipelines.
+`sonar_geometry` is the core physics engine behind [`newMergeAtt`](../omg/newMergeAtt.html) and [`svp_tool`](../JV/JV_svpedit.html). Centralizing all sonar-specific array geometries, sector firing delays, attitude interpolations, and cone intersections in `sonar_geometry.c` guarantees identical bathymetric reduction across interactive refraction editors and batch processing pipelines.

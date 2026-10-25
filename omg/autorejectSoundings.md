@@ -1,9 +1,11 @@
 ---
 layout: default
 title: autorejectSoundings
-parent: OMG Tools
+parent: Core Swath & .all Suite (omg)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 79
 ---
+
 ---
 layout: default
 title: autorejectSoundings
@@ -18,6 +20,7 @@ nav_order: 79
 This tool aims to automate the removal of spikes and other noise artifacts from bathymetric data.
 
 ## Usage
+
 ```bash
 autorejectSoundings <mergefile(s)> [-v] [-isolated] [-criteria <filename>]
 ```

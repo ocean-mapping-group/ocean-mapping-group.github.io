@@ -1,15 +1,16 @@
 ---
 layout: default
 title: j_farray
-parent: Core Shared Libraries (subr)
-module_name: j_farray
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/j_farray.c
-header_path: code/subr/j_farray.h
 category: Data Structures & Numerical Containers
 related_tools:
-  - jb_watercolumn
-  - soundscape
-  - weigh_grid
+- jb_watercolumn
+- soundscape
+- weigh_grid
+module_name: j_farray
+header_path: code/subr/j_farray.h
 ---
 
 # `j_farray` — 2D Floating-Point Grid Container & Bilinear Interpolation Library
@@ -25,6 +26,7 @@ Throughout the OMG water-column raytracing (`j_watercolumn`, `jb_watercolumn`), 
 ## Key Data Structures (`code/subr/j_farray.h`)
 
 ### `farray`
+
 ```c
 typedef struct {
     int x, y;           /* Number of columns (x) and rows (y) */

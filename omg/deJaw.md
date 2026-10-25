@@ -1,9 +1,11 @@
 ---
 layout: default
 title: deJaw
-parent: OMG Tools
+parent: Core Swath & .all Suite (omg)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 85
 ---
+
 # deJaw
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 85
 It can also detect and flag profiles with `vesselHeading` outside the valid 0-360 range.
 
 ## Usage
+
 ```bash
 deJaw <mergefile(s)> [-v] [-badazi] [-port | -stbd]
 ```

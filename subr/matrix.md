@@ -1,15 +1,16 @@
 ---
 layout: default
 title: matrix
-parent: Core Shared Libraries (subr)
-module_name: matrix
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/matrix.c
-header_path: code/subr/matrix.h
 category: 3D Vector, Matrix & Perspective Graphics Math
 related_tools:
-  - 3D visualization utilities
-  - jview
-  - gl / 3D mesh viewers
+- 3D visualization utilities
+- jview
+- gl / 3D mesh viewers
+module_name: matrix
+header_path: code/subr/matrix.h
 ---
 
 # `matrix` — 3D Vector, 3×3 Matrix Algebra & Perspective Projection Library
@@ -26,6 +27,7 @@ To maximize code readability and avoid pointer-aliasing bugs in 3D rendering loo
 
 ### `mat_vector`
 Represents a 3D Cartesian point or direction vector in double precision:
+
 ```c
 typedef struct {
     double x;
@@ -36,6 +38,7 @@ typedef struct {
 
 ### `mat_matrix`
 Represents a 3×3 matrix composed of three 3D vector rows/columns (`a`, `b`, `c`):
+
 ```c
 typedef struct {
     mat_vector a;

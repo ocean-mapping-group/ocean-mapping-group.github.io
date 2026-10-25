@@ -1,9 +1,11 @@
 ---
 layout: default
 title: smoothTime
-parent: OMG Tools
+parent: Core Swath & .all Suite (omg)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 64
 ---
+
 # smoothTime
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 64
 The tool calculates an average `timeOffset` over a specified window (`noav`) of profiles and updates the central profile's `timeOffset` with this averaged value.
 
 ## Usage
+
 ```bash
 smoothTime <OMG_HDCS_datafile(s)> [-noav <value>] [-v]
 ```

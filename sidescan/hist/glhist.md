@@ -1,16 +1,18 @@
 ---
 layout: default
 title: glhist
-parent: Histogram Tools
-grand_parent: sidescan
+parent: Sidescan Radiometric & Geometric Suite (sidescan)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 3
 ---
+
 # glhist
 
 ## Description
 `glhist` is a utility designed for "Chavez-like histogram equalization" on JCU GLORIA format files, particularly suited for EM-12 type data. This tool corrects for across-track variations in intensity, essentially destriping the imagery by normalizing pixel values based on statistical properties. It supports both a static equalization derived from the entire dataset and a more dynamic rolling average normalization for more localized corrections.
 
 ## Usage
+
 ```bash
 glhist [-invalid <value>] [-roll <size>] [-show_sections] [-v] [-normalize <value>] [-first <ping>] [-last <ping>] [-start <pixel>] [-finish <pixel>] <rawfile> <eqfile>
 ```

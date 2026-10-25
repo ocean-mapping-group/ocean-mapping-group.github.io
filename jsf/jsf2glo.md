@@ -1,14 +1,27 @@
 ---
 layout: default
 title: jsf2glo
-parent: JSF Tools
+parent: EdgeTech JSF Sidescan & Sub-Bottom (jsf)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 1
 tool_name: jsf2glo
 source_path: code/jsf/jsf2glo.c
 category: Sidescan & Sub-Bottom Conversion
-input_formats: [".jsf"]
-output_formats: [".low_ss", ".hig_ss", ".subb", ".merged", ".merged.ss_data", ".merged.16_data"]
-related_tools: ["jsf2omg", "jsf2nav", "jsf2orientation", "jsfTool", "mos2"]
+input_formats:
+- .jsf
+output_formats:
+- .low_ss
+- .hig_ss
+- .subb
+- .merged
+- .merged.ss_data
+- .merged.16_data
+related_tools:
+- jsf2omg
+- jsf2nav
+- jsf2orientation
+- jsfTool
+- mos2
 ---
 
 # jsf2glo
@@ -17,6 +30,7 @@ related_tools: ["jsf2omg", "jsf2nav", "jsf2orientation", "jsfTool", "mos2"]
 `jsf2glo` converts dual-frequency sidescan and sub-bottom profiler traces from an EdgeTech `.jsf` file into 8-bit 1024-pixel JCU GLORIA files (`<prefix>.low_ss`, `<prefix>.hig_ss`, and `<prefix>.subb`), with an option (`-out_as_OMG`) to simultaneously write an OMG-HDCS v3 2-beam `.merged` file along with `.merged.ss_data` (8-bit) and `.merged.16_data` (16-bit) trace files. It supports standard JSF Sonar Data messages (type `80`), legacy Sidescan messages (type `82`), and REMUS 600 Situation messages (type `2090`).
 
 ## Usage
+
 ```bash
 jsf2glo [-v] [-log] [-DNramp <val>] [-min16bitval <val>] [-max16bitval <val>] [-maxlowslr <m>] [-maxhigslr <m>] [-maxsubslr <m>] [-out_as_OMG] -in <infile.jsf> -out <outfile_prefix>
 ```
@@ -48,11 +62,13 @@ jsf2glo [-v] [-log] [-DNramp <val>] [-min16bitval <val>] [-max16bitval <val>] [-
 ## Practical Examples
 
 **1. Convert dual-frequency EdgeTech sidescan to GLORIA with logarithmic scaling:**
+
 ```bash
 jsf2glo -log -min16bitval 100 -max16bitval 25000 -in line01.jsf -out line01
 ```
 
 **2. Convert sub-bottom and sidescan while also generating OMG `.merged` files:**
+
 ```bash
 jsf2glo -log -out_as_OMG -in line01.jsf -out line01
 ```

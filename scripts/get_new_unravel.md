@@ -1,11 +1,16 @@
 ---
 layout: default
 title: get_new_unravel
-parent: Helper Scripts
+parent: Automated Processing Scripts (scripts)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 tool_name: get_new_unravel
 source_path: code/scripts/get_new_unravel
 category: Batch Processing & File Management Scripts
-related_tools: ["bunravel", "unravel_KMALL_2500m_RevHplus_netatt2_parallel", "get_prefix", "rename"]
+related_tools:
+- bunravel
+- unravel_KMALL_2500m_RevHplus_netatt2_parallel
+- get_prefix
+- rename
 ---
 
 # get_new_unravel
@@ -26,6 +31,7 @@ get_new_unravel
 ## Script Behavior
 
 1. **Existence Check:** Checks whether a `new_unravel` script already exists in the current working directory (`if (-e new_unravel)`). If present, it prints:
+
    ```text
    Hey...you've already got a new_unravel script!
    ```

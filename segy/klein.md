@@ -1,14 +1,20 @@
 ---
 layout: default
 title: klein
-parent: SEGY Tools
+parent: SEG-Y Sub-Bottom & Seismic (segy)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 1
 tool_name: klein
 source_path: segy/klein.c
 category: format_conversion
-input_formats: [KLEIN_SYS5000]
-output_formats: [SEGY_ORE_SE880]
-related_tools: [readore, klein2omg, upAGCDIG]
+input_formats:
+- KLEIN_SYS5000
+output_formats:
+- SEGY_ORE_SE880
+related_tools:
+- readore
+- klein2omg
+- upAGCDIG
 ---
 
 # klein

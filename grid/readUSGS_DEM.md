@@ -1,13 +1,22 @@
 ---
 layout: default
 title: readUSGS_DEM
-parent: Grid Tools
+parent: Bathymetric Gridding & Export (grid)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 tool_name: readUSGS_DEM
 source_path: code/grid/readUSGS_DEM.c
 category: gridding
-input_formats: ["USGS ASCII DEM (7.5-minute / 1-degree)", "USGS SDTS ISO-8211 (.tar)"]
-output_formats: ["16-bit Binary Band-Sequential Array (.bsq)", "ASCII Header Report", "ASCII XYZ Soundings (thedata)"]
-related_tools: ["read_dem", "USGS_30sec_to_JHC", "weigh_grid"]
+input_formats:
+- USGS ASCII DEM (7.5-minute / 1-degree)
+- USGS SDTS ISO-8211 (.tar)
+output_formats:
+- 16-bit Binary Band-Sequential Array (.bsq)
+- ASCII Header Report
+- ASCII XYZ Soundings (thedata)
+related_tools:
+- read_dem
+- USGS_30sec_to_JHC
+- weigh_grid
 ---
 
 # readUSGS_DEM
@@ -51,6 +60,7 @@ readUSGS_DEM <indem> <outbsq> [outhdr] [nodataval]
 ## Examples
 
 ### Extract a 7.5-minute USGS DEM into a binary raster and `thedata` XYZ points
+
 ```bash
 readUSGS_DEM portland_oe_e.dem portland.bsq portland.hdr
 ```

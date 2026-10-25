@@ -1,7 +1,8 @@
 ---
 layout: default
-title: Repository Documentation (doc)
-nav_order: 34
+title: Historical Format & System Notes (doc)
+parent: 5. Core Libraries, Researcher Suites & Utilities
+nav_order: 18
 has_children: true
 ---
 
@@ -13,4 +14,4 @@ The `doc` directory (`code/doc/`) contains HTML developer notes regarding versio
 
 ## Documents in `doc/`
 
-* [Subversion & Repository Notes (`subversion_notes.html`)](_.md) — Guide to setting up the OMG Subversion repository, checking out code over `svn+ssh`, and resolving three-way merge conflicts in `JV/jview.c`.
+* [Subversion & Repository Notes (`subversion_notes.html`)](_.html) — Guide to setting up the OMG Subversion repository, checking out code over `svn+ssh`, and resolving three-way merge conflicts in `JV/jview.c`.

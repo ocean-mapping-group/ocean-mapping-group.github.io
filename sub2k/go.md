@@ -1,19 +1,20 @@
 ---
 layout: default
 title: go
-parent: Submetrix ISIS (sub2k) Interferometric Sonar Tools
+parent: GeoSwath+ / Submetrix 2000 CLI (sub2k)
+grand_parent: 4. Multi-Vendor Sonar & LiDAR Converters
 nav_order: 6
 tool_name: go
 source_path: sub2k/go
 category: sub2k
 input_formats: []
 output_formats:
-  - wraps (asciiplot data)
-  - plot.meta (OMG metafile)
+- wraps (asciiplot data)
+- plot.meta (OMG metafile)
 related_tools:
-  - testWrap
-  - gox
-  - wraps
+- testWrap
+- gox
+- wraps
 ---
 
 # `go` — Vernier Interferometer Phase-Wrap Simulation Script
@@ -73,6 +74,7 @@ viewmeta plot.meta &
 ## Practical Examples
 
 ### Run the Standard Vernier Phase-Wrap Simulation
+
 ```bash
 cd /path/to/code/sub2k
 sh ./go

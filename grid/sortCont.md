@@ -1,13 +1,21 @@
 ---
 layout: default
 title: sortCont
-parent: Grid Tools
+parent: Bathymetric Gridding & Export (grid)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 tool_name: sortCont
 source_path: code/grid/sortCont.c
 category: gridding
-input_formats: ["OMG Binary Contour Vector (bin_vect)"]
-output_formats: ["OMG Binary Contour Vector (bin_vect)", "ASCII Contour Polylines", "ASCII Contour Labels (.labels)"]
-related_tools: ["contgrid", "embedCont", "getdxf"]
+input_formats:
+- OMG Binary Contour Vector (bin_vect)
+output_formats:
+- OMG Binary Contour Vector (bin_vect)
+- ASCII Contour Polylines
+- ASCII Contour Labels (.labels)
+related_tools:
+- contgrid
+- embedCont
+- getdxf
 ---
 
 # sortCont
@@ -54,11 +62,13 @@ sortCont [-v] [-ascii] [-keep_labels] [-low <val>] [-high <val>] [-break_string 
 ## Examples
 
 ### Sort a binary contour file into connected binary polylines
+
 ```bash
 sortCont harbor.cont harbor_sorted.cont
 ```
 
 ### Convert binary contours to ASCII polylines with `"999 999"` line breaks and a label file
+
 ```bash
 sortCont -ascii -keep_labels -break_string "999 999" harbor.cont harbor_contours.txt
 ```

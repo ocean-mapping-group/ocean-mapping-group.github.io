@@ -1,14 +1,24 @@
 ---
 layout: default
 title: 8bit2acres
-parent: Image Tools
+parent: Raster Image Processing (image)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 2
 tool_name: 8bit2acres
 source_path: code/image/8bit2acres.c
 category: Image & Raster Processing
-input_formats: ["Raw 8-bit raster", "Raw 32-bit float raster (-float)", "Netpbm PGM (-pgm)", "1160-col GLORIA (-isgloria)"]
-output_formats: ["OMG1 8-bit or 32-bit float array (JHC_header)"]
-related_tools: ["stretchacres", "PCItoJHC", "subimage", "jview"]
+input_formats:
+- Raw 8-bit raster
+- Raw 32-bit float raster (-float)
+- Netpbm PGM (-pgm)
+- 1160-col GLORIA (-isgloria)
+output_formats:
+- OMG1 8-bit or 32-bit float array (JHC_header)
+related_tools:
+- stretchacres
+- PCItoJHC
+- subimage
+- jview
 ---
 
 # 8bit2acres
@@ -17,6 +27,7 @@ related_tools: ["stretchacres", "PCItoJHC", "subimage", "jview"]
 `8bit2acres` converts raw headerless 8-bit greyscale rasters, raw 32-bit floating-point arrays (`-float`), Netpbm `.pgm` images (`-pgm`), or 1160-column raw GLORIA scanline files (`-isgloria`) into the Ocean Mapping Group's `OMG1` (`JHC_header`, historically ACRES) georeferenced array format. It supports byte-offset skipping (`-offset`), row/column inversion (`-flip`, `-invert`), and optional geographic or projected bounding-box metadata.
 
 ## CLI Options & Usage
+
 ```bash
 8bit2acres -in <rawimage> -out <acresimage> [-pgm] [-rows <n> -cols <n>] \
   [-offset <bytes>] [-float] [-isgloria] [-invert] [-flip] \

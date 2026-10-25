@@ -1,9 +1,11 @@
 ---
 layout: default
 title: mergeAltitude
-parent: Optech Tools
+parent: Optech SHOALS Bathymetric LiDAR (Optech)
+grand_parent: 4. Multi-Vendor Sonar & LiDAR Converters
 nav_order: 116
 ---
+
 # mergeAltitude
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 116
 The tool interpolates altitude values from the ASCII altitude file to match the timestamp of each beam's bottom strike in the merged file and outputs these merged geographic and altitude data to an ASCII file.
 
 ## Usage
+
 ```bash
 mergeAltitude -in <merged_file(s)> -alt <altitude_file.ascii(s)> -out <ASCII_filename> [-v]
 ```

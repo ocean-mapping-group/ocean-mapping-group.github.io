@@ -1,9 +1,11 @@
 ---
 layout: default
 title: getAngularResponse
-parent: OMG Tools
+parent: Core Swath & .all Suite (omg)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 102
 ---
+
 # getAngularResponse
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 102
 This tool is crucial for backscatter calibration, quality control, and understanding how different sonar systems interact with the seafloor. It can also generate diagnostic images and export the response curve in a standardized format.
 
 ## Usage
+
 ```bash
 getAngularResponse <merged_file(s)> [OPTIONS]
 ```
@@ -23,6 +26,7 @@ getAngularResponse <merged_file(s)> [OPTIONS]
 | `<merged_file(s)>` | **Required.** One or more paths to input OMG-HDCS merged files (with associated `.ss_data`, `.orientation`, `.depression`, and `.sonar_settings` files). |
 
 ### Backscatter Source (Choose one)
+
 | Option | Description |
 |---|---|
 | `-sidescan` | Use sidescan trace data. |
@@ -30,6 +34,7 @@ getAngularResponse <merged_file(s)> [OPTIONS]
 | `-snippet` | Use snippet data. |
 
 ### Angle Calculation
+
 | Option | Description |
 |---|---|
 | `-grazing <method>` | Specifies the grazing angle estimation method:
@@ -44,6 +49,7 @@ getAngularResponse <merged_file(s)> [OPTIONS]
 | `-ignore_topo <val>` | If grazing angle differs from basic flat seafloor assumption by `val` degrees, ignore the data point. |
 
 ### Data Filtering
+
 | Option | Description |
 |---|---|
 | `-max_incidence <val>` | Ignore incidence angles above this value. |
@@ -54,6 +60,7 @@ getAngularResponse <merged_file(s)> [OPTIONS]
 | `-stbd_only` / `-port_only` | Process only starboard or port beams. |
 
 ### Corrections & Adjustments
+
 | Option | Description |
 |---|---|
 | `-redo_prop <val>` | Apply a new absorption coefficient (`val` dB/km) if current value is unreasonable. |
@@ -65,6 +72,7 @@ getAngularResponse <merged_file(s)> [OPTIONS]
 | `-old_cal` | Use old calibration method. |
 
 ### Output & Debugging
+
 | Option | Description |
 |---|---|
 | `-v` | Enable verbose output. |

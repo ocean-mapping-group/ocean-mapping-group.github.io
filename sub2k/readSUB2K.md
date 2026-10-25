@@ -1,10 +1,11 @@
 ---
 layout: default
 title: readSUB2K
-parent: SUB2K Tools
-grand_parent: code
+parent: GeoSwath+ / Submetrix 2000 CLI (sub2k)
+grand_parent: 4. Multi-Vendor Sonar & LiDAR Converters
 nav_order: 5
 ---
+
 # readSUB2K
 
 ## Description
@@ -21,6 +22,7 @@ nav_order: 5
 This tool is central to the processing and conversion of Submetrix 2000 data within the OMG toolkit.
 
 ## Usage
+
 ```bash
 readSUB2K [-v] [-debug] [-linss | -sqrtss | -tvgss] [-linrange <min16> <max16>] [-qua_thresh <value>] [-amp_perc_thresh <value>] [-athresh <value>] [-nobelow <value>] [-oftotal <value>] [-firstsam <value>] [-min_binned <value>] [-max_variance <value>] [-max_coverage_metres <value>] [-max_coverage_multiple <value>] [-angle_sss_ratio_multiplier <value>] [-prefilt_nadir_on | -prefilt_nadir <beams> <half_width> <median_frac_depth>] [-ssv_port <value>] [-tss] [-f180] [-mcom] [-ssv <value>] [-method <value>] [-newType] [-declin <value>] [-draft <value>] [-merid <value>] -out <outfile_prefix> <rawISISfile(s)>
 ```

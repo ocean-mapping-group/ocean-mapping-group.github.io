@@ -1,16 +1,17 @@
 ---
 layout: default
 title: normalization
-parent: Core Shared Libraries (subr)
-module_name: normalization
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/normalization.c
-header_path: code/subr/normalization.h
 category: Backscatter Calibration & Residual Beam Pattern (RBP) Extraction
 related_tools:
-  - newGetBP
-  - applySectBP
-  - get_ADH_SRA
-  - correctBS
+- newGetBP
+- applySectBP
+- get_ADH_SRA
+- correctBS
+module_name: normalization
+header_path: code/subr/normalization.h
 ---
 
 # `normalization` — 4D Multibeam Backscatter Normalization & Residual Beam Pattern (RBP) Library

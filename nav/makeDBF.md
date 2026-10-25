@@ -1,22 +1,28 @@
 ---
 layout: default
 title: makeDBF
-parent: Navigation Tools
+parent: Navigation Processing (nav)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 24
 tool_name: makeDBF
 source_path: code/nav/makeDBF.c
 category: Navigation & Georeferencing
-input_formats: ["Command-line URL/path string"]
-output_formats: [".dbf"]
-related_tools: ["navtoSHP", "iNav2SHP", "readSHP"]
+input_formats:
+- Command-line URL/path string
+output_formats:
+- .dbf
+related_tools:
+- navtoSHP
+- iNav2SHP
+- readSHP
 ---
 
 # makeDBF
 
 ## Description
-`makeDBF` generates a companion dBASE III (`.dbf`) attribute table file for single-record ESRI Polyline Shapefiles created by [`navtoSHP`](navtoSHP.md).
+`makeDBF` generates a companion dBASE III (`.dbf`) attribute table file for single-record ESRI Polyline Shapefiles created by [`navtoSHP`](navtoSHP.html).
 
-Because [`navtoSHP`](navtoSHP.md) writes only the geometry (`.shp`) and spatial index (`.shx`) files for a survey line track, GIS packages (such as ArcGIS and QGIS) require a matching `<line>.dbf` file with the same base name to load the Shapefile layer. `makeDBF` writes a 1-record `.dbf` file containing standard arc-node topology fields (`FNODE_`, `TNODE_`, `LPOLY_`, `RPOLY_`, `LENGTH`, `WOZZIT`, `WOZZIT_ID`, `LINE`) plus a 50-character `HYPERLINK` attribute populated with a user-specified HTML/image path (`-url`), enabling click-to-open line summary pages or sidescan/backscatter waterfall imagery directly from the GIS map canvas.
+Because [`navtoSHP`](navtoSHP.html) writes only the geometry (`.shp`) and spatial index (`.shx`) files for a survey line track, GIS packages (such as ArcGIS and QGIS) require a matching `<line>.dbf` file with the same base name to load the Shapefile layer. `makeDBF` writes a 1-record `.dbf` file containing standard arc-node topology fields (`FNODE_`, `TNODE_`, `LPOLY_`, `RPOLY_`, `LENGTH`, `WOZZIT`, `WOZZIT_ID`, `LINE`) plus a 50-character `HYPERLINK` attribute populated with a user-specified HTML/image path (`-url`), enabling click-to-open line summary pages or sidescan/backscatter waterfall imagery directly from the GIS map canvas.
 
 ---
 
@@ -29,6 +35,7 @@ makeDBF [-v] -dbf <filename.dbf> -url <hyperlink_path>
 ### Common Workflow Examples
 
 **1. Create a `.shp`/`.shx` trackline with `navtoSHP` and generate its companion `.dbf` with `makeDBF`:**
+
 ```bash
 # 1. Create 0001_line.shp and 0001_line.shx
 navtoSHP -skip 5 merged/JD100/0001_line.nav
@@ -38,6 +45,7 @@ makeDBF -dbf merged/JD100/0001_line.dbf -url images/0001_line.html
 ```
 
 **2. Batch-generate `.dbf` files for all `.shp` tracklines in a directory:**
+
 ```bash
 for shp in tracks/*.shp; do
     base=$(basename "$shp" .shp)

@@ -1,9 +1,11 @@
 ---
 layout: default
 title: preFlag
-parent: OMG Tools
+parent: Core Swath & .all Suite (omg)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 49
 ---
+
 # preFlag
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 49
 The tool can filter beams based on an externally provided specification file (for marking consistently bad beams or applying percentage corrections) or by a maximum incidence angle threshold.
 
 ## Usage
+
 ```bash
 preFlag <mergefile(s)> [OPTIONS]
 ```

@@ -1,27 +1,28 @@
 ---
 layout: default
 title: EK_FFT (Module within EKlook)
-parent: EKlook Tools
+parent: Simrad EK60/EK80 Echosounder Suite (EKlook)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 5
 tool_name: EK_FFT
 source_path: code/EKlook/EK_FFT.c
 category: EKlook
 input_formats:
-  - In-Memory Complex Matched-Filtered Trace (.MF_IQ)
-  - Pulse Replica (.pulse)
-  - Sphere TS Reference (.dat)
+- In-Memory Complex Matched-Filtered Trace (.MF_IQ)
+- Pulse Replica (.pulse)
+- Sphere TS Reference (.dat)
 output_formats:
-  - Interactive Spectral Plots
+- Interactive Spectral Plots
 related_tools:
-  - EKlook
-  - ek_fft_funcs
-  - EK_Polar
+- EKlook
+- ek_fft_funcs
+- EK_Polar
 ---
 
 # EK_FFT (Module within EKlook)
 
 ## Description
-`EK_FFT` (`code/EKlook/EK_FFT.c`) is an interactive GUI module within the [`EKlook`](EKlook.md) application. It manages the **"FFT EK-Trace Window,"** enabling users to perform windowed Fast Fourier Transform (FFT) spectral analysis on selected segments of complex matched-filtered EK80 traces (`.MF_IQ`), inspect the transmit pulse replica and its autocorrelation spectrum, remove pulse-compression spectral ripple, and compare observed target spectra against theoretical tungsten-carbide calibration sphere curves (`-sphereTS`).
+`EK_FFT` (`code/EKlook/EK_FFT.c`) is an interactive GUI module within the [`EKlook`](EKlook.html) application. It manages the **"FFT EK-Trace Window,"** enabling users to perform windowed Fast Fourier Transform (FFT) spectral analysis on selected segments of complex matched-filtered EK80 traces (`.MF_IQ`), inspect the transmit pulse replica and its autocorrelation spectrum, remove pulse-compression spectral ripple, and compare observed target spectra against theoretical tungsten-carbide calibration sphere curves (`-sphereTS`).
 
 ## Interactive Controls
 

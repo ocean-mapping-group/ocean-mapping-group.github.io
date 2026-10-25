@@ -1,14 +1,19 @@
 ---
 layout: default
 title: jhc2SUN
-parent: MR1 Tools
+parent: HAWAII MR1 Towed Sidescan (mr1)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 4
 tool_name: jhc2SUN
 source_path: mr1/jhc2SUN.c
 category: format_conversion
-input_formats: [JHC_ARRAY]
-output_formats: [SUN_RASTER]
-related_tools: [plotmr1, edbathy]
+input_formats:
+- JHC_ARRAY
+output_formats:
+- SUN_RASTER
+related_tools:
+- plotmr1
+- edbathy
 ---
 
 # jhc2SUN

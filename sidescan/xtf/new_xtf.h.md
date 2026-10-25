@@ -1,21 +1,26 @@
 ---
 layout: default
 title: new_xtf.h
-parent: XTF Tools
-grand_parent: Sidescan Tools
+parent: Sidescan Radiometric & Geometric Suite (sidescan)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 9
 tool_name: new_xtf.h
 source_path: code/sidescan/xtf/new_xtf.h
 category: XTF Sidescan Conversion
-input_formats: ["C Header File"]
-output_formats: ["Included by xtf2glo.c"]
-related_tools: ["xtf2glo", "xtf_doc.h", "xtf_funcs.h"]
+input_formats:
+- C Header File
+output_formats:
+- Included by xtf2glo.c
+related_tools:
+- xtf2glo
+- xtf_doc.h
+- xtf_funcs.h
 ---
 
 # new_xtf.h
 
 ## Description
-`new_xtf.h` is the configuration header file for [`xtf2glo`](xtf2glo.md) in `code/sidescan/xtf/`. It defines buffer limits, 16-bit-to-8-bit dynamic range normalization methods, processing bitflags, and the geographic Minimum Bounding Rectangle (`MBR`) structure.
+`new_xtf.h` is the configuration header file for [`xtf2glo`](xtf2glo.html) in `code/sidescan/xtf/`. It defines buffer limits, 16-bit-to-8-bit dynamic range normalization methods, processing bitflags, and the geographic Minimum Bounding Rectangle (`MBR`) structure.
 
 ## Constants, Bitflags & Structures
 
@@ -38,6 +43,7 @@ Used when scaling 16-bit XTF sonar samples into 8-bit JCU GLORIA (`0..255`) pixe
 * `CMG` (`16`): Compute Course Made Good azimuth from ship/towfish navigation coordinates.
 
 ### `MBR` Structure
+
 ```c
 typedef struct {
    double minX;

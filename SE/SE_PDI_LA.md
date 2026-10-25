@@ -1,19 +1,31 @@
 ---
 layout: default
 title: SE_PDI_LA
-parent: SwathEd (SE) Tools
+parent: Swath Editor — swathed (SE)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 12
 tool_name: SE_PDI_LA
 source_path: code/SE/SE_PDI_LA.c
 category: Interactive QC & Editing (SwathEd)
-input_formats: [".merged", ".watercol", ".WC_Phase1", ".WC_Phase2"]
-output_formats: ["pdi_XXXXX_BBB_TTTT_slc.ppm", "pdi_XXXXX_BBB_TTTT_pie.ppm"]
-related_tools: ["swathed", "SE_WaterColumn", "SE_BDI_DP", "pdi_funcs", "bdi_funcs"]
+input_formats:
+- .merged
+- .watercol
+- .WC_Phase1
+- .WC_Phase2
+output_formats:
+- pdi_XXXXX_BBB_TTTT_slc.ppm
+- pdi_XXXXX_BBB_TTTT_pie.ppm
+related_tools:
+- swathed
+- SE_WaterColumn
+- SE_BDI_DP
+- pdi_funcs
+- bdi_funcs
 ---
 
 # `SE_PDI_LA` — Phase Detection Indicator (PDI) Track Toolkit
 
-`SE_PDI_LA` (`code/SE/SE_PDI_LA.c`, `code/SE/SE_PDI_LA.h`) is an interactive X11 widget (`"PDI Track Toolkit"`, `PDI_LA_widget`) integrated into [`SE_WaterColumn`](SE_WaterColumn.md) and [`swathed`](swathed.md). Developed by Leonardo (Leo) and John E. Hughes Clarke (October 2019), it extends the across-beam Bottom Detection Indicator ([`SE_BDI_DP`](SE_BDI_DP.md)) by incorporating high-resolution split-beam differential phase time series (`.WC_Phase1` / `.WC_Phase2`, stored in `WHOLE_ping_WCP`) alongside water column amplitude (`.watercol`, `WHOLE_ping_WC`).
+`SE_PDI_LA` (`code/SE/SE_PDI_LA.c`, `code/SE/SE_PDI_LA.h`) is an interactive X11 widget (`"PDI Track Toolkit"`, `PDI_LA_widget`) integrated into [`SE_WaterColumn`](SE_WaterColumn.html) and [`swathed`](swathed.html). Developed by Leonardo (Leo) and John E. Hughes Clarke (October 2019), it extends the across-beam Bottom Detection Indicator ([`SE_BDI_DP`](SE_BDI_DP.html)) by incorporating high-resolution split-beam differential phase time series (`.WC_Phase1` / `.WC_Phase2`, stored in `WHOLE_ping_WCP`) alongside water column amplitude (`.watercol`, `WHOLE_ping_WC`).
 
 By fitting a linear phase ramp across adjacent receive beams around a candidate BDI amplitude peak at a fixed two-way travel time (TWTT) slice—a technique termed **Phase Detection Indicator (PDI)**—`SE_PDI_LA` resolves sub-beam arrival angles at zero-phase crossings across constant-range arcs.
 
@@ -49,6 +61,6 @@ By fitting a linear phase ramp across adjacent receive beams around a candidate 
 
 ## Core Algorithms (`WC_PDI_pick_Angle_Peaks`)
 
-1. **BDI Seed Generation:** Calls `standalone_BDI_pick_Angle_Peaks()` ([`bdi_funcs.c`](bdi_funcs.md)) to populate up to `NO_BDI` (12) amplitude peaks per time slice in `WC_BDI_pick[1500][NO_BDI]`.
-2. **Across-Beam Phase Zero-Crossing Refinement:** Calls `standalone_PDI_pick_Angle_Peaks()` ([`pdi_funcs.c`](pdi_funcs.md)), which inspects the split-beam phase array (`WHOLE_ping_WCP`) in a neighborhood (`[left_limit, right_limit]`) around each BDI seed `WC_BDI_pick[twtt][j].beam`. It performs a least-squares linear regression of differential phase versus beam pointing angle ($\phi(\theta) = a + b\theta$) and solves for the zero-phase crossing angle $\theta_{\text{PDI}} = -a/b$, storing the result in `WC_PDI_pick[twtt][j].angle`.
-3. **Water Column Polar Fan Overlay:** When `show_PDI` and `plot_PDI` are active in [`SE_WaterColumn`](SE_WaterColumn.md), `draw_WaterColumn()` projects every valid `WC_PDI_pick[i][j].angle` into across-track and depth coordinates and renders `RED` diamonds on the polar fan image.
+1. **BDI Seed Generation:** Calls `standalone_BDI_pick_Angle_Peaks()` ([`bdi_funcs.c`](bdi_funcs.html)) to populate up to `NO_BDI` (12) amplitude peaks per time slice in `WC_BDI_pick[1500][NO_BDI]`.
+2. **Across-Beam Phase Zero-Crossing Refinement:** Calls `standalone_PDI_pick_Angle_Peaks()` ([`pdi_funcs.c`](pdi_funcs.html)), which inspects the split-beam phase array (`WHOLE_ping_WCP`) in a neighborhood (`[left_limit, right_limit]`) around each BDI seed `WC_BDI_pick[twtt][j].beam`. It performs a least-squares linear regression of differential phase versus beam pointing angle ($\phi(\theta) = a + b\theta$) and solves for the zero-phase crossing angle $\theta_{\text{PDI}} = -a/b$, storing the result in `WC_PDI_pick[twtt][j].angle`.
+3. **Water Column Polar Fan Overlay:** When `show_PDI` and `plot_PDI` are active in [`SE_WaterColumn`](SE_WaterColumn.html), `draw_WaterColumn()` projects every valid `WC_PDI_pick[i][j].angle` into across-track and depth coordinates and renders `RED` diamonds on the polar fan image.

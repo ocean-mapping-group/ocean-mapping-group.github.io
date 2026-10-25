@@ -1,14 +1,22 @@
 ---
 layout: default
 title: extractSnippet
-parent: XTF Tools
+parent: eXtended Triton Format — XTF (xtf)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 3
 tool_name: extractSnippet
 source_path: code/xtf/extractSnippet.c
 category: Backscatter & Image Processing
-input_formats: [".xtf"]
-output_formats: [".8bit", ".pgm"]
-related_tools: ["extractRI", "stripSS", "xtfTool", "xtf2omg_reson"]
+input_formats:
+- .xtf
+output_formats:
+- .8bit
+- .pgm
+related_tools:
+- extractRI
+- stripSS
+- xtfTool
+- xtf2omg_reson
 ---
 
 # extractSnippet
@@ -17,6 +25,7 @@ related_tools: ["extractRI", "stripSS", "xtfTool", "xtf2omg_reson"]
 `extractSnippet` extracts Reson SeaBat snippet packets (`XTF_HEADER_RESON_SNIPPET`, packet ID 19) from an XTF file and renders them as an 8-bit waterfall image (`.8bit` or `.pgm`) mapped across slant-range sample offsets, or dumps a single ping's snippet traces to stdout when `-ping` is specified.
 
 ## Usage
+
 ```bash
 extractSnippet [-v] [-pgm] [-nocorr] [-ping <ping_num>] -in <file.xtf>
 ```
@@ -39,11 +48,13 @@ extractSnippet [-v] [-pgm] [-nocorr] [-ping <ping_num>] -in <file.xtf>
 ## Practical Examples
 
 **1. Generate a PGM waterfall image of Reson snippets from an XTF file:**
+
 ```bash
 extractSnippet -pgm -in line02.xtf
 ```
 
 **2. Generate an uncorrected OMG `.8bit` snippet image:**
+
 ```bash
 extractSnippet -nocorr -in line02.xtf
 ```

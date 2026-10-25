@@ -1,9 +1,11 @@
 ---
 layout: default
 title: traceBP
-parent: OMG Tools
+parent: Core Swath & .all Suite (omg)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 72
 ---
+
 # traceBP
 
 ## Description
@@ -14,6 +16,7 @@ The primary outputs are:
 2.  Optionally, a verbose output suitable for plotting traces intensities versus launch angles (for all beams or individual beams).
 
 ## Usage
+
 ```bash
 traceBP <merged_file(s)> [OPTIONS]
 ```

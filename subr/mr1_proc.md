@@ -1,15 +1,16 @@
 ---
 layout: default
 title: mr1_proc
-parent: Core Shared Libraries (subr)
-module_name: mr1_proc
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/mr1_proc.c
-header_path: code/subr/mr1_proc.h
 category: Sonar Format I/O & Interferometric Processing (MR1)
 related_tools:
-  - MR1toOMG
-  - weigh_grid
-  - jview
+- MR1toOMG
+- weigh_grid
+- jview
+module_name: mr1_proc
+header_path: code/subr/mr1_proc.h
 ---
 
 # `mr1_proc` — HIG Hawaii MR1 Towed Interferometric Sidescan Processing Library

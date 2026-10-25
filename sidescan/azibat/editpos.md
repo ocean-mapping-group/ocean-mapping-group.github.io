@@ -1,16 +1,18 @@
 ---
 layout: default
 title: editpos
-parent: Sidescan Tools
-grand_parent: azibat
+parent: Sidescan Radiometric & Geometric Suite (sidescan)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 4
 ---
+
 # editpos
 
 ## Description
 `editpos` is a utility used to edit the position fixes of a JCU format sidescan image. It looks for bad position jumps and corrects the fix position.
 
 ## Usage
+
 ```bash
 editpos [-v] [-t <threshold>] <infile>
 ```

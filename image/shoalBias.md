@@ -1,14 +1,21 @@
 ---
 layout: default
 title: shoalBias
-parent: Image Tools
+parent: Raster Image Processing (image)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 46
 tool_name: shoalBias
 source_path: code/image/shoalBias.c
 category: Image & Raster Processing
-input_formats: ["Georeferenced OMG1 32-bit float bathymetry DTM (.r4)"]
-output_formats: ["Shoal-biased .r4 DTM (<out>)", "Sub-bin coordinate offset grids (<out>.lat, <out>.lon)"]
-related_tools: ["decr4", "removeOverplot", "patchArea"]
+input_formats:
+- Georeferenced OMG1 32-bit float bathymetry DTM (.r4)
+output_formats:
+- Shoal-biased .r4 DTM (<out>)
+- Sub-bin coordinate offset grids (<out>.lat, <out>.lon)
+related_tools:
+- decr4
+- removeOverplot
+- patchArea
 ---
 
 # shoalBias
@@ -17,6 +24,7 @@ related_tools: ["decr4", "removeOverplot", "patchArea"]
 `shoalBias` (written by John Hughes Clarke, November 1995) downsamples a high-resolution 32-bit floating-point (`.r4`) `OMG1` bathymetric DTM into larger hydrographic shoal-biased cells of size `-binsize <meters>`. Within each output bin, it retains the shoalest depth while recording the exact sub-bin latitude and longitude offsets of that shoal sounding in companion `<outfile>.lat` and `<outfile>.lon` grids so hydrographic fair sheets can plot the sounding at its true geographic position.
 
 ## CLI Options & Usage
+
 ```bash
 shoalBias -binsize <meters> -in <highres.r4> -out <shoal.r4>
 ```

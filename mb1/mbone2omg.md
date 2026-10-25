@@ -1,14 +1,26 @@
 ---
 layout: default
 title: mbone2omg
-parent: Teledyne MB1 Tools (mb1)
+parent: MB-System .mb1 Format (mb1)
+grand_parent: 4. Multi-Vendor Sonar & LiDAR Converters
 nav_order: 1
 tool_name: mbone2omg
 source_path: code/mb1/mbone2omg.c
 category: Raw Data Unraveling & Format Conversion
-input_formats: [".tdy (Teledyne MB1)"]
-output_formats: [".merged", ".merged.ss_data", ".sonar_settings", ".watercol", "wc_image.r4"]
-related_tools: ["mboneTool", "makess", "get_ADH_SRA", "swathed", "jview"]
+input_formats:
+- .tdy (Teledyne MB1)
+output_formats:
+- .merged
+- .merged.ss_data
+- .sonar_settings
+- .watercol
+- wc_image.r4
+related_tools:
+- mboneTool
+- makess
+- get_ADH_SRA
+- swathed
+- jview
 ---
 
 # mbone2omg
@@ -56,4 +68,4 @@ During execution, `mbone2omg` performs a two-pass scan of the `.tdy` file:
 
 ## Architectural Fit
 
-After running `mbone2omg`, the resulting `<prefix>.merged`, `<prefix>.merged.ss_data`, and `<prefix>.sonar_settings` files can be inspected in [`swathed`](../SE/swathed.md) or passed to [`makess`](../omg/makess.md) (which invokes `calibrate_mb1()` from `omg_mb1.h`) to generate calibrated `.ss` sidescan files for mosaicking in [`mos2`](../newmos/mos2.md).
+After running `mbone2omg`, the resulting `<prefix>.merged`, `<prefix>.merged.ss_data`, and `<prefix>.sonar_settings` files can be inspected in [`swathed`](../SE/swathed.html) or passed to [`makess`](../omg/makess.html) (which invokes `calibrate_mb1()` from `omg_mb1.h`) to generate calibrated `.ss` sidescan files for mosaicking in [`mos2`](../newmos/mos2.html).

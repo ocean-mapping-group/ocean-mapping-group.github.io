@@ -1,9 +1,11 @@
 ---
 layout: default
 title: 8kTool
-parent: Reson Tools
+parent: Reson SeaBat 7k/8k (reson)
+grand_parent: 4. Multi-Vendor Sonar & LiDAR Converters
 nav_order: 183
 ---
+
 # 8kTool
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 183
 This tool is useful for inspecting the raw structure and content of `.81x` files, verifying data integrity, and understanding the types and quantity of data stored within them. It supports `RESON_BATHY` and `RESON_SNIPPET` (SNP0 and SNP1) records.
 
 ## Usage
+
 ```bash
 8kTool -in <inputfile> [-v] [-vb] [-vs]
 ```

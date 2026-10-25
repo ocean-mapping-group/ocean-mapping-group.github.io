@@ -1,14 +1,28 @@
 ---
 layout: default
 title: deTVG
-parent: Jonathan Beaudoin (jonnyb) Tools
+parent: Jonathan Beaudoin — SVP, Refraction & Snippets (jonnyb)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 nav_order: 1
 tool_name: deTVG
 source_path: code/jonnyb/gom_stuff/deTVG.c
 category: Backscatter & Sidescan Processing (jonnyb)
-input_formats: [".merged", ".merged.ss_data", ".param", ".tx_sectors", ".r4 (optional DTM or GRA file)", ".depression"]
-output_formats: [".merged (updated in-place)", ".merged.ss_data (radiometrically corrected snippets)"]
-related_tools: ["makess", "RTlite", "read_kmall", "SE_AnandBS", "newMergeAtt"]
+input_formats:
+- .merged
+- .merged.ss_data
+- .param
+- .tx_sectors
+- .r4 (optional DTM or GRA file)
+- .depression
+output_formats:
+- .merged (updated in-place)
+- .merged.ss_data (radiometrically corrected snippets)
+related_tools:
+- makess
+- RTlite
+- read_kmall
+- SE_AnandBS
+- newMergeAtt
 ---
 
 # deTVG
@@ -27,11 +41,13 @@ deTVG [OPTIONS] -in <filename.merged>
 ### Examples
 
 **1. Standard radiometric TVG removal and grazing-angle correction using a gridded `.r4` DTM:**
+
 ```bash
 deTVG -use_dtm_for_grazing bay_2m.r4 -in merged/JD100/0001_line.merged
 ```
 
 **2. Using Anand Hiroji's local 3x3 ($1\text{ ping}\times 1\text{ beam}$) patch grazing angle calculation with `.kmall` OWTT:**
+
 ```bash
 deTVG -use_ADH_GRZ 1 1 -iskmall_use_realowtt -recalc_NormalIncid -in merged/JD100/0001_line.merged
 ```

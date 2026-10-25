@@ -1,13 +1,14 @@
 ---
 layout: default
 title: serio
-parent: Core Shared Libraries (subr)
-module_name: serio
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/serio.c
-header_path: code/subr/serio.h
 category: System, File I/O & String Utilities
 related_tools:
-  - serio
+- serio
+module_name: serio
+header_path: code/subr/serio.h
 ---
 
 # `serio` — UNIX Terminal / RS-232 Serial Port I/O Wrapper Library
@@ -50,6 +51,7 @@ Defines standard control codes `0x00`–`0x20` and `DEL`:
 ## Public Functions & Signatures
 
 ### `ser_open`
+
 ```c
 int ser_open(char *devicename, int baudrate);
 ```
@@ -61,6 +63,7 @@ int ser_open(char *devicename, int baudrate);
 - **Returns**: `1` on success, `-1` on error (unsupported baud rate, port already open, `fopen` failure, or `ioctl` failure).
 
 ### `ser_close`
+
 ```c
 int ser_close(void);
 ```
@@ -68,12 +71,14 @@ int ser_close(void);
 - **Returns**: `1` on success, `-1` on `ioctl` error.
 
 ### `ser_write`
+
 ```c
 int ser_write(int c);
 ```
 - **Purpose**: Writes a single byte `c` to the open serial output stream `spout` via `fputc(c, spout)`.
 
 ### `ser_read`
+
 ```c
 int ser_read(void);
 ```

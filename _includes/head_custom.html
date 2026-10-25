@@ -1,0 +1,277 @@
+<!-- KaTeX for Mathematical Equations -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" crossorigin="anonymous"></script>
+
+<!-- Mermaid v10 for Architecture & Pipeline Diagrams -->
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.0/dist/mermaid.min.js"></script>
+
+{% if page.source_path or page.tool_name or page.category %}
+<script id="omg-page-meta" type="application/json">
+{
+  "tool_name": {{ page.tool_name | jsonify }},
+  "source_path": {{ page.source_path | jsonify }},
+  "category": {{ page.category | jsonify }},
+  "input_formats": {{ page.input_formats | jsonify }},
+  "output_formats": {{ page.output_formats | jsonify }},
+  "related_tools": {{ page.related_tools | jsonify }}
+}
+</script>
+{% endif %}
+
+<style>
+  /* Expand main content column for wide CLI tables & architecture flowcharts */
+  @media (min-width: 66.5rem) {
+    .main {
+      max-width: 68rem !important;
+      margin-left: 17.5rem !important;
+    }
+    .side-bar {
+      width: 17.5rem !important;
+      min-width: 17.5rem !important;
+    }
+  }
+
+  /* Tool Quick-Spec Metadata Card */
+  .omg-spec-card {
+    background: rgba(30, 41, 59, 0.85);
+    border: 1px solid #334155;
+    border-left: 4px solid #38bdf8;
+    border-radius: 8px;
+    padding: 0.85rem 1.15rem;
+    margin: 1rem 0 1.5rem 0;
+    font-size: 0.86rem;
+    line-height: 1.55;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  }
+  .omg-spec-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 0.55rem 1.25rem;
+  }
+  .omg-spec-item strong {
+    color: #94a3b8;
+    text-transform: uppercase;
+    font-size: 0.72rem;
+    letter-spacing: 0.05em;
+    display: block;
+    margin-bottom: 0.15rem;
+  }
+  .omg-badge {
+    display: inline-block;
+    padding: 0.12rem 0.48rem;
+    margin: 0.1rem 0.2rem 0.1rem 0;
+    border-radius: 4px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.78rem;
+    background: #1e293b;
+    border: 1px solid #475569;
+    color: #e2e8f0;
+  }
+  .omg-badge-cat {
+    background: rgba(56, 189, 248, 0.15);
+    border-color: rgba(56, 189, 248, 0.45);
+    color: #38bdf8;
+    font-family: inherit;
+    font-weight: 600;
+  }
+  .omg-badge-in {
+    background: rgba(34, 197, 94, 0.14);
+    border-color: rgba(34, 197, 94, 0.4);
+    color: #4ade80;
+  }
+  .omg-badge-out {
+    background: rgba(168, 85, 247, 0.15);
+    border-color: rgba(168, 85, 247, 0.45);
+    color: #c084fc;
+  }
+
+  /* Styled Callout Boxes for [!NOTE], [!TIP], [!IMPORTANT], [!WARNING], [!CAUTION] */
+  .omg-callout {
+    border-radius: 6px;
+    padding: 0.85rem 1.1rem;
+    margin: 1.1rem 0;
+    border-left: 4px solid #38bdf8;
+    background: rgba(15, 23, 42, 0.75);
+    border-top: 1px solid rgba(148, 163, 184, 0.18);
+    border-right: 1px solid rgba(148, 163, 184, 0.18);
+    border-bottom: 1px solid rgba(148, 163, 184, 0.18);
+  }
+  .omg-callout-title {
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 0.35rem;
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+  }
+  .omg-callout p:last-child, .omg-callout ul:last-child {
+    margin-bottom: 0;
+  }
+  .omg-callout-note { border-left-color: #38bdf8; background: rgba(56, 189, 248, 0.08); }
+  .omg-callout-note .omg-callout-title { color: #38bdf8; }
+  .omg-callout-tip { border-left-color: #22c55e; background: rgba(34, 197, 94, 0.08); }
+  .omg-callout-tip .omg-callout-title { color: #4ade80; }
+  .omg-callout-important { border-left-color: #a855f7; background: rgba(168, 85, 247, 0.09); }
+  .omg-callout-important .omg-callout-title { color: #c084fc; }
+  .omg-callout-warning { border-left-color: #f59e0b; background: rgba(245, 158, 11, 0.09); }
+  .omg-callout-warning .omg-callout-title { color: #fbbf24; }
+  .omg-callout-caution { border-left-color: #ef4444; background: rgba(239, 68, 68, 0.09); }
+  .omg-callout-caution .omg-callout-title { color: #f87171; }
+
+  /* Mermaid Diagram Container */
+  .mermaid-wrapper {
+    background: #0f172a;
+    border: 1px solid #334155;
+    border-radius: 8px;
+    padding: 1.25rem;
+    margin: 1.25rem 0;
+    overflow-x: auto;
+    text-align: center;
+  }
+
+  /* Clean Table Styling */
+  .table-wrapper table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  .main-content table th {
+    background-color: #1e293b !important;
+    color: #f8fafc !important;
+    font-weight: 600;
+    border-bottom: 2px solid #475569 !important;
+  }
+  .main-content table tr:nth-child(even) td {
+    background-color: rgba(30, 41, 59, 0.4) !important;
+  }
+
+  /* Hero Grid Cards on Landing Pages */
+  .omg-card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+    margin: 1.25rem 0 1.75rem 0;
+  }
+  .omg-card {
+    background: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 8px;
+    padding: 1rem 1.15rem;
+    transition: border-color 0.15s ease, transform 0.15s ease;
+  }
+  .omg-card:hover {
+    border-color: #38bdf8;
+    transform: translateY(-2px);
+  }
+  .omg-card h3, .omg-card h4 {
+    margin-top: 0 !important;
+    margin-bottom: 0.4rem !important;
+    font-size: 1.02rem;
+  }
+  .omg-card p {
+    font-size: 0.85rem;
+    color: #cbd5e1;
+    margin-bottom: 0.5rem;
+  }
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  // 0. Inject Tool Quick-Spec Metadata Card if page has frontmatter metadata
+  const metaEl = document.getElementById("omg-page-meta");
+  const mainH1 = document.querySelector("#main-content h1");
+  if (metaEl && mainH1) {
+    try {
+      const meta = JSON.parse(metaEl.textContent);
+      const items = [];
+      if (meta.category) {
+        items.push('<div class="omg-spec-item"><strong>Category</strong><span class="omg-badge omg-badge-cat">' + meta.category + '</span></div>');
+      }
+      if (meta.source_path) {
+        items.push('<div class="omg-spec-item"><strong>Source File</strong><span class="omg-badge">' + meta.source_path + '</span></div>');
+      }
+      if (Array.isArray(meta.input_formats) && meta.input_formats.length > 0) {
+        const badges = meta.input_formats.map(f => '<span class="omg-badge omg-badge-in">' + f + '</span>').join("");
+        items.push('<div class="omg-spec-item"><strong>Input Formats</strong>' + badges + '</div>');
+      }
+      if (Array.isArray(meta.output_formats) && meta.output_formats.length > 0) {
+        const badges = meta.output_formats.map(f => '<span class="omg-badge omg-badge-out">' + f + '</span>').join("");
+        items.push('<div class="omg-spec-item"><strong>Output Formats</strong>' + badges + '</div>');
+      }
+      if (Array.isArray(meta.related_tools) && meta.related_tools.length > 0) {
+        const badges = meta.related_tools.map(t => '<span class="omg-badge">' + t + '</span>').join("");
+        items.push('<div class="omg-spec-item"><strong>Related Tools</strong>' + badges + '</div>');
+      }
+      if (items.length > 0) {
+        const card = document.createElement("div");
+        card.className = "omg-spec-card";
+        card.innerHTML = '<div class="omg-spec-grid">' + items.join("") + '</div>';
+        mainH1.insertAdjacentElement("afterend", card);
+      }
+    } catch (e) {}
+  }
+
+  // 1. Transform GitHub-style [!NOTE], [!TIP], [!IMPORTANT], [!WARNING], [!CAUTION] blockquotes
+  const icons = {
+    NOTE: "ℹ️ Note",
+    TIP: "💡 Tip",
+    IMPORTANT: "⚡ Important",
+    WARNING: "⚠️ Warning",
+    CAUTION: "🛑 Caution"
+  };
+  document.querySelectorAll("blockquote").forEach(function(bq) {
+    const html = bq.innerHTML.trim();
+    const m = html.match(/^<p>\s*\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]\s*(?:<br\s*\/?>)?\s*/i);
+    if (m) {
+      const kind = m[1].toUpperCase();
+      const div = document.createElement("div");
+      div.className = "omg-callout omg-callout-" + kind.toLowerCase();
+      const cleaned = html.replace(/^<p>\s*\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]\s*(?:<br\s*\/?>)?\s*/i, "<p>");
+      div.innerHTML = '<div class="omg-callout-title">' + (icons[kind] || kind) + '</div>' + cleaned;
+      bq.parentNode.replaceChild(div, bq);
+    }
+  });
+
+  // 2. Render Mermaid Diagrams from ```mermaid code blocks
+  if (window.mermaid) {
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: "dark",
+      securityLevel: "loose",
+      flowchart: { useMaxWidth: true, htmlLabels: true, curve: "basis" }
+    });
+    const codeBlocks = document.querySelectorAll("pre > code.language-mermaid, div.language-mermaid pre > code");
+    const mermaidNodes = [];
+    codeBlocks.forEach(function(codeEl) {
+      const pre = codeEl.closest("div.language-mermaid") || codeEl.parentElement;
+      const wrapper = document.createElement("div");
+      wrapper.className = "mermaid-wrapper";
+      const mDiv = document.createElement("div");
+      mDiv.className = "mermaid";
+      mDiv.textContent = codeEl.textContent;
+      wrapper.appendChild(mDiv);
+      pre.parentNode.replaceChild(wrapper, pre);
+      mermaidNodes.push(mDiv);
+    } );
+    if (mermaidNodes.length > 0) {
+      mermaid.run({ nodes: mermaidNodes });
+    }
+  }
+
+  // 3. Render KaTeX Math ($...$ and $$...$$)
+  if (window.renderMathInElement) {
+    renderMathInElement(document.body, {
+      delimiters: [
+        {left: "$$", right: "$$", display: true},
+        {left: "$", right: "$", display: false},
+        {left: "\\(", right: "\\)", display: false},
+        {left: "\\[", right: "\\]", display: true}
+      ],
+      ignoredTags: ["script", "noscript", "style", "textarea", "pre", "code"],
+      throwOnError: false
+    });
+  }
+});
+</script>

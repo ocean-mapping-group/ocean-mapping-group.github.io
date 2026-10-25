@@ -1,18 +1,19 @@
 ---
 layout: default
 title: j_EM_watercol
-parent: Core Shared Libraries (subr)
-module_name: j_EM_watercol
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/j_EM_watercol.c
-header_path: code/subr/j_EM_watercol.h
-category: "Multibeam Water-Column Processing & Visualization"
+category: Multibeam Water-Column Processing & Visualization
 related_tools:
-  - swathed
-  - RT
-  - RTLite
-  - makeWC
-  - M3imb2omg
-  - targethunt
+- swathed
+- RT
+- RTLite
+- makeWC
+- M3imb2omg
+- targethunt
+module_name: j_EM_watercol
+header_path: code/subr/j_EM_watercol.h
 ---
 
 # `j_EM_watercol` — Multibeam Water-Column Data Structures, Compression, and Polar Scan-Conversion

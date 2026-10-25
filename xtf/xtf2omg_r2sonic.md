@@ -1,14 +1,25 @@
 ---
 layout: default
 title: xtf2omg_r2sonic
-parent: XTF Tools
+parent: eXtended Triton Format — XTF (xtf)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 9
 tool_name: xtf2omg_r2sonic
 source_path: code/xtf/xtf2omg_r2sonic.c
 category: Raw Data Unraveling
-input_formats: [".xtf", ".idx"]
-output_formats: [".merged", ".merged.ss_data", ".sonar_settings"]
-related_tools: ["r2sonic2omg", "xtf2nav", "xtf2orientation", "xtf2param", "xtfTool"]
+input_formats:
+- .xtf
+- .idx
+output_formats:
+- .merged
+- .merged.ss_data
+- .sonar_settings
+related_tools:
+- r2sonic2omg
+- xtf2nav
+- xtf2orientation
+- xtf2param
+- xtfTool
 ---
 
 # xtf2omg_r2sonic
@@ -17,6 +28,7 @@ related_tools: ["r2sonic2omg", "xtf2nav", "xtf2orientation", "xtf2param", "xtfTo
 `xtf2omg_r2sonic` converts R2Sonic multibeam sonar data (Sonic 2022 and 2024) logged in Triton XTF (`.xtf`) format into OMG-HDCS v4 files (`.merged`, `.merged.ss_data`, and `.sonar_settings`). It supports both native R2Sonic bathymetry packets (XTF packet ID 65) and QINSy Multibeam Entry (`QMBE`, XTF packet ID 28) packets, and pairs them with R2Sonic Footprint Time Series (`FTS`, XTF packet ID 66) snippet packets when present.
 
 ## Usage
+
 ```bash
 xtf2omg_r2sonic [-v] [-debug] [-sonar <2022|2024>] -xtf <input.xtf> -omg <omg_prefix>
 ```
@@ -48,11 +60,13 @@ xtf2omg_r2sonic [-v] [-debug] [-sonar <2022|2024>] -xtf <input.xtf> -omg <omg_pr
 ## Practical Examples
 
 **1. Convert an R2Sonic 2024 XTF file containing both Bathy (ID 65) and FTS Snippets (ID 66):**
+
 ```bash
 xtf2omg_r2sonic -v -xtf r2s_line01.xtf -omg r2s_line01
 ```
 
 **2. Convert a QINSy XTF file with QMBE Bathy (ID 28) and no FTS packets:**
+
 ```bash
 xtf2omg_r2sonic -sonar 2024 -xtf qinsy_line01.xtf -omg qinsy_line01
 ```

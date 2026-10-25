@@ -5,29 +5,29 @@ parent: Processing Workflows & Guides
 nav_order: 4
 category: workflows
 input_formats:
-  - .merged
-  - .ss
+- .merged
+- .ss
 output_formats:
-  - .blank
-  - .weight
-  - .r4
-  - .8bit
-  - .sun
-  - .mos
-  - .ran
+- .blank
+- .weight
+- .r4
+- .8bit
+- .sun
+- .mos
+- .ran
 related_tools:
-  - getBounds
-  - make_blank
-  - tor4
-  - weigh_grid
-  - r4to8bit
-  - addSUN
-  - swathed
-  - jview
-  - glfill
-  - stretchacres
-  - tomos
-  - mos2
+- getBounds
+- make_blank
+- tor4
+- weigh_grid
+- r4to8bit
+- addSUN
+- swathed
+- jview
+- glfill
+- stretchacres
+- tomos
+- mos2
 ---
 
 # Bathymetric Gridding, Swath Editing & Sidescan Mosaicking
@@ -68,12 +68,14 @@ Use [`make_blank`](../grid/make_blank.html) with `-float` to initialize the 1024
 > Always place `-float` (and `-mercator` if desired) **before** `-boundsof` or `-bounds`. Moreover, when using `-boundsof`, the output filename and `-Dx`/`-Dy` flags **must precede** `-boundsof`, because `-boundsof` consumes all remaining arguments on the command line as input files!
 
 **Option A — Explicit geographic bounds (Recommended):**
+
 ```bash
 # Format: make_blank <out_prefix> -float -bounds <West> <East> <South> <North> -Dx <res_m> -Dy <res_m>
 make_blank area -float -bounds -66.55 -66.40 44.95 45.10 -Dx 5.0 -Dy 5.0
 ```
 
 **Option B — Automatic bounds from `.merged` files:**
+
 ```bash
 make_blank area -float -Dx 5.0 -Dy 5.0 -boundsof -nav merged/*.merged
 ```

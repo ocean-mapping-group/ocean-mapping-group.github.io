@@ -1,14 +1,24 @@
 ---
 layout: default
 title: xtf2orientation
-parent: XTF Tools
+parent: eXtended Triton Format — XTF (xtf)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 12
 tool_name: xtf2orientation
 source_path: code/xtf/xtf2orientation.c
 category: Attitude Extraction
-input_formats: [".xtf", ".idx"]
-output_formats: [".orientation", ".orientation.POSMV"]
-related_tools: ["xtf2nav", "xtf2param", "xtfTool", "mergeAtt", "newMergeAtt"]
+input_formats:
+- .xtf
+- .idx
+output_formats:
+- .orientation
+- .orientation.POSMV
+related_tools:
+- xtf2nav
+- xtf2param
+- xtfTool
+- mergeAtt
+- newMergeAtt
 ---
 
 # xtf2orientation
@@ -17,6 +27,7 @@ related_tools: ["xtf2nav", "xtf2param", "xtfTool", "mergeAtt", "newMergeAtt"]
 `xtf2orientation` extracts asynchronous vessel attitude records (`XTF_HEADER_ATTITUDE`, packet ID 3) and optional Applanix POS/MV raw navigation/attitude records (`XTF_HEADER_POS_RAW_NAVIGATION`, packet ID 107) from an XTF file and writes them to binary OMG-HDCS `.orientation` (and `.orientation.POSMV`) files. It includes options for scaling or shifting roll and pitch, shifting timestamps, unwrapping midnight millisecond rollovers, and splitting output files across large time gaps.
 
 ## Usage
+
 ```bash
 xtf2orientation [OPTIONS] -xtf <input.xtf> -omg <omgfile.orientation>
 ```
@@ -46,11 +57,13 @@ xtf2orientation [OPTIONS] -xtf <input.xtf> -omg <omgfile.orientation>
 ## Practical Examples
 
 **1. Standard orientation extraction:**
+
 ```bash
 xtf2orientation -xtf line01.xtf -omg line01.orientation
 ```
 
 **2. Invert roll sign and handle midnight rollover:**
+
 ```bash
 xtf2orientation -roll_scale -1.0 -unwrap_day -xtf midnight_line.xtf -omg midnight_line.orientation
 ```

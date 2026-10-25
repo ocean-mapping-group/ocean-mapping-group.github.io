@@ -1,14 +1,22 @@
 ---
 layout: default
 title: klein2omg
-parent: XTF Tools
+parent: eXtended Triton Format — XTF (xtf)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 5
 tool_name: klein2omg
 source_path: code/xtf/klein2omg.c
 category: Raw Data Unraveling
-input_formats: [".xtf"]
-output_formats: [".merged", ".ss_data"]
-related_tools: ["xtf2gloria", "xtf2nav", "xtf2orientation", "xtfTool"]
+input_formats:
+- .xtf
+output_formats:
+- .merged
+- .ss_data
+related_tools:
+- xtf2gloria
+- xtf2nav
+- xtf2orientation
+- xtfTool
 ---
 
 # klein2omg
@@ -17,6 +25,7 @@ related_tools: ["xtf2gloria", "xtf2nav", "xtf2orientation", "xtfTool"]
 `klein2omg` converts Klein sidescan sonar records (`XTF_HEADER_SONAR`, packet ID 0) from an XTF file into an OMG-HDCS v3 2-beam `.merged` file (with `toolType = Knudsen_320`) and a companion 16-bit little-endian `.ss_data` sidescan trace file.
 
 ## Usage
+
 ```bash
 klein2omg [-v] [-debug] -xtf <input.xtf> -omg <output.merged>
 ```
@@ -42,6 +51,7 @@ klein2omg [-v] [-debug] -xtf <input.xtf> -omg <output.merged>
 ## Practical Examples
 
 **1. Convert a Klein XTF file to OMG-HDCS `.merged` and `.ss_data`:**
+
 ```bash
 klein2omg -v -xtf klein_line01.xtf -omg klein_line01.merged
 ```

@@ -1,14 +1,28 @@
 ---
 layout: default
 title: elac2omg
-parent: XTF Tools
+parent: eXtended Triton Format — XTF (xtf)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 1
 tool_name: elac2omg
 source_path: code/xtf/elac2omg.c
 category: Raw Data Unraveling
-input_formats: [".xtf"]
-output_formats: [".merged", ".merged.ss_data", ".orientation", ".nav", ".latency", ".ss_NNN"]
-related_tools: ["refoELAC", "qualityFlag", "xtfTool", "xtf2param", "mergeAtt", "mergeNav"]
+input_formats:
+- .xtf
+output_formats:
+- .merged
+- .merged.ss_data
+- .orientation
+- .nav
+- .latency
+- .ss_NNN
+related_tools:
+- refoELAC
+- qualityFlag
+- xtfTool
+- xtf2param
+- mergeAtt
+- mergeNav
 ---
 
 # elac2omg
@@ -17,6 +31,7 @@ related_tools: ["refoELAC", "qualityFlag", "xtfTool", "xtf2param", "mergeAtt", "
 `elac2omg` converts ELAC HydroStar multibeam sonar data logged in Triton XTF (`.xtf`) format into the OMG-HDCS (`.merged`), sidescan (`.merged.ss_data`), attitude (`.orientation`), and navigation (`.nav`) formats. Unlike other XTF converters that handle only bathymetry, `elac2omg` simultaneously extracts embedded attitude (packet ID 3) and navigation fixes from the ELAC HydroStar bathymetry headers (packet ID 16), estimates attitude latency per ping, and unfolds the 3-fan ELAC transmit sequence into sequential 42-beam OMG profile records.
 
 ## Usage
+
 ```bash
 elac2omg [OPTIONS] -nav <ship|sensor> -hdg <ship|sensor> -xtf <input.xtf> -omg <output_prefix>
 ```
@@ -48,7 +63,7 @@ elac2omg [OPTIONS] -nav <ship|sensor> -hdg <ship|sensor> -xtf <input.xtf> -omg <
 1. **Indexing & Verification:** Scans the XTF file with `buildXTFIndex()` and verifies the presence of `XTF_HEADER_HYDROSTAR_BATHY` (ID 16) records. Matches sidescan packets (`XTF_HEADER_SONAR`, ID 0) to bathymetry packets using `matchXTFPackets()`.
 2. **Attitude Extraction & Latency Estimation:** Reads all `XTF_HEADER_ATTITUDE` (ID 3) packets into memory arrays (`rollSeries`, `pitchSeries`, `heaveSeries`, `timeSeries`) and writes them to `<prefix>.orientation`. For each bathymetry ping, if `-delay` is not set, `getLatency()` cross-correlates the roll/pitch/heave values embedded in the ELAC beam triplets against the asynchronous attitude time series to estimate the timestamp latency, logging `<ping> <delay_ms>` to `<prefix>.latency`.
 3. **3-Fan Unfolding:** Each ELAC HydroStar bathymetry record contains up to 126 beams acquired across 3 sequential transmit fans (42 beams per fan, interleaved every 3rd beam index `3*i + fan`). `elac2omg` sorts the 3 fans chronologically by their `dDelay` offset (`minFan`, `medFan`, `maxFan`) and writes 3 separate 42-beam `OMG_HDCS_profile_header` records per XTF bathymetry packet.
-4. **Triplet Packing:** Packs the roll, pitch, heave, and delay of the 3 fans into a 48-byte big-endian `tripletBuffer` stored inside the `profile.params` structure for downstream use by [`refoELAC`](../elac/refoELAC.md).
+4. **Triplet Packing:** Packs the roll, pitch, heave, and delay of the 3 fans into a 48-byte big-endian `tripletBuffer` stored inside the `profile.params` structure for downstream use by [`refoELAC`](../elac/refoELAC.html).
 
 ## Output Files
 * `<prefix>.merged`: OMG-HDCS v3 bathymetry file (42 beams per profile, 3 profiles per ELAC ping).
@@ -61,11 +76,13 @@ elac2omg [OPTIONS] -nav <ship|sensor> -hdg <ship|sensor> -xtf <input.xtf> -omg <
 ## Practical Examples
 
 **1. Standard ELAC XTF conversion using sensor coordinates and quality filtering:**
+
 ```bash
 elac2omg -v -fq -nav sensor -hdg sensor -xtf line04.xtf -omg line04
 ```
 
 **2. Blank outer fan 0 and apply a fixed 0.15 s latency:**
+
 ```bash
 elac2omg -b0 -delay 0.15 -nav ship -hdg ship -xtf line04.xtf -omg line04
 ```

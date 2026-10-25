@@ -1,18 +1,19 @@
 ---
 layout: default
 title: getCR
-parent: tests (Test, Simulation & Diagnostic Suite)
+parent: Acoustic & Mathematical Test Harnesses (tests)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 nav_order: 7
 tool_name: getCR
 source_path: code/tests/getCR.c
 category: File Format & Line-Ending Utilities (tests)
 input_formats:
-  - ASCII text file (Mac CR, DOS CRLF, or Unix LF)
+- ASCII text file (Mac CR, DOS CRLF, or Unix LF)
 output_formats:
-  - Converted ASCII text file (Unix LF or DOS CRLF)
+- Converted ASCII text file (Unix LF or DOS CRLF)
 related_tools:
-  - stripRawDoc
-  - read4bit
+- stripRawDoc
+- read4bit
 ---
 
 # getCR

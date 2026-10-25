@@ -1,9 +1,11 @@
 ---
 layout: default
 title: checkSD
-parent: OMG Tools
+parent: Core Swath & .all Suite (omg)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 80
 ---
+
 # checkSD
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 80
 The tool works in two passes: first, to calculate the average bias per beam angle, and second, to calculate the standard deviation around that bias.
 
 ## Usage
+
 ```bash
 checkSD <r4prefix> <soundingfiles(s)> [OPTIONS]
 ```
@@ -24,6 +27,7 @@ checkSD <r4prefix> <soundingfiles(s)> [OPTIONS]
 | `<soundingfiles(s)>` | **Required.** One or more paths to OMG-HDCS merged files (or ASCII sounding lists if `-ascii` is used) containing the soundings to be checked. |
 
 ### Processing Control
+
 | Option | Description | Default |
 |---|---|---|
 | `-v` | Enable verbose output. | |
@@ -33,6 +37,7 @@ checkSD <r4prefix> <soundingfiles(s)> [OPTIONS]
 | `-just_pulse_microsec <val>` | Only process pings with a `tx_pulse_len` matching this microsecond value. | |
 
 ### Data Filtering
+
 | Option | Description | Default |
 |---|---|---|
 | `-useallZ` | Use all soundings, regardless of their status flags (overrides `status != 22` and `status != 1`). | |
@@ -40,6 +45,7 @@ checkSD <r4prefix> <soundingfiles(s)> [OPTIONS]
 | `-MAX_nonflyer_percent <val>` | Sets a percentage threshold (e.g., `3.0` for 3%) for rejecting "wild flyers" during standard deviation calculation. Soundings deviating by more than `val`% from the reference ray are discarded from the sigma calculation. | `100.0` |
 
 ### Corrections & Adjustments
+
 | Option | Description | Default |
 |---|---|
 | `-draft <val>` | Specifies the draft (in meters) to subtract from observed depths. **Mandatory**. | `0.0` |
@@ -49,6 +55,7 @@ checkSD <r4prefix> <soundingfiles(s)> [OPTIONS]
 | `-remove_average_bias` | Remove the calculated average bias from the percentage difference calculation (for the second pass). | |
 
 ### Output Options
+
 | Option | Description | Default |
 |---|---|---|
 | `-beams <first> <last>` | Only process beams within this beam number range (inclusive). | All beams |

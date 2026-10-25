@@ -1,14 +1,22 @@
 ---
 layout: default
 title: filtnav
-parent: Navigation Tools
+parent: Navigation Processing (nav)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 18
 tool_name: filtnav
 source_path: code/nav/filtnav.c
 category: Navigation & Georeferencing
-input_formats: [".nav (jcu_nav_rec binary)"]
-output_formats: [".nav.filtered (jcu_nav_rec binary)"]
-related_tools: ["fixnav", "avNav", "calcSpeedHead", "appendNav", "mergeNav"]
+input_formats:
+- .nav (jcu_nav_rec binary)
+output_formats:
+- .nav.filtered (jcu_nav_rec binary)
+related_tools:
+- fixnav
+- avNav
+- calcSpeedHead
+- appendNav
+- mergeNav
 ---
 
 # filtnav
@@ -31,12 +39,14 @@ filtnav [OPTIONS] <filename.nav>
 ### Common Workflow Examples
 
 **1. Filter out duplicate fixes, time jumps, and speed spikes (3 iterative passes):**
+
 ```bash
 filtnav -times 3 raw_line01.nav
 # Writes raw_line01.nav.filtered
 ```
 
 **2. Smooth positions over a $\pm 5$-fix window and recompute course and speed:**
+
 ```bash
 filtnav -smooth raw_line01.nav
 # Writes raw_line01.nav.filtered
@@ -68,7 +78,7 @@ In each pass `j` of `0 .. times - 1`, `filtnav` first compacts the array by disc
 Whenever a fix pair is rejected, `checkem()` prints the inter-fix time step, distance, speed, and full record dumps (`nav_show`) for `Record[i]` and `Record[i+1]`.
 
 > [!TIP]
-> Because `packem()` is called *before* `checkem()` inside the `for (j = 0; j < times; j++)` loop, a single pass (`-times 1`) flags bad records (`flag[3] = 1`) in the output `.filtered` file without removing them from the record array. Pass `-times 2` (or more) if you want the flagged records physically stripped from `<filename>.filtered`, or use `-goodonly` in [`appendNav`](appendNav.md).
+> Because `packem()` is called *before* `checkem()` inside the `for (j = 0; j < times; j++)` loop, a single pass (`-times 1`) flags bad records (`flag[3] = 1`) in the output `.filtered` file without removing them from the record array. Pass `-times 2` (or more) if you want the flagged records physically stripped from `<filename>.filtered`, or use `-goodonly` in [`appendNav`](appendNav.html).
 
 ---
 

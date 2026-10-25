@@ -1,14 +1,38 @@
 ---
 layout: default
 title: sdf2omg
-parent: SDF Tools
+parent: Klein Sonar Data Format — SDF (sdf)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 2
 tool_name: sdf2omg
 source_path: code/sdf/sdf2omg.c
 category: Raw Data Unraveling
-input_formats: [".sdf"]
-output_formats: [".merged", ".merged.ss_data", ".sonar_settings", ".param", ".orientation", ".ss_5902", ".ss_5902.slr", ".ss_5910", ".ss_5910.slr", ".ss_5920", ".ss_3501", ".ss_3502", ".nav_5902", ".nav_5910", ".nav_5920", ".nav_3501", ".nav_3502"]
-related_tools: ["sdf2nav", "sdf2orientation", "sdfTool", "mergeAtt", "mergeNav"]
+input_formats:
+- .sdf
+output_formats:
+- .merged
+- .merged.ss_data
+- .sonar_settings
+- .param
+- .orientation
+- .ss_5902
+- .ss_5902.slr
+- .ss_5910
+- .ss_5910.slr
+- .ss_5920
+- .ss_3501
+- .ss_3502
+- .nav_5902
+- .nav_5910
+- .nav_5920
+- .nav_3501
+- .nav_3502
+related_tools:
+- sdf2nav
+- sdf2orientation
+- sdfTool
+- mergeAtt
+- mergeNav
 ---
 
 # sdf2omg
@@ -17,6 +41,7 @@ related_tools: ["sdf2nav", "sdf2orientation", "sdfTool", "mergeAtt", "mergeNav"]
 `sdf2omg` converts Klein Sonar Data Format (`.sdf`) interferometric bathymetry and multi-channel sidescan records into OMG-HDCS v4 (`.merged`, `.merged.ss_data`, `.sonar_settings`, `.param`, `.orientation`) and JCU GLORIA sidescan (`.ss_*`) and navigation (`.nav_*`) files. It supports both Klein HydroChart 5000 (`page_version == 5004`) and Klein 5900 / 3500 series (`page_version == 5911`, `5902`, `5910`, `5920`, `3501`, `3502`) packets, including embedded Greensea INS attitude/position telegrams.
 
 ## Usage
+
 ```bash
 sdf2omg [OPTIONS] -sdf <input_name.sdf> -omg <omg_file_prefix>
 ```
@@ -47,6 +72,7 @@ sdf2omg [OPTIONS] -sdf <input_name.sdf> -omg <omg_file_prefix>
 ## Practical Examples
 
 **1. Convert a Klein HydroChart 5000 or 5900 `.sdf` file with 0.25 m across-track binning:**
+
 ```bash
 sdf2omg -v -bin 0.25 -qf 0.65 -sdf line01.sdf -omg line01
 ```

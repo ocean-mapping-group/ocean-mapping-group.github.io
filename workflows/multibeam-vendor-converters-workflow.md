@@ -7,7 +7,7 @@ nav_order: 10
 
 # Multi-Vendor Multibeam Sonar Converters Workflow
 
-While Kongsberg Simrad `.all` and `.kmall` files are ingested via `unravel` and `kmall2omg` (see the [Multibeam Bathymetry Workflow](multibeam-bathymetry-workflow.md)), the Ocean Mapping Group (OMG) software suite supports a wide spectrum of hydrographic, tactical, fisheries, and forward-looking multibeam echosounders from **Teledyne Reson**, **R2Sonic**, **FURUNO WASSP**, **L-3 ELAC / SeaBeam (XSE, ELAC, SB2000/2100)**, **Kongsberg Mesotech M3**, and **Lowrance**.
+While Kongsberg Simrad `.all` and `.kmall` files are ingested via `unravel` and `kmall2omg` (see the [Multibeam Bathymetry Workflow](kongsberg-kmall-unraveling.html)), the Ocean Mapping Group (OMG) software suite supports a wide spectrum of hydrographic, tactical, fisheries, and forward-looking multibeam echosounders from **Teledyne Reson**, **R2Sonic**, **FURUNO WASSP**, **L-3 ELAC / SeaBeam (XSE, ELAC, SB2000/2100)**, **Kongsberg Mesotech M3**, and **Lowrance**.
 
 Every vendor converter translates native packet streams into the unified **`OMG_HDCS`** file family (`.merged`, `.merged.ss_data`, `.merged.16_data`, `.merged.wc_data`, `.nav`, `.orientation`, `.params`, and `.svp`), enabling identical downstream processing in `SwathEd`, `weigh_grid`, `mos3000`, and `wc_look`.
 
@@ -95,6 +95,7 @@ The `code/reson/` suite parses the Teledyne Reson Data Frame (7k) protocol, hand
 
 #### Step 1: Inspecting `.s7k` Packet Inventories (`7kTool`)
 Always run `7kTool` first to inventory which 7k record types were logged by the 7k Center / PDS2000 acquisition software:
+
 ```bash
 7kTool -v -in 20230512_141022.s7k
 ```
@@ -161,6 +162,7 @@ r2sonic_extract_truepix -v -in line01.r2s -out r2s_line01_tp
 For FURUNO WASSP fishery and hydrographic multibeam systems (`code/wassp/`):
 * `wasspTool`: Inspects WASSP raw packet types (`CORBATHY`, `RAWBATHY`, `SONAR`, `WCD`, `NAVDAT`) (`wasspTool -v -in survey01.wsp`).
 * `wassp2omg`: Converts WASSP bathymetry, backscatter imagery, navigation, and attitude into `OMG_HDCS` `.merged`, `.merged.ss_data`, `.nav`, and `.orientation`:
+
   ```bash
   wassp2omg -v -in survey01.wsp -out wassp_line01
   ```
@@ -171,6 +173,7 @@ For FURUNO WASSP fishery and hydrographic multibeam systems (`code/wassp/`):
 
 ### XSE Format — SeaBeam 3012 / 3020 / 1180 & ELAC (`xse/`)
 The extensible **XSE** frame format (`Ship`, `Nav`, `Attitude`, `MultiBeam`, `SideScan`, `SVP` frames) is processed using `xseTool` and `xse2omg` (`code/xse/`):
+
 ```bash
 # Inspect XSE frame IDs and group counts:
 xseTool -v -in line01.xse
@@ -187,6 +190,7 @@ xse2omg -v -in line01.xse -out seabeam_line01
 SeaBeam 2000 (`.sb2k`) and SeaBeam 2100 (`.mb41` / `.sb2100`) processing is a two-stage pipeline:
 1. **Unpack Raw Telegrams**: Run `unravelSB2K` (for SeaBeam 2000) or `unravelSB2100` (for SeaBeam 2100) to split raw vendor archives into intermediate bathymetry, `.nav`, `.orientation`, and sidescan files.
 2. **Merge Navigation & Raytrace**: Run `mergeSB2K` to interpolate navigation and attitude onto ping times and write the final `OMG_HDCS` `.merged` and `.merged.ss_data` files:
+
 ```bash
 unravelSB2100 -v -in raw_line01.mb41 -out sb2100_line01
 mergeSB2K -v -in sb2100_line01 -nav sb2100_line01.nav -out sb2100_line01.merged

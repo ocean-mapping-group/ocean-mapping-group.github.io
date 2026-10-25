@@ -1,9 +1,11 @@
 ---
 layout: default
 title: svpSonar
-parent: Ray Tools
+parent: Ray-Tracing & Refraction (ray)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 171
 ---
+
 # svpSonar
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 171
 This tool is critical for understanding the sensitivity of multibeam systems to sound velocity profile inaccuracies and for quantifying potential depth and position errors. It generates output data that can be plotted to visualize these distortions.
 
 ## Usage
+
 ```bash
 svpSonar (-elac | -em1000 | -line | -em3000d | -isis | -custom <LUT_file>) -out <output_file> [-actual <val>] [-speed_range <min_error> <max_error> <step_error>] [-angle_range <min_angle> <max_angle> <step_angle>]
 ```

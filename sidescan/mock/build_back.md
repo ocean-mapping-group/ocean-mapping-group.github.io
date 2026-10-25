@@ -1,16 +1,18 @@
 ---
 layout: default
 title: build_back
-parent: Mock Tools
-grand_parent: sidescan
+parent: Sidescan Radiometric & Geometric Suite (sidescan)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 6
 ---
+
 # build_back
 
 ## Description
 `build_back` is a utility designed to analyze the relationship between backscatter strength and grazing angle by constructing a density plot (or "table") and deriving statistical information. It processes backscatter and grazing angle data from multiple JCU GLORIA files, calculates the mean and standard deviation of backscatter for various grazing angle bins, and outputs this information as both a visual table and an ASCII file. An option for histogram equalization is also available.
 
 ## Usage
+
 ```bash
 build_back [-table <prefix>] [-eq] [-first <record>] [-last <record>]
 ```

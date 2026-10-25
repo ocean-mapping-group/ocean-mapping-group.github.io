@@ -1,10 +1,11 @@
 ---
 layout: default
 title: angular_response
-parent: Subr Tools
-grand_parent: code
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 nav_order: 2
 ---
+
 # angular_response
 
 ## Description
@@ -13,6 +14,7 @@ nav_order: 2
 ## Data Structures
 
 ### `AR_Map`
+
 ```c
 typedef struct {
     JHC_header header;        // Header containing map dimensions, projection info, etc.

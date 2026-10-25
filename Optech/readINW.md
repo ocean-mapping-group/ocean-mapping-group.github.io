@@ -1,9 +1,11 @@
 ---
 layout: default
 title: readINW
-parent: Optech Tools
+parent: Optech SHOALS Bathymetric LiDAR (Optech)
+grand_parent: 4. Multi-Vendor Sonar & LiDAR Converters
 nav_order: 119
 ---
+
 # readINW
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 119
 This tool essentially "unpacks" the raw INW data into a more usable format for subsequent processing by other Optech-related tools.
 
 ## Usage
+
 ```bash
 readINW <infile> <outfile_prefix> [-noraman] [-v]
 ```

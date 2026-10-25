@@ -1,9 +1,11 @@
 ---
 layout: default
 title: dumpWaveFormParams
-parent: Optech Tools
+parent: Optech SHOALS Bathymetric LiDAR (Optech)
+grand_parent: 4. Multi-Vendor Sonar & LiDAR Converters
 nav_order: 111
 ---
+
 # dumpWaveFormParams
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 111
 The tool supports different waveform types (PMT, GAPD, IR, RAMAN) and offers numerous options for filtering, parameter selection, and specialized output formats.
 
 ## Usage
+
 ```bash
 dumpWaveFormParams <OMG_HDCS_datafile(s)> -out <ASCII_listing_file> [OPTIONS]
 ```
@@ -24,6 +27,7 @@ dumpWaveFormParams <OMG_HDCS_datafile(s)> -out <ASCII_listing_file> [OPTIONS]
 | `-out <ASCII_listing_file>` | **Required.** The path for the ASCII output file. |
 
 ### Waveform Type Selection (Choose one)
+
 | Option | Description |
 |---|---|
 | `-pmt` | Process PMT (Photo-Multiplier Tube) waveforms. |
@@ -32,6 +36,7 @@ dumpWaveFormParams <OMG_HDCS_datafile(s)> -out <ASCII_listing_file> [OPTIONS]
 | `-raman` | Process RAMAN waveforms (used primarily for land/water returns if `-no_land` is used). |
 
 ### Parameter Output Selection (Choose one or more)
+
 | Option | Description |
 |---|---|
 | `-nadir_beam` | Output nadir beam info only (depths, widths, slopes, K-values). |
@@ -52,6 +57,7 @@ dumpWaveFormParams <OMG_HDCS_datafile(s)> -out <ASCII_listing_file> [OPTIONS]
 | `-hdk` | Output `i_top_bot_d`, depth-121, and `K * -1.0`. |
 
 ### Filtering & Range Options
+
 | Option | Description | Default / Example |
 |---|---|---|
 | `-valid_only` | Only output data that `pm_Process_Wave` marks as valid (not `9`). | |
@@ -63,6 +69,7 @@ dumpWaveFormParams <OMG_HDCS_datafile(s)> -out <ASCII_listing_file> [OPTIONS]
 | `-trace <depth>` | Dumps ASCII trace data for waveforms at a specific depth. | |
 
 ### Other Options
+
 | Option | Description | Default / Example |
 |---|---|---|
 | `-v` | Enable verbose output. | |

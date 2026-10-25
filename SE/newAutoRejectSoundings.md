@@ -1,14 +1,22 @@
 ---
 layout: default
 title: newAutoRejectSoundings
-parent: SwathEd (SE) Tools
+parent: Swath Editor — swathed (SE)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 34
 tool_name: newAutoRejectSoundings
 source_path: code/SE/newAutoRejectSoundings.c
 category: Interactive QC & Editing (SwathEd)
-input_formats: [".merged", "SwathEd auto-flag criteria file"]
-output_formats: [".merged (beam status flags updated in-place)"]
-related_tools: ["SE_AUTOFLAGwin", "swathed", "SE_omgIOwin", "dumpFlags"]
+input_formats:
+- .merged
+- SwathEd auto-flag criteria file
+output_formats:
+- .merged (beam status flags updated in-place)
+related_tools:
+- SE_AUTOFLAGwin
+- swathed
+- SE_omgIOwin
+- dumpFlags
 ---
 
 # `newAutoRejectSoundings` — Batch Automated Sounding Outlier Flagging Utility
@@ -16,7 +24,7 @@ related_tools: ["SE_AUTOFLAGwin", "swathed", "SE_omgIOwin", "dumpFlags"]
 ## Overview & Purpose
 `newAutoRejectSoundings` (originally `autorejectSounding.c` by John E. Hughes Clarke, January 1994; rebuilt September 2009 during the CCGS *Amundsen* Ajuarak block survey) is a standalone command-line batch processor that applies `swathed` **Auto-Flag Parameters** across one or more `.merged` multibeam files without launching the X11 graphical interface.
 
-In a typical quality-control workflow, a processor opens a representative `.merged` survey line in `swathed`, opens the **Auto-Flag Parameters** window ([`SE_AUTOFLAGwin.c`](SE_AUTOFLAGwin.md)), interactively tunes the across-track and along-track two-slope limits, beam masks, spike sense, and isolated-neighbor ("Fore-Aft", "Left-Right", "Any 2") rules, and saves the configuration to an ASCII criteria file via `dump_auto_parameters()`. `newAutoRejectSoundings` then reads that criteria file (`-criteria <filename>`) and steps through up to 200 `.merged` lines in 100-ping (`SE_NO_SWATHS`) overlapping blocks to batch-flag outliers in place.
+In a typical quality-control workflow, a processor opens a representative `.merged` survey line in `swathed`, opens the **Auto-Flag Parameters** window ([`SE_AUTOFLAGwin.c`](SE_AUTOFLAGwin.html)), interactively tunes the across-track and along-track two-slope limits, beam masks, spike sense, and isolated-neighbor ("Fore-Aft", "Left-Right", "Any 2") rules, and saves the configuration to an ASCII criteria file via `dump_auto_parameters()`. `newAutoRejectSoundings` then reads that criteria file (`-criteria <filename>`) and steps through up to 200 `.merged` lines in 100-ping (`SE_NO_SWATHS`) overlapping blocks to batch-flag outliers in place.
 
 ---
 
@@ -40,7 +48,7 @@ newAutoRejectSoundings -v -criteria petrel_autoflag.params merged/JD250/*.merged
 
 | Option | Description | Default |
 |---|---|---|
-| `-criteria <file>` | **Required.** Path to the ASCII auto-flag parameter file parsed by `parse_auto_parameters()` in [`SE_AUTOFLAGwin.c`](SE_AUTOFLAGwin.md). | Required |
+| `-criteria <file>` | **Required.** Path to the ASCII auto-flag parameter file parsed by `parse_auto_parameters()` in [`SE_AUTOFLAGwin.c`](SE_AUTOFLAGwin.html). | Required |
 | `<mergedfile(s)>` | **Required.** One or more OMG `.merged` files (up to 200 files per invocation) to clean in-place. | Required |
 | `-v` | Enable verbose diagnostic output (`verbose_flag++`). | Disabled |
 
@@ -67,10 +75,11 @@ The `-criteria <file>` argument accepts standard SwathEd auto-flag parameter fil
 
 ## Batch Execution Pipeline
 
-1. **Parameter Parsing & GUI Suppression:** Calls `parse_auto_parameters(tidename)` and zeroes all interactive GUI flags (`got_a_sswindow = 0`, `Lines_flag = 0`, `follow_terrain = 0`, `hdcs_flag = 0`, `full_att = 0`, `preload_flags = 0`) so [`SE_omgIOwin.c`](SE_omgIOwin.md) (`prime_array`) runs purely in headless memory mode without X11 calls.
+1. **Parameter Parsing & GUI Suppression:** Calls `parse_auto_parameters(tidename)` and zeroes all interactive GUI flags (`got_a_sswindow = 0`, `Lines_flag = 0`, `follow_terrain = 0`, `hdcs_flag = 0`, `full_att = 0`, `preload_flags = 0`) so [`SE_omgIOwin.c`](SE_omgIOwin.html) (`prime_array`) runs purely in headless memory mode without X11 calls.
 2. **4-Ping Overlapping Block Stepping:** For each input `.merged` file `name[j]`, opens `infile` in `"r+"` mode, reads `OMG_HDCS_summary_header`, and loops over all profiles in steps of `SE_NO_SWATHS - 4` (`96` pings per step):
+
    ```c
    for (k = 0; k < summary.numProfiles; k += SE_NO_SWATHS - 4)
    ```
    The 4-ping overlap between consecutive 100-ping blocks ensures that along-track two-slope (`use_ALONG_two`) and fore-aft neighbor (`use_FOREAFT`, `any_2`) tests have valid along-track context at block boundaries.
-3. **Load, Check & Write-Back:** Calls `prime_array(k)`, runs `check_data()` from [`SE_AUTOFLAGwin.c`](SE_AUTOFLAGwin.md), and writes updated `beam.status` flags back to disk via `dump_array(k)`.
+3. **Load, Check & Write-Back:** Calls `prime_array(k)`, runs `check_data()` from [`SE_AUTOFLAGwin.c`](SE_AUTOFLAGwin.html), and writes updated `beam.status` flags back to disk via `dump_array(k)`.

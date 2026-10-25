@@ -1,16 +1,18 @@
 ---
 layout: default
 title: testbell
-parent: Mock Tools
-grand_parent: sidescan
+parent: Sidescan Radiometric & Geometric Suite (sidescan)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 16
 ---
+
 # testbell
 
 ## Description
 `testbell` is a utility designed to test and demonstrate the `bell_255` function, which implements a specific non-linear compression scheme known as the "BELL 255 law". This law is used to pack 12-bit signed data into an 8-bit unsigned data value, effectively compressing a wider dynamic range into a smaller representation while clipping values outside the 0-255 range. The program iterates through a range of 12-bit input values and outputs both the original 12-bit value and its 8-bit compressed equivalent.
 
 ## Usage
+
 ```bash
 testbell
 ```

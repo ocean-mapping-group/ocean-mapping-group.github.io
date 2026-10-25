@@ -1,16 +1,18 @@
 ---
 layout: default
 title: glslant
-parent: Slant Tools
-grand_parent: sidescan
+parent: Sidescan Radiometric & Geometric Suite (sidescan)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 3
 ---
+
 # glslant
 
 ## Description
 `glslant` is a utility designed to perform slant-range correction on JCU GLORIA format sidescan files. It takes an input GLORIA file, corrects the imagery for slant range distortion based on the vehicle's altitude, a specified pixel size, and the sound speed in water, and then outputs a new GLORIA file with the corrected imagery. It allows for optional pixel skipping on the port and starboard sides.
 
 ## Usage
+
 ```bash
 glslant [-V] [-v <sound_speed>] [-l <port_skip>] [-r <stbd_skip>] [-p <pixel_size>] <infile> <outfile>
 ```

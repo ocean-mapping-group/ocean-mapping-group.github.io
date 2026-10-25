@@ -1,9 +1,11 @@
 ---
 layout: default
 title: r2sonic_extract_truepix
-parent: R2Sonic Tools
+parent: R2Sonic 2020/2022/2024 (r2sonic)
+grand_parent: 4. Multi-Vendor Sonar & LiDAR Converters
 nav_order: 159
 ---
+
 # r2sonic_extract_truepix
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 159
 This tool processes the `.r2s` file, extracts the TruePix data, converts it into 8-bit image data (for magnitude and angle separately), and optionally dumps detailed time-series data for a specific ping to an ASCII file. This is crucial for visualizing the raw backscatter and angle responses, which can be used for advanced bottom classification or quality control.
 
 ## Usage
+
 ```bash
 r2sonic_extract_truepix -r2s <input.r2s> -outprefix <output_prefix> [-ping <ping_number>] [-v]
 ```

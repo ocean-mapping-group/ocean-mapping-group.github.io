@@ -1,19 +1,20 @@
 ---
 layout: default
 title: convSUB16.c2
-parent: Submetrix ISIS (sub2k) Interferometric Sonar Tools
+parent: GeoSwath+ / Submetrix 2000 CLI (sub2k)
+grand_parent: 4. Multi-Vendor Sonar & LiDAR Converters
 nav_order: 11
 tool_name: convSUB16.c2
 source_path: sub2k/convSUB16.c2
 category: sub2k
 input_formats:
-  - Submetrix 16-bit raw (.sub)
+- Submetrix 16-bit raw (.sub)
 output_formats:
-  - OMG Swath Bathymetry (.merged)
-  - OMG Sidescan (.ss_data)
+- OMG Swath Bathymetry (.merged)
+- OMG Sidescan (.ss_data)
 related_tools:
-  - convSUB16
-  - readSUB2K
+- convSUB16
+- readSUB2K
 ---
 
 # `convSUB16.c2` — Alternate Revision of `convSUB16`

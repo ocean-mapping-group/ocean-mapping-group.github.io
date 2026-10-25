@@ -1,18 +1,19 @@
 ---
 layout: default
 title: simrad_tvg
-parent: Core Shared Libraries (subr)
-module_name: simrad_tvg
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/simrad_tvg.c
-header_path: code/subr/simrad_tvg.h
 category: Acoustic Modeling, Backscatter & TVG
 related_tools:
-  - SE_AnandBS
-  - SE_WaterColumn
-  - newGetBP
-  - understand_KM_BS
-  - compress_OMG_watercolumn
-  - deTVG
+- SE_AnandBS
+- SE_WaterColumn
+- newGetBP
+- understand_KM_BS
+- compress_OMG_watercolumn
+- deTVG
+module_name: simrad_tvg
+header_path: code/subr/simrad_tvg.h
 ---
 
 # `simrad_tvg` — Kongsberg Simrad EM Backscatter TVG & BTS De-Ramping Interface

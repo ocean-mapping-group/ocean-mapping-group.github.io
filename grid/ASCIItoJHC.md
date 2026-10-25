@@ -1,9 +1,11 @@
 ---
 layout: default
 title: ASCIItoJHC
-parent: Grid Tools
+parent: Bathymetric Gridding & Export (grid)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 8
 ---
+
 ---
 layout: default
 title: ASCIItoJHC
@@ -16,6 +18,7 @@ nav_order: 8
 `ASCIItoJHC` is a versatile command-line utility for converting various ASCII (and some binary) gridded XYZ data formats into a JHC-format 32-bit floating-point (`.r4`) grid file. It supports numerous input formats including generic ASCII (Jarvis GSJ-like), NOAA, Larry's custom format, GMT-ish, Canadian 3D, and NTDB. It also has specific options for handling different data types (16-bit, 32-bit integers, or floats) within binary grid files. The tool can project coordinates (e.g., lat/lon to UTM), define grid dimensions and spacing, and handle invalid data values.
 
 ## Usage
+
 ```bash
 ASCIItoJHC [OPTIONS] <input_ASCII_file> <output_JHC_file.r4>
 ```

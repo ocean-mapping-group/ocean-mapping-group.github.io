@@ -1,9 +1,11 @@
 ---
 layout: default
 title: plotAspectRatio
-parent: Plot Tools
+parent: PostScript & Vector Plotting (plot)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 135
 ---
+
 # plotAspectRatio
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 135
 This tool is useful for understanding the geometric distribution of sound rays within a given water column and how it relates to aspect ratio or grazing angle.
 
 ## Usage
+
 ```bash
 plotAspectRatio [-ar <ratio>] [-outfile <filename.meta>] [-size <dx> <dy>] [-yrange <min> <max>]
 ```

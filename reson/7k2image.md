@@ -1,9 +1,11 @@
 ---
 layout: default
 title: 7k2image
-parent: Reson Tools
+parent: Reson SeaBat 7k/8k (reson)
+grand_parent: 4. Multi-Vendor Sonar & LiDAR Converters
 nav_order: 175
 ---
+
 # 7k2image
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 175
 The tool supports IQ data visualization (real, imaginary, magnitude, phase components) and can output to a generic 8-bit image file and a corresponding ASCII text file.
 
 ## Usage
+
 ```bash
 7k2image -in <inputfile> [-ping <ping_num>] [-beam <beam_num>] [-max_samples <val>] [-snippets | -watercolumn | -iq [-real|-imag|-mag|-phase]] [-v]
 ```
@@ -27,6 +30,7 @@ The tool supports IQ data visualization (real, imaginary, magnitude, phase compo
 | `-bt` | (Present in `USAGE` but not implemented) Intended to plot bottom track. |
 
 ### Data Source (Choose one)
+
 | Option | Description |
 |---|---|
 | `-snippets` | Extracts and processes raw snippet (7008 or 7028) data. |
@@ -34,6 +38,7 @@ The tool supports IQ data visualization (real, imaginary, magnitude, phase compo
 | `-iq` | Extracts and processes raw IQ (7038) data. |
 
 ### IQ Data Type (if `-iq` is used, choose one)
+
 | Option | Description |
 |---|---|
 | `-real` | Visualizes the real component of IQ data. |
@@ -42,6 +47,7 @@ The tool supports IQ data visualization (real, imaginary, magnitude, phase compo
 | `-phase` | Visualizes the phase of IQ data. |
 
 ### Other
+
 | Option | Description |
 |---|---|
 | `-v` | Enable verbose output. | |

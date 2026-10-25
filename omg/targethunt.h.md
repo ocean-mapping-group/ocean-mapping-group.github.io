@@ -1,9 +1,11 @@
 ---
 layout: default
 title: targethunt.h
-parent: OMG Tools
+parent: Core Swath & .all Suite (omg)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 71
 ---
+
 # targethunt.h
 
 ## Description
@@ -12,12 +14,14 @@ nav_order: 71
 The file primarily sets up the environment for the target hunting process within the broader OMG toolkit.
 
 ## Macros
+
 | Macro | Description |
 |---|---|
 | `_C_TARGETHUNT` | A preprocessor macro to prevent multiple inclusions of this header file. |
 | `MAXSLOTSIZE` | `1000` | Defines the maximum number of water column pings/swaths that can be processed in one "slot" or chunk by the `targethunt` application. |
 
 ## Includes
+
 ```c
 #include "c_wcpick.h"
 ```

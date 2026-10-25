@@ -1,14 +1,24 @@
 ---
 layout: default
 title: gsf2omg
-parent: GSF Tools
+parent: Generic Sensor Format — GSF (gsf)
+grand_parent: 4. Multi-Vendor Sonar & LiDAR Converters
 nav_order: 1
 tool_name: gsf2omg
 source_path: code/gsf/gsf2omg.c
 category: Raw Data Unraveling
-input_formats: [".gsf"]
-output_formats: [".merged", ".merged.ss_data"]
-related_tools: ["gsf2omg_7101", "gsf2orientation", "gsf2param", "gsf2svp", "gsfTool", "omg2gsf"]
+input_formats:
+- .gsf
+output_formats:
+- .merged
+- .merged.ss_data
+related_tools:
+- gsf2omg_7101
+- gsf2orientation
+- gsf2param
+- gsf2svp
+- gsfTool
+- omg2gsf
 ---
 
 # gsf2omg
@@ -17,6 +27,7 @@ related_tools: ["gsf2omg_7101", "gsf2orientation", "gsf2param", "gsf2svp", "gsfT
 `gsf2omg` converts Generic Sensor Format (`.gsf`) Swath Bathymetry Ping records (`GSF_SWATH_BATHYMETRY_PING`) into OMG-HDCS v3 `.merged` and `.merged.ss_data` files using the lightweight `omg_gsf` parser. It primarily targets Reson SeaBat 8100-series (`8101` and `8125`) GSF files where navigation and attitude have already been merged into the ping headers.
 
 ## Usage
+
 ```bash
 gsf2omg [-v] [-debug] -gsf <input_name.gsf> -omg <omg_file_prefix>
 ```
@@ -38,6 +49,7 @@ gsf2omg [-v] [-debug] -gsf <input_name.gsf> -omg <omg_file_prefix>
 ## Practical Examples
 
 **1. Convert a Reson 8101 GSF file into OMG `.merged` format:**
+
 ```bash
 gsf2omg -v -gsf line01.gsf -omg line01
 ```

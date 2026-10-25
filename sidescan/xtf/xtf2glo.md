@@ -1,16 +1,18 @@
 ---
 layout: default
 title: xtf2glo
-parent: XTF Tools
-grand_parent: sidescan
+parent: Sidescan Radiometric & Geometric Suite (sidescan)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 4
 ---
+
 # xtf2glo
 
 ## Description
 `xtf2glo` is a utility designed to convert XTF (Extended Triton Format) sidescan data into the JCU GLORIA format. It processes various XTF header types, extracting sonar data (typically high-frequency, low-frequency, and optionally sub-bottom profiles). The tool offers options for logarithmic or linear scaling of intensity values, byte swapping for endianness correction, and side swapping for correct port/starboard orientation. It also extracts and logs any raw serial data found in the XTF stream.
 
 ## Usage
+
 ```bash
 xtf2glo [-havesub] [-swapside] [-swapbyte] [-log] [-addISIStime] [-otherdt] [-min16bitval <value>] [-max16bitval <value>] -in <infile> -out <outfile_prefix>
 ```

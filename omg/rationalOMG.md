@@ -1,9 +1,11 @@
 ---
 layout: default
 title: rationalOMG
-parent: OMG Tools
+parent: Core Swath & .all Suite (omg)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 50
 ---
+
 # rationalOMG
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 50
 The "rationalized" format means that the data is presented in a more human-readable and processed form, as opposed to the raw binary storage format.
 
 ## Usage
+
 ```bash
 rationalOMG <OMG_HDCS_datafile> <ASCII_listing> [OPTIONS]
 ```

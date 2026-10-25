@@ -1,9 +1,11 @@
 ---
 layout: default
 title: refoROSS
-parent: ROSS Tools
+parent: ROSS Multi-Transducer Channel Sweep (ROSS)
+grand_parent: 4. Multi-Vendor Sonar & LiDAR Converters
 nav_order: 184
 ---
+
 # refoROSS
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 184
 This tool is essential for integrating ROSS data into the OMG processing pipeline, enabling further analysis and visualization with other OMG tools. It can also output a simplified "spitout" file for basic review.
 
 ## Usage
+
 ```bash
 refoROSS <infile> <outfile_prefix> [-9001] [-leapyear] [-spitout <azifile>] [-v]
 ```
@@ -81,5 +84,6 @@ Writes ROSS profiler swath data to the `.merged` file.
 *   `<outfile_prefix>.gyro`: Binary gyro (heading) attitude file.
 *   `<outfile_prefix>.orientation`: Binary heave/roll/pitch attitude file.
 *   `<outfile_prefix>.fix`: Simplified output file (if `-spitout`).
+
 ```
 ```

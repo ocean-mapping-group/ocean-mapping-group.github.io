@@ -1,12 +1,17 @@
 ---
 layout: default
 title: stdtime
-parent: Shared Core Libraries (subr)
-module_name: stdtime
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/stdtime.c
-header_path: code/subr/stdtime.h
 category: Core System, I/O & Time Utilities
-related_tools: ["support", "OMG_HDCS_jversion", "sonar_geometry", "xtf_utils"]
+related_tools:
+- support
+- OMG_HDCS_jversion
+- sonar_geometry
+- xtf_utils
+module_name: stdtime
+header_path: code/subr/stdtime.h
 ---
 
 # stdtime

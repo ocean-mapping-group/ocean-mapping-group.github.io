@@ -1,9 +1,11 @@
 ---
 layout: default
 title: getRollResidual
-parent: OMG Tools
+parent: Core Swath & .all Suite (omg)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 106
 ---
+
 # getRollResidual
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 106
 This tool is useful for identifying and quantifying residual roll biases in the data, which may be due to uncorrected vessel motion or misalignment.
 
 ## Usage
+
 ```bash
 getRollResidual <filename.merged> [-testonly]
 ```

@@ -1,14 +1,25 @@
 ---
 layout: default
 title: iwc_water
-parent: Ian Church (ianc) Tools
+parent: Ian Church — Hydrodynamic & 3D Ray-Trace Suite (ianc)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 nav_order: 14
 tool_name: iwc_water
 source_path: code/ianc/subr/iwc_water.c
 category: Ocean Modeling & Hydrographic Utilities (ianc)
-input_formats: ["watercolumn struct (j_watercolumn.h)", "iwc_watercol / oceanObs structs"]
-output_formats: ["watercolumn struct with extra_field", "Binned & derived physical oceanography profiles"]
-related_tools: ["oceanReader", "modelAnalysis", "HycomSSP", "modelMerge", "iwc_support", "iwc_adcp"]
+input_formats:
+- watercolumn struct (j_watercolumn.h)
+- iwc_watercol / oceanObs structs
+output_formats:
+- watercolumn struct with extra_field
+- Binned & derived physical oceanography profiles
+related_tools:
+- oceanReader
+- modelAnalysis
+- HycomSSP
+- modelMerge
+- iwc_support
+- iwc_adcp
 ---
 
 # iwc_water

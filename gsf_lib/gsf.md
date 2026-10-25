@@ -1,14 +1,26 @@
 ---
 layout: default
 title: gsf
-parent: GSF Library (gsf_lib)
+parent: Embedded GSF C Library (gsf_lib)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 nav_order: 1
 tool_name: gsf
 source_path: code/gsf_lib/gsf.c
 category: GSF Library Module
-input_formats: [".gsf", ".ndx"]
-output_formats: [".gsf", ".ndx"]
-related_tools: ["gsf_dec", "gsf_enc", "gsf_indx", "gsf_info", "omg2gsf", "gsf2omg_7101", "gsftest"]
+input_formats:
+- .gsf
+- .ndx
+output_formats:
+- .gsf
+- .ndx
+related_tools:
+- gsf_dec
+- gsf_enc
+- gsf_indx
+- gsf_info
+- omg2gsf
+- gsf2omg_7101
+- gsftest
 ---
 
 # gsf (`gsf.c` / `gsf.h`)
@@ -31,4 +43,4 @@ related_tools: ["gsf_dec", "gsf_enc", "gsf_indx", "gsf_info", "omg2gsf", "gsf2om
 | `gsfStringError` / `gsfPrintError` | Returns or prints human-readable descriptions of the global `gsfError` status code. |
 
 ## Usage in OMG Tools
-OMG tools such as [`omg2gsf`](../gsf/omg2gsf.md), [`gsf2omg_7101`](../gsf/gsf2omg_7101.md), and [`gsftest`](../gsf/gsftest.md) include `"gsf.h"` and call `gsfOpen()`, `gsfLoadScaleFactor()`, `gsfPutMBParams()`, `gsfRead()`, `gsfWrite()`, and `gsfClose()`.
+OMG tools such as [`omg2gsf`](../gsf/omg2gsf.html), [`gsf2omg_7101`](../gsf/gsf2omg_7101.html), and [`gsftest`](../gsf/gsftest.html) include `"gsf.h"` and call `gsfOpen()`, `gsfLoadScaleFactor()`, `gsfPutMBParams()`, `gsfRead()`, `gsfWrite()`, and `gsfClose()`.

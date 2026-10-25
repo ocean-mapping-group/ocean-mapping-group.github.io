@@ -1,14 +1,21 @@
 ---
 layout: default
 title: gsf_info
-parent: GSF Library (gsf_lib)
+parent: Embedded GSF C Library (gsf_lib)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 nav_order: 5
 tool_name: gsf_info
 source_path: code/gsf_lib/gsf_info.c
 category: GSF Library Module
-input_formats: [".gsf"]
-output_formats: ["status flags (int *)"]
-related_tools: ["gsf", "gsf_dec", "gsf_enc", "gsf_indx"]
+input_formats:
+- .gsf
+output_formats:
+- status flags (int *)
+related_tools:
+- gsf
+- gsf_dec
+- gsf_enc
+- gsf_indx
 ---
 
 # gsf_info (`gsf_info.c`)

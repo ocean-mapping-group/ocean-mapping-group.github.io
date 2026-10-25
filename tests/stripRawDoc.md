@@ -1,19 +1,20 @@
 ---
 layout: default
 title: stripRawDoc
-parent: tests (Test, Simulation & Diagnostic Suite)
+parent: Acoustic & Mathematical Test Harnesses (tests)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 nav_order: 16
 tool_name: stripRawDoc
 source_path: code/tests/stripRawDoc.c
 category: Binary Format & Forensic File Recovery (tests)
 input_formats:
-  - Raw binary disk image, corrupted document, or binary stream
+- Raw binary disk image, corrupted document, or binary stream
 output_formats:
-  - Extracted ASCII text file (default string search mode)
-  - <outname>_0000.doc / <outname>_0000.ppt (carved Microsoft Office OLE2 documents in -grab_microsoft mode)
+- Extracted ASCII text file (default string search mode)
+- <outname>_0000.doc / <outname>_0000.ppt (carved Microsoft Office OLE2 documents in -grab_microsoft mode)
 related_tools:
-  - getCR
-  - read4bit
+- getCR
+- read4bit
 ---
 
 # stripRawDoc
@@ -60,6 +61,7 @@ stripRawDoc [-v] [-grab_microsoft] [-string "<search_text>"] \
 Slides an 80-byte buffer (`random_string`) byte-by-byte through `<infile>`:
 1. **Header Match (`START_Microsoft`, 32 bytes):**
    Matches the standard OLE2 Compound Binary File header:
+
    ```text
    D0 CF 11 E0 A1 B1 1A E1 00 00 00 00 00 00 00 00
    00 00 00 00 00 00 00 00 3E 00 03 00 FE FF 09 00

@@ -1,13 +1,17 @@
 ---
 layout: default
 title: testmmap
-parent: Grid Tools
+parent: Bathymetric Gridding & Export (grid)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 tool_name: testmmap
 source_path: code/grid/testmmap.c
 category: gridding
 input_formats: []
-output_formats: ["JHC_header (.8bit)"]
-related_tools: ["make_blank", "edhead"]
+output_formats:
+- JHC_header (.8bit)
+related_tools:
+- make_blank
+- edhead
 ---
 
 # testmmap
@@ -44,6 +48,7 @@ testmmap [-colorbar] [-spacing <N>] -xlen <cols> -ylen <rows> -out <outfile>
 ## Examples
 
 ### Test memory-mapped raster creation for a 500x500 image
+
 ```bash
 testmmap -xlen 500 -ylen 500 -out ramp_test.8bit
 ```

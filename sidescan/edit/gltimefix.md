@@ -1,16 +1,18 @@
 ---
 layout: default
 title: gltimefix
-parent: Edit Tools
-grand_parent: sidescan
+parent: Sidescan Radiometric & Geometric Suite (sidescan)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 2
 ---
+
 # gltimefix
 
 ## Description
 `gltimefix` is a utility designed to address time-related issues within JCU GLORIA record files. Its primary function is to constrain the Julian day of records to a specified range and to correct records where the year is not `1970`, which can be a base year for time calculations in some systems.
 
 ## Usage
+
 ```bash
 gltimefix <filename>
 ```

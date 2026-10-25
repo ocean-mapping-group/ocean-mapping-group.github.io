@@ -1,14 +1,15 @@
 ---
 layout: default
 title: rg_jack2
-parent: Core Shared Libraries (subr)
-module_name: rg_jack2
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/rg_jack2.c
-header_path: code/subr/rg_jack2.h
 category: Acoustic Modeling, Backscatter & TVG
 related_tools:
-  - j_ang_resp
-  - fakeAR
+- j_ang_resp
+- fakeAR
+module_name: rg_jack2
+header_path: code/subr/rg_jack2.h
 ---
 
 # `rg_jack2` — Mourad & Jackson (1989) High-Frequency Seafloor Backscatter Model
@@ -34,6 +35,7 @@ Originally written by Rebecca M. Gott (Naval Research Laboratory Code 7441, July
 ## Public Functions & Signatures
 
 ### `do_RG_simple_model`
+
 ```c
 int do_RG_simple_model(
     double In_f,

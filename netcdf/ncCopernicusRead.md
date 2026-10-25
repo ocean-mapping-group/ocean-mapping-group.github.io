@@ -1,14 +1,28 @@
 ---
 layout: default
 title: ncCopernicusRead
-parent: NetCDF & HDF5 Tools (netcdf)
+parent: NetCDF & HDF5 Ocean/Sonar Readers (netcdf)
+grand_parent: 4. Multi-Vendor Sonar & LiDAR Converters
 nav_order: 2
 tool_name: ncCopernicusRead
 source_path: code/netcdf/ncCopernicusRead.c
 category: Oceanographic & Acoustic NetCDF/HDF5 Readers
-input_formats: [".nc (Copernicus, SSCOFS, WCOFS, GRTOFS, UBC Salish Sea NetCDF)"]
-output_formats: [".r4", ".zvals", ".time", ".columns", ".2D_array", ".3D_array", ".4D_array", ".txt"]
-related_tools: ["ncread", "hdf5EC150read", "jview", "mergeAtt"]
+input_formats:
+- .nc (Copernicus, SSCOFS, WCOFS, GRTOFS, UBC Salish Sea NetCDF)
+output_formats:
+- .r4
+- .zvals
+- .time
+- .columns
+- .2D_array
+- .3D_array
+- .4D_array
+- .txt
+related_tools:
+- ncread
+- hdf5EC150read
+- jview
+- mergeAtt
 ---
 
 # ncCopernicusRead
@@ -80,4 +94,4 @@ ncCopernicusRead -varid temp -isSSCOFS -dumpOne3D -chosenlayer 0 [-dumpr4] -in <
    - For 3D `(time, lat, lon)` map series (e.g., sea surface height `zos`), writes per-timeframe `.r4` rasters (`<out>.<date>.<varid>.r4`), `.time` metadata files, and optional `.0000.txt` XYZ ASCII dumps (excluding `-32767` fill values).
 3. **4D `(time, depth, lat, lon)` Sub-Slab Extraction (`nc_get_vara_float`)**:
    - Rather than allocating an entire 4D ocean model in RAM, lines 1168–1356 construct `size_t start[4]` and `size_t count[4]` hyperslab vectors according to `D4_Section` (`VERTICAL_LON`, `VERTICAL_LAT`, or `HORIZONTAL`) and call `nc_get_vara_float()` per time step `kk`.
-   - Produces synchronized `<out>.<step>.<varid>.r4`, `<out>.<step>.<varid>.zvals`, and `<out>.<step>.<varid>.time` files ready for 3D curtain and layer inspection in [`jview`](../JV/jview.md).
+   - Produces synchronized `<out>.<step>.<varid>.r4`, `<out>.<step>.<varid>.zvals`, and `<out>.<step>.<varid>.time` files ready for 3D curtain and layer inspection in [`jview`](../JV/jview.html).

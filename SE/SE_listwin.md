@@ -1,14 +1,24 @@
 ---
 layout: default
 title: SE_listwin
-parent: SwathEd (SE) Tools
+parent: Swath Editor — swathed (SE)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 26
 tool_name: SE_listwin
 source_path: code/SE/SE_listwin.c
 category: Interactive QC & Editing (SwathEd)
-input_formats: [".merged", ".sectors", ".sonar_settings", ".watercol"]
-output_formats: ["ping_list.data"]
-related_tools: ["swathed", "SE_mainwin", "SE_omgIOwin", "SE_WaterColumn"]
+input_formats:
+- .merged
+- .sectors
+- .sonar_settings
+- .watercol
+output_formats:
+- ping_list.data
+related_tools:
+- swathed
+- SE_mainwin
+- SE_omgIOwin
+- SE_WaterColumn
 ---
 
 # `SE_listwin.c` — Interactive Ping Header, Sector & Beam Listing Window
@@ -51,5 +61,5 @@ In `sub_window[14]`, port beams (`i < numDepths / 2`) are shaded **RED** and sta
 
 ## Integration within `swathed`
 - **Invocation:** Opened from the `swathed` toolbox/menu via `view_list()`, which sets `got_a_listwindow = 1`.
-- **Automatic Synchronization:** Whenever the user steps to a new 100-ping block (`setup_for_next80()` in [`SE_mainwin.c`](SE_mainwin.md)) or selects a different ping in the main editor, `plot_list(in_recnum + selected_swath)` automatically refreshes `sub_window[14]`.
-- **Event Handling:** Mouse clicks and keyboard events in `sub_window[14]` (scrolling `view_number`, cycling `beamlist_page`, or dumping `ping_list.data` via `write_list`) are dispatched by [`SE_event_loop.c`](SE_event_loop.md).
+- **Automatic Synchronization:** Whenever the user steps to a new 100-ping block (`setup_for_next80()` in [`SE_mainwin.c`](SE_mainwin.html)) or selects a different ping in the main editor, `plot_list(in_recnum + selected_swath)` automatically refreshes `sub_window[14]`.
+- **Event Handling:** Mouse clicks and keyboard events in `sub_window[14]` (scrolling `view_number`, cycling `beamlist_page`, or dumping `ping_list.data` via `write_list`) are dispatched by [`SE_event_loop.c`](SE_event_loop.html).

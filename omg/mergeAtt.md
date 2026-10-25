@@ -1,9 +1,11 @@
 ---
 layout: default
 title: mergeAtt
-parent: OMG Tools
+parent: Core Swath & .all Suite (omg)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 40
 ---
+
 # mergeAtt
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 40
 It supports various scenarios, including merging from multiple attitude sources, applying scaling factors to motion data, and advanced recalculations of beam vectors for precise georeferencing.
 
 ## Usage
+
 ```bash
 mergeAtt <datafile_handle> [OPTIONS]
 ```
@@ -24,6 +27,7 @@ mergeAtt <datafile_handle> [OPTIONS]
 | `-strip_ext` | Use this if `<datafile_handle>` includes the file extension (e.g., `line.merged`). |
 
 ### Attitude Data Sources & Manipulation
+
 | Option | Description | Default |
 |---|---|
 | `-useorient <1 or 2>` | Specifies which orientation file to use: `0` (default, `.orientation`), `1` (`.orientation_1`), `2` (`.orientation_2`). | `0` |
@@ -42,6 +46,7 @@ mergeAtt <datafile_handle> [OPTIONS]
 | `-dheavescale <val>` | Scale the difference heave. | `1.0` |
 
 ### Surface Sound Speed (SSP) & Mechanical Pitch
+
 | Option | Description |
 |---|---|
 | `-ssp` | Use the `.surf_ss` file for surface sound speed. | |
@@ -49,6 +54,7 @@ mergeAtt <datafile_handle> [OPTIONS]
 | `-dump_ssp` | Dump the surface sound speed values for inspection. | |
 
 ### Refraction & Beam Vector Recalculation
+
 | Option | Description | Default |
 |---|---|
 | `-redoref` | Re-calculates refraction using water column sound velocity profiles. Requires `-wc` option. | |
@@ -65,6 +71,7 @@ mergeAtt <datafile_handle> [OPTIONS]
 | `-RP` | Reduce all positions to the Reference Point (RP) of the vessel. | |
 
 ### SVP Selection for Multiple Profiles
+
 | Option | Description |
 |---|---|
 | `-rules <file>` | Provide a file specifying time-based rules for selecting SVPs. | |
@@ -76,6 +83,7 @@ mergeAtt <datafile_handle> [OPTIONS]
 | `-converge_to <depth> <velocity>` | Quick and dirty profile extension, sets maximum depth and velocity for SVPs shallower than the specified depth. | |
 
 ### Miscellaneous Options
+
 | Option | Description | Default |
 |---|---|
 | `-just_merge` | Just merge TX orientation onto the merged file, ignoring all other raytracing options. | |

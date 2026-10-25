@@ -88,6 +88,7 @@ k16to8 \
 
 #### 3. SEG-Y, iXBlue Echoes 3000 & Furuno FCV-30 Converters
 * **`readSB_SEGY`** (`code/segy/readSB_SEGY.c`): Unpacks 32-bit float, 32-bit int, or 16-bit short SEG-Y sub-bottom files (SeaBeam 2112 4 kHz, Kongsberg SBP120 `-sbp120_ll`, SonarWiz heave-embedded SEG-Y `-extract_heave`, and AUV sub-bottom `-get_AUV_depth`), optionally computing a Hilbert transform envelope (`-hilbert`) and writing `OMG_HDCS` `.merged` files (`-out_as_OMG`):
+
   ```bash
   readSB_SEGY \
     -v -out_as_OMG \
@@ -246,10 +247,12 @@ processSHOALSdepths -v shoals_f01*.merged
 Once waveforms are attached to the `.merged` files, you can inspect vertical laser curtains, extract benthic optical reflectance, and classify submerged aquatic vegetation (eelgrass/kelp) that causes false shallow LiDAR picks:
 
 * **`make_Optech_prof`** (`code/Optech/make_Optech_prof.c`): Extracts 2D JHC profile images of the detrended PMT (`-pmt`), GAPD (`-gapd`), IR (`-ir`), or Raman (`-raman`) laser waveforms along a specific beam (`-beam 50` or `-nadir_beam`) or scan azimuth (`-azimuth_angle`):
+
   ```bash
   make_Optech_prof -v -gapd -nadir_beam -bottom_pick shoals_f01*.merged -out flight01_nadir_gapd.prof
   ```
 * **`dumpWaveFormParams`** (`code/Optech/dumpWaveFormParams.c`): Extracts ASCII `Lon Lat Parameter` triplets from the PMT or GAPD bottom return pulse, including bottom return peak amplitude (`-height_only`), pulse stretching/width, water-column diffuse attenuation coefficient $K_d$ (`-k_only`, `-k_prof`), and **Dijkstra & Elston (2004) pseudo-reflectance (`-D_E_method`)**:
+
   ```bash
   dumpWaveFormParams \
     -v -gapd \

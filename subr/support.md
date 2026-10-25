@@ -1,12 +1,18 @@
 ---
 layout: default
 title: support
-parent: Shared Core Libraries (subr)
-module_name: support
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/support.c
-header_path: code/subr/support.h
 category: Core System, I/O & Time Utilities
-related_tools: ["omg_buffer", "array", "mos2", "weigh_grid", "swathed"]
+related_tools:
+- omg_buffer
+- array
+- mos2
+- weigh_grid
+- swathed
+module_name: support
+header_path: code/subr/support.h
 ---
 
 # support
@@ -25,6 +31,7 @@ related_tools: ["omg_buffer", "array", "mos2", "weigh_grid", "swathed"]
 
 ### CLI Globals
 Every OMG `main()` function initializes these globals at startup:
+
 ```c
 extern int ARGC;      /* Set to argc in main() */
 extern char **ARGV;   /* Set to argv in main() */
@@ -42,6 +49,7 @@ extern char *USAGE;   /* Defined per-program to describe CLI syntax */
 ## Public Functions
 
 ### 1. Diagnostics, Usage & Cleanup Hooks
+
 | Function | Signature | Description |
 |---|---|---|
 | `usage` | `void usage(char *msg, ...)` | Prints `Usage : <ARGV[0]> <USAGE>` followed by the formatted `(<msg>)` to `stderr`, runs `cleanup()`, and exits with status `1`. |
@@ -51,6 +59,7 @@ extern char *USAGE;   /* Defined per-program to describe CLI syntax */
 | `cleanup` | `void cleanup(void)` | Invokes and frees all registered cleanup callbacks. |
 
 ### 2. String & Path Manipulation (Heap-Allocated)
+
 | Function | Signature | Description |
 |---|---|---|
 | `mem_strcpy` | `char *mem_strcpy(char *str)` | `malloc`s and returns a duplicate of `str` (NULL-safe). |
@@ -63,6 +72,7 @@ extern char *USAGE;   /* Defined per-program to describe CLI syntax */
 | `word_tolower` | `char *word_tolower(char *str)` | Converts `str` to lowercase in-place and returns `str`. |
 
 ### 3. Numeric, Angle & File-List Parsing
+
 | Function | Signature | Description |
 |---|---|---|
 | `strtoint` / `strtodbl` | `int strtoint(char *s)` / `double strtodbl(char *s)` | Parses an integer or double from `s`; sets `error_val = error_val_str_not_used` if trailing non-numeric characters remain. |

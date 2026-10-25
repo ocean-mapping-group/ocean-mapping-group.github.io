@@ -1,15 +1,18 @@
---- 
+---
 layout: default
 title: extractProfile
-parent: Grid Tools
+parent: Bathymetric Gridding & Export (grid)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 27
 ---
+
 # extractProfile
 
 ## Description
 `extractProfile` is a command-line utility that extracts 2D depth profiles from one or more JHC-format 32-bit floating-point grid files (`.r4` DTMs). The tool traces a path defined by a series of geographic waypoints, samples the DTM(s) at a regular interval along this path, and outputs the resulting profile. It also includes options for filtering (median, average) and calculating the along-track slope.
 
 ## Usage
+
 ```bash
 extractProfile -wpts <waypointfile> -interval <meters> -topo <dtm1.r4> [-topo <dtm2.r4> ...] [OPTIONS]
 ```
@@ -35,6 +38,7 @@ These options apply post-processing filters to the extracted profile data. A fil
 | `-doaverage <samples>` | Applies a mean (average) filter. The filter window size is `(2 * samples) + 1`. | `3` |
 
 ### Other Options
+
 | Option | Description |
 |---|---|
 | `-use_xaxis_relative` | Used with `-aplot`. The output's X-axis will be the projected X-coordinate from the grid's projection, rather than the cumulative along-track distance. |

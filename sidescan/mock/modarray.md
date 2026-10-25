@@ -1,16 +1,18 @@
 ---
 layout: default
 title: modarray
-parent: Mock Tools
-grand_parent: sidescan
+parent: Sidescan Radiometric & Geometric Suite (sidescan)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 7
 ---
+
 # modarray
 
 ## Description
 `modarray` is a utility designed to modify lookup arrays, specifically to calculate the "aspherical spreading component" derived from beam refraction. It processes input files representing time-lag and beam-angle (in JHC image format) to determine how the apparent angular change of a beam deviates from the normal angular change. This resulting "aspherical" component is then output as a new JHC image file.
 
 ## Usage
+
 ```bash
 modarray -water <file_prefix> [-first <record>] [-last <record>]
 ```

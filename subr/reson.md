@@ -1,21 +1,22 @@
 ---
 layout: default
 title: reson
-parent: Core Shared Libraries (subr)
-module_name: reson
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/reson.c
-header_path: code/subr/reson.h
 category: File Formats & Vendor Parsers
 related_tools:
-  - 8kTool
-  - 8k2omg
-  - xtf2omg_reson
-  - xtfTool
-  - extractSnippet
-  - extractRI
-  - getTVG
-  - get8101BeamPattern
-  - getAngularResponse
+- 8kTool
+- 8k2omg
+- xtf2omg_reson
+- xtfTool
+- extractSnippet
+- extractRI
+- getTVG
+- get8101BeamPattern
+- getAngularResponse
+module_name: reson
+header_path: code/subr/reson.h
 ---
 
 # reson

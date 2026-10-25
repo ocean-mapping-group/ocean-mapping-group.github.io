@@ -1,22 +1,29 @@
 ---
 layout: default
 title: readheader
-parent: Image Tools
+parent: Raster Image Processing (image)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 40
 tool_name: readheader
 source_path: code/image/readheader.c
 category: Satellite, SAR & Format Conversion
-input_formats: ["landsat_rec scanline file"]
-output_formats: ["ASCII scanline navigation table"]
-related_tools: ["addheader", "control_points", "landsat2acres"]
+input_formats:
+- landsat_rec scanline file
+output_formats:
+- ASCII scanline navigation table
+related_tools:
+- addheader
+- control_points
+- landsat2acres
 ---
 
 # readheader
 
 ## Description
-`readheader` (written by A. Y. / JCU, July 1990) inspects a `landsat_rec` scanline-headed Landsat file (created by [`addheader`](addheader.md) or calibrated by [`control_points`](control_points.md)) and dumps the scene metadata and per-scanline center coordinates (`scanline`, `latitude`, `longitude`) to an ASCII file.
+`readheader` (written by A. Y. / JCU, July 1990) inspects a `landsat_rec` scanline-headed Landsat file (created by [`addheader`](addheader.html) or calibrated by [`control_points`](control_points.html)) and dumps the scene metadata and per-scanline center coordinates (`scanline`, `latitude`, `longitude`) to an ASCII file.
 
 ## CLI Options & Usage
+
 ```bash
 readheader -in <landsat_rec_file> -out <header_dump.txt>
 ```

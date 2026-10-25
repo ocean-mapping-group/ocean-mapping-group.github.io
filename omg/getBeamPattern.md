@@ -1,9 +1,11 @@
 ---
 layout: default
 title: getBeamPattern
-parent: OMG Tools
+parent: Core Swath & .all Suite (omg)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 103
 ---
+
 # getBeamPattern
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 103
 The tool processes merged files, applies numerous corrections, filters data based on user-defined criteria (e.g., depth, angle, geographic area), and outputs the resulting beam pattern. It also includes advanced features for extracting across-track and along-track Sonar Relative Beam Patterns (SRBP).
 
 ## Usage
+
 ```bash
 getBeamPattern <file_prefix> [OPTIONS]
 ```
@@ -23,6 +26,7 @@ getBeamPattern <file_prefix> [OPTIONS]
 | `<file_prefix>` | **Required.** The base name of the merged file (e.g., `line`). The tool will look for `line.merged`, `line.ss_data`, `line.param`, etc. Multiple prefixes can be provided. |
 
 ### Input Data & Mode
+
 | Option | Description |
 |---|---|
 | `-refl` | Use reflectivity values from the merged file. |
@@ -35,6 +39,7 @@ getBeamPattern <file_prefix> [OPTIONS]
 | `-only_bandwidth <kHz>` | Process data only for a specific signal bandwidth. |
 
 ### Angle Calculation
+
 | Option | Description |
 |---|---|
 | `-use_real_grazing` | Use pre-calculated grazing angles from an external file (`.GRA` file must be provided). |
@@ -46,6 +51,7 @@ getBeamPattern <file_prefix> [OPTIONS]
 | `-separate_port_stbd_grazing` | Differentiates port/starboard grazing angles based on steering angle. |
 
 ### Corrections & Adjustments
+
 | Option | Description | Default |
 |---|---|
 | `-attenremove` | Remove attenuation from value in profile header. | |
@@ -61,6 +67,7 @@ getBeamPattern <file_prefix> [OPTIONS]
 | `-SR_ignore_within <deg>` | Don't use SR beam pattern within that sonar-relative incidence angle. | `0.0` |
 
 ### SRBP Extraction (ADH's functionality)
+
 | Option | Description |
 |---|---|
 | `-Extract_Across_SRBP` | Extracts across-track sonar relative beam pattern. |
@@ -82,6 +89,7 @@ getBeamPattern <file_prefix> [OPTIONS]
 | `-master_reference_sector <val>` | Master reference sector for adjusting across-track RBP. |
 
 ### Data Filtering & Selection
+
 | Option | Description | Default |
 |---|---|
 | `-valid_ucDN <low> <high>` | Only use unsigned 8-bit DN values within this range. | |
@@ -94,6 +102,7 @@ getBeamPattern <file_prefix> [OPTIONS]
 | `-fill_bin_gaps` | Fills gaps in angle bins by distributing contribution from wide beams. | |
 
 ### Output & Debugging
+
 | Option | Description |
 |---|---|
 | `-v` | Enable verbose output. |

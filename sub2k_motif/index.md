@@ -1,9 +1,9 @@
 ---
 layout: default
-title: Submetrix Motif GUI (sub2k_motif)
-parent: Formats & Converters
+title: GeoSwath+ / Submetrix Motif GUI (sub2k_motif)
+parent: 4. Multi-Vendor Sonar & LiDAR Converters
+nav_order: 8
 has_children: true
-nav_order: 7
 ---
 
 # Submetrix Motif GUI (`sub2k_motif/`)

@@ -1,16 +1,17 @@
 ---
 layout: default
 title: omg_colours
-parent: Core Shared Libraries (subr)
-module_name: omg_colours
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/omg_colours.c
-header_path: code/subr/omg_colours.h
 category: Visualization & Color Palettes
 related_tools:
-  - jview
-  - swathed
-  - r4toz
-  - X11 plotting & image generation utilities
+- jview
+- swathed
+- r4toz
+- X11 plotting & image generation utilities
+module_name: omg_colours
+header_path: code/subr/omg_colours.h
 ---
 
 # `omg_colours` — Standard OMG Color Table Palettes & HSV-to-RGB Conversion Library

@@ -1,20 +1,21 @@
 ---
 layout: default
 title: mkbp
-parent: labs (Teaching & Coursework Labs)
+parent: Graduate Course Lab Exercises (labs)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 nav_order: 3
 tool_name: mkbp
 source_path: code/labs/mkbp.c
 category: Educational Labs & Transducer Array Acoustics (labs)
 input_formats:
-  - Interactive stdin prompts (frequency, array type, dimensions, element shading)
+- Interactive stdin prompts (frequency, array type, dimensions, element shading)
 output_formats:
-  - ASCII 4-column beam pattern table (Angle, Pressure, Intensity, LogIntensity)
+- ASCII 4-column beam pattern table (Angle, Pressure, Intensity, LogIntensity)
 related_tools:
-  - mkbp_skeleton
-  - bpdemo
-  - dobessel
-  - plotTxRxOverlap
+- mkbp_skeleton
+- bpdemo
+- dobessel
+- plotTxRxOverlap
 ---
 
 # mkbp
@@ -22,7 +23,7 @@ related_tools:
 ## Overview
 `mkbp` (`code/labs/mkbp.c`, authored by John Hughes Clarke in February 2000) is an interactive command-line acoustic transducer beam pattern calculator used in Ocean Mapping Group (OMG) hydrographic acoustics courses. It computes the far-field directivity pattern across 1,800 angular steps from $-90.0^\circ$ to $+89.9^\circ$ (in $0.1^\circ$ increments) assuming a nominal water sound speed of $c = 1500.0\text{ m/s}$, and outputs normalized acoustic pressure, intensity, and logarithmic intensity to an ASCII file.
 
-`mkbp.c` is the complete reference implementation corresponding to the student assignment template [`mkbp_skeleton`](mkbp_skeleton.md).
+`mkbp.c` is the complete reference implementation corresponding to the student assignment template [`mkbp_skeleton`](mkbp_skeleton.html).
 
 ---
 
@@ -104,4 +105,4 @@ mkbp -out line_100kHz.bp <<EOF
 0.30
 EOF
 ```
-To interactively visualize these array patterns and side-lobe shading effects in an X11 GUI, see [`bpdemo`](../bpdemo/bpdemo.md).
+To interactively visualize these array patterns and side-lobe shading effects in an X11 GUI, see [`bpdemo`](../bpdemo/BPdemo.html).

@@ -1,14 +1,21 @@
 ---
 layout: default
 title: Check_Nav
-parent: Ian Church (ianc) Tools
+parent: Ian Church — Hydrodynamic & 3D Ray-Trace Suite (ianc)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 nav_order: 1
 tool_name: Check_Nav
 source_path: code/ianc/Check_Nav.c
 category: Ocean Modeling & Hydrographic Utilities (ianc)
-input_formats: ["OMG Binary Navigation (.nav)"]
-output_formats: ["ASCII Standard Output / Grace Tabular Text"]
-related_tools: ["POStoNav", "areaNavEdit", "HycomSSP", "modelAnalysis"]
+input_formats:
+- OMG Binary Navigation (.nav)
+output_formats:
+- ASCII Standard Output / Grace Tabular Text
+related_tools:
+- POStoNav
+- areaNavEdit
+- HycomSSP
+- modelAnalysis
 ---
 
 # Check_Nav
@@ -79,6 +86,7 @@ Check_Nav -grace survey_line01.nav > survey_line01.dat
 ### Output Format
 * **Standard Diagnostic Output**: Multi-line labeled blocks per record showing record index, `Latitude`, `Longitude`, `Epoch`, UTC `asctime` string, `Azimuth / Elevation`, `CMG (centi-degrees) / Depth`, `Velocity`, and `Flag 0` through `Flag 3`.
 * **Grace Tabular Output (`-grace`)**: One line per record formatted as:
+
   ```text
   <time> <lat> <lon> <azi> <velocity> <depth> <flag0> <flag1> <flag2> <flag3>
   ```

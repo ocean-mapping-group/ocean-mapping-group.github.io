@@ -1,26 +1,27 @@
 ---
 layout: default
 title: ek_fft_funcs (Internal FFT Functions for EKlook)
-parent: EKlook Tools
+parent: Simrad EK60/EK80 Echosounder Suite (EKlook)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 12
 tool_name: ek_fft_funcs
 source_path: code/EKlook/ek_fft_funcs.c
 category: EKlook
 input_formats:
-  - In-Memory Complex IQ Windows (fcomplex)
+- In-Memory Complex IQ Windows (fcomplex)
 output_formats:
-  - Complex & Power Spectra (jFFT_bundle)
+- Complex & Power Spectra (jFFT_bundle)
 related_tools:
-  - EK_FFT
-  - EKlook
-  - BatchProcEK
-  - EK_funcs
+- EK_FFT
+- EKlook
+- BatchProcEK
+- EK_funcs
 ---
 
 # ek_fft_funcs (Internal FFT Functions for EKlook)
 
 ## Description
-`ek_fft_funcs.c` (`code/EKlook/ek_fft_funcs.c`) provides the internal Fast Fourier Transform (FFT) signal-processing routines used by [`EK_FFT`](EK_FFT.md), [`EKlook`](EKlook.md), and [`BatchProcEK`](BatchProcEK.md). It operates on `jFFT_bundle` structures containing complex In-Phase/Quadrature (`fcomplex`) time-domain windows, applying cosine tapering, computing power-of-2 complex FFTs via `four1`, unwrapping/shifting baseband frequencies to physical acoustic frequencies, applying frequency-dependent seawater absorption corrections, and detrending matched-filter autocorrelation spectral ripple.
+`ek_fft_funcs.c` (`code/EKlook/ek_fft_funcs.c`) provides the internal Fast Fourier Transform (FFT) signal-processing routines used by [`EK_FFT`](EK_FFT.html), [`EKlook`](EKlook.html), and [`BatchProcEK`](BatchProcEK.html). It operates on `jFFT_bundle` structures containing complex In-Phase/Quadrature (`fcomplex`) time-domain windows, applying cosine tapering, computing power-of-2 complex FFTs via `four1`, unwrapping/shifting baseband frequencies to physical acoustic frequencies, applying frequency-dependent seawater absorption corrections, and detrending matched-filter autocorrelation spectral ripple.
 
 ## Key Functions
 

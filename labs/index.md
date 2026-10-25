@@ -1,8 +1,9 @@
 ---
 layout: default
-title: labs (Teaching & Coursework Labs)
+title: Graduate Course Lab Exercises (labs)
+parent: 5. Core Libraries, Researcher Suites & Utilities
+nav_order: 16
 has_children: true
-nav_order: 28
 ---
 
 # Teaching & Coursework Labs (`labs`)
@@ -19,10 +20,10 @@ The `labs/` (`code/labs/`) directory contains educational C programs and student
 
 | Tool | Source File | Description |
 | :--- | :--- | :--- |
-| **[`EM_unpack`](EM_unpack.md)** | `code/labs/EM_unpack.c` | Educational parser for Kongsberg Simrad EM3000 binary `.all` telegram files; scans for `EM_STX` (`0x02`), validates record lengths, performs optional 16/32-bit endian swapping (`-swap`), and decodes Nav (`0x50`), Image (`0x53`), Raw Time & Angle (`0x46`), and Depth (`0x44`) telegram headers. |
-| **[`example`](example.md)** | `code/labs/example.c` | Laboratory template for discrete time-domain acoustic convolution; reads two-column ASCII transmit pulse (`-pulse`) and target impulse response (`-impul`) files and provides the `doconv()` framework for convolving sonar waveforms. |
-| **[`mkbp`](mkbp.md)** | `code/labs/mkbp.c` | Reference solution for interactive acoustic transducer beam pattern modeling; computes normalized far-field pressure, intensity, and directivity across 1,800 angular bins ($-90^\circ$ to $+90^\circ$) for circular planar pistons, continuous line arrays, and shaded discrete line arrays. |
-| **[`mkbp_skeleton`](mkbp_skeleton.md)** | `code/labs/mkbp_skeleton.c` | Student assignment skeleton for `mkbp`; provides the complete CLI argument parser, interactive array geometry prompts, normalization loop, and ASCII file output while leaving the analytical circular piston, continuous line, and discrete phasor summation formulas as student exercises. |
+| **[`EM_unpack`](EM_unpack.html)** | `code/labs/EM_unpack.c` | Educational parser for Kongsberg Simrad EM3000 binary `.all` telegram files; scans for `EM_STX` (`0x02`), validates record lengths, performs optional 16/32-bit endian swapping (`-swap`), and decodes Nav (`0x50`), Image (`0x53`), Raw Time & Angle (`0x46`), and Depth (`0x44`) telegram headers. |
+| **[`example`](example.html)** | `code/labs/example.c` | Laboratory template for discrete time-domain acoustic convolution; reads two-column ASCII transmit pulse (`-pulse`) and target impulse response (`-impul`) files and provides the `doconv()` framework for convolving sonar waveforms. |
+| **[`mkbp`](mkbp.html)** | `code/labs/mkbp.c` | Reference solution for interactive acoustic transducer beam pattern modeling; computes normalized far-field pressure, intensity, and directivity across 1,800 angular bins ($-90^\circ$ to $+90^\circ$) for circular planar pistons, continuous line arrays, and shaded discrete line arrays. |
+| **[`mkbp_skeleton`](mkbp_skeleton.html)** | `code/labs/mkbp_skeleton.c` | Student assignment skeleton for `mkbp`; provides the complete CLI argument parser, interactive array geometry prompts, normalization loop, and ASCII file output while leaving the analytical circular piston, continuous line, and discrete phasor summation formulas as student exercises. |
 
 ---
 
@@ -30,6 +31,6 @@ The `labs/` (`code/labs/`) directory contains educational C programs and student
 
 Within the broader OMG software ecosystem, the programs in `code/labs/` serve as simplified, self-contained counterparts to production libraries and utilities:
 
-* **`EM_unpack.c`** introduces the exact Kongsberg Simrad `.all` binary framing and endianness logic used in production unravelers such as [`unravel`](../omg/unravel.md) and [`read_kmall`](../kmall/read_kmall.md), without requiring students to link against the full `liblocal.a` or `swapio.h` infrastructure (`cc EM_unpack.c -o EM_unpack -lm`).
-* **`example.c`** pairs directly with [`testChirp`](../tests/testChirp.md) (`code/tests/testChirp.c`), which generates synthetic `pulse.ascii` and `impulse.ascii` files for students to convolve and inspect.
-* **`mkbp.c`** and **`mkbp_skeleton.c`** provide the command-line mathematical foundation for the interactive X11/Motif beam-forming and array shading demonstration tool [`bpdemo`](../bpdemo/bpdemo.md) (`code/bpdemo/bpdemo.c`).
+* **`EM_unpack.c`** introduces the exact Kongsberg Simrad `.all` binary framing and endianness logic used in production unravelers such as [`unravel`](../workflows/kongsberg-all-unraveling.html) and [`read_kmall`](../kmall/read_kmall.html), without requiring students to link against the full `liblocal.a` or `swapio.h` infrastructure (`cc EM_unpack.c -o EM_unpack -lm`).
+* **`example.c`** pairs directly with [`testChirp`](../tests/testChirp.html) (`code/tests/testChirp.c`), which generates synthetic `pulse.ascii` and `impulse.ascii` files for students to convolve and inspect.
+* **`mkbp.c`** and **`mkbp_skeleton.c`** provide the command-line mathematical foundation for the interactive X11/Motif beam-forming and array shading demonstration tool [`bpdemo`](../bpdemo/BPdemo.html) (`code/bpdemo/bpdemo.c`).

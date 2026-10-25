@@ -1,16 +1,18 @@
 ---
 layout: default
 title: glboxfilt
-parent: Destripe Tools
-grand_parent: sidescan
+parent: Sidescan Radiometric & Geometric Suite (sidescan)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 4
 ---
+
 # glboxfilt
 
 ## Description
 `glboxfilt` is a utility designed to apply a box filter to JCU GLORIA format merged sidescan files. It processes the combined port and starboard sidescan data (`all_data`) using a sliding window filter to either smooth the imagery (low-pass) or extract high-frequency components (high-pass). This tool is similar in principle to `destripe.c` and `destripe_hack.c` but operates on the entire data swath simultaneously.
 
 ## Usage
+
 ```bash
 glboxfilt [-filtlen <length>] [-filtwidth <width>] [-low | -high] [-skip <count>] <infile_prefix>
 ```

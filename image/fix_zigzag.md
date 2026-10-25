@@ -1,14 +1,21 @@
 ---
 layout: default
 title: fix_zigzag
-parent: Image Tools
+parent: Raster Image Processing (image)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 23
 tool_name: fix_zigzag
 source_path: code/image/fix_zigzag.c
 category: Satellite, SAR & Format Conversion
-input_formats: ["ACRES 8-bit Landsat MSS image"]
-output_formats: ["Line-shift corrected ACRES 8-bit image (<infile>.fix)"]
-related_tools: ["destripe", "lsfilter", "add_hilo", "landsat2acres"]
+input_formats:
+- ACRES 8-bit Landsat MSS image
+output_formats:
+- Line-shift corrected ACRES 8-bit image (<infile>.fix)
+related_tools:
+- destripe
+- lsfilter
+- add_hilo
+- landsat2acres
 ---
 
 # fix_zigzag
@@ -17,6 +24,7 @@ related_tools: ["destripe", "lsfilter", "add_hilo", "landsat2acres"]
 `fix_zigzag` (written by A. Y. / JCU, May 1990) corrects 12-line periodic horizontal line-start synchronization ("zigzag") shifts in ACRES-format Landsat MSS imagery, writing the corrected image to `<infile>.fix`.
 
 ## CLI Options & Usage
+
 ```bash
 fix_zigzag -in <acres_file>
 ```

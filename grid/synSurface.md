@@ -1,13 +1,19 @@
 ---
 layout: default
 title: synSurface
-parent: Grid Tools
+parent: Bathymetric Gridding & Export (grid)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 tool_name: synSurface
 source_path: code/grid/synSurface.c
 category: gridding
-input_formats: ["JHC_header (.r4)"]
-output_formats: ["JHC_header (.r4)"]
-related_tools: ["makeSynPing", "make_blank", "edhead"]
+input_formats:
+- JHC_header (.r4)
+output_formats:
+- JHC_header (.r4)
+related_tools:
+- makeSynPing
+- make_blank
+- edhead
 ---
 
 # synSurface
@@ -43,6 +49,7 @@ synSurface [-normal <depth>] [-reset] <r4file>
 ## Examples
 
 ### Inspect an `.r4` surface header for synthetic swath generation
+
 ```bash
 synSurface -normal 150.0 test_sheet.r4
 ```

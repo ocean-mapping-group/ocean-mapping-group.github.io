@@ -1,14 +1,22 @@
 ---
 layout: default
 title: mvp2hips
-parent: HIPS Goodies (hips_goodies)
+parent: CARIS HIPS Integration Utilities (hips_goodies)
+grand_parent: 4. Multi-Vendor Sonar & LiDAR Converters
 nav_order: 2
 tool_name: mvp2hips
 source_path: code/hips_goodies/mvp2hips.c
 category: Caris HIPS Conversion Utilities
-input_formats: [".001c (MVP calculated sound speed file)", ".svp"]
-output_formats: [".svp (CARIS HIPS SVP_VERSION_2)"]
-related_tools: ["heli2caris", "read_kmall", "mergeAtt", "newMergeAtt"]
+input_formats:
+- .001c (MVP calculated sound speed file)
+- .svp
+output_formats:
+- .svp (CARIS HIPS SVP_VERSION_2)
+related_tools:
+- heli2caris
+- read_kmall
+- mergeAtt
+- newMergeAtt
 ---
 
 # mvp2hips
@@ -62,4 +70,4 @@ mvp2hips <input.001c> <output.svp>
 
 ## Architectural Fit
 
-Alongside [`heli2caris`](heli2caris.md), `mvp2hips` supports multi-software hydrographic processing environments where MVP casts collected during OMG/UNB multibeam operations must also be imported into CARIS HIPS project vessel configurations.
+Alongside [`heli2caris`](heli2caris.html), `mvp2hips` supports multi-software hydrographic processing environments where MVP casts collected during OMG/UNB multibeam operations must also be imported into CARIS HIPS project vessel configurations.

@@ -1,14 +1,22 @@
 ---
 layout: default
 title: convertWOA01
-parent: Jonathan Beaudoin (jonnyb) Tools
+parent: Jonathan Beaudoin — SVP, Refraction & Snippets (jonnyb)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 nav_order: 6
 tool_name: convertWOA01
 source_path: code/jonnyb/woa/convertWOA01.c
 category: Oceanographic Climatology & Databases (jonnyb)
-input_formats: ["NOAA WOA01 quarter-degree (1440x720) or 1-degree (360x180) ASCII grids"]
-output_formats: [".r4 (32-bit float OMG mapsheets)", ".8bit (8-bit OMG mapsheets)", "woa01_depth.r4"]
-related_tools: ["svp_woa01", "soundscape", "wod2db3"]
+input_formats:
+- NOAA WOA01 quarter-degree (1440x720) or 1-degree (360x180) ASCII grids
+output_formats:
+- .r4 (32-bit float OMG mapsheets)
+- .8bit (8-bit OMG mapsheets)
+- woa01_depth.r4
+related_tools:
+- svp_woa01
+- soundscape
+- wod2db3
 ---
 
 # convertWOA01 & convertWOA01_mask
@@ -33,11 +41,13 @@ convertWOA01_mask [-v] [-8bit] [-split] (-s | -t | -gp) -in <woa01_1deg_ascii_fi
 ### Examples
 
 **1. Convert a quarter-degree WOA01 temperature file into a 33-layer `.r4` volume and extract `woa01_depth.r4`:**
+
 ```bash
 convertWOA01 -t -depths -in t0101an1.woa
 ```
 
 **2. Split a WOA01 salinity file into 33 individual depth-level `.r4` mapsheets (`*.0000.r4` .. `*.5500.r4`):**
+
 ```bash
 convertWOA01 -s -split -in s0101an1.woa
 ```

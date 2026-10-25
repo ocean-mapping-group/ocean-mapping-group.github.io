@@ -1,15 +1,18 @@
 ---
 layout: default
 title: inArea
-parent: OMG Tools
+parent: Core Swath & .all Suite (omg)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 35
 ---
+
 # inArea
 
 ## Description
 `inArea` is a command-line utility that checks whether one or more OMG-HDCS data files (merged files or GLORIA files) intersect with a specified geographic area of interest. It's a spatial filtering tool that helps in selecting relevant data files based on their geographic coverage.
 
 ## Usage
+
 ```bash
 inArea <datafile(s)> [-array <imagefile>] [OPTIONS]
 ```

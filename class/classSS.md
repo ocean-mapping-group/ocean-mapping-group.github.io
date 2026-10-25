@@ -1,15 +1,18 @@
 ---
 layout: default
 title: classSS
-parent: Classification Tools
+parent: Angular Response & Classification (class)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 2
 ---
+
 # classSS
 
 ## Description
 `classSS` is a command-line utility for extracting spectral classification parameters from sidescan sonar imagery, or from multibeam data if specified. It processes input images (typically from `ss_slantrange` files) by dividing them into patches and performing spectral analysis. It can use fixed classification sectors or dynamically adjust based on valid pixels. The tool calculates various attributes for each patch, including average amplitude, sigma, and spectral characteristics, and outputs these into a classification file.
 
 ## Usage
+
 ```bash
 classSS [OPTIONS] -out <classification_file> <ss_slantrange_file(s)>
 ```

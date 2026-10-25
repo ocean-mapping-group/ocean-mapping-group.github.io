@@ -1,14 +1,19 @@
 ---
 layout: default
 title: plotBorder
-parent: Knudsen Tools
+parent: Knudsen Chirp Sub-Bottom (knudsen)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 12
 tool_name: plotBorder
 source_path: knudsen/plotBorder.c
 category: seismic_plotting
-input_formats: [OMG_HDCS]
-output_formats: [PLOTLIB_VECTOR]
-related_tools: [makeSeisPlot, knud2glo]
+input_formats:
+- OMG_HDCS
+output_formats:
+- PLOTLIB_VECTOR
+related_tools:
+- makeSeisPlot
+- knud2glo
 ---
 
 # plotBorder

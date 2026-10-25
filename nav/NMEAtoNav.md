@@ -1,14 +1,24 @@
 ---
 layout: default
 title: NMEAtoNav
-parent: Navigation Tools
+parent: Navigation Processing (nav)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 9
 tool_name: NMEAtoNav
 source_path: code/nav/NMEAtoNav.c
 category: Navigation & Georeferencing
-input_formats: ["ASCII NMEA-0183 logs ($GPGGA, $INGGA, $GNGGA, $PNCTGGA, $GPGGK, $INGGK, $GNGGK, $GPZDA, $INZDA, $GPGLL, $INGLL, $GPVTG, $HEHDT, $SDDPT, $PTNL)"]
-output_formats: [".nav (jcu_nav_rec binary)", "ASCII text (-ascii)", ".merged (SingleBeam HDCS v3 with -sbes)"]
-related_tools: ["Generic_to_Nav", "QNSYtoNav", "mergeNav", "appendNav", "fixnav"]
+input_formats:
+- ASCII NMEA-0183 logs ($GPGGA, $INGGA, $GNGGA, $PNCTGGA, $GPGGK, $INGGK, $GNGGK, $GPZDA, $INZDA, $GPGLL, $INGLL, $GPVTG, $HEHDT, $SDDPT, $PTNL)
+output_formats:
+- .nav (jcu_nav_rec binary)
+- ASCII text (-ascii)
+- .merged (SingleBeam HDCS v3 with -sbes)
+related_tools:
+- Generic_to_Nav
+- QNSYtoNav
+- mergeNav
+- appendNav
+- fixnav
 ---
 
 # NMEAtoNav
@@ -29,22 +39,26 @@ NMEAtoNav [OPTIONS] -comp <output_file> <input_nmea_file(s)>
 ### Common Workflow Examples
 
 **1. Convert standard `$GPGGA` logs using `$GPZDA` for date stamps:**
+
 ```bash
 NMEAtoNav -GP -use_GGA -use_ZDA -comp vessel.nav nmea_serial_*.log
 ```
 
 **2. Extract only RTK Fixed (`GPS_quality == 4`) `$INGGA` fixes with ellipsoidal height stored in `azi`:**
+
 ```bash
 NMEAtoNav -IN -use_GGA -minGPS_quality 4 -maxGPS_quality 4 -ellipsoid \
     -year 2022 -jday 185 -check_for_EOD -comp rtk_ellipsoid.nav posmv_nmea.log
 ```
 
 **3. Inherit Year and Julian Day from an existing `.nav` file and apply a 0.2s latency delay:**
+
 ```bash
 NMEAtoNav -YRJD_from_nav merged/JD185/0001.nav -delay 0.2 -comp aux_gps.nav aux_nmea.txt
 ```
 
 **4. Convert `$GPGLL` + `$SDDPT` single-beam echosounder logs directly into an OMG-HDCS `.merged` file:**
+
 ```bash
 NMEAtoNav -use_GLL -use_ZDA -sbes -comp sbes_line01.merged echosounder.nmea
 ```

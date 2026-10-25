@@ -1,14 +1,21 @@
 ---
 layout: default
 title: wassp2omg
-parent: WASSP Tools
+parent: Furuno WASSP Multibeam (wassp)
+grand_parent: 4. Multi-Vendor Sonar & LiDAR Converters
 nav_order: 1
 tool_name: wassp2omg
 source_path: wassp/wassp2omg.c
 category: format_conversion
-input_formats: [WASSP]
-output_formats: [OMG_HDCS, SONAR_SETTINGS]
-related_tools: [wasspTool, mergeNav, SwathEd]
+input_formats:
+- WASSP
+output_formats:
+- OMG_HDCS
+- SONAR_SETTINGS
+related_tools:
+- wasspTool
+- mergeNav
+- SwathEd
 ---
 
 # wassp2omg

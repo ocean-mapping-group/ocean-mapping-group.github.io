@@ -1,14 +1,21 @@
 ---
 layout: default
 title: fixnav
-parent: Navigation Tools
+parent: Navigation Processing (nav)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 19
 tool_name: fixnav
 source_path: code/nav/fixnav.c
 category: Navigation & Georeferencing
-input_formats: [".nav (jcu_nav_rec binary)"]
-output_formats: [".nav (modified in-place)"]
-related_tools: ["filtnav", "mergeNav", "appendNav", "NMEAtoNav"]
+input_formats:
+- .nav (jcu_nav_rec binary)
+output_formats:
+- .nav (modified in-place)
+related_tools:
+- filtnav
+- mergeNav
+- appendNav
+- NMEAtoNav
 ---
 
 # fixnav
@@ -29,16 +36,19 @@ fixnav [OPTIONS] <filename.nav>
 ### Common Workflow Examples
 
 **1. Inspect a `.nav` file for time gaps ($> 30\text{ s}$), negative time steps, and 24-hour jumps without modifying the file:**
+
 ```bash
 fixnav -testonly merged/JD100/0001_line.nav
 ```
 
 **2. Automatically detect and repair $\pm 24\text{-hour}$ day jumps in-place:**
+
 ```bash
 fixnav merged/JD100/0001_line.nav
 ```
 
 **3. Manually shift all timestamps (from record 1 onward) by +1 day ($+86,400\text{ s}$) using `-skip -1`:**
+
 ```bash
 fixnav -skip -1 merged/JD100/0001_line.nav
 ```

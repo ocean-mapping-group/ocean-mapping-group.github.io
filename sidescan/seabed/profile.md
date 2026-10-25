@@ -1,16 +1,18 @@
 ---
 layout: default
 title: profile
-parent: Seabed Tools
-grand_parent: sidescan
+parent: Sidescan Radiometric & Geometric Suite (sidescan)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 1
 ---
+
 # profile
 
 ## Description
 `profile` is a utility designed to build a depth profile from JCU GLORIA images, specifically focusing on the first returns in the nadir region. It processes the sidescan data, remaps pixel values (optionally), and marks the calculated nadir point on a generated output profile image. This tool can be useful for visualizing the seafloor depth across the swath.
 
 ## Usage
+
 ```bash
 profile [-pingint <seconds>] [-first <record>] [-last <record>] [-noremap] <inname>
 ```

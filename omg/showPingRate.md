@@ -1,9 +1,11 @@
 ---
 layout: default
 title: showPingRate
-parent: OMG Tools
+parent: Core Swath & .all Suite (omg)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 62
 ---
+
 # showPingRate
 
 ## Description
@@ -15,6 +17,7 @@ nav_order: 62
 The output can be in a custom float array format (`.r4`) or PGM (Portable Graymap) image format.
 
 ## Usage
+
 ```bash
 showPingRate <omgfiles(s)> [OPTIONS]
 ```
@@ -32,6 +35,7 @@ showPingRate <omgfiles(s)> [OPTIONS]
 | `-tide <filename>` | Specifies a binary tide file (`.nav` format) to apply tide correction (for systems that have it irreversibly subtracted). |
 
 ### Coverage / Backscatter Map Options (`-show_coverage`)
+
 | Option | Description | Default |
 |---|---|---|
 | `-show_coverage` | Generate a 2D coverage density map (depth vs. across-track distance). Requires `-maxdepth`, `-maxacross`, and `-pixel`. | |
@@ -43,6 +47,7 @@ showPingRate <omgfiles(s)> [OPTIONS]
 | `-range <min> <max>` | (Used with `-pgm`). Stretches the output grayscale values in the PGM image between `min` and `max`. | `0` to `2.0` (for coverage counts) or `-50` to `-1` (for BS values) |
 
 ### Other Options
+
 | Option | Description |
 |---|---|
 | `-v` | Enable verbose output. | |

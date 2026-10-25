@@ -1,16 +1,18 @@
 ---
 layout: default
 title: modbeam
-parent: Mock Tools
-grand_parent: sidescan
+parent: Sidescan Radiometric & Geometric Suite (sidescan)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 8
 ---
+
 # modbeam
 
 ## Description
 `modbeam` is a utility designed to modify the beam pattern by incorporating a vertical beam function. It uses existing beam-angle and aspherical spreading component files (in JHC image format) to compute new, modified beam patterns for both port and starboard transducers. The output consists of two new lookup array files (`.beam_port` and `.beam_stbd`) representing these modified beam patterns. This tool does not appear to incorporate beam focusing.
 
 ## Usage
+
 ```bash
 modbeam -water <file_prefix> [-first <record>] [-last <record>]
 ```

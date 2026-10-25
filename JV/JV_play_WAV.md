@@ -1,9 +1,11 @@
 ---
 layout: default
 title: JV_play_WAV (Module within jview)
-parent: JV Tools
+parent: 2D/3D Interactive Viewer — jview (JV)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 5
 ---
+
 # JV_play_WAV (Module within jview)
 
 ## Description

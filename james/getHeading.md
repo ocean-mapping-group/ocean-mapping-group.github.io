@@ -1,14 +1,21 @@
 ---
 layout: default
 title: getHeading
-parent: James Muggah (james) Tools
+parent: James Muggah — Global Mapper Tiles & Utils (james)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 nav_order: 3
 tool_name: getHeading
 source_path: code/james/getHeading.c
 category: Hydrographic & Line Metadata Utilities (james)
-input_formats: [".merged", "xyzlist (ASCII file list)"]
-output_formats: [".txt (ASCII 2-column table: <filename> <heading_deg>)"]
-related_tools: ["stripNav", "checkBounds", "merged2orientation"]
+input_formats:
+- .merged
+- xyzlist (ASCII file list)
+output_formats:
+- '.txt (ASCII 2-column table: <filename> <heading_deg>)'
+related_tools:
+- stripNav
+- checkBounds
+- merged2orientation
 ---
 
 # getHeading
@@ -29,11 +36,13 @@ getHeading -out <output.txt> [-skip <N>] [-xyzlist <listfile>] [filename(s).merg
 ### Examples
 
 **1. Compute average heading for a directory of `.merged` lines (sampling every 10th ping):**
+
 ```bash
 getHeading -out line_headings.txt -skip 10 merged/JD180/*.merged
 ```
 
 **2. Compute average headings for an `-xyzlist` of `.merged` files:**
+
 ```bash
 getHeading -out line_headings.txt -xyzlist survey_lines.list
 ```

@@ -1,9 +1,11 @@
 ---
 layout: default
 title: deOuterMistrack
-parent: OMG Tools
+parent: Core Swath & .all Suite (omg)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 87
 ---
+
 # deOuterMistrack
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 87
 The tool identifies regions of the outer swath where `Q_factor` (quality factor) is `-128` (indicating no detection) to determine the effective swath edge, and then flags any detected soundings (`!beams[i].status`) beyond this edge.
 
 ## Usage
+
 ```bash
 deOuterMistrack <mergefile(s)> [-v] [-first <ping_num>] [-last <ping_num>]
 ```

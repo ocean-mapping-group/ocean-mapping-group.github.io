@@ -1,7 +1,8 @@
 ---
 layout: default
-title: JV (Jview)
-nav_order: 15
+title: 2D/3D Interactive Viewer — jview (JV)
+parent: 2. Gridding, Mosaicking & Interactive Editors
+nav_order: 4
 has_children: true
 ---
 

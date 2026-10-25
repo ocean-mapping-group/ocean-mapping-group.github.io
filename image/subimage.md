@@ -1,14 +1,23 @@
 ---
 layout: default
 title: subimage
-parent: Image Tools
+parent: Raster Image Processing (image)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 51
 tool_name: subimage
 source_path: code/image/subimage.c
 category: Image & Raster Processing
-input_formats: ["OMG1 8-bit or 32-bit float (.r4) array", "Raw 8-bit raster (-raw)"]
-output_formats: ["Cropped OMG1 8-bit or 32-bit float (.r4) sub-image"]
-related_tools: ["8bit2acres", "pastemos", "paster4", "patchArea", "fft2dimage"]
+input_formats:
+- OMG1 8-bit or 32-bit float (.r4) array
+- Raw 8-bit raster (-raw)
+output_formats:
+- Cropped OMG1 8-bit or 32-bit float (.r4) sub-image
+related_tools:
+- 8bit2acres
+- pastemos
+- paster4
+- patchArea
+- fft2dimage
 ---
 
 # subimage
@@ -17,6 +26,7 @@ related_tools: ["8bit2acres", "pastemos", "paster4", "patchArea", "fft2dimage"]
 `subimage` extracts a rectangular sub-window (`-cols` × `-rows`) from an 8-bit (`data_type = 1`), 32-bit floating-point (`-float`, `data_type = 3`), or raw headerless (`-raw`) raster. The crop window can be specified either by upper-left pixel coordinates (`-left_x`, `-top_y`) or centered on a geographic coordinate (`-geocentre <lat> <lon>`), with automatic recalculation of the `OMG1` (`JHC_header`) geographic bounding box.
 
 ## CLI Options & Usage
+
 ```bash
 subimage -in <infile> -out <outfile> -rows <nrows> -cols <ncols> \
   [-left_x <x0> -top_y <y0> | -geocentre <lat> <lon>] \

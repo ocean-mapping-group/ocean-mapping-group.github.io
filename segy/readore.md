@@ -1,14 +1,21 @@
 ---
 layout: default
 title: readore
-parent: SEGY Tools
+parent: SEG-Y Sub-Bottom & Seismic (segy)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 4
 tool_name: readore
 source_path: segy/readore.c
 category: format_conversion
-input_formats: [SEGY_ORE_SE880]
-output_formats: [BINARY_RASTER, ASCII_STDOUT]
-related_tools: [klein, upAGCDIG, readSB_SEGY]
+input_formats:
+- SEGY_ORE_SE880
+output_formats:
+- BINARY_RASTER
+- ASCII_STDOUT
+related_tools:
+- klein
+- upAGCDIG
+- readSB_SEGY
 ---
 
 # readore

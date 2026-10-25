@@ -1,16 +1,18 @@
 ---
 layout: default
 title: azimerge
-parent: Merge Tools
-grand_parent: sidescan
+parent: Sidescan Radiometric & Geometric Suite (sidescan)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 3
 ---
+
 # azimerge
 
 ## Description
 `azimerge` is a utility designed to merge azimuth (heading) and optionally navigation (latitude and longitude) information from a navigation file (JCU NAV format) onto an existing JCU GLORIA record file. It performs time-based interpolation of navigation data to update the GLORIA records, ensuring accurate positional and heading information.
 
 ## Usage
+
 ```bash
 azimerge [-declin <degrees>] [-timegap <seconds>] [-pixsiz <m>] [-layback <seconds>] [-nav] [-v] [-timehack <seconds>] <navfile> <beforefile> <afterfile>
 ```

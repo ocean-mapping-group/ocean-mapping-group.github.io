@@ -1,9 +1,11 @@
 ---
 layout: default
 title: downHill
-parent: Plot Tools
+parent: PostScript & Vector Plotting (plot)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 126
 ---
+
 # downHill
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 126
 This tool is useful for understanding sonar coverage, designing survey parameters, and generating ground truth data for beam footprint analysis, especially in areas with varying bathymetry. It can model different beam spacing types (equiangular or equidistant) and account for across-track slope.
 
 ## Usage
+
 ```bash
 downHill (-em3000 | -fswp20 | -isis | -towss | -elacII_120 | -elacII_150 | -reson_8101 | -em300 | -sb_classic) -outfile <bf_file> [OPTIONS]
 ```

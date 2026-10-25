@@ -1,14 +1,20 @@
 ---
 layout: default
 title: safileio
-parent: Shapelib GIS Library & Tools (shapelib-1.3.0a2)
+parent: ESRI Shapefile C Library (shapelib-1.3.0a2)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 nav_order: 5
-module_name: safileio
 source_path: code/shapelib-1.3.0a2/safileio.c
 category: GIS & ESRI Shapefile Library / Tools
-input_formats: ["File I/O stream requests from shpopen / dbfopen"]
-output_formats: ["POSIX stdio FILE* or Windows UTF-8 wide-char streams"]
-related_tools: ["shpopen", "dbfopen", "shptree"]
+input_formats:
+- File I/O stream requests from shpopen / dbfopen
+output_formats:
+- POSIX stdio FILE* or Windows UTF-8 wide-char streams
+related_tools:
+- shpopen
+- dbfopen
+- shptree
+module_name: safileio
 ---
 
 # safileio (`safileio.c`)
@@ -17,7 +23,7 @@ related_tools: ["shpopen", "dbfopen", "shptree"]
 
 `safileio.c` (`code/shapelib-1.3.0a2/safileio.c`, 289 lines, Revision 1.4) provides the default **Shapelib Abstracted File I/O (`SAHooks`)** implementation based on standard C `stdio` (`fopen`, `fread`, `fwrite`, `fseek`, `ftell`, `fflush`, `fclose`, `remove`, `fprintf(stderr, ...)`, and `atof`), along with optional Windows UTF-8 wide-character (`_wfopen` / `_wremove`) hooks.
 
-Introduced by Frank Warmerdam and Bram de Greve in December 2007–January 2008, `safileio.c` decouples [`shpopen.c`](shpopen.md) and [`dbfopen.c`](dbfopen.md) from direct `stdio` calls. By routing all file operations, error reporting, and floating-point string parsing through the `SAHooks` function-pointer table stored in `SHPInfo` and `DBFInfo`, applications (such as GDAL/OGR or custom virtual file systems) can override file access, support 64-bit offsets, handle UTF-8 filenames on Windows, or replace locale-sensitive `atof()` without modifying core Shapelib code.
+Introduced by Frank Warmerdam and Bram de Greve in December 2007–January 2008, `safileio.c` decouples [`shpopen.c`](shpopen.html) and [`dbfopen.c`](dbfopen.html) from direct `stdio` calls. By routing all file operations, error reporting, and floating-point string parsing through the `SAHooks` function-pointer table stored in `SHPInfo` and `DBFInfo`, applications (such as GDAL/OGR or custom virtual file systems) can override file access, support 64-bit offsets, handle UTF-8 filenames on Windows, or replace locale-sensitive `atof()` without modifying core Shapelib code.
 
 ---
 

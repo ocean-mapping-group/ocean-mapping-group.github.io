@@ -1,14 +1,26 @@
 ---
 layout: default
 title: PCItoJHC
-parent: Image Tools
+parent: Raster Image Processing (image)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 5
 tool_name: PCItoJHC
 source_path: code/image/PCItoJHC.c
 category: Satellite, SAR & Format Conversion
-input_formats: ["3-band PCI/CASI interleaved raster", "SIF (-sif)", "Netpbm PPM (-ppm) / PGM (-pgm)", "TIFF World File (-tfw)", "CASI .COR (-snb)"]
-output_formats: ["OMG1 8-bit band files (.band1, .band2, .band3)", ".pxm_header"]
-related_tools: ["8bit2acres", "makecolcomp", "landsat2acres", "czcs2acres"]
+input_formats:
+- 3-band PCI/CASI interleaved raster
+- SIF (-sif)
+- Netpbm PPM (-ppm) / PGM (-pgm)
+- TIFF World File (-tfw)
+- CASI .COR (-snb)
+output_formats:
+- OMG1 8-bit band files (.band1, .band2, .band3)
+- .pxm_header
+related_tools:
+- 8bit2acres
+- makecolcomp
+- landsat2acres
+- czcs2acres
 ---
 
 # PCItoJHC
@@ -17,6 +29,7 @@ related_tools: ["8bit2acres", "makecolcomp", "landsat2acres", "czcs2acres"]
 `PCItoJHC` imports 3-band interleaved PCI/CASI airborne hyperspectral imagery, `.sif` imagery (`-sif`), 24-bit Netpbm `.ppm` color images (`-ppm`), or 8-bit `.pgm` greyscale images (`-pgm`) into separate 8-bit `OMG1` (`JHC_header`) band files (`.band1`, `.band2`, `.band3`), while attaching geographic or Transverse Mercator / Mercator projection metadata from either a CASI `.COR` navigation file (`-snb`) or an ESRI TIFF World File (`-tfw`).
 
 ## CLI Options & Usage
+
 ```bash
 PCItoJHC -in <rawimage> -out <prefix> [-ppm | -pgm | -sif] \
   [-rows <n> -cols <n>] [-offset <bytes>] [-invert] [-flip] \

@@ -1,16 +1,17 @@
 ---
 layout: default
 title: j_MCOM
-parent: Core Shared Libraries (subr)
-module_name: j_MCOM
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/j_MCOM.c
-header_path: code/subr/j_MCOM.h
-category: "Navigation, Attitude & Sensor Telegram Parsers"
+category: Navigation, Attitude & Sensor Telegram Parsers
 related_tools:
-  - readDelHeave
-  - j_SUB2K
-  - readEA600
-  - ek80_parse_proc
+- readDelHeave
+- j_SUB2K
+- readEA600
+- ek80_parse_proc
+module_name: j_MCOM
+header_path: code/subr/j_MCOM.h
 ---
 
 # `j_MCOM` — CodaOctopus F180 (`MCOM`) Inertial Attitude & Positioning Parser
@@ -24,6 +25,7 @@ The `j_MCOM` module (`code/subr/j_MCOM.c` and `code/subr/j_MCOM.h`) decodes bina
 
 ### `MCOM_packet` Structure
 Represents a fully decoded 84-byte CodaOctopus `MCOM` inertial navigation and attitude frame:
+
 ```c
 typedef struct {
     char sync[5];                          /* "MCOM\0" header identifier */
@@ -60,6 +62,7 @@ typedef struct {
 ## Public Functions & Signatures
 
 ### 1. `MCOM` Packet Decoder
+
 ```c
 int interpret_MCOM_packet(char *MCOMrawpacket, MCOM_packet *packet);
 ```
@@ -73,6 +76,7 @@ int interpret_MCOM_packet(char *MCOMrawpacket, MCOM_packet *packet);
      - When `cyclicPacketCounter == 40`, extracts the 4-character `MCOM_version`, `outputDelay`, `longperiodHeaveLatency`, and `longperiodHeave_filterPeriod`.
 
 ### 2. 24-Bit Sign Extension & Bit-Printing Utilities
+
 ```c
 signed int switch_24_to32_bit(signed int anint, int show);
 int print8bits(char achar);

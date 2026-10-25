@@ -1,9 +1,11 @@
 ---
 layout: default
 title: diff_MS_bp
-parent: OMG Tools
+parent: Core Swath & .all Suite (omg)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 89
 ---
+
 # diff_MS_bp
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 89
 It expects both input files to have an identical set of sectors (defined by parameters like `sector_id`, `center_frequency`, `signal_length`, `waveform_id`). It calculates the point-by-point difference in dB values for each angle bin.
 
 ## Usage
+
 ```bash
 diff_MS_bp -first <first_file> -second <second_file> -out <output_file> [-v]
 ```

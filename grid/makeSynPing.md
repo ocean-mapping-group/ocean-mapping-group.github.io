@@ -1,13 +1,24 @@
 ---
 layout: default
 title: makeSynPing
-parent: Grid Tools
+parent: Bathymetric Gridding & Export (grid)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 tool_name: makeSynPing
 source_path: code/grid/makeSynPing.c
 category: gridding
-input_formats: ["CLI acoustic and seafloor geometry parameters"]
-output_formats: [".TA.r4 (Time-Angle polar water-column grid)", ".XY.r4 (Cartesian cross-track water-column wedge)", ".BP_TX_FA.r4", ".BP_TX_PS.r4", ".BP_RC_FA.r4", ".BP_RC_PS.r4"]
-related_tools: ["r4to8bit", "synSurface", "make_blank"]
+input_formats:
+- CLI acoustic and seafloor geometry parameters
+output_formats:
+- .TA.r4 (Time-Angle polar water-column grid)
+- .XY.r4 (Cartesian cross-track water-column wedge)
+- .BP_TX_FA.r4
+- .BP_TX_PS.r4
+- .BP_RC_FA.r4
+- .BP_RC_PS.r4
+related_tools:
+- r4to8bit
+- synSurface
+- make_blank
 ---
 
 # makeSynPing
@@ -90,6 +101,7 @@ makeSynPing [OPTIONS] <outname_prefix>
 ## Examples
 
 **Simulate a 150° multibeam water-column ping over a 30 m rippled seabed with a boulder and a fish school:**
+
 ```bash
 makeSynPing \
     -angsect 150 -angstep 0.25 \

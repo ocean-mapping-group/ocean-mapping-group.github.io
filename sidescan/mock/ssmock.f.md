@@ -1,15 +1,22 @@
 ---
 layout: default
 title: ssmock.f
-parent: Mock Tools
-grand_parent: Sidescan Tools
+parent: Sidescan Radiometric & Geometric Suite (sidescan)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 21
 tool_name: ssmock (mockss)
 source_path: code/sidescan/mock/ssmock.f
 category: Sidescan & Backscatter Modeling
-input_formats: ["Bathymetric DTM (512x512 float)", "GLORIA / SeaMARC I track file"]
-output_formats: ["Synthetic grazing-angle array (512x512 float)"]
-related_tools: ["fullmock.f", "ssmock.for", "rrmos.f", "synthetic"]
+input_formats:
+- Bathymetric DTM (512x512 float)
+- GLORIA / SeaMARC I track file
+output_formats:
+- Synthetic grazing-angle array (512x512 float)
+related_tools:
+- fullmock.f
+- ssmock.for
+- rrmos.f
+- synthetic
 ---
 
 # ssmock.f (`mockss`)
@@ -28,4 +35,4 @@ related_tools: ["fullmock.f", "ssmock.for", "rrmos.f", "synthetic"]
 1. Interpolates the sonar track at half-grid-cell steps (`step = grid / 2`) between consecutive pings.
 2. Casts port and starboard across-track rays out to maximum horizontal swath half-width `hmax` (`2500/1000/500 m` for SeaMARC I; `22500/15000 m` for GLORIA), tracking the minimum depression angle (`minang`) along each ray to mask acoustic shadow zones (`rmock = 0.0` in shadows).
 3. For illuminated cells, calls `vectangle(ix, iy, ray, fdepth, rangle)` to compute the 3D angle between the incident vector `(range, height)` and the local seafloor surface normal derived from 4-connected depth gradients, storing `rangle` in `rmock(ix, iy)`.
-4. Optionally exported to an 8-bit image via [`to8bit`](to8bit.md).
+4. Optionally exported to an 8-bit image via [`to8bit`](to8bit.html).

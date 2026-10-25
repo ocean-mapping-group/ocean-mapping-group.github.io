@@ -1,13 +1,19 @@
 ---
 layout: default
 title: noaaTC_Tide
-parent: Tide Tools
+parent: Tidal Reduction & Constituents (tide)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 tool_name: noaaTC_Tide
 source_path: code/tide/noaaTC_Tide.c
 category: tide
-input_formats: ["NOAA Tides & Currents ASCII"]
-output_formats: ["JHC ASCII tide (jday hour min tide)"]
-related_tools: ["noaaTide", "binTide", "mergeTide"]
+input_formats:
+- NOAA Tides & Currents ASCII
+output_formats:
+- JHC ASCII tide (jday hour min tide)
+related_tools:
+- noaaTide
+- binTide
+- mergeTide
 ---
 
 # noaaTC_Tide
@@ -37,6 +43,7 @@ noaaTC_Tide [OPTIONS] -in <tidefilename> -out <mytideformatname>
 
 1. **Header Skipping:** Reads and discards the first `skip` lines (default `14`).
 2. **Column Parsing:** Parses 5 whitespace-separated fields per line:
+
    ```c
    sscanf(linestring, "%s %s %s %f %f", am_pm, datestring, timestring, &ptide, &tide);
    ```
@@ -48,6 +55,7 @@ noaaTC_Tide [OPTIONS] -in <tidefilename> -out <mytideformatname>
 ## Examples
 
 **Convert a NOAA Tides & Currents verified 6-minute water level file:**
+
 ```bash
 noaaTC_Tide -skip 14 -in noaa_8410140_eastport.txt -out eastport.asc
 binTide -year 2007 eastport.asc eastport.bin
@@ -58,5 +66,5 @@ binTide -year 2007 eastport.asc eastport.bin
 ## Workflow Context
 
 - **Upstream:** NOAA Tides & Currents CO-OPS station data exports.
-- **Downstream:** [`binTide`](binTide.md) $\rightarrow$ [`mergeTide`](mergeTide.md).
-- **See Also:** [`noaaTide`](noaaTide.md) for legacy 8-column NOAA DCP tide files.
+- **Downstream:** [`binTide`](binTide.html) $\rightarrow$ [`mergeTide`](mergeTide.html).
+- **See Also:** [`noaaTide`](noaaTide.html) for legacy 8-column NOAA DCP tide files.

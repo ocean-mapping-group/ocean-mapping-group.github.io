@@ -1,15 +1,16 @@
 ---
 layout: default
 title: j_SalishSeaCast
-parent: Core Shared Libraries (subr)
-module_name: j_SalishSeaCast
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/j_SalishSeaCast.c
-header_path: code/subr/j_SalishSeaCast.h
 category: Oceanographic Models & Water Column
 related_tools:
-  - soundscape
-  - SYN_internal_wave
-  - raytracing utilities
+- soundscape
+- SYN_internal_wave
+- raytracing utilities
+module_name: j_SalishSeaCast
+header_path: code/subr/j_SalishSeaCast.h
 ---
 
 # `j_SalishSeaCast` — SalishSeaCast 3D Oceanographic Model Grid & Lookup Library

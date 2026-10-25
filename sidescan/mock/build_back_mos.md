@@ -1,16 +1,18 @@
 ---
 layout: default
 title: build_back_mos
-parent: Mock Tools
-grand_parent: sidescan
+parent: Sidescan Radiometric & Geometric Suite (sidescan)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 5
 ---
+
 # build_back_mos
 
 ## Description
 `build_back_mos` is a utility designed to generate a backscatter plot (or "table") from a single pair of backscatter strength and grazing angle mosaics. It allows the user to define a specific region of interest (`top_y`, `bot_y`, `left_x`, `right_x`) within the mosaics. Within this region, the tool analyzes the relationship between backscatter intensity and grazing angle, calculating the mean and standard deviation of backscatter for different grazing angle bins. This statistical information is then represented as a new image file, termed a "table", which visually summarizes the angular dependence.
 
 ## Usage
+
 ```bash
 build_back_mos -grazfile <grazing_file> -backfile <backscatter_file> -table <table_prefix> [-top_y <value>] [-bot_y <value>] [-left_x <value>] [-right_x <value>] [-full]
 ```

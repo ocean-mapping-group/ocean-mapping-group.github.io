@@ -1,9 +1,11 @@
 ---
 layout: default
 title: plotDump
-parent: Plot Tools
+parent: PostScript & Vector Plotting (plot)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 138
 ---
+
 # plotDump
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 138
 The tool supports plotting multiple data series on a single graph, filtering, applying squat models, and displaying ranges from multibeam merged files. It's highly interactive, prompting the user for plot choices and ranges.
 
 ## Usage
+
 ```bash
 plotDump -infile <file1> [-infile <file2> ...] [-outfile <filename.meta>] [OPTIONS] <merged_file(s)...>
 ```

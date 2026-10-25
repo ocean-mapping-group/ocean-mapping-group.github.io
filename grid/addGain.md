@@ -1,9 +1,11 @@
 ---
 layout: default
 title: addGain
-parent: Grid Tools
+parent: Bathymetric Gridding & Export (grid)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 4
 ---
+
 ---
 layout: default
 title: addGain
@@ -16,6 +18,7 @@ nav_order: 4
 `addGain` is a command-line utility that applies a gain correction to an 8-bit image (likely a sidescan mosaic or intensity map) based on depth information from a corresponding floating-point (`.r4`) depth grid. This effectively normalizes the image intensity with respect to the water depth, compensating for signal loss over longer ranges. The output is a new 8-bit image file.
 
 ## Usage
+
 ```bash
 addGain [OPTIONS] <base_filename> <output_8bit_file>
 ```

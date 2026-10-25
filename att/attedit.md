@@ -1,15 +1,18 @@
 ---
 layout: default
 title: attedit
-parent: Attitude Tools
+parent: Attitude, Heave & Heading (att)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 4
 ---
+
 # attedit
 
 ## Description
 `attedit` is a command-line utility designed to display and potentially edit information within an OMG-HDCS (Ocean Mapping Group - Hydrographic Data Cleaning System) attitude record file. It can perform various checks on the data, fix specific issues like negative time differences or midnight rollovers, and allows for interactive browsing and basic editing of individual attitude records.
 
 ## Usage
+
 ```bash
 attedit [OPTIONS] <filename>.orientation
 ```

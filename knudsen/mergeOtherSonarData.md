@@ -1,14 +1,23 @@
 ---
 layout: default
 title: mergeOtherSonarData
-parent: Knudsen Tools
+parent: Knudsen Chirp Sub-Bottom (knudsen)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 10
 tool_name: mergeOtherSonarData
 source_path: knudsen/mergeOtherSonarData.c
 category: bathymetry_processing
-input_formats: [OMG_HDCS, JCU_NAV]
-output_formats: [OMG_HDCS, BINARY_DELAY]
-related_tools: [knud2glo, pickSS, make_knudsen_ss, SwathEd]
+input_formats:
+- OMG_HDCS
+- JCU_NAV
+output_formats:
+- OMG_HDCS
+- BINARY_DELAY
+related_tools:
+- knud2glo
+- pickSS
+- make_knudsen_ss
+- SwathEd
 ---
 
 # mergeOtherSonarData

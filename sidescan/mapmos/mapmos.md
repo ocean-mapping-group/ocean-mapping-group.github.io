@@ -1,16 +1,18 @@
 ---
 layout: default
 title: mapmos
-parent: Mapmos Tools
-grand_parent: sidescan
+parent: Sidescan Radiometric & Geometric Suite (sidescan)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 1
 ---
+
 # mapmos
 
 ## Description
 `mapmos` is a utility for creating mosaics and visualizing the navigation tracks of JCU GLORIA/MR1 format sidescan files. It allows for various map projections, scaling, and the ability to highlight discontinuities (jumps) in azimuth, time, and distance between consecutive records. It can also overlay coastlines and grid lines.
 
 ## Usage
+
 ```bash
 mapmos -merc <lat> -ll <lon> <lat> -ur <lon> <lat> -scale <value> [-grid <align>] [-azi <offset>] [-notime] [-nolabel] [-noflag] [-title <string>] [-first <nnnn>] [-last <mmmm>] [-coast <filename> <pen#>] <file1> [file2 ...]
 ```

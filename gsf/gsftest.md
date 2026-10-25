@@ -1,22 +1,29 @@
 ---
 layout: default
 title: gsftest
-parent: GSF Tools
+parent: Generic Sensor Format — GSF (gsf)
+grand_parent: 4. Multi-Vendor Sonar & LiDAR Converters
 nav_order: 7
 tool_name: gsftest
 source_path: code/gsf/gsftest.c
 category: Diagnostics & Indexing
-input_formats: [".gsf"]
-output_formats: ["stdout (detailed sensor & snippet dumps)"]
-related_tools: ["gsfTool", "omg2gsf", "gsf2omg_7101"]
+input_formats:
+- .gsf
+output_formats:
+- stdout (detailed sensor & snippet dumps)
+related_tools:
+- gsfTool
+- omg2gsf
+- gsf2omg_7101
 ---
 
 # gsftest
 
 ## Overview
-`gsftest` is a detailed GSF inspection and verification utility linked against the full `gsf_lib` library (`gsfOpen` / `gsfRead`). Originally written to verify GSF files produced by [`omg2gsf`](omg2gsf.md) and third-party hydrographic packages, it prints ping headers, scale factors, and full sensor-specific bathymetry and imagery subrecords for **R2Sonic (2022/2024)**, **Reson SeaBat 7125**, **Kongsberg EM4 (`EM710`, `EM302`, `EM122`)**, and **Kongsberg EM3002**, along with optional per-beam sounding arrays (`-print_beams`) and snippet time series (`-print_snippet_data`).
+`gsftest` is a detailed GSF inspection and verification utility linked against the full `gsf_lib` library (`gsfOpen` / `gsfRead`). Originally written to verify GSF files produced by [`omg2gsf`](omg2gsf.html) and third-party hydrographic packages, it prints ping headers, scale factors, and full sensor-specific bathymetry and imagery subrecords for **R2Sonic (2022/2024)**, **Reson SeaBat 7125**, **Kongsberg EM4 (`EM710`, `EM302`, `EM122`)**, and **Kongsberg EM3002**, along with optional per-beam sounding arrays (`-print_beams`) and snippet time series (`-print_snippet_data`).
 
 ## Usage
+
 ```bash
 gsftest [-print_beams] [-print_snippet_data] -in <filename.gsf>
 ```
@@ -38,11 +45,13 @@ gsftest [-print_beams] [-print_snippet_data] -in <filename.gsf>
 ## Practical Examples
 
 **1. Inspect ping headers and sensor-specific metadata in a GSF file:**
+
 ```bash
 gsftest -in line01.gsf | head -n 60
 ```
 
 **2. Dump all beam soundings and calibrated snippet samples:**
+
 ```bash
 gsftest -print_beams -print_snippet_data -in line01.gsf > line01_dump.txt
 ```

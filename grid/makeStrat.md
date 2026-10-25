@@ -1,13 +1,20 @@
 ---
 layout: default
 title: makeStrat
-parent: Grid Tools
+parent: Bathymetric Gridding & Export (grid)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 tool_name: makeStrat
 source_path: code/grid/makeStrat.c
 category: gridding
-input_formats: ["Multi-column ASCII cross-section profiles (X Y1 Y2 ... Yn)"]
-output_formats: [".8bit (JHC 8-bit stratigraphic cross-section image)", "_00000.layer .. _NNNNN.layer (per-horizon step images)"]
-related_tools: ["extractProfile", "plotProfile", "findHorizon"]
+input_formats:
+- Multi-column ASCII cross-section profiles (X Y1 Y2 ... Yn)
+output_formats:
+- .8bit (JHC 8-bit stratigraphic cross-section image)
+- _00000.layer .. _NNNNN.layer (per-horizon step images)
+related_tools:
+- extractProfile
+- plotProfile
+- findHorizon
 ---
 
 # makeStrat
@@ -60,6 +67,7 @@ makeStrat -xlen <nx> -ylen <ny> [-Xmin <xmin> -Xmax <xmax>] (-Ymin <ymin> -Ymax 
 ## Examples
 
 **Generate a 12-horizon synthetic stratigraphy animation and composite image from repetitive dune profiles:**
+
 ```bash
 makeStrat \
     -xlen 1000 -ylen 400 \
@@ -74,5 +82,5 @@ makeStrat \
 
 ## Workflow Context
 
-- **Upstream:** Multi-epoch profile tables extracted along a repeat survey line using [`extractProfile`](extractProfile.md).
+- **Upstream:** Multi-epoch profile tables extracted along a repeat survey line using [`extractProfile`](extractProfile.html).
 - **Downstream:** View `<out>` and `<out>_*.layer` in `jview` or convert to animations showing dune/bedform foreset preservation and erosion bounding surfaces.

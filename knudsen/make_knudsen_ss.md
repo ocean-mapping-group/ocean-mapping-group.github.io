@@ -1,14 +1,24 @@
 ---
 layout: default
 title: make_knudsen_ss
-parent: Knudsen Tools
+parent: Knudsen Chirp Sub-Bottom (knudsen)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 9
 tool_name: make_knudsen_ss
 source_path: knudsen/make_knudsen_ss.c
 category: sidescan_processing
-input_formats: [OMG_HDCS, OMG_SS_DATA, ASCII_BEAM_PATT]
-output_formats: [GLORIA, ASCII_PICKS, OMG_HDCS]
-related_tools: [knud2glo, pickSS, make_mos2]
+input_formats:
+- OMG_HDCS
+- OMG_SS_DATA
+- ASCII_BEAM_PATT
+output_formats:
+- GLORIA
+- ASCII_PICKS
+- OMG_HDCS
+related_tools:
+- knud2glo
+- pickSS
+- make_mos2
 ---
 
 # make_knudsen_ss

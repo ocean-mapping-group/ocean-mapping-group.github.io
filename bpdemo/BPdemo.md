@@ -1,7 +1,8 @@
 ---
 layout: default
 title: BPdemo.c
-parent: BPdemo
+parent: 3D Beam Pattern Visualizer (bpdemo)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 2
 ---
 

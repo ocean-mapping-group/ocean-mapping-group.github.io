@@ -1,14 +1,23 @@
 ---
 layout: default
 title: xtf2param
-parent: XTF Tools
+parent: eXtended Triton Format — XTF (xtf)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 13
 tool_name: xtf2param
 source_path: code/xtf/xtf2param.c
 category: Lever-Arm & Calibration
-input_formats: [".xtf"]
-output_formats: [".param"]
-related_tools: ["xtf2nav", "xtf2orientation", "xtf2omg_reson", "xtf2omg_r2sonic", "xtf2omg_simrad", "r2v"]
+input_formats:
+- .xtf
+output_formats:
+- .param
+related_tools:
+- xtf2nav
+- xtf2orientation
+- xtf2omg_reson
+- xtf2omg_r2sonic
+- xtf2omg_simrad
+- r2v
 ---
 
 # xtf2param
@@ -23,6 +32,7 @@ related_tools: ["xtf2nav", "xtf2orientation", "xtf2omg_reson", "xtf2omg_r2sonic"
 * **Heading:** Positive clockwise (to starboard)
 
 ## Usage
+
 ```bash
 xtf2param [-v] [-debug] [-wlz <m>] [-switch_axes <a1> <a2>] [-flip_axis <x|y|z>] [-flip_roll] [-flip_pitch] [-flip_gyro] -xtf <inputfile.xtf> -omg <outputfile.param>
 ```
@@ -49,6 +59,7 @@ xtf2param [-v] [-debug] [-wlz <m>] [-switch_axes <a1> <a2>] [-flip_axis <x|y|z>]
 ## Practical Examples
 
 **1. Convert an XTF header where X is Starboard, Y is Forward, and Z is Up into OMG (+Fwd, +Stbd, +Down):**
+
 ```bash
 xtf2param -debug -switch_axes x y -switch_axes y x -flip_axis z -wlz 1.85 -xtf line01.xtf -omg line01.param
 ```

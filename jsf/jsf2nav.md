@@ -1,14 +1,22 @@
 ---
 layout: default
 title: jsf2nav
-parent: JSF Tools
+parent: EdgeTech JSF Sidescan & Sub-Bottom (jsf)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 2
 tool_name: jsf2nav
 source_path: code/jsf/jsf2nav.c
 category: Navigation Extraction
-input_formats: [".jsf"]
-output_formats: [".nav"]
-related_tools: ["jsf2omg", "jsf2orientation", "jsf2glo", "jsfTool", "mergeNav"]
+input_formats:
+- .jsf
+output_formats:
+- .nav
+related_tools:
+- jsf2omg
+- jsf2orientation
+- jsf2glo
+- jsfTool
+- mergeNav
 ---
 
 # jsf2nav
@@ -17,6 +25,7 @@ related_tools: ["jsf2omg", "jsf2orientation", "jsf2glo", "jsfTool", "mergeNav"]
 `jsf2nav` extracts position fixes from EdgeTech JSF Position messages (message type `3004`, `JSF_Position_3004_Data`) and writes them into a binary OMG `jcu_nav_rec` navigation file (`<nav_file_prefix>.nav`).
 
 ## Usage
+
 ```bash
 jsf2nav [-v] [-debug] -jsf <input_name.jsf> -nav <nav_file_prefix>
 ```
@@ -38,6 +47,7 @@ jsf2nav [-v] [-debug] -jsf <input_name.jsf> -nav <nav_file_prefix>
 ## Practical Examples
 
 **1. Extract navigation from an EdgeTech 4600/2205 JSF file:**
+
 ```bash
 jsf2nav -v -jsf line01.jsf -nav line01
 ```

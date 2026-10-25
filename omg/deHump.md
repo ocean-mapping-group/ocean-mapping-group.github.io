@@ -1,9 +1,11 @@
 ---
 layout: default
 title: deHump
-parent: OMG Tools
+parent: Core Swath & .all Suite (omg)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 84
 ---
+
 # deHump
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 84
 The tool can apply corrections using two methods: `angshift` (shifting the beam angle) or `depscale` (scaling the observed depth). It can process either standard OMG-HDCS merged files or USL-HDCS observed depth files.
 
 ## Usage
+
 ```bash
 deHump <mergefile(s)> [-v] (-angshift <value> | -depscale <value>) [-mode <value>] [-hdcs] [-symm]
 ```
@@ -24,12 +27,14 @@ deHump <mergefile(s)> [-v] (-angshift <value> | -depscale <value>) [-mode <value
 | `-v` | Enable verbose output. |
 
 ### Correction Methods (Choose one)
+
 | Option | Description |
 |---|---|
 | `-angshift <value>` | Apply a constant angular shift (in degrees) to the beam angles. |
 | `-depscale <value>` | Apply a depth scaling factor to specific beam ranges. | `0.0105` |
 
 ### Other Options
+
 | Option | Description |
 |---|---|
 | `-mode <value>` | Only apply corrections to profiles (pings) with this specific mode value. | `999` (all modes) |

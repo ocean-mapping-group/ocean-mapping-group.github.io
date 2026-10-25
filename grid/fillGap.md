@@ -1,9 +1,11 @@
 ---
 layout: default
 title: fillGap
-parent: Grid Tools
+parent: Bathymetric Gridding & Export (grid)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 30
 ---
+
 ---
 layout: default
 title: fillGap
@@ -18,6 +20,7 @@ nav_order: 30
 The interpolation logic is primarily designed to fill single-pixel-wide gaps, particularly those oriented along the grid's cardinal axes (North-South or East-West).
 
 ## Usage
+
 ```bash
 fillGap [OPTIONS] <infile> <outfile>
 ```

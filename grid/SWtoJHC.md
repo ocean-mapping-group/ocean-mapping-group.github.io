@@ -1,13 +1,24 @@
 ---
 layout: default
 title: SWtoJHC
-parent: Grid Tools
+parent: Bathymetric Gridding & Export (grid)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 tool_name: SWtoJHC
 source_path: code/grid/SWtoJHC.c
 category: gridding
-input_formats: ["Smith & Weissel (.sw)", "ESRI Binary Float (.flt + .hdr)", "Raw 32-bit float binary", "ncdump ASCII text"]
-output_formats: [".r4 (JHC 32-bit float grid)", "ASCII XYZ / LatLonZ (with -netCDF)"]
-related_tools: ["ASCIItoJHC", "r4toESRI", "r4to8bit", "edhead"]
+input_formats:
+- Smith & Weissel (.sw)
+- ESRI Binary Float (.flt + .hdr)
+- Raw 32-bit float binary
+- ncdump ASCII text
+output_formats:
+- .r4 (JHC 32-bit float grid)
+- ASCII XYZ / LatLonZ (with -netCDF)
+related_tools:
+- ASCIItoJHC
+- r4toESRI
+- r4to8bit
+- edhead
 ---
 
 # SWtoJHC
@@ -62,16 +73,19 @@ SWtoJHC [OPTIONS] <SW_or_input_file> <JHC_output_file>
 ## Examples
 
 **1. Import an ESRI binary float grid (`bathy.flt` and `bathy.hdr`) into OMG `.r4` format:**
+
 ```bash
 SWtoJHC -esri_flt bathy bathy.r4
 ```
 
 **2. Import a headerless 4096-column raw float grid with known bounds:**
+
 ```bash
 SWtoJHC -rawfloat -rawxdim 4096 -pixel 10.0 -tlon -67.0 -blon -66.0 -blat 44.0 -tlat 45.0 raw_dem.bin dem.r4
 ```
 
 **3. Extract `lat lon z` points from an `ncdump` text file of a GMT/GEBCO netCDF grid:**
+
 ```bash
 ncdump gebco_sub.nc > gebco_sub.cdl
 SWtoJHC -netCDF -want_lalo -nudge_zero gebco_sub.cdl gebco_sub.llz
@@ -81,5 +95,5 @@ SWtoJHC -netCDF -want_lalo -nudge_zero gebco_sub.cdl gebco_sub.llz
 
 ## Workflow Context
 
-- **Counterpart:** [`r4toESRI`](r4toESRI.md) exports OMG `.r4` grids to ESRI `.flt`/`.hdr` or `.bil` format.
-- **Downstream:** [`edhead`](edhead.md), [`r4to8bit`](r4to8bit.md), [`addSUN`](addSUN.md), [`project`](project.md).
+- **Counterpart:** [`r4toESRI`](r4toESRI.html) exports OMG `.r4` grids to ESRI `.flt`/`.hdr` or `.bil` format.
+- **Downstream:** [`edhead`](edhead.html), [`r4to8bit`](r4to8bit.html), [`addSUN`](addSUN.html), [`project`](project.html).

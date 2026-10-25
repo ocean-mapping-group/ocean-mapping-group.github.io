@@ -1,9 +1,11 @@
 ---
 layout: default
 title: compareTwoSVPs
-parent: Ray Tools
+parent: Ray-Tracing & Refraction (ray)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 165
 ---
+
 # compareTwoSVPs
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 165
 This tool is useful for visualizing the impact of SVP uncertainty, sound speed errors, or specific sonar steering mechanisms on the actual bottom detection locations. It can help assess the sensitivity of bathymetric measurements to sound speed variations.
 
 ## Usage
+
 ```bash
 compareTwoSVPs -wc1 <ref_jWC_file> -wc2 <comp_jWC_file(s)> -out <output_file> [OPTIONS]
 ```

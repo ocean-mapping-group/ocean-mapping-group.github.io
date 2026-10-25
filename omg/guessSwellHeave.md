@@ -1,9 +1,11 @@
 ---
 layout: default
 title: guessSwellHeave
-parent: OMG Tools
+parent: Core Swath & .all Suite (omg)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 109
 ---
+
 # guessSwellHeave
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 109
 The tool uses either a simple moving average or a cosine-squared tapered weighted average filter to derive a "smoothed" depth, and then calculates heave as the difference between the original and smoothed depths. It can also filter out improbable heave values.
 
 ## Usage
+
 ```bash
 guessSwellHeave <OMG_HDCS_datafile(s)> [OPTIONS]
 ```

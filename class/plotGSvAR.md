@@ -1,15 +1,18 @@
 ---
 layout: default
 title: plotGSvAR
-parent: Classification Tools
+parent: Angular Response & Classification (class)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 5
 ---
+
 # plotGSvAR
 
 ## Description
 `plotGSvAR` is an interactive command-line utility designed for plotting relationships between various geological sample (GS) parameters and Angular Response (AR) parameters derived from multibeam sonar data. It assumes that `findCloseAR` has already been run to establish indices between AR files and GS sample locations. Users interactively select which parameters to plot (GS vs AR, GS vs GS, AR vs AR, or all available parameters). It can optionally apply a beam pattern (BP) curve to the AR data.
 
 ## Usage
+
 ```bash
 plotGSvAR -samples <sample_file> -index <index_file> -arnames <ar_list_file> [OPTIONS]
 ```

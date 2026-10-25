@@ -1,9 +1,11 @@
 ---
 layout: default
 title: plotProf
-parent: Plot Tools
+parent: PostScript & Vector Plotting (plot)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 143
 ---
+
 # plotProf
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 143
 The tool can display long profiles, indicate geographic coordinates at profile boundaries, and is particularly useful for visualizing along-track bathymetric sections or other continuous measurements. It supports both standard profile plotting and a "scalebar" mode.
 
 ## Usage
+
 ```bash
 plotProf -infile <file1> [-outfile <filename.meta>] [-size <dx> <dy>] [-xrange <min> <max>] [-yrange <min> <max>] [-scalebar] [-showspikes]
 ```

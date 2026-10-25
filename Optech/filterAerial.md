@@ -1,9 +1,11 @@
 ---
 layout: default
 title: filterAerial
-parent: Optech Tools
+parent: Optech SHOALS Bathymetric LiDAR (Optech)
+grand_parent: 4. Multi-Vendor Sonar & LiDAR Converters
 nav_order: 112
 ---
+
 # filterAerial
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 112
 The tool reads multiple input 8-bit image files, sums their pixel values, and then divides by the number of input files to get an average for each pixel.
 
 ## Usage
+
 ```bash
 filterAerial -out <outfile> <8bitfile(s)>
 ```

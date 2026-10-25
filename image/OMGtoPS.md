@@ -1,14 +1,20 @@
 ---
 layout: default
 title: OMGtoPS
-parent: Image Tools
+parent: Raster Image Processing (image)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 4
 tool_name: OMGtoPS
 source_path: code/image/OMGtoPS.c
 category: Image & Raster Processing
-input_formats: ["OMG1 8-bit greyscale array (JHC_header)"]
-output_formats: ["Encapsulated PostScript (.eps / .ps)"]
-related_tools: ["stretchacres", "8bit2acres", "printmos"]
+input_formats:
+- OMG1 8-bit greyscale array (JHC_header)
+output_formats:
+- Encapsulated PostScript (.eps / .ps)
+related_tools:
+- stretchacres
+- 8bit2acres
+- printmos
 ---
 
 # OMGtoPS
@@ -17,6 +23,7 @@ related_tools: ["stretchacres", "8bit2acres", "printmos"]
 `OMGtoPS` converts an 8-bit `OMG1` (`JHC_header`) greyscale raster image into a standalone Encapsulated PostScript (`EPSF-2.0`) file suitable for high-resolution laser printing or inclusion in publication figures.
 
 ## CLI Options & Usage
+
 ```bash
 OMGtoPS -in <infile> -out <outfile.ps>
 ```

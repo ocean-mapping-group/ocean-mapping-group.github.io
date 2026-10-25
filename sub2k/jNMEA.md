@@ -1,10 +1,11 @@
 ---
 layout: default
 title: jNMEA
-parent: SUB2K Tools
-grand_parent: code
+parent: GeoSwath+ / Submetrix 2000 CLI (sub2k)
+grand_parent: 4. Multi-Vendor Sonar & LiDAR Converters
 nav_order: 3
 ---
+
 # jNMEA
 
 ## Description

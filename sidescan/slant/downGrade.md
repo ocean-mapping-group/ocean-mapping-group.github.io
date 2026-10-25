@@ -1,16 +1,18 @@
 ---
 layout: default
 title: downGrade
-parent: Slant Tools
-grand_parent: sidescan
+parent: Sidescan Radiometric & Geometric Suite (sidescan)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 2
 ---
+
 # downGrade
 
 ## Description
 `downGrade` is a utility designed to reduce the resolution of JCU GLORIA format sidescan files. It can decimate the data both along-track (by averaging multiple pings) and across-track (by averaging multiple pixels within a ping). An optional "destriping" mode allows for a different aggregation method across-track, potentially for noise reduction.
 
 ## Usage
+
 ```bash
 downGrade [-v] [-across <pixels>] [-along <pings>] [-destripe] -in <infile> -out <outfile>
 ```

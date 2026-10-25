@@ -1,8 +1,9 @@
 ---
 layout: default
-title: MR1 Tools
+title: HAWAII MR1 Towed Sidescan (mr1)
+parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
+nav_order: 11
 has_children: true
-nav_order: 15
 ---
 
 # MR1 Tools

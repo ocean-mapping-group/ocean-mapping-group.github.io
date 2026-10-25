@@ -1,22 +1,26 @@
 ---
 layout: default
 title: makeWts
-parent: Mosaicking Tools
+parent: Sidescan Mosaicking (newmos)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 4
 tool_name: makeWts
 source_path: code/newmos/makeWts.c
 category: Backscatter & Sidescan Mosaicking
-output_formats: ["MOS_weights (ASCII weight table)"]
-related_tools: ["mos2", "weigh_grid"]
+output_formats:
+- MOS_weights (ASCII weight table)
+related_tools:
+- mos2
+- weigh_grid
 ---
 
 # makeWts
 
 ## Description
 `makeWts` (`code/newmos/makeWts.c`) is an interactive command-line utility for generating **custom across-track priority weight tables** (`MOS_weights` by default) made of piecewise-linear ramps. It supports two output modes:
-1. **Mosaicking Weight Mode (Default, for [`mos2 -custom_weight`](mos2.md))**:
+1. **Mosaicking Weight Mode (Default, for [`mos2 -custom_weight`](mos2.html))**:
    Initializes an array of `num` integers (typically `1024` for GLORIA `.ss` files, max `2048`) to `255` (the **lowest** priority weight in `mos2` / `comboMOS`), prompts the user for one or more index ranges `[start_no, end_no]` and integer weight ramps `[start_wt, end_wt]` in `0..255` (where **`0` is highest priority** and **`255` is lowest priority / do-not-mosaic**), and writes a header line (`<num>`) followed by `<index> <weight>` pairs.
-2. **Gridding Weight Mode (`-grid`, for [`weigh_grid`](../grid/weigh_grid.md))**:
+2. **Gridding Weight Mode (`-grid`, for [`weigh_grid`](../grid/weigh_grid.html))**:
    Initializes an array of `num` floats to `1.0` (the **highest** weight in `weigh_grid`), prompts for floating-point weight ramps `[start_wt, end_wt]` in `0.0..1.0` (where **`0.0` is lowest weight** and **`1.0` is highest weight**), and writes `<index> 1 <weight>` lines.
 
 ---
@@ -48,6 +52,7 @@ makes a ramp over the first 512 weights from 0 to 255)
 ```
 
 You can then pass `custom_1024.wts` to `mos2`:
+
 ```bash
 mos2 -custom_weight custom_1024.wts -swap_dirs ss/ merged/ bay_mos ss/*.ss
 ```
@@ -68,6 +73,7 @@ mos2 -custom_weight custom_1024.wts -swap_dirs ss/ merged/ bay_mos ss/*.ss
 ## Interactive Input Format & Output File Structure
 
 At the interactive prompt, enter four whitespace-separated numbers per ramp segment:
+
 ```text
 <start_no> <end_no> <start_weight> <end_weight>
 ```

@@ -1,9 +1,11 @@
 ---
 layout: default
 title: plotAngular
-parent: Plot Tools
+parent: PostScript & Vector Plotting (plot)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 134
 ---
+
 # plotAngular
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 134
 The tool supports various input file formats, allows for plotting multiple datasets on the same graph, and offers customizable plot ranges and titles.
 
 ## Usage
+
 ```bash
 plotAngular <infile(s)> [-outfile <filename.meta>] [-size <dx> <dy>] [-yrange <min> <max>] [OPTIONS]
 ```
@@ -26,6 +29,7 @@ plotAngular <infile(s)> [-outfile <filename.meta>] [-size <dx> <dy>] [-yrange <m
 | `-yrange <min> <max>` | Sets the Y-axis range (backscatter strength in dB). | `-45.0` to `-15.0` |
 
 ### File Format Selection (Choose one)
+
 | Option | Description |
 |---|---|
 | `-jackTool` | Interprets the input file as being from `jackTool`. |
@@ -33,6 +37,7 @@ plotAngular <infile(s)> [-outfile <filename.meta>] [-size <dx> <dy>] [-yrange <m
 | `-delayed` | (Default) Interprets the input file as being from `DelayEditor`. |
 
 ### Plot Customization
+
 | Option | Description |
 |---|---|
 | `-together` | Plots all input files on a single graph, overlapping. |

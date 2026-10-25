@@ -1,9 +1,11 @@
 ---
 layout: default
 title: calcRayDiff
-parent: Ray Tools
+parent: Ray-Tracing & Refraction (ray)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 164
 ---
+
 # calcRayDiff
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 164
 The primary purpose of this tool is to provide a graphical output (currently a PGM image) that quantifies the absolute scale of depth anomalies at every depth-across track position, which can be encountered by a shipboard sonar. This helps users understand the impact of using one SVP over another on multibeam bathymetry.
 
 ## Usage
+
 ```bash
 calcRayDiff -pro1 <file1> -pro2 <file2> -outimage <image_file> [-tdcr_dep <val>] [-maxangle <val>] [-v]
 ```

@@ -1,14 +1,22 @@
 ---
 layout: default
 title: removeRedundantNav
-parent: Navigation Tools
+parent: Navigation Processing (nav)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 29
 tool_name: removeRedundantNav
 source_path: code/nav/removeRedundantNav.c
 category: Navigation & Georeferencing
-input_formats: [".nav"]
-output_formats: [".nav"]
-related_tools: ["thin_nav", "appendNav", "fixnav", "navedit", "mergeNav"]
+input_formats:
+- .nav
+output_formats:
+- .nav
+related_tools:
+- thin_nav
+- appendNav
+- fixnav
+- navedit
+- mergeNav
 ---
 
 # removeRedundantNav
@@ -29,16 +37,19 @@ removeRedundantNav [-v] [-skip <N>] [-reject_timejump_over <sec>] -comp <out_nav
 ### Common Workflow Examples
 
 **1. Remove consecutive duplicate lat/lon fixes from a navigation file:**
+
 ```bash
 removeRedundantNav -comp merged/JD100/0001_line_unique.nav merged/JD100/0001_line.nav
 ```
 
 **2. Concatenate multiple `.nav` files while rejecting any forward or backward time jumps larger than 5 seconds:**
+
 ```bash
 removeRedundantNav -reject_timejump_over 5.0 -comp clean_track.nav raw_nav/*.nav
 ```
 
 **3. Reject only backward (negative) time jumps larger than 0.5 seconds:**
+
 ```bash
 removeRedundantNav -reject_timejump_over -0.5 -comp monotonic_track.nav raw_nav/line1.nav
 ```
@@ -59,9 +70,9 @@ removeRedundantNav -reject_timejump_over -0.5 -comp monotonic_track.nav raw_nav/
 
 ## Comparison: `removeRedundantNav` vs. `thin_nav`
 
-Both [`removeRedundantNav`](removeRedundantNav.md) and [`thin_nav`](thin_nav.md) clean redundant navigation records, but they differ in multi-file support, output naming, and time filtering:
+Both [`removeRedundantNav`](removeRedundantNav.html) and [`thin_nav`](thin_nav.html) clean redundant navigation records, but they differ in multi-file support, output naming, and time filtering:
 
-| Feature | `removeRedundantNav` | [`thin_nav`](thin_nav.md) |
+| Feature | `removeRedundantNav` | [`thin_nav`](thin_nav.html) |
 |---|---|---|
 | **Number of Input Files** | Up to 200 `.nav` files (concatenates into `-comp`) | Single `.nav` file |
 | **Output Filename** | User-specified via `-comp <outfile>` | Automatically appends `_thin` (`<filename>_thin`) |

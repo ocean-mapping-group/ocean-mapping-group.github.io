@@ -1,16 +1,18 @@
 ---
 layout: default
 title: oldbeams
-parent: Mock Tools
-grand_parent: sidescan
+parent: Sidescan Radiometric & Geometric Suite (sidescan)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 10
 ---
+
 # oldbeams
 
 ## Description
 `oldbeams` is a utility designed to calculate GLORIA's beam directivity functions, or beam patterns. It is functionally very similar to `beams.c` but appears to be an older or alternative implementation, potentially used for historical analysis or specific GLORIA configurations. It can compute either horizontal or vertical beam patterns based on physical parameters of the GLORIA sonar system, outputting values in linear power, linear pressure, or decibel (dB) scale.
 
 ## Usage
+
 ```bash
 oldbeams [-l] [-p] [-h] [-s] [-i <increment>] [-m <max_angle>]
 ```

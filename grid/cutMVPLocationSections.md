@@ -1,9 +1,11 @@
 ---
 layout: default
 title: cutMVPLocationSections
-parent: Grid Tools
+parent: Bathymetric Gridding & Export (grid)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 17
 ---
+
 ---
 layout: default
 title: cutMVPLocationSections
@@ -16,6 +18,7 @@ nav_order: 17
 `cutMVPLocationSections` is a specialized command-line utility designed to extract and combine vertical profile data along a specified X-location (column) from a series of images with corresponding MVP (Moving Vessel Profiler) data. It takes an MVP file, one or more image files (either 8-bit or float JHC grids), and an X-coordinate. It resamples the MVP data and extracts vertical slices from the image(s) at that X-location. The output is a single ASCII file containing combined depth, sound velocity, and image intensity values along the vertical section, suitable for further analysis or plotting.
 
 ## Usage
+
 ```bash
 cutMVPLocationSections -mvpfile <mvp_file.m1> -outfile <output.ascii> -xloc <x_pixel_location> -allimages <image1> [image2 ...] [OPTIONS]
 ```

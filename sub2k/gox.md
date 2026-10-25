@@ -1,19 +1,20 @@
 ---
 layout: default
 title: gox
-parent: Submetrix ISIS (sub2k) Interferometric Sonar Tools
+parent: GeoSwath+ / Submetrix 2000 CLI (sub2k)
+grand_parent: 4. Multi-Vendor Sonar & LiDAR Converters
 nav_order: 7
 tool_name: gox
 source_path: sub2k/gox
 category: sub2k
 input_formats: []
 output_formats:
-  - wraps (asciiplot data)
-  - plot.meta (OMG metafile)
+- wraps (asciiplot data)
+- plot.meta (OMG metafile)
 related_tools:
-  - testWrap
-  - go
-  - wraps
+- testWrap
+- go
+- wraps
 ---
 
 # `gox` — Vernier Interferometer Cross-Phase Trajectory Script
@@ -72,6 +73,7 @@ viewmeta plot.meta &
 ## Practical Examples
 
 ### Generate and View the 2D Phase-Difference Locus
+
 ```bash
 cd /path/to/code/sub2k
 sh ./gox

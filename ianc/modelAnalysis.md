@@ -1,14 +1,35 @@
 ---
 layout: default
 title: modelAnalysis
-parent: Ian Church (ianc) Tools
+parent: Ian Church — Hydrodynamic & 3D Ray-Trace Suite (ianc)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 nav_order: 7
 tool_name: modelAnalysis
 source_path: code/ianc/modelAnalysis.c
 category: Ocean Modeling & Hydrographic Utilities (ianc)
-input_formats: ["FVCOM NetCDF (.nc)", "CARIS SVP (.svp)", "RDI ADCP / WinADCP", "OMG Attitude (.orientation)", "OMG Binary Navigation (.nav)", "OMG R4 Area Mask (.r4)", "MVP .m1"]
-output_formats: ["FVCOM NetCDF (in-place variables)", "CARIS SVP (.svp)", "OMG Binary Navigation (.nav)", "Ocean Data View (.txt)", "ArcGIS Vector (.txt)", "CSV Error & Flux Reports (.csv)", "OMG JHC Map Sheet Headers"]
-related_tools: ["modelMerge", "HycomSSP", "oceanReader", "iwc_support", "iwc_water", "iwc_adcp"]
+input_formats:
+- FVCOM NetCDF (.nc)
+- CARIS SVP (.svp)
+- RDI ADCP / WinADCP
+- OMG Attitude (.orientation)
+- OMG Binary Navigation (.nav)
+- OMG R4 Area Mask (.r4)
+- MVP .m1
+output_formats:
+- FVCOM NetCDF (in-place variables)
+- CARIS SVP (.svp)
+- OMG Binary Navigation (.nav)
+- Ocean Data View (.txt)
+- ArcGIS Vector (.txt)
+- CSV Error & Flux Reports (.csv)
+- OMG JHC Map Sheet Headers
+related_tools:
+- modelMerge
+- HycomSSP
+- oceanReader
+- iwc_support
+- iwc_water
+- iwc_adcp
 ---
 
 # modelAnalysis

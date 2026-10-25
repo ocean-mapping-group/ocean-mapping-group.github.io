@@ -1,9 +1,11 @@
 ---
 layout: default
 title: findHorizon
-parent: Grid Tools
+parent: Bathymetric Gridding & Export (grid)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 31
 ---
+
 ---
 layout: default
 title: findHorizon
@@ -18,6 +20,7 @@ nav_order: 31
 The output is a new grid where peaks indicate the presence, vertical position, and "roll" (or tilt) of features in the original image that match the specified curvature. This process is analogous to a slant stack or Radon transform tailored for a specific feature shape, and is likely intended for use with geophysical data like seismic or sidescan sonar profiles where sedimentary layers or other horizons need to be tracked.
 
 ## Usage
+
 ```bash
 findHorizon [-curvature <pixels>] [-roll_step <degrees>] <input_floatfile.r4> <output_filterfile.r4>
 ```

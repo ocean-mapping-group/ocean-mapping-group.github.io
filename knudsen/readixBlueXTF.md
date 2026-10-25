@@ -1,14 +1,25 @@
 ---
 layout: default
 title: readixBlueXTF
-parent: Knudsen Tools
+parent: Knudsen Chirp Sub-Bottom (knudsen)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 14
 tool_name: readixBlueXTF
 source_path: knudsen/readixBlueXTF.c
 category: format_conversion
-input_formats: [XTF]
-output_formats: [OMG_HDCS, OMG_SS_DATA, OMG_FL_DATA, JCU_NAV, OMG_ORIENTATION, BINARY_RASTER]
-related_tools: [kflto8, makeSeisPlot, xtfTool]
+input_formats:
+- XTF
+output_formats:
+- OMG_HDCS
+- OMG_SS_DATA
+- OMG_FL_DATA
+- JCU_NAV
+- OMG_ORIENTATION
+- BINARY_RASTER
+related_tools:
+- kflto8
+- makeSeisPlot
+- xtfTool
 ---
 
 # readixBlueXTF

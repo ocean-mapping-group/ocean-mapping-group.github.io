@@ -1,13 +1,23 @@
 ---
 layout: default
 title: r4filter
-parent: Grid Tools
+parent: Bathymetric Gridding & Export (grid)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 tool_name: r4filter
 source_path: code/grid/r4filter.c
 category: gridding
-input_formats: [".r4 (JHC 32-bit float grid)", ".8bit (JHC 8-bit unsigned char grid)", "Raw 32-bit float binary (-rawfloat)"]
-output_formats: [".r4 (filtered 32-bit float grid)", ".8bit (filtered 8-bit unsigned char grid)"]
-related_tools: ["r4interp", "fillGap", "subtractSurface", "r4to8bit"]
+input_formats:
+- .r4 (JHC 32-bit float grid)
+- .8bit (JHC 8-bit unsigned char grid)
+- Raw 32-bit float binary (-rawfloat)
+output_formats:
+- .r4 (filtered 32-bit float grid)
+- .8bit (filtered 8-bit unsigned char grid)
+related_tools:
+- r4interp
+- fillGap
+- subtractSurface
+- r4to8bit
 ---
 
 # r4filter
@@ -58,16 +68,19 @@ r4filter -xbox <nx_odd> -ybox <ny_odd> (-low | -high | -median | -vert_grad | -h
 ## Examples
 
 **1. Smooth a noisy `.r4` bathymetric grid with a $5 \times 5$ median filter:**
+
 ```bash
 r4filter -xbox 5 -ybox 5 -median survey_raw.r4 survey_med5x5.r4
 ```
 
 **2. Extract short-wavelength bedforms (high-pass residual) using a $15 \times 15$ boxcar:**
+
 ```bash
 r4filter -xbox 15 -ybox 15 -high survey.r4 survey_hpf15.r4
 ```
 
 **3. Filter an 8-bit sidescan mosaic while ignoring background `255` pixels:**
+
 ```bash
 r4filter -xbox 3 -ybox 3 -median -ignore 255 mosaic.mos mosaic_despeckled.mos
 ```
@@ -76,4 +89,4 @@ r4filter -xbox 3 -ybox 3 -median -ignore 255 mosaic.mos mosaic_despeckled.mos
 
 ## Workflow Context
 
-- **See Also:** [`fillGap`](fillGap.md) (for targeted gap interpolation without smoothing valid nodes) and [`subtractSurface`](subtractSurface.md) (for subtracting two `.r4` surfaces).
+- **See Also:** [`fillGap`](fillGap.html) (for targeted gap interpolation without smoothing valid nodes) and [`subtractSurface`](subtractSurface.html) (for subtracting two `.r4` surfaces).

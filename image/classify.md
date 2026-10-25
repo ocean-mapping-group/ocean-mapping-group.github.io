@@ -1,14 +1,25 @@
 ---
 layout: default
 title: classify
-parent: Image Tools
+parent: Raster Image Processing (image)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 10
 tool_name: classify
 source_path: code/image/classify.c
 category: Spectral & Backscatter Analysis
-input_formats: ["Three angular-sector OMG1 mosaics (<prefix>.nad, <prefix>.mea, <prefix>.tai)"]
-output_formats: ["Intensity map (<prefix>.int)", "Slope map (<prefix>.slp)", "Classification map (<prefix>.cls)", "DumpLut", "DumpHist"]
-related_tools: ["MSpecBS_Xplot", "build_back_mos", "back_char", "stretchacres"]
+input_formats:
+- Three angular-sector OMG1 mosaics (<prefix>.nad, <prefix>.mea, <prefix>.tai)
+output_formats:
+- Intensity map (<prefix>.int)
+- Slope map (<prefix>.slp)
+- Classification map (<prefix>.cls)
+- DumpLut
+- DumpHist
+related_tools:
+- MSpecBS_Xplot
+- build_back_mos
+- back_char
+- stretchacres
 ---
 
 # classify
@@ -17,6 +28,7 @@ related_tools: ["MSpecBS_Xplot", "build_back_mos", "back_char", "stretchacres"]
 `classify` performs supervised/unsupervised acoustic seafloor classification from three co-registered angular-sector backscatter mosaics created by splitting a swath into near-nadir (`<prefix>.nad`), mid-range mean (`<prefix>.mea`), and outer-swath tail (`<prefix>.tai`) grazing-angle sectors. From these three inputs, it derives a weighted mean backscatter intensity image (`<prefix>.int`), an angular response slope image (`<prefix>.slp`), a 256×256 intensity-vs-slope 2D histogram (`DumpHist`), a 2D class lookup table (`DumpLut`), and a classified seafloor map (`<prefix>.cls`).
 
 ## CLI Options & Usage
+
 ```bash
 classify -in <Prefix> [-show]
 ```

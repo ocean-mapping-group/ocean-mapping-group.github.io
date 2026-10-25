@@ -1,26 +1,27 @@
 ---
 layout: default
 title: EK_ZoomImage (Module within EKlook)
-parent: EKlook Tools
+parent: Simrad EK60/EK80 Echosounder Suite (EKlook)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 8
 tool_name: EK_ZoomImage
 source_path: code/EKlook/EK_ZoomImage.c
 category: EKlook
 input_formats:
-  - In-Memory Trace, Phase & Complex IQ Arrays (.MF_dB, .Raw_dB, .PS_phase, .FA_phase, .MF_IQ)
+- In-Memory Trace, Phase & Complex IQ Arrays (.MF_dB, .Raw_dB, .PS_phase, .FA_phase, .MF_IQ)
 output_formats:
-  - Bottom Track Guide (.BottomTrackGuide)
-  - Ping Parameters (.ping_Params)
+- Bottom Track Guide (.BottomTrackGuide)
+- Ping Parameters (.ping_Params)
 related_tools:
-  - EKlook
-  - EK_BottomBS
-  - BatchProcEK
+- EKlook
+- EK_BottomBS
+- BatchProcEK
 ---
 
 # EK_ZoomImage (Module within EKlook)
 
 ## Description
-`EK_ZoomImage` (`code/EKlook/EK_ZoomImage.c`) is an interactive GUI module within the [`EKlook`](EKlook.md) application. It manages the **"ZOOM EK-Trace Window,"** providing a high-resolution zoomed echogram of selected ping ranges alongside single-ping vertical profiles of uncompressed power (`.Raw_dB`), matched-filtered power (`.MF_dB`), complex I/Q waveforms (`.MF_IQ`), and Fore–Aft / Port–Starboard split-beam phase angles. It also allows interactive adjustment of bottom-detection parameters (`dBdrop`, `phaseOffZero`, `maxAcceptablePhaseFit`) and bottom-track guide curves.
+`EK_ZoomImage` (`code/EKlook/EK_ZoomImage.c`) is an interactive GUI module within the [`EKlook`](EKlook.html) application. It manages the **"ZOOM EK-Trace Window,"** providing a high-resolution zoomed echogram of selected ping ranges alongside single-ping vertical profiles of uncompressed power (`.Raw_dB`), matched-filtered power (`.MF_dB`), complex I/Q waveforms (`.MF_IQ`), and Fore–Aft / Port–Starboard split-beam phase angles. It also allows interactive adjustment of bottom-detection parameters (`dBdrop`, `phaseOffZero`, `maxAcceptablePhaseFit`) and bottom-track guide curves.
 
 ## Interactive Controls
 

@@ -1,21 +1,22 @@
 ---
 layout: default
 title: refoCustom
-parent: Singlebeam Tools
+parent: Single-Beam Echosounder Tools (singlebeam)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 1
 tool_name: refoCustom
 source_path: code/singlebeam/refoCustom.c
 category: singlebeam
 input_formats:
-  - BCHYDRO ASCII Singlebeam
-  - SDG 48-Byte Binary Singlebeam
+- BCHYDRO ASCII Singlebeam
+- SDG 48-Byte Binary Singlebeam
 output_formats:
-  - OMG_HDCS Singlebeam (.merged)
+- OMG_HDCS Singlebeam (.merged)
 related_tools:
-  - readEA600
-  - knud2glo
-  - mergeTide
-  - weigh_grid
+- readEA600
+- knud2glo
+- mergeTide
+- weigh_grid
 ---
 
 # refoCustom
@@ -26,6 +27,7 @@ related_tools:
 2. **SDG (`-SDG`)**: 48-byte (`LENGTH_SDG = 48`) big-endian binary records containing timestamp, raw and processed Easting/Northing, raw and processed depths, tidal correction, sound-velocity correction, draft/heave correction, and a 16-bit bitwise quality status flag.
 
 ## Usage
+
 ```bash
 refoCustom [-v] [-BCHydro [-local_datum <m>]] [-SDG [-showbits]] <infile> <outfile.merged>
 ```
@@ -57,6 +59,7 @@ refoCustom [-v] [-BCHydro [-local_datum <m>]] [-SDG [-showbits]] <infile> <outfi
 * Converts `proc_y_pos` and `proc_x_pos` to geographic coordinates, populates `profile.tide` from `sdgr.tidal_corr`, sets `beams[0].observedDepth` from `sdgr.raw_depth`, maps rejected status bits to `beams[0].status`, and writes each profile to `<outfile>`.
 
 ## Example
+
 ```bash
 # Convert a BC Hydro ASCII survey with a 2.45 m local datum offset:
 refoCustom -v -BCHydro -local_datum 2.45 reservoir_sb.txt reservoir_sb.merged

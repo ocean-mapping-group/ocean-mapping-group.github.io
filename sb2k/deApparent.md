@@ -1,14 +1,21 @@
 ---
 layout: default
 title: deApparent
-parent: SB2K Tools
+parent: SeaBeam 2000 / 2100 (sb2k)
+grand_parent: 4. Multi-Vendor Sonar & LiDAR Converters
 nav_order: 1
 tool_name: deApparent
 source_path: sb2k/deApparent.c
 category: bathymetry_processing
-input_formats: [OMG_HDCS, OMG_SVP]
-output_formats: [OMG_HDCS]
-related_tools: [unravelSB2K, unravelSB2100, refoSB_Classic]
+input_formats:
+- OMG_HDCS
+- OMG_SVP
+output_formats:
+- OMG_HDCS
+related_tools:
+- unravelSB2K
+- unravelSB2100
+- refoSB_Classic
 ---
 
 # deApparent

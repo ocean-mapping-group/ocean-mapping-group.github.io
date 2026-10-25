@@ -1,14 +1,22 @@
 ---
 layout: default
 title: dbfadd
-parent: Shapelib GIS Library & Tools (shapelib-1.3.0a2)
+parent: ESRI Shapefile C Library (shapelib-1.3.0a2)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 nav_order: 1
 tool_name: dbfadd
 source_path: code/shapelib-1.3.0a2/dbfadd.c
 category: GIS & ESRI Shapefile Library / Tools
-input_formats: [".dbf (xBase table)"]
-output_formats: [".dbf (xBase table with appended record)"]
-related_tools: ["dbfcreate", "dbfdump", "dbfopen", "shpadd", "shpcreate"]
+input_formats:
+- .dbf (xBase table)
+output_formats:
+- .dbf (xBase table with appended record)
+related_tools:
+- dbfcreate
+- dbfdump
+- dbfopen
+- shpadd
+- shpcreate
 ---
 
 # dbfadd
@@ -17,7 +25,7 @@ related_tools: ["dbfcreate", "dbfdump", "dbfopen", "shpadd", "shpcreate"]
 
 `dbfadd` (`code/shapelib-1.3.0a2/dbfadd.c`) is a command-line utility authored by Frank Warmerdam for appending a single attribute record (row) to an existing **xBase (`.dbf`)** database table associated with an ESRI Shapefile.
 
-When building shapefiles from shell scripts or batch hydrographic workflows, [`dbfcreate`](dbfcreate.md) is first used to define the attribute schema (`.dbf`), [`shpcreate`](shpcreate.md) creates the geometry files (`.shp`/`.shx`), and then each feature is added by calling [`shpadd`](shpadd.md) (to append the geometry) together with `dbfadd` (to append the corresponding attribute row at index `iRecord = DBFGetRecordCount(hDBF)`).
+When building shapefiles from shell scripts or batch hydrographic workflows, [`dbfcreate`](dbfcreate.html) is first used to define the attribute schema (`.dbf`), [`shpcreate`](shpcreate.html) creates the geometry files (`.shp`/`.shx`), and then each feature is added by calling [`shpadd`](shpadd.html) (to append the geometry) together with `dbfadd` (to append the corresponding attribute row at index `iRecord = DBFGetRecordCount(hDBF)`).
 
 ---
 

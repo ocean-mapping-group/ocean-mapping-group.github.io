@@ -1,9 +1,11 @@
 ---
 layout: default
 title: plotFoot
-parent: Plot Tools
+parent: PostScript & Vector Plotting (plot)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 140
 ---
+
 # plotFoot
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 140
 This tool is invaluable for understanding sonar coverage patterns, especially for interleaved pings, and for assessing how different survey parameters (depth, speed, ping rate) affect the overall mapping efficiency and data density.
 
 ## Usage
+
 ```bash
 plotFoot -infile <bf_file> [-outfile <filename.meta>] [-size <dx> <dy>] [-depth <val>] [-speed <val>] [-reprate <val>] [-boxsize <val>] [-interleave]
 ```

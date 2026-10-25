@@ -1,14 +1,15 @@
 ---
 layout: default
 title: j_SHP
-parent: Core Shared Libraries (subr)
-module_name: j_SHP
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/j_SHP.c
-header_path: code/subr/j_SHP.h
-category: "GIS Export, Contouring & Shapefile I/O"
+category: GIS Export, Contouring & Shapefile I/O
 related_tools:
-  - navtoSHP
-  - readSHP
+- navtoSHP
+- readSHP
+module_name: j_SHP
+header_path: code/subr/j_SHP.h
 ---
 
 # `j_SHP` — ESRI Shapefile (`.shp` / `.shx`) Binary Reader and Writer
@@ -27,6 +28,7 @@ Per the ESRI Shapefile Technical Description (July 1998):
 
 ### Key Structures
 - **`j_shape_file_header` (100 bytes):**
+
   ```c
   typedef struct {
       signed int BE_File_Code;      /* Always 9994 (0x0000270A) */
@@ -44,6 +46,7 @@ Per the ESRI Shapefile Technical Description (July 1998):
 - **`j_shape_index_record` (8 bytes in `.shx`):** `{ signed int BE_Offset; signed int BE_Content_Length; }`.
 - **`j_shape_point` & `j_shape_bounding_box`:** 2D double-precision coordinate pair `{ double LE_X, LE_Y; }` and bounding box `{ double LE_Xmin, LE_Ymin, LE_Xmax, LE_Ymax; }`.
 - **`j_shape_record_contents`:**
+
   ```c
   typedef struct {
       signed int LE_Shape_Type;
@@ -60,6 +63,7 @@ Per the ESRI Shapefile Technical Description (July 1998):
 ## Public Functions & Signatures
 
 ### 1. Header Initialization, I/O, and Diagnostics
+
 ```c
 int init_shp_header(j_shape_file_header *sh_fl_head);
 int read_shp_header(FILE *file, j_shape_file_header *sh_fl_head);
@@ -70,6 +74,7 @@ int print_shp_header(j_shape_file_header *sh_fl_head);
 - **`write_shp_header()`:** Determines the current end-of-file position via `ftell(file)`, computes `BE_File_Length = tot_bytes / 2` (in 16-bit words), rewinds to byte `0`, byte-swaps the big-endian header fields, and writes the 100-byte header block.
 
 ### 2. Geometry Record & Spatial Index I/O
+
 ```c
 int read_shp_record(FILE *file, j_shape_record_header *sh_rec_head, j_shape_record_contents *sh_rec_cont);
 int write_shp_record(FILE *file, j_shape_record_header sh_rec_head, j_shape_record_contents sh_rec_cont);

@@ -1,17 +1,18 @@
 ---
 layout: default
 title: ref_coeffs
-parent: Core Shared Libraries (subr)
-module_name: ref_coeffs
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/ref_coeffs.c
-header_path: code/subr/ref_coeffs.h
 category: Acoustic & Bathymetric Processing
 related_tools:
-  - swathed (SE)
-  - deRefract
-  - dumpXYZ
-  - rationalOMG
-  - weigh_grid
+- swathed (SE)
+- deRefract
+- dumpXYZ
+- rationalOMG
+- weigh_grid
+module_name: ref_coeffs
+header_path: code/subr/ref_coeffs.h
 ---
 
 # ref_coeffs

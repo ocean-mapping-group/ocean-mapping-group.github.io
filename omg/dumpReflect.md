@@ -1,9 +1,11 @@
 ---
 layout: default
 title: dumpReflect
-parent: OMG Tools
+parent: Core Swath & .all Suite (omg)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 92
 ---
+
 # dumpReflect
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 92
 The tool supports specific processing for EM1000 and similar sonar types, allowing for recalculation of calibrated backscatter, and provides options for mapping and normalization.
 
 ## Usage
+
 ```bash
 dumpReflect <OMG_HDCS_datafile> <dumpfile> [OPTIONS]
 ```

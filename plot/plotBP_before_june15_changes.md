@@ -1,19 +1,25 @@
 ---
 layout: default
 title: plotBP_before_june15_changes
-parent: Plot Tools
+parent: PostScript & Vector Plotting (plot)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 tool_name: plotBP_before_june15_changes
 source_path: code/plot/plotBP_before_june15_changes.c
 category: Scientific & Diagnostic Plotting
-related_tools: ["plotBP", "getBeamPattern", "newGetBP", "makeFoot", "viewmeta"]
+related_tools:
+- plotBP
+- getBeamPattern
+- newGetBP
+- makeFoot
+- viewmeta
 ---
 
 # plotBP_before_june15_changes
 
 ## Overview
-`plotBP_before_june15_changes` (`code/plot/plotBP_before_june15_changes.c`) is the preserved pre-June 2015 revision of [`plotBP`](plotBP.md), the Ocean Mapping Group's vector plotting utility for acoustic beam patterns (`getBeamPattern`), seafloor angular response curves (`.graz` / `.ar`), and multibeam 3 dB beam footprints (`makeFoot`).
+`plotBP_before_june15_changes` (`code/plot/plotBP_before_june15_changes.c`) is the preserved pre-June 2015 revision of [`plotBP`](plotBP.html), the Ocean Mapping Group's vector plotting utility for acoustic beam patterns (`getBeamPattern`), seafloor angular response curves (`.graz` / `.ar`), and multibeam 3 dB beam footprints (`makeFoot`).
 
-It writes device-independent vector graphics to `plot.meta` (or a user-specified `-outfile`) using [`plotlib`](../plotlib/plotlib.md), supporting both **polar** (`-polar`) and **Cartesian** (`-cartes`, default) coordinate layouts, multi-panel grid layouts (`-apart`), and smoothing filters (`-median`, `-average`).
+It writes device-independent vector graphics to `plot.meta` (or a user-specified `-outfile`) using [`plotlib`](../plotlib/plotlib.html), supporting both **polar** (`-polar`) and **Cartesian** (`-cartes`, default) coordinate layouts, multi-panel grid layouts (`-apart`), and smoothing filters (`-median`, `-average`).
 
 ---
 
@@ -31,8 +37,8 @@ plotBP_before_june15_changes [OPTIONS] <input_file(s) ...>
 |---|---|---|
 | `-size <dx> <dy>` | Set overall plot page dimensions in centimeters (`dx` width, `dy` height). | `16.0` x `20.0` cm |
 | `-outfile <filename>` | Output `plotlib` metafile path. | `plot.meta` |
-| `-bp` | Input files are binary/ASCII beam-pattern dumps from `synSwath` or `beamPatt` (read via `read_bpfile` from [`bP_stuff`](../subr/bP_stuff.md)). Without `-bp`, reads 4-column ASCII grazing-angle/intensity files (`angle`, `intensity`, `refcorr`, `dummy`) from `getBeamPattern`. | Grazing-angle ASCII |
-| `-foot` | Input files are multibeam footprint characterization files (read via `load_BF_characteristics` from [`beam_foot`](../subr/beam_foot.md)). Sets default signal range to `-3` to `0` dB. | Disabled |
+| `-bp` | Input files are binary/ASCII beam-pattern dumps from `synSwath` or `beamPatt` (read via `read_bpfile` from [`bP_stuff`](../subr/bP_stuff.html)). Without `-bp`, reads 4-column ASCII grazing-angle/intensity files (`angle`, `intensity`, `refcorr`, `dummy`) from `getBeamPattern`. | Grazing-angle ASCII |
+| `-foot` | Input files are multibeam footprint characterization files (read via `load_BF_characteristics` from [`beam_foot`](../subr/beam_foot.html)). Sets default signal range to `-3` to `0` dB. | Disabled |
 | `-polar` | Render plots in polar coordinates ($-90^\circ$ to $+90^\circ$ lower hemisphere fan) instead of Cartesian axes. | Cartesian |
 | `-cartes` | Render plots on Cartesian axes (Angle in degrees vs. Intensity in dB). | Default |
 | `-apart` | Tile multiple input files into separate sub-panels on a $\sqrt{N} \times \lceil N/\sqrt{N}\rceil$ grid instead of overplotting on a single axis. | Overplot |
@@ -53,4 +59,4 @@ plotBP_before_june15_changes [OPTIONS] <input_file(s) ...>
 ---
 
 ## Differences from Current `plotBP`
-This file preserves the `plotBP.c` implementation prior to the June 2015 updates (which refined multi-sector Kongsberg beam-pattern overlays and text formatting). For production plotting workflows, see [`plotBP`](plotBP.md).
+This file preserves the `plotBP.c` implementation prior to the June 2015 updates (which refined multi-sector Kongsberg beam-pattern overlays and text formatting). For production plotting workflows, see [`plotBP`](plotBP.html).

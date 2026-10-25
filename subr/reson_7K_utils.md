@@ -1,17 +1,18 @@
 ---
 layout: default
 title: reson_7K_utils
-parent: Core Shared Libraries (subr)
-module_name: reson_7K_utils
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/reson_7K_utils.c
-header_path: code/subr/reson_7K_utils.h
 category: Multibeam Vendor Parsers
 related_tools:
-  - 7k2omg
-  - 7k2nav
-  - 7k2orientation
-  - getAngularResponse
-  - omg2gsf
+- 7k2omg
+- 7k2nav
+- 7k2orientation
+- getAngularResponse
+- omg2gsf
+module_name: reson_7K_utils
+header_path: code/subr/reson_7K_utils.h
 ---
 
 # `reson_7K_utils` — Reson 7K to OMG HDCS Conversion Utilities

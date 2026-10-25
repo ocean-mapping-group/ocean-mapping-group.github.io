@@ -1,9 +1,11 @@
 ---
 layout: default
 title: dumpXYZ
-parent: OMG Tools
+parent: Core Swath & .all Suite (omg)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 93
 ---
+
 # dumpXYZ
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 93
 The tool offers extensive filtering capabilities, including by ping/beam ranges, geographical area, or pulse length. It can also project coordinates into different systems (UTM, Mercator pixel coordinates) and apply various corrections.
 
 ## Usage
+
 ```bash
 dumpXYZ <OMG_HDCS_datafile(s)> -out <ASCII_listing_file> [OPTIONS]
 ```
@@ -24,6 +27,7 @@ dumpXYZ <OMG_HDCS_datafile(s)> -out <ASCII_listing_file> [OPTIONS]
 | `-out <ASCII_listing_file>` | **Required.** The path for the ASCII output file. |
 
 ### Data Type Selection (Choose one)
+
 | Option | Description |
 |---|---|
 | `-att` | Dumps attitude data (roll, pitch, heading, heave) along with lat, lon, and time. |
@@ -34,6 +38,7 @@ dumpXYZ <OMG_HDCS_datafile(s)> -out <ASCII_listing_file> [OPTIONS]
 | `-dataFrame` | Dumps comprehensive data for a data frame, including motion, beam details, lat/lon, depth, across, along, status, reflectivity, Q-factor, frequency, range, TWTT, and TXSector. |
 
 ### Coordinate System & Projection
+
 | Option | Description | Default / Example |
 |---|---|---|
 | `-utm` | Output coordinates in UTM (easting/northing). Requires `-merid`. | |
@@ -43,6 +48,7 @@ dumpXYZ <OMG_HDCS_datafile(s)> -out <ASCII_listing_file> [OPTIONS]
 | `-pixelcoords` | (Used with `-area`) Outputs pixel coordinates (x, y) on the map sheet instead of lat/lon. | |
 
 ### Data Filtering
+
 | Option | Description |
 |---|---|
 | `-start <ping_num>` / `-end <ping_num>` | Process pings only within this range (inclusive). | All pings |
@@ -54,6 +60,7 @@ dumpXYZ <OMG_HDCS_datafile(s)> -out <ASCII_listing_file> [OPTIONS]
 | `-add_dyn_draft_shift` | Adds `profile.longperiod_heaveCorrection` to the observed depth. | |
 
 ### Corrections & Processing
+
 | Option | Description |
 |---|---|
 | `-coeffs` | Applies empirical refraction coefficients (from `.ref_coeffs` file). | |
@@ -61,6 +68,7 @@ dumpXYZ <OMG_HDCS_datafile(s)> -out <ASCII_listing_file> [OPTIONS]
 | `-mergeSSS <SSSfile>` | Merges a surface sound speed file (SSS) into the output (format: `ping_num sss_value`). | |
 
 ### Other Options
+
 | Option | Description |
 |---|---|
 | `-v` | Enable verbose output. | |

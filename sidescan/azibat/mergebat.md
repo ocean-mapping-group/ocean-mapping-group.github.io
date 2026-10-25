@@ -1,16 +1,18 @@
 ---
 layout: default
 title: mergebat
-parent: Sidescan Tools
-grand_parent: azibat
+parent: Sidescan Radiometric & Geometric Suite (sidescan)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 7
 ---
+
 # mergebat
 
 ## Description
 `mergebat` is a utility used to merge altitude data into a JCU format sidescan image. The tool takes a "pick file" (which is actually a mask file from `jview`) containing a series of picks (x, y coordinates) and interpolates these picks to generate a new altitude profile. This new profile is then written into the header of the JCU sidescan file.
 
 ## Usage
+
 ```bash
 mergebat [-v] [-s] [-c <count>] [-t <threshold>] <infile> <outfile>
 ```

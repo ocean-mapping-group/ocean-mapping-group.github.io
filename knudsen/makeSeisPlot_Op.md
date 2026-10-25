@@ -1,14 +1,22 @@
 ---
 layout: default
 title: makeSeisPlot_Op
-parent: Knudsen Tools
+parent: Knudsen Chirp Sub-Bottom (knudsen)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 8
 tool_name: makeSeisPlot_Op
 source_path: knudsen/makeSeisPlot_Op.c
 category: seismic_plotting
-input_formats: [OMG_HDCS, OMG_SS_DATA, JHC_MAPSHEET]
-output_formats: [JHC_ARRAY, ASCII_PERSPECT]
-related_tools: [makeSeisPlot, collapseSeisStack]
+input_formats:
+- OMG_HDCS
+- OMG_SS_DATA
+- JHC_MAPSHEET
+output_formats:
+- JHC_ARRAY
+- ASCII_PERSPECT
+related_tools:
+- makeSeisPlot
+- collapseSeisStack
 ---
 
 # makeSeisPlot_Op

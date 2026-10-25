@@ -1,18 +1,19 @@
 ---
 layout: default
 title: four1
-parent: Core Shared Libraries (subr)
-module_name: four1
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/four1.c
-header_path: code/subr/four1.h
-category: "Signal Processing, FFT & Spectral Analysis"
+category: Signal Processing, FFT & Spectral Analysis
 related_tools:
-  - dspectra
-  - ek_IQ
-  - Echo_calib
-  - EKlook
-  - jview
-  - DelayEditor
+- dspectra
+- ek_IQ
+- Echo_calib
+- EKlook
+- jview
+- DelayEditor
+module_name: four1
+header_path: code/subr/four1.h
 ---
 
 # `four1` — 1D and Multi-Dimensional Fast Fourier Transform (FFT) Routines
@@ -37,6 +38,7 @@ Both `four1` and `fourn` use the classic *Numerical Recipes* **1-based indexing 
 ## Public Functions & Signatures
 
 ### 1. One-Dimensional Radix-2 FFT
+
 ```c
 void four1(float data[], int nn, int isign);
 ```
@@ -51,6 +53,7 @@ void four1(float data[], int nn, int isign);
   3. **Inverse Scaling Note:** When `isign == -1`, the output is unnormalized and must be divided by `nn` by the caller to recover exact amplitudes.
 
 ### 2. Multi-Dimensional Radix-2 FFT
+
 ```c
 void fourn(float data[], unsigned long nn[], int ndim, int isign);
 ```

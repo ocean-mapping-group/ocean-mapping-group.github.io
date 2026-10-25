@@ -1,14 +1,17 @@
 ---
 layout: default
 title: jview
-parent: JV Tools
+parent: 2D/3D Interactive Viewer — jview (JV)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 1
 ---
+
 # jview
 ## Description
 `jview` is an X-windows-based interactive tool for visualizing, analyzing, and editing geospatial data. It orchestrates the entire application lifecycle, from startup configuration to user interaction handling and data processing.
 
 ## Usage
+
 ```bash
 jview [OPTIONS] [<input_data_files...>]
 ```
@@ -16,6 +19,7 @@ jview [OPTIONS] [<input_data_files...>]
 ## Arguments
 
 ### Data Loading
+
 | Option | Description |
 |---|---|
 | `-mask` | Load a mask file. |
@@ -37,6 +41,7 @@ jview [OPTIONS] [<input_data_files...>]
 | `-survey_linefile` | Load a survey line file. |
 
 ### Display & View Options
+
 | Option | Description |
 |---|---|
 | `-show_fft2d` | Show 2D FFT analysis widget. |
@@ -107,6 +112,7 @@ jview [OPTIONS] [<input_data_files...>]
 | `-sslook` | Sidescan look. |
 
 ### Debugging & Control
+
 | Option | Description |
 |---|---|
 | `-die` | Exit immediately. |

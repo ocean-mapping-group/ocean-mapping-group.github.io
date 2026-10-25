@@ -1,9 +1,11 @@
 ---
 layout: default
 title: fixEM3K_V3
-parent: OMG Tools
+parent: Core Swath & .all Suite (omg)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 98
 ---
+
 # fixEM3K_V3
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 98
 This tool essentially "pads" the profile header of affected files and sets a flag (`maxProcDepth` to non-zero) to indicate that the fix has been applied, distinguishing them from uncorrected files.
 
 ## Usage
+
 ```bash
 fixEM3K_V3 <old_V3file> <fixed_V3file> [-v]
 ```

@@ -1,16 +1,17 @@
 ---
 layout: default
 title: omg_sdf
-parent: Core Shared Libraries (subr)
-module_name: omg_sdf
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/omg_sdf.c
-header_path: code/subr/omg_sdf.h
 category: File Formats & Vendor Parsers
 related_tools:
-  - sdfTool
-  - sdf2omg
-  - sdf2nav
-  - sdf2orientation
+- sdfTool
+- sdf2omg
+- sdf2nav
+- sdf2orientation
+module_name: omg_sdf
+header_path: code/subr/omg_sdf.h
 ---
 
 # omg_sdf

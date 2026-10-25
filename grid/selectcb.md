@@ -1,13 +1,21 @@
 ---
 layout: default
 title: selectcb
-parent: Grid Tools
+parent: Bathymetric Gridding & Export (grid)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 tool_name: selectcb
 source_path: code/grid/selectcb.c
 category: gridding
-input_formats: ["URI SeaBeam Binary (sb_urirec)", "ASCII Lat/Lon/Depth"]
-output_formats: ["ASCII Projected XYZ (Mercator)", "ASCII Geographic Lat/Lon/Depth"]
-related_tools: ["weigh_grid", "project", "dump_merged"]
+input_formats:
+- URI SeaBeam Binary (sb_urirec)
+- ASCII Lat/Lon/Depth
+output_formats:
+- ASCII Projected XYZ (Mercator)
+- ASCII Geographic Lat/Lon/Depth
+related_tools:
+- weigh_grid
+- project
+- dump_merged
 ---
 
 # selectcb
@@ -54,11 +62,13 @@ selectcb [-v] [-just_dump] [-justfilt] [-ascii] [-skip <N>] [-lola] <outfilename
 ## Examples
 
 ### Dump all valid beams from URI SeaBeam files to ASCII `lon lat depth`
+
 ```bash
 selectcb -just_dump seabeam_all.xyz cruise91_01.cb cruise91_02.cb
 ```
 
 ### Interactively filter and Mercator-project an ASCII `lon lat depth` file
+
 ```bash
 selectcb -ascii -lola region_merc.xyz raw_soundings.xyz
 ```
@@ -68,4 +78,4 @@ selectcb -ascii -lola region_merc.xyz raw_soundings.xyz
 ## Workflow Context
 
 - **Downstream**: [`weigh_grid`](weigh_grid.html), [`surface`](surface.html).
-- **Related Tools**: [`project`](project.html), [`dump_merged`](dump_merged.html).
+- **Related Tools**: [`project`](project.html), [`dump_merged`](../omg/dumpFlags.html).

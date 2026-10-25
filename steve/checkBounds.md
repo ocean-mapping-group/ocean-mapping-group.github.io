@@ -1,14 +1,25 @@
 ---
 layout: default
 title: checkBounds
-parent: Steve Brucker (steve) Tools
+parent: Steve Brucker — Backscatter & Calibration (steve)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 nav_order: 1
 tool_name: checkBounds
 source_path: code/steve/checkBounds.c
 category: Spatial Indexing & Quality Control (steve)
-input_formats: [".merged", ".100ping_bounds", ".file_bounds", "xyzlist (ASCII file list)"]
-output_formats: ["Binary bounds array (6 doubles per file)", "ASCII bounds table"]
-related_tools: ["getBounds", "weigh_grid", "swathed", "checkEmpty"]
+input_formats:
+- .merged
+- .100ping_bounds
+- .file_bounds
+- xyzlist (ASCII file list)
+output_formats:
+- Binary bounds array (6 doubles per file)
+- ASCII bounds table
+related_tools:
+- getBounds
+- weigh_grid
+- swathed
+- checkEmpty
 ---
 
 # checkBounds
@@ -32,16 +43,19 @@ checkBounds [-v] [-in <file.merged> | -xyzlist <listfile>] [-out <binary_bounds>
 ### Examples
 
 **1. Inspect a single `.merged` file and its `.100ping_bounds` / `.file_bounds` in verbose mode:**
+
 ```bash
 checkBounds -v -in merged/JD200/0012_line.merged
 ```
 
 **2. Audit an entire survey's `-xyzlist` for corrupted bounding boxes and write an ASCII catalog:**
+
 ```bash
 checkBounds -xyzlist all_merged.list -ascii_out survey_bounds.txt
 ```
 
 **3. Export both binary (48 bytes per file) and ASCII global bounds:**
+
 ```bash
 checkBounds -xyzlist all_merged.list -out global_bounds.bin -ascii_out global_bounds.txt
 ```
@@ -64,6 +78,7 @@ checkBounds -xyzlist all_merged.list -out global_bounds.bin -ascii_out global_bo
 
 ### 1. ASCII Output (`-ascii_out`)
 Each line contains 7 space-separated fields:
+
 ```text
 <merged_filename> <mintime_s> <maxtime_s> <minlat_deg> <maxlat_deg> <minlon_deg> <maxlon_deg>
 ```
@@ -95,9 +110,10 @@ For each processed file with valid bounds, `checkBounds` writes a contiguous 48-
    Computes the Euclidean distance in nautical miles from the summary header reference point $(\text{ref\_lat}, \text{ref\_lon})$ to both the Top-Left $(\text{maxlat}, \text{minlon})$ and Bottom-Right $(\text{minlat}, \text{maxlon})$ corners:
    $$\Delta d_{\text{TL}} = \sqrt{\left((\text{ref\_lat} - \text{maxlat})\times 60\right)^2 + \left((\text{ref\_lon} - \text{minlon})\times 60\cos(\text{ref\_lat})\right)^2}$$
    If $\Delta d_{\text{TL}} > 50\text{ NM}$ or $\Delta d_{\text{BR}} > 50\text{ NM}$, prints:
+
    ```text
    LOOKS LIKE THERES A PROBLEM IN: <filename>
    TLy: ... TLx: ... BRy: ... BRx: ... Start Time: ... End Time: ... Timespan(s): ...
    delta_dist_TL: ... delta_dist_BR: ... (miles from reference coords)
    ```
-   which immediately identifies lines with unflagged navigation spikes that need cleaning with [`navedit`](../nav/navedit.md) or [`areaNavEdit`](../ianc/areaNavEdit.md) followed by re-running [`getBounds`](../omg/getBounds.md).
+   which immediately identifies lines with unflagged navigation spikes that need cleaning with [`navedit`](../nav/navedit.html) or [`areaNavEdit`](../ianc/areaNavEdit.html) followed by re-running [`getBounds`](../omg/getBounds.html).

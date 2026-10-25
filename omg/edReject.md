@@ -1,9 +1,11 @@
 ---
 layout: default
 title: edReject
-parent: OMG Tools
+parent: Core Swath & .all Suite (omg)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 94
 ---
+
 # edReject
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 94
 The tool calculates depth gradients (`delta`) between adjacent beams and flags beams where these gradients exceed a user-defined threshold (`eps`) or show specific patterns indicative of spikes.
 
 ## Usage
+
 ```bash
 edReject <mergefile(s)> [-v] [-eps <value>]
 ```

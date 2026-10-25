@@ -1,14 +1,15 @@
 ---
 layout: default
 title: jwave_subr
-parent: Core Shared Libraries (subr)
-module_name: jwave_subr
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/jwave_subr.c
-header_path: code/subr/jwave_subr.h
 category: Acoustic Waveform & Audio I/O
 related_tools:
-  - readWave
-  - waveform slicing & conversion utilities
+- readWave
+- waveform slicing & conversion utilities
+module_name: jwave_subr
+header_path: code/subr/jwave_subr.h
 ---
 
 # `jwave_subr` — RIFF WAVE Header & 16-Bit PCM Body Reader/Writer Library
@@ -24,6 +25,7 @@ Unlike `j_wav_io` (written a year later in February 2020, which links against Li
 ## Key Data Structures & Globals (`code/subr/jwave_subr.h`)
 
 ### `Wave_str` (and global instance `Wave_str waveStr`)
+
 ```c
 typedef struct {
     char  riff_head[5];   /* "RIFF" chunk descriptor (null-terminated in memory) */

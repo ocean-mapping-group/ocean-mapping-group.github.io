@@ -1,13 +1,30 @@
 ---
 layout: default
 title: tidecor2.42
-parent: Finite-Element Tidal Prediction (Tidecor)
+parent: Finite-Element Tide Modeling (Tidecor)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 tool_name: tidecor2.42
 source_path: code/Tidecor/tidecor2.42.c
 category: Tidal Prediction & Datum Reduction
-input_formats: [".nod", ".ele", ".bat", ".v2c / constituent files", ".merged", ".nav", ".r4", ".8bit (model_map)"]
-output_formats: [".merged (updated in-place)", ".nav", ".r4", ".csv", "ASCII stdout"]
-related_tools: ["plotTides", "weigh_grid", "jview"]
+input_formats:
+- .nod
+- .ele
+- .bat
+- .v2c / constituent files
+- .merged
+- .nav
+- .r4
+- .8bit (model_map)
+output_formats:
+- .merged (updated in-place)
+- .nav
+- .r4
+- .csv
+- ASCII stdout
+related_tools:
+- plotTides
+- weigh_grid
+- jview
 ---
 
 # tidecor2.42
@@ -27,16 +44,19 @@ Requires the `TIDECOR_PATH` environment variable pointing to the root directory 
 ## Usage & Five Operating Modes
 
 ### Mode 1: Apply Tidal Reduction Directly to an OMG `.merged` Swath File
+
 ```bash
 tidecor2.42 -model upper_fundy -onto_merged -in line01.merged [-use_nearest] [-datum_shift 4.5] [-time_shift 15]
 ```
 
 ### Mode 2: Predict Tides Along a Binary or ASCII `.nav` Track
+
 ```bash
 tidecor2.42 -model scotian_shelf -onto_nav -in ship.nav -out ship_tide.nav -into_azi [-use_nearest] [-datum_shift 1.2]
 ```
 
 ### Mode 3: Generate a Synthetic Tide Time Series at a Fixed Station (`-onto_position`)
+
 ```bash
 tidecor2.42 -model northwest_atlantic -onto_position 45.250 -66.050 \
   -start 2024 06 01 -end 2024 06 05 -interval 6 \
@@ -44,6 +64,7 @@ tidecor2.42 -model northwest_atlantic -onto_position 45.250 -66.050 \
 ```
 
 ### Mode 4: Sample Tidal Constituent Amplitude, Phase, or Mesh Depth onto an `.r4` Grid
+
 ```bash
 # Sample M2 amplitude or ISLW (M2+S2+K1+O1) onto a blank .r4 grid
 tidecor2.42 -model upper_fundy -onto_grid -in bay.r4 -amp -M2 -out bay_M2_amp.r4
@@ -52,6 +73,7 @@ tidecor2.42 -model upper_fundy -onto_grid -in bay.r4 -depths -out bay_mesh_depth
 ```
 
 ### Mode 5: Query Harmonic Constituents at a Single Point
+
 ```bash
 tidecor2.42 -model halifax_harbour -get_coeffs_at 44.650 -63.570
 ```

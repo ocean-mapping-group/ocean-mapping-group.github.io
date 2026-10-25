@@ -1,14 +1,27 @@
 ---
 layout: default
 title: soundscape
-parent: Jonathan Beaudoin (jonnyb) Tools
+parent: Jonathan Beaudoin — SVP, Refraction & Snippets (jonnyb)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 nav_order: 4
 tool_name: soundscape
 source_path: code/jonnyb/svp/svp_tool/soundscape.c
 category: Sound Velocity & Refraction Analysis (jonnyb)
-input_formats: [".svp", ".sun_315 / .8bit (basemap)", ".nav", "wod.db3", "WOA01 grids"]
-output_formats: [".svp", "Refraction error plots"]
-related_tools: ["svp_woa01", "svp_raytrace", "wod2db3", "convertWOA01", "RefractEd"]
+input_formats:
+- .svp
+- .sun_315 / .8bit (basemap)
+- .nav
+- wod.db3
+- WOA01 grids
+output_formats:
+- .svp
+- Refraction error plots
+related_tools:
+- svp_woa01
+- svp_raytrace
+- wod2db3
+- convertWOA01
+- RefractEd
 ---
 
 # soundscape (`svp_tool`)
@@ -27,11 +40,13 @@ soundscape [OPTIONS] (-svp <files.svp ...> | -svp_list <listfile>)
 ### Examples
 
 **1. Launch `soundscape` with all `.svp` casts over a sun-illuminated basemap and shiptrack:**
+
 ```bash
 soundscape -map arctic_overview.sun_315 -nav cruise_track.nav -plot_all -svp svp/*.svp
 ```
 
 **2. Jump directly into multibeam refraction error-monitoring mode for a 130° swath and 6.5 m draft:**
+
 ```bash
 soundscape -error_monitor -draft 6.5 -angular_sector 130 -svp svp/*.svp
 ```

@@ -1,25 +1,26 @@
 ---
 layout: default
 title: testSV
-parent: tests (Test, Simulation & Diagnostic Suite)
+parent: Acoustic & Mathematical Test Harnesses (tests)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 nav_order: 23
 tool_name: testSV
 source_path: code/tests/testSV.c
 category: Seawater Sound Speed & Oceanographic Functions (tests)
 input_formats:
-  - Interactive stdin (Salinity, Temperature, Depth) or -stz CLI args
-  - 3-column ASCII profile: depth (m), temperature (°C), salinity (ppt) (-dofile)
-  - OMG j_watercolumn SVP file (-dotrace)
+- Interactive stdin (Salinity, Temperature, Depth) or -stz CLI args
+- 3-column ASCII profile: depth (m), temperature (°C), salinity (ppt) (-dofile)
+- OMG j_watercolumn SVP file (-dotrace)
 output_formats:
-  - Sound speed (m/s) or UNESCO seawater density (kg/m³) on stdout
-  - 400x300 OMG .r4 floating-point T-S sound speed surface (<outfile>)
+- Sound speed (m/s) or UNESCO seawater density (kg/m³) on stdout
+- 400x300 OMG .r4 floating-point T-S sound speed surface (<outfile>)
 related_tools:
-  - speed2salinity
-  - speedtosalinity
-  - testAtten
-  - one
-  - two
-  - RTlite
+- speed2salinity
+- speedtosalinity
+- testAtten
+- one
+- two
+- RTlite
 ---
 
 # testSV
@@ -75,7 +76,7 @@ testSV [-wilson | -chenmill -lat <deg>] <dummy_in> <grid_out.r4>
 1. **Latitude-Dependent Pressure & Chen-Millero (`soundspeed.c`):**
    As documented by Jason Bartlett (`JDB`, February 2007, lines 303–317), in interactive/`-stz` Chen-Millero mode, `testSV` converts depth $z$ (m) and latitude $\phi$ (deg) to pressure in MPa via `depth2press(depth, latitude)`, scales to bars (`MPA_TO_BARS * pressure`), and calls the NPL-validated `ChenMillero(sal, temp, press_bars)` from `subr/soundspeed.c`—achieving agreement with Sea-Bird SBE CTD software on CCGS *Amundsen*.
 2. **Correction of `this_vchemilli` (`a3` term, line 479) and `this_vsw` (`vstp` term, line 430):**
-   `testSV.c` contains both the corrected `a3` term (`1.0405e-12 * pow(t, 4)`) and the corrected additive `+ p *` cross-terms in `this_vsw()` that were buggy in earlier standalone files ([`one.c`](one.md), [`speed2salinity.c`](speed2salinity.md), and [`speedtosalinity.c`](speedtosalinity.md)).
+   `testSV.c` contains both the corrected `a3` term (`1.0405e-12 * pow(t, 4)`) and the corrected additive `+ p *` cross-terms in `this_vsw()` that were buggy in earlier standalone files ([`one.c`](one.html), [`speed2salinity.c`](speed2salinity.html), and [`speedtosalinity.c`](speedtosalinity.html)).
 
 ---
 

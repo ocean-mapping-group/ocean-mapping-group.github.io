@@ -1,13 +1,20 @@
 ---
 layout: default
 title: refoCurrent
-parent: Tide Tools
+parent: Tidal Reduction & Constituents (tide)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 tool_name: refoCurrent
 source_path: code/tide/refoCurrent.c
 category: tide
-input_formats: ["ASCII vessel/current log (short / medium / long)"]
-output_formats: [".nav (binary jcu_nav_rec)", "asciiplot format"]
-related_tools: ["binTide", "mergeTide", "diffTide"]
+input_formats:
+- ASCII vessel/current log (short / medium / long)
+output_formats:
+- .nav (binary jcu_nav_rec)
+- asciiplot format
+related_tools:
+- binTide
+- mergeTide
+- diffTide
 ---
 
 # refoCurrent
@@ -50,11 +57,13 @@ refoCurrent [OPTIONS] <infilename> <outfilename>
 ## Examples
 
 **1. Convert a 14-column current log into binary `jcu_nav_rec` format:**
+
 ```bash
 refoCurrent -short -navfmt ship_current.log ship_current.nav
 ```
 
 **2. Extract records 100 to 500 into an `asciiplot` file:**
+
 ```bash
 refoCurrent -bounds 100 500 ship_current.log current_plot.asc
 ```

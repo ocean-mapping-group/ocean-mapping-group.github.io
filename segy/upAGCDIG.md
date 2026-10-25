@@ -1,14 +1,23 @@
 ---
 layout: default
 title: upAGCDIG
-parent: SEGY Tools
+parent: SEG-Y Sub-Bottom & Seismic (segy)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 5
 tool_name: upAGCDIG
 source_path: segy/upAGCDIG.c
 category: format_conversion
-input_formats: [SEGY_AGCDIG]
-output_formats: [GLORIA, NMEA, BINARY_RASTER]
-related_tools: [readSB_SEGY, readore, upsegy, make_mos2]
+input_formats:
+- SEGY_AGCDIG
+output_formats:
+- GLORIA
+- NMEA
+- BINARY_RASTER
+related_tools:
+- readSB_SEGY
+- readore
+- upsegy
+- make_mos2
 ---
 
 # upAGCDIG

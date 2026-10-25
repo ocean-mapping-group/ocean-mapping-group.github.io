@@ -1,14 +1,19 @@
 ---
 layout: default
 title: swapascii
-parent: MR1 Tools
+parent: HAWAII MR1 Towed Sidescan (mr1)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 11
 tool_name: swapascii
 source_path: mr1/swapascii.c
 category: navigation_processing
-input_formats: [ASCII_XYZ]
-output_formats: [ASCII_XYZ]
-related_tools: [combineMW, subsetAscii]
+input_formats:
+- ASCII_XYZ
+output_formats:
+- ASCII_XYZ
+related_tools:
+- combineMW
+- subsetAscii
 ---
 
 # swapascii

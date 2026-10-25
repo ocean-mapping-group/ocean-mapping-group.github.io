@@ -1,9 +1,11 @@
 ---
 layout: default
 title: getdxf
-parent: Grid Tools
+parent: Bathymetric Gridding & Export (grid)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 34
 ---
+
 ---
 layout: default
 title: getdxf
@@ -18,6 +20,7 @@ nav_order: 34
 This tool is designed for very specific data-massaging tasks and is not a general-purpose format converter.
 
 ## Usage
+
 ```bash
 getdxf [OPTIONS] < input_file > output_file
 ```

@@ -1,14 +1,21 @@
 ---
 layout: default
 title: sar2Nav
-parent: Navigation Tools
+parent: Navigation Processing (nav)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 30
 tool_name: sar2Nav
 source_path: code/nav/sar2Nav.c
 category: Navigation & Georeferencing
-input_formats: ["JPL AIRSAR ASCII navigation"]
-output_formats: [".nav"]
-related_tools: ["toNav", "video2Nav", "xsonar2Nav", "appendNav"]
+input_formats:
+- JPL AIRSAR ASCII navigation
+output_formats:
+- .nav
+related_tools:
+- toNav
+- video2Nav
+- xsonar2Nav
+- appendNav
 ---
 
 # sar2Nav
@@ -29,11 +36,13 @@ sar2Nav [-v] [-new] [-skip <N>] -comp <out_navfile> <airsar_file(s)>
 ### Common Workflow Examples
 
 **1. Convert JPL AIRSAR flight track files into a binary `.nav` file:**
+
 ```bash
 sar2Nav -comp airsar_track.nav flight_01.sar flight_02.sar
 ```
 
 **2. Convert with verbose record printout:**
+
 ```bash
 sar2Nav -v -comp airsar_track.nav flight_01.sar
 ```
@@ -59,6 +68,7 @@ sar2Nav -v -comp airsar_track.nav flight_01.sar
    The first 224 bytes of each input file are read via `fread(&headerstring, 224, 1, file)` and echoed to `stdout`.
 2. **Data Records (11 ASCII fields per record):**
    Parsed via `fscanf(file, "%hd%hd%hd%f%d%d%f%d%d%f%f", ...)`:
+
    ```text
    hour  min  sec  PDOP  latdeg  latmin  latsec  londeg  lonmin  lonsec  altitude
    ```

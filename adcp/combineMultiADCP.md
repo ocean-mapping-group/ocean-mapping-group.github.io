@@ -1,22 +1,23 @@
 ---
 layout: default
 title: combineMultiADCP
-parent: ADCP Tools
+parent: Teledyne RDI ADCP Processing (adcp)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 4
 tool_name: combineMultiADCP
 source_path: code/adcp/combineMultiADCP.c
 category: adcp
 input_formats:
-  - jcu_nav Depth-Averaged ADCP Vectors (.nav)
-  - JHC Grid (.r4 / .8bit)
+- jcu_nav Depth-Averaged ADCP Vectors (.nav)
+- JHC Grid (.r4 / .8bit)
 output_formats:
-  - jcu_nav Phase-Averaged Vectors (.phase###)
+- jcu_nav Phase-Averaged Vectors (.phase###)
 related_tools:
-  - combineMultiADCP_wshiftoption
-  - combineMultiADCP_garret
-  - calc_ellipse2
-  - readADCP
-  - readGenericADCP
+- combineMultiADCP_wshiftoption
+- combineMultiADCP_garret
+- calc_ellipse2
+- readADCP
+- readGenericADCP
 ---
 
 # combineMultiADCP
@@ -27,6 +28,7 @@ related_tools:
 This is useful for creating a time-series representation of tidal currents over a geographic area.
 
 ## Usage
+
 ```bash
 combineMultiADCP [OPTIONS] -grid <coarseDTM> -out <outfilenameprefix> -in <infilename(s)>
 ```

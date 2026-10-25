@@ -1,14 +1,22 @@
 ---
 layout: default
 title: refoELAC
-parent: ELAC Tools
+parent: ELAC BottomChart Multibeam (elac)
+grand_parent: 4. Multi-Vendor Sonar & LiDAR Converters
 nav_order: 2
 tool_name: refoELAC
 source_path: elac/refoELAC.c
 category: format_conversion
-input_formats: [ELAC_FAU]
-output_formats: [OMG_HDCS, ASCII_HISTOGRAM]
-related_tools: [qualityFlag, elac2omg, xse2omg, SwathEd]
+input_formats:
+- ELAC_FAU
+output_formats:
+- OMG_HDCS
+- ASCII_HISTOGRAM
+related_tools:
+- qualityFlag
+- elac2omg
+- xse2omg
+- SwathEd
 ---
 
 # refoELAC

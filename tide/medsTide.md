@@ -1,13 +1,22 @@
 ---
 layout: default
 title: medsTide
-parent: Tide Tools
+parent: Tidal Reduction & Constituents (tide)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 tool_name: medsTide
 source_path: code/tide/medsTide.c
 category: tide
-input_formats: ["DFO MEDS ASCII tide", "XTide AM/PM ASCII tide"]
-output_formats: ["JHC ASCII tide (jday hour min tide)"]
-related_tools: ["binTide", "mergeTide", "convCHSpredTide", "refoXTIDE", "wlvTide"]
+input_formats:
+- DFO MEDS ASCII tide
+- XTide AM/PM ASCII tide
+output_formats:
+- JHC ASCII tide (jday hour min tide)
+related_tools:
+- binTide
+- mergeTide
+- convCHSpredTide
+- refoXTIDE
+- wlvTide
 ---
 
 # medsTide
@@ -49,12 +58,14 @@ medsTide [OPTIONS] -in <tidefilename> -out <mytideformatname>
 ## Examples
 
 **1. Convert a standard DFO MEDS tide gauge file (skipping 8 header lines):**
+
 ```bash
 medsTide -in meds_saint_john.csv -out saint_john.asc
 binTide -year 2007 saint_john.asc saint_john.bin
 ```
 
 **2. Convert an XTide AM/PM prediction listing:**
+
 ```bash
 medsTide -xtide -in xtide_pred.txt -out xtide_pred.asc
 ```
@@ -64,4 +75,4 @@ medsTide -xtide -in xtide_pred.txt -out xtide_pred.asc
 ## Workflow Context
 
 - **Upstream:** DFO MEDS CSV/ASCII water level downloads or XTide text predictions.
-- **Downstream:** [`binTide`](binTide.md) $\rightarrow$ [`mergeTide`](mergeTide.md).
+- **Downstream:** [`binTide`](binTide.html) $\rightarrow$ [`mergeTide`](mergeTide.html).

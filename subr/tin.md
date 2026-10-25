@@ -1,12 +1,16 @@
 ---
 layout: default
 title: tin
-parent: Shared Core Libraries (subr)
-module_name: tin
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/tin.c
-header_path: code/subr/tin.h
 category: Gridding, Interpolation & Contouring
-related_tools: ["array", "contour", "weigh_grid"]
+related_tools:
+- array
+- contour
+- weigh_grid
+module_name: tin
+header_path: code/subr/tin.h
 ---
 
 # tin
@@ -44,4 +48,4 @@ typedef struct {
 
 ## Implementation Notes
 - `tin.c` is a prototype/experimental module (`infile` and `extra_field` in `tin.c` reference caller-scope variables, and `tin.h` omits the semicolon on `void get_tin_points()`).
-- For production bathymetric gridding and surface interpolation in the OMG suite, see [`weigh_grid`](../grid/weigh_grid.md), [`array`](array.md), [`j_farray`](j_farray.md), and [`contour`](contour.md).
+- For production bathymetric gridding and surface interpolation in the OMG suite, see [`weigh_grid`](../grid/weigh_grid.html), [`array`](array.html), [`j_farray`](j_farray.html), and [`contour`](contour.html).

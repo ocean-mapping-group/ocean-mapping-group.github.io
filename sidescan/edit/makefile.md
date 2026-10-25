@@ -1,15 +1,20 @@
 ---
 layout: default
 title: makefile (edit)
-parent: Edit Tools
-grand_parent: Sidescan Tools
+parent: Sidescan Radiometric & Geometric Suite (sidescan)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 10
 tool_name: makefile
 source_path: code/sidescan/edit/makefile
 category: Build Configuration
-input_formats: [".c"]
-output_formats: ["Executable binaries (gledit, iosedit, gltimefix)"]
-related_tools: ["gledit", "iosedit", "gltimefix"]
+input_formats:
+- .c
+output_formats:
+- Executable binaries (gledit, iosedit, gltimefix)
+related_tools:
+- gledit
+- iosedit
+- gltimefix
 ---
 
 # makefile (`sidescan/edit`)
@@ -21,11 +26,12 @@ The `makefile` in `code/sidescan/edit/` compiles the scanline header and timesta
 
 Each target links with `-llocal -ljhc -lm` and installs into `$(HOME)/bin/`:
 
-* **`gledit`** ([`gledit.c`](gledit.md)) — Interactive/command-line record editor and subsets extractor for JCU GLORIA `.ss` files.
-* **`iosedit`** ([`iosedit.c`](iosedit.md)) — Record inspection and editing utility for raw IOS format GLORIA files prior to `ios2glo` conversion.
-* **`gltimefix`** ([`gltimefix.c`](gltimefix.md)) — Repairs non-monotonic, wrapped, or corrupted ping timestamps in `.ss` scanline headers.
+* **`gledit`** ([`gledit.c`](gledit.html)) — Interactive/command-line record editor and subsets extractor for JCU GLORIA `.ss` files.
+* **`iosedit`** ([`iosedit.c`](iosedit.html)) — Record inspection and editing utility for raw IOS format GLORIA files prior to `ios2glo` conversion.
+* **`gltimefix`** ([`gltimefix.c`](gltimefix.html)) — Repairs non-monotonic, wrapped, or corrupted ping timestamps in `.ss` scanline headers.
 
 ## Usage
+
 ```bash
 cd code/sidescan/edit
 make gledit iosedit gltimefix

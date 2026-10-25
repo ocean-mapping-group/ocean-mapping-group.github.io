@@ -1,26 +1,27 @@
 ---
 layout: default
 title: readGenericADCP
-parent: ADCP Tools
+parent: Teledyne RDI ADCP Processing (adcp)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 13
 tool_name: readGenericADCP
 source_path: code/adcp/readGenericADCP.c
 category: adcp
 input_formats:
-  - jcu_nav Navigation (.nav / .decXX.nav)
-  - JHC 32-bit Float Velocity Arrays (.N.r4, .E.r4, .D.r4)
+- jcu_nav Navigation (.nav / .decXX.nav)
+- JHC 32-bit Float Velocity Arrays (.N.r4, .E.r4, .D.r4)
 output_formats:
-  - jcu_nav Depth-Averaged ADCP Vectors (.nav)
+- jcu_nav Depth-Averaged ADCP Vectors (.nav)
 related_tools:
-  - mapGenericADCP
-  - combineMultiADCP
-  - calc_ellipse2
+- mapGenericADCP
+- combineMultiADCP
+- calc_ellipse2
 ---
 
 # readGenericADCP
 
 ## Description
-`readGenericADCP` is a command-line utility designed to process generic or Kongsberg Simrad EC150 pre-processed ADCP (Acoustic Doppler Current Profiler) datasets. It calculates a single depth-averaged horizontal current vector (`velocity` and `azi`) for each ADCP ensemble within a specified depth window (`-mindepth` to `-maxdepth`) and writes a new `jcu_nav` `.nav` file ready for multi-cycle tidal analysis in [`combineMultiADCP`](combineMultiADCP.md) or [`calc_ellipse2`](calc_ellipse2.md).
+`readGenericADCP` is a command-line utility designed to process generic or Kongsberg Simrad EC150 pre-processed ADCP (Acoustic Doppler Current Profiler) datasets. It calculates a single depth-averaged horizontal current vector (`velocity` and `azi`) for each ADCP ensemble within a specified depth window (`-mindepth` to `-maxdepth`) and writes a new `jcu_nav` `.nav` file ready for multi-cycle tidal analysis in [`combineMultiADCP`](combineMultiADCP.html) or [`calc_ellipse2`](calc_ellipse2.html).
 
 The tool expects each input `.nav` file (e.g., `survey1.dec10.nav`) to be accompanied by three JHC 32-bit floating-point arrays (`survey1.dec10.N.r4`, `survey1.dec10.E.r4`, and `survey1.dec10.D.r4`) representing the vertical profiles of North, East, and Downward velocity components.
 
@@ -28,6 +29,7 @@ The tool expects each input `.nav` file (e.g., `survey1.dec10.nav`) to be accomp
 > On the command line, `-out <outfile>` **must** be specified before `-in <infile(s)>`, because `-in` consumes all remaining positional arguments.
 
 ## Usage
+
 ```bash
 readGenericADCP [OPTIONS] -out <outfile> -in <infile(s)>
 ```

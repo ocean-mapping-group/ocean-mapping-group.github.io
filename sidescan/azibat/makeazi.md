@@ -1,16 +1,18 @@
 ---
 layout: default
 title: makeazi
-parent: Sidescan Tools
-grand_parent: azibat
+parent: Sidescan Radiometric & Geometric Suite (sidescan)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 6
 ---
+
 # makeazi
 
 ## Description
 `makeazi` is a utility used to make the azimuth of a JCU format sidescan image for the USGS case where none is provided. It calculates the azimuth based on the course made good between consecutive records.
 
 ## Usage
+
 ```bash
 makeazi [-v] [-t <threshold>] <infile> <outfile>
 ```

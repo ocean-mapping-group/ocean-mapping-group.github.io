@@ -1,14 +1,47 @@
 ---
 layout: default
 title: read_kmall
-parent: KMALL Tools
+parent: Kongsberg .kmall & .kmwcd (kmall)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 1
 tool_name: read_kmall
 source_path: code/kmall/read_kmall.c
 category: Raw Data Unraveling
-input_formats: [".kmall", ".kmwcd"]
-output_formats: [".merged", ".merged.ss_data", ".merged.16_data", ".sectors", ".nav_1", ".nav_2", ".nav_3", ".orientation_1", ".orientation_2", ".net_att_1", ".net_att_2", ".NMEA", ".watercol", ".WC_Phase1", ".WC_Phase2", ".param", ".param_km", ".svp_NNN", ".ssp", ".IOP", ".svTS"]
-related_tools: ["moveOverWCinfo", "mergeAtt", "newMergeAtt", "mergeNav", "getBounds", "makess", "makeWC", "dumpFlags", "RTlite"]
+input_formats:
+- .kmall
+- .kmwcd
+output_formats:
+- .merged
+- .merged.ss_data
+- .merged.16_data
+- .sectors
+- .nav_1
+- .nav_2
+- .nav_3
+- .orientation_1
+- .orientation_2
+- .net_att_1
+- .net_att_2
+- .NMEA
+- .watercol
+- .WC_Phase1
+- .WC_Phase2
+- .param
+- .param_km
+- .svp_NNN
+- .ssp
+- .IOP
+- .svTS
+related_tools:
+- moveOverWCinfo
+- mergeAtt
+- newMergeAtt
+- mergeNav
+- getBounds
+- makess
+- makeWC
+- dumpFlags
+- RTlite
 ---
 
 # read_kmall
@@ -19,7 +52,7 @@ related_tools: ["moveOverWCinfo", "mergeAtt", "newMergeAtt", "mergeNav", "getBou
 During execution, `read_kmall` scans the raw binary file for `#` datagram headers (`#IIP`, `#IOP`, `#SPO`, `#SKM`, `#SVP`, `#SVT`, `#SHI`, `#SCL`, `#SDE`, `#FCF`, `#MRZ`, `#MWC`, `#CHE`), validates datagram sizes and versions (supporting KMALL Revisions D through H+ automatically via `dgmVersion`), and writes synchronized ping headers, beam records, sidescan snippets, transmit sector metadata, multi-source navigation, serial/network attitude, and water column amplitude/phase structures to up to 21 distinct OMG files.
 
 > [!IMPORTANT]
-> When processing a survey line that has a separate `.kmwcd` water column file alongside the `.kmall` file, you **must** run `read_kmall` on the `.kmwcd` file **first**, rename the resulting `.merged` file (e.g., to `justWC_<line>.merged`), run `read_kmall` on the `.kmall` file **second**, and then combine the water column byte offsets into the bathymetric `.merged` file using [`moveOverWCinfo`](../omg/moveOverWCinfo.md). If you run `.kmall` first and `.kmwcd` second on the same `-out` prefix without moving `.merged`, the `.kmwcd` pass will overwrite the bathymetric `.merged` file with empty stub beams!
+> When processing a survey line that has a separate `.kmwcd` water column file alongside the `.kmall` file, you **must** run `read_kmall` on the `.kmwcd` file **first**, rename the resulting `.merged` file (e.g., to `justWC_<line>.merged`), run `read_kmall` on the `.kmall` file **second**, and then combine the water column byte offsets into the bathymetric `.merged` file using [`moveOverWCinfo`](../omg/moveOverWCinfo.html). If you run `.kmall` first and `.kmwcd` second on the same `-out` prefix without moving `.merged`, the `.kmwcd` pass will overwrite the bathymetric `.merged` file with empty stub beams!
 
 ---
 
@@ -32,6 +65,7 @@ read_kmall [OPTIONS] -in <infile.kmall | infile.kmwcd> -out <outfile_prefix>
 ### Standard Unraveling Examples
 
 **1. Unpacking a single `.kmall` file (with embedded or no water column):**
+
 ```bash
 read_kmall \
     -doWC \
@@ -41,6 +75,7 @@ read_kmall \
 ```
 
 **2. Unpacking paired `.kmwcd` and `.kmall` files:**
+
 ```bash
 # Step 1: Unpack the .kmwcd file first to generate .watercol, .WC_Phase1/2, and WC profile offsets
 read_kmall -doWC -doPhase \
@@ -137,6 +172,7 @@ Because `read_kmall` separates multi-sensor navigation and attitude streams into
 
 1. **Navigation Selection:**
    `read_kmall` writes position fixes to `.nav_1`, `.nav_2`, and `.nav_3` (corresponding to `#SPO` `sensorSystem` 0, 1, and 2), but does **not** create `<prefix>.nav`. Before running `mergeNav` or `appendNav`, copy the active navigation source to `.nav`:
+
    ```bash
    cp merged/JD100/line.nav_1 merged/JD100/line.nav
    ```
@@ -148,6 +184,7 @@ Because `read_kmall` separates multi-sensor navigation and attitude streams into
    * Format `7` (POS M/V GRP 102/103 Network) $\rightarrow$ `.net_att_1`
    
    Before running `mergeAtt`, check which file is non-empty (`ls -l <prefix>.*att* <prefix>.orientation*`) and copy it to `<prefix>.orientation`:
+
    ```bash
    cp merged/JD100/line.net_att_2 merged/JD100/line.orientation
    mergeAtt merged/JD100/line

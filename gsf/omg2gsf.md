@@ -1,14 +1,26 @@
 ---
 layout: default
 title: omg2gsf
-parent: GSF Tools
+parent: Generic Sensor Format — GSF (gsf)
+grand_parent: 4. Multi-Vendor Sonar & LiDAR Converters
 nav_order: 8
 tool_name: omg2gsf
 source_path: code/gsf/omg2gsf.c
 category: Format Export
-input_formats: [".merged", ".merged.ss_data", ".sonar_settings", ".param", ".orientation"]
-output_formats: [".gsf"]
-related_tools: ["gsftest", "gsf2omg", "gsf2omg_7101", "7k2omg", "r2sonic2omg"]
+input_formats:
+- .merged
+- .merged.ss_data
+- .sonar_settings
+- .param
+- .orientation
+output_formats:
+- .gsf
+related_tools:
+- gsftest
+- gsf2omg
+- gsf2omg_7101
+- 7k2omg
+- r2sonic2omg
 ---
 
 # omg2gsf
@@ -17,6 +29,7 @@ related_tools: ["gsftest", "gsf2omg", "gsf2omg_7101", "7k2omg", "r2sonic2omg"]
 `omg2gsf` exports processed OMG-HDCS `.merged` multibeam files (along with companion `.param`, `.sonar_settings`, `.merged.ss_data`, and `.orientation` files) into the standard SAIC/Leidos Generic Sensor Format (`.gsf`). For **R2Sonic (`2022`, `2024`)** and **Reson 7k (`SeaBat_7125`, `SeaBat_7160`, `Reson_T20P`)** datasets, `omg2gsf` populates full sensor-specific GSF subrecords and 16-bit Bathymetric Receive Beam (`brb_inten`) snippet time series. When `-correct_imagery` is enabled on SeaBat 7125 data, it computes seafloor grazing angles and applies full radiometric TVG/transmission-loss calibration (`calibrate_reson_7K`), encoding calibrated snippets in 0.1 dB units.
 
 ## Usage
+
 ```bash
 omg2gsf [OPTIONS] -in <filename.merged> [-out <outfile.gsf>]
 ```
@@ -53,11 +66,13 @@ omg2gsf [OPTIONS] -in <filename.merged> [-out <outfile.gsf>]
 ## Practical Examples
 
 **1. Export a processed Reson 7125 `.merged` file to GSF with calibrated 0.1 dB snippet imagery and attitude:**
+
 ```bash
 omg2gsf -correct_imagery -dump_orientation -in line01.merged -out line01.gsf
 ```
 
 **2. Export an R2Sonic 2024 `.merged` file within a geographic bounding box without tide correction:**
+
 ```bash
 omg2gsf -ignore_tide -min_lat 44.5 -max_lat 45.2 -min_lon -66.5 -max_lon -65.8 -in r2s_line.merged -out r2s_line.gsf
 ```

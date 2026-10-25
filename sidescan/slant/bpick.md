@@ -1,16 +1,18 @@
 ---
 layout: default
 title: bpick
-parent: Slant Tools
-grand_parent: sidescan
+parent: Sidescan Radiometric & Geometric Suite (sidescan)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 1
 ---
+
 # bpick
 
 ## Description
 `bpick` is a utility designed for bottom picking in JCU GLORIA format sidescan files. It identifies the first arrival of the seafloor by detecting a sustained signal amplitude above a specified `threshold` within a `pick_window`. This tool can be configured to pick for port, starboard, the shallowest, or the deepest returns. Additionally, it provides options to smooth the picked bottom depths using median or averaging filters, useful for removing noise or small-scale irregularities from the profile.
 
 ## Usage
+
 ```bash
 bpick [-v] [-use_existing] [-median <length> | -average <length>] [-pickport | -pickstbd | -pickboth | -pickshallow | -pickdeep] [-pickwin <windowsize> <min_above>] [-minpick <pixels>] [-threshold <value>] -in <infile>
 ```

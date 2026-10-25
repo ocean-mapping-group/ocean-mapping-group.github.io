@@ -1,10 +1,11 @@
 ---
 layout: default
 title: bathy_window
-parent: SUB2K Motif Tools
-grand_parent: code
+parent: GeoSwath+ / Submetrix Motif GUI (sub2k_motif)
+grand_parent: 4. Multi-Vendor Sonar & LiDAR Converters
 nav_order: 3
 ---
+
 # bathy_window
 
 ## Description

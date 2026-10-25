@@ -1,9 +1,11 @@
 ---
 layout: default
 title: 7k2omg
-parent: Reson Tools
+parent: Reson SeaBat 7k/8k (reson)
+grand_parent: 4. Multi-Vendor Sonar & LiDAR Converters
 nav_order: 177
 ---
+
 # 7k2omg
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 177
 It supports both old and new 7k bathymetry and snippet packet types, handles various Reson sonar models, and provides options for ignoring specific data types, forcing old packet usage, and dealing with dual-head sonar systems. The output merged file is a foundational format for further processing and visualization within the OMG toolkit.
 
 ## Usage
+
 ```bash
 7k2omg -s7k <input_name> -omg <omg_file_prefix> [-sonar <type>] [OPTIONS]
 ```

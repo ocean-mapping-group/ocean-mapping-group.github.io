@@ -1,22 +1,31 @@
 ---
 layout: default
 title: stencilIPV
-parent: Image Tools
+parent: Raster Image Processing (image)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 50
 tool_name: stencilIPV
 source_path: code/image/stencilIPV.c
 category: Masking & Stenciling
-input_formats: ["Multi-plane .ipv raster (-in)", "OMG1 8-bit mask (-mask)", "Optional .ipv underlay (-under)"]
-output_formats: ["Stenciled multi-plane .ipv raster (-out)"]
-related_tools: ["stencil", "mask_make", "jb_mask_make"]
+input_formats:
+- Multi-plane .ipv raster (-in)
+- OMG1 8-bit mask (-mask)
+- Optional .ipv underlay (-under)
+output_formats:
+- Stenciled multi-plane .ipv raster (-out)
+related_tools:
+- stencil
+- mask_make
+- jb_mask_make
 ---
 
 # stencilIPV
 
 ## Description
-`stencilIPV` is a specialized variant of [`stencil`](stencil.md) designed for Magdy Halim's multi-plane `.ipv` image files (which begin with a 2048-byte header followed by `-planes <n>` sequential 8-bit image planes stored in bottom-to-top row order).
+`stencilIPV` is a specialized variant of [`stencil`](stencil.html) designed for Magdy Halim's multi-plane `.ipv` image files (which begin with a 2048-byte header followed by `-planes <n>` sequential 8-bit image planes stored in bottom-to-top row order).
 
 ## CLI Options & Usage
+
 ```bash
 stencilIPV -mask <mask.8bit> -in <in.ipv> -out <out.ipv> \
   [-planes <n>] [-inverse] [-ignore <val>] \

@@ -1,16 +1,18 @@
 ---
 layout: default
 title: synthetic
-parent: Mock Tools
-grand_parent: sidescan
+parent: Sidescan Radiometric & Geometric Suite (sidescan)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 13
 ---
+
 # synthetic
 
 ## Description
 `synthetic` is a utility designed to generate synthetic sidescan images. It creates these images based on an input grazing angle mosaic and a user-specified backscatter model, which can be either Lambertian or linear. Additionally, it has the capability to apply a "real" angular response function (derived empirically) to a grazing angle image to produce a synthetic backscatter image that mimics observed data. This tool is a key component in sidescan modeling and analysis pipelines.
 
 ## Usage
+
 ```bash
 synthetic [-strip] [-real <response_file>] [-lamb <nadir_intercept>] [-linear <nadir_intercept> <slope>] -infile <grazing_mosaic> -outfile <synthetic_mosaic>
 ```

@@ -1,14 +1,21 @@
 ---
 layout: default
 title: NJWtoNav
-parent: Navigation Tools
+parent: Navigation Processing (nav)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 8
 tool_name: NJWtoNav
 source_path: code/nav/NJWtoNav.c
 category: Navigation & Georeferencing
-input_formats: ["ASCII text (NJW-SSP towfish/ship UTM navigation)"]
-output_formats: [".nav (jcu_nav_rec binary)"]
-related_tools: ["AGCtoNav", "AuketoNav", "mergeNav", "appendNav"]
+input_formats:
+- ASCII text (NJW-SSP towfish/ship UTM navigation)
+output_formats:
+- .nav (jcu_nav_rec binary)
+related_tools:
+- AGCtoNav
+- AuketoNav
+- mergeNav
+- appendNav
 ---
 
 # NJWtoNav
@@ -29,12 +36,14 @@ NJWtoNav [OPTIONS] -year <YYYY> -jday <DDD> -comp <output.nav> <njw_ssp_infile(s
 ### Common Workflow Examples
 
 **1. Convert an NJW-SSP towfish navigation file with year and Julian day specified on the command line:**
+
 ```bash
 # Prompts on stdin for Ellipsoid (1=WGS84, 2=NAD27) and Meridian (e.g. -63.0)
 NJWtoNav -year 1997 -jday 145 -comp towfish.nav line01.njw
 ```
 
 **2. Non-interactive pipeline execution using a here-string for ellipsoid and meridian:**
+
 ```bash
 NJWtoNav -year 1997 -jday 145 -comp towfish.nav line01.njw <<< "1 -63.0"
 ```
@@ -64,6 +73,7 @@ Regardless of command-line flags, `NJWtoNav` always prompts for two parameters a
 
 ### Input ASCII Format (9 columns)
 Each line of an NJW-SSP file must contain 9 whitespace-delimited floating-point numbers:
+
 ```text
 <nmea_time> <time_corr> <adjusted_time> <fish_easting> <fish_northing> <ship_easting> <ship_northing> <averaged_line_azi> <layback>
 ```

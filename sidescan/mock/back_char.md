@@ -1,10 +1,11 @@
 ---
 layout: default
 title: back_char
-parent: Mock Tools
-grand_parent: sidescan
+parent: Sidescan Radiometric & Geometric Suite (sidescan)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 1
 ---
+
 # back_char
 
 ## Description
@@ -19,6 +20,7 @@ nav_order: 1
 All calculations are performed for backscatter measured over the grazing angle range of 45 to 76.8 degrees.
 
 ## Usage
+
 ```bash
 back_char [-box <size>] [-min_useful <count>] [-bounds <upper> <lower>] [-map] [-slope] [-midi] [-stdv] [-lamb]
 ```

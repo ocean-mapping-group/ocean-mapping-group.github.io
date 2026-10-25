@@ -1,15 +1,21 @@
 ---
 layout: default
 title: viewbeam.f
-parent: Old Stuff
-grand_parent: Beam Tools
+parent: Sidescan Radiometric & Geometric Suite (sidescan)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 9
 tool_name: viewbeam
 source_path: code/sidescan/beam/oldstuff/viewbeam.f
 category: Sidescan Beam Pattern Processing
-input_formats: ["ASCII .beam_pattern (ps89_<pass>.beam_pattern)"]
-output_formats: ["Interactive GPR display", "Mutoh / HP7475 / Report plot metafile"]
-related_tools: ["glbeam_bypass", "sumbeam.f", "sumbeambin.f"]
+input_formats:
+- ASCII .beam_pattern (ps89_<pass>.beam_pattern)
+output_formats:
+- Interactive GPR display
+- Mutoh / HP7475 / Report plot metafile
+related_tools:
+- glbeam_bypass
+- sumbeam.f
+- sumbeambin.f
 ---
 
 # viewbeam.f (`viewbeam`)
@@ -18,6 +24,7 @@ related_tools: ["glbeam_bypass", "sumbeam.f", "sumbeambin.f"]
 `viewbeam.f` is an interactive Fortran 77 plotting utility (John Hughes Clarke, December 1989) that visualizes empirical GLORIA port and starboard beam pattern curves (`ps89_<pass>.beam_pattern`) across grazing angles from `-90°` (port) to `+90°` (starboard). It supports both interactive Apollo GPR graphics display and hardcopy plotfile output (Mutoh, HP7475, or Report sizes).
 
 ## Usage & Interactive Prompts
+
 ```bash
 viewbeam
 ```

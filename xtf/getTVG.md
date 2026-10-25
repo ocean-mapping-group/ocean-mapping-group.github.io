@@ -1,14 +1,21 @@
 ---
 layout: default
 title: getTVG
-parent: XTF Tools
+parent: eXtended Triton Format — XTF (xtf)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 4
 tool_name: getTVG
 source_path: code/xtf/getTVG.c
 category: Backscatter & Image Processing
-input_formats: [".xtf"]
-output_formats: [".txt (ASCII range-amplitude table)"]
-related_tools: ["stripSS", "deTVG", "7kTVG", "xtfTool"]
+input_formats:
+- .xtf
+output_formats:
+- .txt (ASCII range-amplitude table)
+related_tools:
+- stripSS
+- deTVG
+- 7kTVG
+- xtfTool
 ---
 
 # getTVG
@@ -17,6 +24,7 @@ related_tools: ["stripSS", "deTVG", "7kTVG", "xtfTool"]
 `getTVG` analyzes 16-bit sidescan sonar traces (`XTF_HEADER_SONAR`, packet ID 0) and Reson bathymetry headers (`XTF_HEADER_BATHY`, packet ID 2) inside an XTF file to compute empirical mean amplitude vs. slant range curves. It bins sidescan trace samples by slant range (in meters) across a specified range of pings and outputs a two-column ASCII table (`<range_m> <mean_amplitude_or_dB>`) useful for diagnosing Time Varying Gain (TVG) curves.
 
 ## Usage
+
 ```bash
 getTVG [-v] [-log] [-range_resolution <m>] [-from <ping_idx>] [-to <ping_idx>] [-port_only | -stbd_only] -in <input.xtf> -out <output.txt>
 ```
@@ -43,11 +51,13 @@ getTVG [-v] [-log] [-range_resolution <m>] [-from <ping_idx>] [-to <ping_idx>] [
 ## Practical Examples
 
 **1. Compute 0.5 m range-binned sidescan backscatter in dB for pings 100 to 500:**
+
 ```bash
 getTVG -log -range_resolution 0.5 -from 100 -to 500 -in line01.xtf -out line01_tvg.txt
 ```
 
 **2. Extract port-only linear amplitude profile across the entire XTF file:**
+
 ```bash
 getTVG -port_only -in line01.xtf -out line01_port_tvg.txt
 ```

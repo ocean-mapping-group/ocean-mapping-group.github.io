@@ -1,9 +1,11 @@
 ---
 layout: default
 title: merge_PPK
-parent: Optech Tools
+parent: Optech SHOALS Bathymetric LiDAR (Optech)
+grand_parent: 4. Multi-Vendor Sonar & LiDAR Converters
 nav_order: 115
 ---
+
 # merge_PPK
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 115
 This calculated `RTK_at_RP` height is then stored in the merged file, providing a precise vertical reference that accounts for both vessel motion and antenna offsets.
 
 ## Usage
+
 ```bash
 merge_PPK <OMG_HDCS_datafile(s)> -ppk <bin-file> [OPTIONS]
 ```

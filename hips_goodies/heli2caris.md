@@ -1,14 +1,22 @@
 ---
 layout: default
 title: heli2caris
-parent: HIPS Goodies (hips_goodies)
+parent: CARIS HIPS Integration Utilities (hips_goodies)
+grand_parent: 4. Multi-Vendor Sonar & LiDAR Converters
 nav_order: 1
 tool_name: heli2caris
 source_path: code/hips_goodies/heli2caris.c
 category: Caris HIPS Conversion Utilities
-input_formats: ["OEM4 ASCII GPS", "PRTKA ASCII GPS", "NMEA GGA (.txt, .log)"]
-output_formats: ["CARIS FOF/NTX command script"]
-related_tools: ["mvp2hips", "stripNav", "iNav2SHP"]
+input_formats:
+- OEM4 ASCII GPS
+- PRTKA ASCII GPS
+- NMEA GGA (.txt, .log)
+output_formats:
+- CARIS FOF/NTX command script
+related_tools:
+- mvp2hips
+- stripNav
+- iNav2SHP
 ---
 
 # heli2caris (and `helo2caris.cpp`)

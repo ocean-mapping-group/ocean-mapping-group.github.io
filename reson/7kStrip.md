@@ -1,9 +1,11 @@
 ---
 layout: default
 title: 7kStrip
-parent: Reson Tools
+parent: Reson SeaBat 7k/8k (reson)
+grand_parent: 4. Multi-Vendor Sonar & LiDAR Converters
 nav_order: 179
 ---
+
 # 7kStrip
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 179
 This tool is useful for reducing the size of `.s7k` files by removing unnecessary data (e.g., specific telemetry, unused sensor data) or for preparing specialized `.s7k` files containing only particular data types for specific processing steps.
 
 ## Usage
+
 ```bash
 7kStrip -in <inputfile.s7k> -out <stripped_file.s7k> [-strip <ID>] [-v]
 ```

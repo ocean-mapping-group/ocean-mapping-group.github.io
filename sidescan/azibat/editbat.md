@@ -1,16 +1,18 @@
 ---
 layout: default
 title: editbat
-parent: Sidescan Tools
-grand_parent: azibat
+parent: Sidescan Radiometric & Geometric Suite (sidescan)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 2
 ---
+
 # editbat
 
 ## Description
 `editbat` is a utility used to edit the altitude of a JCU format sidescan image to create a more coherent image. It identifies and corrects bad depths (altitudes) by applying a median filter and replacing values that are significantly different from the median.
 
 ## Usage
+
 ```bash
 editbat [-v] [-c <count>] [-t <threshold>] <infile> <outfile>
 ```

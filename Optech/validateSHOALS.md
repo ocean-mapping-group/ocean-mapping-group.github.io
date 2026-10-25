@@ -1,15 +1,18 @@
 ---
 layout: default
 title: validateSHOALS
-parent: Optech Tools
+parent: Optech SHOALS Bathymetric LiDAR (Optech)
+grand_parent: 4. Multi-Vendor Sonar & LiDAR Converters
 nav_order: 123
 ---
+
 # validateSHOALS
 
 ## Description
 `validateSHOALS` is a specialized validation tool for SHOALS (Scanning Hydrographic Operational Airborne Lidar Survey) data. It processes two 8-bit image files: a "reference" image (typically representing backscatter intensity or other signal quality metrics) and a "height" image (e.g., bottom return height, roughness, or standard deviation of depths). By comparing overlapping pixels in these two images against user-defined thresholds, the program classifies seabed characteristics, primarily focusing on the presence of submerged vegetation (weed detection) and other data quality aspects. The output is a new 8-bit image where each pixel represents a validation status.
 
 ## Usage
+
 ```bash
 validateSHOALS -reference <filename> -reference_threshold <value> -height <filename> -height_threshold <value> -out <filename> [OPTIONS]
 ```

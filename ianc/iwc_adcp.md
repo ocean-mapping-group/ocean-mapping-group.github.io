@@ -1,14 +1,22 @@
 ---
 layout: default
 title: iwc_adcp
-parent: Ian Church (ianc) Tools
+parent: Ian Church — Hydrodynamic & 3D Ray-Trace Suite (ianc)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 nav_order: 10
 tool_name: iwc_adcp
 source_path: code/ianc/subr/iwc_adcp.c
 category: Ocean Modeling & Hydrographic Utilities (ianc)
-input_formats: ["ADCP_record struct (j_adcp.h)"]
-output_formats: ["In-memory heading-corrected ADCP_record"]
-related_tools: ["oceanReader", "modelAnalysis", "HycomSSP", "iwc_support", "iwc_water"]
+input_formats:
+- ADCP_record struct (j_adcp.h)
+output_formats:
+- In-memory heading-corrected ADCP_record
+related_tools:
+- oceanReader
+- modelAnalysis
+- HycomSSP
+- iwc_support
+- iwc_water
 ---
 
 # iwc_adcp
@@ -79,10 +87,12 @@ fixADCPBinVel(&adcp_rec[j]);
 2. **Bin Iteration & Sentinel Filtering**: The function loops over every depth bin `k` from `0` to `adcp_rec->no_bins - 1`. It verifies that `adcp_rec->bins[k].vel_magnitude` lies strictly between `-30000` and `30000` to avoid corrupting bad-data sentinel values (`-32768`).
 3. **Azimuth Rotation & Trigonometric Decomposition**:
    * The bin flow direction is adjusted by the compass error:
+
      ```c
      adcp_rec->bins[k].vel_direction = adcp_rec->bins[k].vel_direction + adcp_rec->azi_bias;
      ```
    * Treating `vel_direction` as a geographic azimuth (clockwise from true North) and calling `deg2rad()` from `iwc_support.c`, the orthogonal velocity components are updated:
+
      ```c
      adcp_rec->bins[k].east_vel_component  = adcp_rec->bins[k].vel_magnitude * sin(deg2rad(adcp_rec->bins[k].vel_direction));
      adcp_rec->bins[k].north_vel_component = adcp_rec->bins[k].vel_magnitude * cos(deg2rad(adcp_rec->bins[k].vel_direction));

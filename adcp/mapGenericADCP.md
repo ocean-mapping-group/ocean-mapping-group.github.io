@@ -1,23 +1,24 @@
 ---
 layout: default
 title: mapGenericADCP
-parent: ADCP Tools
+parent: Teledyne RDI ADCP Processing (adcp)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 9
 tool_name: mapGenericADCP
 source_path: code/adcp/mapGenericADCP.c
 category: adcp
 input_formats:
-  - jcu_nav Navigation (.nav / .decXX.nav)
-  - JHC 32-bit Float Velocity Arrays (.N.r4, .E.r4, .D.r4)
-  - OMG Map Sheet (.map / .blank)
+- jcu_nav Navigation (.nav / .decXX.nav)
+- JHC 32-bit Float Velocity Arrays (.N.r4, .E.r4, .D.r4)
+- OMG Map Sheet (.map / .blank)
 output_formats:
-  - JHC 32-bit Float Section Grids (.N.r4, .E.r4, .D.r4, .Mag.r4, .Azi.r4, .Rad.r4, .Tan.r4)
-  - Hit Count History (.history)
-  - ASCII NED Profile Summary (.NED_av.txt)
+- JHC 32-bit Float Section Grids (.N.r4, .E.r4, .D.r4, .Mag.r4, .Azi.r4, .Rad.r4, .Tan.r4)
+- Hit Count History (.history)
+- ASCII NED Profile Summary (.NED_av.txt)
 related_tools:
-  - readGenericADCP
-  - readADCP
-  - makeVectorPlot
+- readGenericADCP
+- readADCP
+- makeVectorPlot
 ---
 
 # mapGenericADCP
@@ -26,6 +27,7 @@ related_tools:
 `mapGenericADCP` is a command-line utility that georeferences and projects generic or Kongsberg EC150 binned ADCP (Acoustic Doppler Current Profiler) 3D velocity datasets onto a 2D cross-sectional mapsheet grid. It reads a `jcu_nav` navigation file (`<prefix>.nav` or `<prefix>.decXX.nav`) alongside its companion North (`<prefix>.N.r4`), East (`<prefix>.E.r4`), and Downward (`<prefix>.D.r4`) floating-point velocity rasters, bins all ensembles falling within the target `.map` bounds, and outputs 7 co-registered `.r4` velocity component sections.
 
 ## Usage
+
 ```bash
 mapGenericADCP -map <map.blank> -Xpixel <x_size> -Zpixel <z_size> -in <infile(s)> -out <outfileprefix> [OPTIONS]
 ```

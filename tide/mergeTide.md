@@ -1,14 +1,22 @@
 ---
 layout: default
 title: mergeTide
-parent: Tide Tools
+parent: Tidal Reduction & Constituents (tide)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 1
 tool_name: mergeTide
 source_path: code/tide/mergeTide.c
 category: Vertical Datum & Tide Correction
-input_formats: [".merged", ".nav (binary tide series)"]
-output_formats: [".merged (modified in-place)"]
-related_tools: ["weigh_grid", "swathed", "stripNav", "mergeHeave"]
+input_formats:
+- .merged
+- .nav (binary tide series)
+output_formats:
+- .merged (modified in-place)
+related_tools:
+- weigh_grid
+- swathed
+- stripNav
+- mergeHeave
 ---
 
 # mergeTide
@@ -29,11 +37,13 @@ mergeTide [OPTIONS] -tide <tidefile.bin> <mergefile(s).merged>
 ### Common Workflow Examples
 
 **1. Standard predicted or observed tide merge (as used in Kongsberg unravel scripts):**
+
 ```bash
 mergeTide -tide ../Tides/Predicted_Fort_Point_May_2021.bin merged/JD100/0001_line.merged
 ```
 
 **2. Two-station spatial and temporal tide interpolation:**
+
 ```bash
 mergeTide \
     -interpolate \
@@ -43,11 +53,13 @@ mergeTide \
 ```
 
 **3. Merging GPS RTK tide while removing real-time vessel heave (to avoid double-correcting heave):**
+
 ```bash
 mergeTide -RTK -remove_heave -tide rtk_height_series.bin merged/JD100/*.merged
 ```
 
 **4. Clearing (zeroing out) previously merged tides:**
+
 ```bash
 mergeTide -zero_tide merged/JD100/*.merged
 ```

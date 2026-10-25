@@ -1,16 +1,17 @@
 ---
 layout: default
 title: j_SUB2K
-parent: Core Shared Libraries (subr)
-module_name: j_SUB2K
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/j_SUB2K.c
-header_path: code/subr/j_SUB2K.h
 category: Sonar Format I/O & Interferometric Processing
 related_tools:
-  - SUB2KtoOMG
-  - SwathPlus converters
-  - weigh_grid
-  - jview
+- SUB2KtoOMG
+- SwathPlus converters
+- weigh_grid
+- jview
+module_name: j_SUB2K
+header_path: code/subr/j_SUB2K.h
 ---
 
 # `j_SUB2K` — Submetrix 2000 & SEA SWATHplus Interferometric Sonar Processing Library

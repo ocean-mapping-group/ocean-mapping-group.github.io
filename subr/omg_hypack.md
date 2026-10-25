@@ -1,13 +1,14 @@
 ---
 layout: default
 title: omg_hypack
-parent: Core Shared Libraries (subr)
-module_name: omg_hypack
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/omg_hypack.c
-header_path: code/subr/omg_hypack.h
 category: File Formats & Vendor Parsers
 related_tools:
-  - hypack2omg
+- hypack2omg
+module_name: omg_hypack
+header_path: code/subr/omg_hypack.h
 ---
 
 # omg_hypack

@@ -1,22 +1,23 @@
 ---
 layout: default
 title: calc_ellipse
-parent: ADCP Tools
+parent: Teledyne RDI ADCP Processing (adcp)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 2
 tool_name: calc_ellipse
 source_path: code/adcp/calc_ellipse.c
 category: adcp
 input_formats:
-  - jcu_nav Depth-Averaged ADCP Vectors (.nav)
-  - JHC Grid (.r4 / .8bit)
+- jcu_nav Depth-Averaged ADCP Vectors (.nav)
+- JHC Grid (.r4 / .8bit)
 output_formats:
-  - CSV Tidal Ellipse Table
-  - jcu_nav Phase-Averaged Vectors (.phase###)
+- CSV Tidal Ellipse Table
+- jcu_nav Phase-Averaged Vectors (.phase###)
 related_tools:
-  - calc_ellipse1
-  - calc_ellipse2
-  - combineMultiADCP
-  - readADCP
+- calc_ellipse1
+- calc_ellipse2
+- combineMultiADCP
+- readADCP
 ---
 
 # calc_ellipse
@@ -24,9 +25,10 @@ related_tools:
 ## Description
 `calc_ellipse` is a command-line utility designed to analyze ADCP (Acoustic Doppler Current Profiler) data to determine M2 tidal ellipse parameters ($12.42\text{ hours} = 360^\circ$). It processes depth-averaged current vectors from one or more tidal cycles, sorts them by tidal phase and spatial location using a coarse DTM grid, and calculates the properties of the tidal ellipse (semi-major/minor axes, orientation, ellipticity, and residual current) for each grid cell.
 
-This tool is the foundational version of [`calc_ellipse1`](calc_ellipse1.md) and [`calc_ellipse2`](calc_ellipse2.md), writing its ellipse parameters directly to a CSV table.
+This tool is the foundational version of [`calc_ellipse1`](calc_ellipse1.html) and [`calc_ellipse2`](calc_ellipse2.html), writing its ellipse parameters directly to a CSV table.
 
 ## Usage
+
 ```bash
 calc_ellipse [OPTIONS] -grid <coarseDTM> -out <outfilenameprefix> -ellipse_file <ellipse_parameter_file> -in <infilename(s)>
 ```

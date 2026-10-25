@@ -1,9 +1,11 @@
 ---
 layout: default
 title: compress_OMG_watercolumn
-parent: OMG Tools
+parent: Core Swath & .all Suite (omg)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 82
 ---
+
 # compress_OMG_watercolumn
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 82
 The tool uses the JasPer library for JPEG2000 compression, offering a way to reduce storage size for large WC datasets.
 
 ## Usage
+
 ```bash
 compress_OMG_watercolumn -in <filename.merged> [-compress <factor>] [-v]
 ```

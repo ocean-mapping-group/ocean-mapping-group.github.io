@@ -1,14 +1,20 @@
 ---
 layout: default
 title: DNMtoLLD
-parent: Navigation Tools
+parent: Navigation Processing (nav)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 6
 tool_name: DNMtoLLD
 source_path: code/nav/DNMtoLLD.c
 category: Navigation & Georeferencing
-input_formats: ["ASCII text (Australian Navy Division of National Mapping format)"]
-output_formats: ["ASCII .lld / .llz (lat lon depth)"]
-related_tools: ["Generic_to_Nav", "dohypackLNW", "dumpnav"]
+input_formats:
+- ASCII text (Australian Navy Division of National Mapping format)
+output_formats:
+- ASCII .lld / .llz (lat lon depth)
+related_tools:
+- Generic_to_Nav
+- dohypackLNW
+- dumpnav
 ---
 
 # DNMtoLLD
@@ -29,11 +35,13 @@ DNMtoLLD [OPTIONS] -comp <output_lld_file> <input_dnm_file(s)>
 ### Common Workflow Examples
 
 **1. Convert a single Division of National Mapping file to ASCII `lat lon depth`:**
+
 ```bash
 DNMtoLLD -comp survey_soundings.lld ran_dnm_sheet01.txt
 ```
 
 **2. Convert and concatenate multiple DNM files with verbose debugging:**
+
 ```bash
 DNMtoLLD -v -comp combined_dnm.lld dnm_part1.txt dnm_part2.txt dnm_part3.txt
 ```
@@ -61,6 +69,7 @@ DNMtoLLD -v -comp combined_dnm.lld dnm_part1.txt dnm_part2.txt dnm_part3.txt
 
 ### Output Format
 Each valid record is written to the `-comp` output file as a space-delimited ASCII line:
+
 ```text
 <lat_deg> <lon_deg> <depth_m>
 ```

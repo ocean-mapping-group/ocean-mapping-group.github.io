@@ -1,12 +1,18 @@
 ---
 layout: default
 title: soundspeed
-parent: Shared Core Libraries (subr)
-module_name: soundspeed
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/soundspeed.c
-header_path: code/subr/soundspeed.h
 category: Raytracing, Sound Speed & Geolocation
-related_tools: ["water", "j_watercolumn", "jb_watercolumn", "svp_tool", "r_atten"]
+related_tools:
+- water
+- j_watercolumn
+- jb_watercolumn
+- svp_tool
+- r_atten
+module_name: soundspeed
+header_path: code/subr/soundspeed.h
 ---
 
 # soundspeed
@@ -43,4 +49,4 @@ Defined in `soundspeed.h` for converting between MPa, bars, decibars, and $\text
 ---
 
 ## Architectural Role
-`soundspeed` works alongside [`water`](water.md) (seawater density, potential temperature, and conductivity-to-salinity) and [`r_atten`](r_atten.md) (Francois-Garrison acoustic absorption). It is used by CTD/SVP import utilities, `svp_tool`, and acoustic backscatter absorption calculators when converting raw CTD casts or AML SV&T probe logs into raytracing sound velocity profiles.
+`soundspeed` works alongside [`water`](water.html) (seawater density, potential temperature, and conductivity-to-salinity) and [`r_atten`](r_atten.html) (Francois-Garrison acoustic absorption). It is used by CTD/SVP import utilities, `svp_tool`, and acoustic backscatter absorption calculators when converting raw CTD casts or AML SV&T probe logs into raytracing sound velocity profiles.

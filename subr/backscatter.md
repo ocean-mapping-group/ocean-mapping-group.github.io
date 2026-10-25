@@ -1,10 +1,11 @@
 ---
 layout: default
 title: backscatter
-parent: Subr Tools
-grand_parent: code
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 nav_order: 4
 ---
+
 # backscatter
 
 ## Description

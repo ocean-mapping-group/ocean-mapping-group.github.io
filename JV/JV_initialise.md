@@ -1,9 +1,11 @@
 ---
 layout: default
 title: JV_initialise (Module within jview)
-parent: JV Tools
+parent: 2D/3D Interactive Viewer — jview (JV)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 4
 ---
+
 # JV_initialise (Module within jview)
 
 ## Description

@@ -1,13 +1,19 @@
 ---
 layout: default
 title: r4to16bit
-parent: Grid Tools
+parent: Bathymetric Gridding & Export (grid)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 tool_name: r4to16bit
 source_path: code/grid/r4to16bit.c
 category: gridding
-input_formats: [".r4 (JHC 32-bit float grid)"]
-output_formats: ["JHC_header + 16-bit unsigned short array"]
-related_tools: ["r4to8bit", "8bittor4", "r4toESRI"]
+input_formats:
+- .r4 (JHC 32-bit float grid)
+output_formats:
+- JHC_header + 16-bit unsigned short array
+related_tools:
+- r4to8bit
+- 8bittor4
+- r4toESRI
 ---
 
 # r4to16bit
@@ -52,6 +58,7 @@ r4to16bit [-low <min_val>] [-high <max_val>] [-nozero] <floatfile> <16bitfile>
 ## Examples
 
 **Scale a bathymetric `.r4` grid spanning `-3500 m` to `0 m` into 16-bit unsigned integers, reserving `0` for nodata:**
+
 ```bash
 r4to16bit -low -3500 -high 0 -nozero deep_survey.r4 deep_survey.16bit
 ```
@@ -60,5 +67,5 @@ r4to16bit -low -3500 -high 0 -nozero deep_survey.r4 deep_survey.16bit
 
 ## Workflow Context
 
-- **Counterpart:** [`8bittor4`](8bittor4.md) (`-short` flag) converts 16-bit integer `JHC_header` grids back to 32-bit `.r4` floating-point grids.
-- **See Also:** [`r4to8bit`](r4to8bit.md) for standard 8-bit (`0..255`) conversion.
+- **Counterpart:** [`8bittor4`](8bittor4.html) (`-short` flag) converts 16-bit integer `JHC_header` grids back to 32-bit `.r4` floating-point grids.
+- **See Also:** [`r4to8bit`](r4to8bit.html) for standard 8-bit (`0..255`) conversion.

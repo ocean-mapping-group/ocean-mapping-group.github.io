@@ -1,9 +1,11 @@
 ---
 layout: default
 title: classSel
-parent: OMG Tools
+parent: Core Swath & .all Suite (omg)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 81
 ---
+
 # classSel
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 81
 The tool operates on pre-generated LUT files (`.lut` and `.num`), which store backscatter values and associated metadata (profile, beam, grazing angle, intensity) for individual soundings. It effectively performs a moving window analysis over these LUTs to classify or characterize the seafloor.
 
 ## Usage
+
 ```bash
 classSel -lut <LUThandle> [-step <pixels>] [-v]
 ```

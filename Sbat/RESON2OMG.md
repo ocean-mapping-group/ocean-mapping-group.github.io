@@ -1,14 +1,20 @@
 ---
 layout: default
 title: RESON2OMG
-parent: Sbat Tools
+parent: Reson SeaBat 9001/8101 Legacy (Sbat)
+grand_parent: 4. Multi-Vendor Sonar & LiDAR Converters
 nav_order: 3
 tool_name: RESON2OMG
 source_path: Sbat/RESON2OMG.c
 category: format_conversion
-input_formats: [UNB_RESON]
-output_formats: [OMG_HDCS]
-related_tools: [Sbat2OMG, 8101toOMG, GSF9002toOMG]
+input_formats:
+- UNB_RESON
+output_formats:
+- OMG_HDCS
+related_tools:
+- Sbat2OMG
+- 8101toOMG
+- GSF9002toOMG
 ---
 
 # RESON2OMG

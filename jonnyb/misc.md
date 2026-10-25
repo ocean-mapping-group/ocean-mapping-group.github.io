@@ -1,14 +1,18 @@
 ---
 layout: default
 title: misc
-parent: Jonathan Beaudoin (jonnyb) Tools
+parent: Jonathan Beaudoin — SVP, Refraction & Snippets (jonnyb)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 nav_order: 8
 tool_name: misc
 source_path: code/jonnyb/misc.c
 category: Developer Templates & Utilities (jonnyb)
-input_formats: ["Any file (-in)"]
-output_formats: ["Any file (-out)"]
-related_tools: ["misc_omg"]
+input_formats:
+- Any file (-in)
+output_formats:
+- Any file (-out)
+related_tools:
+- misc_omg
 ---
 
 # misc

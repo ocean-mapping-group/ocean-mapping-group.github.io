@@ -1,14 +1,33 @@
 ---
 layout: default
 title: mergeNav
-parent: Navigation Tools
+parent: Navigation Processing (nav)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 1
 tool_name: mergeNav
 source_path: code/nav/mergeNav.c
 category: Navigation & Georeferencing
-input_formats: [".merged", ".nav", ".param", ".ss", ".svp", ".adcp"]
-output_formats: [".merged (modified in-place)", ".ss (modified in-place)", ".svp (modified in-place)", ".llz_post", ".txt"]
-related_tools: ["read_kmall", "RTlite", "mergeAtt", "newMergeAtt", "stripNav", "appendNav", "getBounds"]
+input_formats:
+- .merged
+- .nav
+- .param
+- .ss
+- .svp
+- .adcp
+output_formats:
+- .merged (modified in-place)
+- .ss (modified in-place)
+- .svp (modified in-place)
+- .llz_post
+- .txt
+related_tools:
+- read_kmall
+- RTlite
+- mergeAtt
+- newMergeAtt
+- stripNav
+- appendNav
+- getBounds
 ---
 
 # mergeNav
@@ -16,7 +35,7 @@ related_tools: ["read_kmall", "RTlite", "mergeAtt", "newMergeAtt", "stripNav", "
 ## Description
 `mergeNav` interpolates asynchronous binary navigation records (`jcu_nav_rec`, 48 bytes per fix, stored in `<handle>.nav`) onto the profile headers of an OMG-HDCS multibeam file (`<handle>.merged`), a GLORIA sidescan file (`<handle>.ss`), a Sound Velocity Profile (`<handle>.svp`), an ADCP file, or an underwater camera photo sequence.
 
-In the standard Kongsberg `.kmall` and `.all` unraveling pipelines, `mergeNav` is executed **immediately after** [`mergeAtt`](../omg/mergeAtt.md) (because `mergeNav` requires the ping's roll, pitch, and heading from the profile header to rotate 3D lever-arm offsets between the GPS antenna and the vessel Reference Point / transducer) and **immediately before** [`getBounds`](../omg/getBounds.md) and [`makess`](../omg/makess.md).
+In the standard Kongsberg `.kmall` and `.all` unraveling pipelines, `mergeNav` is executed **immediately after** [`mergeAtt`](../omg/mergeAtt.html) (because `mergeNav` requires the ping's roll, pitch, and heading from the profile header to rotate 3D lever-arm offsets between the GPS antenna and the vessel Reference Point / transducer) and **immediately before** [`getBounds`](../omg/getBounds.html) and [`makess`](../omg/makess.html).
 
 > [!IMPORTANT]
 > **Sign Convention for Lever Arms (`-ahead`, `-right`, `-below`):**
@@ -38,6 +57,7 @@ mergeNav [OPTIONS] <datafile_handle> [...]
 ### Common Workflow Examples
 
 **1. Standard Kongsberg `.kmall` / `.all` pipeline (nav already at RP):**
+
 ```bash
 # Ensure .nav exists (for .kmall, copy .nav_1 to .nav first)
 cp merged/JD100/0001_line.nav_1 merged/JD100/0001_line.nav
@@ -52,16 +72,19 @@ mergeNav \
 ```
 
 **2. Applying lever arms from the `.param` file (Sensor 1):**
+
 ```bash
 mergeNav -use_params -sensor 1 merged/JD100/0001_line.merged
 ```
 
 **3. Merging an external navigation file onto a swath file with a latency delay:**
+
 ```bash
 mergeNav -nav proc_nav/whole_day.nav -delay 0.05 -swath merged/JD100/0001_line.merged
 ```
 
 **4. Merging navigation onto a sidescan (`.ss`) or SVP (`.svp`) file:**
+
 ```bash
 mergeNav -ss ss/JD100/0001_line.ss
 mergeNav -svp -nav merged/JD100/0001_line.nav merged/JD100/0001_line.svp_001

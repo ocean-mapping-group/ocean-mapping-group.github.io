@@ -1,9 +1,11 @@
 ---
 layout: default
 title: makeFoot
-parent: Plot Tools
+parent: PostScript & Vector Plotting (plot)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 127
 ---
+
 # makeFoot
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 127
 The tool supports a wide range of sonar models (e.g., various Simrad EM series, Reson SeaBat series, ELAC, FSWP20, ISIS, TOWSS, Fishfinder) and allows for customization of parameters like angular sector and beam spacing. This `beam.foot` file can then be used by other processing tools for footprint modeling, coverage analysis, and data inversion.
 
 ## Usage
+
 ```bash
 makeFoot (-em3000 | -fswp20 | -isis | -towss | ...) -outfile <bf_file> [OPTIONS]
 ```
@@ -28,6 +31,7 @@ makeFoot (-em3000 | -fswp20 | -isis | -towss | ...) -outfile <bf_file> [OPTIONS]
 | `-port` / `-stbd` | Generate beam definitions only for the port or starboard side. | Both |
 
 ### Interactive (for some EM models)
+
 | Option | Description |
 |---|---|
 | `-em300` | (Interactive) Will ask for `nobeams`, `spacing_type`, `angsect`, `tr_bwdth`, `rc_bwdth`. |

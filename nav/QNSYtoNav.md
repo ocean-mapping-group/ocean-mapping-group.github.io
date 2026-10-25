@@ -1,14 +1,23 @@
 ---
 layout: default
 title: QNSYtoNav
-parent: Navigation Tools
+parent: Navigation Processing (nav)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 11
 tool_name: QNSYtoNav
 source_path: code/nav/QNSYtoNav.c
 category: Navigation & Georeferencing
-input_formats: ["QINSy ASCII export files (GGA all attributes, Format v2, Format v3, Speedlog, Motion, Draught)"]
-output_formats: [".nav (jcu_nav_rec binary)", ".orientation (OMG_HDCS_attitude v3 with -motion)"]
-related_tools: ["NMEAtoNav", "PNAVtoNav", "Generic_to_Nav", "mergeNav", "mergeAtt"]
+input_formats:
+- QINSy ASCII export files (GGA all attributes, Format v2, Format v3, Speedlog, Motion, Draught)
+output_formats:
+- .nav (jcu_nav_rec binary)
+- .orientation (OMG_HDCS_attitude v3 with -motion)
+related_tools:
+- NMEAtoNav
+- PNAVtoNav
+- Generic_to_Nav
+- mergeNav
+- mergeAtt
 ---
 
 # QNSYtoNav
@@ -35,22 +44,26 @@ QNSYtoNav [FORMAT_FLAG] [OPTIONS] -comp <output_file> <qinsy_ascii_file(s)>
 ### Common Workflow Examples
 
 **1. Convert default QINSy GGA-All-Attributes ASCII export to binary `.nav`:**
+
 ```bash
 QNSYtoNav -comp qinsy_gps.nav qinsy_gga_export.txt
 ```
 
 **2. Convert QINSy Format 2 or Format 3 ASCII navigation exports:**
+
 ```bash
 QNSYtoNav -format 2 -comp qinsy_v2.nav export_v2.txt
 QNSYtoNav -format 3 -comp qinsy_v3.nav export_v3.txt
 ```
 
 **3. Convert QINSy roll/pitch/heave motion export to an OMG `.orientation` file:**
+
 ```bash
 QNSYtoNav -motion -comp vessel.orientation qinsy_motion.txt
 ```
 
 **4. Convert QINSy speedlog or dynamic draught export to `.nav`:**
+
 ```bash
 QNSYtoNav -speedlog -comp speed.nav qinsy_speed.txt
 QNSYtoNav -draught -comp draught.nav qinsy_draught.txt
@@ -82,6 +95,7 @@ Before parsing each line, `QNSYtoNav` replaces the following characters in-place
 ### Subformat Column Layouts & Quality Flagging
 
 1. **Default (`QINSY_GGA_ALL_ATTRIBUTES`, 1 header line skipped):**
+
    ```text
    <hour> <min> <sec.sss> <day> <month> <YY> <lat_D> <lat_M> <lat_S> <lon_D> <lon_M> <lon_S> <ellipse_h> <CalcMode> <HDOP> <noSats> <CorrAge>
    ```
@@ -90,18 +104,21 @@ Before parsing each line, `QNSYtoNav` replaces the following characters in-place
    * **Automatic Quality Flagging (`flag[3]`):** Sets `flag[3] = 1` (bad fix) if `HDOP > 10.0`, `CalcMode < 2`, `CalcMode > 4`, `noSats < 3`, or `CorrAge > 20.0`. Sets `flag[3] = 2` if `CalcMode == 1`.
 
 2. **Format 2 (`-format 2`, 0 header lines skipped):**
+
    ```text
    <lat_D> <lat_M> <lat_S> <lon_D> <lon_M> <lon_S> <ellipse_h> <CalcMode> <EWhemi> <NShemi> <hour> <min> <sec.sss> <day> <month> <YY> <HDOP> <fnoSats> <CorrAge>
    ```
    * Same `jcu_nav_rec` field mapping and quality flagging (`flag[3] = 1`) as default mode, plus console warnings when thresholds are exceeded or time jumps (`deltime > 500` or `< 0`) occur.
 
 3. **Format 3 (`-format 3`, 10 header lines skipped):**
+
    ```text
    <month> <day> <YYYY> <hour> <min> <sec.sss> <lat_D> <lat_M> <lat_S> <lon_D> <lon_M> <lon_S> <east> <north> <ellipse_h> <ROC> <SOG> <CalcMode>
    ```
    * Preserves hundredths of a second (`tide_rec.centisecs = msec / 10.0`).
 
 4. **Motion (`-motion`, 5 header lines skipped):**
+
    ```text
    <month> <day> <YYYY> <hour> <min> <sec.sss> <pitch_deg> <roll_deg> <heave_m>
    ```

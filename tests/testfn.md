@@ -1,20 +1,21 @@
 ---
 layout: default
 title: testfn
-parent: tests (Test, Simulation & Diagnostic Suite)
+parent: Acoustic & Mathematical Test Harnesses (tests)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 nav_order: 25
 tool_name: testfn
 source_path: code/tests/testfn.c
 category: Backscatter & Ensonified Footprint Geometry (tests)
 input_formats:
-  - Command-line depth parameter (-depth)
+- Command-line depth parameter (-depth)
 output_formats:
-  - Console geometric footprint table from show_footprint()
+- Console geometric footprint table from show_footprint()
 related_tools:
-  - BatchProcEK
-  - EKlook
-  - deTVG
-  - testAtten
+- BatchProcEK
+- EKlook
+- deTVG
+- testAtten
 ---
 
 # testfn
@@ -22,7 +23,7 @@ related_tools:
 ## Overview
 `testfn` (`code/tests/testfn.c`, authored by John Hughes Clarke in August 1992) is a concise driver utility written to test the `show_footprint(depth, beam_width, pulse_length)` library function declared in `Echo_calib.h` (`liblocal.a`).
 
-In multibeam and sidescan radiometric backscatter reduction (such as [`deTVG`](../omg/deTVG.md) and [`BatchProcEK`](../EKlook/BatchProcEK.md)), converting raw echo intensity into seafloor backscatter strength per unit area ($S_b$ in $\text{dB re } 1\text{ m}^2/\text{m}^2$) requires computing the instantaneous ensonified seafloor area $A(\theta)$ across the swath. `testfn` calls `show_footprint()` for a given water depth (`depth`, default $100\text{ m}$), two-way beamwidth (`beam_width = 3.3` degrees), and transmit pulse duration (`pulse_length = 0.0002` seconds = $0.2\text{ ms}$) to print the transition from the **beamwidth-limited** (nadir) regime to the **pulse-length-limited** (oblique) regime.
+In multibeam and sidescan radiometric backscatter reduction (such as [`deTVG`](../omg/deTVG.html) and [`BatchProcEK`](../EKlook/BatchProcEK.html)), converting raw echo intensity into seafloor backscatter strength per unit area ($S_b$ in $\text{dB re } 1\text{ m}^2/\text{m}^2$) requires computing the instantaneous ensonified seafloor area $A(\theta)$ across the swath. `testfn` calls `show_footprint()` for a given water depth (`depth`, default $100\text{ m}$), two-way beamwidth (`beam_width = 3.3` degrees), and transmit pulse duration (`pulse_length = 0.0002` seconds = $0.2\text{ ms}$) to print the transition from the **beamwidth-limited** (nadir) regime to the **pulse-length-limited** (oblique) regime.
 
 ---
 

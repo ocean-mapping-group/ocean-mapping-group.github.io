@@ -1,16 +1,17 @@
 ---
 layout: default
 title: j_non_ortho_cones
-parent: Core Shared Libraries (subr)
-module_name: j_non_ortho_cones
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/j_non_ortho_cones.c
-header_path: code/subr/j_non_ortho_cones.h
 category: Multibeam Geometry & 3D Attitude Kinematics
 related_tools:
-  - mergeAtt
-  - newMergeAtt
-  - swathEd
-  - SYN_ship
+- mergeAtt
+- newMergeAtt
+- swathEd
+- SYN_ship
+module_name: j_non_ortho_cones
+header_path: code/subr/j_non_ortho_cones.h
 ---
 
 # `j_non_ortho_cones` — Non-Orthogonal Mills Cross Multibeam Cone Intersection Library

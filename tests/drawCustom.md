@@ -1,19 +1,20 @@
 ---
 layout: default
 title: drawCustom
-parent: tests (Test, Simulation & Diagnostic Suite)
+parent: Acoustic & Mathematical Test Harnesses (tests)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 nav_order: 4
 tool_name: drawCustom
 source_path: code/tests/drawCustom.c
 category: Attitude Error & Geometry Plotting (tests)
 input_formats:
-  - Command-line flags only (no input file read)
+- Command-line flags only (no input file read)
 output_formats:
-  - draw.ascii (or custom ASCII multi-curve plot file for OMG plot utilities)
+- draw.ascii (or custom ASCII multi-curve plot file for OMG plot utilities)
 related_tools:
-  - testrot
-  - twistVRU
-  - DelayEditor
+- testrot
+- twistVRU
+- DelayEditor
 ---
 
 # drawCustom

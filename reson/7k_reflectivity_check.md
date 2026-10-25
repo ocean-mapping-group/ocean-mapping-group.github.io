@@ -1,9 +1,11 @@
 ---
 layout: default
 title: 7k_reflectivity_check
-parent: Reson Tools
+parent: Reson SeaBat 7k/8k (reson)
+grand_parent: 4. Multi-Vendor Sonar & LiDAR Converters
 nav_order: 174
 ---
+
 # 7k_reflectivity_check
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 174
 The primary purpose of this tool is for quality control and detailed analysis of backscatter data, allowing users to assess the consistency of intensity measurements from different sources within the 7k data stream.
 
 ## Usage
+
 ```bash
 7k_reflectivity_check -s7k <input_name> [-v] [-debug]
 ```

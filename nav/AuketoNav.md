@@ -1,14 +1,22 @@
 ---
 layout: default
 title: AuketoNav
-parent: Navigation Tools
+parent: Navigation Processing (nav)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 5
 tool_name: AuketoNav
 source_path: code/nav/AuketoNav.c
 category: Navigation & Georeferencing
-input_formats: ["ASCII text (Auke TGO / Peter Stewart custom heave & nav)"]
-output_formats: [".nav (jcu_nav_rec binary)"]
-related_tools: ["AGCtoNav", "Generic_to_Nav", "NJWtoNav", "mergeNav", "avNav"]
+input_formats:
+- ASCII text (Auke TGO / Peter Stewart custom heave & nav)
+output_formats:
+- .nav (jcu_nav_rec binary)
+related_tools:
+- AGCtoNav
+- Generic_to_Nav
+- NJWtoNav
+- mergeNav
+- avNav
 ---
 
 # AuketoNav
@@ -16,7 +24,7 @@ related_tools: ["AGCtoNav", "Generic_to_Nav", "NJWtoNav", "mergeNav", "avNav"]
 ## Description
 `AuketoNav` converts custom ASCII GPS/RTK navigation and height logs (originally developed for Auke TGO post-processed GPS outputs in April 2008, and extended in April 2012 with `-peter_stewart` for modified heave/height time-series files) into the standard 48-byte OMG binary navigation format (`jcu_nav_rec`, `.nav`).
 
-In both modes, `AuketoNav` stores the parsed vertical height or heave column in the `tide_rec.azi` field of the output `.nav` record so that it can be smoothed with [`avNav`](avNav.md), inspected with [`dumpnav`](dumpnav.md), or merged as a vertical correction.
+In both modes, `AuketoNav` stores the parsed vertical height or heave column in the `tide_rec.azi` field of the output `.nav` record so that it can be smoothed with [`avNav`](avNav.html), inspected with [`dumpnav`](dumpnav.html), or merged as a vertical correction.
 
 ---
 
@@ -29,11 +37,13 @@ AuketoNav [OPTIONS] -comp <output.nav> <input_ascii_file(s)>
 ### Common Workflow Examples
 
 **1. Convert standard 9-column Auke TGO ASCII navigation & height files:**
+
 ```bash
 AuketoNav -comp tgo_rtk.nav line01_tgo.txt line02_tgo.txt
 ```
 
 **2. Convert Peter Stewart 6-column Julian Day + seconds-since-midnight heave/height files:**
+
 ```bash
 AuketoNav -peter_stewart -year 2012 -comp stewart_heave.nav heave_dump.txt
 ```
@@ -58,6 +68,7 @@ AuketoNav -peter_stewart -year 2012 -comp stewart_heave.nav heave_dump.txt
 
 ### 1. Default Auke TGO Format (9 columns)
 Each whitespace-delimited line in the input file contains:
+
 ```text
 <hour> <min> <sec> <day> <month> <year> <lat_deg> <lon_deg> <height_m>
 ```
@@ -68,6 +79,7 @@ Each whitespace-delimited line in the input file contains:
 
 ### 2. Peter Stewart Format (`-peter_stewart`, 6 columns)
 Each whitespace-delimited line in the input file contains:
+
 ```text
 <jday> <secs_since_midnight> <lat_deg> <lon_deg> <height_m> <fdum>
 ```

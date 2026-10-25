@@ -1,12 +1,17 @@
 ---
 layout: default
 title: swapio
-parent: Shared Core Libraries (subr)
-module_name: swapio
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/swapio.c
-header_path: code/subr/swapio.h
 category: Core System, I/O & Time Utilities
-related_tools: ["jb_endian", "OMG_HDCS_jversion", "array", "j_farray"]
+related_tools:
+- jb_endian
+- OMG_HDCS_jversion
+- array
+- j_farray
+module_name: swapio
+header_path: code/subr/swapio.h
 ---
 
 # swapio
@@ -66,4 +71,4 @@ Drop-in replacements for standard C `fread()` and `fwrite()` that automatically 
 ---
 
 ## Architectural Role
-`swapio` underpins [`OMG_HDCS_jversion`](OMG_HDCS_jversion.md), [`array`](array.md), [`j_farray`](j_farray.md), and legacy big-endian sonar parsers. While newer modules also use [`jb_endian`](jb_endian.md) for explicit `_LE_` / `_BE_` stream reads, `swapio` ensures all classic OMG binary files remain portable across SPARC/MIPS and modern x86_64 Linux systems.
+`swapio` underpins [`OMG_HDCS_jversion`](OMG_HDCS_jversion.html), [`array`](array.html), [`j_farray`](j_farray.html), and legacy big-endian sonar parsers. While newer modules also use [`jb_endian`](jb_endian.html) for explicit `_LE_` / `_BE_` stream reads, `swapio` ensures all classic OMG binary files remain portable across SPARC/MIPS and modern x86_64 Linux systems.

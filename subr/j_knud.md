@@ -1,16 +1,17 @@
 ---
 layout: default
 title: j_knud
-parent: Core Shared Libraries (subr)
-module_name: j_knud
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/j_knud.c
-header_path: code/subr/j_knud.h
 category: Sonar Format I/O (Sub-bottom & Echosounder)
 related_tools:
-  - knud2glo
-  - k16to8
-  - kflto8
-  - xtf2gloria
+- knud2glo
+- k16to8
+- kflto8
+- xtf2gloria
+module_name: j_knud
+header_path: code/subr/j_knud.h
 ---
 
 # `j_knud` — Knudsen 320 / Chirp Sub-Bottom Profiler (`.keb` / `.kea` B9, D3 & E0) Format Library

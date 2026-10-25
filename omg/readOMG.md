@@ -1,9 +1,11 @@
 ---
 layout: default
 title: readOMG
-parent: OMG Tools
+parent: Core Swath & .all Suite (omg)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 52
 ---
+
 # readOMG
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 52
 The tool offers an interactive interface to navigate through profiles, displaying details of each record.
 
 ## Usage
+
 ```bash
 readOMG <OMG_HDCS_datafile> [-verbose]
 ```

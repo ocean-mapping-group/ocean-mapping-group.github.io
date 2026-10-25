@@ -1,14 +1,34 @@
 ---
 layout: default
 title: weigh_grid
-parent: grid Tools
+parent: Bathymetric Gridding & Export (grid)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 2
 tool_name: weigh_grid
 source_path: code/grid/weigh_grid.c
 category: Gridding & Bathymetric Surface Generation
-input_formats: [".r4", ".r4_weights", ".r4_weight_depth", ".merged", ".merged.100_ping_bounds", ".merged.global_bounds", "ASCII XYZ"]
-output_formats: [".r4 (updated in-place)", ".r4_weights (updated in-place)", ".r4_weight_depth (updated in-place)", ".used", ".regrid"]
-related_tools: ["make_blank", "tor4", "getBounds", "r4to8bit", "addSUN", "swathed", "jview"]
+input_formats:
+- .r4
+- .r4_weights
+- .r4_weight_depth
+- .merged
+- .merged.100_ping_bounds
+- .merged.global_bounds
+- ASCII XYZ
+output_formats:
+- .r4 (updated in-place)
+- .r4_weights (updated in-place)
+- .r4_weight_depth (updated in-place)
+- .used
+- .regrid
+related_tools:
+- make_blank
+- tor4
+- getBounds
+- r4to8bit
+- addSUN
+- swathed
+- jview
 ---
 
 # weigh_grid
@@ -16,12 +36,12 @@ related_tools: ["make_blank", "tor4", "getBounds", "r4to8bit", "addSUN", "swathe
 ## Description
 `weigh_grid` is the core Ocean Mapping Group bathymetric gridding program. It reads soundings from one or more OMG-HDCS `.merged` multibeam files (or MR1 sidescan bathy, or ASCII lon/lat/depth files), projects each unflagged beam into the coordinate system of a pre-initialized floating-point Digital Terrain Model (`<dtmprefix>.r4`), and computes a spatially weighted average depth for every grid cell using a **Butterworth** (default), **reciprocal**, or **linear** distance-weighting function.
 
-Crucially, `weigh_grid` maintains three parallel floating-point array files on disk (initialized from `<dtmprefix>.blank` via the [`tor4`](../scripts/tor4.md) helper script):
+Crucially, `weigh_grid` maintains three parallel floating-point array files on disk (initialized from `<dtmprefix>.blank` via the [`tor4`](../scripts/tor4.html) helper script):
 1. `<dtmprefix>.r4` — Final weighted-average depth grid ($\sum (w_i z_i) / \sum w_i$).
 2. `<dtmprefix>.r4_weights` — Cumulative sum of weights ($\sum w_i$) at every grid node.
 3. `<dtmprefix>.r4_weight_depth` — Cumulative sum of weighted depths ($\sum w_i z_i$) at every grid node.
 
-Because `weigh_grid` stores $\sum w_i$ and $\sum (w_i z_i)$ persistently, **you can add new survey lines incrementally to an existing grid** without re-gridding previous lines, or **subtract (`-subtract`) a dirty line**, edit it in [`swathed`](../SE/swathed.md) (which can also live-update `.r4` grids directly via `swathed -locate <dtmprefix>`), and re-add it!
+Because `weigh_grid` stores $\sum w_i$ and $\sum (w_i z_i)$ persistently, **you can add new survey lines incrementally to an existing grid** without re-gridding previous lines, or **subtract (`-subtract`) a dirty line**, edit it in [`swathed`](../SE/swathed.html) (which can also live-update `.r4` grids directly via `swathed -locate <dtmprefix>`), and re-add it!
 
 ---
 
@@ -155,5 +175,5 @@ jview bay_2m.8bit -sun bay_2m.sun_315
 | Symptom / Error | Cause | Resolution |
 |---|---|---|
 | `Could not open <dtmprefix>.r4_weights` | `weigh_grid` was run on `<dtmprefix>` before `tor4 <dtmprefix>.blank` was executed. | Run `make_blank -float <dtmprefix> ...` followed by `tor4 <dtmprefix>.blank` first. |
-| `weigh_grid` finishes immediately and says 0 files contributed (`some_contrib == 0`) | 1) [`getBounds`](../omg/getBounds.md) was not run on the `.merged` files after `mergeNav`, or 2) the `.merged` files lie outside the map bounds of `<dtmprefix>.r4`. | Run `getBounds merged/subdir/*.merged` first, or pass `-try_anyway` to `weigh_grid` to bypass the `.global_bounds` check. |
+| `weigh_grid` finishes immediately and says 0 files contributed (`some_contrib == 0`) | 1) [`getBounds`](../omg/getBounds.html) was not run on the `.merged` files after `mergeNav`, or 2) the `.merged` files lie outside the map bounds of `<dtmprefix>.r4`. | Run `getBounds merged/subdir/*.merged` first, or pass `-try_anyway` to `weigh_grid` to bypass the `.global_bounds` check. |
 | Re-running `weigh_grid` doubles the weights of already-gridded lines | By default, `weigh_grid` accumulates into existing `.r4_weights` and `.r4_weight_depth` files. | Pass `-fs` (`-fresh_start`) when re-gridding the entire dataset from scratch, or re-run `tor4 <dtmprefix>.blank` to reset the grid files. |

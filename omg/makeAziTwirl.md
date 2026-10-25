@@ -1,9 +1,11 @@
 ---
 layout: default
 title: makeAziTwirl
-parent: OMG Tools
+parent: Core Swath & .all Suite (omg)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 37
 ---
+
 # makeAziTwirl
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 37
 The tool can process either GLORIA sidescan records (`-inss`) or multibeam (OMG-HDCS) data with pre-calculated grazing angles and backscatter values (`-merged`, `-beamgra`, `-beambs`).
 
 ## Usage
+
 ```bash
 # For GLORIA Sidescan data
 makeAziTwirl -inss <input_ss_file> -outprefix <output_prefix> [OPTIONS]
@@ -27,6 +30,7 @@ makeAziTwirl -merged <merged_file> -beamgra <grazing_angle_file> -beambs <backsc
 | `-outprefix <output_prefix>` | **Required.** The base name for the output files. | |
 
 ### Input Data Source (Choose one)
+
 | Option | Description |
 |---|---|
 | `-inss <input_ss_file>` | Specifies the input GLORIA sidescan file (`GLORIA_RECLEN` format). | |
@@ -35,6 +39,7 @@ makeAziTwirl -merged <merged_file> -beamgra <grazing_angle_file> -beambs <backsc
 | `-beambs <backscatter_file>` | **Required with `-merged`.** A JHC float grid (`.r4`) containing beam backscatter values. | |
 
 ### Output Resolution
+
 | Option | Description | Default |
 |---|---|
 | `-pixel <size>` | For sidescan option (`-inss`). Sets the pixel size for the across-track dimension in the output orthogonal grids. | `1.0` |
@@ -42,12 +47,14 @@ makeAziTwirl -merged <merged_file> -beamgra <grazing_angle_file> -beambs <backsc
 | `-azidegstep <step>` | Sets the step size for azimuth bins (in degrees) in all output grids. | `0.5` |
 
 ### Filtering/Range Options
+
 | Option | Description | Default |
 |---|---|
 | `-start <ping_num>` | Processes data only from the specified starting ping number. | All |
 | `-end <ping_num>` | Processes data only up to the specified ending ping number. | All |
 
 ### Other Options
+
 | Option | Description |
 |---|---|
 | `-v` | Enable verbose output. | |

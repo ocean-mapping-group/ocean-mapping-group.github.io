@@ -1,16 +1,18 @@
 ---
 layout: default
 title: glcosmetic
-parent: Gain Tools
-grand_parent: sidescan
+parent: Sidescan Radiometric & Geometric Suite (sidescan)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 1
 ---
+
 # glcosmetic
 
 ## Description
 `glcosmetic` is a utility designed to apply cosmetic adjustments to JCU GLORIA sidescan files. Its primary function, as implemented, is to "smudge" or smooth out the nadir region of the imagery, particularly useful for data like Lake Ontario. It also includes options for applying independent gain factors to the port and starboard sides, although the current implementation focuses on the nadir smudging.
 
 ## Usage
+
 ```bash
 glcosmetic [-smudge <start_smudge> <end_smudge>] [-port <gain>] [-stbd <gain>] [-fixsb] [-start <record>] [-end <record>] <infile> <outfile>
 ```

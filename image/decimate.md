@@ -1,14 +1,21 @@
 ---
 layout: default
 title: decimate
-parent: Image Tools
+parent: Raster Image Processing (image)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 15
 tool_name: decimate
 source_path: code/image/decimate.c
 category: Image & Raster Processing
-input_formats: ["OMG1 8-bit array (JHC_header)"]
-output_formats: ["Downsampled OMG1 8-bit array"]
-related_tools: ["decr4", "expand", "changeAspect", "shoalBias"]
+input_formats:
+- OMG1 8-bit array (JHC_header)
+output_formats:
+- Downsampled OMG1 8-bit array
+related_tools:
+- decr4
+- expand
+- changeAspect
+- shoalBias
 ---
 
 # decimate
@@ -17,6 +24,7 @@ related_tools: ["decr4", "expand", "changeAspect", "shoalBias"]
 `decimate` downsamples an 8-bit `OMG1` (`JHC_header`) raster by an integer factor `-count <n>` along both axes (or along a single axis via `-justx` or `-justy`). It supports either valid-pixel mean averaging (default) or minimum-value selection (`-lowest`), while excluding a user-specified background/no-data value (`-ignore`, default `255`).
 
 ## CLI Options & Usage
+
 ```bash
 decimate -in <infile> -out <outfile> -count <n> \
   [-justx | -justy] [-ignore <val>] [-lowest]

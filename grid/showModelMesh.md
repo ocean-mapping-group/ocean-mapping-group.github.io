@@ -1,13 +1,19 @@
 ---
 layout: default
 title: showModelMesh
-parent: Grid Tools
+parent: Bathymetric Gridding & Export (grid)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 tool_name: showModelMesh
 source_path: code/grid/showModelMesh.c
 category: gridding
-input_formats: ["JHC_header (.lat.r4, .lon.r4, .mask.r4)"]
-output_formats: ["ASCII Mesh Line Segments (.mesh.llz)"]
-related_tools: ["makemesh", "readQUODDY", "extractNodeProf"]
+input_formats:
+- JHC_header (.lat.r4, .lon.r4, .mask.r4)
+output_formats:
+- ASCII Mesh Line Segments (.mesh.llz)
+related_tools:
+- makemesh
+- readQUODDY
+- extractNodeProf
 ---
 
 # showModelMesh
@@ -39,6 +45,7 @@ showModelMesh [-v] -prefix <modelprefix>
    - Iterates through every cell `(i, j)` for `i = 0..yno-2` and `j = 0..xno-2`.
    - Retrieves `(lat, lon, mask)` at `(i, j)`, its eastern neighbor `(lat1, lon1, mask1)` at `(i, j+1)`, and its southern neighbor `(lat2, lon2, mask2)` at `(i+1, j)`.
    - If both `mask` and `mask1` are non-zero, writes a 2-point horizontal segment followed by a `0.0 0.0 0.0` pen-up terminator:
+
      ```
       <lat> <lon> <mask>
       <lat1> <lon1> <mask1>
@@ -51,6 +58,7 @@ showModelMesh [-v] -prefix <modelprefix>
 ## Examples
 
 ### Export a wireframe mesh from curvilinear model coordinate grids
+
 ```bash
 showModelMesh -prefix gom_pom
 ```

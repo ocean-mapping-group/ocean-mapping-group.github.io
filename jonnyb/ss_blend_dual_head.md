@@ -1,20 +1,27 @@
 ---
 layout: default
 title: ss_blend_dual_head
-parent: Jonathan Beaudoin (jonnyb) Tools
+parent: Jonathan Beaudoin — SVP, Refraction & Snippets (jonnyb)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 nav_order: 2
 tool_name: ss_blend_dual_head
 source_path: code/jonnyb/gom_stuff/ss_blend_dual_head.c
 category: Backscatter & Sidescan Processing (jonnyb)
-input_formats: [".ss (GLORIA format dual-head sidescan)"]
-output_formats: [".ss (GLORIA format blended single-ping sidescan)"]
-related_tools: ["makess", "mos2", "deTVG", "SE_sswindow"]
+input_formats:
+- .ss (GLORIA format dual-head sidescan)
+output_formats:
+- .ss (GLORIA format blended single-ping sidescan)
+related_tools:
+- makess
+- mos2
+- deTVG
+- SE_sswindow
 ---
 
 # ss_blend_dual_head
 
 ## Description
-`ss_blend_dual_head` (`code/jonnyb/gom_stuff/ss_blend_dual_head.c`, written by Jonathan Beaudoin, October 2012) merges paired port and starboard GLORIA `.ss` sidescan records produced when [`makess`](../omg/makess.md) processes a dual-head multibeam echosounder (where each transducer head logs a separate ping record) into a single combined `gloria_rec` scanline per ping cycle.
+`ss_blend_dual_head` (`code/jonnyb/gom_stuff/ss_blend_dual_head.c`, written by Jonathan Beaudoin, October 2012) merges paired port and starboard GLORIA `.ss` sidescan records produced when [`makess`](../omg/makess.html) processes a dual-head multibeam echosounder (where each transducer head logs a separate ping record) into a single combined `gloria_rec` scanline per ping cycle.
 
 ---
 
@@ -29,11 +36,13 @@ ss_blend_dual_head [-v] [-invalid <val>] [-swap_sides] \
 ### Examples
 
 **1. Feather-blend overlapping dual-head sidescan records matched by ping number:**
+
 ```bash
 ss_blend_dual_head -feather -by_ping dual_line.ss blended_line.ss
 ```
 
 **2. Blend at the center nadir seam matching paired heads by timestamp:**
+
 ```bash
 ss_blend_dual_head -seam -by_time dual_line.ss blended_line.ss
 ```

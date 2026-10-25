@@ -1,16 +1,18 @@
 ---
 layout: default
 title: smthazi
-parent: Sidescan Tools
-grand_parent: azibat
+parent: Sidescan Radiometric & Geometric Suite (sidescan)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 8
 ---
+
 # smthazi
 
 ## Description
 `smthazi` is a utility used to smooth the azimuth of a JCU format sidescan image to create a more coherent image. It applies a low-pass filter to the azimuth data, taking care not to smooth over large azimuth changes or time steps, which might indicate a corner or a period of non-transmission.
 
 ## Usage
+
 ```bash
 smthazi [-v] [-l] [-f <filter_size>] [-t <threshold>] <infile> <outfile>
 ```

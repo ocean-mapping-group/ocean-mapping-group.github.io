@@ -1,16 +1,18 @@
 ---
 layout: default
 title: interpTime
-parent: Sidescan Tools
-grand_parent: azibat
+parent: Sidescan Radiometric & Geometric Suite (sidescan)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 5
 ---
+
 # interpTime
 
 ## Description
 `interpTime` is a utility used to interpolate fractional seconds in a JCU format sidescan file. This is particularly useful for data from sources like AGCDIG SEGY format, which may only have integer second time stamps, especially when dealing with high-ping-rate sonars like the Simrad MS992.
 
 ## Usage
+
 ```bash
 interpTime [-v] [-f<filter_length>] <jcuglofile>
 ```

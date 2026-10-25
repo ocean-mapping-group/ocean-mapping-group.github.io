@@ -1,21 +1,22 @@
 ---
 layout: default
 title: jNMEA
-parent: Core Shared Libraries (subr)
-module_name: jNMEA
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/jNMEA.c
-header_path: code/subr/jNMEA.h
-category: "Navigation, Attitude & Sensor Telegram Parsers"
+category: Navigation, Attitude & Sensor Telegram Parsers
 related_tools:
-  - NMEAtoNav
-  - RT
-  - RTLite
-  - read_kmall
-  - readEA600
-  - humm2omg
-  - oceanReader
-  - plotSVP
-  - upAGCDIG
+- NMEAtoNav
+- RT
+- RTLite
+- read_kmall
+- readEA600
+- humm2omg
+- oceanReader
+- plotSVP
+- upAGCDIG
+module_name: jNMEA
+header_path: code/subr/jNMEA.h
 ---
 
 # `jNMEA` — NMEA-0183 Navigation, Timing, and Attitude Telegram Parser

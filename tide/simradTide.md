@@ -1,13 +1,18 @@
 ---
 layout: default
 title: simradTide
-parent: Tide Tools
+parent: Tidal Reduction & Constituents (tide)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 tool_name: simradTide
 source_path: code/tide/simradTide.c
 category: tide
-input_formats: ["Simrad ASCII tide file"]
-output_formats: ["JHC ASCII tide (jday hour min -MLLWlevel)"]
-related_tools: ["binTide", "mergeTide"]
+input_formats:
+- Simrad ASCII tide file
+output_formats:
+- JHC ASCII tide (jday hour min -MLLWlevel)
+related_tools:
+- binTide
+- mergeTide
 ---
 
 # simradTide
@@ -49,6 +54,7 @@ simradTide [OPTIONS] -in <tidefilename> -out <mytideformatname>
 ## Examples
 
 **Convert a Simrad tide file to OMG binary tide format:**
+
 ```bash
 simradTide -in simrad_tide.txt -out omg_tide.asc
 binTide -year 2004 omg_tide.asc omg_tide.bin
@@ -60,4 +66,4 @@ mergeTide -tide omg_tide.bin merged/JD120/*.merged
 ## Workflow Context
 
 - **Upstream:** Kongsberg / Simrad SIS or Neptune ASCII tide files.
-- **Downstream:** [`binTide`](binTide.md) $\rightarrow$ [`mergeTide`](mergeTide.md).
+- **Downstream:** [`binTide`](binTide.html) $\rightarrow$ [`mergeTide`](mergeTide.html).

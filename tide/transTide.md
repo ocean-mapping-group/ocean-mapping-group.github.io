@@ -1,13 +1,19 @@
 ---
 layout: default
 title: transTide
-parent: Tide Tools
+parent: Tidal Reduction & Constituents (tide)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 tool_name: transTide
 source_path: code/tide/transTide.c
 category: tide
-input_formats: ["81-byte fixed-record Australian (Oz) / CHS tide format"]
-output_formats: ["JHC ASCII tide (jday hour min tide_m)"]
-related_tools: ["quebecTide", "binTide", "mergeTide"]
+input_formats:
+- 81-byte fixed-record Australian (Oz) / CHS tide format
+output_formats:
+- JHC ASCII tide (jday hour min tide_m)
+related_tools:
+- quebecTide
+- binTide
+- mergeTide
 ---
 
 # transTide
@@ -44,6 +50,7 @@ transTide [OPTIONS] -tide <tidefilename> <outfilename>
 ## Examples
 
 **Convert an 81-byte Australian tide file to binary OMG tide format:**
+
 ```bash
 transTide -tide oz_tide.dat oz_tide.asc
 binTide -year 1993 oz_tide.asc oz_tide.bin
@@ -54,5 +61,5 @@ mergeTide -tide oz_tide.bin merged/*.merged
 
 ## Workflow Context
 
-- **See Also:** [`quebecTide`](quebecTide.md).
-- **Downstream:** [`binTide`](binTide.md) $\rightarrow$ [`mergeTide`](mergeTide.md).
+- **See Also:** [`quebecTide`](quebecTide.html).
+- **Downstream:** [`binTide`](binTide.html) $\rightarrow$ [`mergeTide`](mergeTide.html).

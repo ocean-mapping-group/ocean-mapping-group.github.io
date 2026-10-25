@@ -1,31 +1,32 @@
 ---
 layout: default
 title: readADCP
-parent: ADCP Tools
+parent: Teledyne RDI ADCP Processing (adcp)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 10
 tool_name: readADCP
 source_path: code/adcp/readADCP.c
 category: adcp
 input_formats:
-  - RDI ASCII ADCP
-  - WinADCP ASCII
-  - jcu_nav (.nav)
-  - OMG Attitude (.orientation)
-  - JHC Float DTM (.r4)
-  - OMG Map (.map)
+- RDI ASCII ADCP
+- WinADCP ASCII
+- jcu_nav (.nav)
+- OMG Attitude (.orientation)
+- JHC Float DTM (.r4)
+- OMG Map (.map)
 output_formats:
-  - JHC 8-bit Profile (.prof / .stack_prof / .map_prof)
-  - JHC 32-bit Float Array (.r4 / .map_r4)
-  - jcu_nav Depth-Averaged Vectors (.nav)
-  - ASCII Stack Summary (.stack_ASCII)
+- JHC 8-bit Profile (.prof / .stack_prof / .map_prof)
+- JHC 32-bit Float Array (.r4 / .map_r4)
+- jcu_nav Depth-Averaged Vectors (.nav)
+- ASCII Stack Summary (.stack_ASCII)
 related_tools:
-  - readADCP_g
-  - readADCP_mod
-  - readWinADCP
-  - combineMultiADCP
-  - calc_ellipse2
-  - makeTSmap
-  - makeVectorPlot
+- readADCP_g
+- readADCP_mod
+- readWinADCP
+- combineMultiADCP
+- calc_ellipse2
+- makeTSmap
+- makeVectorPlot
 ---
 
 # readADCP
@@ -36,6 +37,7 @@ related_tools:
 In addition to rendering 8-bit (`.prof`) and 32-bit floating-point (`.r4`) vertical sections of velocity magnitude, azimuth, radial/tangential velocity, vertical velocity, error velocity, or calibrated volume backscatter ($S_v$), `readADCP` computes depth-averaged current vectors for every ensemble and writes them to a binary `jcu_nav` file (`<outfile>.nav`) for downstream M2 tidal phase binning (`combineMultiADCP`) and tidal ellipse analysis (`calc_ellipse2`).
 
 ## Usage
+
 ```bash
 readADCP -in <infiles> -out <outfile> [OPTIONS]
 ```
@@ -43,6 +45,7 @@ readADCP -in <infiles> -out <outfile> [OPTIONS]
 ## Key Options
 
 ### Input/Output & Auxiliary Integration
+
 | Option | Description |
 |---|---|
 | `-in <infilename(s)>` | **Required.** One or more input RDI ASCII ADCP files. |
@@ -62,6 +65,7 @@ readADCP -in <infiles> -out <outfile> [OPTIONS]
 | `-dump_RPTZ` / `-dump_CURR` / `-dump_BINS` | (With `-winADCP`) Dump per-ensemble ASCII current or bin files. |
 
 ### Data Selection and Quality Filtering
+
 | Option | Description |
 |---|---|
 | `-start <Y J H M>` / `-end <Y J H M>` | Set start and end time window (Year, Julian Day, Hour, Minute). |
@@ -75,6 +79,7 @@ readADCP -in <infiles> -out <outfile> [OPTIONS]
 | `-maximum_believable_magnitude <mm/s>` | Reject velocity bins with magnitude exceeding this threshold (default `10000` mm/s). |
 
 ### Processing and Display Modes
+
 | Option | Description |
 |---|---|
 | `-showMAG` | **(Default)** Output horizontal velocity magnitude in the profile. |
@@ -97,9 +102,9 @@ readADCP -in <infiles> -out <outfile> [OPTIONS]
 * **`<outfile>.prof`**: 8-bit JHC image file of the vertical profiles (columns = ensembles, rows = `-layers` depth bins).
 * **`<outfile>.r4`**: (With `-export_r4`) 32-bit floating-point JHC array containing physical values (m/s, degrees, or dB).
 * **`<outfile>.nav`**: Binary `jcu_nav` file containing the depth-averaged current speed (`velocity`) and direction (`azi`) between `-mindepth` and `-maxdepth` for each ensemble.
-* **`<outfile>.stack_prof` & `<outfile>.stack_ASCII`**: (With `-ensem_stack`) Stacked 8-bit profile image and companion ASCII timestamp log (used as a guide by [`makeTSmap`](makeTSmap.md)).
+* **`<outfile>.stack_prof` & `<outfile>.stack_ASCII`**: (With `-ensem_stack`) Stacked 8-bit profile image and companion ASCII timestamp log (used as a guide by [`makeTSmap`](makeTSmap.html)).
 * **`<outfile>.map_prof` & `<outfile>.map_r4`**: (With `-map`) Georeferenced 2D curtain projected onto the target mapsheet.
 
 ## See Also
-* [ADCP Processing & Tidal Current Analysis Workflow](../workflows/adcp-processing-workflow.md)
-* [`combineMultiADCP`](combineMultiADCP.md), [`calc_ellipse2`](calc_ellipse2.md), [`makeTSmap`](makeTSmap.md)
+* [ADCP Processing & Tidal Current Analysis Workflow](../workflows/adcp-processing-workflow.html)
+* [`combineMultiADCP`](combineMultiADCP.html), [`calc_ellipse2`](calc_ellipse2.html), [`makeTSmap`](makeTSmap.html)

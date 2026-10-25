@@ -1,13 +1,19 @@
 ---
 layout: default
 title: surface
-parent: Grid Tools
+parent: Bathymetric Gridding & Export (grid)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 tool_name: surface
 source_path: code/grid/surface.c
 category: gridding
-input_formats: ["ASCII XYZ Triples (stdin or file)"]
-output_formats: ["Binary Grid (surface.grd)"]
-related_tools: ["weigh_grid", "r4interp", "fillGap"]
+input_formats:
+- ASCII XYZ Triples (stdin or file)
+output_formats:
+- Binary Grid (surface.grd)
+related_tools:
+- weigh_grid
+- r4interp
+- fillGap
 ---
 
 # surface
@@ -66,6 +72,7 @@ surface [xyz-file] -R<west>/<east>/<south>/<north> -I<xinc>[/<yinc>] \
 ## Examples
 
 ### Fit a tensioned spline surface (T = 0.35) to bathymetric XYZ soundings
+
 ```bash
 surface soundings.xyz -R-67.0/-66.5/44.5/45.0 -I0.5m -T0.35 -Opassamaquoddy.grd -V
 ```

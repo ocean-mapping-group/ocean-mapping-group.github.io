@@ -1,20 +1,21 @@
 ---
 layout: default
 title: plotTxRxOverlap
-parent: tests (Test, Simulation & Diagnostic Suite)
+parent: Acoustic & Mathematical Test Harnesses (tests)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 nav_order: 11
 tool_name: plotTxRxOverlap
 source_path: code/tests/plotTxRxOverlap.c
 category: Backscatter & Transducer Array Acoustics (tests)
 input_formats:
-  - Optional ASCII input file (-infile) or internal 200-point synthetic cosine beam patterns
+- Optional ASCII input file (-infile) or internal 200-point synthetic cosine beam patterns
 output_formats:
-  - plot_001.meta .. plot_036.meta (36 OMG plotlib vector graphics metafiles)
+- plot_001.meta .. plot_036.meta (36 OMG plotlib vector graphics metafiles)
 related_tools:
-  - mkbp
-  - bpdemo
-  - EKlook
-  - BatchProcEK
+- mkbp
+- bpdemo
+- EKlook
+- BatchProcEK
 ---
 
 # plotTxRxOverlap
@@ -76,4 +77,4 @@ which is drawn as a horizontal blue line with a central diamond across the overl
 # Generate the 36-frame metafile sequence (plot_001.meta .. plot_036.meta)
 plotTxRxOverlap -size 30.0 20.0
 ```
-The resulting `.meta` files can be rendered to X11, PostScript, or GIF using the tools in [`plotlib`](../plotlib/index.md).
+The resulting `.meta` files can be rendered to X11, PostScript, or GIF using the tools in [`plotlib`](../plotlib/).

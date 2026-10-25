@@ -1,9 +1,11 @@
 ---
 layout: default
 title: findShoals
-parent: Grid Tools
+parent: Bathymetric Gridding & Export (grid)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 32
 ---
+
 ---
 layout: default
 title: findShoals
@@ -18,6 +20,7 @@ nav_order: 32
 The tool uses a 3x3 sliding window to examine each pixel. If a pixel's value is strictly greater than all eight of its immediate neighbors, it is classified as a shoal. The geographic coordinates (latitude, longitude) and depth of each identified shoal are then written to an ASCII output file.
 
 ## Usage
+
 ```bash
 findShoals <depthfile.r4> <output_asciifile>
 ```

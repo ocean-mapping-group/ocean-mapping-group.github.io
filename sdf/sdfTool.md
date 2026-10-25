@@ -1,14 +1,20 @@
 ---
 layout: default
 title: sdfTool
-parent: SDF Tools
+parent: Klein Sonar Data Format — SDF (sdf)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 4
 tool_name: sdfTool
 source_path: code/sdf/sdfTool.c
 category: Diagnostics & Indexing
-input_formats: [".sdf"]
-output_formats: ["stdout (ASCII summary & record dumps)"]
-related_tools: ["sdf2omg", "sdf2nav", "sdf2orientation"]
+input_formats:
+- .sdf
+output_formats:
+- stdout (ASCII summary & record dumps)
+related_tools:
+- sdf2omg
+- sdf2nav
+- sdf2orientation
 ---
 
 # sdfTool
@@ -17,6 +23,7 @@ related_tools: ["sdf2omg", "sdf2nav", "sdf2orientation"]
 `sdfTool` is a diagnostic utility for inspecting Klein Sonar Data Format (`.sdf`) files. It scans through all SDF ping records, optionally prints detailed header and sub-record structures when `-v` is enabled, and outputs a summary count of total records and specific Klein page versions (`5902`, `5911`, `5910`, `5920`).
 
 ## Usage
+
 ```bash
 sdfTool [-v] -in <inputfile.sdf>
 ```
@@ -35,11 +42,13 @@ sdfTool [-v] -in <inputfile.sdf>
 ## Practical Examples
 
 **1. Inspect the record inventory of a Klein `.sdf` file:**
+
 ```bash
 sdfTool -in survey_line01.sdf
 ```
 
 **2. Dump detailed SDF headers for every record:**
+
 ```bash
 sdfTool -v -in survey_line01.sdf
 ```

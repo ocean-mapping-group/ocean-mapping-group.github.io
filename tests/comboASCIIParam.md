@@ -1,25 +1,26 @@
 ---
 layout: default
 title: comboASCIIParam
-parent: tests (Test, Simulation & Diagnostic Suite)
+parent: Acoustic & Mathematical Test Harnesses (tests)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 nav_order: 1
 tool_name: comboASCIIParam
 source_path: code/tests/comboASCIIParam.c
 category: Backscatter & Multi-Spectral Grid Processing (tests)
 input_formats:
-  - .xval (ASCII frequency vector in kHz)
-  - .yval (ASCII grazing angle vector in degrees)
-  - .zval (ASCII 2D backscatter matrix dump in dB)
+- .xval (ASCII frequency vector in kHz)
+- .yval (ASCII grazing angle vector in degrees)
+- .zval (ASCII 2D backscatter matrix dump in dB)
 output_formats:
-  - ASCII X-Y-Z backscatter table (-out)
-  - .r4 (OMG raw 2D floating-point raster)
-  - .av (ASCII binned average frequency-grazing-BS table)
-  - .pack.r4 (OMG binned grazing-by-frequency floating-point raster)
+- ASCII X-Y-Z backscatter table (-out)
+- .r4 (OMG raw 2D floating-point raster)
+- .av (ASCII binned average frequency-grazing-BS table)
+- .pack.r4 (OMG binned grazing-by-frequency floating-point raster)
 related_tools:
-  - comboASCIIParam2
-  - fakeAR
-  - BatchProcEK
-  - jview
+- comboASCIIParam2
+- fakeAR
+- BatchProcEK
+- jview
 ---
 
 # comboASCIIParam
@@ -76,7 +77,7 @@ For each sample $(i, j)$, the nearest bin indices `(igraz, ifreq)` are computed 
 
 $$i_{\text{graz}} = \left\lfloor \frac{\theta_{g,j} - \theta_{g,\min}}{\Delta\theta_g} + 0.5 \right\rfloor, \qquad i_{\text{freq}} = \left\lfloor \frac{f_i - f_{\min}}{\Delta f} + 0.5 \right\rfloor$$
 
-All samples within bounds that satisfy $Z'_{i,j} < \text{maxBS}$ are averaged inside `packbs[igraz][ifreq]`. Non-zero averaged cells ($|\overline{\text{BS}}| > 1\text{ dB}$ and $\overline{\text{BS}} < \text{maxBS}$) are written as `freq graz BS` rows to `<out>.av`, and the 2D `packbs` array is exported with an `OMG1` `JHC_header` to `<out>.pack.r4` for visualization in [`jview`](../JV/jview.md).
+All samples within bounds that satisfy $Z'_{i,j} < \text{maxBS}$ are averaged inside `packbs[igraz][ifreq]`. Non-zero averaged cells ($|\overline{\text{BS}}| > 1\text{ dB}$ and $\overline{\text{BS}} < \text{maxBS}$) are written as `freq graz BS` rows to `<out>.av`, and the 2D `packbs` array is exported with an `OMG1` `JHC_header` to `<out>.pack.r4` for visualization in [`jview`](../JV/jview.html).
 
 ---
 
@@ -90,4 +91,4 @@ comboASCIIParam -minFkHz 90 -maxFkHz 170 -freqBins 50 \
                 -xval camp_freq.xval -yval camp_graz.yval -zval camp_bs.zval \
                 -out camp_multispec
 ```
-For frequency-dependent calibration detrending and altitude/attenuation SNR masking on these datasets, see [`comboASCIIParam2`](comboASCIIParam2.md).
+For frequency-dependent calibration detrending and altitude/attenuation SNR masking on these datasets, see [`comboASCIIParam2`](comboASCIIParam2.html).

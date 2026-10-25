@@ -1,7 +1,8 @@
 ---
 layout: default
 title: binTide
-parent: Tide Tools
+parent: Tidal Reduction & Constituents (tide)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 ---
 
 # binTide
@@ -10,6 +11,7 @@ parent: Tide Tools
 `binTide` is a utility that converts ASCII listings of tide data into the jcu_nav binary format for merging with other navigation data. It reads time and tide height values from an ASCII file and outputs them in a structured binary format suitable for integration into OMG processing workflows.
 
 ## Usage
+
 ```bash
 binTide (-v) (-1970time) (-addsine) (-scale 0.01) (-offset -0.63) (-delay 180) (-position lat lon) -year 1996 (or -V2 -V3) asciitidefile binarytidefile
 ```

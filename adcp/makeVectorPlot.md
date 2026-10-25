@@ -1,18 +1,19 @@
 ---
 layout: default
 title: makeVectorPlot
-parent: ADCP Tools
+parent: Teledyne RDI ADCP Processing (adcp)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 8
 tool_name: makeVectorPlot
 source_path: code/adcp/makeVectorPlot.c
 category: adcp
 input_formats:
-  - JHC Float Velocity Array (.r4)
+- JHC Float Velocity Array (.r4)
 output_formats:
-  - JHC 8-bit Vector Plot Image
+- JHC 8-bit Vector Plot Image
 related_tools:
-  - readADCP
-  - mapGenericADCP
+- readADCP
+- mapGenericADCP
 ---
 
 # makeVectorPlot
@@ -21,6 +22,7 @@ related_tools:
 `makeVectorPlot` is a command-line utility that creates an 8-bit graphical stick/bar vector plot from distance-averaged ADCP (Acoustic Doppler Current Profiler) `.r4` velocity sections. It reads a JHC-formatted floating-point velocity array and generates a vertically stretched 8-bit JHC image where vertical bars or lines represent current speed and sign at each depth layer and horizontal bin.
 
 ## Usage
+
 ```bash
 makeVectorPlot -in <infile> -out <outfile> [OPTIONS]
 ```

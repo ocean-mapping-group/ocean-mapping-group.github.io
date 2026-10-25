@@ -1,16 +1,18 @@
 ---
 layout: default
 title: glbeam_bydepth
-parent: Beam Tools
-grand_parent: sidescan
+parent: Sidescan Radiometric & Geometric Suite (sidescan)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 1
 ---
+
 # glbeam_bydepth
 
 ## Description
 `glbeam_bydepth` is a utility for beam pattern correction of a JCU GLORIA file. This version applies correction factors based on depth ranges, using 20 correction factor files to adjust the beam pattern according to the nadir depth.
 
 ## Usage
+
 ```bash
 glbeam_bydepth <infile> <outfile>
 ```

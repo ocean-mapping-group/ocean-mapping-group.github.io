@@ -1,15 +1,21 @@
 ---
 layout: default
 title: makefile (merge)
-parent: Merge Tools
-grand_parent: Sidescan Tools
+parent: Sidescan Radiometric & Geometric Suite (sidescan)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 10
 tool_name: makefile
 source_path: code/sidescan/merge/makefile
 category: Build Configuration
-input_formats: [".c"]
-output_formats: ["Executable binaries (glmerge, azimerge, addheader, appendSS)"]
-related_tools: ["glmerge", "azimerge", "addheader", "appendSS"]
+input_formats:
+- .c
+output_formats:
+- Executable binaries (glmerge, azimerge, addheader, appendSS)
+related_tools:
+- glmerge
+- azimerge
+- addheader
+- appendSS
 ---
 
 # makefile (`sidescan/merge`)
@@ -21,12 +27,13 @@ The `makefile` in `code/sidescan/merge/` compiles utilities that merge external 
 
 All targets link against `-llocal -ljhc -lm` and install to `$(HOME)/bin/`:
 
-* **`glmerge`** ([`glmerge.c`](glmerge.md)) — Merges navigation and attitude time series into GLORIA `.ss` headers.
-* **`azimerge`** ([`azimerge.c`](azimerge.md)) — Computes towfish layback geometry (`-layback`) and merges smoothed course/heading azimuths into `.ss` records.
-* **`addheader`** ([`addheader.c`](addheader.md)) — Prepends or updates JCU GLORIA scanline headers on raw sidescan arrays.
-* **`appendSS`** ([`appendSS.c`](appendSS.md)) — Concatenates multiple `.ss` sidescan pass files into a continuous file.
+* **`glmerge`** ([`glmerge.c`](glmerge.html)) — Merges navigation and attitude time series into GLORIA `.ss` headers.
+* **`azimerge`** ([`azimerge.c`](azimerge.html)) — Computes towfish layback geometry (`-layback`) and merges smoothed course/heading azimuths into `.ss` records.
+* **`addheader`** ([`addheader.c`](addheader.html)) — Prepends or updates JCU GLORIA scanline headers on raw sidescan arrays.
+* **`appendSS`** ([`appendSS.c`](appendSS.html)) — Concatenates multiple `.ss` sidescan pass files into a continuous file.
 
 ## Usage
+
 ```bash
 cd code/sidescan/merge
 make glmerge azimerge addheader appendSS

@@ -1,13 +1,22 @@
 ---
 layout: default
 title: project
-parent: Grid Tools
+parent: Bathymetric Gridding & Export (grid)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 tool_name: project
 source_path: code/grid/project.c
 category: gridding
-input_formats: [".r4 (JHC 32-bit float bathymetry grid)", ".8bit (JHC 8-bit color/drape image)", ".maskmap (JHC 8-bit stencil mask)"]
-output_formats: [".8bit (saved 3D perspective rendered JHC_header image)"]
-related_tools: ["r4to8bit", "addSUN", "mix_ci", "maskarray"]
+input_formats:
+- .r4 (JHC 32-bit float bathymetry grid)
+- .8bit (JHC 8-bit color/drape image)
+- .maskmap (JHC 8-bit stencil mask)
+output_formats:
+- .8bit (saved 3D perspective rendered JHC_header image)
+related_tools:
+- r4to8bit
+- addSUN
+- mix_ci
+- maskarray
 ---
 
 # project
@@ -29,8 +38,8 @@ project <bathfile.r4> -c <colormap.8bit> [-c <cmap2.8bit> ...] -m <maskmap> [OPT
 | Option | Description | Default |
 |---|---|---|
 | `<bathfile.r4>` | **Required.** Input 32-bit floating-point `JHC_header` bathymetry/topography grid. | None |
-| `-c <colormap>` | **Required** (repeatable up to 20 files). Input 8-bit `JHC_header` color/intensity image(s) (e.g., from [`mix_ci`](mix_ci.md) or [`addSUN`](addSUN.md)) to drape onto the 3D surface. | None |
-| `-m <maskmap>` | **Required.** Input 8-bit `JHC_header` mask file (e.g., from [`maskarray`](maskarray.md)) indicating valid grid nodes. | None |
+| `-c <colormap>` | **Required** (repeatable up to 20 files). Input 8-bit `JHC_header` color/intensity image(s) (e.g., from [`mix_ci`](mix_ci.html) or [`addSUN`](addSUN.html)) to drape onto the 3D surface. | None |
+| `-m <maskmap>` | **Required.** Input 8-bit `JHC_header` mask file (e.g., from [`maskarray`](maskarray.html)) indicating valid grid nodes. | None |
 | `-elev_azi_range <elev> <azi> <range>` | Set initial camera viewing geometry using polar coordinates (elevation angle in degrees, azimuth in degrees, and radial distance in pixels). Mutually exclusive with `-eye`. | Computed from `-eye` and `-focus` |
 | `-eye <x> <y> <z>` | Set initial camera eye position in grid pixel/depth coordinates. Mutually exclusive with `-elev_azi_range`. | `(dx + 100, dy + 100, 1000)` |
 | `-focus <x> <y> <z>` | Set initial 3D focal point in grid coordinates. | `(dx / 2, dy / 2, 0.0)` |
@@ -67,6 +76,7 @@ project <bathfile.r4> -c <colormap.8bit> [-c <cmap2.8bit> ...] -m <maskmap> [OPT
 ## Examples
 
 **Launch an interactive 3D perspective session with color-shaded bathymetry and 10 m contours:**
+
 ```bash
 maskarray canyon.r4
 r4to8bit -low -500 -high -50 canyon.r4 canyon.8bit
@@ -80,5 +90,5 @@ project canyon.r4 -c canyon_ci.8bit -m canyon.r4.maskmap -vs 4.0 -contour 25 0 -
 
 ## Workflow Context
 
-- **Upstream:** [`weigh_grid`](weigh_grid.md) $\rightarrow$ [`maskarray`](maskarray.md), [`r4to8bit`](r4to8bit.md), [`addSUN`](addSUN.md), [`mix_ci`](mix_ci.md).
-- **Output:** Saved 8-bit perspective renders include `view_elev`, `view_azi`, and `view_exag` in their `JHC_header` and can be annotated with [`addstamp`](addstamp.md).
+- **Upstream:** [`weigh_grid`](weigh_grid.html) $\rightarrow$ [`maskarray`](maskarray.html), [`r4to8bit`](r4to8bit.html), [`addSUN`](addSUN.html), [`mix_ci`](mix_ci.html).
+- **Output:** Saved 8-bit perspective renders include `view_elev`, `view_azi`, and `view_exag` in their `JHC_header` and can be annotated with [`addstamp`](addstamp.html).

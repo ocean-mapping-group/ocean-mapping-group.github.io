@@ -1,14 +1,21 @@
 ---
 layout: default
 title: shptest
-parent: Shapelib GIS Library & Tools (shapelib-1.3.0a2)
+parent: ESRI Shapefile C Library (shapelib-1.3.0a2)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 nav_order: 11
 tool_name: shptest
 source_path: code/shapelib-1.3.0a2/shptest.c
 category: GIS & ESRI Shapefile Library / Tools
-input_formats: ["CLI integer test ID (0..13)"]
-output_formats: ["test0.shp .. test13.shp (.shp and .shx)"]
-related_tools: ["shpdump", "shpcreate", "shpadd", "shpopen"]
+input_formats:
+- CLI integer test ID (0..13)
+output_formats:
+- test0.shp .. test13.shp (.shp and .shx)
+related_tools:
+- shpdump
+- shpcreate
+- shpadd
+- shpopen
 ---
 
 # shptest
@@ -17,7 +24,7 @@ related_tools: ["shpdump", "shpcreate", "shpadd", "shpopen"]
 
 `shptest` (`code/shapelib-1.3.0a2/shptest.c`) is a regression test generator authored by Frank Warmerdam that programmatically synthesizes sample ESRI Shapefiles (`test0.shp` through `test13.shp`) covering every geometry type supported by the ESRI Shapefile specification (`Null`, `Point`, `PointZ`, `PointM`, `MultiPoint`, `MultiPointZ`, `MultiPointM`, `Arc`, `ArcZ`, `ArcM`, `Polygon`, `PolygonZ`, `PolygonM`, and `MultiPatch`).
 
-It is invoked by the `stream2.sh` test script (`make test` in `code/shapelib-1.3.0a2/Makefile`) to verify that `SHPCreate()`, `SHPCreateObject()`, `SHPWriteObject()`, `SHPReadObject()`, and [`shpdump`](shpdump.md) accurately round-trip 2D, 3D (`Z`), Measured (`M`), multi-part ring, and `MultiPatch` part-type (`SHPP_RING` / `SHPP_INNERRING`) geometries across big-endian and little-endian architectures.
+It is invoked by the `stream2.sh` test script (`make test` in `code/shapelib-1.3.0a2/Makefile`) to verify that `SHPCreate()`, `SHPCreateObject()`, `SHPWriteObject()`, `SHPReadObject()`, and [`shpdump`](shpdump.html) accurately round-trip 2D, 3D (`Z`), Measured (`M`), multi-part ring, and `MultiPatch` part-type (`SHPP_RING` / `SHPP_INNERRING`) geometries across big-endian and little-endian architectures.
 
 ---
 

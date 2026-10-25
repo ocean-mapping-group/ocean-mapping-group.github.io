@@ -1,14 +1,22 @@
 ---
 layout: default
 title: extractRI
-parent: XTF Tools
+parent: eXtended Triton Format — XTF (xtf)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 2
 tool_name: extractRI
 source_path: code/xtf/extractRI.c
 category: Backscatter & Image Processing
-input_formats: [".xtf"]
-output_formats: [".8bit", ".pgm"]
-related_tools: ["extractSnippet", "stripSS", "xtfTool", "xtf2omg_reson"]
+input_formats:
+- .xtf
+output_formats:
+- .8bit
+- .pgm
+related_tools:
+- extractSnippet
+- stripSS
+- xtfTool
+- xtf2omg_reson
 ---
 
 # extractRI
@@ -17,6 +25,7 @@ related_tools: ["extractSnippet", "stripSS", "xtfTool", "xtf2omg_reson"]
 `extractRI` extracts 8-bit beam reflectivity (intensity) values from Reson SeaBat bathymetry packets (`XTF_HEADER_BATHY`, packet ID 2) inside an XTF file and writes them as a 2D grayscale raster image (width = number of beams, height = number of bathymetry pings) in either the OMG/JHC `.8bit` format or Portable Graymap (`.pgm`) format.
 
 ## Usage
+
 ```bash
 extractRI [-pgm] -in <basename_without_xtf_extension>
 ```
@@ -40,12 +49,14 @@ extractRI [-pgm] -in <basename_without_xtf_extension>
 ## Practical Examples
 
 **1. Extract Reson beam intensities to an OMG `.8bit` raster (for `jview`):**
+
 ```bash
 # Reads survey_line01.xtf and writes survey_line01.8bit
 extractRI -in survey_line01
 ```
 
 **2. Extract Reson beam intensities to a standard `.pgm` image:**
+
 ```bash
 # Reads survey_line01.xtf and writes survey_line01.pgm
 extractRI -pgm -in survey_line01

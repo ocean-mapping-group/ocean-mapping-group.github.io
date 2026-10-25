@@ -1,15 +1,18 @@
 ---
 layout: default
 title: mergeHeave
-parent: Attitude Tools
+parent: Attitude, Heave & Heading (att)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 8
 ---
+
 # mergeHeave
 
 ## Description
 `mergeHeave` is a command-line utility designed to merge heave data from a separate source onto either an OMG-HDCS (Ocean Mapping Group - Hydrographic Data Cleaning System) merged bathymetry file (`.merged` for swath) or a tide file (`.bin` for tide). This tool is crucial for correcting depth measurements by applying accurate heave information, often from a dedicated heave sensor. It can either apply the heave correction to the profile header or directly to the individual beam depths in a swath file, and can also invert the heave scale.
 
 ## Usage
+
 ```bash
 mergeHeave [OPTIONS] -heave <heave_file> [-swath <merged_file> | -tide <tide_file>]
 ```

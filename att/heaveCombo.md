@@ -1,15 +1,18 @@
 ---
 layout: default
 title: heaveCombo
-parent: Attitude Tools
+parent: Attitude, Heave & Heading (att)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 6
 ---
+
 # heaveCombo
 
 ## Description
 `heaveCombo` is a specialized command-line utility designed to combine heave data from two near-synchronous OMG-HDCS (Ocean Mapping Group - Hydrographic Data Cleaning System) attitude streams. It primarily aims to merge one stream with "delayed heave" and another with "real-time heave," bringing over Roll, Pitch, Heading (RPGH) from a reference file and interpolating heave from another. The output is a new attitude file that consolidates the best available data from both sources.
 
 ## Usage
+
 ```bash
 heaveCombo [OPTIONS] -ref <ref_att_file> -other <other_att_file> -out <output_att_file>
 ```

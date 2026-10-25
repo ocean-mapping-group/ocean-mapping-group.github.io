@@ -1,9 +1,11 @@
 ---
 layout: default
 title: demo_fernando
-parent: OMG Tools
+parent: Core Swath & .all Suite (omg)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 86
 ---
+
 # demo_fernando
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 86
 This tool primarily serves as a debugging aid or a basic example for developers to understand the structure of EM1000 data within the OMG-HDCS format.
 
 ## Usage
+
 ```bash
 demo_fernando <input_omg_file(.merged)> [-v]
 ```

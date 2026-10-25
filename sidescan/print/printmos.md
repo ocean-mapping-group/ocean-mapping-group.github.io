@@ -1,16 +1,18 @@
 ---
 layout: default
 title: printmos
-parent: Print Tools
-grand_parent: sidescan
+parent: Sidescan Radiometric & Geometric Suite (sidescan)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 1
 ---
+
 # printmos
 
 ## Description
 `printmos` is a utility designed for printing mosaics generated from ACRES format image files to a DeskJet printer. It is capable of handling large images by tiling them across multiple pages. The tool adds page numbers and other annotations to the output, making it suitable for producing hardcopy maps of sidescan data.
 
 ## Usage
+
 ```bash
 printmos <acresfile>
 ```

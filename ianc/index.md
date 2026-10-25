@@ -1,8 +1,9 @@
 ---
 layout: default
-title: Ian Church (ianc) Tools
+title: Ian Church — Hydrodynamic & 3D Ray-Trace Suite (ianc)
+parent: 5. Core Libraries, Researcher Suites & Utilities
+nav_order: 6
 has_children: true
-nav_order: 2
 category: Ocean Modeling & Hydrographic Utilities (ianc)
 ---
 

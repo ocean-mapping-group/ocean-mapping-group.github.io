@@ -1,9 +1,11 @@
 ---
 layout: default
 title: makess
-parent: OMG Tools
+parent: Core Swath & .all Suite (omg)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 38
 ---
+
 # makess
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 38
 The tool supports a wide array of options for beam pattern correction, gain adjustment, absorption removal, and handling of various sonar-specific formats and behaviors. It can also output additional diagnostic data like grazing angles and along-track displacements.
 
 ## Usage
+
 ```bash
 makess <input_omg_file(.merged)> <output_sidescan_file(.ss_usually)> [OPTIONS]
 ```
@@ -26,6 +29,7 @@ makess <input_omg_file(.merged)> <output_sidescan_file(.ss_usually)> [OPTIONS]
 ### Sonar Specific Options
 
 **RESON Sonars:**
+
 | Option | Description |
 |---|---|
 | `-RESON_sidescan` | Use RESON raw sidescan traces. |
@@ -44,6 +48,7 @@ makess <input_omg_file(.merged)> <output_sidescan_file(.ss_usually)> [OPTIONS]
 | `-white_holly` | Fix White Holly specific issues. | |
 
 **R2Sonic Sonars:**
+
 | Option | Description |
 |---|---|
 | `-R2SONIC_truepix` | Use R2Sonic true-pixel backscatter. | |
@@ -54,6 +59,7 @@ makess <input_omg_file(.merged)> <output_sidescan_file(.ss_usually)> [OPTIONS]
 | `-flatseafloor` | Apply flat seafloor assumption (for R2Sonic truepix). | |
 
 **Teledyne MB1 Sonars:**
+
 | Option | Description |
 |---|---|
 | `-MB1_skip_all` | Skip all MB1 corrections. | |
@@ -61,6 +67,7 @@ makess <input_omg_file(.merged)> <output_sidescan_file(.ss_usually)> [OPTIONS]
 | `-MB1_attenuation <val>` | Attenuation coefficient. | **Required** |
 
 **WASSP Sonars:**
+
 | Option | Description |
 |---|---|
 | `-WASSP_skip_all` | Skip all WASSP corrections. | |
@@ -68,6 +75,7 @@ makess <input_omg_file(.merged)> <output_sidescan_file(.ss_usually)> [OPTIONS]
 | `-WASSP_attenuation <val>` | Attenuation coefficient. | **Required** |
 
 ### General Processing Options
+
 | Option | Description | Default |
 |---|---|
 | `-pixel <size>` | Output sidescan pixel size in meters. | Auto-calculated |
@@ -113,6 +121,7 @@ makess <input_omg_file(.merged)> <output_sidescan_file(.ss_usually)> [OPTIONS]
 | `-blendBP <file> <inner_angle> <outer_angle>` | Blend beam patterns from a file within specified angles. | |
 
 ### Debugging & Output Options
+
 | Option | Description |
 |---|---|
 | `-v` | Enable verbose output. |

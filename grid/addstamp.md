@@ -1,9 +1,11 @@
 ---
 layout: default
 title: addstamp
-parent: Grid Tools
+parent: Bathymetric Gridding & Export (grid)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 5
 ---
+
 ---
 layout: default
 title: addstamp
@@ -16,6 +18,7 @@ nav_order: 5
 `addstamp` is a command-line utility for "stamping" a smaller 8-bit image (a "logo") onto a larger 8-bit image file. It allows for placing the logo at specified coordinates or corners, with options for blending it with the background image or controlling overwriting behavior.
 
 ## Usage
+
 ```bash
 addstamp [OPTIONS] -logo <logo_file.8bit> <8bit_image_file>
 ```

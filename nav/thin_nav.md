@@ -1,14 +1,22 @@
 ---
 layout: default
 title: thin_nav
-parent: Navigation Tools
+parent: Navigation Processing (nav)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 32
 tool_name: thin_nav
 source_path: code/nav/thin_nav.c
 category: Navigation & Georeferencing
-input_formats: [".nav"]
-output_formats: [".nav_thin (<filename>_thin)"]
-related_tools: ["removeRedundantNav", "appendNav", "fixnav", "navedit", "mergeNav"]
+input_formats:
+- .nav
+output_formats:
+- .nav_thin (<filename>_thin)
+related_tools:
+- removeRedundantNav
+- appendNav
+- fixnav
+- navedit
+- mergeNav
 ---
 
 # thin_nav
@@ -31,12 +39,14 @@ thin_nav [-v] [-by_time] <filename>
 ### Common Workflow Examples
 
 **1. Remove duplicate consecutive positions from a `.nav` file:**
+
 ```bash
 thin_nav merged/JD100/0001_line.nav
 # Produces: merged/JD100/0001_line.nav_thin
 ```
 
 **2. Enforce strictly increasing timestamps (`new_time > old_time`) with verbose logging:**
+
 ```bash
 thin_nav -v -by_time merged/JD100/0001_line.nav
 # Produces: merged/JD100/0001_line.nav_thin

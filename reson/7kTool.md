@@ -1,9 +1,11 @@
 ---
 layout: default
 title: 7kTool
-parent: Reson Tools
+parent: Reson SeaBat 7k/8k (reson)
+grand_parent: 4. Multi-Vendor Sonar & LiDAR Converters
 nav_order: 180
 ---
+
 # 7kTool
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 180
 This tool is invaluable for inspecting the contents and structure of `.s7k` files, debugging issues, and understanding the types and quantity of data stored within them. It supports a wide range of Reson 7k record types.
 
 ## Usage
+
 ```bash
 7kTool -in <inputfile.s7k> [-v] [-vid <ID>] [-build_index] [-check_timing]
 ```

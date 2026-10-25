@@ -1,9 +1,11 @@
 ---
 layout: default
 title: understand_KM_BS
-parent: OMG Tools
+parent: Core Swath & .all Suite (omg)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 73
 ---
+
 # understand_KM_BS
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 73
 The tool supports a wide range of parameters, including raw reflectivity, applied corrections (e.g., source level, receiver sensitivity), TVG components, and various derived quantities. It also offers options to manipulate calibration data (remove/flip `BScalibration_dB`) and plot specific trends.
 
 ## Usage
+
 ```bash
 understand_KM_BS <OMG_HDCS_datafile(s)> [OPTIONS] -out <ASCII_listing_file>
 ```
@@ -24,6 +27,7 @@ understand_KM_BS <OMG_HDCS_datafile(s)> [OPTIONS] -out <ASCII_listing_file>
 | `-out <ASCII_listing_file>` | **Required.** The path for the output ASCII listing file. A binary dump file (`.dmp`) will also be created with the same prefix. |
 
 ### Parameter Selection (Choose one)
+
 | Option | Description |
 |---|---|
 | `-absco` | Absolute absorption coefficient (dB/km). |
@@ -54,12 +58,14 @@ understand_KM_BS <OMG_HDCS_datafile(s)> [OPTIONS] -out <ASCII_listing_file>
 | `-actrk` | Across-track SRA (Sonar Relative Angle) correction values (reads from `.SRA_across_atit.r4`). |
 
 ### Calibration Manipulation
+
 | Option | Description |
 |---|---|
 | `-remove_bscal` | Removes `BScalibration_dB` from `refl1` or `refl2`. |
 | `-flip_bscal` | Flips the sign of `BScalibration_dB` (applies `+2 * BSCAL` to compensate for double sign-flip). |
 
 ### Profile-level Parameters (for line plots)
+
 | Option | Description | Default |
 |---|---|
 | `-scstr` | Steering angle of transmit sectors. | |
@@ -69,6 +75,7 @@ understand_KM_BS <OMG_HDCS_datafile(s)> [OPTIONS] -out <ASCII_listing_file>
 | `-RPGrange <min> <max>` | Range for values of profile-level parameters. | `-10` to `10` (for pitch/roll/scstr), `0` to `360` (for heading) |
 
 ### Filtering & Range Options
+
 | Option | Description |
 |---|---|
 | `-specific_swath <val>` | Processes data only for a specific swath (0-indexed). | |
@@ -76,6 +83,7 @@ understand_KM_BS <OMG_HDCS_datafile(s)> [OPTIONS] -out <ASCII_listing_file>
 | `-end <ping_num>` | Processes pings only up to this ping number (inclusive). | All pings |
 
 ### Other Options
+
 | Option | Description |
 |---|---|
 | `-v` | Enable verbose output. | |

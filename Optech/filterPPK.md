@@ -1,9 +1,11 @@
 ---
 layout: default
 title: filterPPK
-parent: Optech Tools
+parent: Optech SHOALS Bathymetric LiDAR (Optech)
+grand_parent: 4. Multi-Vendor Sonar & LiDAR Converters
 nav_order: 113
 ---
+
 # filterPPK
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 113
 The tool aims to separate the short-period heave (swell) from the long-period heave (tide and any residual vertical datum issues) for more accurate data processing. The filtered long-period heave is then outputted, and the high-pass filtered component could theoretically represent the swell heave.
 
 ## Usage
+
 ```bash
 filterPPK <OMG_HDCS_datafile(s)> [-out <ASCII_filename>] [-longperiod <val>] [-verbose]
 ```

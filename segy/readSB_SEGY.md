@@ -1,14 +1,24 @@
 ---
 layout: default
 title: readSB_SEGY
-parent: SEGY Tools
+parent: SEG-Y Sub-Bottom & Seismic (segy)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 3
 tool_name: readSB_SEGY
 source_path: segy/readSB_SEGY.c
 category: format_conversion
-input_formats: [SEGY]
-output_formats: [OMG_HDCS, OMG_SS_DATA, JCU_NAV, BINARY_RASTER]
-related_tools: [upKnudSEGY, upsegy, upAGCDIG, makeSeisPlot]
+input_formats:
+- SEGY
+output_formats:
+- OMG_HDCS
+- OMG_SS_DATA
+- JCU_NAV
+- BINARY_RASTER
+related_tools:
+- upKnudSEGY
+- upsegy
+- upAGCDIG
+- makeSeisPlot
 ---
 
 # readSB_SEGY

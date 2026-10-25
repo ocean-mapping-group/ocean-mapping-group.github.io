@@ -1,20 +1,27 @@
 ---
 layout: default
 title: tomos
-parent: Helper Scripts
+parent: Automated Processing Scripts (scripts)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 nav_order: 4
 tool_name: tomos
 source_path: code/scripts/tomos
 category: Backscatter & Sidescan Mosaicking
-input_formats: [".blank"]
-output_formats: [".mos", ".ran"]
-related_tools: ["make_blank", "mos2", "tor4"]
+input_formats:
+- .blank
+output_formats:
+- .mos
+- .ran
+related_tools:
+- make_blank
+- mos2
+- tor4
 ---
 
 # tomos
 
 ## Description
-`tomos` is a `tcsh` helper script that initializes the two 8-bit array files required by [`mos2`](../newmos/mos2.md) from a single `<prefix>.blank` file created by [`make_blank -8bit -prime 255`](../grid/make_blank.md).
+`tomos` is a `tcsh` helper script that initializes the two 8-bit array files required by [`mos2`](../newmos/mos2.html) from a single `<prefix>.blank` file created by [`make_blank -8bit -prime 255`](../grid/make_blank.html).
 
 For each `<prefix>` (or `<prefix>.blank`) passed on the command line, `tomos` verifies that `<prefix>.blank` exists and copies it to:
 1. `<prefix>.mos` — The 8-bit backscatter mosaic array.
@@ -29,6 +36,7 @@ tomos <prefix_or_blank_file> [...]
 ```
 
 ### Example
+
 ```bash
 # 1. Create an 8-bit blank mapsheet primed to 255 (background)
 make_blank -8bit -prime 255 bay_mos -boundsof_ss ss/JD100/*.ss

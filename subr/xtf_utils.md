@@ -1,12 +1,18 @@
 ---
 layout: default
 title: xtf_utils
-parent: Shared Core Libraries (subr)
-module_name: xtf_utils
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/xtf_utils.c
-header_path: code/subr/xtf_utils.h
 category: Sonar Format Parsers & Hardware Drivers
-related_tools: ["omg_xtf", "xtf2omg", "reson", "simrad_utils", "OMG_HDCS_jversion"]
+related_tools:
+- omg_xtf
+- xtf2omg
+- reson
+- simrad_utils
+- OMG_HDCS_jversion
+module_name: xtf_utils
+header_path: code/subr/xtf_utils.h
 ---
 
 # xtf_utils
@@ -14,7 +20,7 @@ related_tools: ["omg_xtf", "xtf2omg", "reson", "simrad_utils", "OMG_HDCS_jversio
 ## Overview
 `xtf_utils` (`xtf_utils.c` / `xtf_utils.h`) implements the **timestamp synchronization (`synchro`), base-time recovery, and OMG-HDCS summary header initialization** logic for Triton Elics eXtended Triton Format (`.xtf`) sonar files.
 
-As explained in `xtf_utils.h`, XTF packets carry relative millisecond attitude/ping time tags (`AttitudeTimeTag`) that are not always referenced to an absolute UTC epoch, while embedded raw sonar packets (Reson 81-P, Kongsberg/Simrad EM, R2Sonic, Q-Multibeam, or sidescan) may or may not have 1PPS/UTC clock synchronization enabled. `xtf_utils` inspects the indexed `.xtf` packet stream (`XTFFileIndex` from [`omg_xtf`](omg_xtf.md)) to automatically determine the appropriate synchronization mode, establish the Unix epoch `baseTime` corresponding to `0 ms` of the relative timer, and initialize OMG-HDCS `.merged` and `.orientation` summary headers.
+As explained in `xtf_utils.h`, XTF packets carry relative millisecond attitude/ping time tags (`AttitudeTimeTag`) that are not always referenced to an absolute UTC epoch, while embedded raw sonar packets (Reson 81-P, Kongsberg/Simrad EM, R2Sonic, Q-Multibeam, or sidescan) may or may not have 1PPS/UTC clock synchronization enabled. `xtf_utils` inspects the indexed `.xtf` packet stream (`XTFFileIndex` from [`omg_xtf`](omg_xtf.html)) to automatically determine the appropriate synchronization mode, establish the Unix epoch `baseTime` corresponding to `0 ms` of the relative timer, and initialize OMG-HDCS `.merged` and `.orientation` summary headers.
 
 ---
 
@@ -48,4 +54,4 @@ Defined in `xtf_utils.h` (with human-readable strings in `synchro_labels[0..7]`)
 ---
 
 ## Architectural Role
-`xtf_utils` works directly with [`omg_xtf`](omg_xtf.md) inside the XTF conversion tools (`xtf2omg`), solving the notorious clock-drift and relative-millisecond tagging ambiguities found in multi-vendor `.xtf` survey recordings.
+`xtf_utils` works directly with [`omg_xtf`](omg_xtf.html) inside the XTF conversion tools (`xtf2omg`), solving the notorious clock-drift and relative-millisecond tagging ambiguities found in multi-vendor `.xtf` survey recordings.

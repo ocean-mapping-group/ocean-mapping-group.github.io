@@ -1,12 +1,19 @@
 ---
 layout: default
 title: X_extra
-parent: Graphics & X11/OpenGL Libraries (subr_graphics)
-module_name: X_extra
+parent: X11 / Motif / OpenGL Graphics Library (subr_graphics)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr_graphics/X_extra.c
-header_path: code/subr_graphics/X_extra.h
 category: X11 & GUI Widget Library
-related_tools: ["jX_win", "jGL_draw", "omg_colours", "jview", "swathed", "svp_tool"]
+related_tools:
+- jX_win
+- jGL_draw
+- omg_colours
+- jview
+- swathed
+- svp_tool
+module_name: X_extra
+header_path: code/subr_graphics/X_extra.h
 ---
 
 # X_extra
@@ -22,6 +29,7 @@ Originally designed for 8-bit `PseudoColor` Sun/SGI workstations and later upgra
 
 ### 1. `window_param`
 Maps pixel dimensions and parent-window fractional layout to 2D real-world coordinates (`[x_min, x_max] x [y_min, y_max]`):
+
 ```c
 typedef struct {
     int   width, height;         /* Drawable size in pixels excluding border */
@@ -35,6 +43,7 @@ typedef struct {
 
 ### 2. `jX_widget_params`, `jX_slider` & `jX_slider_range`
 Declarative layout specification for constructing composite X11 tool forms with up to `MAX_SLIDERS` (`100`) sliders, `MAX_BUTTONS` (`500`) buttons, and `MAX_GRAPHICS` (`100`) drawing canvases stacked horizontally (`JX_STACK_HORI`), vertically (`JX_STACK_VERT`), or at custom pixel offsets (`JX_STACK_CUSTOM`):
+
 ```c
 typedef struct jX_slider {
     char *label;
@@ -61,6 +70,7 @@ typedef struct jX_slider {
 ## Public Functions
 
 ### 1. X11 Initialization, Visuals & Colormaps
+
 | Function | Signature | Description |
 |---|---|---|
 | `start_x` | `void start_x(void)` | Connects to the X server (`XOpenDisplay`), selects the optimal visual (`jX_get_PseudoColor_visual_and_colormap`), primes color palettes (`prime_palettes`, `do_colormap`), creates `main_window`, `icon_window[]`, and `graphic_window[]`, enables X11 event masks, and initializes `icon_gc`, `draw_gc`, and `image_gc`. |
@@ -70,6 +80,7 @@ typedef struct jX_slider {
 | `terminate_x` | `void terminate_x(char *error_msg)` | Frees X11 resources, prints `error_msg` if non-NULL, and exits cleanly. |
 
 ### 2. Widget & Form Management (`jX_*`)
+
 | Function | Signature | Description |
 |---|---|---|
 | `jX_setup_widget` | `void jX_setup_widget(jX_widget_params *params)` | Automatically computes pixel geometry and creates a complete form window containing title bar, Quit button, interactive slider bars, action buttons, and 2D graphics subwindows. |

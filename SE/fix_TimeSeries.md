@@ -1,20 +1,27 @@
 ---
 layout: default
 title: fix_TimeSeries
-parent: SwathEd (SE) Tools
+parent: Swath Editor — swathed (SE)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 33
 tool_name: fix_TimeSeries
 source_path: code/SE/fix_TimeSeries.c
 category: Interactive QC & Editing (SwathEd)
-input_formats: [".merged"]
-output_formats: [".merged (updated in-place or via write_out_modified)"]
-related_tools: ["SE_W_TimeSeries", "swathed", "newMergeAtt", "RefractEd"]
+input_formats:
+- .merged
+output_formats:
+- .merged (updated in-place or via write_out_modified)
+related_tools:
+- SE_W_TimeSeries
+- swathed
+- newMergeAtt
+- RefractEd
 ---
 
 # `fix_TimeSeries` — Batch Motion Residual, Latency & Heave Drift Correction Utility
 
 ## Overview & Purpose
-`fix_TimeSeries` (authored by John E. Hughes Clarke, July 2008) is a standalone command-line utility that batch-applies the attitude, motion-scaling, latency, lever-arm, yaw misalignment, surface sound speed (SSS), and long-period heave drift corrections interactively diagnosed in the `swathed -ts` Time Series analyzer ([`SE_W_TimeSeries.c`](SE_W_TimeSeries.md)) across one or more `.merged` survey lines.
+`fix_TimeSeries` (authored by John E. Hughes Clarke, July 2008) is a standalone command-line utility that batch-applies the attitude, motion-scaling, latency, lever-arm, yaw misalignment, surface sound speed (SSS), and long-period heave drift corrections interactively diagnosed in the `swathed -ts` Time Series analyzer ([`SE_W_TimeSeries.c`](SE_W_TimeSeries.html)) across one or more `.merged` survey lines.
 
 During interactive quality control with `swathed -ts`, a hydrographer can cross-correlate outer-beam seafloor slope residuals against vessel roll, pitch, and heave time series to determine exact motion sensor time delays, RC filter phase lags, amplitude scaling errors, surface sound speed errors/gradients, or long-period heave drift. Once optimal correction parameters are identified on a test line, `fix_TimeSeries` applies those exact fixes in batch mode across an entire survey sheet without requiring an X11 display.
 
@@ -29,16 +36,19 @@ fix_TimeSeries [OPTIONS] <mergedfile(s)...>
 ### Common Workflow Examples
 
 **1. Compute and embed cosine-tapered long-period heave drift (over a $\pm 160\text{ s}$ window) into `.merged` profile headers:**
+
 ```bash
 fix_TimeSeries -heave_drift -avpings 160.0 merged/JD100/*.merged
 ```
 
 **2. Batch-apply motion time delay (`0.10 s`), motion scaling (`1.03`), and lever-arm corrections (`X Y Z` in meters) to `.merged` soundings:**
+
 ```bash
 fix_TimeSeries -delay 0.10 -scale 1.03 -lever_arm 3.1 2.3 0.7 merged/JD100/*.merged
 ```
 
 **3. Correct a surface sound speed error (`-sss_error`) and across-track SSS gradient (`-sss_gradient`) with transducer draft:**
+
 ```bash
 fix_TimeSeries -draft 2.50 -sss_error 2.0 -sss_gradient 0.5 merged/JD100/*.merged
 ```
@@ -67,7 +77,7 @@ fix_TimeSeries -draft 2.50 -sss_error 2.0 -sss_gradient 0.5 merged/JD100/*.merge
 
 ## Processing Architecture & Integration with `SE_W_TimeSeries.c`
 
-`fix_TimeSeries.c` links directly against [`SE_W_TimeSeries.c`](SE_W_TimeSeries.md) (providing dummy no-op stubs for `prime_array()` and `dump_array()` to avoid pulling in the interactive X11 GUI event loop of `swathed`).
+`fix_TimeSeries.c` links directly against [`SE_W_TimeSeries.c`](SE_W_TimeSeries.html) (providing dummy no-op stubs for `prime_array()` and `dump_array()` to avoid pulling in the interactive X11 GUI event loop of `swathed`).
 
 For each `.merged` file `inname[j]` on the command line:
 1. **Initialization (`init_TimeSeries_variables` & `load_TimeSeries_variables`):** Opens `inname[j]` in `"r+"` read-write mode. If `-heave_drift` is specified without angular beam fixes (`insert_heave_drift == 1`), sets `load_beams = 0` so only the `OMG_HDCS_profile_header` sequence is read into memory (dramatically accelerating execution); otherwise sets `load_beams = 1` to load all profile headers and beam arrays.

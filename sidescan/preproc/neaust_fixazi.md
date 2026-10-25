@@ -1,15 +1,21 @@
 ---
 layout: default
 title: neaust_fixazi
-parent: Preprocessing Tools
-grand_parent: Sidescan Tools
+parent: Sidescan Radiometric & Geometric Suite (sidescan)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 1
 tool_name: neaust_fixazi
 source_path: code/sidescan/preproc/neaust_fixazi
 category: Sidescan Preprocessing
-input_formats: ["JCU GLORIA (.beam)", "Navigation time series (neaust.nav)"]
-output_formats: ["Azimuth-corrected JCU GLORIA (.beam)"]
-related_tools: ["azimerge", "smthazi", "rebuild_neaust"]
+input_formats:
+- JCU GLORIA (.beam)
+- Navigation time series (neaust.nav)
+output_formats:
+- Azimuth-corrected JCU GLORIA (.beam)
+related_tools:
+- azimerge
+- smthazi
+- rebuild_neaust
 ---
 
 # neaust_fixazi
@@ -19,12 +25,14 @@ related_tools: ["azimerge", "smthazi", "rebuild_neaust"]
 
 ## Script Pipeline
 For each affected pass (`ps89_001.beam`, `ps89_002.beam`, `ps89_003.beam`):
-1. **Layback Azimuth Merging ([`azimerge`](../merge/azimerge.md))**:
+1. **Layback Azimuth Merging ([`azimerge`](../merge/azimerge.html))**:
+
    ```csh
    azimerge -layback 150 ~/data/neaust/nav/neaust.nav $file ${file}.merge
    ```
    Computes the effective towfish track and azimuth assuming a 150-meter cable layback behind the ship navigation fixes in `neaust.nav`.
-2. **Temporal Azimuth Smoothing ([`smthazi`](../azibat/smthazi.md))**:
+2. **Temporal Azimuth Smoothing ([`smthazi`](../azibat/smthazi.html))**:
+
    ```csh
    smthazi -t 6 -f 3 ${file}.merge $file
    ```

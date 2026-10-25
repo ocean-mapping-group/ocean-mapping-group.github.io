@@ -1,14 +1,26 @@
 ---
 layout: default
 title: shputils
-parent: Shapelib GIS Library & Tools (shapelib-1.3.0a2)
+parent: ESRI Shapefile C Library (shapelib-1.3.0a2)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 nav_order: 14
 tool_name: shputils
 source_path: code/shapelib-1.3.0a2/shputils.c
 category: GIS & ESRI Shapefile Library / Tools
-input_formats: [".shp", ".shx", ".dbf (ESRI Shapefile + xBase table)"]
-output_formats: [".shp", ".shx", ".dbf (Merged, filtered, clipped, or transformed Shapefile)"]
-related_tools: ["shpdump", "dbfdump", "shpopen", "dbfopen", "shprewind"]
+input_formats:
+- .shp
+- .shx
+- .dbf (ESRI Shapefile + xBase table)
+output_formats:
+- .shp
+- .shx
+- .dbf (Merged, filtered, clipped, or transformed Shapefile)
+related_tools:
+- shpdump
+- dbfdump
+- shpopen
+- dbfopen
+- shprewind
 ---
 
 # shputils

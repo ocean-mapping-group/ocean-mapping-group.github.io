@@ -1,17 +1,18 @@
 ---
 layout: default
 title: j_area
-parent: Core Shared Libraries (subr)
-module_name: j_area
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/j_area.c
-header_path: code/subr/j_area.h
 category: Map Projections & Geographic Bounds
 related_tools:
-  - inArea
-  - checkSD
-  - getGraz
-  - weigh_grid
-  - jview
+- inArea
+- checkSD
+- getGraz
+- weigh_grid
+- jview
+module_name: j_area
+header_path: code/subr/j_area.h
 ---
 
 # `j_area` — Geographic Bounding Box & Gridding Area Setup Library

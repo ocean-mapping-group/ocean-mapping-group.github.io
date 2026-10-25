@@ -1,14 +1,21 @@
 ---
 layout: default
 title: mask_make
-parent: Image Tools
+parent: Raster Image Processing (image)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 32
 tool_name: mask_make
 source_path: code/image/mask_make.c
 category: Masking & Stenciling
-input_formats: ["ASCII polygon vertex list (x, y)"]
-output_formats: ["OMG1 8-bit filled polygon mask"]
-related_tools: ["jb_mask_make", "mask_ray", "stencil", "stencilIPV"]
+input_formats:
+- ASCII polygon vertex list (x, y)
+output_formats:
+- OMG1 8-bit filled polygon mask
+related_tools:
+- jb_mask_make
+- mask_ray
+- stencil
+- stencilIPV
 ---
 
 # mask_make
@@ -17,6 +24,7 @@ related_tools: ["jb_mask_make", "mask_ray", "stencil", "stencilIPV"]
 `mask_make` (written by A. Y. and J. E. H. C., May 1990) rasterizes one or more closed polygons from an ASCII vertex file into an 8-bit `OMG1` (`JHC_header`) mask image of arbitrary dimensions (`-xlen`, `-ylen`), filling polygon interiors with a specified Digital Number (`-val`).
 
 ## CLI Options & Usage
+
 ```bash
 mask_make -infile <vertex_file> -outfile <mask.8bit> \
   [-xlen <cols>] [-ylen <rows>] [-val <0..255>] [-nmap <n>]

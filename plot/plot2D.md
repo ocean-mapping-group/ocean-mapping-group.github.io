@@ -1,9 +1,11 @@
 ---
 layout: default
 title: plot2D
-parent: Plot Tools
+parent: PostScript & Vector Plotting (plot)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 130
 ---
+
 # plot2D
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 130
 The tool can display general 2D scatter plots or specialized "patch test" plots, showing the results of calibration offsets. It's interactive for setting plot sizes and ranges.
 
 ## Usage
+
 ```bash
 plot2D -infile <file1> [-outfile <filename.meta>] [-size <dx> <dy>] [-patch] [-xrange <min> <max>]
 ```

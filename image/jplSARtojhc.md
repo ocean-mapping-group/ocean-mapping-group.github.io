@@ -1,14 +1,22 @@
 ---
 layout: default
 title: jplSARtojhc
-parent: Image Tools
+parent: Raster Image Processing (image)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 27
 tool_name: jplSARtojhc
 source_path: code/image/jplSARtojhc.c
 category: Satellite, SAR & Format Conversion
-input_formats: ["JPL AIRSAR / SIR-C VAX float (SY) or compressed Stokes matrix (-CM) files"]
-output_formats: ["OMG1 32-bit float (.tp.r4, .hh.r4, .hv.r4, .vh.r4, .vv.r4) and 8-bit (.8bit) arrays", "ASCII header (.header)"]
-related_tools: ["8bit2acres", "PCItoJHC", "r4to8bit", "stretchacres"]
+input_formats:
+- JPL AIRSAR / SIR-C VAX float (SY) or compressed Stokes matrix (-CM) files
+output_formats:
+- OMG1 32-bit float (.tp.r4, .hh.r4, .hv.r4, .vh.r4, .vv.r4) and 8-bit (.8bit) arrays
+- ASCII header (.header)
+related_tools:
+- 8bit2acres
+- PCItoJHC
+- r4to8bit
+- stretchacres
 ---
 
 # jplSARtojhc
@@ -17,6 +25,7 @@ related_tools: ["8bit2acres", "PCItoJHC", "r4to8bit", "stretchacres"]
 `jplSARtojhc` imports NASA/JPL AIRSAR and SIR-C polarimetric Synthetic Aperture Radar (SAR) imagery—in either older VAX floating-point `SY` format or Newer Compressed Stokes Matrix (`-CM`) format—into `OMG1` (`JHC_header`) 32-bit floating-point (`.r4`) and 8-bit (`.8bit`) rasters, while extracting embedded ASCII engineering headers into `<out>.header`.
 
 ## CLI Options & Usage
+
 ```bash
 jplSARtojhc -in <sar_file> -out <prefix> [-CM]
 ```

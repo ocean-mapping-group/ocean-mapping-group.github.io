@@ -1,19 +1,20 @@
 ---
 layout: default
 title: testRangeAzi
-parent: tests (Test, Simulation & Diagnostic Suite)
+parent: Acoustic & Mathematical Test Harnesses (tests)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 nav_order: 22
 tool_name: testRangeAzi
 source_path: code/tests/testRangeAzi.c
 category: Attitude Error & Geometry Plotting (tests)
 input_formats:
-  - Interactive stdin prompts (lat/lon format choice, starting coordinates, radial distance in m, azimuth in deg)
+- Interactive stdin prompts (lat/lon format choice, starting coordinates, radial distance in m, azimuth in deg)
 output_formats:
-  - Projected geographic coordinates on stdout (decimal degrees and degrees/decimal minutes)
+- Projected geographic coordinates on stdout (decimal degrees and degrees/decimal minutes)
 related_tools:
-  - testrot
-  - checkBounds
-  - getBounds
+- testrot
+- checkBounds
+- getBounds
 ---
 
 # testRangeAzi
@@ -42,6 +43,7 @@ testRangeAzi [-v] [-depth <m>]
 
 ### 1. Input Coordinate Format Selection
 At each iteration, `testRangeAzi` prompts:
+
 ```text
  do you want to enter lat lon as:
  --- decimal_lat decimal_lon      (1) (43.23534 -63.435346)

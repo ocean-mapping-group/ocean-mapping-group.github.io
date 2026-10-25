@@ -1,13 +1,26 @@
 ---
 layout: default
 title: readQUODDY
-parent: Grid Tools
+parent: Bathymetric Gridding & Export (grid)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 tool_name: readQUODDY
 source_path: code/grid/readQUODDY.c
 category: gridding
-input_formats: ["QUODDY Finite-Element Mesh (.nod, .ele, .bat)", "QUODDY Harmonic Tide/Current Files", "JHC_header (.r4)"]
-output_formats: ["ASCII XYZ (.xyz)", "ASCII Mesh Elements (.ele_out)", "Harmonic Current/Tide Grids (.ampl, .phase, .umag, .vmag, .currvec, .mocktide)", "Binary Residual Current (.justresid)", "JHC_header (.r4)"]
-related_tools: ["showModelMesh", "makemesh", "plotADCPgridcurrents", "weigh_grid"]
+input_formats:
+- QUODDY Finite-Element Mesh (.nod, .ele, .bat)
+- QUODDY Harmonic Tide/Current Files
+- JHC_header (.r4)
+output_formats:
+- ASCII XYZ (.xyz)
+- ASCII Mesh Elements (.ele_out)
+- Harmonic Current/Tide Grids (.ampl, .phase, .umag, .vmag, .currvec, .mocktide)
+- Binary Residual Current (.justresid)
+- JHC_header (.r4)
+related_tools:
+- showModelMesh
+- makemesh
+- plotADCPgridcurrents
+- weigh_grid
 ---
 
 # readQUODDY
@@ -65,11 +78,13 @@ readQUODDY [OPTIONS] -model <quoddy_prefix> -out <deriv_prefix> \
 ## Examples
 
 ### Interpolate a QUODDY bathymetric mesh onto a target `.r4` mapsheet
+
 ```bash
 readQUODDY -model bay_quoddy -out bay_mesh -into bay_template.r4 -interp bay_quoddy_bathy -mapelem
 ```
 
 ### Extract M2 tidal current vectors and synthetic phase tide files
+
 ```bash
 readQUODDY -model bay_quoddy -out bay_m2 -curr bay_quoddy.s2c
 ```

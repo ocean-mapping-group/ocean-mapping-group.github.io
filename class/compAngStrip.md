@@ -1,15 +1,18 @@
 ---
 layout: default
 title: compAngStrip
-parent: Classification Tools
+parent: Angular Response & Classification (class)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 3
 ---
+
 # compAngStrip
 
 ## Description
 `compAngStrip` processes OMG-HDCS multibeam sonar data (e.g., EM1000 files) to estimate the angular response (AR) as it changes along a survey strip. It averages data over a user-specified number of swaths (a "stack"). The tool can extract angular response based on various intensity interpretations (linear or logarithmic), apply corrections (such as removing TVG or SRA effects), and handle different grazing angle definitions. Its primary output is a series of `JEM_Angular_Response` binary structures (written to an attribute file) containing the summed angular response, flags, and geographical coordinates, which can be further processed by tools like `classAngStrip`.
 
 ## Usage
+
 ```bash
 compAngStrip [OPTIONS] -prefix <prefix> -suffix <suffix> <filebodyname(s)>
 ```

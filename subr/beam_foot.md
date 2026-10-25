@@ -1,17 +1,18 @@
 ---
 layout: default
 title: beam_foot
-parent: Core Shared Libraries (subr)
-module_name: beam_foot
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/beam_foot.c
-header_path: code/subr/beam_foot.h
 category: Acoustic Array & Beam Pattern Modeling
 related_tools:
-  - makeFoot
-  - downHill
-  - plotBP
-  - synSwath
-  - swathed
+- makeFoot
+- downHill
+- plotBP
+- synSwath
+- swathed
+module_name: beam_foot
+header_path: code/subr/beam_foot.h
 ---
 
 # beam_foot: Multibeam Swath Geometry & Beam Footprint Specification I/O
@@ -24,6 +25,7 @@ related_tools:
 ## Key Constants & Data Structures
 
 ### Beam Spacing Mode Constants
+
 ```c
 #define SG_EQUIANGULAR      1   /* Equiangular beam spacing */
 #define SG_EQUIDISTANT     -1   /* Equidistant across-track beam spacing */
@@ -33,6 +35,7 @@ related_tools:
 ```
 
 ### `BeamFoot` Structure
+
 ```c
 typedef struct {
     char  *toolType;                   /* Sonar model name string */

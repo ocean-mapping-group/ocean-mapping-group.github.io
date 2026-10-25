@@ -1,20 +1,21 @@
 ---
 layout: default
 title: seabeam
-parent: Core Shared Libraries (subr)
-module_name: seabeam
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/seabeam.c
-header_path: code/subr/seabeam.h
 category: Multibeam Vendor Parsers
 related_tools:
-  - refoSB_Classic
-  - selectcb
-  - iosedit
-  - gledit
-  - glgain
-  - glmerge
-  - azimerge
-  - addheader
+- refoSB_Classic
+- selectcb
+- iosedit
+- gledit
+- glgain
+- glmerge
+- azimerge
+- addheader
+module_name: seabeam
+header_path: code/subr/seabeam.h
 ---
 
 # `seabeam` — URI-Format Classic General Instruments SeaBeam I/O Library

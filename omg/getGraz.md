@@ -1,9 +1,11 @@
 ---
 layout: default
 title: getGraz
-parent: OMG Tools
+parent: Core Swath & .all Suite (omg)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 105
 ---
+
 # getGraz
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 105
 The tool aims to correct backscatter data for the true grazing angle, accounting for seabed slopes and potentially removing the Simrad Lambertian Correction. The LUT can then be used for backscatter classification or further analysis.
 
 ## Usage
+
 ```bash
 getGraz <merged_file(s)> -lut <LUThandle> [OPTIONS]
 ```

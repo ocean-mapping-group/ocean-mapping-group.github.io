@@ -1,9 +1,11 @@
 ---
 layout: default
 title: RT
-parent: RT Tools
+parent: Real-Time Multibeam Display (RT)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 185
 ---
+
 # RT
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 185
 The tool can output processed data to OMG-HDCS (Ocean Mapping Group - Hydrographic Data Conversion System) merged files, along with auxiliary attitude, heading, and sidescan data files. It provides interactive controls for panning, zooming, color mapping, and adjusting display parameters. `RT` is a critical tool for real-time quality control, survey monitoring, and initial data processing of multibeam sonar data.
 
 ## Usage
+
 ```bash
 RT [OPTIONS] [<input_file(s)>]
 ```
@@ -23,6 +26,7 @@ RT [OPTIONS] [<input_file(s)>]
 | `<input_file(s)>` | (Optional) One or more input raw sonar telegram files. If not provided, it will prompt interactively or use auto-discovery. |
 
 ### Sonar Type Selection (Choose one)
+
 | Option | Description |
 |---|---|
 | `-em100` / `-em120` / `-em300` / `-em1000` / `-em1002` / `-em3000` / `-em3000d` / `-em3002` / `-em3002d` / `-em710` / `-em122` / `-em302` / `-em2040` / `-em12s` / `-em121a` | Specifies the Simrad EM sonar model. |
@@ -31,6 +35,7 @@ RT [OPTIONS] [<input_file(s)>]
 | `-submex` | Specifies Submetrix processing. (Not fully implemented). |
 
 ### File Input/Output
+
 | Option | Description |
 |---|---|
 | `-background` | Runs in background mode (non-graphical) and logs data without display. |
@@ -44,6 +49,7 @@ RT [OPTIONS] [<input_file(s)>]
 | `-svtd <svtdfile>` | SVP (Sound Velocity Profile) file for ray tracing (currently unused). |
 
 ### Data Processing & Conversion
+
 | Option | Description |
 |---|---|
 | `-force_swap` / `-LE` / `-BE` | Force byte swapping (Little Endian / Big Endian). Auto-guessed by default. |
@@ -63,6 +69,7 @@ RT [OPTIONS] [<input_file(s)>]
 | `-refcoord <lat> <lon>` | Reference coordinate for scrambling navigation. |
 
 ### Map & Display Options
+
 | Option | Description |
 |---|---|
 | `-region <file>` | Defines a geographical region. |
@@ -77,17 +84,20 @@ RT [OPTIONS] [<input_file(s)>]
 | `-atdist <val>` | Along-track distance for some displays. |
 
 ### Nav Flagging
+
 | Option | Description |
 |---|---|
 | `-posnav` | Enables POS/MV navigation flagging. |
 | `-maxNUMSATS <val>` / `-maxCORRAGE <val>` / `-maxHDOP <val>` | Max satellites/correction age/HDOP for nav flagging. |
 
 ### Versioning
+
 | Option | Description |
 |---|---|
 | `-version1` / `-version2` / `-version3` / `-version4` / `-v1` / `-v2` / `-v3` / `-v4` | Overrides default OMG-HDCS file version. |
 
 ### Debugging & Verbosity
+
 | Option | Description |
 |---|---|
 | `-v` | Enable verbose output. |
@@ -167,5 +177,6 @@ When running in foreground (`-foreground` or default), `RT` provides an interact
 ## Notes
 *   This tool is highly complex due to the wide range of sonar types and processing options it supports.
 *   It leverages various external libraries and helper functions for specific tasks like NMEA parsing, projection, and X-windows graphics.
+
 ```
 ```

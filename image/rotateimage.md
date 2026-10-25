@@ -1,14 +1,21 @@
 ---
 layout: default
 title: rotateimage
-parent: Image Tools
+parent: Raster Image Processing (image)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 45
 tool_name: rotateimage
 source_path: code/image/rotateimage.c
 category: Image & Raster Processing
-input_formats: ["OMG1 8-bit array (JHC_header)"]
-output_formats: ["Rotated or horizontally flipped OMG1 8-bit array"]
-related_tools: ["distortImage", "changeAspect", "subimage", "8bit2acres"]
+input_formats:
+- OMG1 8-bit array (JHC_header)
+output_formats:
+- Rotated or horizontally flipped OMG1 8-bit array
+related_tools:
+- distortImage
+- changeAspect
+- subimage
+- 8bit2acres
 ---
 
 # rotateimage
@@ -17,6 +24,7 @@ related_tools: ["distortImage", "changeAspect", "subimage", "8bit2acres"]
 `rotateimage` rotates an 8-bit `OMG1` (`JHC_header`) image by 90° clockwise (default, swapping `xmax`/`ymax` and `dx`/`dy`), flips it horizontally left-to-right (`-hflip`), or rotates it by an arbitrary angle (`-rotate_angle <deg>`) about a specified pixel center (`-cen <x> <y>`) while keeping the original grid dimensions.
 
 ## CLI Options & Usage
+
 ```bash
 rotateimage -in <infile> -out <outfile> \
   [-hflip | -rotate_angle <deg> [-cen <cx> <cy>]]

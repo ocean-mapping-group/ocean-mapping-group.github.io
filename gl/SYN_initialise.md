@@ -1,19 +1,25 @@
 ---
 layout: default
 title: SYN_initialise
-parent: gl Tools
-module_name: SYN_initialise
+parent: OpenGL 3D Visualization (gl)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 source_path: code/gl/SYN_initialise.c
 category: 3D OpenGL Swath & Sonar Geometry Simulation
-related_tools: ["synSwath", "SYN_launcher", "SYN_event_loop", "SYN_oGL_draw", "SYN_global"]
+related_tools:
+- synSwath
+- SYN_launcher
+- SYN_event_loop
+- SYN_oGL_draw
+- SYN_global
+module_name: SYN_initialise
 ---
 
 # SYN_initialise
 
 ## Overview
-`SYN_initialise.c` implements `initialise_SYN_variables()`, the global state initialization routine for the [`synSwath`](synSwath.md) 3D OpenGL acoustic geometry, beam-steering, and bottom-detection simulator (originally created by John E. Hughes Clarke in 1995 and rationalized in 2001).
+`SYN_initialise.c` implements `initialise_SYN_variables()`, the global state initialization routine for the [`synSwath`](synSwath.html) 3D OpenGL acoustic geometry, beam-steering, and bottom-detection simulator (originally created by John E. Hughes Clarke in 1995 and rationalized in 2001).
 
-Before `synSwath` parses command-line options or opens its X11/GLX viewport, `initialise_SYN_variables()` configures default values across all simulation subsystems declared in [`SYN_global.h`](SYN_global.md).
+Before `synSwath` parses command-line options or opens its X11/GLX viewport, `initialise_SYN_variables()` configures default values across all simulation subsystems declared in [`SYN_global.h`](SYN_global.html).
 
 ---
 
@@ -51,4 +57,4 @@ Configures six named OpenGL material property slots (`diffuse`, `ambient`, `spec
 ---
 
 ## Architectural Role
-`initialise_SYN_variables()` is called at startup by `main()` in [`synSwath.c`](synSwath.md) prior to command-line argument parsing and script execution ([`SYN_scripting.c`](SYN_scripting.md)), ensuring deterministic baseline state for interactive X11/OpenGL rendering and batch animation frame dumps.
+`initialise_SYN_variables()` is called at startup by `main()` in [`synSwath.c`](synSwath.html) prior to command-line argument parsing and script execution ([`SYN_scripting.c`](SYN_scripting.html)), ensuring deterministic baseline state for interactive X11/OpenGL rendering and batch animation frame dumps.

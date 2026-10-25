@@ -1,27 +1,28 @@
 ---
 layout: default
 title: testChirp
-parent: tests (Test, Simulation & Diagnostic Suite)
+parent: Acoustic & Mathematical Test Harnesses (tests)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 nav_order: 19
 tool_name: testChirp
 source_path: code/tests/testChirp.c
 category: Chirp Waveforms, Matched Filtering & Signal Processing (tests)
 input_formats:
-  - Command-line pulse, sweep, Doppler, heave, noise, and harmonic parameters
+- Command-line pulse, sweep, Doppler, heave, noise, and harmonic parameters
 output_formats:
-  - pulse.ascii (Transmit chirp waveform in OMG ASCII plot format)
-  - impulse.ascii (Synthetic 12-target seafloor reflection impulse series)
-  - autocorrel.plot (Chirp autocorrelation & optional Doppler cross-correlation)
-  - chirp.plot (5-curve summary: chirp, autocorrelation, ref_coeff, convolved echo, deconvolved/compressed output)
-  - fft.plot (Power/amplitude spectrum or multi-harmonic dB spectrum)
-  - doppler.plot (Optional Doppler-shifted waveform comparison)
-  - heave.plot (Optional vessel heave cycle & vertical velocity profile)
-  - noise.plot (Optional additive white noise time series)
+- pulse.ascii (Transmit chirp waveform in OMG ASCII plot format)
+- impulse.ascii (Synthetic 12-target seafloor reflection impulse series)
+- autocorrel.plot (Chirp autocorrelation & optional Doppler cross-correlation)
+- chirp.plot (5-curve summary: chirp, autocorrelation, ref_coeff, convolved echo, deconvolved/compressed output)
+- fft.plot (Power/amplitude spectrum or multi-harmonic dB spectrum)
+- doppler.plot (Optional Doppler-shifted waveform comparison)
+- heave.plot (Optional vessel heave cycle & vertical velocity profile)
+- noise.plot (Optional additive white noise time series)
 related_tools:
-  - testNormConv
-  - testFIR
-  - example
-  - EKlook
+- testNormConv
+- testFIR
+- example
+- EKlook
 ---
 
 # testChirp

@@ -1,14 +1,22 @@
 ---
 layout: default
 title: shpcreate
-parent: Shapelib GIS Library & Tools (shapelib-1.3.0a2)
+parent: ESRI Shapefile C Library (shapelib-1.3.0a2)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 nav_order: 7
 tool_name: shpcreate
 source_path: code/shapelib-1.3.0a2/shpcreate.c
 category: GIS & ESRI Shapefile Library / Tools
-input_formats: ["CLI shape type specification"]
-output_formats: [".shp", ".shx (empty ESRI Shapefile pair)"]
-related_tools: ["shpadd", "shpdump", "shpopen", "dbfcreate"]
+input_formats:
+- CLI shape type specification
+output_formats:
+- .shp
+- .shx (empty ESRI Shapefile pair)
+related_tools:
+- shpadd
+- shpdump
+- shpopen
+- dbfcreate
 ---
 
 # shpcreate
@@ -17,7 +25,7 @@ related_tools: ["shpadd", "shpdump", "shpopen", "dbfcreate"]
 
 `shpcreate` (`code/shapelib-1.3.0a2/shpcreate.c`) is a command-line utility authored by Frank Warmerdam for creating a new, empty **ESRI Shapefile** pair (`.shp` main geometry file and `.shx` spatial index file) initialized with a 100-byte header for a specified 2D, 3D (`Z`), or Measured (`M`) geometry type.
 
-In command-line GIS workflows, `shpcreate` is the first step when generating a new shapefile layer, typically followed by [`dbfcreate`](dbfcreate.md) (to create the companion `.dbf` attribute table) and repeated invocations of [`shpadd`](shpadd.md) and [`dbfadd`](dbfadd.md) to populate features.
+In command-line GIS workflows, `shpcreate` is the first step when generating a new shapefile layer, typically followed by [`dbfcreate`](dbfcreate.html) (to create the companion `.dbf` attribute table) and repeated invocations of [`shpadd`](shpadd.html) and [`dbfadd`](dbfadd.html) to populate features.
 
 ---
 

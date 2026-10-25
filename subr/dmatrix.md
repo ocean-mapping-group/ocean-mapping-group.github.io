@@ -1,15 +1,16 @@
 ---
 layout: default
 title: dmatrix
-parent: Core Shared Libraries (subr)
-module_name: dmatrix
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/dmatrix.c
-header_path: code/subr/dmatrix.h
 category: Linear Algebra, Least Squares & Trend Surface Analysis
 related_tools:
-  - fft2dimage
-  - extractVertSection
-  - readQUODDY
+- fft2dimage
+- extractVertSection
+- readQUODDY
+module_name: dmatrix
+header_path: code/subr/dmatrix.h
 ---
 
 # dmatrix: Double-Precision Linear Algebra, Least-Squares & Polynomial Surface Detrending
@@ -22,6 +23,7 @@ related_tools:
 ## Key Macros & Data Structures
 
 ### Element Access Macros
+
 ```c
 #define _cell(Elements,Row,Col)    (((Row) * Elements->col) + (Col))
 #define _get(Elements,Row,Col)     ((double *)Elements->elements)[_cell(Elements,Row,Col)]
@@ -30,6 +32,7 @@ related_tools:
 ```
 
 ### `Matrix` & `Vector` Structures
+
 ```c
 typedef struct {
     int   row;       /* Number of matrix rows */

@@ -1,22 +1,23 @@
 ---
 layout: default
 title: reson_7K
-parent: Core Shared Libraries (subr)
-module_name: reson_7K
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/reson_7K.c
-header_path: code/subr/reson_7K.h
 category: File Formats & Vendor Parsers
 related_tools:
-  - 7kTool
-  - 7k2omg
-  - 7k2nav
-  - 7k2orientation
-  - 7k2image
-  - 7kStrip
-  - 7kTVG
-  - 7k_reflectivity_check
-  - omg2gsf
-  - swathed (SE)
+- 7kTool
+- 7k2omg
+- 7k2nav
+- 7k2orientation
+- 7k2image
+- 7kStrip
+- 7kTVG
+- 7k_reflectivity_check
+- omg2gsf
+- swathed (SE)
+module_name: reson_7K
+header_path: code/subr/reson_7K.h
 ---
 
 # reson_7K

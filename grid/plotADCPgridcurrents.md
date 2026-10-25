@@ -1,20 +1,26 @@
 ---
 layout: default
 title: plotADCPgridcurrents
-parent: Grid Tools
+parent: Bathymetric Gridding & Export (grid)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 tool_name: plotADCPgridcurrents
 source_path: code/grid/plotADCPgridcurrents.c
 category: gridding
-input_formats: [".r4 (JHC 32-bit float ADCP tangential velocity section grid)"]
-output_formats: [".meta (OMG plotlib vector metafile)"]
-related_tools: ["convertSectionUVtoRadTan", "extractVertSection", "plotProfile"]
+input_formats:
+- .r4 (JHC 32-bit float ADCP tangential velocity section grid)
+output_formats:
+- .meta (OMG plotlib vector metafile)
+related_tools:
+- convertSectionUVtoRadTan
+- extractVertSection
+- plotProfile
 ---
 
 # plotADCPgridcurrents
 
 ## Overview
 
-`plotADCPgridcurrents` reads a 2D 32-bit floating-point (`.r4`) vertical section grid of ADCP current velocities (such as tangential velocity produced by [`convertSectionUVtoRadTan`](convertSectionUVtoRadTan.md)), block-averages the velocities over configurable along-section distance (`-distAv`) and depth (`-depthAv`) bins, and renders a stick/vector profile plot in OMG `plotlib` metafile format (`plot.meta` by default).
+`plotADCPgridcurrents` reads a 2D 32-bit floating-point (`.r4`) vertical section grid of ADCP current velocities (such as tangential velocity produced by [`convertSectionUVtoRadTan`](convertSectionUVtoRadTan.html)), block-averages the velocities over configurable along-section distance (`-distAv`) and depth (`-depthAv`) bins, and renders a stick/vector profile plot in OMG `plotlib` metafile format (`plot.meta` by default).
 
 ---
 
@@ -49,6 +55,7 @@ plotADCPgridcurrents [OPTIONS] -infile <vel_section.r4> [-outfile <plot.meta>]
 ## Examples
 
 **Average an ADCP tangential velocity section into 50 m horizontal by 3 m vertical bins and plot:**
+
 ```bash
 plotADCPgridcurrents -distAv 50 -depthAv 3 -maxvel 1.5 -infile adcp_tang.r4 -outfile adcp_sticks.meta
 ```
@@ -57,4 +64,4 @@ plotADCPgridcurrents -distAv 50 -depthAv 3 -maxvel 1.5 -infile adcp_tang.r4 -out
 
 ## Workflow Context
 
-- **Upstream:** [`extractVertSection`](extractVertSection.md) and [`convertSectionUVtoRadTan`](convertSectionUVtoRadTan.md).
+- **Upstream:** [`extractVertSection`](extractVertSection.html) and [`convertSectionUVtoRadTan`](convertSectionUVtoRadTan.html).

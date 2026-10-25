@@ -1,20 +1,21 @@
 ---
 layout: default
 title: EM_unpack
-parent: labs (Teaching & Coursework Labs)
+parent: Graduate Course Lab Exercises (labs)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 nav_order: 1
 tool_name: EM_unpack
 source_path: code/labs/EM_unpack.c
 category: Educational Labs & Binary Datagram Parsing (labs)
 input_formats:
-  - .all (Kongsberg Simrad EM3000 binary telegram stream)
+- .all (Kongsberg Simrad EM3000 binary telegram stream)
 output_formats:
-  - ASCII diagnostic log (stdout and -out file)
+- ASCII diagnostic log (stdout and -out file)
 related_tools:
-  - unravel
-  - read_kmall
-  - example
-  - mkbp
+- unravel
+- read_kmall
+- example
+- mkbp
 ---
 
 # EM_unpack
@@ -88,11 +89,13 @@ For every validated `0x50` (Nav), `0x53` (Image), `0x46` (Raw Time & Angle), or 
 ## Workflow Context & Examples
 
 ### Inspecting an EM3000 `.all` File in a Student Lab
+
 ```bash
 # Parse an EM3000 raw file recorded with opposite byte order
 EM_unpack -swap -in 0001_20010214_120000.all -out unpack_test.txt
 ```
 Sample console output:
+
 ```text
 poss len is 148 -   ---  yo possible NAV telegram 
  model 3000 ymd 20010214 time 43200150
@@ -101,4 +104,4 @@ poss len is 1624 -   ---  yo possible DEPTH telegram
 ```
 
 ### Extending `EM_unpack` in Coursework
-Students use `EM_unpack.c` as a starting point to write custom payload decoders (such as extracting vessel latitude/longitude from `EM3000_NAV_CODE` or beam depths and across-track distances from `EM3000_DEPTH_CODE`) and writing those values to `outfile`. In production OMG workflows, full Kongsberg `.all` decoding is handled by [`unravel`](../omg/unravel.md).
+Students use `EM_unpack.c` as a starting point to write custom payload decoders (such as extracting vessel latitude/longitude from `EM3000_NAV_CODE` or beam depths and across-track distances from `EM3000_DEPTH_CODE`) and writing those values to `outfile`. In production OMG workflows, full Kongsberg `.all` decoding is handled by [`unravel`](../workflows/kongsberg-all-unraveling.html).

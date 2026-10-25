@@ -1,14 +1,22 @@
 ---
 layout: default
 title: changeAspect
-parent: Image Tools
+parent: Raster Image Processing (image)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 9
 tool_name: changeAspect
 source_path: code/image/changeAspect.c
 category: Image & Raster Processing
-input_formats: ["OMG1 8-bit or 32-bit float (.r4) array"]
-output_formats: ["Rescaled OMG1 8-bit or 32-bit float (.r4) array"]
-related_tools: ["expand", "expandr4", "decimate", "decr4", "stretchacres"]
+input_formats:
+- OMG1 8-bit or 32-bit float (.r4) array
+output_formats:
+- Rescaled OMG1 8-bit or 32-bit float (.r4) array
+related_tools:
+- expand
+- expandr4
+- decimate
+- decr4
+- stretchacres
 ---
 
 # changeAspect
@@ -17,6 +25,7 @@ related_tools: ["expand", "expandr4", "decimate", "decr4", "stretchacres"]
 `changeAspect` independently rescales the horizontal (`X`) and vertical (`Y`) pixel dimensions of an 8-bit (`data_type = 1`) or 32-bit floating-point (`data_type = 3`, `.r4`) `OMG1` (`JHC_header`) array. It accepts either multiplicative scale factors (`-xfactor`, `-yfactor`) or explicit target pixel dimensions (`-xdim`, `-ydim`), updating the header's grid spacing (`dx`, `dy`) to preserve geographic scale.
 
 ## CLI Options & Usage
+
 ```bash
 changeAspect -in <infile> -out <outfile> \
   [-xfactor <fx>] [-yfactor <fy>] [-xdim <nx>] [-ydim <ny>]

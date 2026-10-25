@@ -1,14 +1,15 @@
 ---
 layout: default
 title: ek_IQ
-parent: Core Shared Libraries (subr)
-module_name: ek_IQ
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/ek_IQ.c
-header_path: code/subr/ek_IQ.h
 category: Broadband Echosounder & Split-Beam Signal Processing
 related_tools:
-  - readEA600
-  - EKlook
+- readEA600
+- EKlook
+module_name: ek_IQ
+header_path: code/subr/ek_IQ.h
 ---
 
 # ek_IQ: Complex I/Q Phasor Arithmetic, Chirp Synthesis & Fast FFT Convolution
@@ -26,6 +27,7 @@ related_tools:
 ## Key Data Structures & Global Variables
 
 ### Complex Phasor Structure (`fcomplex`)
+
 ```c
 typedef struct {
     float I, Q;   /* In-phase (real) and Quadrature (imaginary) components */
@@ -33,6 +35,7 @@ typedef struct {
 ```
 
 ### Fast FFT Convolution State Globals
+
 ```c
 int       doFFTConv;        /* Flag to select cmplx_fft_convolve (1) vs time-domain cmplx_convolve (0) */
 int       pulseFFTlen;      /* Cached sample length of the current matched-filter pulse */

@@ -1,14 +1,20 @@
 ---
 layout: default
 title: showCoverage
-parent: Image Tools
+parent: Raster Image Processing (image)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 47
 tool_name: showCoverage
 source_path: code/image/showCoverage.c
 category: Multibeam Water Column & Acoustic Modeling
-input_formats: ["ASCII beam directivity table (-angresp)"]
-output_formats: ["2D across-track/depth SNR coverage OMG1 8-bit array (-out)"]
-related_tools: ["embedBeamSpacing", "TAtoXZ", "stretchacres"]
+input_formats:
+- ASCII beam directivity table (-angresp)
+output_formats:
+- 2D across-track/depth SNR coverage OMG1 8-bit array (-out)
+related_tools:
+- embedBeamSpacing
+- TAtoXZ
+- stretchacres
 ---
 
 # showCoverage
@@ -17,6 +23,7 @@ related_tools: ["embedBeamSpacing", "TAtoXZ", "stretchacres"]
 `showCoverage` models the 2D vertical cross-section of acoustic echo level / Signal-to-Noise Ratio (SNR) across the water column and seabed for a multibeam or sidescan sonar system. Given an ASCII transducer angular response table (`-angresp`) and sonar equation parameters (source level, absorption coefficient, pulse length, beamwidth, and max sector angle), it outputs an 8-bit `OMG1` (`JHC_header`) vertical cross-section image (`-out`) showing spatial acoustic coverage, sidelobe envelopes, and seabed grazing footprints.
 
 ## CLI Options & Usage
+
 ```bash
 showCoverage -angresp <beam_table> -out <coverage.8bit> \
   [-depth <m>] [-width <m>] [-bathy_sector] [-max_angle <deg>] \

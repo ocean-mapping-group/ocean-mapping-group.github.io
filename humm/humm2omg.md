@@ -1,13 +1,21 @@
 ---
 layout: default
 title: humm2omg
-parent: Humminbird Converter (humm)
+parent: Humminbird Side-Imaging Sonar (humm)
+grand_parent: 4. Multi-Vendor Sonar & LiDAR Converters
 tool_name: humm2omg
 source_path: code/humm/humm2omg.c
 category: Raw Sonar Format Conversion
-input_formats: ["ASCII serial log ($GPGGA, Trimcube P-telegrams, 6-beam Humminbird depths)"]
-output_formats: [".merged (OMG_HDCS v3, toolType=Humminbird)", ".nav (jcu_nav_rec)"]
-related_tools: ["jNMEA", "jcu_nav", "OMG_HDCS_jversion", "mergeAtt"]
+input_formats:
+- ASCII serial log ($GPGGA, Trimcube P-telegrams, 6-beam Humminbird depths)
+output_formats:
+- .merged (OMG_HDCS v3, toolType=Humminbird)
+- .nav (jcu_nav_rec)
+related_tools:
+- jNMEA
+- jcu_nav
+- OMG_HDCS_jversion
+- mergeAtt
 ---
 
 # humm2omg
@@ -44,7 +52,7 @@ humm2omg [-v] [-new] [-skip <n>] -year <YYYY> -jday <DDD> -comp <out_prefix> <as
 As `humm2omg` reads each line from the input ASCII log via `getc_line()`, it dispatches on the leading character(s):
 
 1. **`$GPGGA` NMEA GPS Telegrams (`telegram[0] == '$' && strncmp(telegram+1, "GPGGA", 5) == 0`):**
-   * Parsed via `jnmea_read_INGGA()` ([`jNMEA`](../subr/jNMEA.md)).
+   * Parsed via `jnmea_read_INGGA()` ([`jNMEA`](../subr/jNMEA.html)).
    * Converted to a `jcu_nav_rec` (`fill_in_nav`) with `time = stdtime_from_jul_day(year, jday, hour, min, sec)` and written sequentially to `<prefix>.nav` via `nav_write()`.
    * Prints `N` to `stdout`.
 

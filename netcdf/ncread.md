@@ -1,14 +1,20 @@
 ---
 layout: default
 title: ncread
-parent: NetCDF & HDF5 Tools (netcdf)
+parent: NetCDF & HDF5 Ocean/Sonar Readers (netcdf)
+grand_parent: 4. Multi-Vendor Sonar & LiDAR Converters
 nav_order: 4
 tool_name: ncread
 source_path: code/netcdf/ncread.c
 category: Oceanographic & Acoustic NetCDF/HDF5 Readers
-input_formats: [".nc (NetCDF-3 / NetCDF-4)"]
-output_formats: ["STDOUT NetCDF schema dump"]
-related_tools: ["ncCopernicusRead", "ncEC150read", "hdf5EC150read"]
+input_formats:
+- .nc (NetCDF-3 / NetCDF-4)
+output_formats:
+- STDOUT NetCDF schema dump
+related_tools:
+- ncCopernicusRead
+- ncEC150read
+- hdf5EC150read
 ---
 
 # ncread
@@ -17,7 +23,7 @@ related_tools: ["ncCopernicusRead", "ncEC150read", "hdf5EC150read"]
 
 `ncread` (`code/netcdf/ncread.c`) is a lightweight NetCDF-3 / NetCDF-4 structure and group discovery utility written by John Hughes Clarke (updated March 2023) for inspecting the root dimensions, variables, attributes, top-level groups, and second-level subgroups of any `.nc` file using the Unidata `libnetcdf` C API.
 
-Before running [`ncCopernicusRead`](ncCopernicusRead.md) (which requires knowing the exact `-varid` string and dimension ordering of a 2D/3D/4D ocean model) or [`hdf5EC150read`](hdf5EC150read.md) (which requires knowing which `/Sonar/Beam_group<X>` groups exist), `ncread` provides a fast, zero-configuration summary of the NetCDF file's internal schema.
+Before running [`ncCopernicusRead`](ncCopernicusRead.html) (which requires knowing the exact `-varid` string and dimension ordering of a 2D/3D/4D ocean model) or [`hdf5EC150read`](hdf5EC150read.html) (which requires knowing which `/Sonar/Beam_group<X>` groups exist), `ncread` provides a fast, zero-configuration summary of the NetCDF file's internal schema.
 
 ---
 
@@ -78,4 +84,4 @@ ndims: 2 nvar: 19 natts 3 unlimdimid -1
 
 ## Architectural Fit
 
-Within `code/netcdf/`, `ncread` is the baseline schema exploration utility that complements the specialized extractors [`ncCopernicusRead`](ncCopernicusRead.md), [`ncEC150read`](ncEC150read.md), and [`hdf5EC150read`](hdf5EC150read.md).
+Within `code/netcdf/`, `ncread` is the baseline schema exploration utility that complements the specialized extractors [`ncCopernicusRead`](ncCopernicusRead.html), [`ncEC150read`](ncEC150read.html), and [`hdf5EC150read`](hdf5EC150read.html).

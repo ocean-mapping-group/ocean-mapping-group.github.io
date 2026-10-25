@@ -1,9 +1,11 @@
 ---
 layout: default
 title: binPPK
-parent: Optech Tools
+parent: Optech SHOALS Bathymetric LiDAR (Optech)
+grand_parent: 4. Multi-Vendor Sonar & LiDAR Converters
 nav_order: 1
 ---
+
 # binPPK
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 1
 The tool reads date, time, latitude, longitude, and height from an ASCII input file and writes it to a binary file, performing byte-swapping for portability.
 
 ## Usage
+
 ```bash
 binPPK <asciiPPKfile> <binaryPPKfile> [-v]
 ```

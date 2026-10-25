@@ -1,9 +1,11 @@
 ---
 layout: default
 title: plotAngStrip
-parent: Plot Tools
+parent: PostScript & Vector Plotting (plot)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 133
 ---
+
 # plotAngStrip
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 133
 The tool allows for plotting multiple stacked curves, defining custom plot ranges, and adding titles, making it suitable for analyzing how angular response varies along a survey line or between different processing stages.
 
 ## Usage
+
 ```bash
 plotAngStrip -infile <file1> [-outfile <filename.meta>] [-size <dx> <dy>] [-yrange <min> <max>] [OPTIONS]
 ```

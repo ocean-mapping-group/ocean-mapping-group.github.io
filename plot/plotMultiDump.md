@@ -1,9 +1,11 @@
 ---
 layout: default
 title: plotMultiDump
-parent: Plot Tools
+parent: PostScript & Vector Plotting (plot)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 142
 ---
+
 # plotMultiDump
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 142
 This tool is highly interactive, guiding the user through prompts to select parameters, define plot ranges, and apply simple filtering. It's particularly useful for comparing the same parameter across different data acquisition lines or processing runs.
 
 ## Usage
+
 ```bash
 plotMultiDump -infile <file1> [-infile <file2> ...] [-outfile <filename.meta>] [OPTIONS]
 ```

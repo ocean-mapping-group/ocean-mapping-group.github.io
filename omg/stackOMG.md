@@ -1,9 +1,11 @@
 ---
 layout: default
 title: stackOMG
-parent: OMG Tools
+parent: Core Swath & .all Suite (omg)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 69
 ---
+
 # stackOMG
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 69
 The tool can process a specific range of pings or iterate through entire files. It can also perform a least-squares fit on the averaged data to determine a best-fit slope and intercept.
 
 ## Usage
+
 ```bash
 stackOMG <OMG_HDCS_datafile(s)> [-mode <value>] [-verbose] [-list]
 ```

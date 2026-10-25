@@ -1,9 +1,11 @@
 ---
 layout: default
 title: get8101BeamPattern
-parent: OMG Tools
+parent: Core Swath & .all Suite (omg)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 101
 ---
+
 # get8101BeamPattern
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 101
 The primary output is an ASCII file (`beampatt`) containing the mean and standard deviation of the intensity differences per beam, which represents the RBP. It can also generate a PGM image (`bp.pgm`) visualizing the differences.
 
 ## Usage
+
 ```bash
 get8101BeamPattern <merged_file(s)> [OPTIONS]
 ```

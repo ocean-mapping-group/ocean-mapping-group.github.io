@@ -1,15 +1,16 @@
 ---
 layout: default
 title: omg_fmgt
-parent: Core Shared Libraries (subr)
-module_name: omg_fmgt
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/omg_fmgt.c
-header_path: code/subr/omg_fmgt.h
 category: Backscatter Mosaicking & Fledermaus FMGT Interoperability
 related_tools:
-  - makess
-  - correctBS
-  - FMGT / geocoder interoperability utilities
+- makess
+- correctBS
+- FMGT / geocoder interoperability utilities
+module_name: omg_fmgt
+header_path: code/subr/omg_fmgt.h
 ---
 
 # `omg_fmgt` — QPS Fledermaus Geocoder Toolbox (FMGT) Backscatter Structure Definitions

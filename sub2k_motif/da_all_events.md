@@ -1,10 +1,11 @@
 ---
 layout: default
 title: da_all_events
-parent: SUB2K Motif Tools
-grand_parent: code
+parent: GeoSwath+ / Submetrix Motif GUI (sub2k_motif)
+grand_parent: 4. Multi-Vendor Sonar & LiDAR Converters
 nav_order: 6
 ---
+
 # da_all_events
 
 ## Description

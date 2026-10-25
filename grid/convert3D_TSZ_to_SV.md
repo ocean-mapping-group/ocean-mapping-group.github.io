@@ -1,9 +1,11 @@
 ---
 layout: default
 title: convert3D_TSZ_to_SV
-parent: Grid Tools
+parent: Bathymetric Gridding & Export (grid)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 13
 ---
+
 ---
 layout: default
 title: convert3D_TSZ_to_SV
@@ -16,6 +18,7 @@ nav_order: 13
 `convert3D_TSZ_to_SV` is a specialized command-line utility for converting 3D gridded Salinity (S), Temperature (T), and Depth (Z) data into Sound Velocity (SV) profiles. It's designed to process output from oceanographic models (specifically mentioned SalishSeaCast NetCDF files, which are converted to JHC `.r4` grids for S, T, and Z at various layers). For each grid cell and depth layer, it reads S and T values, uses the corresponding Z from a `.zvals` file, calculates pressure, and then computes sound velocity using the Chen-Millero equation. The output is a new set of JHC `.r4` grid files for sound velocity for each depth layer, along with copied `.zvals` and `.time` files.
 
 ## Usage
+
 ```bash
 convert3D_TSZ_to_SV -prefix <SectionPath/SectionPrefix> [OPTIONS]
 ```

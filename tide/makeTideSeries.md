@@ -1,13 +1,19 @@
 ---
 layout: default
 title: makeTideSeries
-parent: Tide Tools
+parent: Tidal Reduction & Constituents (tide)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 tool_name: makeTideSeries
 source_path: code/tide/makeTideSeries.c
 category: tide
-input_formats: ["CLI parameters (location and time range)"]
-output_formats: [".nav / .bin (binary jcu_nav_rec time series template)"]
-related_tools: ["mergeTide", "binTide", "diffTide"]
+input_formats:
+- CLI parameters (location and time range)
+output_formats:
+- .nav / .bin (binary jcu_nav_rec time series template)
+related_tools:
+- mergeTide
+- binTide
+- diffTide
 ---
 
 # makeTideSeries
@@ -16,7 +22,7 @@ related_tools: ["mergeTide", "binTide", "diffTide"]
 
 `makeTideSeries` generates a synthetic OMG binary `jcu_nav_rec` file at a fixed geographic coordinate (`-lalo <lat> <lon>`) over a specified UTC start/end time range (`-start` to `-end`) at a uniform time step (`-timestep_min`).
 
-It is designed to create a regular fixed-station time series template that can then be populated by a tidal prediction engine (such as `tidecor` or WebTide) and subsequently merged into survey lines with [`mergeTide`](mergeTide.md).
+It is designed to create a regular fixed-station time series template that can then be populated by a tidal prediction engine (such as `tidecor` or WebTide) and subsequently merged into survey lines with [`mergeTide`](mergeTide.html).
 
 ---
 
@@ -48,6 +54,7 @@ makeTideSeries -lalo <lat> <lon> -start <yr> <jday> <hr> <min> -end <yr> <jday> 
 ## Examples
 
 **Create a 5-minute station template in the Bay of Fundy for Julian Day 180:**
+
 ```bash
 makeTideSeries \
     -lalo 45.15 -66.05 \
@@ -61,4 +68,4 @@ makeTideSeries \
 
 ## Workflow Context
 
-- **Downstream:** Used as input to tidal constituent predictors (`tidecor`) to evaluate predicted tides at a fixed virtual gauge, followed by [`mergeTide`](mergeTide.md).
+- **Downstream:** Used as input to tidal constituent predictors (`tidecor`) to evaluate predicted tides at a fixed virtual gauge, followed by [`mergeTide`](mergeTide.html).

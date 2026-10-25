@@ -1,9 +1,11 @@
 ---
 layout: default
 title: plotAng2
-parent: Plot Tools
+parent: PostScript & Vector Plotting (plot)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 132
 ---
+
 # plotAng2
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 132
 It allows for plotting multiple datasets, defining custom plot ranges, and provides basic visualization for comparing angular response curves.
 
 ## Usage
+
 ```bash
 plotAng2 <infile(s)> [-outfile <filename.meta>] [-size <dx> <dy>] [-yrange <min> <max>] [OPTIONS]
 ```
@@ -26,6 +29,7 @@ plotAng2 <infile(s)> [-outfile <filename.meta>] [-size <dx> <dy>] [-yrange <min>
 | `-yrange <min> <max>` | Sets the Y-axis range (backscatter strength in dB). | `-50.0` to `0.0` |
 
 ### File Format Selection (Choose one)
+
 | Option | Description |
 |---|---|
 | `-jackTool` | Interprets the input file as being from `jackTool`. |
@@ -33,6 +37,7 @@ plotAng2 <infile(s)> [-outfile <filename.meta>] [-size <dx> <dy>] [-yrange <min>
 | `-delayed` | (Present in `USAGE` but not implemented). |
 
 ### Plot Customization
+
 | Option | Description |
 |---|---|
 | `-together` | Plots multiple datasets on the same graph, overlapping. |

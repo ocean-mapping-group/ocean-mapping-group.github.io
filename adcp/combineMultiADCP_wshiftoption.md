@@ -1,28 +1,30 @@
 ---
 layout: default
 title: combineMultiADCP_wshiftoption
-parent: ADCP Tools
+parent: Teledyne RDI ADCP Processing (adcp)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 6
 tool_name: combineMultiADCP_wshiftoption
 source_path: code/adcp/combineMultiADCP_wshiftoption.c
 category: adcp
 input_formats:
-  - jcu_nav Depth-Averaged ADCP Vectors (.nav)
-  - JHC Grid (.r4 / .8bit)
+- jcu_nav Depth-Averaged ADCP Vectors (.nav)
+- JHC Grid (.r4 / .8bit)
 output_formats:
-  - jcu_nav Phase-Averaged Vectors (.phase###)
+- jcu_nav Phase-Averaged Vectors (.phase###)
 related_tools:
-  - combineMultiADCP
-  - combineMultiADCP_garret
-  - calc_ellipse2
+- combineMultiADCP
+- combineMultiADCP_garret
+- calc_ellipse2
 ---
 
 # combineMultiADCP_wshiftoption
 
 ## Description
-`combineMultiADCP_wshiftoption` is a specialized version of [`combineMultiADCP`](combineMultiADCP.md). It processes and combines depth-averaged ADCP (Acoustic Doppler Current Profiler) data from multiple tidal cycles, with additional options to apply a time shift (`-tshift`) and set a manual reference epoch (`-reftime`) for precise M2 tidal phase alignment across multi-day or multi-vessel surveys.
+`combineMultiADCP_wshiftoption` is a specialized version of [`combineMultiADCP`](combineMultiADCP.html). It processes and combines depth-averaged ADCP (Acoustic Doppler Current Profiler) data from multiple tidal cycles, with additional options to apply a time shift (`-tshift`) and set a manual reference epoch (`-reftime`) for precise M2 tidal phase alignment across multi-day or multi-vessel surveys.
 
 ## Usage
+
 ```bash
 combineMultiADCP_wshiftoption [OPTIONS] -grid <coarseDTM> -out <outfilenameprefix> -in <infilename(s)>
 ```

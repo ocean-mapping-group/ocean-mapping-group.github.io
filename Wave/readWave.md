@@ -1,13 +1,20 @@
 ---
 layout: default
 title: readWave
-parent: Acoustic WAV Processing (Wave)
+parent: Acoustic WAV Waveform Tools (Wave)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 tool_name: readWave
 source_path: code/Wave/readWave.c
 category: Passive Acoustics & Hydrophone WAV Processing
-input_formats: [".wav (RIFF/WAVE 16-bit PCM)"]
-output_formats: [".spec (binary float FFT power spectra)", ".wav (gain-adjusted/subsetted RIFF/WAVE)"]
-related_tools: ["extractWaveWindow", "jwave_subr", "four1"]
+input_formats:
+- .wav (RIFF/WAVE 16-bit PCM)
+output_formats:
+- .spec (binary float FFT power spectra)
+- .wav (gain-adjusted/subsetted RIFF/WAVE)
+related_tools:
+- extractWaveWindow
+- jwave_subr
+- four1
 ---
 
 # readWave

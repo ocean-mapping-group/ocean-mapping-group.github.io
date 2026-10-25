@@ -1,31 +1,32 @@
 ---
 layout: default
 title: EK_funcs (Internal Functions for EKlook)
-parent: EKlook Tools
+parent: Simrad EK60/EK80 Echosounder Suite (EKlook)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 10
 tool_name: EK_funcs
 source_path: code/EKlook/EK_funcs.c
 category: EKlook
 input_formats:
-  - JHC Float Trace Arrays (.MF_dB, .Raw_dB, .PS_phase, .FA_phase, .MF_IQ)
-  - OMG_HDCS (.merged)
-  - OMG Attitude (.orientation)
-  - Pulse Replica (.pulse)
+- JHC Float Trace Arrays (.MF_dB, .Raw_dB, .PS_phase, .FA_phase, .MF_IQ)
+- OMG_HDCS (.merged)
+- OMG Attitude (.orientation)
+- Pulse Replica (.pulse)
 output_formats:
-  - Bottom Track Guide (.BottomTrackGuide)
-  - Ping Parameters (.ping_Params)
-  - Angular Response Curves (.ARC_fullBW, .ARC_3D, .ARC_FFTbins, .ARC_FFT3D)
+- Bottom Track Guide (.BottomTrackGuide)
+- Ping Parameters (.ping_Params)
+- Angular Response Curves (.ARC_fullBW, .ARC_3D, .ARC_FFTbins, .ARC_FFT3D)
 related_tools:
-  - EKlook
-  - BatchProcEK
-  - comboCalibEK_ARCs
-  - ek_fft_funcs
+- EKlook
+- BatchProcEK
+- comboCalibEK_ARCs
+- ek_fft_funcs
 ---
 
 # EK_funcs (Internal Functions for EKlook)
 
 ## Description
-`EK_funcs.c` (`code/EKlook/EK_funcs.c`) is the shared computational and I/O library used by [`EKlook`](EKlook.md), [`BatchProcEK`](BatchProcEK.md), and [`comboCalibEK_ARCs`](comboCalibEK_ARCs.md). It handles loading the matched-filtered trace file family produced by `readEA600` (`.Raw_dB`, `.MF_dB`, `.PS_phase`, `.FA_phase`, `.MF_IQ`, `.pulse`, `.merged`, `.orientation`), computing seawater sound absorption and transmission loss, ray-tracing 3D bottom strike footprints, modeling ensonified seafloor area and beam-pattern roll-off, and accumulating/exporting 2D and 3D Angular Response Curves (ARCs).
+`EK_funcs.c` (`code/EKlook/EK_funcs.c`) is the shared computational and I/O library used by [`EKlook`](EKlook.html), [`BatchProcEK`](BatchProcEK.html), and [`comboCalibEK_ARCs`](comboCalibEK_ARCs.html). It handles loading the matched-filtered trace file family produced by `readEA600` (`.Raw_dB`, `.MF_dB`, `.PS_phase`, `.FA_phase`, `.MF_IQ`, `.pulse`, `.merged`, `.orientation`), computing seawater sound absorption and transmission loss, ray-tracing 3D bottom strike footprints, modeling ensonified seafloor area and beam-pattern roll-off, and accumulating/exporting 2D and 3D Angular Response Curves (ARCs).
 
 ## Core Function Groups
 

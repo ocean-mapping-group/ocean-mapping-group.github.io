@@ -1,15 +1,18 @@
 ---
 layout: default
 title: mergeHeading
-parent: Attitude Tools
+parent: Attitude, Heave & Heading (att)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 7
 ---
+
 # mergeHeading
 
 ## Description
 `mergeHeading` is a command-line utility that merges heading data from a separate gyro file (e.g., from a more accurate or different heading sensor) onto an existing OMG-HDCS (Ocean Mapping Group - Hydrographic Data Cleaning System) attitude file. It interpolates the heading values from the gyro file based on time and updates the attitude records in the primary orientation file. The output is a new orientation file with the merged heading.
 
 ## Usage
+
 ```bash
 mergeHeading [OPTIONS] -hdg <gyro_file> <orientation_file>
 ```

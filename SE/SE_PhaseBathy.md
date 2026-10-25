@@ -1,19 +1,27 @@
 ---
 layout: default
 title: SE_PhaseBathy
-parent: SwathEd (SE) Tools
+parent: Swath Editor — swathed (SE)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 13
 tool_name: SE_PhaseBathy
 source_path: code/SE/SE_PhaseBathy.c
 category: Interactive QC & Editing (SwathEd)
-input_formats: [".merged", ".raw_ping", ".raw_phas"]
-output_formats: [".merged (updated in-memory soundings)"]
-related_tools: ["swathed", "SE_sswindow", "SE_WaterColumn"]
+input_formats:
+- .merged
+- .raw_ping
+- .raw_phas
+output_formats:
+- .merged (updated in-memory soundings)
+related_tools:
+- swathed
+- SE_sswindow
+- SE_WaterColumn
 ---
 
 # `SE_PhaseBathy` — Interferometric / Phase-Differencing Bathymetry Analysis Toolkit
 
-`SE_PhaseBathy` (`code/SE/SE_PhaseBathy.c`, `code/SE/SE_PhaseBathy.h`) implements the `"PhaseBathy Analysis Toolkit"` (`PhaseBathy_widget`) in [`swathed`](swathed.md). Authored by John E. Hughes Clarke (December 2007), it provides an interactive X11 workbench for inspecting and re-solving raw multi-baseline interferometric / phase-differencing sidescan sonar data—specifically SEA SWATHplus / Submetrix 2000 systems (`SEA_SwathPlus`, defined in `j_SUB2K.h`).
+`SE_PhaseBathy` (`code/SE/SE_PhaseBathy.c`, `code/SE/SE_PhaseBathy.h`) implements the `"PhaseBathy Analysis Toolkit"` (`PhaseBathy_widget`) in [`swathed`](swathed.html). Authored by John E. Hughes Clarke (December 2007), it provides an interactive X11 workbench for inspecting and re-solving raw multi-baseline interferometric / phase-differencing sidescan sonar data—specifically SEA SWATHplus / Submetrix 2000 systems (`SEA_SwathPlus`, defined in `j_SUB2K.h`).
 
 When clicking the **`ss`** icon (`icon_window[7]`) on a `SEA_SwathPlus` dataset, `swathed` opens `PhaseBathy_widget` to display raw 16-bit port/starboard amplitude traces (`pingfile`) and 8-bit 3-baseline differential phase traces (`AB`, `AC`, `AD` in `phasfile`), allowing interactive Vernier phase unwrapping, amplitude/quality gating, and sounding regeneration.
 

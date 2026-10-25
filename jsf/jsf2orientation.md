@@ -1,14 +1,24 @@
 ---
 layout: default
 title: jsf2orientation
-parent: JSF Tools
+parent: EdgeTech JSF Sidescan & Sub-Bottom (jsf)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 4
 tool_name: jsf2orientation
 source_path: code/jsf/jsf2orientation.c
 category: Attitude Extraction
-input_formats: [".jsf"]
-output_formats: [".orientation", ".heading"]
-related_tools: ["jsf2omg", "jsf2nav", "jsf2glo", "jsfTool", "mergeAtt", "newMergeAtt"]
+input_formats:
+- .jsf
+output_formats:
+- .orientation
+- .heading
+related_tools:
+- jsf2omg
+- jsf2nav
+- jsf2glo
+- jsfTool
+- mergeAtt
+- newMergeAtt
 ---
 
 # jsf2orientation
@@ -19,6 +29,7 @@ related_tools: ["jsf2omg", "jsf2nav", "jsf2glo", "jsfTool", "mergeAtt", "newMerg
 * `<prefix>.heading`: Heading-only records (`status = 4`).
 
 ## Usage
+
 ```bash
 jsf2orientation [-v] [-debug] -jsf <input_name.jsf> -orientation <file_prefix>
 ```
@@ -41,6 +52,7 @@ jsf2orientation [-v] [-debug] -jsf <input_name.jsf> -orientation <file_prefix>
 ## Practical Examples
 
 **1. Extract `.orientation` and `.heading` files from an EdgeTech JSF file:**
+
 ```bash
 jsf2orientation -jsf line01.jsf -orientation line01
 ```

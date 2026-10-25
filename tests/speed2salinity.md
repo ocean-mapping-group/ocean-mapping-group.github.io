@@ -1,21 +1,22 @@
 ---
 layout: default
 title: speed2salinity
-parent: tests (Test, Simulation & Diagnostic Suite)
+parent: Acoustic & Mathematical Test Harnesses (tests)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 nav_order: 14
 tool_name: speed2salinity
 source_path: code/tests/speed2salinity.c
 category: Seawater Sound Speed & Oceanographic Functions (tests)
 input_formats:
-  - CSV 3-column profile: depth (m), velocity (m/s), temperature (°C)
+- CSV 3-column profile: depth (m), velocity (m/s), temperature (°C)
 output_formats:
-  - CSV 4-column profile: depth (m), velocity (m/s), temperature (°C), salinity (ppt)
+- CSV 4-column profile: depth (m), velocity (m/s), temperature (°C), salinity (ppt)
 related_tools:
-  - speedtosalinity
-  - testSV
-  - testAtten
-  - one
-  - two
+- speedtosalinity
+- testSV
+- testAtten
+- one
+- two
 ---
 
 # speed2salinity
@@ -25,7 +26,7 @@ related_tools:
 
 For each `(depth, velocity, temperature)` record in the comma-separated input file, `speed2salinity` converts depth to hydrostatic pressure in $\text{kg/cm}^2$ and performs an exhaustive grid search over integer salinities $S \in [0, 39]\text{ ppt}$ in $1.0\text{ ppt}$ steps using **Wilson's (1962)** empirical sound speed equation (`vsw`), selecting the salinity that minimizes $|c_{\text{Wilson}}(T, P, S) - c_{\text{obs}}|$.
 
-*(For $0.1\text{ ppt}$ resolution and a choice between Wilson and Chen-Millero equations, see [`speedtosalinity`](speedtosalinity.md)).*
+*(For $0.1\text{ ppt}$ resolution and a choice between Wilson and Chen-Millero equations, see [`speedtosalinity`](speedtosalinity.html)).*
 
 ---
 
@@ -64,26 +65,29 @@ $$v_{\text{sw}}(t, p, s) = 1449.14 + v_t(t) + v_p(p) + v_s(s) + v_{stp}(s, t, p)
 * $v_p = 1.60272\times 10^{-1} p + 1.0268\times 10^{-5} p^2 + 3.5216\times 10^{-9} p^3 - 3.3603\times 10^{-12} p^4$
 * $v_s = 1.39799(s - 35) + 1.69202\times 10^{-3}(s - 35)^2$
 * $v_{stp}$: Cross-product polynomial in $(s - 35)$, $t$, and $p$.
-  *(Note: In `speed2salinity.c` lines 149–155, several continuation lines in `vstp` use `* +p` instead of `+ p *`, which alters the high-pressure cross-term; this was corrected to `+ p *` in [`testSV.c`](testSV.md) lines 430–436).*
+  *(Note: In `speed2salinity.c` lines 149–155, several continuation lines in `vstp` use `* +p` instead of `+ p *`, which alters the high-pressure cross-term; this was corrected to `+ p *` in [`testSV.c`](testSV.html) lines 430–436).*
 
 ---
 
 ## Example Input & Output
 
 **Input (`svp_cast.csv`):**
+
 ```text
 5.000000, 1489.200000, 10.500000
 25.000000, 1485.100000, 8.900000
 ```
 
 **Command:**
+
 ```bash
 speed2salinity svp_cast.csv svp_with_sal.csv
 ```
 
 **Output (`svp_with_sal.csv`):**
+
 ```text
 5.000000, 1489.200000, 10.500000, 34.000000
 25.000000, 1485.100000, 8.900000, 35.000000
 ```
-The resulting salinity profile can then be used to compute frequency-dependent acoustic absorption in [`testAtten`](testAtten.md) or [`BatchProcEK`](../EKlook/BatchProcEK.md).
+The resulting salinity profile can then be used to compute frequency-dependent acoustic absorption in [`testAtten`](testAtten.html) or [`BatchProcEK`](../EKlook/BatchProcEK.html).

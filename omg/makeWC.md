@@ -1,15 +1,18 @@
 ---
 layout: default
 title: makeWC
-parent: OMG Tools
+parent: Core Swath & .all Suite (omg)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 39
 ---
+
 # makeWC
 
 ## Description
 `makeWC` is a versatile command-line utility for processing multibeam water column (WC) data. It generates various visualizations and extracts information from water column telegrams, such as pie diagrams, vertical profiles, time-angle plots, and horizontal profiles. The tool offers extensive customization for output format, spatial/temporal filtering, motion correction, and mapping.
 
 ## Usage
+
 ```bash
 makeWC <input_omg_file(.merged)> <output_WCprefix> [OPTIONS]
 makeWC -out <output_WCprefix> -ins <many.merged's> [OPTIONS]
@@ -25,6 +28,7 @@ makeWC -out <output_WCprefix> -ins <many.merged's> [OPTIONS]
 | `-out <output_WCprefix>` | Alternative way to specify the output prefix, especially when using `-ins`. | |
 
 ### Output Type
+
 | Option | Description | Default |
 |---|---|---|
 | `-pie` | Generates a "pie diagram" (circular or semi-circular view of the water column). | **Default** |
@@ -34,6 +38,7 @@ makeWC -out <output_WCprefix> -ins <many.merged's> [OPTIONS]
 | `-out_as_ss` | (Used with `-horiz_prof`) Outputs the horizontal slice in GLORIA sidescan format. | |
 
 ### Spatial & Temporal Filtering
+
 | Option | Description |
 |---|---|
 | `-start <ping_num>` | Process pings within a specific range (inclusive). | All pings |
@@ -72,6 +77,7 @@ makeWC -out <output_WCprefix> -ins <many.merged's> [OPTIONS]
 | `-shift_logic <val>` | Logic for shifting processing in EM2040D (0-3 valid). | `0` |
 
 ### Corrections & Enhancements
+
 | Option | Description | Default |
 |---|---|---|
 | `-add_heave` / `-other_heave` | Apply heave correction. `-other_heave` may use an alternative heave source. | |
@@ -90,6 +96,7 @@ makeWC -out <output_WCprefix> -ins <many.merged's> [OPTIONS]
 | `-beyond_DN_drop <val>` | Define the DN drop threshold for bottom detection. | `60` |
 
 ### Output Formatting
+
 | Option | Description |
 |---|---|
 | `-pgm` | Output in PGM (Portable Graymap) format. | |
@@ -107,6 +114,7 @@ makeWC -out <output_WCprefix> -ins <many.merged's> [OPTIONS]
 | `-do_time_highlights` / `-highlight_halfwidth <val>` / `-check_RxCycle` | Highlight specific time intervals in the output; `check_RxCycle` highlights Rx cycle boundaries. | |
 
 ### Mapping
+
 | Option | Description |
 |---|---|
 | `-map <Box.header0>` | Map the water column data onto an existing map grid defined by `Box.header0`. | |

@@ -1,14 +1,22 @@
 ---
 layout: default
 title: bdi_funcs
-parent: SwathEd (SE) Tools
+parent: Swath Editor — swathed (SE)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 31
 tool_name: bdi_funcs
 source_path: code/SE/bdi_funcs.c
 category: Interactive QC & Editing (SwathEd)
-input_formats: [".watercol", ".merged"]
+input_formats:
+- .watercol
+- .merged
 output_formats: []
-related_tools: ["applyBDI", "SE_BDI_DP", "pdi_funcs", "SE_PDI_LA", "swathed"]
+related_tools:
+- applyBDI
+- SE_BDI_DP
+- pdi_funcs
+- SE_PDI_LA
+- swathed
 ---
 
 # `bdi_funcs.c` — Standalone Beam-Direction Indicator (BDI) Peak-Picking & Filtering Library
@@ -16,7 +24,7 @@ related_tools: ["applyBDI", "SE_BDI_DP", "pdi_funcs", "SE_PDI_LA", "swathed"]
 ## Overview & Purpose
 `bdi_funcs.c` and `bdi_funcs.h` (authored by Douglas Bergersen and John E. Hughes Clarke, July 2015) implement the core mathematical algorithms for **Beam-Direction Indicator (BDI)** bottom detection on multibeam water-column fans (`j_EM_watercolumn`).
 
-Shared between the interactive SwathEd BDI analysis window ([`SE_BDI_DP.c`](SE_BDI_DP.md)), the phase-zero-crossing PDI picker ([`pdi_funcs.c`](pdi_funcs.md)), and the batch command-line processor ([`applyBDI.c`](applyBDI.md)), `bdi_funcs.c` processes a full ping's water-column amplitude matrix (`WHOLE_ping_WC`) slice-by-slice in constant Two-Way Travel Time (TWTT) to extract sub-beam-width angular seafloor arrivals.
+Shared between the interactive SwathEd BDI analysis window ([`SE_BDI_DP.c`](SE_BDI_DP.html)), the phase-zero-crossing PDI picker ([`pdi_funcs.c`](pdi_funcs.html)), and the batch command-line processor ([`applyBDI.c`](applyBDI.html)), `bdi_funcs.c` processes a full ping's water-column amplitude matrix (`WHOLE_ping_WC`) slice-by-slice in constant Two-Way Travel Time (TWTT) to extract sub-beam-width angular seafloor arrivals.
 
 ---
 

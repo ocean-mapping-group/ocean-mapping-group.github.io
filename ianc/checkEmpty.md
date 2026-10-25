@@ -1,14 +1,20 @@
 ---
 layout: default
 title: checkEmpty
-parent: Ian Church (ianc) Tools
+parent: Ian Church — Hydrodynamic & 3D Ray-Trace Suite (ianc)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 nav_order: 6
 tool_name: checkEmpty
 source_path: code/ianc/checkEmpty.c
 category: Ocean Modeling & Hydrographic Utilities (ianc)
-input_formats: ["OMG R4 Grid (.r4)", "OMG 8-Bit Grid (.8bit / .mos)", "OMG 16-Bit Short Grid"]
-output_formats: ["ASCII Status (Empty / NotEmpty) and Shell Exit Code"]
-related_tools: ["calcArea"]
+input_formats:
+- OMG R4 Grid (.r4)
+- OMG 8-Bit Grid (.8bit / .mos)
+- OMG 16-Bit Short Grid
+output_formats:
+- ASCII Status (Empty / NotEmpty) and Shell Exit Code
+related_tools:
+- calcArea
 ---
 
 # checkEmpty

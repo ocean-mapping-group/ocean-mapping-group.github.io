@@ -1,14 +1,20 @@
 ---
 layout: default
 title: visit_writer
-parent: Ian Church (ianc) Tools
+parent: Ian Church — Hydrodynamic & 3D Ray-Trace Suite (ianc)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 nav_order: 15
 tool_name: visit_writer
 source_path: code/ianc/subr/visit_writer.c
 category: Ocean Modeling & Hydrographic Utilities (ianc)
-input_formats: ["In-memory 3D point, unstructured, regular, rectilinear, or curvilinear mesh arrays"]
-output_formats: ["VTK Legacy DataFile Version 2.0 (.vtk, ASCII or Big-Endian Binary)"]
-related_tools: ["modelAnalysis", "iwc_gwc", "iwc_support"]
+input_formats:
+- In-memory 3D point, unstructured, regular, rectilinear, or curvilinear mesh arrays
+output_formats:
+- VTK Legacy DataFile Version 2.0 (.vtk, ASCII or Big-Endian Binary)
+related_tools:
+- modelAnalysis
+- iwc_gwc
+- iwc_support
 ---
 
 # visit_writer
@@ -85,6 +91,7 @@ Used in the `celltypes` array passed to `write_unstructured_mesh()`:
 ## File Formats
 
 * **VTK Legacy File (`.vtk`)**: If `filename` does not already contain the `.vtk` suffix, `open_file()` automatically appends `.vtk`. Each file begins with the 3-line VTK header:
+
   ```text
   # vtk DataFile Version 2.0
   Written using VisIt writer

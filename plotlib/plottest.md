@@ -1,15 +1,18 @@
 ---
 layout: default
 title: plottest
-parent: Plotlib Tools
+parent: PostScript & Vector Plot Library (plotlib)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 nav_order: 154
 ---
+
 # plottest
 
 ## Description
 `plottest.c` is a simple test program for the `plotlib` library. It demonstrates basic usage of `plotlib` functions to open a plot, draw some lines, display text, and close the plot. It serves as a quick functional check of the `plotlib` installation and its ability to generate a metafile.
 
 ## Usage
+
 ```bash
 plottest
 ```

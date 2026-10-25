@@ -1,13 +1,21 @@
 ---
 layout: default
 title: wlvTide
-parent: Tide Tools
+parent: Tidal Reduction & Constituents (tide)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 tool_name: wlvTide
 source_path: code/tide/wlvTide.c
 category: tide
-input_formats: [".wlv ASCII water level file", "XTide UTC ASCII tide"]
-output_formats: ["JHC ASCII tide (jday hour min tide)"]
-related_tools: ["medsTide", "refoXTIDE", "binTide", "mergeTide"]
+input_formats:
+- .wlv ASCII water level file
+- XTide UTC ASCII tide
+output_formats:
+- JHC ASCII tide (jday hour min tide)
+related_tools:
+- medsTide
+- refoXTIDE
+- binTide
+- mergeTide
 ---
 
 # wlvTide
@@ -52,12 +60,14 @@ wlvTide [OPTIONS] -in <tidefilename> -out <mytideformatname>
 ## Examples
 
 **1. Convert a standard `.wlv` file (24-line header, `YYYY/MM/DD`):**
+
 ```bash
 wlvTide -in station_001.wlv -out station_001.asc
 binTide -year 2007 station_001.asc station_001.bin
 ```
 
 **2. Convert a 24-hour UTC XTide listing with `MM/DD/YYYY` dates and 4 header lines:**
+
 ```bash
 wlvTide -skip 4 -UTC -MDY -in xtide_utc.txt -out xtide_utc.asc
 ```
@@ -67,4 +77,4 @@ wlvTide -skip 4 -UTC -MDY -in xtide_utc.txt -out xtide_utc.asc
 ## Workflow Context
 
 - **Upstream:** `.wlv` water level gauge files or XTide UTC text files.
-- **Downstream:** [`binTide`](binTide.md) $\rightarrow$ [`mergeTide`](mergeTide.md).
+- **Downstream:** [`binTide`](binTide.html) $\rightarrow$ [`mergeTide`](mergeTide.html).

@@ -1,9 +1,11 @@
 ---
 layout: default
 title: plotAAC
-parent: Plot Tools
+parent: PostScript & Vector Plotting (plot)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 131
 ---
+
 # plotAAC
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 131
 The tool allows users to select which parameters to plot, define plotting ranges, and can overlay data from multiple sources (e.g., primary RLG, HIPPY, TSSB systems). It also applies simple filtering for spike removal.
 
 ## Usage
+
 ```bash
 plotAAC -infile <file1> [-outfile <filename.meta>] [-size <dx> <dy>] [-vref] [-sens] [-xrange <min> <max>]
 ```

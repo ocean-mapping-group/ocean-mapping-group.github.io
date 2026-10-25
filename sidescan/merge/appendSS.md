@@ -1,16 +1,18 @@
 ---
 layout: default
 title: appendSS
-parent: Merge Tools
-grand_parent: sidescan
+parent: Sidescan Radiometric & Geometric Suite (sidescan)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 2
 ---
+
 # appendSS
 
 ## Description
 `appendSS` is a utility designed to append multiple JCU GLORIA sidescan files together into a single output file. It intelligently sorts the input files by their start time, and can filter records based on a specified time window. An optional time shift can also be applied to the records during the appending process. This tool is a re-implementation of `appendAtt` tailored for sidescan data.
 
 ## Usage
+
 ```bash
 appendSS [-v] [-intimeshiftsecs <seconds>] [-start <yr jday hr min>] [-end <yr jday hr min>] [-start_sec <yr jday hr min sec>] [-end_sec <yr jday hr min sec>] [-timeboundsof <mergedfile>] -out <outfile> <infile1> [<infile2> ...]
 ```

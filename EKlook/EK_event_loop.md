@@ -1,28 +1,29 @@
 ---
 layout: default
 title: EK_event_loop (Module within EKlook)
-parent: EKlook Tools
+parent: Simrad EK60/EK80 Echosounder Suite (EKlook)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 4
 tool_name: EK_event_loop
 source_path: code/EKlook/EK_event_loop.c
 category: EKlook
 input_formats:
-  - X11 User Input Events
+- X11 User Input Events
 output_formats:
-  - GUI State Updates & Widget Dispatch
+- GUI State Updates & Widget Dispatch
 related_tools:
-  - EKlook
-  - EK_ZoomImage
-  - EK_BottomBS
-  - EK_Polar
-  - EK_FFT
-  - EK_PosMotion
+- EKlook
+- EK_ZoomImage
+- EK_BottomBS
+- EK_Polar
+- EK_FFT
+- EK_PosMotion
 ---
 
 # EK_event_loop (Module within EKlook)
 
 ## Description
-`EK_event_loop.c` defines the core X11 event processing loop for the interactive [`EKlook`](EKlook.md) application. It continuously monitors mouse clicks, rubber-band drags, scroll-wheel actions, and keyboard shortcuts across the main thumbnail/histogram window and dispatches specialized widget events to [`EK_ZoomImage`](EK_ZoomImage.md), [`EK_BottomBS`](EK_BottomBS.md), [`EK_Polar`](EK_Polar.md), [`EK_FFT`](EK_FFT.md), and [`EK_PosMotion`](EK_PosMotion.md).
+`EK_event_loop.c` defines the core X11 event processing loop for the interactive [`EKlook`](EKlook.html) application. It continuously monitors mouse clicks, rubber-band drags, scroll-wheel actions, and keyboard shortcuts across the main thumbnail/histogram window and dispatches specialized widget events to [`EK_ZoomImage`](EK_ZoomImage.html), [`EK_BottomBS`](EK_BottomBS.html), [`EK_Polar`](EK_Polar.html), [`EK_FFT`](EK_FFT.html), and [`EK_PosMotion`](EK_PosMotion.html).
 
 ## Key Functionality and Interactions
 

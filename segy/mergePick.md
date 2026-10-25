@@ -1,14 +1,19 @@
 ---
 layout: default
 title: mergePick
-parent: SEGY Tools
+parent: SEG-Y Sub-Bottom & Seismic (segy)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 2
 tool_name: mergePick
 source_path: segy/mergePick.c
 category: seismic_processing
-input_formats: [ASCII_PICKS]
-output_formats: [ASCII_PICKS]
-related_tools: [upsegy, pickSS]
+input_formats:
+- ASCII_PICKS
+output_formats:
+- ASCII_PICKS
+related_tools:
+- upsegy
+- pickSS
 ---
 
 # mergePick

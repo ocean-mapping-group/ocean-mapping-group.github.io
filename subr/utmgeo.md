@@ -1,11 +1,16 @@
 ---
 layout: default
 title: utmgeo
-parent: Shared Core Libraries (subr)
-module_name: utmgeo
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/utmgeo.c
 category: Map Projections, Ellipsoids & Geodesy
-related_tools: ["utm", "geoutm", "j_proj", "geographic"]
+related_tools:
+- utm
+- geoutm
+- j_proj
+- geographic
+module_name: utmgeo
 ---
 
 # utmgeo
@@ -13,7 +18,7 @@ related_tools: ["utm", "geoutm", "j_proj", "geographic"]
 ## Overview
 `utmgeo` (`utmgeo.c`) is the standalone K&R C implementation of the **inverse Universal Transverse Mercator (UTM) projection** (`utmgeo()`), converting UTM grid Easting (`x`) and Northing (`y`) in meters back into geographic latitude (`*phi`) and longitude (`*lam`) in decimal degrees.
 
-Written by A. Malinverno (March 3, 1986) from J.P. Snyder's *Map projections used by the U.S.G.S.* (USGS Bulletin 1532, p. 68, 1982), `utmgeo.c` is the companion to [`geoutm.c`](geoutm.md). Note that both `geoutm()` and `utmgeo()` are also consolidated with ANSI C prototypes in [`utm.c` / `utm.h`](utm.md).
+Written by A. Malinverno (March 3, 1986) from J.P. Snyder's *Map projections used by the U.S.G.S.* (USGS Bulletin 1532, p. 68, 1982), `utmgeo.c` is the companion to [`geoutm.c`](geoutm.html). Note that both `geoutm()` and `utmgeo()` are also consolidated with ANSI C prototypes in [`utm.c` / `utm.h`](utm.html).
 
 ---
 
@@ -33,6 +38,7 @@ If `Ellipsoid` does not match one of these five constants, `utmgeo()` prints `"i
 ## Public Function
 
 ### `utmgeo`
+
 ```c
 void utmgeo(double *phi, double *lam, double clam, double x, double y, char hem);
 ```
@@ -57,4 +63,4 @@ void utmgeo(double *phi, double *lam, double clam, double x, double y, char hem)
 ---
 
 ## Architectural Role
-`utmgeo.c` (or its consolidated counterpart [`utm.c`](utm.md)) provides inverse UTM coordinate conversion for [`j_proj`](j_proj.md) and older standalone projection utilities.
+`utmgeo.c` (or its consolidated counterpart [`utm.c`](utm.html)) provides inverse UTM coordinate conversion for [`j_proj`](j_proj.html) and older standalone projection utilities.

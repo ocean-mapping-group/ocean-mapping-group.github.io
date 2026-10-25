@@ -1,13 +1,18 @@
 ---
 layout: default
 title: tide_intp_sub
-parent: Tide Tools
+parent: Tidal Reduction & Constituents (tide)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 tool_name: tide_intp_sub
 source_path: code/tide/tide_intp_sub.c
 category: tide
-input_formats: ["C function arguments (z0, z1, xx, yy)"]
-output_formats: ["Interpolated tide height (*zz)"]
-related_tools: ["mergeTide", "diffTide"]
+input_formats:
+- C function arguments (z0, z1, xx, yy)
+output_formats:
+- Interpolated tide height (*zz)
+related_tools:
+- mergeTide
+- diffTide
 ---
 
 # tide_intp_sub
@@ -16,7 +21,7 @@ related_tools: ["mergeTide", "diffTide"]
 
 `tide_intp_sub` (`code/tide/tide_intp_sub.c`) is a C subroutine module defining `tide_intp(z0, z1, xx, yy, zz)`, which performs two-station linear spatial tide interpolation by projecting a vessel's position `(xx, yy)` onto the baseline connecting a South-East tide station `(x0, y0)` and a North-West tide station `(x1, y1)`.
 
-This algorithm is the prototype for the `-interpolate` two-station cotidal interpolation built directly into [`mergeTide`](mergeTide.md).
+This algorithm is the prototype for the `-interpolate` two-station cotidal interpolation built directly into [`mergeTide`](mergeTide.html).
 
 ---
 
@@ -54,7 +59,7 @@ void tide_intp(float z0, float z1, float xx, float yy, float *zz);
 
 ## Examples
 
-In production command-line workflows, invoke this algorithm via [`mergeTide`](mergeTide.md) using the `-interpolate`, `-loc1`, and `-loc2` flags:
+In production command-line workflows, invoke this algorithm via [`mergeTide`](mergeTide.html) using the `-interpolate`, `-loc1`, and `-loc2` flags:
 
 ```bash
 mergeTide \
@@ -68,4 +73,4 @@ mergeTide \
 
 ## Workflow Context
 
-- Embedded directly into [`mergeTide`](mergeTide.md) (`-interpolate`) for cotidal zoning between two bounding tide gauges.
+- Embedded directly into [`mergeTide`](mergeTide.html) (`-interpolate`) for cotidal zoning between two bounding tide gauges.

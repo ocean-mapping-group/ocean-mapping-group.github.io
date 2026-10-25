@@ -1,9 +1,11 @@
 ---
 layout: default
 title: multiplot
-parent: Plot Tools
+parent: PostScript & Vector Plotting (plot)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 128
 ---
+
 # multiplot
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 128
 This tool is useful for comparing different datasets visually in a structured manner, where each dataset might represent a separate measurement or a different processing step of the same data.
 
 ## Usage
+
 ```bash
 multiplot [-infile <asciiplotfile>] [-outfile <metafile_name>]
 ```

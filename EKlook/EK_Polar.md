@@ -1,26 +1,27 @@
 ---
 layout: default
 title: EK_Polar (Module within EKlook)
-parent: EKlook Tools
+parent: Simrad EK60/EK80 Echosounder Suite (EKlook)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 6
 tool_name: EK_Polar
 source_path: code/EKlook/EK_Polar.c
 category: EKlook
 input_formats:
-  - In-Memory Trace, Phase & Complex IQ Arrays
-  - Sphere TS Reference (.dat)
+- In-Memory Trace, Phase & Complex IQ Arrays
+- Sphere TS Reference (.dat)
 output_formats:
-  - Frequency Calibration File (.txt.r4)
+- Frequency Calibration File (.txt.r4)
 related_tools:
-  - EKlook
-  - EK_FFT
-  - comboCalibEK_ARCs
+- EKlook
+- EK_FFT
+- comboCalibEK_ARCs
 ---
 
 # EK_Polar (Module within EKlook)
 
 ## Description
-`EK_Polar` (`code/EKlook/EK_Polar.c`) is an interactive GUI module within the [`EKlook`](EKlook.md) application. It manages the **"POLAR EK-Trace Window,"** which visualizes split-beam target detections in polar coordinates (Fore–Aft vs. Port–Starboard mechanical angles), models 2D transducer beam-pattern roll-off as a function of radial angle and frequency, and exports frequency-dependent calibration tables (`Dump Calib`) during tungsten-carbide calibration sphere deployments.
+`EK_Polar` (`code/EKlook/EK_Polar.c`) is an interactive GUI module within the [`EKlook`](EKlook.html) application. It manages the **"POLAR EK-Trace Window,"** which visualizes split-beam target detections in polar coordinates (Fore–Aft vs. Port–Starboard mechanical angles), models 2D transducer beam-pattern roll-off as a function of radial angle and frequency, and exports frequency-dependent calibration tables (`Dump Calib`) during tungsten-carbide calibration sphere deployments.
 
 ## Interactive Controls
 
@@ -33,7 +34,7 @@ related_tools:
 | `Remove Ripple` | Toggles removal of matched-filter autocorrelation ripple during spectral analysis. | `RemoveRipple` |
 | `Subtract Sphere` | Subtracts the theoretical sphere Target Strength curve (`-sphereTS`) from the observed target spectra. | `RemoveSphere` |
 | `Apply Calib` | Applies the derived frequency-dependent calibration curve. | `ApplyFreqCalib` |
-| `Dump Calib` | Writes the derived frequency-dependent calibration curve to disk for use in [`comboCalibEK_ARCs`](comboCalibEK_ARCs.md) `-calib`. | |
+| `Dump Calib` | Writes the derived frequency-dependent calibration curve to disk for use in [`comboCalibEK_ARCs`](comboCalibEK_ARCs.html) `-calib`. | |
 | **Sliders** | | |
 | `Peak Plot dB Range` | Dynamic range (in dB) for the peak Target Strength plots. | `Peak_Plot_Range_dB` |
 | `max beamwidth` | Angular diameter (in degrees) of the polar bullseye plot. | `POLAR_diameter_degrees` |

@@ -1,9 +1,11 @@
 ---
 layout: default
 title: smthBP
-parent: OMG Tools
+parent: Core Swath & .all Suite (omg)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 65
 ---
+
 # smthBP
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 65
 The smoothing is weighted by the `bcount` (number of samples in each bin), giving more influence to bins with more data.
 
 ## Usage
+
 ```bash
 smthBP -in <infile> -out <outfile> [-halfwidth <value>] [-v]
 ```

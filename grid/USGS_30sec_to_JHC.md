@@ -1,13 +1,22 @@
 ---
 layout: default
 title: USGS_30sec_to_JHC
-parent: Grid Tools
+parent: Bathymetric Gridding & Export (grid)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 tool_name: USGS_30sec_to_JHC
 source_path: code/grid/USGS_30sec_to_JHC.c
 category: gridding
-input_formats: ["USGS 30-arc-second 16-bit DEM", "NASA SRTM 1-arc-second (.hgt) 16-bit DEM"]
-output_formats: [".r4 (JHC 32-bit float grid)", ".llz (ASCII lat lon depth)"]
-related_tools: ["SatAlt_to_JHC", "gtopo2ascii", "readUSGS_DEM", "project"]
+input_formats:
+- USGS 30-arc-second 16-bit DEM
+- NASA SRTM 1-arc-second (.hgt) 16-bit DEM
+output_formats:
+- .r4 (JHC 32-bit float grid)
+- .llz (ASCII lat lon depth)
+related_tools:
+- SatAlt_to_JHC
+- gtopo2ascii
+- readUSGS_DEM
+- project
 ---
 
 # USGS_30sec_to_JHC
@@ -56,12 +65,14 @@ USGS_30sec_to_JHC [OPTIONS] (-usgs_30sec | -srtm_1sec) <USGS_or_SRTM_file> <JHC_
 ## Examples
 
 **1. Convert a 1-arc-second SRTM tile (`N45W067.hgt`) to `.r4` and `.llz`:**
+
 ```bash
 USGS_30sec_to_JHC -srtm_1sec -minlat 45.0 -minlon -67.0 N45W067.hgt N45W067
 # Produces N45W067.r4 (geographic projection=3) and N45W067.llz
 ```
 
 **2. Reproject the resulting geographic `.r4` grid onto a UTM mapsheet:**
+
 ```bash
 project -in N45W067.r4 -Area fundy_utm.blank -out N45W067_utm.r4
 ```
@@ -70,4 +81,4 @@ project -in N45W067.r4 -Area fundy_utm.blank -out N45W067_utm.r4
 
 ## Workflow Context
 
-- **Downstream:** Use [`project`](project.md) to reproject the geographic `.r4` grid (`projection = 3`) onto a Mercator or UTM mapsheet, or grid the `.llz` points directly with [`weigh_grid`](weigh_grid.md).
+- **Downstream:** Use [`project`](project.html) to reproject the geographic `.r4` grid (`projection = 3`) onto a Mercator or UTM mapsheet, or grid the `.llz` points directly with [`weigh_grid`](weigh_grid.html).

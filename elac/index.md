@@ -1,8 +1,9 @@
 ---
 layout: default
-title: ELAC Tools
-has_children: true
+title: ELAC BottomChart Multibeam (elac)
+parent: 4. Multi-Vendor Sonar & LiDAR Converters
 nav_order: 5
+has_children: true
 ---
 
 # ELAC Tools

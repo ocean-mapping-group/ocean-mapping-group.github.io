@@ -1,14 +1,26 @@
 ---
 layout: default
 title: dbfopen
-parent: Shapelib GIS Library & Tools (shapelib-1.3.0a2)
+parent: ESRI Shapefile C Library (shapelib-1.3.0a2)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 nav_order: 4
-module_name: dbfopen
 source_path: code/shapelib-1.3.0a2/dbfopen.c
 category: GIS & ESRI Shapefile Library / Tools
-input_formats: [".dbf", ".cpg (xBase table & codepage)"]
-output_formats: [".dbf", ".cpg"]
-related_tools: ["shpopen", "safileio", "dbfcreate", "dbfadd", "dbfdump", "shputils", "iNav2SHP"]
+input_formats:
+- .dbf
+- .cpg (xBase table & codepage)
+output_formats:
+- .dbf
+- .cpg
+related_tools:
+- shpopen
+- safileio
+- dbfcreate
+- dbfadd
+- dbfdump
+- shputils
+- iNav2SHP
+module_name: dbfopen
 ---
 
 # dbfopen (`dbfopen.c`)
@@ -92,4 +104,4 @@ typedef DBFInfo * DBFHandle;
 
 ## Architectural Fit in OMG
 
-`dbfopen.o` is compiled in `code/shapelib-1.3.0a2/` and linked with `shpopen.o` and `safileio.o` into OMG GIS exporters such as [`iNav2SHP`](../nav/iNav2SHP.md), which writes survey line metadata (`LINE_NAME`, timestamps, ping counts) into `.dbf` tables alongside `.shp` tracklines.
+`dbfopen.o` is compiled in `code/shapelib-1.3.0a2/` and linked with `shpopen.o` and `safileio.o` into OMG GIS exporters such as [`iNav2SHP`](../nav/iNav2SHP.html), which writes survey line metadata (`LINE_NAME`, timestamps, ping counts) into `.dbf` tables alongside `.shp` tracklines.

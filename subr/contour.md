@@ -1,18 +1,19 @@
 ---
 layout: default
 title: contour
-parent: Core Shared Libraries (subr)
-module_name: contour
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/contour.c
-header_path: code/subr/contour.h
 category: Gridding, Contouring & Spatial Geometry
 related_tools:
-  - contgrid
-  - embedCont
-  - swathed
-  - RT
-  - QCdemo
-  - project
+- contgrid
+- embedCont
+- swathed
+- RT
+- QCdemo
+- project
+module_name: contour
+header_path: code/subr/contour.h
 ---
 
 # contour: Distorted Swath & Grid Iso-Depth Contouring Engine
@@ -27,6 +28,7 @@ The library resolves saddle-point (four-edge crossover) ambiguities using shorte
 ## Key Global Variables & Data Structures
 
 ### Binary Vector Structure (`bin_vect`, defined in `array.h`)
+
 ```c
 typedef struct {
     double x1, y1;   /* Start coordinates of contour segment (or -999999.0 flag for text label) */
@@ -38,6 +40,7 @@ typedef struct {
 ```
 
 ### Global State Variables
+
 ```c
 bin_vect current_vect;          /* Active binary vector record written to plotfile */
 float    rminlevel, rmaxlevel;  /* Minimum and maximum contour depth levels */

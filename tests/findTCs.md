@@ -1,20 +1,21 @@
 ---
 layout: default
 title: findTCs
-parent: tests (Test, Simulation & Diagnostic Suite)
+parent: Acoustic & Mathematical Test Harnesses (tests)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 nav_order: 6
 tool_name: findTCs
 source_path: code/tests/findTCs.c
 category: Passive Acoustic & Time-Series Classification (tests)
 input_formats:
-  - spectrafile (2-column ASCII spectral time series)
-  - filtfile (2-column ASCII high-pass filtered envelope time series)
+- spectrafile (2-column ASCII spectral time series)
+- filtfile (2-column ASCII high-pass filtered envelope time series)
 output_formats:
-  - classfile (10-line per-minute YES/NOO spike classification table)
-  - .wav.datetime (2-line start/end Julian day & Unix epoch timestamp sidecar)
+- classfile (10-line per-minute YES/NOO spike classification table)
+- .wav.datetime (2-line start/end Julian day & Unix epoch timestamp sidecar)
 related_tools:
-  - testFIR
-  - testChirp
+- testFIR
+- testChirp
 ---
 
 # findTCs
@@ -57,6 +58,7 @@ findTCs [-v] [-yrmon <YYYY-MM>] [-dahrmnse <DDHHMMSS> | -yrmondahrmnse <YYYYMMDD
 
 ### 1. Julian Day & Epoch Conversion
 When `-yrmon` and either `-dahrmnse` or `-yrmondahrmnse` are provided, `findTCs` extracts `year`, `month`, `day`, `hour`, `min`, and `sec`, calls `stdtime_dmy_to_jul_day(day, month, year)` and `stdtime_from_jul_day(year, jday, hour, min, sec)`, and writes two lines (start time and start time + `reclen_secs`) to `<yrmon>/<stamp>.wav.datetime`:
+
 ```text
   2019 6 21 6 8 10 -- jday 172 -- 1970time 1561097290.00 
   2019 6 21 6 8 610 -- jday 172 -- 1970time 1561097890.00 
@@ -68,6 +70,7 @@ Assuming a 10-minute (`600 s`) recording with `count1` total decimated envelope 
 $$N_{\text{above}}(m) = \sum_{j=0}^{\text{samp\_per\_min}-1} \mathbb{I}\!\left(\left|\text{filthigh}[m \cdot \text{samp\_per\_min} + j]\right| > \text{threshold}\right)$$
 
 If $N_{\text{above}}(m) > \text{aboveOK}$, the minute is flagged `YES`; otherwise `NOO`:
+
 ```text
  2019 172 06 08 10 JD172_21th_06mnth_YES 12
  2019 172 06 09 10 JD172_21th_06mnth_NOO 1

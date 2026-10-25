@@ -1,22 +1,30 @@
 ---
 layout: default
 title: paster4
-parent: Image Tools
+parent: Raster Image Processing (image)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 35
 tool_name: paster4
 source_path: code/image/paster4.c
 category: Mosaicking & Patching
-input_formats: ["OMG1 32-bit float grids (.r4)"]
-output_formats: ["Composite OMG1 32-bit float grid (.r4)"]
-related_tools: ["pastemos", "patchArea", "subimage", "decr4"]
+input_formats:
+- OMG1 32-bit float grids (.r4)
+output_formats:
+- Composite OMG1 32-bit float grid (.r4)
+related_tools:
+- pastemos
+- patchArea
+- subimage
+- decr4
 ---
 
 # paster4
 
 ## Description
-`paster4` is the 32-bit floating-point (`data_type = 3`, `.r4`) counterpart to [`pastemos`](pastemos.md). It initializes a `cols × rows` floating-point `OMG1` (`JHC_header`) canvas and interactively prompts the user to paste either external `.r4` sub-grids or constant-value rectangular blank patches at arbitrary pixel offsets `(left_x, top_y)`.
+`paster4` is the 32-bit floating-point (`data_type = 3`, `.r4`) counterpart to [`pastemos`](pastemos.html). It initializes a `cols × rows` floating-point `OMG1` (`JHC_header`) canvas and interactively prompts the user to paste either external `.r4` sub-grids or constant-value rectangular blank patches at arbitrary pixel offsets `(left_x, top_y)`.
 
 ## CLI Options & Usage
+
 ```bash
 paster4 -out <outfile.r4> -rows <nrows> -cols <ncols> [-back <val>]
 ```

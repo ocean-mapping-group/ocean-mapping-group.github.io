@@ -1,18 +1,19 @@
 ---
 layout: default
 title: orientation
-parent: Core Shared Libraries (subr)
-module_name: orientation
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/orientation.c
-header_path: code/subr/orientation.h
 category: Navigation, Attitude & Geodesy
 related_tools:
-  - newMergeAtt
-  - swathed (SE)
-  - applyBDI
-  - jview (JV)
-  - xse2omg
-  - targethunt
+- newMergeAtt
+- swathed (SE)
+- applyBDI
+- jview (JV)
+- xse2omg
+- targethunt
+module_name: orientation
+header_path: code/subr/orientation.h
 ---
 
 # orientation

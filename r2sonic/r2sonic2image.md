@@ -1,9 +1,11 @@
 ---
 layout: default
 title: r2sonic2image
-parent: R2Sonic Tools
+parent: R2Sonic 2020/2022/2024 (r2sonic)
+grand_parent: 4. Multi-Vendor Sonar & LiDAR Converters
 nav_order: 160
 ---
+
 # r2sonic2image
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 160
 It can be used to investigate the raw snippet waveforms around the detected bottom to understand detection quality or characteristics.
 
 ## Usage
+
 ```bash
 r2sonic2image -r2s <input.r2s> [-ping <ping_number>] [-v]
 ```

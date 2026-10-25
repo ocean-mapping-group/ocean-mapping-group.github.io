@@ -1,9 +1,11 @@
 ---
 layout: default
 title: moveOverWCinfo
-parent: OMG Tools
+parent: Core Swath & .all Suite (omg)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 42
 ---
+
 # moveOverWCinfo
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 42
 The tool attempts to match profiles between the two merged files. Historically, this was done primarily by time stamps. With the advent of formats like KMALL, which include more detailed indexing (ping number, RX fan index, swath position), `moveOverWCinfo` now offers a more robust matching mechanism.
 
 ## Usage
+
 ```bash
 moveOverWCinfo [-v] [-tol <tolerance>] <dot_all_merged_file> <wcinfo_merged_file>
 ```

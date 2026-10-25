@@ -1,21 +1,22 @@
 ---
 layout: default
 title: geoutm
-parent: Core Shared Libraries (subr)
-module_name: geoutm
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/geoutm.c
-header_path: code/subr/wgs.h
-category: "Geodesy, Map Projections & Coordinate Transforms"
+category: Geodesy, Map Projections & Coordinate Transforms
 related_tools:
-  - dumpXYZ
-  - convertutm
-  - make_bases
-  - make_blank
-  - r4toASCII
-  - r4toGRASS
-  - testutm
-  - dohypackLNW
-  - swathed
+- dumpXYZ
+- convertutm
+- make_bases
+- make_blank
+- r4toASCII
+- r4toGRASS
+- testutm
+- dohypackLNW
+- swathed
+module_name: geoutm
+header_path: code/subr/wgs.h
 ---
 
 # `geoutm` — Forward Geographic-to-UTM Map Projection

@@ -1,20 +1,21 @@
 ---
 layout: default
 title: testrot
-parent: tests (Test, Simulation & Diagnostic Suite)
+parent: Acoustic & Mathematical Test Harnesses (tests)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 nav_order: 26
 tool_name: testrot
 source_path: code/tests/testrot.c
 category: Attitude Error & Lever-Arm Coordinate Rotations (tests)
 input_formats:
-  - Interactive stdin prompts: 3D vector (x0, y0, z0), rotation direction (1, 2, or 0), and attitude Euler angles (roll, pitch, heading)
+- Interactive stdin prompts: 3D vector (x0, y0, z0), rotation direction (1, 2, or 0), and attitude Euler angles (roll, pitch, heading)
 output_formats:
-  - Rotated 3D vector coordinates (x1, y1, z1) on stdout
+- Rotated 3D vector coordinates (x1, y1, z1) on stdout
 related_tools:
-  - twistVRU
-  - DelayEditor
-  - RTlite
-  - newMergeAtt
+- twistVRU
+- DelayEditor
+- RTlite
+- newMergeAtt
 ---
 
 # testrot
@@ -22,7 +23,7 @@ related_tools:
 ## Overview
 `testrot` (`code/tests/testrot.c`, authored by John Hughes Clarke in July 1994) is an interactive command-line verification utility for testing 3D rigid-body Euler angle coordinate transformations implemented in `DCM_rthand.h` (`DCM_rotate` and `DCM_unrotate` in `liblocal.a`).
 
-In multibeam sonar ray-tracing and lever-arm motion compensation (such as [`RTlite`](../RTLite/RTlite.md), [`DelayEditor`](../DE/DelayEditor.md), and [`swathed`](../SE/swathed.md)), 3D vectors—such as GPS-to-transducer lever-arm offsets $(x_0, y_0, z_0)$ or unit beam pointing vectors—must be rotated accurately between the vessel/sonar reference frame (`SONAR`) and the local level geographic reference frame (`GEO`) using instantaneous roll ($r$), pitch ($p$), and heading/yaw ($h$). `testrot` allows the user to interactively enter any 3D vector `(x0, y0, z0)` and attitude triplet `(roll, pitch, heading)` and transform it either forward (`GEO -> SONAR` via `DCM_rotate`) or inverse (`SONAR -> GEO` via `DCM_unrotate`).
+In multibeam sonar ray-tracing and lever-arm motion compensation (such as [`RTlite`](../RTLite/RTlite.html), [`DelayEditor`](../DE/DelayEditor.html), and [`swathed`](../SE/swathed.html)), 3D vectors—such as GPS-to-transducer lever-arm offsets $(x_0, y_0, z_0)$ or unit beam pointing vectors—must be rotated accurately between the vessel/sonar reference frame (`SONAR`) and the local level geographic reference frame (`GEO`) using instantaneous roll ($r$), pitch ($p$), and heading/yaw ($h$). `testrot` allows the user to interactively enter any 3D vector `(x0, y0, z0)` and attitude triplet `(roll, pitch, heading)` and transform it either forward (`GEO -> SONAR` via `DCM_rotate`) or inverse (`SONAR -> GEO` via `DCM_unrotate`).
 
 ---
 
@@ -82,4 +83,4 @@ $ testrot
  10.000000 0.000000 90.000000
  rot back -1.736482 0.000000 9.848078
 ```
-To analyze coupled roll/pitch cross-talk caused by VRU yaw mounting misalignment, see [`twistVRU`](twistVRU.md).
+To analyze coupled roll/pitch cross-talk caused by VRU yaw mounting misalignment, see [`twistVRU`](twistVRU.html).

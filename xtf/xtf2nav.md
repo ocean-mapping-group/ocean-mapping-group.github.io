@@ -1,14 +1,26 @@
 ---
 layout: default
 title: xtf2nav
-parent: XTF Tools
+parent: eXtended Triton Format — XTF (xtf)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 8
 tool_name: xtf2nav
 source_path: code/xtf/xtf2nav.c
 category: Navigation Extraction
-input_formats: [".xtf", ".idx"]
-output_formats: [".nav_0", ".nav_2", ".nav_100", ".nav_107"]
-related_tools: ["xtf2orientation", "xtf2param", "xtfTool", "mergeNav", "stripNav"]
+input_formats:
+- .xtf
+- .idx
+output_formats:
+- .nav_0
+- .nav_2
+- .nav_100
+- .nav_107
+related_tools:
+- xtf2orientation
+- xtf2param
+- xtfTool
+- mergeNav
+- stripNav
 ---
 
 # xtf2nav
@@ -23,6 +35,7 @@ related_tools: ["xtf2orientation", "xtf2param", "xtfTool", "mergeNav", "stripNav
 > Downstream OMG tools (`mergeNav`, `jview`, etc.) always read `<prefix>.nav`. After running `xtf2nav`, copy your preferred navigation file (`.nav_2`, `.nav_0`, `.nav_100`, or `.nav_107`) to `<prefix>.nav`!
 
 ## Usage
+
 ```bash
 xtf2nav [OPTIONS] -nav <ship|sensor> -hdg <ship|sensor> -xtf <input.xtf> -omg <output_prefix>
 ```
@@ -54,12 +67,14 @@ xtf2nav [OPTIONS] -nav <ship|sensor> -hdg <ship|sensor> -xtf <input.xtf> -omg <o
 ## Practical Examples
 
 **1. Extract sensor navigation from a Reson XTF file and copy `.nav_2` to `.nav`:**
+
 ```bash
 xtf2nav -nav sensor -hdg sensor -xtf line01.xtf -omg line01
 cp line01.nav_2 line01.nav
 ```
 
 **2. Extract navigation from an R2Sonic XTF file (packet ID 65) logged in UTM Zone 20N:**
+
 ```bash
 xtf2nav -bathy_source 65 -zone 20 n -nav ship -hdg ship -xtf r2s_line.xtf -omg r2s_line
 cp r2s_line.nav_2 r2s_line.nav

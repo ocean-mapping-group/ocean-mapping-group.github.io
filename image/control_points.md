@@ -1,22 +1,31 @@
 ---
 layout: default
 title: control_points
-parent: Image Tools
+parent: Raster Image Processing (image)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 13
 tool_name: control_points
 source_path: code/image/control_points.c
 category: Satellite, SAR & Format Conversion
-input_formats: ["landsat_rec scanline file", "ASCII control point file (2 GCPs)"]
-output_formats: ["Geometrically calibrated landsat_rec file"]
-related_tools: ["addheader", "readheader", "distortImage", "landsat2acres"]
+input_formats:
+- landsat_rec scanline file
+- ASCII control point file (2 GCPs)
+output_formats:
+- Geometrically calibrated landsat_rec file
+related_tools:
+- addheader
+- readheader
+- distortImage
+- landsat2acres
 ---
 
 # control_points
 
 ## Description
-`control_points` (written by A. Y. / JCU, July 1990) refines the orbital navigation geometry stored in a `landsat_rec` scanline file (created by [`addheader`](addheader.md)) using two Ground Control Points (GCPs) with known pixel `(x, y)` and geographic `(latitude, longitude)` coordinates. It solves for the true satellite track heading (`track_angle`), along-track line spacing (`track_pixel_size`), across-track sample spacing (`scan_pixel_size`), and per-scanline center coordinates.
+`control_points` (written by A. Y. / JCU, July 1990) refines the orbital navigation geometry stored in a `landsat_rec` scanline file (created by [`addheader`](addheader.html)) using two Ground Control Points (GCPs) with known pixel `(x, y)` and geographic `(latitude, longitude)` coordinates. It solves for the true satellite track heading (`track_angle`), along-track line spacing (`track_pixel_size`), across-track sample spacing (`scan_pixel_size`), and per-scanline center coordinates.
 
 ## CLI Options & Usage
+
 ```bash
 control_points -in <in_landsat> -control <gcp_file> -out <out_landsat> [-scan_pixel <m>]
 ```

@@ -1,14 +1,28 @@
 ---
 layout: default
 title: HycomSSP
-parent: Ian Church (ianc) Tools
+parent: Ian Church — Hydrodynamic & 3D Ray-Trace Suite (ianc)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 nav_order: 2
 tool_name: HycomSSP
 source_path: code/ianc/HycomSSP.c
 category: Ocean Modeling & Hydrographic Utilities (ianc)
-input_formats: ["OPeNDAP / NetCDF HYCOM Grid", "OMG Binary Navigation (.nav)", "CARIS SVP (.svp)"]
-output_formats: ["CARIS SVP v2 (.svp)", "CARIS Tide (.tid)", "OMG Binary Navigation (.nav)", "Ocean Data View (.txt)", "CSV Surface Velocity (.txt)"]
-related_tools: ["modelMerge", "modelAnalysis", "oceanReader", "iwc_support", "iwc_water"]
+input_formats:
+- OPeNDAP / NetCDF HYCOM Grid
+- OMG Binary Navigation (.nav)
+- CARIS SVP (.svp)
+output_formats:
+- CARIS SVP v2 (.svp)
+- CARIS Tide (.tid)
+- OMG Binary Navigation (.nav)
+- Ocean Data View (.txt)
+- CSV Surface Velocity (.txt)
+related_tools:
+- modelMerge
+- modelAnalysis
+- oceanReader
+- iwc_support
+- iwc_water
 ---
 
 # HycomSSP

@@ -1,9 +1,11 @@
 ---
 layout: default
 title: plotSwath
-parent: Plot Tools
+parent: PostScript & Vector Plotting (plot)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 146
 ---
+
 # plotSwath
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 146
 The tool is interactive, prompting the user for plotting choices, Y-axis ranges, and allows for displaying all data or only data that is within a certain range.
 
 ## Usage
+
 ```bash
 plotSwath -infile <file1> [-outfile <filename.meta>] [-size <dx> <dy>] [-width <val>] [-showspikes] [-showall]
 ```

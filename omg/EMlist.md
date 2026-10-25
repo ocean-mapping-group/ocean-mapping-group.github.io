@@ -1,9 +1,11 @@
 ---
 layout: default
 title: EMlist
-parent: OMG Tools
+parent: Core Swath & .all Suite (omg)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 96
 ---
+
 # EMlist
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 96
 This tool is primarily for debugging, reverse-engineering, or in-depth analysis of raw Simrad EM data streams, providing insights into the binary structure and content of the acquisition files.
 
 ## Usage
+
 ```bash
 EMlist -in <infile> -out <outfile> [-v] [-recno <val>]
 ```

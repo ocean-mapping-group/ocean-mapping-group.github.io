@@ -1,15 +1,18 @@
 ---
 layout: default
 title: synSwath
-parent: GL Tools
+parent: OpenGL 3D Visualization (gl)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 1
 ---
+
 # synSwath
 
 ## Description
 `synSwath` is an interactive OpenGL-based simulation and visualization tool for multibeam sonar systems. It allows users to simulate various aspects of multibeam operations, including beam pattern generation, bottom detection algorithms, sound propagation effects, and the interaction of sonar pulses with a simulated seafloor. It supports 3D visualization, real-time animation, and can load custom terrain models, beam patterns, and motion data. The tool is designed for demonstrating and understanding complex sonar physics and data acquisition principles.
 
 ## Usage
+
 ```bash
 synSwath [OPTIONS]
 ```
@@ -18,6 +21,7 @@ Many options refer to files that configure the simulation (e.g., for beam patter
 ## Arguments
 
 ### Simulation & Data Loading
+
 | Option | Description |
 |---|---|
 | `-bp <filename>` | Load a beam pattern file. |
@@ -35,6 +39,7 @@ Many options refer to files that configure the simulation (e.g., for beam patter
 | `-ts <filename>` | Load a time series file for animation. |
 
 ### Rendering & Display
+
 | Option | Description | Default / Example |
 |---|---|---|
 | `-mini` | Use a reduced window size (e.g., 725x725 pixels) for the OpenGL display. | |
@@ -58,6 +63,7 @@ Many options refer to files that configure the simulation (e.g., for beam patter
 | `-SUN` | Enable a specific "SUN" display mode. | |
 
 ### Behavioral & Toggle Flags
+
 | Option | Description |
 |---|---|
 | `-v` | Enable verbose output, printing detailed information to the console during operation. | |

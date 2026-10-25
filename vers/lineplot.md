@@ -1,11 +1,17 @@
 ---
 layout: default
 title: lineplot
-parent: Versatec & Map Plotting (vers)
+parent: Version Control & Build Stamps (vers)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 tool_name: lineplot
 source_path: code/vers/lineplot.c
 category: Cartographic & Map Plotting
-related_tools: ["scaleimage", "viewmeta", "hpgl", "jview", "make_blank"]
+related_tools:
+- scaleimage
+- viewmeta
+- hpgl
+- jview
+- make_blank
 ---
 
 # lineplot
@@ -67,4 +73,4 @@ lineplot -area <jhc_mapfile> [OPTIONS]
 ---
 
 ## Output
-Generates `plot.meta` in the current working directory, which can be viewed interactively with [`viewmeta`](../plotlib/viewmeta.md) or converted to PostScript/HP-GL via [`hpgl`](../plotlib/hpgl.md).
+Generates `plot.meta` in the current working directory, which can be viewed interactively with [`viewmeta`](../plotlib/viewmeta.html) or converted to PostScript/HP-GL via [`hpgl`](../plotlib/hpgl.html).

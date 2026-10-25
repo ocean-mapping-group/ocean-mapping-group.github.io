@@ -1,14 +1,22 @@
 ---
 layout: default
 title: upsegy
-parent: SEGY Tools
+parent: SEG-Y Sub-Bottom & Seismic (segy)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 6
 tool_name: upsegy
 source_path: segy/upsegy.c
 category: format_conversion
-input_formats: [SEGY_EGG_CHIRP]
-output_formats: [BINARY_RASTER, JCU_NAV, ASCII_PICKS]
-related_tools: [mergePick, readSB_SEGY, readore]
+input_formats:
+- SEGY_EGG_CHIRP
+output_formats:
+- BINARY_RASTER
+- JCU_NAV
+- ASCII_PICKS
+related_tools:
+- mergePick
+- readSB_SEGY
+- readore
 ---
 
 # upsegy

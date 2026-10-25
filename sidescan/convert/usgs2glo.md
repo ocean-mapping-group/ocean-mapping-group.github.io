@@ -1,16 +1,18 @@
 ---
 layout: default
 title: usgs2glo
-parent: Convert Tools
-grand_parent: sidescan
+parent: Sidescan Radiometric & Geometric Suite (sidescan)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 5
 ---
+
 # usgs2glo
 
 ## Description
 `usgs2glo` is a utility designed to convert USGS merged GLORIA data to JCU GLORIA format. It is designed to work with ASCII header files and raw imagery, and can handle VAX byte order conversion to IEEE format.
 
 ## Usage
+
 ```bash
 usgs2glo -in <infile_prefix> -out <outfile> [-ping_rate <value>]
 ```

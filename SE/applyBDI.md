@@ -1,22 +1,38 @@
 ---
 layout: default
 title: applyBDI
-parent: SwathEd (SE) Tools
+parent: Swath Editor — swathed (SE)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 30
 tool_name: applyBDI
 source_path: code/SE/applyBDI.c
 category: Interactive QC & Editing (SwathEd)
-input_formats: [".merged", ".watercol", ".sectors", ".orientation", ".param", ".svp_001", ".nav"]
-output_formats: [".merged_BDI", "BDI_non-nMA_<tags>_<prefix>.merged", "BDI_w-nMA_<tags>_<prefix>.merged"]
-related_tools: ["bdi_funcs", "SE_BDI_DP", "swathed", "newMergeAtt", "getBounds"]
+input_formats:
+- .merged
+- .watercol
+- .sectors
+- .orientation
+- .param
+- .svp_001
+- .nav
+output_formats:
+- .merged_BDI
+- BDI_non-nMA_<tags>_<prefix>.merged
+- BDI_w-nMA_<tags>_<prefix>.merged
+related_tools:
+- bdi_funcs
+- SE_BDI_DP
+- swathed
+- newMergeAtt
+- getBounds
 ---
 
 # `applyBDI` — Batch Beam-Direction Indicator (BDI) Water Column Bottom Detector
 
 ## Overview & Purpose
-`applyBDI` (authored by Douglas Bergersen / Douglas and John E. Hughes Clarke, July 2015) is a standalone command-line utility that batch-applies the **Beam-Direction Indicator (BDI)** constant-time-slice angular peak-picking algorithm (defined in [`bdi_funcs.c`](bdi_funcs.md) and interactively tuned in [`SE_BDI_DP.c`](SE_BDI_DP.md)) across every ping of a Kongsberg `.merged` and `.watercol` dataset.
+`applyBDI` (authored by Douglas Bergersen / Douglas and John E. Hughes Clarke, July 2015) is a standalone command-line utility that batch-applies the **Beam-Direction Indicator (BDI)** constant-time-slice angular peak-picking algorithm (defined in [`bdi_funcs.c`](bdi_funcs.html) and interactively tuned in [`SE_BDI_DP.c`](SE_BDI_DP.html)) across every ping of a Kongsberg `.merged` and `.watercol` dataset.
 
-Unlike conventional multibeam bottom detection—which fixes a receive beam angle and searches along the time series for a bottom return (often failing on steep slopes, vertical walls, or complex targets)—BDI steps through **each constant Two-Way Travel Time (TWTT) slice** of the `.watercol` fan and picks up to two across-track amplitude peaks across the receive beam array using 3-point or 5-point parabolic interpolation. `applyBDI` converts these water-column BDI solutions into receiver-relative steering angles and travel times, packs them into `OMG_HDCS_beam` records (up to 400 solutions per output sub-swath), and optionally runs [`getBounds`](../omg/getBounds.md) and [`newMergeAtt`](../omg/newMergeAtt.md) to raytrace full 3D geographic soundings.
+Unlike conventional multibeam bottom detection—which fixes a receive beam angle and searches along the time series for a bottom return (often failing on steep slopes, vertical walls, or complex targets)—BDI steps through **each constant Two-Way Travel Time (TWTT) slice** of the `.watercol` fan and picks up to two across-track amplitude peaks across the receive beam array using 3-point or 5-point parabolic interpolation. `applyBDI` converts these water-column BDI solutions into receiver-relative steering angles and travel times, packs them into `OMG_HDCS_beam` records (up to 400 solutions per output sub-swath), and optionally runs [`getBounds`](../omg/getBounds.html) and [`newMergeAtt`](../omg/newMergeAtt.html) to raytrace full 3D geographic soundings.
 
 > [!IMPORTANT]
 > **Supported Sonar Systems & Companion Files:**
@@ -33,16 +49,19 @@ applyBDI -in <line.merged> -parabola <3|5> [OPTIONS]
 ### Example Workflows
 
 **1. Batch-generate a `.merged_BDI` file for direct inspection in `swathed` (`-out_as_bdi_extension`):**
+
 ```bash
 applyBDI -in 0001_line.merged -parabola 3 -out_as_bdi_extension
 ```
 
 **2. Run BDI with 5-point parabola, compress into 400 virtual beams per ping, and automatically raytrace via `newMergeAtt`:**
+
 ```bash
 applyBDI -in 0001_line.merged -parabola 5 -compress -virtual_beams 400
 ```
 
 **3. Apply a manual dB threshold with slope and manual standard-deviation filter:**
+
 ```bash
 applyBDI -in 0001_line.merged -parabola 3 -manual_threshold 3.0 -threshold_slope -1 \
          -apply_manual_filter -filter_index 7
@@ -69,7 +88,7 @@ applyBDI -in 0001_line.merged -parabola 3 -manual_threshold 3.0 -threshold_slope
 ## Processing Pipeline & Raytracing Geometry
 
 For each ping `i` (`0 .. summary.numProfiles - 1`), `applyBDI` executes:
-1. **Water Column Read & Peak Picking:** Reads the profile, transmit sectors (`.sectors`), raw beams, and water-column fan (`j_EM_read_watercolumn`), then invokes `standalone_BDI_pick_Angle_Peaks()` from [`bdi_funcs.c`](bdi_funcs.md) to populate `WC_BDI_pick[this_TWTT][0..1]`.
+1. **Water Column Read & Peak Picking:** Reads the profile, transmit sectors (`.sectors`), raw beams, and water-column fan (`j_EM_read_watercolumn`), then invokes `standalone_BDI_pick_Angle_Peaks()` from [`bdi_funcs.c`](bdi_funcs.html) to populate `WC_BDI_pick[this_TWTT][0..1]`.
 2. **TWTT & Range Calculation:** For every valid BDI pick (`WC_BDI_pick[this_TWTT][ii].angle != 0`), converts the sample index into true Two-Way Travel Time (`twtt`) by adding `start_range_sample_no` of the `closest_beam` and dividing by `WHOLE_ping_WC->sampling_freq / 100.0`. Populates `BDI_beams[jj].twtt`, `other_range = twtt * profile.samp_rate`, and `range = 0.5 * twtt * profile.samp_rate`.
 3. **Receive-Time Attitude Un-Stabilization (`Rc_steer`):** Because water-column beam pointing angles are stored relative to local vertical (`calc_angle = WC_BDI_pick[this_TWTT][ii].angle`), `applyBDI` reconstructs the raw array-relative receive steering angle required by `newMergeAtt`:
    - Adds the transducer roll mounting angle `mount_angle` from `<prefix>.param` (`sonar[1].dRoll` or `sonar[2].dRoll` for dual-head EM2040).

@@ -1,14 +1,25 @@
 ---
 layout: default
 title: xtf2omg_reson
-parent: XTF Tools
+parent: eXtended Triton Format — XTF (xtf)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 10
 tool_name: xtf2omg_reson
 source_path: code/xtf/xtf2omg_reson.c
 category: Raw Data Unraveling
-input_formats: [".xtf", ".idx"]
-output_formats: [".merged", ".merged.ss_data"]
-related_tools: ["7k2omg", "xtf2nav", "xtf2orientation", "xtf2param", "xtfTool", "makess"]
+input_formats:
+- .xtf
+- .idx
+output_formats:
+- .merged
+- .merged.ss_data
+related_tools:
+- 7k2omg
+- xtf2nav
+- xtf2orientation
+- xtf2param
+- xtfTool
+- makess
 ---
 
 # xtf2omg_reson
@@ -17,6 +28,7 @@ related_tools: ["7k2omg", "xtf2nav", "xtf2orientation", "xtf2param", "xtfTool", 
 `xtf2omg_reson` converts Reson SeaBat 8100-series (`8101`, `8111`, `8125`, `8150`, `8160`) multibeam bathymetry (`XTF_HEADER_BATHY`, ID 2), sidescan traces (`XTF_HEADER_SONAR`, ID 0), and snippets (`XTF_HEADER_RESON_SNIPPET`, ID 19) from an XTF file into OMG-HDCS v3 `.merged` and `.merged.ss_data` files.
 
 ## Usage
+
 ```bash
 xtf2omg_reson [OPTIONS] -xtf <inputfile.xtf> -omg <name_prefix>
 ```
@@ -53,6 +65,7 @@ xtf2omg_reson [OPTIONS] -xtf <inputfile.xtf> -omg <name_prefix>
 ## Practical Examples
 
 **1. Convert a Reson 8101 XTF file with quality filtering and attitude/nav extraction:**
+
 ```bash
 xtf2omg_reson -sonar 8101 -fq -xtf line01.xtf -omg line01
 xtf2orientation -xtf line01.xtf -omg line01.orientation

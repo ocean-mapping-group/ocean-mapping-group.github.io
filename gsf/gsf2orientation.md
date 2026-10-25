@@ -1,14 +1,22 @@
 ---
 layout: default
 title: gsf2orientation
-parent: GSF Tools
+parent: Generic Sensor Format — GSF (gsf)
+grand_parent: 4. Multi-Vendor Sonar & LiDAR Converters
 nav_order: 3
 tool_name: gsf2orientation
 source_path: code/gsf/gsf2orientation.c
 category: Attitude Extraction
-input_formats: [".gsf"]
-output_formats: [".orientation"]
-related_tools: ["gsf2omg", "gsf2param", "gsf2svp", "gsfTool", "mergeAtt"]
+input_formats:
+- .gsf
+output_formats:
+- .orientation
+related_tools:
+- gsf2omg
+- gsf2param
+- gsf2svp
+- gsfTool
+- mergeAtt
 ---
 
 # gsf2orientation
@@ -17,6 +25,7 @@ related_tools: ["gsf2omg", "gsf2param", "gsf2svp", "gsfTool", "mergeAtt"]
 `gsf2orientation` extracts full time-series attitude packets (`GSF_ATTITUDE`, record ID 6) from a Generic Sensor Format (`.gsf`) file and writes them to a binary OMG-HDCS v3 `.orientation` file.
 
 ## Usage
+
 ```bash
 gsf2orientation [-v] -gsf <input_name.gsf> -omg <omgfile.orientation>
 ```
@@ -36,6 +45,7 @@ gsf2orientation [-v] -gsf <input_name.gsf> -omg <omgfile.orientation>
 ## Practical Examples
 
 **1. Extract high-rate attitude from a GSF file:**
+
 ```bash
 gsf2orientation -v -gsf line01.gsf -omg line01.orientation
 ```

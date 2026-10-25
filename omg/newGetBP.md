@@ -1,9 +1,11 @@
 ---
 layout: default
 title: newGetBP
-parent: OMG Tools
+parent: Core Swath & .all Suite (omg)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 44
 ---
+
 # newGetBP
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 44
 The tool can handle various input data types (raw sidescan traces, reflectivity, calibrated backscatter, or specific KMALL parameters), apply numerous corrections (e.g., attenuation, TVG, declination), and filter data based on depth, angle, or spatial masks. It supports outputting beam patterns for individual modes/sectors or a collapsed average, and can generate diagnostic scatterplots or detailed attribute files.
 
 ## Usage
+
 ```bash
 newGetBP <file_prefix> [OPTIONS]
 ```
@@ -23,6 +26,7 @@ newGetBP <file_prefix> [OPTIONS]
 | `<file_prefix>` | **Required.** The base name of the merged file (e.g., `line`). The tool will look for `line.merged`, `line.ss_data`, `line.param`, etc. Multiple prefixes can be provided. |
 
 ### Input Data Type
+
 | Option | Description |
 |---|---|
 | `-trace` | (Default) Use raw sidescan traces. |
@@ -39,6 +43,7 @@ newGetBP <file_prefix> [OPTIONS]
 | `-bscal` | Use KMALL `BScalibration_dB`. |
 
 ### Angle Calculation
+
 | Option | Description |
 |---|---|
 | `-use_real_grazing` | Uses pre-calculated grazing angles from an external file (`.GRA` file must be provided). |
@@ -53,6 +58,7 @@ newGetBP <file_prefix> [OPTIONS]
 | `-separate_port_stbd_grazing` | Separates port and starboard grazing angle by looking at the steering angle. |
 
 ### Data Filtering & Selection
+
 | Option | Description | Default |
 |---|---|
 | `-onlymode <mode_ID>` | Process data only for a specific mode ID. | |
@@ -72,6 +78,7 @@ newGetBP <file_prefix> [OPTIONS]
 | `-fill_bin_gaps` | Fills gaps in angle bins by distributing contribution from wide beams. | |
 
 ### Corrections & Adjustments
+
 | Option | Description | Default |
 |---|---|---|
 | `-attenremove` | Remove attenuation from the value in the profile header. | |
@@ -87,6 +94,7 @@ newGetBP <file_prefix> [OPTIONS]
 | `-SR_ignore_within <deg>` | Don't use SR beam pattern within that sonar-relative incidence angle. | `0.0` |
 
 ### SRBP Extraction (ADH's functionality)
+
 | Option | Description |
 |---|---|
 | `-Extract_Across_SRBP` | Extracts across-track sonar relative beam pattern. |
@@ -108,6 +116,7 @@ newGetBP <file_prefix> [OPTIONS]
 | `-master_reference_sector <val>` | Master reference sector for adjusting across-track RBP. |
 
 ### Output & Debugging
+
 | Option | Description |
 |---|---|
 | `-out <outname>` | Specify the base name for output files. | `beampatt` |

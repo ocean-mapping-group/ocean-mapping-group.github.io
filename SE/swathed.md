@@ -1,14 +1,36 @@
 ---
 layout: default
 title: swathed
-parent: SwathEd (SE) Tools
+parent: Swath Editor — swathed (SE)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 1
 tool_name: swathed
 source_path: code/SE/swathed.c
 category: Interactive QC & Editing
-input_formats: [".merged", ".merged.100_ping_bounds", ".merged.global_bounds", ".watercol", ".WC_Phase1", ".WC_Phase2", ".r4", ".r4_weights", ".r4_weight_depth", ".8bit", ".ss"]
-output_formats: [".merged (beam status flags updated in-place)", ".r4 (updated live if -locate is used)", ".lookup", ".cleaned_areas"]
-related_tools: ["getBounds", "dumpFlags", "weigh_grid", "jview", "RefractEd", "newMergeAtt"]
+input_formats:
+- .merged
+- .merged.100_ping_bounds
+- .merged.global_bounds
+- .watercol
+- .WC_Phase1
+- .WC_Phase2
+- .r4
+- .r4_weights
+- .r4_weight_depth
+- .8bit
+- .ss
+output_formats:
+- .merged (beam status flags updated in-place)
+- .r4 (updated live if -locate is used)
+- .lookup
+- .cleaned_areas
+related_tools:
+- getBounds
+- dumpFlags
+- weigh_grid
+- jview
+- RefractEd
+- newMergeAtt
 ---
 
 # swathed
@@ -23,7 +45,7 @@ related_tools: ["getBounds", "dumpFlags", "weigh_grid", "jview", "RefractEd", "n
 
 > [!TIP]
 > **Preserving Manual Edits Across Re-Unraveling (`dumpFlags`):**
-> Because `swathed` writes sounding rejection flags directly into `<line>.merged`, re-running `read_kmall` or `RTlite` would overwrite your manual cleaning work. All OMG unraveling scripts (`unravel_KMALL_single`, `bunravel`) automatically run [`dumpFlags`](../omg/dumpFlags.md) before unpacking (which saves your `swathed` edits to `<line>.flag_bk`) and `dumpFlags -load` afterward to restore them!
+> Because `swathed` writes sounding rejection flags directly into `<line>.merged`, re-running `read_kmall` or `RTlite` would overwrite your manual cleaning work. All OMG unraveling scripts (`unravel_KMALL_single`, `bunravel`) automatically run [`dumpFlags`](../omg/dumpFlags.html) before unpacking (which saves your `swathed` edits to `<line>.flag_bk`) and `dumpFlags -load` afterward to restore them!
 
 ---
 
@@ -36,11 +58,13 @@ swathed [OPTIONS] <omgfile(s).merged ...>
 ### Common Workflow Examples
 
 **1. Inspect and clean a single `.merged` line (e.g., during or after unraveling):**
+
 ```bash
 swathed merged/JD100/0001_line.merged
 ```
 
 **2. Geographic area-based cleaning over a `weigh_grid` DTM (`-locate`) using a file list (`-xyzlist`):**
+
 ```bash
 # Ensure getBounds has been run on all .merged files first!
 getBounds merged/JD100/*.merged
@@ -50,11 +74,13 @@ swathed -locate bay_2m merged/JD100/*.merged
 ```
 
 **3. Inspect 2D water column "pie" fans on a `.kmall` / `.kmwcd` line up to 750 m depth:**
+
 ```bash
 swathed -show_WC2D -WC_depth 750.0 merged/JD100/0001_line.merged
 ```
 
 **4. Batch-export 2D water column fan images or 2D profile scatterplots and exit automatically (`-and_terminate`):**
+
 ```bash
 swathed -show_WC2D -dump_WC2D_pies -and_terminate merged/JD100/0001_line.merged
 ```

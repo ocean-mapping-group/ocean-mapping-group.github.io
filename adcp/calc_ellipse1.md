@@ -1,33 +1,35 @@
 ---
 layout: default
 title: calc_ellipse1
-parent: ADCP Tools
+parent: Teledyne RDI ADCP Processing (adcp)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 2
 tool_name: calc_ellipse1
 source_path: code/adcp/calc_ellipse1.c
 category: adcp
 input_formats:
-  - jcu_nav Depth-Averaged ADCP Vectors (.nav)
-  - JHC Grid (.r4 / .8bit)
+- jcu_nav Depth-Averaged ADCP Vectors (.nav)
+- JHC Grid (.r4 / .8bit)
 output_formats:
-  - jcu_nav Tidal Ellipse Vectors (_ellipse.nav)
-  - jcu_nav Residual Current Vectors (_residual.nav)
-  - jcu_nav Phase-Averaged Vectors (.phase###)
+- jcu_nav Tidal Ellipse Vectors (_ellipse.nav)
+- jcu_nav Residual Current Vectors (_residual.nav)
+- jcu_nav Phase-Averaged Vectors (.phase###)
 related_tools:
-  - calc_ellipse
-  - calc_ellipse2
-  - combineMultiADCP
-  - readADCP
+- calc_ellipse
+- calc_ellipse2
+- combineMultiADCP
+- readADCP
 ---
 
 # calc_ellipse1
 
 ## Description
-`calc_ellipse1` is a command-line utility for calculating M2 tidal current ellipses and mean residual circulation from depth-averaged ADCP (Acoustic Doppler Current Profiler) `.nav` files. Like [`calc_ellipse`](calc_ellipse.md) and [`calc_ellipse2`](calc_ellipse2.md), it reads depth-averaged velocity vectors from multiple tidal cycles, bins them spatially using a coarse JHC grid (`-grid`) and temporally by M2 tidal phase ($12.42\text{ hours} = 360^\circ$), and computes the principal-axis tidal ellipse parameters for each grid cell.
+`calc_ellipse1` is a command-line utility for calculating M2 tidal current ellipses and mean residual circulation from depth-averaged ADCP (Acoustic Doppler Current Profiler) `.nav` files. Like [`calc_ellipse`](calc_ellipse.html) and [`calc_ellipse2`](calc_ellipse2.html), it reads depth-averaged velocity vectors from multiple tidal cycles, bins them spatially using a coarse JHC grid (`-grid`) and temporally by M2 tidal phase ($12.42\text{ hours} = 360^\circ$), and computes the principal-axis tidal ellipse parameters for each grid cell.
 
 Unlike `calc_ellipse` (which writes only a CSV file), `calc_ellipse1` outputs two binary `jcu_nav` files—`<ellipse_file>_ellipse.nav` and `<ellipse_file>_residual.nav`—so that tidal ellipses and mean residual vectors can be plotted directly on mapsheets in `jview` and `plot_nav`.
 
 ## Usage
+
 ```bash
 calc_ellipse1 [OPTIONS] -grid <coarseDTM> -out <outfilenameprefix> -ellipse_file <ellipse_prefix> -in <infilename(s)>
 ```

@@ -1,9 +1,11 @@
 ---
 layout: default
 title: sm2file.h
-parent: OMG Tools
+parent: Core Swath & .all Suite (omg)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 63
 ---
+
 # sm2file.h
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 63
 The header defines structures for record headers, file headers, and a file block that manages the state of an open sm2 file. It also declares several external functions for opening, reading, writing, and closing sm2 files.
 
 ## Macros
+
 | Macro | Description |
 |---|---|
 | `SM2FILE` | `0` |
@@ -25,6 +28,7 @@ These macros define constants related to the sm2 file format and error codes.
 ## Data Structures
 
 ### `sm2RecHdr` (Standard Record Header)
+
 ```c
 typedef struct {
     long	rh_size;	/* record size, in bytes */
@@ -38,6 +42,7 @@ This structure defines the header for individual records within an sm2 file.
 *   `rh_time`: The timestamp of the record.
 
 ### `sm2FileHdr` (Standard File Header Record)
+
 ```c
 typedef struct {
     long	fh_size;	/* header record size, in bytes */
@@ -54,6 +59,7 @@ This structure defines the header for the entire sm2 file.
 *   `fh_rcnt`: The total count of data records in the file.
 
 ### `sm2FileBlock` (File Block)
+
 ```c
 typedef struct {
     int		fb_fd;		/* file descriptor */

@@ -1,7 +1,8 @@
 ---
 layout: default
 title: temp.c
-parent: GLSEIS Tools
+parent: OpenGL 3D Seismic & Curtain Viewer (glseis)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 10
 ---
 

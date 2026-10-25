@@ -1,16 +1,17 @@
 ---
 layout: default
 title: lambert
-parent: Core Shared Libraries (subr)
-module_name: lambert
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/lambert.c
-header_path: code/subr/lambert.h
 category: Map Projections & Coordinate Transformations
 related_tools:
-  - j_proj
-  - weigh_grid
-  - makess
-  - jview
+- j_proj
+- weigh_grid
+- makess
+- jview
+module_name: lambert
+header_path: code/subr/lambert.h
 ---
 
 # `lambert` — Lambert Conformal Conic (LCC) Map Projection Library
@@ -27,6 +28,7 @@ In the OMG raster and mapping architecture (`j_proj.c` and `array.h`), Lambert C
 
 ### `Lambert` (and global `Lambert projection_vars`)
 Stores the reference ellipsoid parameters, user-specified standard parallels and origin, and precomputed Snyder (1987) conformal conic constants:
+
 ```c
 typedef struct {
     /* Ellipsoidal parameters */

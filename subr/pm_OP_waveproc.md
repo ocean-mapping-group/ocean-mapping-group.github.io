@@ -1,18 +1,19 @@
 ---
 layout: default
 title: pm_OP_waveproc
-parent: Core Shared Libraries (subr)
-module_name: pm_OP_waveproc
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/pm_OP_waveproc.c
-header_path: code/subr/pm_OP_waveproc.h
 category: Acoustic & Bathymetric Processing
 related_tools:
-  - swathed (SE)
-  - dumpWaveFormParams
-  - processSHOALSdepths
-  - make_Optech_prof
-  - filterPPK
-  - merge_PPK
+- swathed (SE)
+- dumpWaveFormParams
+- processSHOALSdepths
+- make_Optech_prof
+- filterPPK
+- merge_PPK
+module_name: pm_OP_waveproc
+header_path: code/subr/pm_OP_waveproc.h
 ---
 
 # pm_OP_waveproc

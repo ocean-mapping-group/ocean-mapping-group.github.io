@@ -1,9 +1,9 @@
 ---
 layout: default
-title: R2Sonic Multibeam Tools
-parent: Formats & Converters
+title: R2Sonic 2020/2022/2024 (r2sonic)
+parent: 4. Multi-Vendor Sonar & LiDAR Converters
+nav_order: 3
 has_children: true
-nav_order: 12
 ---
 
 # R2Sonic Multibeam Tools (`r2sonic/`)
@@ -18,8 +18,8 @@ The `r2sonic/` directory contains utilities for inspecting and converting raw **
 
 | Tool | Source File | Primary Purpose | Input Formats | Output Formats |
 | :--- | :--- | :--- | :--- | :--- |
-| [`bth2omg`](bth2omg.html) | `r2sonic/bth2omg.c` | Convert raw R2Sonic `.bth` / `.r2s` bathymetry (`BTH0`) and snippet (`SNI0`) logs along with external navigation into OMG `.merged`, `.param`, and `.bck` files | `.bth`, `.r2s`, `.nav` | `.merged`, `.param`, `.bck` |
-| [`r2sTool`](r2sTool.html) | `r2sonic/r2sTool.c` | Interactive Motif/X11 and CLI packet analyzer for R2Sonic `BTH0` (`H0`) bathymetry and `SNI0` (`I0`) snippet packets | `.bth`, `.r2s` | Diagnostic text, X11 beam plots |
+| [`bth2omg`](r2sonic2omg.html) | `r2sonic/bth2omg.c` | Convert raw R2Sonic `.bth` / `.r2s` bathymetry (`BTH0`) and snippet (`SNI0`) logs along with external navigation into OMG `.merged`, `.param`, and `.bck` files | `.bth`, `.r2s`, `.nav` | `.merged`, `.param`, `.bck` |
+| [`r2sTool`](r2sonic2omg.html) | `r2sonic/r2sTool.c` | Interactive Motif/X11 and CLI packet analyzer for R2Sonic `BTH0` (`H0`) bathymetry and `SNI0` (`I0`) snippet packets | `.bth`, `.r2s` | Diagnostic text, X11 beam plots |
 
 ---
 

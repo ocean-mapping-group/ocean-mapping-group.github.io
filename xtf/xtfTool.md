@@ -1,14 +1,27 @@
 ---
 layout: default
 title: xtfTool
-parent: XTF Tools
+parent: eXtended Triton Format — XTF (xtf)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 14
 tool_name: xtfTool
 source_path: code/xtf/xtfTool.c
 category: Diagnostics & Indexing
-input_formats: [".xtf"]
-output_formats: [".idx", ".port_trace", ".stbd_trace", ".beam_NNN", "raw binary extraction"]
-related_tools: ["xtf2omg_reson", "xtf2omg_r2sonic", "xtf2omg_simrad", "xtf2nav", "xtf2orientation", "xtf2param"]
+input_formats:
+- .xtf
+output_formats:
+- .idx
+- .port_trace
+- .stbd_trace
+- .beam_NNN
+- raw binary extraction
+related_tools:
+- xtf2omg_reson
+- xtf2omg_r2sonic
+- xtf2omg_simrad
+- xtf2nav
+- xtf2orientation
+- xtf2param
 ---
 
 # xtfTool
@@ -17,6 +30,7 @@ related_tools: ["xtf2omg_reson", "xtf2omg_r2sonic", "xtf2omg_simrad", "xtf2nav",
 `xtfTool` is the primary diagnostic, indexing, and packet-extraction utility for Triton XTF (`.xtf`) files. It scans an XTF file, prints a summary inventory of all packet types present, optionally writes a binary packet index (`<basename>.idx`) to accelerate subsequent runs of `xtf2nav`, `xtf2orientation`, `xtf2omg_*`, and `xtf2gloria`, and can dump decoded packet structures or raw binary payloads for Reson, Simrad, ELAC, R2Sonic, and QINSy QMBE records.
 
 ## Usage
+
 ```bash
 xtfTool [OPTIONS] -in <file.xtf>
 ```
@@ -54,16 +68,19 @@ xtfTool [OPTIONS] -in <file.xtf>
 ## Practical Examples
 
 **1. Inspect an XTF file and generate a `.idx` index file:**
+
 ```bash
 xtfTool -v -write_index -in survey01.xtf
 ```
 
 **2. Dump Reson snippet traces in dB for record 150:**
+
 ```bash
 xtfTool -snipdump -rec 150 -log -in reson01.xtf
 ```
 
 **3. Extract embedded R2Sonic Bathy (ID 65) and FTS (ID 66) packets into a native `.r2s` file:**
+
 ```bash
 xtfTool -extract_bathy -extract_snippets -extract_file line01.r2s -in qinsy_r2s.xtf
 ```

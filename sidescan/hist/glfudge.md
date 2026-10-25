@@ -1,16 +1,18 @@
 ---
 layout: default
 title: glfudge
-parent: Histogram Tools
-grand_parent: sidescan
+parent: Sidescan Radiometric & Geometric Suite (sidescan)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 2
 ---
+
 # glfudge
 
 ## Description
 `glfudge` is a utility designed to fill in invalid data (typically pixels with a value of 255) in JCU GLORIA format files. It is similar to `glfill.c` but employs a more aggressive interpolation strategy, first filling gaps in the across-track direction within each ping, and then filling gaps in the along-track (ping-to-ping) direction. It allows for configurable maximum interpolation distances in both directions.
 
 ## Usage
+
 ```bash
 glfudge [-invalid <value>] [-maxInterpAlong <pixels>] [-maxInterpAcross <pixels>] [-lower_level <value>] <rawfile> <fillfile>
 ```

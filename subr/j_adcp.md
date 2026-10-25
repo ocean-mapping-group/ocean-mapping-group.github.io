@@ -1,14 +1,15 @@
 ---
 layout: default
 title: j_adcp
-parent: Core Shared Libraries (subr)
-module_name: j_adcp
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/j_adcp.c
-header_path: code/subr/j_adcp.h
 category: Oceanographic & Acoustic Sensor I/O
 related_tools:
-  - adcputilities
-  - watercolumn / current profiling tools
+- adcputilities
+- watercolumn / current profiling tools
+module_name: j_adcp
+header_path: code/subr/j_adcp.h
 ---
 
 # `j_adcp` — Teledyne RDI ADCP (ASCII, WinADCP & VmDas Binary) Parser Library

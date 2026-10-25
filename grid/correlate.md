@@ -1,9 +1,11 @@
 ---
 layout: default
 title: correlate
-parent: Grid Tools
+parent: Bathymetric Gridding & Export (grid)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 16
 ---
+
 ---
 layout: default
 title: correlate
@@ -16,6 +18,7 @@ nav_order: 16
 `correlate` is a command-line utility designed to perform image correlation between a stereo pair of 8-bit images (master and slave). It searches for the best match of a user-defined window from the master image within a specified search range in the slave image. It outputs three 8-bit JHC-format grid files: one for the X-shift, one for the Y-shift, and one for the correlation coefficient (or residual difference) for each correlated pixel location in the master image. This tool is fundamental for stereo photogrammetry or motion tracking applications.
 
 ## Usage
+
 ```bash
 correlate -name <file_prefix> [OPTIONS]
 ```

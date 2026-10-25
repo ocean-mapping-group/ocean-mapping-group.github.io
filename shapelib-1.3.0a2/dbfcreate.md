@@ -1,14 +1,21 @@
 ---
 layout: default
 title: dbfcreate
-parent: Shapelib GIS Library & Tools (shapelib-1.3.0a2)
+parent: ESRI Shapefile C Library (shapelib-1.3.0a2)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 nav_order: 2
 tool_name: dbfcreate
 source_path: code/shapelib-1.3.0a2/dbfcreate.c
 category: GIS & ESRI Shapefile Library / Tools
-input_formats: ["CLI field schema definitions (-s, -n)"]
-output_formats: [".dbf (xBase table)"]
-related_tools: ["dbfadd", "dbfdump", "dbfopen", "shpcreate"]
+input_formats:
+- CLI field schema definitions (-s, -n)
+output_formats:
+- .dbf (xBase table)
+related_tools:
+- dbfadd
+- dbfdump
+- dbfopen
+- shpcreate
 ---
 
 # dbfcreate
@@ -82,4 +89,4 @@ dbfdump -h survey_bounds.dbf
 
 ## Architectural Fit
 
-`dbfcreate` is the standard CLI schema initializer in `code/shapelib-1.3.0a2/`, paired with [`shpcreate`](shpcreate.md), [`dbfadd`](dbfadd.md), and [`dbfdump`](dbfdump.md) for command-line shapefile generation and inspection.
+`dbfcreate` is the standard CLI schema initializer in `code/shapelib-1.3.0a2/`, paired with [`shpcreate`](shpcreate.html), [`dbfadd`](dbfadd.html), and [`dbfdump`](dbfdump.html) for command-line shapefile generation and inspection.

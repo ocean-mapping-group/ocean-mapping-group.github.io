@@ -1,7 +1,7 @@
 ---
 layout: default
-title: LLM / RAG & Fine-Tuning Resources
-nav_order: 3
+title: LocalAI / LLM & RAG Dataset
+nav_order: 5
 has_children: false
 ---
 

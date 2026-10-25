@@ -1,14 +1,18 @@
 ---
 layout: default
 title: wasspTool
-parent: WASSP Tools
+parent: Furuno WASSP Multibeam (wassp)
+grand_parent: 4. Multi-Vendor Sonar & LiDAR Converters
 nav_order: 2
 tool_name: wasspTool
 source_path: wassp/wasspTool.c
 category: diagnostics
-input_formats: [WASSP]
-output_formats: [ASCII_STDOUT]
-related_tools: [wassp2omg]
+input_formats:
+- WASSP
+output_formats:
+- ASCII_STDOUT
+related_tools:
+- wassp2omg
 ---
 
 # wasspTool

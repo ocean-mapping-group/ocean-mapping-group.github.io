@@ -1,21 +1,22 @@
 ---
 layout: default
 title: mercator
-parent: Core Shared Libraries (subr)
-module_name: mercator
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/mercator.c
-header_path: code/subr/mercator.h
 category: Map Projections & Coordinate Transformations
 related_tools:
-  - j_proj
-  - weigh_grid
-  - makess
-  - inArea
-  - checkSD
-  - getGraz
-  - showPingRate
-  - correctBS
-  - jview
+- j_proj
+- weigh_grid
+- makess
+- inArea
+- checkSD
+- getGraz
+- showPingRate
+- correctBS
+- jview
+module_name: mercator
+header_path: code/subr/mercator.h
 ---
 
 # `mercator` — Ellipsoidal Mercator Map Projection Library

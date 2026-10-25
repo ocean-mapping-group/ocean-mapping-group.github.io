@@ -1,14 +1,19 @@
 ---
 layout: default
 title: subsetAscii
-parent: MR1 Tools
+parent: HAWAII MR1 Towed Sidescan (mr1)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 10
 tool_name: subsetAscii
 source_path: mr1/subsetAscii.c
 category: navigation_processing
-input_formats: [ASCII_XYZ]
-output_formats: [ASCII_XYZ]
-related_tools: [combineMW, swapascii]
+input_formats:
+- ASCII_XYZ
+output_formats:
+- ASCII_XYZ
+related_tools:
+- combineMW
+- swapascii
 ---
 
 # subsetAscii

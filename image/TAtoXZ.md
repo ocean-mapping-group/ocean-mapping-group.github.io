@@ -1,14 +1,21 @@
 ---
 layout: default
 title: TAtoXZ
-parent: Image Tools
+parent: Raster Image Processing (image)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 6
 tool_name: TAtoXZ
 source_path: code/image/TAtoXZ.c
 category: Multibeam Water Column & Acoustic Modeling
-input_formats: ["SM2000 Time-Angle rasters (<prefix>.TA_inten, <prefix>.TA_phase)"]
-output_formats: ["Across-track / depth fan rasters (<prefix>.XZ_inten, <prefix>.XZ_phase)"]
-related_tools: ["comboTAs", "comboVPs", "patchTA", "stackPIEs"]
+input_formats:
+- SM2000 Time-Angle rasters (<prefix>.TA_inten, <prefix>.TA_phase)
+output_formats:
+- Across-track / depth fan rasters (<prefix>.XZ_inten, <prefix>.XZ_phase)
+related_tools:
+- comboTAs
+- comboVPs
+- patchTA
+- stackPIEs
 ---
 
 # TAtoXZ
@@ -17,6 +24,7 @@ related_tools: ["comboTAs", "comboVPs", "patchTA", "stackPIEs"]
 `TAtoXZ` projects Simrad/Kongsberg Mesotech SM2000 multibeam sonar water-column frames from raw polar Time-Angle coordinates (`782` time samples × `120` beams in `<prefix>.TA_inten` and `<prefix>.TA_phase`) into Cartesian across-track vs. depth (`XZ`) fan coordinates (`1024 × 512` pixels in `<prefix>.XZ_inten` and `<prefix>.XZ_phase`).
 
 ## CLI Options & Usage
+
 ```bash
 TAtoXZ -in <sm2kprefix>
 ```

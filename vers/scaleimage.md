@@ -1,11 +1,16 @@
 ---
 layout: default
 title: scaleimage
-parent: Versatec & Map Plotting (vers)
+parent: Version Control & Build Stamps (vers)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 tool_name: scaleimage
 source_path: code/vers/scaleimage.c
 category: Cartographic & Map Plotting
-related_tools: ["lineplot", "jview", "X_extra", "CnCcolorMap"]
+related_tools:
+- lineplot
+- jview
+- X_extra
+- CnCcolorMap
 ---
 
 # scaleimage

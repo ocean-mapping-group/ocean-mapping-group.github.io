@@ -1,9 +1,11 @@
 ---
 layout: default
 title: RefractEd
-parent: OMG Tools
+parent: Core Swath & .all Suite (omg)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 53
 ---
+
 # RefractEd
 
 ## Description
@@ -16,6 +18,7 @@ The tool provides a graphical interface to:
 *   Interact with the SVP to modify velocities, observing the real-time impact on raytracing results.
 
 ## Usage
+
 ```bash
 RefractEd <datafile> [-v] [-SUN] [-std16] [-raw <filename>] [-raw <filename2>]
 ```

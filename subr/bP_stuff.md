@@ -1,16 +1,17 @@
 ---
 layout: default
 title: bP_stuff
-parent: Core Shared Libraries (subr)
-module_name: bP_stuff
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/bP_stuff.c
-header_path: code/subr/bP_stuff.h
 category: Acoustic Array & Beam Pattern Modeling
 related_tools:
-  - plotBP
-  - BDplot
-  - makeSynPing
-  - synSwath
+- plotBP
+- BDplot
+- makeSynPing
+- synSwath
+module_name: bP_stuff
+header_path: code/subr/bP_stuff.h
 ---
 
 # bP_stuff: Acoustic Transducer Array Shading, Beam Pattern & Phase Modeling
@@ -29,6 +30,7 @@ The module supports 9 classical aperture shading (apodization) windows—includi
 ## Key Constants & Global State Variables
 
 ### Array & Shading Constants
+
 ```c
 /* Pattern / Direction Indices */
 #define TRANSMIT_FORE_AFT  0

@@ -1,20 +1,21 @@
 ---
 layout: default
 title: one
-parent: tests (Test, Simulation & Diagnostic Suite)
+parent: Acoustic & Mathematical Test Harnesses (tests)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 nav_order: 10
 tool_name: one
 source_path: code/tests/one.c
 category: Seawater Sound Speed & Oceanographic Functions (tests)
 input_formats:
-  - C function arguments: double t (temperature °C), double p (pressure kg/cm²), double s (salinity ppt)
+- C function arguments: double t (temperature °C), double p (pressure kg/cm²), double s (salinity ppt)
 output_formats:
-  - Return value: double vchemilli (sound speed in m/s)
+- Return value: double vchemilli (sound speed in m/s)
 related_tools:
-  - two
-  - testSV
-  - speedtosalinity
-  - speed2salinity
+- two
+- testSV
+- speedtosalinity
+- speed2salinity
 ---
 
 # one (`this_vchemilli`)
@@ -22,7 +23,7 @@ related_tools:
 ## Overview
 `one.c` (`code/tests/one.c`) is a standalone 60-line C function module containing `double this_vchemilli(double t, double p, double s)`, an early implementation of the **Chen & Millero (1977)** empirical equation for the speed of sound in seawater as a function of temperature $t$ ($^\circ\text{C}$), pressure $p$ ($\text{kg/cm}^2$), and salinity $s$ (parts per thousand / PSU).
 
-In the OMG repository history, `one.c` and [`two.c`](two.md) were created side-by-side in `code/tests/` to isolate and debug a subtle typographical error in the quadratic pressure coefficient `a3` of the pure-water sound speed polynomial $C_w(t,p)$—a bug documented by Jason Bartlett (`JDB`) in [`testSV.c`](testSV.md) (`/* This had a boo-boo in it... */`).
+In the OMG repository history, `one.c` and [`two.c`](two.html) were created side-by-side in `code/tests/` to isolate and debug a subtle typographical error in the quadratic pressure coefficient `a3` of the pure-water sound speed polynomial $C_w(t,p)$—a bug documented by Jason Bartlett (`JDB`) in [`testSV.c`](testSV.html) (`/* This had a boo-boo in it... */`).
 
 ---
 
@@ -52,6 +53,7 @@ where:
    * $a_1 = 1402.388 + 5.03711 t - 5.80852\times 10^{-2} t^2 + 3.3420\times 10^{-4} t^3 - 1.4780\times 10^{-6} t^4 + 3.1464\times 10^{-9} t^5$
    * $a_2 = \left(0.153563 + 6.8982\times 10^{-4} t - 8.1788\times 10^{-6} t^2 + 1.3621\times 10^{-7} t^3 - 6.1185\times 10^{-10} t^4\right) p$
    * $a_3$ **(Buggy in `one.c` lines 19–21):**
+
      ```c
      a3 = (3.1260e-5 - 1.7107e-6 * t + 2.5974e-8 * t * t - 2.5335e-10 * pow(t, 3) +
            1.0405e-12 + pow(t, 4)) * p * p;
@@ -72,6 +74,6 @@ where:
 
 ## Relationship to Other OMG Files
 
-* **[`two.c`](two.md):** Contains the corrected version of this function (`1.0405e-12 * pow(t, 4)`).
-* **[`speedtosalinity.c`](speedtosalinity.md):** Retains the `1.0405e-12 + pow(t, 4)` typo in its local copy of `vchemilli()`.
-* **[`testSV.c`](testSV.md):** Documents the bug (`/* This had a boo-boo in it...I fixed it... JDB, September 2004 */`) and replaces it with the validated `ChenMillero()` function from `soundspeed.c`.
+* **[`two.c`](two.html):** Contains the corrected version of this function (`1.0405e-12 * pow(t, 4)`).
+* **[`speedtosalinity.c`](speedtosalinity.html):** Retains the `1.0405e-12 + pow(t, 4)` typo in its local copy of `vchemilli()`.
+* **[`testSV.c`](testSV.html):** Documents the bug (`/* This had a boo-boo in it...I fixed it... JDB, September 2004 */`) and replaces it with the validated `ChenMillero()` function from `soundspeed.c`.

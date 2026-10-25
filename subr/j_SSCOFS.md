@@ -1,15 +1,16 @@
 ---
 layout: default
 title: j_SSCOFS
-parent: Core Shared Libraries (subr)
-module_name: j_SSCOFS
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/j_SSCOFS.c
-header_path: code/subr/j_SSCOFS.h
-category: "Oceanographic Models, Tides & Sound Velocity"
+category: Oceanographic Models, Tides & Sound Velocity
 related_tools:
-  - extractNodeProf
-  - extractSVTS
-  - extractVertSection
+- extractNodeProf
+- extractSVTS
+- extractVertSection
+module_name: j_SSCOFS
+header_path: code/subr/j_SSCOFS.h
 ---
 
 # `j_SSCOFS` — Unstructured Finite-Element Hydrodynamic Ocean Model Loader (`QUODDY` / `SSCOFS` / `STOFS-3D`)
@@ -25,6 +26,7 @@ The `j_SSCOFS` module (`code/subr/j_SSCOFS.c` and `code/subr/j_SSCOFS.h`) provid
 - `#define QUODDYMAXLAYERS 500`: Maximum vertical sigma/z-level layers supported at each unstructured mesh node.
 
 ### 2. Mesh & Raster Index Structures
+
 ```c
 typedef struct {
     int nolayers;
@@ -55,6 +57,7 @@ typedef struct {
 ## Public Functions & Signatures
 
 ### 1. Finite-Element Mesh & Element-Map Loader
+
 ```c
 int SSCOFS_load_quoddy_mapelem(char *quoddyprefix, char *mapelemname);
 ```
@@ -66,6 +69,7 @@ int SSCOFS_load_quoddy_mapelem(char *quoddyprefix, char *mapelemname);
   4. **Spatial Index Grid (`mapelem`):** Opens `mapelemname`, reads its `JHC_header` via `jread_header()`, allocates `xdim * ydim` floats, and loads the rasterized triangle index map via `jread_data()`.
 
 ### 2. Spatial Node/Element Lookup Hook
+
 ```c
 int SSCOFS_find_nodelem(double lon, double lat, int *elem, int *nod);
 ```

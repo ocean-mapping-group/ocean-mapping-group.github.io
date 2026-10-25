@@ -1,14 +1,22 @@
 ---
 layout: default
 title: dbfdump
-parent: Shapelib GIS Library & Tools (shapelib-1.3.0a2)
+parent: ESRI Shapefile C Library (shapelib-1.3.0a2)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 nav_order: 3
 tool_name: dbfdump
 source_path: code/shapelib-1.3.0a2/dbfdump.c
 category: GIS & ESRI Shapefile Library / Tools
-input_formats: [".dbf (xBase attribute table)"]
-output_formats: ["STDOUT tabular / multiline attribute dump"]
-related_tools: ["dbfcreate", "dbfadd", "dbfopen", "shpdump", "shputils"]
+input_formats:
+- .dbf (xBase attribute table)
+output_formats:
+- STDOUT tabular / multiline attribute dump
+related_tools:
+- dbfcreate
+- dbfadd
+- dbfopen
+- shpdump
+- shputils
 ---
 
 # dbfdump
@@ -17,7 +25,7 @@ related_tools: ["dbfcreate", "dbfadd", "dbfopen", "shpdump", "shputils"]
 
 `dbfdump` (`code/shapelib-1.3.0a2/dbfdump.c`) is a command-line inspection utility authored by Frank Warmerdam that reads an **xBase (`.dbf`)** attribute table and prints its column schema and all records to `stdout` in human-readable tabular, raw, or multi-line format.
 
-When working with ESRI Shapefiles in hydrographic and GIS workflows (such as navigation tracklines exported by [`iNav2SHP`](../nav/iNav2SHP.md) or coastline shapefiles), `dbfdump` allows operators and shell scripts to inspect field names, native xBase column types (`C`, `N`, `F`, `L`, `D`), column widths, decimal precisions, `NULL` attribute flags, and record values directly in the terminal without opening a desktop GIS application.
+When working with ESRI Shapefiles in hydrographic and GIS workflows (such as navigation tracklines exported by [`iNav2SHP`](../nav/iNav2SHP.html) or coastline shapefiles), `dbfdump` allows operators and shell scripts to inspect field names, native xBase column types (`C`, `N`, `F`, `L`, `D`), column widths, decimal precisions, `NULL` attribute flags, and record values directly in the terminal without opening a desktop GIS application.
 
 ---
 

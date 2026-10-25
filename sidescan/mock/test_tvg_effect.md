@@ -1,16 +1,18 @@
 ---
 layout: default
 title: test_tvg_effect
-parent: Mock Tools
-grand_parent: sidescan
+parent: Sidescan Radiometric & Geometric Suite (sidescan)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 15
 ---
+
 # test_tvg_effect
 
 ## Description
 `test_tvg_effect` is a utility designed to visualize the effect of Time-Varying Gain (TVG) on different seafloor depths as a function of range and grazing angle. It generates a 2D plot, represented as a JHC image format "table" file, which illustrates how the TVG-applied gain (in dB) changes under various depth and grazing angle conditions. This helps in understanding the compensation mechanism of the TVG function.
 
 ## Usage
+
 ```bash
 test_tvg_effect [-table <tablename>] [-full]
 ```

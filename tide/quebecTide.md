@@ -1,20 +1,27 @@
 ---
 layout: default
 title: quebecTide
-parent: Tide Tools
+parent: Tidal Reduction & Constituents (tide)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 tool_name: quebecTide
 source_path: code/tide/quebecTide.c
 category: tide
-input_formats: ["81-byte fixed-record CHS Quebec / Australian tide format"]
-output_formats: ["JHC ASCII tide (jday hour min tide_m)"]
-related_tools: ["transTide", "convCHSpredTide", "binTide", "mergeTide"]
+input_formats:
+- 81-byte fixed-record CHS Quebec / Australian tide format
+output_formats:
+- JHC ASCII tide (jday hour min tide_m)
+related_tools:
+- transTide
+- convCHSpredTide
+- binTide
+- mergeTide
 ---
 
 # quebecTide
 
 ## Overview
 
-`quebecTide` converts 81-byte fixed-width tide gauge records (containing 12 fifteen-minute centimeter tide readings per 3-hour record) into the 4-column JHC ASCII tide format (`jday hour min tide_m`). It is a variant of [`transTide`](transTide.md).
+`quebecTide` converts 81-byte fixed-width tide gauge records (containing 12 fifteen-minute centimeter tide readings per 3-hour record) into the 4-column JHC ASCII tide format (`jday hour min tide_m`). It is a variant of [`transTide`](transTide.html).
 
 ---
 
@@ -44,6 +51,7 @@ quebecTide [OPTIONS] -tide <tidefilename> <outfilename>
 ## Examples
 
 **Convert an 81-byte fixed-record tide file to JHC ASCII:**
+
 ```bash
 quebecTide -tide quebec_raw.dat quebec_tide.asc
 binTide -year 1992 quebec_tide.asc quebec_tide.bin
@@ -53,5 +61,5 @@ binTide -year 1992 quebec_tide.asc quebec_tide.bin
 
 ## Workflow Context
 
-- **See Also:** [`transTide`](transTide.md) (which parses the same 81-byte record structure without the initial `getchar` loop) and [`convCHSpredTide`](convCHSpredTide.md).
-- **Downstream:** [`binTide`](binTide.md) $\rightarrow$ [`mergeTide`](mergeTide.md).
+- **See Also:** [`transTide`](transTide.html) (which parses the same 81-byte record structure without the initial `getchar` loop) and [`convCHSpredTide`](convCHSpredTide.html).
+- **Downstream:** [`binTide`](binTide.html) $\rightarrow$ [`mergeTide`](mergeTide.html).

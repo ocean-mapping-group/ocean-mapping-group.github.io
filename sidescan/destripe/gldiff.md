@@ -1,16 +1,18 @@
 ---
 layout: default
 title: gldiff
-parent: Destripe Tools
-grand_parent: sidescan
+parent: Sidescan Radiometric & Geometric Suite (sidescan)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 5
 ---
+
 # gldiff
 
 ## Description
 `gldiff` is a utility designed to calculate and visualize the difference between two JCU GLORIA format merged sidescan files. It typically compares a backscatter file (`.bksct`) with a synthetic file (`.synth`) to produce a difference image (`.diff`), handling specific unique identifiers provided by the `offtrack` program.
 
 ## Usage
+
 ```bash
 gldiff [-weight1 <value>] [-weight2 <value>] <infile_prefix>
 ```

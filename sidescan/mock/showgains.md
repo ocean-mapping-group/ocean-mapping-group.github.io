@@ -1,16 +1,18 @@
 ---
 layout: default
 title: showgains
-parent: Mock Tools
-grand_parent: sidescan
+parent: Sidescan Radiometric & Geometric Suite (sidescan)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 12
 ---
+
 # showgains
 
 ## Description
 `showgains` is a utility designed to analyze and display the individual components of the backscatter strength equation as a function of range. It simulates a single swath of sidescan data at a given depth and calculates key acoustic parameters for each pixel, such as beam pattern, Time-Varying Gain (TVG), range decay, insonified area, and ultimately, the backscatter strength (`S_b`). The output is printed to standard output in a format suitable for plotting or further analysis.
 
 ## Usage
+
 ```bash
 showgains [-verbose] [-min_beam <gain>] [-depth <seafloor_depth>]
 ```

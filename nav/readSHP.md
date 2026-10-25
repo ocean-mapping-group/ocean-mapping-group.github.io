@@ -1,14 +1,26 @@
 ---
 layout: default
 title: readSHP
-parent: Navigation Tools
+parent: Navigation Processing (nav)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 28
 tool_name: readSHP
 source_path: code/nav/readSHP.c
 category: Navigation & Georeferencing
-input_formats: [".shp", ".shx", ".dbf"]
-output_formats: ["ASCII contour/segment (.asc, .ascii)", ".nav", ".seg"]
-related_tools: ["navtoSHP", "iNav2SHP", "makeDBF", "jview", "sortCont"]
+input_formats:
+- .shp
+- .shx
+- .dbf
+output_formats:
+- ASCII contour/segment (.asc, .ascii)
+- .nav
+- .seg
+related_tools:
+- navtoSHP
+- iNav2SHP
+- makeDBF
+- jview
+- sortCont
 ---
 
 # readSHP
@@ -29,26 +41,31 @@ readSHP [-v] [-navbin] [-merid <deg> [-Shemi]] [-separate] [-debug_index <N>] [-
 ### Common Workflow Examples
 
 **1. Inspect the header, spatial bounds, and record structure of a Shapefile:**
+
 ```bash
 readSHP coastlines/bay_of_fundy.shp
 ```
 
 **2. Convert a geographic WGS84 Shapefile into a single OMG ASCII line/polygon overlay file for `jview`:**
+
 ```bash
 readSHP -out bay_coastline.ascii coastlines/bay_of_fundy.shp
 ```
 
 **3. Unproject a UTM Zone 19N (Central Meridian -69.0°) Shapefile into WGS84 ASCII segments:**
+
 ```bash
 readSHP -merid -69.0 -out pipeline_route.ascii gis/pipeline_utm19n.shp
 ```
 
 **4. Export each Shapefile record into its own numbered file (`prefix_0000.asc`, `prefix_0001.asc`, ...):**
+
 ```bash
 readSHP -separate -outpolygons/lease_block gis/lease_blocks.shp
 ```
 
 **5. Convert a Shapefile into a binary OMG `.nav` file (`jcu_nav_rec`):**
+
 ```bash
 readSHP -navbin -out trackline.nav gis/vessel_track.shp
 ```
@@ -75,6 +92,7 @@ readSHP -navbin -out trackline.nav gis/vessel_track.shp
 
 ### 1. ASCII Segment Format (Default)
 In default ASCII mode, `readSHP` writes `lat lon 0.00` lines compatible with OMG contour/line plotting utilities (`jview`, `plot_cont`, `iNav2SHP -ascii`). Multi-part shapes and separate records are delimited by `0.0 0.0 0.0` (and `0.000 0.000 <part_index>` at the start of each part $j$):
+
 ```text
 0.0 0.0 0.0
 0.000 0.000 0

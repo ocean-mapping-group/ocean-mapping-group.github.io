@@ -1,23 +1,29 @@
 ---
 layout: default
 title: glhist_pre_steve0531.c
-parent: Histogram Tools
-grand_parent: Sidescan Tools
+parent: Sidescan Radiometric & Geometric Suite (sidescan)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 6
 tool_name: glhist (pre-May 31 revision)
 source_path: code/sidescan/hist/glhist_pre_steve0531.c
 category: Sidescan Histogram & Gap Filling
-input_formats: ["JCU GLORIA / EM-12 (.ss)"]
-output_formats: ["Histogram-equalized JCU GLORIA (.ss)"]
-related_tools: ["glhist", "glfill", "glfudge"]
+input_formats:
+- JCU GLORIA / EM-12 (.ss)
+output_formats:
+- Histogram-equalized JCU GLORIA (.ss)
+related_tools:
+- glhist
+- glfill
+- glfudge
 ---
 
 # glhist_pre_steve0531.c
 
 ## Description
-`glhist_pre_steve0531.c` is the baseline October 1991 implementation of [`glhist`](glhist.md) by John Hughes Clarke, preserved before May 31 modifications by Steve Hughes. It performs two-pass Chavez-style Gaussian histogram equalization on JCU GLORIA / Simrad EM-12 look-alike sidescan sonar files.
+`glhist_pre_steve0531.c` is the baseline October 1991 implementation of [`glhist`](glhist.html) by John Hughes Clarke, preserved before May 31 modifications by Steve Hughes. It performs two-pass Chavez-style Gaussian histogram equalization on JCU GLORIA / Simrad EM-12 look-alike sidescan sonar files.
 
 ## CLI Options & Usage
+
 ```bash
 glhist [-invalid <val>] <rawfile> <eqfile>
 ```

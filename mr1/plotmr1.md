@@ -1,14 +1,24 @@
 ---
 layout: default
 title: plotmr1
-parent: MR1 Tools
+parent: HAWAII MR1 Towed Sidescan (mr1)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 9
 tool_name: plotmr1
 source_path: mr1/plotmr1.c
 category: format_conversion
-input_formats: [MR1_RAW, MR1_BIN_NOISE]
-output_formats: [OMG_MR1_SS, OMG_MR1_ZX]
-related_tools: [edbathy, mr1_noise, mergeMWascii, mr1_proc, mr1_raw]
+input_formats:
+- MR1_RAW
+- MR1_BIN_NOISE
+output_formats:
+- OMG_MR1_SS
+- OMG_MR1_ZX
+related_tools:
+- edbathy
+- mr1_noise
+- mergeMWascii
+- mr1_proc
+- mr1_raw
 ---
 
 # plotmr1

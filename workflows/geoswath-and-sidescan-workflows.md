@@ -140,6 +140,7 @@ The `code/gsf/` directory provides full bidirectional support for SAIC/Leidos **
 | `omg2gsf` | `code/gsf/omg2gsf.c` | Exports cleaned `OMG_HDCS` `.merged` files back to standard `.gsf` format (`-in <file.merged> -out <file.gsf>`). |
 
 ### Example: Converting a High-Density GeoSwath GSF File to OMG_HDCS
+
 ```bash
 # 1. Inspect the GSF file contents and sensor type:
 gsfTool -v -in geoswath_line04.gsf
@@ -206,12 +207,14 @@ Once sidescan data is converted into the OMG GLORIA (`jcu_glo`) format—either 
 
 #### Step 1: First-Break Bottom Picking (`bpick`)
 `bpick` (`code/sidescan/slant/bpick.c`) scans each port/starboard trace in a `.glo` file to detect the seabed first arrival (altitude above bottom) using a sliding confirmation window (`-window`, `-confirm`, `-thresh`) and writes the detected altitude back into the GLORIA record headers:
+
 ```bash
 bpick -v -thresh 45 -window 15 -confirm 10 -minalt 2.0 -maxalt 80.0 line01.glo line01_picked.glo
 ```
 
 #### Step 2: Slant-Range to Ground-Range Correction (`glslant`)
 `glslant` (`code/sidescan/slant/glslant.c`) uses the towfish altitude stored in each GLORIA header (or an external depth grid) to project slant-range samples onto true horizontal ground range (`-pixel <m>`), removing the water-column gap at nadir:
+
 ```bash
 glslant -v -pixel 0.25 line01_picked.glo line01_sr.glo
 ```

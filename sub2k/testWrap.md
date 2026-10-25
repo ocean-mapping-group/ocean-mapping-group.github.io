@@ -1,16 +1,18 @@
 ---
 layout: default
 title: testWrap
-parent: SUB2K Tools
-grand_parent: code
+parent: GeoSwath+ / Submetrix 2000 CLI (sub2k)
+grand_parent: 4. Multi-Vendor Sonar & LiDAR Converters
 nav_order: 8
 ---
+
 # testWrap
 
 ## Description
 `testWrap` is a utility designed to test and visualize phase wrap-around effects, typically encountered in multibeam sonar phase-difference bathymetry systems. It simulates phase differences based on a user-defined seafloor depth, transducer mount angle, and three different transducer spacings. The program then calculates various phase metrics (individual phase, differential phase, fractional parts) and writes them to an output file named "wraps" in a format suitable for plotting, allowing for analysis of phase ambiguity and wrap-around behavior.
 
 ## Usage
+
 ```bash
 testWrap [-v] [-xplot] [-depth <value>]
 ```

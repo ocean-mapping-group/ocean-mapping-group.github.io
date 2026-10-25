@@ -1,20 +1,21 @@
 ---
 layout: default
 title: readSUB2K.c.pre_danforth_20071016
-parent: Submetrix ISIS (sub2k) Interferometric Sonar Tools
+parent: GeoSwath+ / Submetrix 2000 CLI (sub2k)
+grand_parent: 4. Multi-Vendor Sonar & LiDAR Converters
 nav_order: 12
 tool_name: readSUB2K.c.pre_danforth_20071016
 source_path: sub2k/readSUB2K.c.pre_danforth_20071016
 category: sub2k
 input_formats:
-  - Submetrix 2000 (.sub, .rrc)
+- Submetrix 2000 (.sub, .rrc)
 output_formats:
-  - OMG Swath Bathymetry (.merged)
-  - OMG Sidescan (.ss_data)
-  - OMG Navigation (.nav)
+- OMG Swath Bathymetry (.merged)
+- OMG Sidescan (.ss_data)
+- OMG Navigation (.nav)
 related_tools:
-  - readSUB2K
-  - makefile_BWD
+- readSUB2K
+- makefile_BWD
 ---
 
 # `readSUB2K.c.pre_danforth_20071016` — Pre-2007 Baseline Snapshot of `readSUB2K`

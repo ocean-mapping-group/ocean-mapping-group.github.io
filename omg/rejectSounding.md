@@ -1,9 +1,11 @@
 ---
 layout: default
 title: rejectSounding
-parent: OMG Tools
+parent: Core Swath & .all Suite (omg)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 55
 ---
+
 # rejectSounding
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 55
 This tool is useful for initial data cleaning, removing gross outliers, or isolating data within a particular spatial extent.
 
 ## Usage
+
 ```bash
 rejectSounding <mergefile(s)> [OPTIONS]
 ```

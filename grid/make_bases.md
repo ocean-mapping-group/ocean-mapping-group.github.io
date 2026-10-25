@@ -1,13 +1,21 @@
 ---
 layout: default
 title: make_bases
-parent: Grid Tools
+parent: Bathymetric Gridding & Export (grid)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 tool_name: make_bases
 source_path: code/grid/make_bases.c
 category: gridding
-input_formats: [".r4 (optional reference DTM for depth-range filtering)"]
-output_formats: ["Box.header<N> or Box.<lat>_<lon> or Box.<mpp>m_<N> (1024-byte JHC_header files)", "box.coords (ASCII bounding polygons in -gsi mode)"]
-related_tools: ["make_blank", "weigh_grid", "project", "edhead"]
+input_formats:
+- .r4 (optional reference DTM for depth-range filtering)
+output_formats:
+- Box.header<N> or Box.<lat>_<lon> or Box.<mpp>m_<N> (1024-byte JHC_header files)
+- box.coords (ASCII bounding polygons in -gsi mode)
+related_tools:
+- make_blank
+- weigh_grid
+- project
+- edhead
 ---
 
 # make_bases
@@ -63,11 +71,13 @@ make_bases [-v] [-gsi] [-binhead] [-latlon_name] [-dtm <file.r4>] [-mdepth <max_
 ## Examples
 
 **1. Generate a tiled series of mapsheet headers named by center Lat/Lon:**
+
 ```bash
 make_bases -latlon_name -dtm regional_bathy.r4 -mdepth 2500
 ```
 
 **2. Run GSI charting tile layout with 5 m pixel size and output `box.coords` + binary headers:**
+
 ```bash
 make_bases -gsi -binhead -dtm ireland_eeza.r4 -pixel 5.0 -mdepth 4000
 ```
@@ -76,5 +86,5 @@ make_bases -gsi -binhead -dtm ireland_eeza.r4 -pixel 5.0 -mdepth 4000
 
 ## Workflow Context
 
-- **See Also:** [`make_blank`](make_blank.md) (creates a single `.blank` mapsheet) and [`weigh_grid`](weigh_grid.md).
-- After generating header-only `Box.header*` files with `make_bases`, use `tor4` or `edhead` to initialize full `.r4` grids for [`weigh_grid`](weigh_grid.md).
+- **See Also:** [`make_blank`](make_blank.html) (creates a single `.blank` mapsheet) and [`weigh_grid`](weigh_grid.html).
+- After generating header-only `Box.header*` files with `make_bases`, use `tor4` or `edhead` to initialize full `.r4` grids for [`weigh_grid`](weigh_grid.html).

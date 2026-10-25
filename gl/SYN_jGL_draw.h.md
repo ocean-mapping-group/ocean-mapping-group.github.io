@@ -1,7 +1,8 @@
 ---
 layout: default
 title: jGL_draw.h
-parent: GL Tools
+parent: OpenGL 3D Visualization (gl)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 10
 ---
 

@@ -1,14 +1,22 @@
 ---
 layout: default
 title: gsf2param
-parent: GSF Tools
+parent: Generic Sensor Format — GSF (gsf)
+grand_parent: 4. Multi-Vendor Sonar & LiDAR Converters
 nav_order: 4
 tool_name: gsf2param
 source_path: code/gsf/gsf2param.c
 category: Lever-Arm & Calibration
-input_formats: [".gsf"]
-output_formats: [".param"]
-related_tools: ["gsf2omg", "gsf2orientation", "gsf2svp", "gsfTool", "r2v"]
+input_formats:
+- .gsf
+output_formats:
+- .param
+related_tools:
+- gsf2omg
+- gsf2orientation
+- gsf2svp
+- gsfTool
+- r2v
 ---
 
 # gsf2param
@@ -17,6 +25,7 @@ related_tools: ["gsf2omg", "gsf2orientation", "gsf2svp", "gsfTool", "r2v"]
 `gsf2param` extracts sensor lever-arm and angular alignment parameters from the first `GSF_SENSOR_PARAMETERS` record in a `.gsf` file and writes them to an ASCII OMG `.param` file.
 
 ## Usage
+
 ```bash
 gsf2param [-v] -gsf <input_name.gsf> -omg <omgfile.param>
 ```
@@ -42,6 +51,7 @@ gsf2param [-v] -gsf <input_name.gsf> -omg <omgfile.param>
 ## Practical Examples
 
 **1. Extract lever-arm offsets from a GSF file into an OMG `.param` file:**
+
 ```bash
 gsf2param -v -gsf line01.gsf -omg line01.param
 ```

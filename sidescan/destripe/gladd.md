@@ -1,10 +1,11 @@
 ---
 layout: default
 title: gladd
-parent: Destripe Tools
-grand_parent: sidescan
+parent: Sidescan Radiometric & Geometric Suite (sidescan)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 3
 ---
+
 # gladd
 
 ## Description
@@ -12,12 +13,14 @@ nav_order: 3
 
 ## Usage
 **Original Usage (Destriping):**
+
 ```bash
 gladd <infile_prefix>
 ```
 (Assumes `<infile_prefix>.high`, `<infile_prefix>.low`, `<infile_prefix>.mer` exist, and outputs to `<infile_prefix>.des`)
 
 **General Usage (2015 version):**
+
 ```bash
 gladd -degraz -bs <bs_file> -graz <graz_file> -out <outfile> [-retain255]
 ```

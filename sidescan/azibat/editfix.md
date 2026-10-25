@@ -1,16 +1,18 @@
 ---
 layout: default
 title: editfix
-parent: Sidescan Tools
-grand_parent: azibat
+parent: Sidescan Radiometric & Geometric Suite (sidescan)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 3
 ---
+
 # editfix
 
 ## Description
 `editfix` is a utility used to edit the fixes of a JCU format sidescan image. It looks for bad time jumps and corrects the time and fix position.
 
 ## Usage
+
 ```bash
 editfix [-v] [-t <threshold>] <infile>
 ```

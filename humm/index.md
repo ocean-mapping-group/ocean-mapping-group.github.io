@@ -1,7 +1,8 @@
 ---
 layout: default
-title: Humminbird Converter (humm)
-nav_order: 30
+title: Humminbird Side-Imaging Sonar (humm)
+parent: 4. Multi-Vendor Sonar & LiDAR Converters
+nav_order: 11
 has_children: true
 ---
 
@@ -13,4 +14,4 @@ The `humm` directory contains the ingestion utility for converting serial ASCII 
 
 ## Tools in `humm/`
 
-* [`humm2omg`](humm2omg.md) — Parses interleaved ASCII `$GPGGA` NMEA navigation, Trimcube pitch/roll attitude telegrams, and Humminbird 6-beam depth strings ($\pm 25^\circ, \pm 15^\circ, \pm 5^\circ$) into OMG-HDCS `.merged` and `.nav` files.
+* [`humm2omg`](humm2omg.html) — Parses interleaved ASCII `$GPGGA` NMEA navigation, Trimcube pitch/roll attitude telegrams, and Humminbird 6-beam depth strings ($\pm 25^\circ, \pm 15^\circ, \pm 5^\circ$) into OMG-HDCS `.merged` and `.nav` files.

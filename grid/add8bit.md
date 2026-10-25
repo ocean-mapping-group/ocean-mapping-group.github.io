@@ -1,9 +1,11 @@
 ---
 layout: default
 title: add8bit
-parent: Grid Tools
+parent: Bathymetric Gridding & Export (grid)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 2
 ---
+
 ---
 layout: default
 title: add8bit
@@ -16,6 +18,7 @@ nav_order: 2
 `add8bit` is a command-line utility that combines two JHC-format 8-bit grid files (`.8bit` files). It can either add the values of the second file (scaled) to the first file, or find the maximum value between corresponding pixels of the two files. The output is a new 8-bit grid file.
 
 ## Usage
+
 ```bash
 add8bit [OPTIONS] -first <file1.8bit> -second <file2.8bit> -out <output.8bit>
 ```

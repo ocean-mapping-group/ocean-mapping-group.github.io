@@ -1,14 +1,21 @@
 ---
 layout: default
 title: refoSB_Classic
-parent: SB2K Tools
+parent: SeaBeam 2000 / 2100 (sb2k)
+grand_parent: 4. Multi-Vendor Sonar & LiDAR Converters
 nav_order: 3
 tool_name: refoSB_Classic
 source_path: sb2k/refoSB_Classic.c
 category: format_conversion
-input_formats: [URI_SEABEAM]
-output_formats: [OMG_HDCS]
-related_tools: [deApparent, unravelSB2K, unravelSB2100, SwathEd]
+input_formats:
+- URI_SEABEAM
+output_formats:
+- OMG_HDCS
+related_tools:
+- deApparent
+- unravelSB2K
+- unravelSB2100
+- SwathEd
 ---
 
 # refoSB_Classic

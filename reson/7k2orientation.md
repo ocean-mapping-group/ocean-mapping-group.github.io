@@ -1,9 +1,11 @@
 ---
 layout: default
 title: 7k2orientation
-parent: Reson Tools
+parent: Reson SeaBat 7k/8k (reson)
+grand_parent: 4. Multi-Vendor Sonar & LiDAR Converters
 nav_order: 178
 ---
+
 # 7k2orientation
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 178
 This tool is essential for providing motion and heading data for various downstream processing steps within the OMG toolkit, such as motion compensation and data georeferencing.
 
 ## Usage
+
 ```bash
 7k2orientation -s7k <input_name> -omg <omg_file_prefix> [-v] [-debug]
 ```

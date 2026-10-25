@@ -1,9 +1,11 @@
 ---
 layout: default
 title: extractVertSection
-parent: Grid Tools
+parent: Bathymetric Gridding & Export (grid)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 29
 ---
+
 ---
 layout: default
 title: extractVertSection
@@ -18,11 +20,13 @@ nav_order: 29
 The tool supports both structured grids (like **SalishSeaCast**) and unstructured triangular-mesh grids (like **SSCOFS/FVCOM**).
 
 ## Usage
+
 ```bash
 extractVertSection -wpts <waypointfile> -interval <meters> -param3D <param.r4> <model_geom_option> [OPTIONS]
 ```
 
 ### Example
+
 ```bash
 # For a structured grid (SalishSeaCast)
 extractVertSection -wpts track.txt -interval 100 -param3D temp.r4 -custom_Salish lat.r4 lon.r4 mask.r4 -maxdepth 300
@@ -34,6 +38,7 @@ extractVertSection -wpts track.txt -interval 100 -param3D temp.r4 -custom_SSCOFS
 ## Arguments
 
 ### Required Inputs
+
 | Option | Description |
 |---|---|
 | `-wpts <waypointfile>` | An ASCII file containing the waypoints (`latitude longitude label`) that define the path for the cross-section. |
@@ -44,6 +49,7 @@ extractVertSection -wpts track.txt -interval 100 -param3D temp.r4 -custom_SSCOFS
 | `-custom_SSCOFS <quoddy_prefix> <mapelem.r4>` | For **unstructured** grids. Specifies the prefix for the Quoddy node/element files and a `.r4` grid that maps geographic locations to element numbers. |
 
 ### Output and Resampling Options
+
 | Option | Description | Default |
 |---|---|---|
 | `-maxdepth <meters>` | The maximum depth for the output vertical section grid. | `400.0` |

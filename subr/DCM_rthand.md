@@ -1,18 +1,19 @@
 ---
 layout: default
 title: DCM_rthand
-parent: Core Shared Libraries (subr)
-module_name: DCM_rthand
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/DCM_rthand.c
-header_path: code/subr/DCM_rthand.h
 category: Coordinate Geometry & 3D Attitude Transformations
 related_tools:
-  - unrollOMG
-  - makeWC
-  - DelayEditor
-  - synSwath
-  - swathed
-  - makeSeisPlot
+- unrollOMG
+- makeWC
+- DelayEditor
+- synSwath
+- swathed
+- makeSeisPlot
+module_name: DCM_rthand
+header_path: code/subr/DCM_rthand.h
 ---
 
 # DCM_rthand: Direction Cosine Matrix (Right-Handed) Attitude & Vector Transformations
@@ -35,6 +36,7 @@ While `DCM_rthand.c` defines the global `rotation_sequence` state variable (supp
 
 ### Rotation Sequence Constants
 Used primarily by `synSwath` and 3D OpenGL visualization tools (`jGL_draw.c`) to switch between Euler/Tait-Bryan rotation orders:
+
 ```c
 extern int rotation_sequence;
 
@@ -48,6 +50,7 @@ extern int rotation_sequence;
 ```
 
 ### Attitude & Vector Structures
+
 ```c
 typedef struct {
     double roll;
@@ -93,6 +96,7 @@ typedef struct {
 ## Public Functions & Signatures
 
 ### Double-Precision DCM Rotations
+
 ```c
 void DCM_rotate(location orig, attitude rotate, location *final);
 void DCM_unrotate(location orig, attitude rotate, location *final);
@@ -103,6 +107,7 @@ void jDCM_unrotate(location orig, attitude rotate, location *final);
 * **Purpose:** Rotates (`DCM_rotate` / `jDCM_rotate`) or inverse-rotates (`DCM_unrotate` / `jDCM_unrotate`) a 3D double-precision vector `orig` by the Euler angles in `rotate`, writing the transformed vector to `*final`. Used to map lever arms and beam vectors between the Ship Reference Frame (SRF) and the Local Level / Geographic Reference Frame.
 
 ### Single-Precision DCM Rotations
+
 ```c
 void DCM_rotatef(fvect orig, attitude rotate, fvect *final);
 void DCM_unrotatef(fvect orig, attitude rotate, fvect *final);
@@ -113,6 +118,7 @@ void jDCM_unrotatef(fvect orig, attitude rotate, fvect *final);
 * **Purpose:** Single-precision (`fvect`) counterparts to the double-precision DCM rotation routines, heavily used in real-time OpenGL rendering, cone/beam intersections (`j_non_ortho_cones.c`), ADCP beam transformations (`SYN_ADCP.c`), and internal wave raytracing (`SYN_internal_wave.c`).
 
 ### Yaw Misalignment Cross-Coupling Solvers
+
 ```c
 int OtoR(double ym, double or, double op, double *tr, double *tp);
 int RtoO(double ym, double tr, double tp, double *or, double *op);

@@ -1,19 +1,27 @@
 ---
 layout: default
 title: SE_REFTOOLwin
-parent: SwathEd (SE) Tools
+parent: Swath Editor — swathed (SE)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 14
 tool_name: SE_REFTOOLwin
 source_path: code/SE/SE_REFTOOLwin.c
 category: Interactive QC & Editing (SwathEd)
-input_formats: [".merged", ".ref_coeffs"]
-output_formats: [".ref_coeffs"]
-related_tools: ["swathed", "RefractEd", "applyRef", "SE_W_TimeSeries"]
+input_formats:
+- .merged
+- .ref_coeffs
+output_formats:
+- .ref_coeffs
+related_tools:
+- swathed
+- RefractEd
+- applyRef
+- SE_W_TimeSeries
 ---
 
 # `SE_REFTOOLwin` — Empirical Sound Speed Refraction & Induced Heave Modeling Tool
 
-`SE_REFTOOLwin` (`code/SE/SE_REFTOOLwin.c`, `code/SE/SE_REFTOOLwin.h`) implements the `"Empirical Refraction Modification Tool (And Induced Heave Error Model)"` (`sub_window[REF_OFFSET .. REF_OFFSET + 12]`, where `REF_OFFSET = 61`) in [`swathed`](swathed.md). Authored by John E. Hughes Clarke (July 1999), it enables hydrographers to interactively diagnose and correct outer-beam "smiles" or "frowns" caused by inaccurate sound velocity profiles (SVP) or surface sound speed errors, as well as along-track "ripples" caused by incorrect motion-sensor-to-transducer lever arms (induced heave errors).
+`SE_REFTOOLwin` (`code/SE/SE_REFTOOLwin.c`, `code/SE/SE_REFTOOLwin.h`) implements the `"Empirical Refraction Modification Tool (And Induced Heave Error Model)"` (`sub_window[REF_OFFSET .. REF_OFFSET + 12]`, where `REF_OFFSET = 61`) in [`swathed`](swathed.html). Authored by John E. Hughes Clarke (July 1999), it enables hydrographers to interactively diagnose and correct outer-beam "smiles" or "frowns" caused by inaccurate sound velocity profiles (SVP) or surface sound speed errors, as well as along-track "ripples" caused by incorrect motion-sensor-to-transducer lever arms (induced heave errors).
 
 ---
 
@@ -22,6 +30,7 @@ related_tools: ["swathed", "RefractEd", "applyRef", "SE_W_TimeSeries"]
 Clicking the **`Refr.`** icon (`icon_window[13]`) on the main `swathed` toolbar calls `view_reftool_box()`, creating top-level form `sub_window[61]` (`920 × 620` px), 4 profile plots (`62..65`), 7 parameter sliders (`66..72`), a survey-line coefficient timeline (`73`), and 3 action/mode buttons (`button_window[6..8]`):
 
 ### 4 Profile & Residual Graphics Windows
+
 | Window | Dimensions | Function | Description |
 | :--- | :--- | :--- | :--- |
 | `sub_window[62]` (`REF_OFFSET+1`) | `600 × 150` | `refresh_reftool_window()` | **Original Swath Profiles:** Plots the 80 uncorrected across-track depth profiles (`offsets[j][i]`, `box[j][i]`), highlighting `selected_swath` in `RED`. |
@@ -31,6 +40,7 @@ Clicking the **`Refr.`** icon (`icon_window[13]`) on the main `swathed` toolbar 
 | `sub_window[73]` (`REF_OFFSET+12`) | `300 × 80` | `refresh_reftool_window()` | **Refraction Record Timeline:** Plots the ping locations (`rcoeff[k].rec`) of up to 100 saved empirical refraction coefficient sets along the line (`0` to `no_recs`), marking the active 80-ping window in `RED`. |
 
 ### 7 Interactive Parameter Sliders (`sub_window[66..72]`)
+
 | Window | Label | Range | Backing Variable | Physical Meaning |
 | :--- | :--- | :--- | :--- | :--- |
 | `sub_window[66]` | `transducer depth (m)` | `0.0` .. `10.0` m | `trans_depth` | Draft of the multibeam transducer below the waterline. |
@@ -60,6 +70,6 @@ Clicking the **`Refr.`** icon (`icon_window[13]`) on the main `swathed` toolbar 
 
 ## Action & Mode Buttons (`button_window[6..8]`)
 
-* **`button_window[6]` (`Dump`):** Calls `write_out_refract_coeffs()` (`ref_coeffs.h`), inserting or updating a `ref_coeff` record at the center ping (`in_recnum + SE_NO_SWATHS/2`) with `trans_depth`, `surf_ss_error`, `layer_depth`, `ss_change`, and `trans_type`, and writing `<line_prefix>.ref_coeffs` to disk for batch application via [`applyRef`](../refract/applyRef.md).
+* **`button_window[6]` (`Dump`):** Calls `write_out_refract_coeffs()` (`ref_coeffs.h`), inserting or updating a `ref_coeff` record at the center ping (`in_recnum + SE_NO_SWATHS/2`) with `trans_depth`, `surf_ss_error`, `layer_depth`, `ss_change`, and `trans_type`, and writing `<line_prefix>.ref_coeffs` to disk for batch application via [`applyRef`](../omg/deRefract.html).
 * **`button_window[7]` (`Horiz.` / `EM1000` / `Twin.` / `EM1002`):** Cycles `trans_type` and recalculates `calc_refract()` and `refract_data()`.
 * **`button_window[8]` (`Str.Heave` / `Flip1Heave` / `Flip2Heave`):** Cycles the sign convention (`heave_sense`) used when computing `heave_error[i]`.

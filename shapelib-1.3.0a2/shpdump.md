@@ -1,14 +1,23 @@
 ---
 layout: default
 title: shpdump
-parent: Shapelib GIS Library & Tools (shapelib-1.3.0a2)
+parent: ESRI Shapefile C Library (shapelib-1.3.0a2)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 nav_order: 8
 tool_name: shpdump
 source_path: code/shapelib-1.3.0a2/shpdump.c
 category: GIS & ESRI Shapefile Library / Tools
-input_formats: [".shp", ".shx (ESRI Shapefile)"]
-output_formats: ["STDOUT human-readable geometry & bounds dump"]
-related_tools: ["shpcreate", "shpadd", "shprewind", "shpopen", "dbfdump"]
+input_formats:
+- .shp
+- .shx (ESRI Shapefile)
+output_formats:
+- STDOUT human-readable geometry & bounds dump
+related_tools:
+- shpcreate
+- shpadd
+- shprewind
+- shpopen
+- dbfdump
 ---
 
 # shpdump

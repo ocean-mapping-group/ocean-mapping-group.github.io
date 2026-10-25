@@ -1,17 +1,22 @@
 ---
 layout: default
 title: get_prefix
-parent: Helper Scripts
+parent: Automated Processing Scripts (scripts)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 tool_name: get_prefix
 source_path: code/scripts/get_prefix
 category: Batch Processing & File Management Scripts
-related_tools: ["tomos", "tor4", "bunravel", "rename"]
+related_tools:
+- tomos
+- tor4
+- bunravel
+- rename
 ---
 
 # get_prefix
 
 ## Overview
-`get_prefix` (`code/scripts/get_prefix`) is a lightweight `tcsh` and `awk` helper script used by OMG shell pipelines (such as [`tomos`](tomos.md) and [`tor4`](tor4.md)) to strip the trailing file extension (e.g., `.blank`, `.merged`, `.ss`, `.all`) from one or more filenames and print the base prefix.
+`get_prefix` (`code/scripts/get_prefix`) is a lightweight `tcsh` and `awk` helper script used by OMG shell pipelines (such as [`tomos`](tomos.html) and [`tor4`](tor4.html)) to strip the trailing file extension (e.g., `.blank`, `.merged`, `.ss`, `.all`) from one or more filenames and print the base prefix.
 
 ---
 
@@ -41,6 +46,7 @@ exit
 ```
 
 ### Example
+
 ```bash
 $ get_prefix bay_of_fundy.blank
 bay_of_fundy

@@ -1,9 +1,11 @@
 ---
 layout: default
 title: diff8bit
-parent: Grid Tools
+parent: Bathymetric Gridding & Export (grid)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 20
 ---
+
 ---
 layout: default
 title: diff8bit
@@ -16,6 +18,7 @@ nav_order: 20
 `diff8bit` is a command-line utility that computes the pixel-wise difference between two 8-bit JHC-format grid files. It subtracts the second image from the first, offsets the result to place zero-difference at a mid-level grey (128), and saves the output as a new 8-bit grid. This is useful for change detection or comparing two images, like sidescan mosaics.
 
 ## Usage
+
 ```bash
 diff8bit -first <file1.8bit> -second <file2.8bit> -out <output.8bit> [OPTIONS]
 ```

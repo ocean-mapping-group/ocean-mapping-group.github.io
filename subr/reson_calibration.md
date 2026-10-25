@@ -1,18 +1,19 @@
 ---
 layout: default
 title: reson_calibration
-parent: Core Shared Libraries (subr)
-module_name: reson_calibration
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/reson_calibration.c
-header_path: code/subr/reson_calibration.h
 category: Acoustic Modeling, Backscatter & TVG
 related_tools:
-  - makess
-  - getAngularResponse
-  - getSnippetBP
-  - get_ADH_SRA
-  - getSnippetVariance
-  - omg2gsf
+- makess
+- getAngularResponse
+- getSnippetBP
+- get_ADH_SRA
+- getSnippetVariance
+- omg2gsf
+module_name: reson_calibration
+header_path: code/subr/reson_calibration.h
 ---
 
 # `reson_calibration` — Reson 81xx and 7K Radiometric Backscatter Calibration
@@ -54,6 +55,7 @@ Developed by Jonathan Beaudoin and Thomas Weber (following tank calibrations at 
 ## Public Functions & Signatures
 
 ### `calibrate_reson`
+
 ```c
 int calibrate_reson(
     unsigned short *dataIn, unsigned char *dataOut,
@@ -67,6 +69,7 @@ int calibrate_reson(
 Calibrates an array of `num_samples` 16-bit amplitudes from a Reson 81xx sonar (`SeaBat_8101`, `8111`, `8125`, `8150`, `8160`) into 8-bit unsigned integers scaled by `dB_scale` relative to `255` (where `255` represents `0 dB` or invalid data). Calls `interpolate_ensonified_areas()` and optionally `build_scallop()`.
 
 ### `calibrate_reson_7K`
+
 ```c
 int calibrate_reson_7K(
     unsigned short *dataIn, unsigned char *dataOut,
@@ -80,6 +83,7 @@ int calibrate_reson_7K(
 Calibrates snippet (`source_flags < 0`) or sidescan (`source_flags == JB_8101_TRACE`) time series from Reson 7K systems (`SeaBat_7125`, `7150`, `7160`, `Reson_T20P`) using `Reson_7K_7000_Sonar_Settings` and `ensonified_area()`, accounting for $\cos(\text{Rc\_steer})$ receive beamwidth broadening on electronically steered arrays. Outputs the net scalar correction factor into `*final_corrector` if non-`NULL`.
 
 ### `build_scallop`
+
 ```c
 int build_scallop(
     OMG_HDCS_profile_header profile, OMG_HDCS_beam *beams,
@@ -90,6 +94,7 @@ int build_scallop(
 Computes per-sample receive beam-pattern gain corrections (`snippet_gain`) across a snippet window for `beam_to_do` using one of four `scallop_type` modes (`SIMPLE`, `MODEL`, `BP`, or `DUMP_ANGLES`).
 
 ### `interpolate_ensonified_areas`
+
 ```c
 int interpolate_ensonified_areas(
     OMG_HDCS_profile_header profile, OMG_HDCS_beam *beams,

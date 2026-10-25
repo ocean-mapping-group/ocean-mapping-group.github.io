@@ -1,30 +1,32 @@
 ---
 layout: default
 title: readADCP_g
-parent: ADCP Tools
+parent: Teledyne RDI ADCP Processing (adcp)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 11
 tool_name: readADCP_g
 source_path: code/adcp/readADCP_g.c
 category: adcp
 input_formats:
-  - RDI ASCII ADCP
-  - jcu_nav (.nav)
-  - OMG Map (.map)
+- RDI ASCII ADCP
+- jcu_nav (.nav)
+- OMG Map (.map)
 output_formats:
-  - JHC 8-bit Profile (.prof / .stack_prof / .map_prof)
-  - jcu_nav Depth-Averaged Vectors (.nav)
+- JHC 8-bit Profile (.prof / .stack_prof / .map_prof)
+- jcu_nav Depth-Averaged Vectors (.nav)
 related_tools:
-  - readADCP
-  - readADCP_mod
-  - combineMultiADCP
+- readADCP
+- readADCP_mod
+- combineMultiADCP
 ---
 
 # readADCP_g
 
 ## Description
-`readADCP_g` is a utility for reading and processing RDI ASCII ADCP (Acoustic Doppler Current Profiler) files. It is a streamlined variant of [`readADCP`](readADCP.md) that converts raw RDI ASCII ADCP ensembles into time-series profile images (`<outfile>.prof`), georeferenced mapsheet curtains (`<outfile>.map_prof`), and depth-averaged current vector files (`<outfile>.nav`), with direct support for `-phase_zero` tidal phase referencing and `-ref_bottom` height-above-bottom binning.
+`readADCP_g` is a utility for reading and processing RDI ASCII ADCP (Acoustic Doppler Current Profiler) files. It is a streamlined variant of [`readADCP`](readADCP.html) that converts raw RDI ASCII ADCP ensembles into time-series profile images (`<outfile>.prof`), georeferenced mapsheet curtains (`<outfile>.map_prof`), and depth-averaged current vector files (`<outfile>.nav`), with direct support for `-phase_zero` tidal phase referencing and `-ref_bottom` height-above-bottom binning.
 
 ## Usage
+
 ```bash
 readADCP_g -in <infiles> -out <outfile> [OPTIONS]
 ```

@@ -1,12 +1,17 @@
 ---
 layout: default
 title: uwedge
-parent: Shared Core Libraries (subr)
-module_name: uwedge
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/uwedge.c
-header_path: code/subr/uwedge.h
 category: Raytracing, Sound Speed & Geolocation
-related_tools: ["support", "j_watercolumn", "jb_watercolumn", "svp_tool"]
+related_tools:
+- support
+- j_watercolumn
+- jb_watercolumn
+- svp_tool
+module_name: uwedge
+header_path: code/subr/uwedge.h
 ---
 
 # uwedge
@@ -22,6 +27,7 @@ Given a collection of pairwise difference wedges (`bwedges`) computed between mu
 
 ### `WedgeNode`
 Represents the vertical and horizontal uncertainty at a single `(z, y)` grid cell in the swath wedge:
+
 ```c
 typedef struct {
     double sigma_d;   /* Vertical depth uncertainty / bias (m) */
@@ -31,6 +37,7 @@ typedef struct {
 
 ### `Wedge`
 In-memory representation of a `<wedge>` XML document:
+
 ```c
 typedef struct {
     float version;            /* XML schema version (e.g. 1.0) */

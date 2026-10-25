@@ -1,13 +1,20 @@
 ---
 layout: default
 title: SatAlt_to_JHC
-parent: Grid Tools
+parent: Bathymetric Gridding & Export (grid)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 tool_name: SatAlt_to_JHC
 source_path: code/grid/SatAlt_to_JHC.c
 category: gridding
-input_formats: ["Global 2-minute satellite altimetry / bathymetry 16-bit integer grid (10800 x 6336)"]
-output_formats: ["ASCII lat lon depth"]
-related_tools: ["USGS_30sec_to_JHC", "ASCIItoJHC", "weigh_grid", "patchWORLD"]
+input_formats:
+- Global 2-minute satellite altimetry / bathymetry 16-bit integer grid (10800 x 6336)
+output_formats:
+- ASCII lat lon depth
+related_tools:
+- USGS_30sec_to_JHC
+- ASCIItoJHC
+- weigh_grid
+- patchWORLD
 ---
 
 # SatAlt_to_JHC
@@ -46,6 +53,7 @@ SatAlt_to_JHC [-maxlat <N>] [-minlat <S>] [-minlon <W>] [-maxlon <E>] <SatAlt_in
 ## Examples
 
 **Extract satellite altimetry bathymetry for the Northeast Pacific:**
+
 ```bash
 SatAlt_to_JHC -minlat 30 -maxlat 60 -minlon -130 -maxlon -115 topo_global.img ne_pacific.llz
 ```
@@ -54,5 +62,5 @@ SatAlt_to_JHC -minlat 30 -maxlat 60 -minlon -130 -maxlon -115 topo_global.img ne
 
 ## Workflow Context
 
-- **Downstream:** The output ASCII `lat lon depth` file can be gridded onto an OMG `.r4` mapsheet using [`weigh_grid`](weigh_grid.md) (`-xyz`) or [`ASCIItoJHC`](ASCIItoJHC.md).
-- **See Also:** [`USGS_30sec_to_JHC`](USGS_30sec_to_JHC.md) and [`patchWORLD`](patchWORLD.md).
+- **Downstream:** The output ASCII `lat lon depth` file can be gridded onto an OMG `.r4` mapsheet using [`weigh_grid`](weigh_grid.html) (`-xyz`) or [`ASCIItoJHC`](ASCIItoJHC.html).
+- **See Also:** [`USGS_30sec_to_JHC`](USGS_30sec_to_JHC.html) and [`patchWORLD`](patchWORLD.html).

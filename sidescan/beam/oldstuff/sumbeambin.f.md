@@ -1,23 +1,30 @@
 ---
 layout: default
 title: sumbeambin.f
-parent: Old Stuff
-grand_parent: Beam Tools
+parent: Sidescan Radiometric & Geometric Suite (sidescan)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 8
 tool_name: sumbeambin
 source_path: code/sidescan/beam/oldstuff/sumbeambin.f
 category: Sidescan Beam Pattern Processing
-input_formats: ["ASCII .beam_bin (ps89_<pass>.beam_bin)"]
-output_formats: ["20 depth-stratified .beam_pattern files (ps89_025..ps89_975.beam_pattern)"]
-related_tools: ["glbeambin", "glbeam_bydepth", "sumbeam.f", "viewbeam.f"]
+input_formats:
+- ASCII .beam_bin (ps89_<pass>.beam_bin)
+output_formats:
+- 20 depth-stratified .beam_pattern files (ps89_025..ps89_975.beam_pattern)
+related_tools:
+- glbeambin
+- glbeam_bydepth
+- sumbeam.f
+- viewbeam.f
 ---
 
 # sumbeambin.f (`sumbeambin`)
 
 ## Description
-`sumbeambin.f` is a Fortran 77 utility (John Hughes Clarke, December 1989) that reads depth-stratified empirical beam histogram files (`ps89_<pass>.beam_bin`, produced by [`glbeambin`](glbeambin.md)) across multiple GLORIA passes, accumulates sample counts and amplitude sums across 91 grazing-angle bins (`0°–90°`) and 20 water-depth bins (`0–10,000 m` in `500 m` increments), and outputs 20 depth-specific `.beam_pattern` files (`ps89_025.beam_pattern` through `ps89_975.beam_pattern`) for use by [`glbeam_bydepth`](glbeam_bydepth.md).
+`sumbeambin.f` is a Fortran 77 utility (John Hughes Clarke, December 1989) that reads depth-stratified empirical beam histogram files (`ps89_<pass>.beam_bin`, produced by [`glbeambin`](glbeambin.html)) across multiple GLORIA passes, accumulates sample counts and amplitude sums across 91 grazing-angle bins (`0°–90°`) and 20 water-depth bins (`0–10,000 m` in `500 m` increments), and outputs 20 depth-specific `.beam_pattern` files (`ps89_025.beam_pattern` through `ps89_975.beam_pattern`) for use by [`glbeam_bydepth`](glbeam_bydepth.html).
 
 ## Usage & Interactive Prompts
+
 ```bash
 sumbeambin
 ```

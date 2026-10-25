@@ -1,14 +1,27 @@
 ---
 layout: default
 title: make_blank
-parent: grid Tools
+parent: Bathymetric Gridding & Export (grid)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 1
 tool_name: make_blank
 source_path: code/grid/make_blank.c
 category: Gridding & Bathymetric Surface Generation
-input_formats: [".merged", ".nav", ".ss", "JHC_header (.r4 / .8bit)"]
-output_formats: [".blank"]
-related_tools: ["tor4", "tomos", "weigh_grid", "mos2", "edhead", "r4to8bit", "addSUN"]
+input_formats:
+- .merged
+- .nav
+- .ss
+- JHC_header (.r4 / .8bit)
+output_formats:
+- .blank
+related_tools:
+- tor4
+- tomos
+- weigh_grid
+- mos2
+- edhead
+- r4to8bit
+- addSUN
 ---
 
 # make_blank
@@ -16,7 +29,7 @@ related_tools: ["tor4", "tomos", "weigh_grid", "mos2", "edhead", "r4to8bit", "ad
 ## Description
 `make_blank` initializes a blank OMG1 `JHC_header` array file (`<prefix>.blank`) with a specified geographic projection (Mercator, UTM, Rotated UTM, Rotated Mercator, or Lambert Conformal Conic), bounding box, and pixel resolution (meters per pixel, `mpp`).
 
-In the OMG gridding and sidescan mosaicking workflows, `make_blank` is **always Step 1**. Neither [`weigh_grid`](weigh_grid.md) nor [`mos2`](../newmos/mos2.md) creates grid headers from scratch; instead, you run `make_blank` to define the map sheet geometry (`<prefix>.blank`), and then run the helper scripts [`tor4`](../scripts/tor4.md) (which copies `<prefix>.blank` to `.r4`, `.r4_weights`, and `.r4_weight_depth` for `weigh_grid`) or [`tomos`](../scripts/tomos.md) (which copies `<prefix>.blank` to `.mos` and `.ran` for `mos2`).
+In the OMG gridding and sidescan mosaicking workflows, `make_blank` is **always Step 1**. Neither [`weigh_grid`](weigh_grid.html) nor [`mos2`](../newmos/mos2.html) creates grid headers from scratch; instead, you run `make_blank` to define the map sheet geometry (`<prefix>.blank`), and then run the helper scripts [`tor4`](../scripts/tor4.html) (which copies `<prefix>.blank` to `.r4`, `.r4_weights`, and `.r4_weight_depth` for `weigh_grid`) or [`tomos`](../scripts/tomos.html) (which copies `<prefix>.blank` to `.mos` and `.ran` for `mos2`).
 
 ---
 
@@ -30,6 +43,7 @@ make_blank [OPTIONS] <outfilename_prefix>
 ### Common Workflow Examples
 
 **1. Create a floating-point `.blank` grid automatically bounded by a set of `.merged` files (for bathymetry gridding):**
+
 ```bash
 # Put the output prefix BEFORE -boundsof because -boundsof reads all trailing arguments!
 make_blank -float survey_area -boundsof merged/JD100/*.merged
@@ -40,6 +54,7 @@ tor4 survey_area.blank
 ```
 
 **2. Create an 8-bit `.blank` grid primed to `255` (for sidescan mosaicking with `mos2`):**
+
 ```bash
 make_blank -8bit -prime 255 survey_mos -boundsof_ss ss/JD100/*.ss
 # Prepare .mos and .ran files for mos2:
@@ -47,11 +62,13 @@ tomos survey_mos.blank
 ```
 
 **3. Clone the exact projection and bounds of an existing mapsheet (`-area`), changing only resolution or data type:**
+
 ```bash
 make_blank -float -area existing_map.r4 new_highres_map
 ```
 
 **4. Create a UTM-projected floating-point `.blank` grid from `.merged` files with central meridian `-66.0`:**
+
 ```bash
 make_blank -float -utm_boundsof -merid -66.0 fundy_utm -boundsof merged/JD100/*.merged
 ```
@@ -114,6 +131,7 @@ make_blank -float -utm_boundsof -merid -66.0 fundy_utm -boundsof merged/JD100/*.
 
 1. **Argument Order with `-boundsof`:**
    In `make_blank.c` (lines 386–392), `-boundsof`, `-boundsof_nav`, and `-boundsof_ss` loop over `while (*argv)` until the end of the command line! Therefore, if you place the output filename *after* `-boundsof *.merged`, `make_blank` will treat your output filename as a `.merged` input file and then prompt you interactively for the output filename. **Always put the output filename before `-boundsof`:**
+
    ```bash
    # CORRECT:
    make_blank -float my_grid -boundsof merged/JD100/*.merged

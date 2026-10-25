@@ -1,9 +1,11 @@
 ---
 layout: default
 title: RT_ancil_data
-parent: RT Tools
+parent: Real-Time Multibeam Display (RT)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 186
 ---
+
 # RT_ancil_data
 
 ## Description
@@ -68,5 +70,6 @@ This module primarily focuses on display and does not directly produce output fi
 *   `X_extra.h`: X-windows graphics utilities.
 *   `array.h`: Array manipulation utilities.
 *   `j_area.h`: Area and projection handling.
+
 ```
 ```

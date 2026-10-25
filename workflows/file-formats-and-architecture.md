@@ -5,17 +5,17 @@ parent: Processing Workflows & Guides
 nav_order: 1
 category: workflows
 related_tools:
-  - read_kmall
-  - RTlite
-  - mergeNav
-  - mergeAtt
-  - newMergeAtt
-  - makess
-  - make_blank
-  - weigh_grid
-  - mos2
-  - swathed
-  - jview
+- read_kmall
+- RTlite
+- mergeNav
+- mergeAtt
+- newMergeAtt
+- makess
+- make_blank
+- weigh_grid
+- mos2
+- swathed
+- jview
 ---
 
 # OMG File Formats & Directory Architecture

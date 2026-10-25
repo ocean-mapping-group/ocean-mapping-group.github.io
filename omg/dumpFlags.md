@@ -1,9 +1,11 @@
 ---
 layout: default
 title: dumpFlags
-parent: OMG Tools
+parent: Core Swath & .all Suite (omg)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 91
 ---
+
 # dumpFlags
 
 ## Description
@@ -14,6 +16,7 @@ nav_order: 91
 This tool is useful for backing up cleaning efforts, applying a standard set of flags to new data, or restoring flags after an accidental modification.
 
 ## Usage
+
 ```bash
 dumpFlags <OMG_HDCS_datafile_prefix(s)> [OPTIONS]
 ```

@@ -1,14 +1,20 @@
 ---
 layout: default
 title: iwc_gwc
-parent: Ian Church (ianc) Tools
+parent: Ian Church — Hydrodynamic & 3D Ray-Trace Suite (ianc)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 nav_order: 11
 tool_name: iwc_gwc
 source_path: code/ianc/subr/iwc_gwc.c
 category: Ocean Modeling & Hydrographic Utilities (ianc)
-input_formats: ["Generic Water Column Binary Format (.gwc)"]
-output_formats: ["In-memory GWC packet structs (GWC_FileHeader, GWC_WaterColumnPacket, etc.)"]
-related_tools: ["iwc_water", "iwc_support", "oceanReader"]
+input_formats:
+- Generic Water Column Binary Format (.gwc)
+output_formats:
+- In-memory GWC packet structs (GWC_FileHeader, GWC_WaterColumnPacket, etc.)
+related_tools:
+- iwc_water
+- iwc_support
+- oceanReader
 ---
 
 # iwc_gwc

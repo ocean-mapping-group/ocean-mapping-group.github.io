@@ -1,14 +1,23 @@
 ---
 layout: default
 title: fft2dimage
-parent: Image Tools
+parent: Raster Image Processing (image)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 22
 tool_name: fft2dimage
 source_path: code/image/fft2dimage.c
 category: Spectral & Backscatter Analysis
-input_formats: ["OMG1 32-bit float bathymetry DTM (.r4)"]
-output_formats: ["2D FFT power spectrum (.fft)", "Dominant wavelength (.wav.r4), azimuth (.azi.r4), and amplitude (.mag.r4) grids", "Vector track (.nav) and ASCII summary (.txt)"]
-related_tools: ["subimage", "pastemos", "r4to8bit", "jview"]
+input_formats:
+- OMG1 32-bit float bathymetry DTM (.r4)
+output_formats:
+- 2D FFT power spectrum (.fft)
+- Dominant wavelength (.wav.r4), azimuth (.azi.r4), and amplitude (.mag.r4) grids
+- Vector track (.nav) and ASCII summary (.txt)
+related_tools:
+- subimage
+- pastemos
+- r4to8bit
+- jview
 ---
 
 # fft2dimage
@@ -17,6 +26,7 @@ related_tools: ["subimage", "pastemos", "r4to8bit", "jview"]
 `fft2dimage` performs 2D Fast Fourier Transform (FFT) spectral analysis on a 32-bit floating-point (`.r4`) `OMG1` bathymetric DTM to quantify bedform/sandwave crest orientation, dominant wavelength, and wave height amplitude. It operates either on a single $2^n \times 2^n$ sub-window (`-xstart`, `-ystart`) or in a sliding-window loop (`-loopstep`) across the entire mapsheet to produce regional bedform maps (`.wav.r4`, `.azi.r4`, `.mag.r4`, and `.nav`).
 
 ## CLI Options & Usage
+
 ```bash
 fft2dimage -in <bathy.r4> -out <prefix> -power <n> \
   [-xstart <col> -ystart <row> | -loopstep <step_pixels>] \
@@ -33,4 +43,4 @@ fft2dimage -in <bathy.r4> -out <prefix> -power <n> \
 * **`-wavelength`**: Outputs spatial wavelength in meters rather than spatial frequency ($1/\lambda$).
 
 ## Algorithm
-For each valid $2^n \times 2^n$ sub-grid, `fft2dimage` removes the mean/planar trend, applies the radial cosine taper, executes a 2D complex-to-complex radix-2 FFT (`fft2d()`), locates the peak spectral power bin `(max_i, max_j)`, and converts the wavenumber vector `(kx, ky)` into dominant bedform wavelength $\lambda$, crest-normal azimuth (`0°–180°`), and RMS amplitude. The resulting `.mag.r4` and `.azi.r4` grids can be combined into a directional color-wheel map using [`pastemos`](pastemos.md).
+For each valid $2^n \times 2^n$ sub-grid, `fft2dimage` removes the mean/planar trend, applies the radial cosine taper, executes a 2D complex-to-complex radix-2 FFT (`fft2d()`), locates the peak spectral power bin `(max_i, max_j)`, and converts the wavenumber vector `(kx, ky)` into dominant bedform wavelength $\lambda$, crest-normal azimuth (`0°–180°`), and RMS amplitude. The resulting `.mag.r4` and `.azi.r4` grids can be combined into a directional color-wheel map using [`pastemos`](pastemos.html).

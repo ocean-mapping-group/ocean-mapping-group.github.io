@@ -1,13 +1,18 @@
 ---
 layout: default
 title: dischargeTide
-parent: Tide Tools
+parent: Tidal Reduction & Constituents (tide)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 tool_name: dischargeTide
 source_path: code/tide/dischargeTide.c
 category: tide
-input_formats: ["Environment Canada Daily Discharge CSV"]
-output_formats: ["JHC V2 ASCII tide (year jday hour min value)"]
-related_tools: ["binTide", "mergeTide"]
+input_formats:
+- Environment Canada Daily Discharge CSV
+output_formats:
+- JHC V2 ASCII tide (year jday hour min value)
+related_tools:
+- binTide
+- mergeTide
 ---
 
 # dischargeTide
@@ -47,6 +52,7 @@ dischargeTide [OPTIONS] -tide <in_csv_file> <out_ascii_file>
 ## Examples
 
 **Convert an Environment Canada daily discharge CSV to binary OMG format:**
+
 ```bash
 dischargeTide -tide squamish_daily.csv squamish_discharge.asc
 binTide -V2 squamish_discharge.asc squamish_discharge.bin

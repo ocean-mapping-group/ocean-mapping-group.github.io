@@ -1,14 +1,21 @@
 ---
 layout: default
 title: decr4
-parent: Image Tools
+parent: Raster Image Processing (image)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 16
 tool_name: decr4
 source_path: code/image/decr4.c
 category: Image & Raster Processing
-input_formats: ["OMG1 32-bit float grid (.r4)"]
-output_formats: ["Downsampled OMG1 32-bit float grid (.r4)"]
-related_tools: ["decimate", "expandr4", "shoalBias", "changeAspect"]
+input_formats:
+- OMG1 32-bit float grid (.r4)
+output_formats:
+- Downsampled OMG1 32-bit float grid (.r4)
+related_tools:
+- decimate
+- expandr4
+- shoalBias
+- changeAspect
 ---
 
 # decr4
@@ -17,6 +24,7 @@ related_tools: ["decimate", "expandr4", "shoalBias", "changeAspect"]
 `decr4` downsamples a 32-bit floating-point (`data_type = 3`, `.r4`) `OMG1` (`JHC_header`) bathymetric or backscatter grid by integer decimation factors (`-count`, or asymmetric `-xcount` / `-ycount`). It supports either valid-cell arithmetic averaging (default) or shoal-biased maximum selection (`-shoal_bias`), plus optional vertical datum offsetting (`-add`).
 
 ## CLI Options & Usage
+
 ```bash
 decr4 -in <infile.r4> -out <outfile.r4> \
   [-count <n> | -xcount <nx> -ycount <ny>] \

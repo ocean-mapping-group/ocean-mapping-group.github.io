@@ -1,7 +1,8 @@
 ---
 layout: default
-title: KMALL Tools
-nav_order: 10
+title: Kongsberg .kmall & .kmwcd (kmall)
+parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
+nav_order: 1
 has_children: true
 ---
 
@@ -13,12 +14,12 @@ The `kmall` directory contains the Ocean Mapping Group's parser and converter fo
 
 ## Tools & Headers in `kmall/`
 
-* [`read_kmall`](read_kmall.md) — Primary converter (`code/kmall/read_kmall.c`) that unpacks `#MRZ` (multibeam raw range and depth), `#MWC` (water column), `#SPO` (sensor position), `#SKM` (high-rate KM binary attitude & delayed heave), `#SCL` (clock), `#SVP` / `#SVT` (sound velocity), `#IOP` (runtime parameters), and `#IIP` (installation parameters) datagrams into OMG-HDCS v4 files (`.merged`, `.nav_1..3`, `.net_att_1..2`, `.watercol`, `.sectors`, `.param`).
+* [`read_kmall`](read_kmall.html) — Primary converter (`code/kmall/read_kmall.c`) that unpacks `#MRZ` (multibeam raw range and depth), `#MWC` (water column), `#SPO` (sensor position), `#SKM` (high-rate KM binary attitude & delayed heave), `#SCL` (clock), `#SVP` / `#SVT` (sound velocity), `#IOP` (runtime parameters), and `#IIP` (installation parameters) datagrams into OMG-HDCS v4 files (`.merged`, `.nav_1..3`, `.net_att_1..2`, `.watercol`, `.sectors`, `.param`).
 * **Kongsberg Datagram Headers (`EMdgmFormat.h`, `EMdgm.h`):** Official Kongsberg Maritime C struct definitions (including Revision D, Revision G, and Revision H+ extensions for phase/amplitude water-column and installation text parsing).
 
 ---
 
 ## Related Workflows & Batch Scripts
 
-* [`unravel_KMALL_2500m_RevHplus_netatt2_parallel`](../scripts/unravel_KMALL_parallel.md) — Parallel batch dispatcher running `read_kmall`, `newMergeAtt`, `repoint`, `makess`, and `getBounds`.
-* [Kongsberg `.kmall` Unraveling Workflow](../workflows/kongsberg-kmall-unraveling.md) — Step-by-step guide to unpacking and processing `.kmall` surveys.
+* [`unravel_KMALL_2500m_RevHplus_netatt2_parallel`](../scripts/unravel_KMALL_parallel.html) — Parallel batch dispatcher running `read_kmall`, `newMergeAtt`, `repoint`, `makess`, and `getBounds`.
+* [Kongsberg `.kmall` Unraveling Workflow](../workflows/kongsberg-kmall-unraveling.html) — Step-by-step guide to unpacking and processing `.kmall` surveys.

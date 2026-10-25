@@ -1,18 +1,19 @@
 ---
 layout: default
 title: Echo_calib
-parent: Core Shared Libraries (subr)
-module_name: Echo_calib
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/Echo_calib.c
-header_path: code/subr/Echo_calib.h
 category: Acoustic Backscatter & Sidescan Calibration
 related_tools:
-  - make_ss
-  - swathed
-  - RT
-  - RTLite
-  - DelayEditor
-  - EKlook
+- make_ss
+- swathed
+- RT
+- RTLite
+- DelayEditor
+- EKlook
+module_name: Echo_calib
+header_path: code/subr/Echo_calib.h
 ---
 
 # Echo_calib: Multibeam Backscatter Calibration & Sidescan Time-Series Generation
@@ -32,6 +33,7 @@ The library accounts for Time-Varying Gain (TVG), spherical spreading, seawater 
 ## Key Constants, State Variables & Data Structures
 
 ### Constants & Processing Versions
+
 ```c
 #define MAX_NUM_ECHO_CALIB_SCANS 100000
 #define MAX_NUM_ECHO_CALIB_BEAMS 1440

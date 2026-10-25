@@ -1,8 +1,9 @@
 ---
 layout: default
-title: WASSP Tools
+title: Furuno WASSP Multibeam (wassp)
+parent: 4. Multi-Vendor Sonar & LiDAR Converters
+nav_order: 4
 has_children: true
-nav_order: 24
 ---
 
 # WASSP Tools

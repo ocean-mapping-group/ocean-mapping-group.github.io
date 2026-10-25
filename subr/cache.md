@@ -1,15 +1,16 @@
 ---
 layout: default
 title: cache
-parent: Core Shared Libraries (subr)
-module_name: cache
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/cache.c
-header_path: code/subr/cache.h
 category: Memory & Disk Caching Utilities
 related_tools:
-  - mos2
-  - rasterCoords
-  - s2_reader
+- mos2
+- rasterCoords
+- s2_reader
+module_name: cache
+header_path: code/subr/cache.h
 ---
 
 # cache: Block-Based Least-Recently-Used (LRU) Disk Array Cache
@@ -22,12 +23,14 @@ related_tools:
 ## Key Constants & Data Structures
 
 ### Cache Sizing Constants
+
 ```c
 #define CACHE_MAXBLOCKS 1500   /* Maximum number of 1 KB blocks held in memory (~1.5 MB per cache) */
 #define CACHE_BLOCKSIZE 1024   /* Size of each cached file block in bytes */
 ```
 
 ### `cache` Structure
+
 ```c
 typedef struct cache {
     int    x0, y0;        /* Pixel coordinate origin offset (default 0, 0 at lower-left) */

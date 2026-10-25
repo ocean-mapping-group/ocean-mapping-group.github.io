@@ -1,9 +1,11 @@
 ---
 layout: default
 title: getBounds
-parent: OMG Tools
+parent: Core Swath & .all Suite (omg)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 104
 ---
+
 # getBounds
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 104
 The calculated bounds are written back to the summary header of the input file, to an auxiliary `.file_bounds` file, and to a `.100ping_bounds` file (which stores bounds for every 100 pings). This tool is crucial for spatial indexing, data management, and ensuring that file headers accurately reflect the data's coverage.
 
 ## Usage
+
 ```bash
 getBounds <datafile(s).{merged,ss}> [OPTIONS]
 ```

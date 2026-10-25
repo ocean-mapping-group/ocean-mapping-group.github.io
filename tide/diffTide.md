@@ -1,13 +1,21 @@
 ---
 layout: default
 title: diffTide
-parent: Tide Tools
+parent: Tidal Reduction & Constituents (tide)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 tool_name: diffTide
 source_path: code/tide/diffTide.c
 category: tide
-input_formats: [".nav / .bin (binary jcu_nav_rec tide or navigation files)"]
-output_formats: [".nav / .bin (binary jcu_nav_rec difference/sum file)", "ASCII horizontal offset (dlat_m dlon_m)"]
-related_tools: ["binTide", "mergeTide", "GrafNav_2_OMG", "posProc_2_OMG"]
+input_formats:
+- .nav / .bin (binary jcu_nav_rec tide or navigation files)
+output_formats:
+- .nav / .bin (binary jcu_nav_rec difference/sum file)
+- ASCII horizontal offset (dlat_m dlon_m)
+related_tools:
+- binTide
+- mergeTide
+- GrafNav_2_OMG
+- posProc_2_OMG
 ---
 
 # diffTide
@@ -67,16 +75,19 @@ diffTide [OPTIONS] -tide1 <tide1.bin> [-tide2 <tide2.bin>] -out <out.bin>
 ## Examples
 
 **1. Subtract predicted gauge tide from RTK GPS elevation to isolate residual surge/ellipsoid offset:**
+
 ```bash
 diffTide -tide1 rtk_elev.bin -tide2 predicted_tide.bin -out residual_tide.bin
 ```
 
 **2. Apply a datum offset (+0.45 m) and phase delay (12 minutes) to a single binary tide file:**
+
 ```bash
 diffTide -base_offset 0.45 -atten 0.96 -tide1 station_a.bin -out station_a_adjusted.bin
 ```
 
 **3. Compute horizontal position differences (in meters) between two navigation files:**
+
 ```bash
 diffTide -calc_horiz_diff -tide1 posmv_nav.bin -tide2 grafnav_ppk.bin -out horiz_diff.txt
 ```
@@ -85,5 +96,5 @@ diffTide -calc_horiz_diff -tide1 posmv_nav.bin -tide2 grafnav_ppk.bin -out horiz
 
 ## Workflow Context
 
-- **Upstream:** Binary tide/navigation files produced by [`binTide`](binTide.md), [`GrafNav_2_OMG`](GrafNav_2_OMG.md), [`posProc_2_OMG`](posProc_2_OMG.md), or `stripNav`.
-- **Downstream:** [`mergeTide`](mergeTide.md) or time-series plotting tools.
+- **Upstream:** Binary tide/navigation files produced by [`binTide`](binTide.html), [`GrafNav_2_OMG`](GrafNav_2_OMG.html), [`posProc_2_OMG`](posProc_2_OMG.html), or `stripNav`.
+- **Downstream:** [`mergeTide`](mergeTide.html) or time-series plotting tools.

@@ -1,9 +1,11 @@
 ---
 layout: default
 title: reSortOMG
-parent: OMG Tools
+parent: Core Swath & .all Suite (omg)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 59
 ---
+
 # reSortOMG
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 59
 The tool reads the entire merged file, extracts time and ping number information for each profile, sorts this information, and then rewrites the merged file in the correct order.
 
 ## Usage
+
 ```bash
 reSortOMG <input_omg_file(.merged)> [OPTIONS]
 ```

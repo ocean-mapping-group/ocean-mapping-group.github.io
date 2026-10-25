@@ -1,12 +1,18 @@
 ---
 layout: default
 title: jGL_draw
-parent: Graphics & X11/OpenGL Libraries (subr_graphics)
-module_name: jGL_draw
+parent: X11 / Motif / OpenGL Graphics Library (subr_graphics)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr_graphics/jGL_draw.c
-header_path: code/subr_graphics/jGL_draw.h
 category: 3D OpenGL Visualization
-related_tools: ["DCM_rthand", "bP_stuff", "swathed", "glSeis", "synSwath"]
+related_tools:
+- DCM_rthand
+- bP_stuff
+- swathed
+- glSeis
+- synSwath
+module_name: jGL_draw
+header_path: code/subr_graphics/jGL_draw.h
 ---
 
 # jGL_draw
@@ -39,6 +45,7 @@ It powers interactive 3D multibeam and water-column visualization tools includin
 ## Public Functions
 
 ### 1. Camera, Lighting & Primitive Setup
+
 | Function | Signature | Description |
 |---|---|---|
 | `set_up_lighting` / `set_up_sphere` / `set_up_cylinder` | `void set_up_lighting(void)` | Initializes OpenGL light sources (`GL_LIGHT0`..), `GLUquadricObj` handles (`qobj_cyl`, `qobj_sph`, `qobj_disk`), and material tables. |
@@ -50,15 +57,17 @@ It powers interactive 3D multibeam and water-column visualization tools includin
 | `do_panel` / `do_triangle` / `get_normal` | `void do_panel(float *v1, float *v2, float *v3, float *v4)` | Computes surface normal vectors (`get_normal`) and emits lit OpenGL quadrilateral/triangular facets. |
 
 ### 2. Acoustic Array, Beamforming & Cone Geometry
+
 | Function | Signature | Description |
 |---|---|---|
-| `draw_line_array` / `draw_transverse_array` | `void draw_line_array(int transp)` | Renders a linear transducer array along with optional interactive visualizations of element spacing, shading weights (`SHOW_SHADING` via [`bP_stuff`](../subr/bP_stuff.md)), incoming phase wavefronts and FFT organ-pipe spectra (`SHOW_TIME_DELAY`), virtual steered array projection (`SHOW_ARRAY_WAVELENGTHS`), and near-field focusing arcs (`SHOW_FOCAL_LENGTH`). |
+| `draw_line_array` / `draw_transverse_array` | `void draw_line_array(int transp)` | Renders a linear transducer array along with optional interactive visualizations of element spacing, shading weights (`SHOW_SHADING` via [`bP_stuff`](../subr/bP_stuff.html)), incoming phase wavefronts and FFT organ-pipe spectra (`SHOW_TIME_DELAY`), virtual steered array projection (`SHOW_ARRAY_WAVELENGTHS`), and near-field focusing arcs (`SHOW_FOCAL_LENGTH`). |
 | `draw_IandQ` | `void draw_IandQ(int phase36th)` | Renders a 3D helix and phasor diagram of complex In-phase ($I$) and Quadrature ($Q$) harmonic signals over 6 wavelengths. |
 | `draw_cone` | `void draw_cone(float steering_angle, int axis, float start_angle, float end_angle, int dobeams)` | Renders a 3D hyperbolic/conical transmit or receive beam-steering surface (`axis = X` or `Y`) at `steering_angle` and computes its seafloor intersection curve. |
 | `do_ray_fan` | `void do_ray_fan(int nobeams, float *angles, float tilt, float radius, float max_elev, float steer)` | Renders a fan of `nobeams` individual acoustic rays from a tilted/steered array. |
 | `draw_T_array` / `draw_X_array` / `draw_30deg_Tpair` / `draw_disc` / `draw_two_row` / `draw_three_row` | `void draw_T_array(float tilt, int style, float max_elev, float steer)` | Renders Mills Cross (`T` and `X`), dual-head $30^\circ$ tilted pair, circular piston (`draw_disc`), and multi-row interferometric transducer arrays. |
 
 ### 3. Sonar Heads, Platforms & Oceanographic Environment
+
 | Function | Signature | Description |
 |---|---|---|
 | `draw_appropriate_object` | `void draw_appropriate_object(void)` | Dispatches 3D rendering for the currently selected vessel/platform (`draw_ship`, `draw_boat`, `draw_ROV`, `draw_hugin`, `draw_buoy`) and sonar head (`draw_EM3000`, `draw_EM3000D`, `draw_EM2040D`, `draw_EM1000`, `draw_8101`, `draw_8111`, `draw_8125`, `draw_Seabat`, `draw_Twin_Seabat`, `draw_SM2000`, `draw_M3`, `draw_SMII`, `draw_Bathyscan`, `draw_AcousticBeacon`, `draw_SubbottomArray`). |

@@ -1,9 +1,11 @@
 ---
 layout: default
 title: get_GRA
-parent: OMG Tools
+parent: Core Swath & .all Suite (omg)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 100
 ---
+
 # get_GRA
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 100
 This tool is critical for backscatter processing and beam pattern analysis, as accurate grazing angles are fundamental for correcting angular response effects.
 
 ## Usage
+
 ```bash
 get_GRA <input_omg_file(.merged)> [OPTIONS]
 ```
@@ -27,6 +30,7 @@ get_GRA <input_omg_file(.merged)> [OPTIONS]
 | `-out_ext <extension>` | Optional extension to append to the output filenames (e.g., `.GRA_ADH.<extension>.r4`). |
 
 ### Grazing Angle Calculation Methods (Choose one or more)
+
 | Option | Description |
 |---|---|
 | `-grazing_just_across` | Calculates grazing angle using simple across-track/depth ratio. |
@@ -38,6 +42,7 @@ get_GRA <input_omg_file(.merged)> [OPTIONS]
 | `-use_DTM_depth_instedof_beam_depth` | Uses DTM depth instead of beam depth for angle calculations. |
 
 ### Other Options
+
 | Option | Description |
 |---|---|
 | `-separate_port_stbd_grazing` | (Present in `USAGE` but not implemented in code) Intended to differentiate grazing angles for port and starboard. |

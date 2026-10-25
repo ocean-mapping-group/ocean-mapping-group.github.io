@@ -1,9 +1,11 @@
 ---
 layout: default
 title: get_ADH_SRA
-parent: OMG Tools
+parent: Core Swath & .all Suite (omg)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 99
 ---
+
 # get_ADH_SRA
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 99
 This tool is essential for advanced backscatter processing, beam pattern analysis, and calibration, where accurate knowledge of the beam's angle relative to the sonar or the vertical is critical.
 
 ## Usage
+
 ```bash
 get_ADH_SRA <input_omg_file(.merged)> [OPTIONS]
 ```

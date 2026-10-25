@@ -1,20 +1,21 @@
 ---
 layout: default
 title: testSphereTS
-parent: tests (Test, Simulation & Diagnostic Suite)
+parent: Acoustic & Mathematical Test Harnesses (tests)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 nav_order: 24
 tool_name: testSphereTS
 source_path: code/tests/testSphereTS.c
 category: Backscatter & Target Strength Calibration (tests)
 input_formats:
-  - Command-line frequency (-freq) and hardcoded 38.1 mm tungsten carbide sphere constants
+- Command-line frequency (-freq) and hardcoded 38.1 mm tungsten carbide sphere constants
 output_formats:
-  - Spherical Bessel diagnostic values and acoustic Target Strength (TS in dB re 1 m²) on stdout
+- Spherical Bessel diagnostic values and acoustic Target Strength (TS in dB re 1 m²) on stdout
 related_tools:
-  - dobessel
-  - EKlook
-  - BatchProcEK
-  - testNormConv
+- dobessel
+- EKlook
+- BatchProcEK
+- testNormConv
 ---
 
 # testSphereTS
@@ -22,7 +23,7 @@ related_tools:
 ## Overview
 `testSphereTS` (`code/tests/testSphereTS.c`, authored by John Hughes Clarke in June 2023) is a C translation and testbed of David Macaulay's `sphereTS.py` Python package, which calculates the exact theoretical acoustic backscattered **Target Strength ($\text{TS}$)** of an elastic calibration sphere immersed in a fluid using the normal-mode series solution of **MacLennan (1981)** (*"The theory of solid spheres as sonar calibration targets"*) and the spherical Bessel derivative recurrences of **Rudgers (1967)** (*NRL Report 6551*).
 
-In hydrographic and fisheries acoustics (such as calibrating Kongsberg Simrad EK60/EK80 split-beam echosounders in [`EKlook`](../EKlook/index.md)), a standard $38.1\text{ mm}$ tungsten carbide ($\text{WC}$ with $6\%$ cobalt binder) sphere is suspended beneath the transducer to verify on-axis gain and broadband frequency response.
+In hydrographic and fisheries acoustics (such as calibrating Kongsberg Simrad EK60/EK80 split-beam echosounders in [`EKlook`](../EKlook/)), a standard $38.1\text{ mm}$ tungsten carbide ($\text{WC}$ with $6\%$ cobalt binder) sphere is suspended beneath the transducer to verify on-axis gain and broadband frequency response.
 
 ---
 

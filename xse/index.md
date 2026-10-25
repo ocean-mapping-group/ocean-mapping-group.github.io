@@ -1,8 +1,9 @@
 ---
 layout: default
-title: XSE Tools
+title: L-3 / SeaBeam XSE Format (xse)
+parent: 4. Multi-Vendor Sonar & LiDAR Converters
+nav_order: 12
 has_children: true
-nav_order: 25
 ---
 
 # XSE Tools

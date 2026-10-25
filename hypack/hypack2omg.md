@@ -1,14 +1,28 @@
 ---
 layout: default
 title: hypack2omg
-parent: Hypack Tools (hypack)
+parent: HYPACK HSX / RAW Converters (hypack)
+grand_parent: 4. Multi-Vendor Sonar & LiDAR Converters
 nav_order: 2
 tool_name: hypack2omg
 source_path: code/hypack/hypack2omg.c
 category: Raw Data Unraveling & Format Conversion
-input_formats: [".hsx (HYPACK HYSWEEP ASCII)"]
-output_formats: [".merged", ".nav", ".tide", ".orientation", ".heading", ".param"]
-related_tools: ["dehypack", "mergeNav", "mergeAtt", "newMergeAtt", "mergeTide", "swathed"]
+input_formats:
+- .hsx (HYPACK HYSWEEP ASCII)
+output_formats:
+- .merged
+- .nav
+- .tide
+- .orientation
+- .heading
+- .param
+related_tools:
+- dehypack
+- mergeNav
+- mergeAtt
+- newMergeAtt
+- mergeTide
+- swathed
 ---
 
 # hypack2omg

@@ -1,14 +1,22 @@
 ---
 layout: default
 title: hypack2nav
-parent: Navigation Tools
+parent: Navigation Processing (nav)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 21
 tool_name: hypack2nav
 source_path: code/nav/hypack2nav.c
 category: Navigation & Georeferencing
-input_formats: ["HYPACK RAW ASCII (.RAW)"]
-output_formats: [".nav"]
-related_tools: ["dohypackLNW", "NMEAtoNav", "Generic_to_Nav", "mergeNav", "appendNav"]
+input_formats:
+- HYPACK RAW ASCII (.RAW)
+output_formats:
+- .nav
+related_tools:
+- dohypackLNW
+- NMEAtoNav
+- Generic_to_Nav
+- mergeNav
+- appendNav
 ---
 
 # hypack2nav
@@ -29,11 +37,13 @@ hypack2nav [-v] <infile> <navfile>
 ### Common Workflow Examples
 
 **1. Convert a HYPACK `.RAW` log file to an OMG binary `.nav` file:**
+
 ```bash
 hypack2nav 001_1430.RAW 001_1430.nav
 ```
 
 **2. Convert and inspect the resulting binary navigation file:**
+
 ```bash
 hypack2nav -v survey_line1.RAW survey_line1.nav
 navedit -check survey_line1.nav
@@ -60,12 +70,14 @@ navedit -check survey_line1.nav
 `hypack2nav` scans each line (up to 255 characters) for two HYPACK record identifiers:
 
 1. **`TND` (Time and Date Header):**
+
    ```text
    TND HH:MM:SS MM/DD/YYYY
    ```
    * Characters at fixed offsets `&date[13]` (month), `&date[16]` (day), and `&date[19]` (year) are converted via `atoi()` and passed to `stdtime_from_dmy(day, month, year)` to compute the base Unix timestamp (`seconds`) at `00:00:00 UTC` of the survey date.
 
 2. **`RAW` (Raw Device Position Record):**
+
    ```text
    RAW <dev_id> <sec_of_day> <num_vals> <lat_DDDMM_MMMM> <lon_DDDMM_MMMM> ...
    ```

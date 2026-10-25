@@ -1,9 +1,11 @@
 ---
 layout: default
 title: 7kTVG
-parent: Reson Tools
+parent: Reson SeaBat 7k/8k (reson)
+grand_parent: 4. Multi-Vendor Sonar & LiDAR Converters
 nav_order: 181
 ---
+
 # 7kTVG
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 181
 This tool is useful for analyzing the TVG curves applied by the sonar, which is important for understanding backscatter measurements and for calibrating side-scan sonar data.
 
 ## Usage
+
 ```bash
 7kTVG -in <inputfile.s7k> -out <outputfile.r4> [-v]
 ```

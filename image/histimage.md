@@ -1,14 +1,20 @@
 ---
 layout: default
 title: histimage
-parent: Image Tools
+parent: Raster Image Processing (image)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 25
 tool_name: histimage
 source_path: code/image/histimage.c
 category: Spectral & Backscatter Analysis
-input_formats: ["ACRES 8-bit image"]
-output_formats: ["Normalized 256-bin ASCII histogram table"]
-related_tools: ["stretchacres", "classify", "MSpecBS_Xplot"]
+input_formats:
+- ACRES 8-bit image
+output_formats:
+- Normalized 256-bin ASCII histogram table
+related_tools:
+- stretchacres
+- classify
+- MSpecBS_Xplot
 ---
 
 # histimage
@@ -17,6 +23,7 @@ related_tools: ["stretchacres", "classify", "MSpecBS_Xplot"]
 `histimage` (written by A. Y. / JCU, June 1990) interactively extracts and normalizes 256-bin greyscale intensity histograms from up to 10 user-defined rectangular sub-windows of an ACRES-format 8-bit image, writing a side-by-side comparison table to `<outfile>`.
 
 ## CLI Options & Usage
+
 ```bash
 histimage -in <acres_file> -out <hist_table.txt>
 ```

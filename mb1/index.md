@@ -1,11 +1,17 @@
 ---
 layout: default
-title: Teledyne MB1 Tools (mb1)
+title: MB-System .mb1 Format (mb1)
+parent: 4. Multi-Vendor Sonar & LiDAR Converters
+nav_order: 10
 has_children: true
-nav_order: 27
-category: Raw Data Unraveling & Format Conversion
 source_path: code/mb1/
-related_tools: ["mbone2omg", "mboneTool", "makess", "get_ADH_SRA", "swathed"]
+category: Raw Data Unraveling & Format Conversion
+related_tools:
+- mbone2omg
+- mboneTool
+- makess
+- get_ADH_SRA
+- swathed
 ---
 
 # Teledyne MB1 Tools (`mb1/`)
@@ -22,8 +28,8 @@ Teledyne's `.tdy` data format encapsulates multibeam bathymetry, raw sonar setti
 
 | Tool | Source File | Primary Role | Input Formats | Output Formats |
 | :--- | :--- | :--- | :--- | :--- |
-| **[`mbone2omg`](mbone2omg.md)** | `code/mb1/mbone2omg.c` | Unpacks Teledyne `.tdy` (`TDYMB01`) multibeam files into OMG-HDCS v4 `.merged`, `.merged.ss_data` (float snippets), `.sonar_settings`, `.watercol`, and `wc_image.r4`. | `.tdy` (Teledyne MB1) | `.merged`, `.merged.ss_data`, `.sonar_settings`, `.watercol`, `wc_image.r4` |
-| **[`mboneTool`](mboneTool.md)** | `code/mb1/mboneTool.c` | Diagnostic packet scanner and inventory tool that counts, validates, and pretty-prints `FILE_HEADER`, `TDYMB01`, and `TDYRTA1` records in a `.tdy` file. | `.tdy` (Teledyne MB1) | Terminal packet inventory & header dumps |
+| **[`mbone2omg`](mbone2omg.html)** | `code/mb1/mbone2omg.c` | Unpacks Teledyne `.tdy` (`TDYMB01`) multibeam files into OMG-HDCS v4 `.merged`, `.merged.ss_data` (float snippets), `.sonar_settings`, `.watercol`, and `wc_image.r4`. | `.tdy` (Teledyne MB1) | `.merged`, `.merged.ss_data`, `.sonar_settings`, `.watercol`, `wc_image.r4` |
+| **[`mboneTool`](mboneTool.html)** | `code/mb1/mboneTool.c` | Diagnostic packet scanner and inventory tool that counts, validates, and pretty-prints `FILE_HEADER`, `TDYMB01`, and `TDYRTA1` records in a `.tdy` file. | `.tdy` (Teledyne MB1) | Terminal packet inventory & header dumps |
 
 ---
 

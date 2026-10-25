@@ -1,9 +1,11 @@
 ---
 layout: default
 title: extractNodeProf
-parent: Grid Tools
+parent: Bathymetric Gridding & Export (grid)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 26
 ---
+
 ---
 layout: default
 title: extractNodeProf
@@ -18,6 +20,7 @@ nav_order: 26
 This tool is essential for creating subsets of large-scale model data for regional analysis or for comparison with field observations.
 
 ## Usage
+
 ```bash
 extractNodeProf -mapsheet <area.r4> -outprefix <prefix> -custom_Salish <lat.r4> <lon.r4> <mask> <bathy.r4> -param3D <model_time_file(s)>
 ```

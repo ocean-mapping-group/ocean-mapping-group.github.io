@@ -1,21 +1,26 @@
 ---
 layout: default
 title: gl_beam.h
-parent: Beammap Tools
-grand_parent: Sidescan Tools
+parent: Sidescan Radiometric & Geometric Suite (sidescan)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 4
 tool_name: gl_beam.h
 source_path: code/sidescan/beammap/gl_beam.h
 category: Sidescan Beam Pattern Processing
-input_formats: ["C Header File"]
-output_formats: ["Included by mapbeam.c, debeam.c, joinbeam.c"]
-related_tools: ["mapbeam", "debeam", "joinbeam"]
+input_formats:
+- C Header File
+output_formats:
+- Included by mapbeam.c, debeam.c, joinbeam.c
+related_tools:
+- mapbeam
+- debeam
+- joinbeam
 ---
 
 # gl_beam.h
 
 ## Description
-`gl_beam.h` is the shared C header file (written by Guy Carpenter, April 1990) defining grid dimensions, depth bounds, and array-indexing macros for the 2D empirical beam-pattern mapping and removal tools ([`mapbeam`](mapbeam.md), [`debeam`](debeam.md), and [`joinbeam`](joinbeam.md)).
+`gl_beam.h` is the shared C header file (written by Guy Carpenter, April 1990) defining grid dimensions, depth bounds, and array-indexing macros for the 2D empirical beam-pattern mapping and removal tools ([`mapbeam`](mapbeam.html), [`debeam`](debeam.html), and [`joinbeam`](joinbeam.html)).
 
 ## Constants & Macros
 

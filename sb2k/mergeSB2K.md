@@ -1,14 +1,21 @@
 ---
 layout: default
 title: mergeSB2K
-parent: SB2K Tools
+parent: SeaBeam 2000 / 2100 (sb2k)
+grand_parent: 4. Multi-Vendor Sonar & LiDAR Converters
 nav_order: 2
 tool_name: mergeSB2K
 source_path: sb2k/mergeSB2K.c
 category: sidescan_processing
-input_formats: [GLORIA, OMG_HDCS]
-output_formats: [OMG_HDCS]
-related_tools: [unravelSB2K, SwathEd, make_mos2]
+input_formats:
+- GLORIA
+- OMG_HDCS
+output_formats:
+- OMG_HDCS
+related_tools:
+- unravelSB2K
+- SwathEd
+- make_mos2
 ---
 
 # mergeSB2K

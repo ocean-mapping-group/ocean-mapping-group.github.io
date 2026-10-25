@@ -1,14 +1,22 @@
 ---
 layout: default
 title: navtoSHP
-parent: Navigation Tools
+parent: Navigation Processing (nav)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 26
 tool_name: navtoSHP
 source_path: code/nav/navtoSHP.c
 category: Navigation & Georeferencing
-input_formats: [".nav"]
-output_formats: [".shp", ".shx"]
-related_tools: ["makeDBF", "iNav2SHP", "readSHP", "appendNav"]
+input_formats:
+- .nav
+output_formats:
+- .shp
+- .shx
+related_tools:
+- makeDBF
+- iNav2SHP
+- readSHP
+- appendNav
 ---
 
 # navtoSHP
@@ -16,7 +24,7 @@ related_tools: ["makeDBF", "iNav2SHP", "readSHP", "appendNav"]
 ## Description
 `navtoSHP` is a lightweight, zero-dependency converter that reads a binary OMG navigation file (`.nav`, `jcu_nav_rec`) and writes a 2D ESRI Polyline Shapefile (`<basename>.shp`) and its spatial index (`<basename>.shx`) using the internal OMG Shapefile library (`code/subr/j_SHP.c`).
 
-Unlike [`iNav2SHP`](iNav2SHP.md) (which uses external Shapelib and creates 3D `SHPT_*Z` geometries with `.dbf` and `.prj` files), `navtoSHP` writes a single 2D `JSHP_POLYLINE` (Shape Type `3`) record containing the trackline vertices and is designed to be paired with [`makeDBF`](makeDBF.md) to attach a hyperlink `.dbf` table.
+Unlike [`iNav2SHP`](iNav2SHP.html) (which uses external Shapelib and creates 3D `SHPT_*Z` geometries with `.dbf` and `.prj` files), `navtoSHP` writes a single 2D `JSHP_POLYLINE` (Shape Type `3`) record containing the trackline vertices and is designed to be paired with [`makeDBF`](makeDBF.html) to attach a hyperlink `.dbf` table.
 
 ---
 
@@ -29,12 +37,14 @@ navtoSHP [-v] [-skip <seconds>] <filename.nav>
 ### Common Workflow Examples
 
 **1. Convert a binary `.nav` file to `.shp` and `.shx` sampled every 5 seconds:**
+
 ```bash
 navtoSHP -skip 5 merged/JD100/0001_line.nav
 # Produces: merged/JD100/0001_line.shp and merged/JD100/0001_line.shx
 ```
 
 **2. Complete GIS trackline workflow with `navtoSHP` + `makeDBF`:**
+
 ```bash
 navtoSHP -skip 3 merged/JD100/0001_line.nav
 makeDBF -dbf merged/JD100/0001_line.dbf -url images/0001_line.html
@@ -53,7 +63,7 @@ makeDBF -dbf merged/JD100/0001_line.dbf -url images/0001_line.html
 > [!WARNING]
 > **Static Vertex Buffer Limit & Sub-Second Sampling with `-skip`:**
 > 1. `j_shape_record_contents` (`code/subr/j_SHP.h`) allocates a static array of `points[1000000]` (1,000,000 points). Ensure your input `.nav` file (after `-skip`) contains fewer than 1,000,000 vertices.
-> 2. Because `-skip` checks `((int)nav_rec.time) % skip < 1`, if the input `.nav` file has multiple fixes per second (e.g., 10 Hz POS MV navigation), **all fixes within each matching whole second** will pass the modulo filter. To decimate strictly by record count instead of integer second modulo, use [`iNav2SHP -skip N`](iNav2SHP.md) or pre-decimate with [`appendNav -skip N`](appendNav.md).
+> 2. Because `-skip` checks `((int)nav_rec.time) % skip < 1`, if the input `.nav` file has multiple fixes per second (e.g., 10 Hz POS MV navigation), **all fixes within each matching whole second** will pass the modulo filter. To decimate strictly by record count instead of integer second modulo, use [`iNav2SHP -skip N`](iNav2SHP.html) or pre-decimate with [`appendNav -skip N`](appendNav.html).
 
 ---
 

@@ -1,12 +1,18 @@
 ---
 layout: default
 title: snippet
-parent: Shared Core Libraries (subr)
-module_name: snippet
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/snippet.c
-header_path: code/subr/snippet.h
 category: Sonar Format Parsers & Hardware Drivers
-related_tools: ["reson", "unr8101", "xtf2omg", "makess", "jb_endian"]
+related_tools:
+- reson
+- unr8101
+- xtf2omg
+- makess
+- jb_endian
+module_name: snippet
+header_path: code/subr/snippet.h
 ---
 
 # snippet
@@ -21,6 +27,7 @@ Because the Reson 81-P processor packs variable-length beam snippets into Ethern
 ## Key Constants & Data Structures
 
 ### Constants
+
 | Constant | Value | Description |
 |---|---|---|
 | `SNIPPET_ID_SNP0` | `0x534E5030` (`'SNP0'`) | Big-endian magic identifier for a Reson snippet ping header. |
@@ -49,6 +56,7 @@ Describes a single snippet fragment for beam `Beam` (`0..BeamCnt-1`):
 - `FragOffset` (sample offset from ping start), `FragSamples` (samples in this fragment)
 
 ### `RESON_SNIPPET` (In-Memory Ping Container)
+
 ```c
 typedef struct {
     SNP0 header;                  /* 74-byte ping header */

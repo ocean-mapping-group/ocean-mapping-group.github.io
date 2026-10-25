@@ -1,9 +1,11 @@
 ---
 layout: default
 title: plotSvSonar
-parent: Plot Tools
+parent: PostScript & Vector Plotting (plot)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 145
 ---
+
 # plotSvSonar
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 145
 The tool can display vertical (Z), across-track (Y), or angular errors, helping users assess the quality of sound velocity profiles and identify areas where Sv corrections may be insufficient or incorrect.
 
 ## Usage
+
 ```bash
 plotSvSonar -infile <file1> [-outfile <filename.meta>] [-size <dx> <dy>] [-across_error | -angle_error] [-multi] [-points] [-v]
 ```

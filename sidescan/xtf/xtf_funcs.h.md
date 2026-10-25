@@ -1,21 +1,27 @@
 ---
 layout: default
 title: xtf_funcs.h
-parent: XTF Tools
-grand_parent: Sidescan Tools
+parent: Sidescan Radiometric & Geometric Suite (sidescan)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 11
 tool_name: xtf_funcs.h
 source_path: code/sidescan/xtf/xtf_funcs.h
 category: XTF Sidescan Conversion
-input_formats: ["C Header File"]
-output_formats: ["Included by xtf_funcs.c, xtf2glo.c"]
-related_tools: ["xtf_funcs", "xtf2glo", "xtf_doc.h", "chxtfhdr.h"]
+input_formats:
+- C Header File
+output_formats:
+- Included by xtf_funcs.c, xtf2glo.c
+related_tools:
+- xtf_funcs
+- xtf2glo
+- xtf_doc.h
+- chxtfhdr.h
 ---
 
 # xtf_funcs.h
 
 ## Description
-`xtf_funcs.h` is the C header file in `code/sidescan/xtf/` declaring the high-level `.XTF` file header and data packet reader functions implemented in [`xtf_funcs.c`](xtf_funcs.md).
+`xtf_funcs.h` is the C header file in `code/sidescan/xtf/` declaring the high-level `.XTF` file header and data packet reader functions implemented in [`xtf_funcs.c`](xtf_funcs.html).
 
 ## Function Prototypes
 

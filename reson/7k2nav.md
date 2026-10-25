@@ -1,9 +1,11 @@
 ---
 layout: default
 title: 7k2nav
-parent: Reson Tools
+parent: Reson SeaBat 7k/8k (reson)
+grand_parent: 4. Multi-Vendor Sonar & LiDAR Converters
 nav_order: 176
 ---
+
 # 7k2nav
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 176
 This tool is essential for providing position data for georeferencing multibeam sonar data when the `.s7k` file is the primary source of navigation.
 
 ## Usage
+
 ```bash
 7k2nav -s7k <input_name> -omg <omg_file_prefix> [-v] [-debug]
 ```

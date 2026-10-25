@@ -1,14 +1,18 @@
 ---
 layout: default
 title: mboneTool
-parent: Teledyne MB1 Tools (mb1)
+parent: MB-System .mb1 Format (mb1)
+grand_parent: 4. Multi-Vendor Sonar & LiDAR Converters
 nav_order: 2
 tool_name: mboneTool
 source_path: code/mb1/mboneTool.c
 category: Raw Data Unraveling & Format Conversion
-input_formats: [".tdy (Teledyne MB1)"]
-output_formats: ["STDOUT packet inventory & header dump"]
-related_tools: ["mbone2omg"]
+input_formats:
+- .tdy (Teledyne MB1)
+output_formats:
+- STDOUT packet inventory & header dump
+related_tools:
+- mbone2omg
 ---
 
 # mboneTool
@@ -17,7 +21,7 @@ related_tools: ["mbone2omg"]
 
 `mboneTool` (`code/mb1/mboneTool.c`) is a command-line diagnostic and packet-inspection utility for **Teledyne `.tdy` (MB1 / RTA1)** binary sonar files.
 
-Before unpacking a `.tdy` file with [`mbone2omg`](mbone2omg.md), operators can run `mboneTool` to verify file integrity, inspect the total packet count by record type (`FILE_HEADER`, `TDYMB01`, and `TDYRTA1` sub-types), and selectively dump the parsed header fields of specific packet IDs using `-vid <ID>` or `-v`.
+Before unpacking a `.tdy` file with [`mbone2omg`](mbone2omg.html), operators can run `mboneTool` to verify file integrity, inspect the total packet count by record type (`FILE_HEADER`, `TDYMB01`, and `TDYRTA1` sub-types), and selectively dump the parsed header fields of specific packet IDs using `-vid <ID>` or `-v`.
 
 ---
 
@@ -67,4 +71,4 @@ Got file size 104857600
 
 ## Architectural Fit
 
-`mboneTool` serves the same diagnostic role for Teledyne `.tdy` files that `kmall_index` / `read_kmall -v` serves for Kongsberg `.kmall` files, enabling rapid verification of packet counts, sonar firmware headers, and segment presence before running [`mbone2omg`](mbone2omg.md).
+`mboneTool` serves the same diagnostic role for Teledyne `.tdy` files that `kmall_index` / `read_kmall -v` serves for Kongsberg `.kmall` files, enabling rapid verification of packet counts, sonar firmware headers, and segment presence before running [`mbone2omg`](mbone2omg.html).

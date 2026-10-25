@@ -1,13 +1,24 @@
 ---
 layout: default
 title: r4toASCII
-parent: Grid Tools
+parent: Bathymetric Gridding & Export (grid)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 tool_name: r4toASCII
 source_path: code/grid/r4toASCII.c
 category: gridding
-input_formats: [".r4 (JHC 32-bit float grid)", ".8bit (JHC 8-bit unsigned char grid)", ".lat / .lon (optional exact shoal position grids)"]
-output_formats: ["ASCII (lat lon z, lon lat z, east north z, pixel x y z, ESRI grid, or GUI DMS)", "Binary 64-bit double triples (-ddd)"]
-related_tools: ["ASCIItoJHC", "r4toESRI", "r4toGRASS", "findShoals", "surface"]
+input_formats:
+- .r4 (JHC 32-bit float grid)
+- .8bit (JHC 8-bit unsigned char grid)
+- .lat / .lon (optional exact shoal position grids)
+output_formats:
+- ASCII (lat lon z, lon lat z, east north z, pixel x y z, ESRI grid, or GUI DMS)
+- Binary 64-bit double triples (-ddd)
+related_tools:
+- ASCIItoJHC
+- r4toESRI
+- r4toGRASS
+- findShoals
+- surface
 ---
 
 # r4toASCII
@@ -36,13 +47,13 @@ r4toASCII [OPTIONS] <infile.r4_or_8bit> <outfile.xyz>
 | `-lola` | Swap geographic column order to `lon lat (-val + zshift)` (`X Y Z`). | Disabled (`lat lon Z`) |
 | `-utm` | Output projected UTM meters `east north (-val + zshift)` (`%.3f %.3f %.3f`). If the input grid is Mercator (`projection == 1` or `5`), requires `-merid <central_meridian>`. | Disabled |
 | `-merid <deg>` | Central meridian (decimal degrees, e.g., `-66.0`) required when exporting a Mercator grid with `-utm`. | `-999.0` |
-| `-shoal_locations` | Read companion `<infile>.lat` and `<infile>.lon` sub-pixel offset grids (created by `weigh_grid -retain_pos` or [`findShoals`](findShoals.md)) so exported coordinates reflect exact sounding locations (`ymin + lat_off`, `xmin + lon_off`) rather than pixel centers. | Disabled |
-| `-for_surface` | Output unprojected pixel center coordinates `(x + 0.5) (dy - y - 0.5) (val + zshift)` for feeding into [`surface`](surface.md). | Disabled |
+| `-shoal_locations` | Read companion `<infile>.lat` and `<infile>.lon` sub-pixel offset grids (created by `weigh_grid -retain_pos` or [`findShoals`](findShoals.html)) so exported coordinates reflect exact sounding locations (`ymin + lat_off`, `xmin + lon_off`) rather than pixel centers. | Disabled |
+| `-for_surface` | Output unprojected pixel center coordinates `(x + 0.5) (dy - y - 0.5) (val + zshift)` for feeding into [`surface`](surface.html). | Disabled |
 | `-for_profile` | Output scaled metric coordinates `(x + 0.5)*xstep -(y + 0.5)*ystep (val + zshift)`. | Disabled |
 | `-linear` | Output pixel coordinates `(x + 0.5) (dy - y + 0.5) (val + zshift)` without map projection. | Disabled |
 | `-woa` | Output World Ocean Atlas $0.25^\circ$ grid centers `(x*0.25 + 0.125) ((dy - y - 1)*0.25 - 89.875) (val + zshift)`. | Disabled |
 | `-dg` | Output Distorted Grid format: writes `dx dy` on line 1, enables `-withzeros`, and outputs `(x+0.5)*xstep (dy-y-0.5)*ystep -val+zshift -val+zshift` (`0 0 0 0` for nodata). | Disabled |
-| `-esri` | Write space-separated matrix rows of `-(val + zshift)` with `-99999.99` for `0.0` nodata (note: use [`r4toESRI`](r4toESRI.md) for complete ESRI `.asc`/`.bil` exports with headers). | Disabled |
+| `-esri` | Write space-separated matrix rows of `-(val + zshift)` with `-99999.99` for `0.0` nodata (note: use [`r4toESRI`](r4toESRI.html) for complete ESRI `.asc`/`.bil` exports with headers). | Disabled |
 | `-gui` | Output CARIS/CHS GUI format (`depth/ge=DD-MM-SS.SSSN,DD-MM-SS.SSSW`). | Disabled |
 | `-ddd` | Write binary 64-bit IEEE `double[3]` triples (`lon, lat, val`, or `east, north, val` with `-utm`) instead of ASCII text. | Disabled |
 
@@ -70,16 +81,19 @@ r4toASCII [OPTIONS] <infile.r4_or_8bit> <outfile.xyz>
 ## Examples
 
 **1. Export valid soundings from a `.r4` grid to `lon lat depth` ASCII:**
+
 ```bash
 r4toASCII -lola survey.r4 survey_lonlatz.xyz
 ```
 
 **2. Export UTM `easting northing depth` triples:**
+
 ```bash
 r4toASCII -utm survey_utm.r4 survey_enu.xyz
 ```
 
 **3. Export exact shoal sounding coordinates (using `.lat` and `.lon` grids from `weigh_grid`):**
+
 ```bash
 r4toASCII -shoal_locations -lola survey.r4 survey_shoals.xyz
 ```
@@ -88,5 +102,5 @@ r4toASCII -shoal_locations -lola survey.r4 survey_shoals.xyz
 
 ## Workflow Context
 
-- **Inverse Tool:** [`ASCIItoJHC`](ASCIItoJHC.md) and [`weigh_grid`](weigh_grid.md) (`-xyz`) convert ASCII XYZ files back into `.r4` grids.
-- **GIS Export Alternatives:** Use [`r4toESRI`](r4toESRI.md) for ESRI `.asc`/`.bil`/`.flt` grids and [`r4toGRASS`](r4toGRASS.md) for GRASS GIS ASCII grids.
+- **Inverse Tool:** [`ASCIItoJHC`](ASCIItoJHC.html) and [`weigh_grid`](weigh_grid.html) (`-xyz`) convert ASCII XYZ files back into `.r4` grids.
+- **GIS Export Alternatives:** Use [`r4toESRI`](r4toESRI.html) for ESRI `.asc`/`.bil`/`.flt` grids and [`r4toGRASS`](r4toGRASS.html) for GRASS GIS ASCII grids.

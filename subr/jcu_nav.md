@@ -1,16 +1,17 @@
 ---
 layout: default
 title: jcu_nav
-parent: Core Shared Libraries (subr)
-module_name: jcu_nav
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/jcu_nav.c
-header_path: code/subr/jcu_nav.h
 category: Navigation Format I/O & Time Indexing
 related_tools:
-  - j_SUB2K
-  - appendNav_asciiSecs
-  - mergeNav
-  - jview
+- j_SUB2K
+- appendNav_asciiSecs
+- mergeNav
+- jview
+module_name: jcu_nav
+header_path: code/subr/jcu_nav.h
 ---
 
 # `jcu_nav` — OMG / JCU Binary & ASCII Navigation Record Format Library
@@ -30,6 +31,7 @@ Throughout the OMG processing pipeline, vessel navigation (`lat`, `lon`, `time`,
 - `JCU_BINNAV_RECLEN` (`48`): Byte length of a serialized binary `jcu_nav_rec` on disk (including 2 bytes of 32-bit alignment padding after `centisecs`).
 
 ### Core Struct: `jcu_nav_rec`
+
 ```c
 typedef struct {
     double lat;       /* Latitude in decimal degrees (+N, -S)          [offset 0,  8 bytes] */

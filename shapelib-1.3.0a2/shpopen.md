@@ -1,14 +1,27 @@
 ---
 layout: default
 title: shpopen
-parent: Shapelib GIS Library & Tools (shapelib-1.3.0a2)
+parent: ESRI Shapefile C Library (shapelib-1.3.0a2)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 nav_order: 9
-module_name: shpopen
 source_path: code/shapelib-1.3.0a2/shpopen.c
 category: GIS & ESRI Shapefile Library / Tools
-input_formats: [".shp", ".shx (ESRI Shapefile geometry & index)"]
-output_formats: [".shp", ".shx"]
-related_tools: ["dbfopen", "shptree", "safileio", "shpcreate", "shpadd", "shpdump", "shprewind", "iNav2SHP"]
+input_formats:
+- .shp
+- .shx (ESRI Shapefile geometry & index)
+output_formats:
+- .shp
+- .shx
+related_tools:
+- dbfopen
+- shptree
+- safileio
+- shpcreate
+- shpadd
+- shpdump
+- shprewind
+- iNav2SHP
+module_name: shpopen
 ---
 
 # shpopen (`shpopen.c`)
@@ -90,4 +103,4 @@ typedef struct
 
 ## Architectural Fit in OMG
 
-`shpopen.o` is compiled in `code/shapelib-1.3.0a2/` and linked into OMG navigation and GIS tools (such as [`iNav2SHP`](../nav/iNav2SHP.md)) to export multibeam vessel tracklines directly as `SHPT_ARC` shapefiles.
+`shpopen.o` is compiled in `code/shapelib-1.3.0a2/` and linked into OMG navigation and GIS tools (such as [`iNav2SHP`](../nav/iNav2SHP.html)) to export multibeam vessel tracklines directly as `SHPT_ARC` shapefiles.

@@ -1,22 +1,32 @@
 ---
 layout: default
 title: c_wcl_TOOLBOX
-parent: SwathEd (SE) Tools
+parent: Swath Editor — swathed (SE)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 32
 tool_name: c_wcl_TOOLBOX
 source_path: code/SE/c_wcl_TOOLBOX.c
 category: Interactive QC & Editing (SwathEd)
-input_formats: [".merged", ".watercol", ".tgtShape", ".target"]
-output_formats: [".target"]
-related_tools: ["swathed", "SE_WaterColumn", "SE_3D", "SE_GEOwindows"]
+input_formats:
+- .merged
+- .watercol
+- .tgtShape
+- .target
+output_formats:
+- .target
+related_tools:
+- swathed
+- SE_WaterColumn
+- SE_3D
+- SE_GEOwindows
 ---
 
 # `c_wcl_TOOLBOX.c` — Interactive Water Column 3D Target Detection & Hunting Toolbox
 
 ## Overview & Purpose
-`c_wcl_TOOLBOX.c` and `c_wcl_TOOLBOX.h` (authored by Carlos Marques, February 2012) implement the interactive **"Target Detection Tools"** X11 widget (`target_widget`) integrated into the 2D Water Column viewer ([`SE_WaterColumn.c`](SE_WaterColumn.md)) of `swathed`.
+`c_wcl_TOOLBOX.c` and `c_wcl_TOOLBOX.h` (authored by Carlos Marques, February 2012) implement the interactive **"Target Detection Tools"** X11 widget (`target_widget`) integrated into the 2D Water Column viewer ([`SE_WaterColumn.c`](SE_WaterColumn.html)) of `swathed`.
 
-Designed for automated and semi-automated detection of mid-water acoustic targets (such as gas seeps, fish shoals, wrecks, mast/buoy moorings, and hydrographic Least Depth targets) across 3D water-column volumes (`samples` $\times$ `beams` $\times$ `pings`), `c_wcl_TOOLBOX.c` provides an interactive GUI wrapping the underlying `c_wcpick.h` target-hunting and beam-pattern modeling routines (`c_hunt_for_detections`, `c_hunt_for_targets`, `c_mark_targets`, `c_loadWclSpecs`). Detected targets are stored in the global `OMG_Target_List` (`target_list`) so they can be simultaneously visualized in 2D water-column fans, the geographic map window ([`SE_GEOwindows.c`](SE_GEOwindows.md)), and the 3D OpenGL viewer ([`SE_3D.c`](SE_3D.md)), and saved to `<prefix>.target` files.
+Designed for automated and semi-automated detection of mid-water acoustic targets (such as gas seeps, fish shoals, wrecks, mast/buoy moorings, and hydrographic Least Depth targets) across 3D water-column volumes (`samples` $\times$ `beams` $\times$ `pings`), `c_wcl_TOOLBOX.c` provides an interactive GUI wrapping the underlying `c_wcpick.h` target-hunting and beam-pattern modeling routines (`c_hunt_for_detections`, `c_hunt_for_targets`, `c_mark_targets`, `c_loadWclSpecs`). Detected targets are stored in the global `OMG_Target_List` (`target_list`) so they can be simultaneously visualized in 2D water-column fans, the geographic map window ([`SE_GEOwindows.c`](SE_GEOwindows.html)), and the 3D OpenGL viewer ([`SE_3D.c`](SE_3D.html)), and saved to `<prefix>.target` files.
 
 ---
 
@@ -52,7 +62,7 @@ Designed for automated and semi-automated detection of mid-water acoustic target
 | `5` | `Use Single Swath` / `Use Multi Swath` | Toggles `c_user_multipleswath` between 3D multi-swath hunting and 2D single-swath hunting. |
 | `6` | `Insert Sector` | Adds the transmit sector selected on Slider `7` to `c_user_sectors[]` queue for sector-specific target hunting. |
 | `7` | `Reset Sectors` | Clears `c_user_sectors[]` (`c_user_nsectors = 0`) and restores automatic all-sector search. |
-| `8` | `Show Search Area` / `Hide Search Area` | Toggles `tgtTBox_DrawBoundaries` to overlay the `[minSample..maxSample, minBeam..maxBeam]` bounding box on the 2D Water Column fan in [`SE_WaterColumn.c`](SE_WaterColumn.md). |
+| `8` | `Show Search Area` / `Hide Search Area` | Toggles `tgtTBox_DrawBoundaries` to overlay the `[minSample..maxSample, minBeam..maxBeam]` bounding box on the 2D Water Column fan in [`SE_WaterColumn.c`](SE_WaterColumn.html). |
 | `9` | `Store Tgt List` | Calls `write_OMG_Target_List(&c_SE_targetList[current_file])` to save detected targets to disk. |
 | `10` | `Show wcl BP` / `Hide wcl BP` | Toggles `tgtTBox_ShowBP` and runs `c_loadWclSpecs()` to compute and overlay theoretical 2D transmit/receive beam-pattern sidelobe arcs at the selected beam and range sample. |
 

@@ -1,14 +1,20 @@
 ---
 layout: default
 title: removeRadial
-parent: Image Tools
+parent: Raster Image Processing (image)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 42
 tool_name: removeRadial
 source_path: code/image/removeRadial.c
 category: Image & Raster Processing
-input_formats: ["Raw or OMG1 8-bit image"]
-output_formats: ["Radially compensated 8-bit image"]
-related_tools: ["8bit2acres", "stretchacres", "removecloud"]
+input_formats:
+- Raw or OMG1 8-bit image
+output_formats:
+- Radially compensated 8-bit image
+related_tools:
+- 8bit2acres
+- stretchacres
+- removecloud
 ---
 
 # removeRadial
@@ -17,6 +23,7 @@ related_tools: ["8bit2acres", "stretchacres", "removecloud"]
 `removeRadial` compensates for radial illumination fall-off (vignetting or optical/acoustic hotspot shading) around a user-specified `(x, y)` center in an 8-bit greyscale image using either an additive power-law boost (`-add`) or a multiplicative radial gain function (`-gain`).
 
 ## CLI Options & Usage
+
 ```bash
 removeRadial -in <rawimage> -out <outimage> \
   -rows <n> -cols <n> -centre <cx> <cy> \

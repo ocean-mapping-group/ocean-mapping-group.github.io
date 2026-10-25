@@ -1,12 +1,15 @@
 ---
 layout: default
 title: unb_huffproc
-parent: Shared Core Libraries (subr)
-module_name: unb_huffproc
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/unb_huffproc.c
-header_path: code/subr/unb_huffproc.h
 category: Sonar Format Parsers & Hardware Drivers
-related_tools: ["j_knud", "knud2r4"]
+related_tools:
+- j_knud
+- knud2r4
+module_name: unb_huffproc
+header_path: code/subr/unb_huffproc.h
 ---
 
 # unb_huffproc
@@ -14,7 +17,7 @@ related_tools: ["j_knud", "knud2r4"]
 ## Overview
 `unb_huffproc` (`unb_huffproc.c` / `unb_huffproc.h`, alongside `unb_huffstruct.h`) implements **Huffman lossless compression and decompression** for **Knudsen 320 / 320B / 320M / 3260** echosounder binary `.keb` and `.kea` envelope/trace records.
 
-Adapted to plain ANSI C by John Hughes Clarke (January 2008) from Knudsen Engineering's C++ `CHuffmanProcessing` class (itself derived from Mark Nelson and Jean-Loup Gailly's *The Data Compression Book, 2nd Edition*), `unb_huffproc` decompresses Huffman-encoded acoustic echogram trace blocks in [`j_knud`](j_knud.md) and `knud2r4`.
+Adapted to plain ANSI C by John Hughes Clarke (January 2008) from Knudsen Engineering's C++ `CHuffmanProcessing` class (itself derived from Mark Nelson and Jean-Loup Gailly's *The Data Compression Book, 2nd Edition*), `unb_huffproc` decompresses Huffman-encoded acoustic echogram trace blocks in [`j_knud`](j_knud.html) and `knud2r4`.
 
 ---
 
@@ -54,4 +57,4 @@ Defined in `unb_huffproc.h` and `unb_huffstruct.h`:
 ---
 
 ## Architectural Role
-`unb_huffproc` is invoked by [`j_knud`](j_knud.md) whenever a Knudsen `.keb` packet header indicates Huffman-compressed sample traces. The caller copies the compressed payload into `m_pHuffmanBuffer`, calls `ExpandDataBlock()`, and reads `m_nOutputBytes` of uncompressed echogram samples from `m_pDataBuffer`.
+`unb_huffproc` is invoked by [`j_knud`](j_knud.html) whenever a Knudsen `.keb` packet header indicates Huffman-compressed sample traces. The caller copies the compressed payload into `m_pHuffmanBuffer`, calls `ExpandDataBlock()`, and reads `m_nOutputBytes` of uncompressed echogram samples from `m_pDataBuffer`.

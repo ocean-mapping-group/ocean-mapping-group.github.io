@@ -1,16 +1,18 @@
 ---
 layout: default
 title: convSUB16
-parent: SUB2K Tools
-grand_parent: code
+parent: GeoSwath+ / Submetrix 2000 CLI (sub2k)
+grand_parent: 4. Multi-Vendor Sonar & LiDAR Converters
 nav_order: 1
 ---
+
 # convSUB16
 
 ## Description
 `convSUB16` is a utility designed to convert 16-bit intensity sidescan data from Submetrix 2000 into an 8-bit GLORIA format (typically a `.sst` file). It processes OMG_HDCS merged files, extracting profile and beam information, and then reads associated 16-bit sidescan data (`.ss_data`). The tool offers various scaling options (linear, square root, TVG, or logarithmic) to effectively compress the high-resolution 16-bit data into an 8-bit dynamic range suitable for display or further processing.
 
 ## Usage
+
 ```bash
 convSUB16 [-v] [-linss | -sqrtss | -tvgss] [-dump_ping <ping_num>] [-dump_sample <sample_num>] [-min16 <value>] [-max16 <value>] <mergedfile>
 ```

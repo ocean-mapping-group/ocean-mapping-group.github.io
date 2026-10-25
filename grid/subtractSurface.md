@@ -1,13 +1,20 @@
 ---
 layout: default
 title: subtractSurface
-parent: Grid Tools
+parent: Bathymetric Gridding & Export (grid)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 tool_name: subtractSurface
 source_path: code/grid/subtractSurface.c
 category: gridding
-input_formats: ["JHC_header (.r4)", "OMG HDCS (.merged)"]
-output_formats: ["OMG HDCS (.merged)"]
-related_tools: ["weigh_grid", "differ", "showError"]
+input_formats:
+- JHC_header (.r4)
+- OMG HDCS (.merged)
+output_formats:
+- OMG HDCS (.merged)
+related_tools:
+- weigh_grid
+- differ
+- showError
 ---
 
 # subtractSurface
@@ -54,11 +61,13 @@ subtractSurface [-v] [-proc] [-add_dyn_draft_shift] [-latshift <min>] [-lonshift
 ## Examples
 
 ### Compute beam-by-beam depth residuals against a reference patch-test grid
+
 ```bash
 subtractSurface -proc ref_patch line01.merged line02.merged
 ```
 
 ### Evaluate residuals with a trial navigation offset of +0.02' latitude and -0.03' longitude
+
 ```bash
 subtractSurface -latshift 0.02 -lonshift -0.03 ref_surface survey_line.merged
 ```

@@ -1,14 +1,23 @@
 ---
 layout: default
 title: iwc_support
-parent: Ian Church (ianc) Tools
+parent: Ian Church — Hydrodynamic & 3D Ray-Trace Suite (ianc)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 nav_order: 13
 tool_name: iwc_support
 source_path: code/ianc/subr/iwc_support.c
 category: Ocean Modeling & Hydrographic Utilities (ianc)
-input_formats: ["In-memory C arrays, ZVpair arrays, coordinate/time vectors"]
-output_formats: ["2D dynamically allocated arrays, statistical metrics, nearest-neighbor indices"]
-related_tools: ["modelAnalysis", "modelMerge", "HycomSSP", "oceanReader", "iwc_water", "iwc_adcp"]
+input_formats:
+- In-memory C arrays, ZVpair arrays, coordinate/time vectors
+output_formats:
+- 2D dynamically allocated arrays, statistical metrics, nearest-neighbor indices
+related_tools:
+- modelAnalysis
+- modelMerge
+- HycomSSP
+- oceanReader
+- iwc_water
+- iwc_adcp
 ---
 
 # iwc_support

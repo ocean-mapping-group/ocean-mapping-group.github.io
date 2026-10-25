@@ -1,13 +1,19 @@
 ---
 layout: default
 title: updateArray
-parent: Grid Tools
+parent: Bathymetric Gridding & Export (grid)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 tool_name: updateArray
 source_path: code/grid/updateArray.c
 category: gridding
-input_formats: ["JHC_header (.r4_weights, .r4_weight_depth)"]
-output_formats: ["JHC_header (.r4)"]
-related_tools: ["weigh_grid", "addWG", "combine"]
+input_formats:
+- JHC_header (.r4_weights, .r4_weight_depth)
+output_formats:
+- JHC_header (.r4)
+related_tools:
+- weigh_grid
+- addWG
+- combine
 ---
 
 # updateArray
@@ -43,6 +49,7 @@ updateArray <prefix>
 ## Examples
 
 ### Recompute `.r4` depths after merging or updating accumulator grids
+
 ```bash
 updateArray sheet01
 ```

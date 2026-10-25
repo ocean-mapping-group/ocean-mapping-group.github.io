@@ -1,16 +1,18 @@
 ---
 layout: default
 title: special_hack_glbeam
-parent: Beam Tools
-grand_parent: sidescan
+parent: Sidescan Radiometric & Geometric Suite (sidescan)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 6
 ---
+
 # special_hack_glbeam
 
 ## Description
 `special_hack_glbeam` is a specialized utility for beam pattern correction of a JCU GLORIA file. This tool applies correction factors based on depth ranges, using 20 correction factor files to adjust the beam pattern according to the nadir depth. Additionally, it incorporates a linear-logarithmic compression function to prevent clipping of data that might otherwise exceed the maximum intensity value after correction. This version uses different compression parameters (`LINEAR_LIMIT = 180.0`, `MAX_REPRESENTED = 512`) compared to `hack_glbeam.c`.
 
 ## Usage
+
 ```bash
 special_hack_glbeam <infile> <outfile>
 ```

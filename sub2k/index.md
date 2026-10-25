@@ -1,9 +1,9 @@
 ---
 layout: default
-title: Submetrix ISIS (sub2k) Interferometric Sonar Tools
-parent: Formats & Converters
+title: GeoSwath+ / Submetrix 2000 CLI (sub2k)
+parent: 4. Multi-Vendor Sonar & LiDAR Converters
+nav_order: 7
 has_children: true
-nav_order: 6
 ---
 
 # Submetrix ISIS (`sub2k`) Interferometric Sonar Tools (`sub2k/`)

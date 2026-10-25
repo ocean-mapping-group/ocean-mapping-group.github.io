@@ -1,18 +1,24 @@
 ---
 layout: default
 title: jX_win
-parent: Graphics & X11/OpenGL Libraries (subr_graphics)
-module_name: jX_win
+parent: X11 / Motif / OpenGL Graphics Library (subr_graphics)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr_graphics/jX_win.c
-header_path: code/subr_graphics/jX_win.h
 category: Motif & X11 Drawing Library
-related_tools: ["X_extra", "jGL_draw", "swathed", "jview", "glSeis"]
+related_tools:
+- X_extra
+- jGL_draw
+- swathed
+- jview
+- glSeis
+module_name: jX_win
+header_path: code/subr_graphics/jX_win.h
 ---
 
 # jX_win
 
 ## Overview
-`jX_win` (`jX_win.c` / `jX_win.h`, written by John Hughes Clarke, July 1999) is the **OSF/Motif (`XmDrawingArea`) and `Xt` Intrinsics window/pixmap plotting library** in `subr_graphics/`. Created as a structured, per-widget upgrade to the global-array architecture of [`X_extra`](X_extra.md), `jX_win` encapsulates all state for an individual Motif drawing canvas—its `Widget`, X11 `Window`, offscreen backing `Pixmap`, `XImage` pixel buffer, world-coordinate bounds, and mouse rubber-band state—inside a self-contained `jX_win_param` struct.
+`jX_win` (`jX_win.c` / `jX_win.h`, written by John Hughes Clarke, July 1999) is the **OSF/Motif (`XmDrawingArea`) and `Xt` Intrinsics window/pixmap plotting library** in `subr_graphics/`. Created as a structured, per-widget upgrade to the global-array architecture of [`X_extra`](X_extra.html), `jX_win` encapsulates all state for an individual Motif drawing canvas—its `Widget`, X11 `Window`, offscreen backing `Pixmap`, `XImage` pixel buffer, world-coordinate bounds, and mouse rubber-band state—inside a self-contained `jX_win_param` struct.
 
 This design allows complex Motif applications (`swathed`, `glSeis`, `synSwath`, and Motif-based interactive editors) to manage any number of independent 2D canvases with double-buffered pixmap rendering and world-coordinate plotting.
 
@@ -21,6 +27,7 @@ This design allows complex Motif applications (`swathed`, `glSeis`, `synSwath`, 
 ## Core Data Structure: `jX_win_param`
 
 Defined in `jX_win.h`:
+
 ```c
 typedef struct {
     Widget        widget;                       /* Motif XmDrawingArea widget */

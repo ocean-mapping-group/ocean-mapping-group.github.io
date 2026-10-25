@@ -1,9 +1,11 @@
 ---
 layout: default
 title: getSnippetVariance
-parent: OMG Tools
+parent: Core Swath & .all Suite (omg)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 108
 ---
+
 # getSnippetVariance
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 108
 The tool uses a Digital Terrain Model (DTM) to estimate grazing angles and calculate ensonified areas, which are crucial inputs for the `calibrate_reson` function. It outputs the mean and standard deviation for each beam.
 
 ## Usage
+
 ```bash
 getSnippetVariance <filename.merged> -dtm <dtm.r4> [-debug]
 ```

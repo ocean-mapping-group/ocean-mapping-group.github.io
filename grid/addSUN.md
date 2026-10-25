@@ -1,29 +1,32 @@
 ---
 layout: default
 title: addSUN
-parent: Grid Tools
+parent: Bathymetric Gridding & Export (grid)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 6
 tool_name: addSUN
 source_path: code/grid/addSUN.c
 category: visualization
 input_formats:
-  - .r4
+- .r4
 output_formats:
-  - .sun
-  - .8bit
-  - .r4
+- .sun
+- .8bit
+- .r4
 related_tools:
-  - make_blank
-  - weigh_grid
-  - r4to8bit
-  - jview
+- make_blank
+- weigh_grid
+- r4to8bit
+- jview
 ---
+
 # addSUN
 
 ## Description
 `addSUN` is a command-line utility that takes a JHC-format floating-point (`.r4`) depth grid (a Digital Terrain Model) and generates a shaded relief image (or "sun" image) by calculating the cosine of the angle between an artificial light source (sun) and the normal to each surface facet. It can output either a floating-point sun image or an 8-bit greyscale image. It also supports calculating terrain derivatives (slopes) instead of shaded relief.
 
 ## Usage
+
 ```bash
 addSUN [OPTIONS] <depth_input_file.r4> [sun_output_file]
 ```

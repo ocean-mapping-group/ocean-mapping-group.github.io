@@ -1,22 +1,32 @@
 ---
 layout: default
 title: pastemos
-parent: Image Tools
+parent: Raster Image Processing (image)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 34
 tool_name: pastemos
 source_path: code/image/pastemos.c
 category: Mosaicking & Patching
-input_formats: ["OMG1 8-bit rasters", "2D FFT magnitude/azimuth grids (.mag.r4, .azi.r4)", "Temperature/Salinity grids"]
-output_formats: ["Composite OMG1 8-bit raster or 24-bit Netpbm .ppm image"]
-related_tools: ["paster4", "patchArea", "fft2dimage", "stretchacres"]
+input_formats:
+- OMG1 8-bit rasters
+- 2D FFT magnitude/azimuth grids (.mag.r4, .azi.r4)
+- Temperature/Salinity grids
+output_formats:
+- Composite OMG1 8-bit raster or 24-bit Netpbm .ppm image
+related_tools:
+- paster4
+- patchArea
+- fft2dimage
+- stretchacres
 ---
 
 # pastemos
 
 ## Description
-`pastemos` interactively composites multiple `OMG1` (`JHC_header`) sub-images onto a user-dimensioned 8-bit `OMG1` canvas or 24-bit RGB `.ppm` image (`-ppm`). In addition to standard greyscale pasting and grid-stepped tiling (`-xstep`, `-ystep`), `pastemos` includes specialized 24-bit RGB color encoders for plotting 2D FFT sandwave Magnitude + Azimuth pairs (from [`fft2dimage`](fft2dimage.md), complete with an embedded color-wheel compass rose) and ocean Temperature + Salinity cross-sections.
+`pastemos` interactively composites multiple `OMG1` (`JHC_header`) sub-images onto a user-dimensioned 8-bit `OMG1` canvas or 24-bit RGB `.ppm` image (`-ppm`). In addition to standard greyscale pasting and grid-stepped tiling (`-xstep`, `-ystep`), `pastemos` includes specialized 24-bit RGB color encoders for plotting 2D FFT sandwave Magnitude + Azimuth pairs (from [`fft2dimage`](fft2dimage.html), complete with an embedded color-wheel compass rose) and ocean Temperature + Salinity cross-sections.
 
 ## CLI Options & Usage
+
 ```bash
 pastemos -out <outfile> -rows <nrows> -cols <ncols> [-ppm] \
   [-back <val>] [-backrgb <r> <g> <b>] [-ignore <val>] \

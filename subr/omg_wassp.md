@@ -1,17 +1,18 @@
 ---
 layout: default
 title: omg_wassp
-parent: Core Shared Libraries (subr)
-module_name: omg_wassp
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/omg_wassp.c
-header_path: code/subr/omg_wassp.h
 category: File Formats & Vendor Parsers
 related_tools:
-  - wasspTool
-  - wassp2omg
-  - makess
-  - get_ADH_SRA
-  - swathed (SE)
+- wasspTool
+- wassp2omg
+- makess
+- get_ADH_SRA
+- swathed (SE)
+module_name: omg_wassp
+header_path: code/subr/omg_wassp.h
 ---
 
 # omg_wassp

@@ -1,17 +1,18 @@
 ---
 layout: default
 title: omg_gsf
-parent: Core Shared Libraries (subr)
-module_name: omg_gsf
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/omg_gsf.c
-header_path: code/subr/omg_gsf.h
 category: File Formats & Vendor Parsers
 related_tools:
-  - gsfTool
-  - gsf2omg
-  - gsf2orientation
-  - gsf2svp
-  - gsf2param
+- gsfTool
+- gsf2omg
+- gsf2orientation
+- gsf2svp
+- gsf2param
+module_name: omg_gsf
+header_path: code/subr/omg_gsf.h
 ---
 
 # omg_gsf

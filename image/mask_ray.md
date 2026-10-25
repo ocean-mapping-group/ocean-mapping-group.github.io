@@ -1,14 +1,20 @@
 ---
 layout: default
 title: mask_ray
-parent: Image Tools
+parent: Raster Image Processing (image)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 33
 tool_name: mask_ray
 source_path: code/image/mask_ray.c
 category: Masking & Stenciling
-input_formats: ["ASCII polygon vertex list (x, y)"]
-output_formats: ["ACRES 8-bit filled polygon mask"]
-related_tools: ["mask_make", "jb_mask_make", "stencil"]
+input_formats:
+- ASCII polygon vertex list (x, y)
+output_formats:
+- ACRES 8-bit filled polygon mask
+related_tools:
+- mask_make
+- jb_mask_make
+- stencil
 ---
 
 # mask_ray
@@ -17,6 +23,7 @@ related_tools: ["mask_make", "jb_mask_make", "stencil"]
 `mask_ray` (written by A. Y. / JCU, May 1990) creates an ACRES-format 8-bit polygon mask from an ASCII vertex file using a 4-directional ray-casting parity test (casting rays left, right, up, and down from every candidate pixel to count boundary intersections).
 
 ## CLI Options & Usage
+
 ```bash
 mask_ray -infile <vertex_file> -outfile <acres_mask> -xlen <cols> -ylen <rows>
 ```

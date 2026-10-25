@@ -1,7 +1,8 @@
 ---
 layout: default
 title: CnCcolorMapV
-parent: Colormap Tools
+parent: Bathymetric & Backscatter Colormaps (cmaps)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 2
 ---
 
@@ -13,6 +14,7 @@ nav_order: 2
 Unlike `CnCcolorMap`, which always generates 256 colors, this version generates a number of color entries equal to the number of intervals specified by the user.
 
 ## Usage
+
 ```bash
 CnCcolorMapV -b <h:s:v> -e <h:s:v> -i <intervals> [ -o <outfile> ]
 ```

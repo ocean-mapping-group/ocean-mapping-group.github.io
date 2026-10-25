@@ -1,9 +1,11 @@
 ---
 layout: default
 title: applyOffset
-parent: OMG Tools
+parent: Core Swath & .all Suite (omg)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 77
 ---
+
 ---
 layout: default
 title: applyOffset
@@ -18,6 +20,7 @@ nav_order: 77
 The tool can apply a fixed offset based on user-defined `ahead` and `right` values relative to the vessel's heading, or it can apply corrections from an external offset file (`-offsetfile`) combined with an `ElltoCD` correction.
 
 ## Usage
+
 ```bash
 applyOffset <datafile(s)> [OPTIONS]
 ```

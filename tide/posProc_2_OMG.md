@@ -1,13 +1,21 @@
 ---
 layout: default
 title: posProc_2_OMG
-parent: Tide Tools
+parent: Tidal Reduction & Constituents (tide)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 tool_name: posProc_2_OMG
 source_path: code/tide/posProc_2_OMG.c
 category: tide
-input_formats: ["Applanix PosProc / POSPac PPK ASCII"]
-output_formats: [".nav (binary jcu_nav_rec tide)", "ASCII tide (time lat lon height)"]
-related_tools: ["GrafNav_2_OMG", "binTide", "mergeTide", "diffTide"]
+input_formats:
+- Applanix PosProc / POSPac PPK ASCII
+output_formats:
+- .nav (binary jcu_nav_rec tide)
+- ASCII tide (time lat lon height)
+related_tools:
+- GrafNav_2_OMG
+- binTide
+- mergeTide
+- diffTide
 ---
 
 # posProc_2_OMG
@@ -40,6 +48,7 @@ posProc_2_OMG [OPTIONS] -year <YYYY> -jday <DDD> -in <posprocfilename> -out <myt
 
 1. **Header Skipping:** Reads and skips the first `lines_to_skip` lines (default `23`).
 2. **Column Parsing:** Parses 7 columns from each line:
+
    ```c
    sscanf(linestring, "%lf %f %f %f %f %lf %lf",
           &weeksecs, &fdum, &fdum, &fdum, &bin_nav.azi, &bin_nav.lat, &bin_nav.lon);
@@ -52,12 +61,14 @@ posProc_2_OMG [OPTIONS] -year <YYYY> -jday <DDD> -in <posprocfilename> -out <myt
 ## Examples
 
 **1. Convert a PosProc export for Julian Day 173, 2008 to binary OMG tide format:**
+
 ```bash
 posProc_2_OMG -year 2008 -jday 173 -in posproc_jd173.txt -out posproc_jd173.bin
 mergeTide -RTK -tide posproc_jd173.bin merged/JD173/*.merged
 ```
 
 **2. Convert with custom header length to ASCII for inspection:**
+
 ```bash
 posProc_2_OMG -lines_to_skip 25 -year 2008 -jday 173 -ascii -in posproc.txt -out posproc.asc
 ```
@@ -67,5 +78,5 @@ posProc_2_OMG -lines_to_skip 25 -year 2008 -jday 173 -ascii -in posproc.txt -out
 ## Workflow Context
 
 - **Upstream:** Applanix PosProc / POSPac post-processed GNSS/INS text exports.
-- **Downstream:** [`mergeTide`](mergeTide.md) or [`diffTide`](diffTide.md).
-- **See Also:** [`GrafNav_2_OMG`](GrafNav_2_OMG.md) for Waypoint GrafNav exports.
+- **Downstream:** [`mergeTide`](mergeTide.html) or [`diffTide`](diffTide.html).
+- **See Also:** [`GrafNav_2_OMG`](GrafNav_2_OMG.html) for Waypoint GrafNav exports.

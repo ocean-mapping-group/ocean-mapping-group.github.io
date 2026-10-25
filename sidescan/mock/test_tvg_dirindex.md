@@ -1,10 +1,11 @@
 ---
 layout: default
 title: test_tvg_dirindex
-parent: Mock Tools
-grand_parent: sidescan
+parent: Sidescan Radiometric & Geometric Suite (sidescan)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 14
 ---
+
 # test_tvg_dirindex
 
 ## Description
@@ -17,6 +18,7 @@ nav_order: 14
 This tool is useful for verifying the behavior of acoustic models and lookup tables used in quantitative backscatter calculations.
 
 ## Usage
+
 ```bash
 test_tvg_dirindex [-DB <constant>] [-dx <value>] [-rep <rate>] [-tvg] [-bell] [-lookup <filename>] [-depth <seafloor_depth>] [-min_beam <gain>]
 ```

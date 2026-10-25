@@ -1,9 +1,11 @@
 ---
 layout: default
 title: plotBP
-parent: Plot Tools
+parent: PostScript & Vector Plotting (plot)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 136
 ---
+
 # plotBP
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 136
 The tool supports advanced features like plotting multiple beam patterns, applying filters (median, average), highlighting specific sectors or traces, and normalizing responses. It's crucial for analyzing sonar performance, understanding beam shaping, and validating calibration.
 
 ## Usage
+
 ```bash
 plotBP <files...> [-outfile <filenm>] [OPTIONS]
 ```
@@ -24,12 +27,14 @@ plotBP <files...> [-outfile <filenm>] [OPTIONS]
 | `-outfile <filenm>` | Specifies the output PostScript metafile name. | `plot.meta` |
 
 ### Input Type
+
 | Option | Description |
 |---|---|
 | `-bp` | Input files are beam patterns (default). |
 | `-foot` | Input files are beam footprint files. |
 
 ### Plotting Type
+
 | Option | Description |
 |---|---|
 | `-cartes` | Generates a Cartesian plot (intensity vs. angle). |
@@ -37,6 +42,7 @@ plotBP <files...> [-outfile <filenm>] [OPTIONS]
 | `-polar_fill` | Same as `-polar`, but fills the area under the curve in the polar plot. |
 
 ### Display Options
+
 | Option | Description | Default |
 |---|---|
 | `-size <dx> <dy>` | Specifies the plot size in centimeters. | `16.0 20.0` |

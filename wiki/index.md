@@ -1,7 +1,8 @@
 ---
 layout: default
-title: Historical OMG Code Wiki (wiki)
-nav_order: 35
+title: Legacy OMG Code Wiki Archive (wiki)
+parent: 5. Core Libraries, Researcher Suites & Utilities
+nav_order: 19
 has_children: true
 ---
 
@@ -13,4 +14,4 @@ The `wiki` directory (`code/wiki/`) contains the self-contained HTML **TiddlyWik
 
 ## Contents of `wiki/`
 
-* [OMG Code TiddlyWiki Archive (`omg_code.html`)](_.md) — Summary of all preserved wiki articles (tiddlers) inside `code/wiki/omg_code.html`, including developer guides for adding new sonar `toolType` definitions and program guides for `edhead`, `fixnav`, `flagNav`, `stripNav`, `sumNav`, `getBounds`, `inArea`, `useCMG`, `jview`, `mos2`, and `omg2hips`.
+* [OMG Code TiddlyWiki Archive (`omg_code.html`)](_.html) — Summary of all preserved wiki articles (tiddlers) inside `code/wiki/omg_code.html`, including developer guides for adding new sonar `toolType` definitions and program guides for `edhead`, `fixnav`, `flagNav`, `stripNav`, `sumNav`, `getBounds`, `inArea`, `useCMG`, `jview`, `mos2`, and `omg2hips`.

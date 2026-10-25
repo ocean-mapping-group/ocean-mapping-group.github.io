@@ -1,9 +1,11 @@
 ---
 layout: default
 title: readHDCS
-parent: OMG Tools
+parent: Core Swath & .all Suite (omg)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 51
 ---
+
 # readHDCS
 
 ## Description
@@ -14,6 +16,7 @@ The tool provides a low-level view of the data structures within these files, in
 **Note:** This tool is explicitly noted as "not SWAPIO compliant," meaning it does not handle byte-order differences between systems, which could lead to incorrect data interpretation on systems with different endianness.
 
 ## Usage
+
 ```bash
 readHDCS <USL_HDCS_linedirectory> [-verbose]
 ```

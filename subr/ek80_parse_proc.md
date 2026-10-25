@@ -1,14 +1,15 @@
 ---
 layout: default
 title: ek80_parse_proc
-parent: Core Shared Libraries (subr)
-module_name: ek80_parse_proc
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/ek80_parse_proc.c
-header_path: code/subr/ek80_parse_proc.h
 category: Broadband Echosounder & Split-Beam Signal Processing
 related_tools:
-  - readEA600
-  - EKlook
+- readEA600
+- EKlook
+module_name: ek80_parse_proc
+header_path: code/subr/ek80_parse_proc.h
 ---
 
 # ek80_parse_proc: Simrad EK80 / EK60 / EA600 Broadband Chirp & Split-Beam Processing Engine
@@ -26,6 +27,7 @@ related_tools:
 ## Key Constants & Data Structures
 
 ### Constants & Legacy EK60/EA600 Structures
+
 ```c
 #define MAX_NO_EK_TDCRS  20           /* Supports up to 20 channels (e.g. 6-freq EK80 + EC150/EC300 ADCP) */
 #define MAXEK60TRACELEN  80192        /* Maximum samples per trace */

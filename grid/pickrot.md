@@ -1,13 +1,21 @@
 ---
 layout: default
 title: pickrot
-parent: Grid Tools
+parent: Bathymetric Gridding & Export (grid)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 tool_name: pickrot
 source_path: code/grid/pickrot.c
 category: gridding
-input_formats: ["ASCII waypoint/navigation track (-way)", "JHC_header rotated UTM box headers"]
-output_formats: ["JHC_header rotated UTM mapsheet header (-out)"]
-related_tools: ["make_blank", "make_bases", "edhead", "weigh_grid"]
+input_formats:
+- ASCII waypoint/navigation track (-way)
+- JHC_header rotated UTM box headers
+output_formats:
+- JHC_header rotated UTM mapsheet header (-out)
+related_tools:
+- make_blank
+- make_bases
+- edhead
+- weigh_grid
 ---
 
 # pickrot
@@ -56,6 +64,7 @@ pickrot [OPTIONS] [-way <wayfile>] -out <new_box.header> [<existing_box_headers.
 ## Examples
 
 **Interactively align a 2 m resolution rotated UTM mapsheet along a survey track:**
+
 ```bash
 pickrot -way survey_utm_track.way -width 4000 -height 1500 -angle 35.0 -pixel 2.0 -out channel_rot.blank
 ```
@@ -64,4 +73,4 @@ pickrot -way survey_utm_track.way -width 4000 -height 1500 -angle 35.0 -pixel 2.
 
 ## Workflow Context
 
-- **Next Step:** Pass the header written by `pickrot` into [`make_blank`](make_blank.md) (`-area <header>`) or `tor4` to allocate the full pixel array before gridding with [`weigh_grid`](weigh_grid.md).
+- **Next Step:** Pass the header written by `pickrot` into [`make_blank`](make_blank.html) (`-area <header>`) or `tor4` to allocate the full pixel array before gridding with [`weigh_grid`](weigh_grid.html).

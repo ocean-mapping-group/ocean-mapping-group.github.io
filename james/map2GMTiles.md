@@ -1,14 +1,25 @@
 ---
 layout: default
 title: map2GMTiles
-parent: James Muggah (james) Tools
+parent: James Muggah — Global Mapper Tiles & Utils (james)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 nav_order: 5
 tool_name: map2GMTiles
 source_path: code/james/map2GMTiles.c
 category: Raster Processing & Web Mapping (james)
-input_formats: [".r4", ".8bit", ".sun_*"]
-output_formats: [".header (OMG1 256x256 Spherical Mercator tile headers)", "stdout (tile header filenames)"]
-related_tools: ["merged2GMTiles", "GoogleMapTileCreation", "GM_fillGap", "header", "remap"]
+input_formats:
+- .r4
+- .8bit
+- .sun_*
+output_formats:
+- .header (OMG1 256x256 Spherical Mercator tile headers)
+- stdout (tile header filenames)
+related_tools:
+- merged2GMTiles
+- GoogleMapTileCreation
+- GM_fillGap
+- header
+- remap
 ---
 
 # map2GMTiles
@@ -31,16 +42,19 @@ map2GMTiles [-v] [-fresh] [-output_header] [-dont_touch] [-zoomlevel <Z>] \
 ### Examples
 
 **1. List all Zoom Level 14 Google Map tiles covering an `.r4` bathymetry mapsheet:**
+
 ```bash
 map2GMTiles -zoomlevel 14 -in bay_bathy.r4
 ```
 
 **2. Generate `256x256` OMG `.header` files for Zoom Level 12 without overwriting existing tile headers:**
+
 ```bash
 map2GMTiles -zoomlevel 12 -output_header -dont_touch -in arctic_grid.r4
 ```
 
 **3. Generate tile headers for an explicit geographic bounding box:**
+
 ```bash
 map2GMTiles -zoomlevel 10 -output_header -n 75.0 -s 73.0 -w -110.0 -e -102.0 -in reference.r4
 ```

@@ -1,9 +1,11 @@
 ---
 layout: default
 title: contgrid
-parent: Grid Tools
+parent: Bathymetric Gridding & Export (grid)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 12
 ---
+
 ---
 layout: default
 title: contgrid
@@ -16,6 +18,7 @@ nav_order: 12
 `contgrid` is a command-line utility for generating contour lines from a JHC-format 32-bit floating-point (`.r4`) grid file. It creates a binary vector file (presumably in a custom format) that represents these contour lines, which can then be used for plotting or further visualization. The tool supports different map projections and allows users to specify the range of depth values to contour.
 
 ## Usage
+
 ```bash
 contgrid [OPTIONS] <input_float_file.r4> <output_vector_file>
 ```

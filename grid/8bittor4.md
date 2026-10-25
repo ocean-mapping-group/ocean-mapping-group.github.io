@@ -1,9 +1,11 @@
 ---
 layout: default
 title: 8bittor4
-parent: Grid Tools
+parent: Bathymetric Gridding & Export (grid)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 1
 ---
+
 ---
 layout: default
 title: 8bittor4
@@ -16,6 +18,7 @@ nav_order: 1
 `8bittor4` is a command-line utility that converts a JHC-format 8-bit or 16-bit (short integer) array grid file into a 32-bit floating-point (r4) grid file. It allows for scaling digital numbers (DN) to a specified range of floating-point values, and can handle ignored values and apply a dB scaling if needed.
 
 ## Usage
+
 ```bash
 8bittor4 [OPTIONS] <8bit_input_file> <float_output_file>
 ```

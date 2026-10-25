@@ -1,9 +1,11 @@
 ---
 layout: default
 title: Ray
-parent: Ray Tools
+parent: Ray-Tracing & Refraction (ray)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 170
 ---
+
 # Ray
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 170
 The generated lookup tables (`.Time_LUT`, `.ACROSS_LUT`) are crucial for converting raw sonar measurements (like one-way travel time and beam angle) into georeferenced positions (across-track and depth). This is fundamental for multibeam data processing and image rectification.
 
 ## Usage
+
 ```bash
 Ray -pro <svp_handle> [-fishdep <val>] [-layerthick <val>] [-spacing <step> <start> <finish>] [-verbose]
 ```

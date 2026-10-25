@@ -1,23 +1,24 @@
 ---
 layout: default
 title: calc_ellipse2
-parent: ADCP Tools
+parent: Teledyne RDI ADCP Processing (adcp)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 3
 tool_name: calc_ellipse2
 source_path: code/adcp/calc_ellipse2.c
 category: adcp
 input_formats:
-  - jcu_nav Depth-Averaged ADCP Vectors (.nav)
-  - JHC Grid (.r4 / .8bit)
+- jcu_nav Depth-Averaged ADCP Vectors (.nav)
+- JHC Grid (.r4 / .8bit)
 output_formats:
-  - jcu_nav Tidal Ellipse Vectors (_ellipse.nav)
-  - jcu_nav Residual Current Vectors (_residual.nav)
-  - ASCII Comma-Separated Ellipse Summary (asciifile)
+- jcu_nav Tidal Ellipse Vectors (_ellipse.nav)
+- jcu_nav Residual Current Vectors (_residual.nav)
+- ASCII Comma-Separated Ellipse Summary (asciifile)
 related_tools:
-  - calc_ellipse
-  - calc_ellipse1
-  - combineMultiADCP
-  - readADCP
+- calc_ellipse
+- calc_ellipse1
+- combineMultiADCP
+- readADCP
 ---
 
 # calc_ellipse2
@@ -25,9 +26,10 @@ related_tools:
 ## Description
 `calc_ellipse2` is a command-line utility for calculating tidal ellipse parameters from ADCP (Acoustic Doppler Current Profiler) data. It processes depth-averaged velocity vectors from multiple tidal cycles, sorting them by tidal phase and spatial location into bins defined by a coarse DTM grid. The tool then computes tidal ellipse parameters (major axis, minor axis, orientation, and ellipticity) for each bin and outputs the results to nav-format files. It can also output residual currents and an optional ASCII table (`-ascii`).
 
-This tool is an enhanced version of [`calc_ellipse1`](calc_ellipse1.md) with both binary `jcu_nav` and optional ASCII output.
+This tool is an enhanced version of [`calc_ellipse1`](calc_ellipse1.html) with both binary `jcu_nav` and optional ASCII output.
 
 ## Usage
+
 ```bash
 calc_ellipse2 [OPTIONS] -grid <coarseDTM> -out <outfilenameprefix> -ellipse_file <ellipse_parameter_file> -in <infilename(s)>
 ```

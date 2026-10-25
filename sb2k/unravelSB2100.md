@@ -1,14 +1,22 @@
 ---
 layout: default
 title: unravelSB2100
-parent: SB2K Tools
+parent: SeaBeam 2000 / 2100 (sb2k)
+grand_parent: 4. Multi-Vendor Sonar & LiDAR Converters
 nav_order: 4
 tool_name: unravelSB2100
 source_path: sb2k/unravelSB2100.c
 category: format_conversion
-input_formats: [SB2100]
-output_formats: [OMG_HDCS, OMG_SS_DATA]
-related_tools: [unravelSB2K, refoSB_Classic, deApparent, SwathEd]
+input_formats:
+- SB2100
+output_formats:
+- OMG_HDCS
+- OMG_SS_DATA
+related_tools:
+- unravelSB2K
+- refoSB_Classic
+- deApparent
+- SwathEd
 ---
 
 # unravelSB2100

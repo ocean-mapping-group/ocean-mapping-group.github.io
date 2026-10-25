@@ -1,14 +1,15 @@
 ---
 layout: default
 title: etopo
-parent: Core Shared Libraries (subr)
-module_name: etopo
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/etopo.c
-header_path: code/subr/etopo.h
 category: Global Bathymetry & Environmental Databases
 related_tools:
-  - patchWORLD
-  - svp_rtofs
+- patchWORLD
+- svp_rtofs
+module_name: etopo
+header_path: code/subr/etopo.h
 ---
 
 # etopo: ETOPO5 Global 5-Arc-Minute Bathymetric/Topographic Database Extractor

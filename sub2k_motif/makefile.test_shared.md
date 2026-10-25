@@ -1,19 +1,20 @@
 ---
 layout: default
 title: makefile.test_shared (sub2k_motif)
-parent: Submetrix Motif GUI (sub2k_motif)
+parent: GeoSwath+ / Submetrix Motif GUI (sub2k_motif)
+grand_parent: 4. Multi-Vendor Sonar & LiDAR Converters
 nav_order: 22
 tool_name: makefile.test_shared
 source_path: sub2k_motif/makefile.test_shared
 category: sub2k_motif
 input_formats:
-  - C source files (.c, .h)
+- C source files (.c, .h)
 output_formats:
-  - Shared library (libsubx.so)
-  - Executable (RTsubx)
+- Shared library (libsubx.so)
+- Executable (RTsubx)
 related_tools:
-  - makefile
-  - RTsubx
+- makefile
+- RTsubx
 ---
 
 # `makefile.test_shared` (`sub2k_motif/makefile.test_shared`) — Shared Library Test Makefile

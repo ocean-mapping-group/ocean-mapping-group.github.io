@@ -1,9 +1,11 @@
 ---
 layout: default
 title: plotSVP
-parent: Ray Tools
+parent: Ray-Tracing & Refraction (ray)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 169
 ---
+
 # plotSVP
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 169
 The tool supports advanced features such as plotting multiple SVPs on the same graph, filtering profiles based on area or time, painting profiles into a 2D array, and outputting processed SVPs in JWC (JHC Water Column) format. It's a critical tool for analyzing, visualizing, and standardizing SVP data within oceanographic workflows.
 
 ## Usage
+
 ```bash
 plotSVP <svpfilename(s)> [-outfile <filename.meta>] [OPTIONS]
 ```
@@ -24,6 +27,7 @@ plotSVP <svpfilename(s)> [-outfile <filename.meta>] [OPTIONS]
 | `-outfile <filename.meta>` | Specifies the output PostScript metafile name. | `plot.meta` |
 
 ### SVP Input Formats
+
 | Option | Description |
 |---|---|
 | `-newsvp` | Input file is a "NEW" raw SVP format. |
@@ -44,6 +48,7 @@ plotSVP <svpfilename(s)> [-outfile <filename.meta>] [OPTIONS]
 | `-custom1` / `-custom2` | Custom ASCII formats. |
 
 ### Output Types (`-to_plot`)
+
 | Option | Description |
 |---|---|
 | `-velo` | Plot sound velocity (default). |
@@ -65,6 +70,7 @@ plotSVP <svpfilename(s)> [-outfile <filename.meta>] [OPTIONS]
 | `-beam_attenuation` / `-beam_transmission` | Plot beam attenuation/transmission. |
 
 ### Plotting & Filtering
+
 | Option | Description | Default |
 |---|---|
 | `-together` | Plot all SVPs on the same graph. | |
@@ -85,6 +91,7 @@ plotSVP <svpfilename(s)> [-outfile <filename.meta>] [OPTIONS]
 | `-ancil <file.txt>` | Ancillary data file for background rendering in raster plots. | |
 
 ### Time & Location
+
 | Option | Description |
 |---|---|
 | `-start <yr> <jday> <hr> <min>` / `-end <yr> <jday> <hr> <min>` | Sets a time window for processing SVPs. |
@@ -98,12 +105,14 @@ plotSVP <svpfilename(s)> [-outfile <filename.meta>] [OPTIONS]
 | `-addGPSrolloverwraps <val>` | Adds GPS rollover adjustment. |
 
 ### Density & Gradient
+
 | Option | Description |
 |---|---|
 | `-density_difference -refval <refval.m1> -refsal <val> -reftemp <val>` | Calculates density difference from a reference SVP (MVP_m1 format) with reference salinity and temperature. |
 | `-sali_scale <val>` / `-dens_scale <val>` | Scales salinity/density values. |
 
 ### Titles & Footers
+
 | Option | Description |
 |---|---|
 | `-tit1 <string>` / `-tit2 <string>` | Sets plot titles. | |
@@ -111,6 +120,7 @@ plotSVP <svpfilename(s)> [-outfile <filename.meta>] [OPTIONS]
 | `-refazi <val>` | Reference azimuth for current plotting. | |
 
 ### Debugging
+
 | Option | Description |
 |---|---|
 | `-v` | Enable verbose output. | |

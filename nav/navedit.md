@@ -1,14 +1,24 @@
 ---
 layout: default
 title: navedit
-parent: Navigation Tools
+parent: Navigation Processing (nav)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 25
 tool_name: navedit
 source_path: code/nav/navedit.c
 category: Navigation & Georeferencing
-input_formats: [".nav"]
-output_formats: [".nav (modified in-place)", "ASCII diagnostics (stdout)"]
-related_tools: ["fixnav", "flagNav", "removeRedundantNav", "thin_nav", "mergeNav", "appendNav"]
+input_formats:
+- .nav
+output_formats:
+- .nav (modified in-place)
+- ASCII diagnostics (stdout)
+related_tools:
+- fixnav
+- flagNav
+- removeRedundantNav
+- thin_nav
+- mergeNav
+- appendNav
 ---
 
 # navedit
@@ -43,10 +53,12 @@ navedit <filename.nav>
 ### Common Workflow Examples
 
 **1. Check a navigation file for backward time jumps, gaps, and sampling rate:**
+
 ```bash
 navedit -check merged/JD100/0001_line.nav
 ```
 Example output:
+
 ```text
  merged/JD100/0001_line.nav 
   4520 records in file
@@ -54,11 +66,13 @@ Checked Nav, mindt 0.1999 (rec 14), maxdt 1.0001 (rec 892) typical freq 5.00 Hz,
 ```
 
 **2. Inspect the midpoint position and timestamp of a survey line:**
+
 ```bash
 navedit -show_centre_fix merged/JD100/0001_line.nav
 ```
 
 **3. Repair a 24-hour (-86400 s) midnight rollover jump in-place:**
+
 ```bash
 navedit -fix_midnight raw_nmea.nav
 ```
@@ -73,7 +87,7 @@ navedit -fix_midnight raw_nmea.nav
 | `-check` | Non-interactive continuity check: computes `mindt`, `maxdt`, average frequency (`1.0 / avdt`), and prints every record where `dtime < 0.0` with its formatted UTC date/time. | Disabled |
 | `-verbose` | Used with `-check`: prints `Record <i >, time <t>...dt = <dtime>` for every record in the file. *(Note: the flag is `-verbose`, not `-v`).* | Disabled |
 | `-show_centre_fix` | Reads and prints only the midpoint record (`rec_num = length / 2`) using `nav_show()` and exits cleanly. Suppresses header banners so output can be piped into scripts. | Disabled |
-| `-fix_midnight` | Scans consecutive records; whenever `dtime < 0 && fabs(dtime) > 86000`, adds `86400` seconds to `glo_rec.time` and writes it in-place. *(Note: repairs single-step rollovers; run [`fixnav`](fixnav.md) if all subsequent records in the file also need shifting).* | Disabled |
+| `-fix_midnight` | Scans consecutive records; whenever `dtime < 0 && fabs(dtime) > 86000`, adds `86400` seconds to `glo_rec.time` and writes it in-place. *(Note: repairs single-step rollovers; run [`fixnav`](fixnav.html) if all subsequent records in the file also need shifting).* | Disabled |
 
 ---
 
@@ -94,6 +108,7 @@ When invoked without `-check`, `-show_centre_fix`, or `-fix_midnight`, `navedit`
 ## `nav_show` Output Format
 
 Each displayed record is formatted by `nav_show()` (`code/subr/jcu_nav.c`) as a single line:
+
 ```text
   lat           lon           depth vel    azi     year jday (mm dd) hh mm ss.cc f0 f1 f2 f3
   45.12345678  -66.98765432     0  4.120 182.400 2023 145 ( 5 25) 14 32 10.20  8  3 12  0

@@ -1,8 +1,9 @@
 ---
 layout: default
-title: SB2K Tools
+title: SeaBeam 2000 / 2100 (sb2k)
+parent: 4. Multi-Vendor Sonar & LiDAR Converters
+nav_order: 6
 has_children: true
-nav_order: 20
 ---
 
 # SB2K Tools

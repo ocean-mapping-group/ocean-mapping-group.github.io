@@ -1,16 +1,18 @@
 ---
 layout: default
 title: xsonar2glo
-parent: Convert Tools
-grand_parent: sidescan
+parent: Sidescan Radiometric & Geometric Suite (sidescan)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 6
 ---
+
 # xsonar2glo
 
 ## Description
 `xsonar2glo` is a utility designed to convert XSONAR merged GLORIA data to JCU GLORIA format. It handles XSONAR ping records, extracts navigation, attitude, and sidescan data, performs byte swapping if necessary, and converts it into GLORIA records.
 
 ## Usage
+
 ```bash
 xsonar2glo [-merid <value>] [-timeseries] [-reverse] [-in <infile>] -out <outfile>
 ```

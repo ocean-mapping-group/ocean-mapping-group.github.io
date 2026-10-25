@@ -1,13 +1,21 @@
 ---
 layout: default
 title: convCHSpredTide
-parent: Tide Tools
+parent: Tidal Reduction & Constituents (tide)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 tool_name: convCHSpredTide
 source_path: code/tide/convCHSpredTide.c
 category: tide
-input_formats: ["CHS Predicted Tide ASCII", "Cape Enrage Measured Tide ASCII"]
-output_formats: ["JHC ASCII tide (jday hour min elev)"]
-related_tools: ["binTide", "mergeTide", "medsTide", "cncTide"]
+input_formats:
+- CHS Predicted Tide ASCII
+- Cape Enrage Measured Tide ASCII
+output_formats:
+- JHC ASCII tide (jday hour min elev)
+related_tools:
+- binTide
+- mergeTide
+- medsTide
+- cncTide
 ---
 
 # convCHSpredTide
@@ -40,6 +48,7 @@ convCHSpredTide [OPTIONS] -tide <tidefilename> <outfilename>
    - Skips the first `18` header lines of the CHS predicted tide file.
    - Reads each daily block starting with the day number (`day`), followed by `24` hourly floating-point tide elevations (`elev`, in meters).
    - Writes 24 lines per day to `<outfilename>` (and `stdout`) formatted as:
+
      ```text
      <jday_start + day> <hour (1..24)> 0 <elev>
      ```
@@ -52,12 +61,14 @@ convCHSpredTide [OPTIONS] -tide <tidefilename> <outfilename>
 ## Examples
 
 **1. Convert a CHS predicted monthly tide table starting on May 1 (Julian Day 121, so `-jday_start 120`):**
+
 ```bash
 convCHSpredTide -jday_start 120 -tide chs_may_pred.txt may_tide.asc
 binTide -year 2002 may_tide.asc may_tide.bin
 ```
 
 **2. Convert Cape Enrage measured centimeter tide blocks:**
+
 ```bash
 convCHSpredTide -enrage_meas -tide enrage_raw.txt enrage_tide.asc
 ```
@@ -66,4 +77,4 @@ convCHSpredTide -enrage_meas -tide enrage_raw.txt enrage_tide.asc
 
 ## Workflow Context
 
-- **Next Step:** Pass the output JHC ASCII tide file into [`binTide`](binTide.md) to create a binary `jcu_nav_rec` tide file, then apply it to `.merged` survey lines with [`mergeTide`](mergeTide.md).
+- **Next Step:** Pass the output JHC ASCII tide file into [`binTide`](binTide.html) to create a binary `jcu_nav_rec` tide file, then apply it to `.merged` survey lines with [`mergeTide`](mergeTide.html).

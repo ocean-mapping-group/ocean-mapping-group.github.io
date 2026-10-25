@@ -1,14 +1,21 @@
 ---
 layout: default
 title: czcs2acres
-parent: Image Tools
+parent: Raster Image Processing (image)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 14
 tool_name: czcs2acres
 source_path: code/image/czcs2acres.c
 category: Satellite, SAR & Format Conversion
-input_formats: ["4-band BIL Coastal Zone Color Scanner (CZCS) raw tape file"]
-output_formats: ["Four ACRES 8-bit band files (.band1 .. .band4)"]
-related_tools: ["landsat2acres", "8bit2acres", "PCItoJHC", "stretchacres"]
+input_formats:
+- 4-band BIL Coastal Zone Color Scanner (CZCS) raw tape file
+output_formats:
+- Four ACRES 8-bit band files (.band1 .. .band4)
+related_tools:
+- landsat2acres
+- 8bit2acres
+- PCItoJHC
+- stretchacres
 ---
 
 # czcs2acres
@@ -17,6 +24,7 @@ related_tools: ["landsat2acres", "8bit2acres", "PCItoJHC", "stretchacres"]
 `czcs2acres` de-interleaves a 4-band Band-Interleaved-by-Line (BIL) Nimbus-7 Coastal Zone Color Scanner (CZCS) raw image into four separate ACRES-format 8-bit raster files (`<out>.band1` through `<out>.band4`).
 
 ## CLI Options & Usage
+
 ```bash
 czcs2acres -in <raw_czcs> -out <acres_prefix> [-rows <n>] [-cols <n>]
 ```

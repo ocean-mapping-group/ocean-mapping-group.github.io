@@ -1,9 +1,11 @@
 ---
 layout: default
 title: refoOptech
-parent: Optech Tools
+parent: Optech SHOALS Bathymetric LiDAR (Optech)
+grand_parent: 4. Multi-Vendor Sonar & LiDAR Converters
 nav_order: 122
 ---
+
 # refoOptech
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 122
 The tool handles different ASCII formats (`-fmt`), determines scan direction, and creates auxiliary navigation (`.nav`) and debug (`.debug`) files for each generated merged line.
 
 ## Usage
+
 ```bash
 refoOptech <infile> <outfile_prefix> [-fmt <val>] [-dont_break_lines] [-v]
 ```

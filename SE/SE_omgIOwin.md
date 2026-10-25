@@ -1,14 +1,46 @@
 ---
 layout: default
 title: SE_omgIOwin
-parent: SwathEd (SE) Tools
+parent: Swath Editor — swathed (SE)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 28
 tool_name: SE_omgIOwin
 source_path: code/SE/SE_omgIOwin.c
 category: Interactive QC & Editing (SwathEd)
-input_formats: [".merged", ".param", ".ref_coeffs", ".orientation", ".orientation_1", ".orientation_2", ".net_att_1", ".net_att_2", ".sectors", ".extra", ".ss_data", ".ss_data.convert", ".16_data", ".32_data", ".fl_data", ".ph_data", ".ph16_data", ".watercol", ".WC_Phase1", ".vert_prof", ".waveform", ".sonar_settings", ".flag_bk"]
-output_formats: [".merged (updated in-place)", ".SE_changes", "cleaned_files.list"]
-related_tools: ["swathed", "SE_mainwin", "SE_global", "SE_sswindow", "dumpFlags"]
+input_formats:
+- .merged
+- .param
+- .ref_coeffs
+- .orientation
+- .orientation_1
+- .orientation_2
+- .net_att_1
+- .net_att_2
+- .sectors
+- .extra
+- .ss_data
+- .ss_data.convert
+- .16_data
+- .32_data
+- .fl_data
+- .ph_data
+- .ph16_data
+- .watercol
+- .WC_Phase1
+- .vert_prof
+- .waveform
+- .sonar_settings
+- .flag_bk
+output_formats:
+- .merged (updated in-place)
+- .SE_changes
+- cleaned_files.list
+related_tools:
+- swathed
+- SE_mainwin
+- SE_global
+- SE_sswindow
+- dumpFlags
 ---
 
 # `SE_omgIOwin.c` — Multibeam File I/O, 100-Ping Buffer Management & Detrending Engine
@@ -33,8 +65,8 @@ It supports three underlying swath file formats (`file_type`):
 | `load_full_orientation` | `void load_full_orientation(int *recnum)` | Searches the high-rate `.orientation` file (`OMG_HDCS_att_time_search`) at each ping's exact timestamp and populates `roll[]`, `pitch[]`, and `heave[]`. |
 | `calc_Detrend_Slopes` / `apply_Detrend_Slopes` | `void calc_Detrend_Slopes()` / `void apply_Detrend_Slopes()` | Computes linear least-squares along-track slope (`Detrend_Along_Slope`, meters per ping) and across-track slope (`Detrend_Across_Slope`) across the 100-ping block, and rotates `unrot_box[][]` and `unrot_offsets[][]` into `rot_box[][]` and `rot_offsets[][]`. |
 | `update_for_detrend` | `int update_for_detrend(int refresh)` | Synchronizes flag polarity between `box[][]`, `unrot_box[][]`, and `rot_box[][]`, recalculates detrend slopes, swaps between `load_Detrend_bathy()` and `load_Regular_bathy()`, and triggers `setup_for_next80()`. |
-| `load_up_strip` | `void load_up_strip()` | Builds the $900 \times 80$ pixel sidescan waterfall strip image (`strip_image`, `strip_data`) for `sub_window[15]` in [`SE_sswindow.c`](SE_sswindow.md) by calling `make_ss()` (or decoding ISIS Submetrix / SeaBeam 2000 traces) across the loaded swaths. |
-| `load_flags` / `guess_flag_offset` | `void load_flags()` / `void guess_flag_offset()` | Reads external 8-bit flag backup files (`<prefix>.flag_bk` created by [`dumpFlags`](../omg/dumpFlags.md) or HIPS export), determines any ping index offset (`HIPS_ping_offset`), and applies the saved rejection flags to `box[][]`. |
+| `load_up_strip` | `void load_up_strip()` | Builds the $900 \times 80$ pixel sidescan waterfall strip image (`strip_image`, `strip_data`) for `sub_window[15]` in [`SE_sswindow.c`](SE_sswindow.html) by calling `make_ss()` (or decoding ISIS Submetrix / SeaBeam 2000 traces) across the loaded swaths. |
+| `load_flags` / `guess_flag_offset` | `void load_flags()` / `void guess_flag_offset()` | Reads external 8-bit flag backup files (`<prefix>.flag_bk` created by [`dumpFlags`](../omg/dumpFlags.html) or HIPS export), determines any ping index offset (`HIPS_ping_offset`), and applies the saved rejection flags to `box[][]`. |
 | `write_file_list` | `void write_file_list()` | Writes the list of active/cleaned survey line filenames (`done_status[i]`) to disk. |
 
 ---
@@ -50,5 +82,5 @@ In May 2019, `prime_array()` and `dump_array()` were updated from the legacy mon
 ---
 
 ## Integration within `swathed`
-- **Line Stepping & Geographic Sub-Windows:** Called whenever the user opens a line, steps forward/backward by 80 pings (`SE_NO_SWATHS - 20`), jumps to a record number (`-jump_to_recnum`), or selects a line from [`SE_GEOwindows.c`](SE_GEOwindows.md) or [`SE_LineListwin.c`](SE_LineListwin.md).
-- **Batch Utilities:** Linked directly by [`newAutoRejectSoundings`](newAutoRejectSoundings.md) to batch-load 100-ping blocks (`prime_array`), run `check_data()`, and save flags (`dump_array`) without an X11 display.
+- **Line Stepping & Geographic Sub-Windows:** Called whenever the user opens a line, steps forward/backward by 80 pings (`SE_NO_SWATHS - 20`), jumps to a record number (`-jump_to_recnum`), or selects a line from [`SE_GEOwindows.c`](SE_GEOwindows.html) or [`SE_LineListwin.c`](SE_LineListwin.html).
+- **Batch Utilities:** Linked directly by [`newAutoRejectSoundings`](newAutoRejectSoundings.html) to batch-load 100-ping blocks (`prime_array`), run `check_data()`, and save flags (`dump_array`) without an X11 display.

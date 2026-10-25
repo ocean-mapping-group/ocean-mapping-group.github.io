@@ -1,15 +1,18 @@
 ---
 layout: default
 title: findCloseAR
-parent: Classification Tools
+parent: Angular Response & Classification (class)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 4
 ---
+
 # findCloseAR
 
 ## Description
 `findCloseAR` is a command-line utility that searches through multiple Angular Response (AR) files to find AR records that are geographically close to a given list of sample station coordinates. It takes a list of sample locations (latitude/longitude) and a search radius, then identifies AR records falling within that radius. The primary output is a file detailing which AR records (file number, record number, side) are close to each sample station.
 
 ## Usage
+
 ```bash
 findCloseAR [OPTIONS] -samples <sample_file> -radius <meters> -arnames <ar_list_file>
 ```

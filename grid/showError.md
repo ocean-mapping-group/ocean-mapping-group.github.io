@@ -1,13 +1,20 @@
 ---
 layout: default
 title: showError
-parent: Grid Tools
+parent: Bathymetric Gridding & Export (grid)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 tool_name: showError
 source_path: code/grid/showError.c
 category: gridding
-input_formats: ["JHC_header (.r4)", "OMG HDCS (.merged)"]
-output_formats: ["JHC_header (.8bit)"]
-related_tools: ["weigh_grid", "stat_grid", "grid_stats"]
+input_formats:
+- JHC_header (.r4)
+- OMG HDCS (.merged)
+output_formats:
+- JHC_header (.8bit)
+related_tools:
+- weigh_grid
+- stat_grid
+- grid_stats
 ---
 
 # showError
@@ -50,6 +57,7 @@ showError [-low <val>] <ref_merc.r4> <out_count.8bit> <merged_files...>
 ## Examples
 
 ### Generate an 8-bit density map of rejected multibeam soundings across a survey sheet
+
 ```bash
 showError sheet01.r4 sheet01_rejected_counts.8bit line01.merged line02.merged line03.merged
 ```

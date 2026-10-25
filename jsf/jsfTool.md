@@ -1,14 +1,21 @@
 ---
 layout: default
 title: jsfTool
-parent: JSF Tools
+parent: EdgeTech JSF Sidescan & Sub-Bottom (jsf)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 5
 tool_name: jsfTool
 source_path: code/jsf/jsfTool.c
 category: Diagnostics & Indexing
-input_formats: [".jsf"]
-output_formats: ["stdout (ASCII summary & packet dumps)"]
-related_tools: ["jsf2omg", "jsf2glo", "jsf2nav", "jsf2orientation"]
+input_formats:
+- .jsf
+output_formats:
+- stdout (ASCII summary & packet dumps)
+related_tools:
+- jsf2omg
+- jsf2glo
+- jsf2nav
+- jsf2orientation
 ---
 
 # jsfTool
@@ -17,6 +24,7 @@ related_tools: ["jsf2omg", "jsf2glo", "jsf2nav", "jsf2orientation"]
 `jsfTool` is a diagnostic utility for inspecting EdgeTech `.jsf` files. It verifies message synchronization (`0x1601` header marker), counts the occurrences of every JSF message type across the file, and optionally dumps decoded message headers and payloads (`80` Sonar Data, `2020` Orientation, `3000` Bathymetric Data, `3001` Attitude, `3002` Pressure, `3004` Position) to stdout.
 
 ## Usage
+
 ```bash
 jsfTool [-v] [-contents] [-vid <ID>] -in <inputfile.jsf>
 ```
@@ -38,11 +46,13 @@ jsfTool [-v] [-contents] [-vid <ID>] -in <inputfile.jsf>
 ## Practical Examples
 
 **1. Cepatly list the message inventory of a `.jsf` file:**
+
 ```bash
 jsfTool -contents -in survey01.jsf
 ```
 
 **2. Dump all JSF Bathymetric (3000) and Pressure/SV (3002) messages:**
+
 ```bash
 jsfTool -vid 3000 -vid 3002 -in survey01.jsf
 ```

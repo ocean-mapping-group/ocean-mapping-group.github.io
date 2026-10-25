@@ -1,9 +1,11 @@
 ---
 layout: default
 title: unrollOMG
-parent: OMG Tools
+parent: Core Swath & .all Suite (omg)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 74
 ---
+
 # unrollOMG
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 74
 This tool works by recalculating beam depths and positions based on corrected motion data or user-specified offsets, making it a powerful tool for refining bathymetric data quality.
 
 ## Usage
+
 ```bash
 unrollOMG <OMG_HDCS_datafile(s)> [OPTIONS]
 ```
@@ -24,6 +27,7 @@ unrollOMG <OMG_HDCS_datafile(s)> [OPTIONS]
 | `-v` | Enable verbose output. |
 
 ### Motion Correction
+
 | Option | Description | Default |
 |---|---|
 | `-apply_roll` | Apply measured roll data to correct beam positions. | |
@@ -39,12 +43,14 @@ unrollOMG <OMG_HDCS_datafile(s)> [OPTIONS]
 | `-lag <val>` | Apply a time lag (in seconds) to the measured motion data (for lever arm correction). | `0.0` |
 
 ### Depth Adjustments
+
 | Option | Description | Default |
 |---|---|
 | `-draft <val>` | Specifies the draft (in meters) to use for calculations. | `0.0` |
 | `-add_draft <val>` | Adds a constant draft value (in meters) to all depths. | `0.0` |
 
 ### Data Filtering & Specific Corrections
+
 | Option | Description | Default |
 |---|---|
 | `-justport` / `-juststbd` | Apply corrections only to port or starboard beams, respectively. | `FIXBOTH` (both sides) |

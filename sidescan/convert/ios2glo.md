@@ -1,16 +1,18 @@
 ---
 layout: default
 title: ios2glo
-parent: Convert Tools
-grand_parent: sidescan
+parent: Sidescan Radiometric & Geometric Suite (sidescan)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 1
 ---
+
 # ios2glo
 
 ## Description
 `ios2glo` is a utility designed to convert IOS (Institute of Ocean Sciences) format sidescan data to the JCU GLORIA format.
 
 ## Usage
+
 ```bash
 ios2glo -in <infile> -out <outfile> [-v]
 ```

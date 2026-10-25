@@ -1,18 +1,22 @@
 ---
 layout: default
 title: fillquad2
-parent: Mosaicking Tools
+parent: Sidescan Mosaicking (newmos)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 3
-module_name: fillquad2
 source_path: code/newmos/fillquad2.c
 category: Backscatter & Sidescan Mosaicking
-related_tools: ["mos2", "cache", "support"]
+related_tools:
+- mos2
+- cache
+- support
+module_name: fillquad2
 ---
 
 # fillquad2
 
 ## Overview
-`fillquad2` (`code/newmos/fillquad2.c`, originally written as `quadfill.c` by Guy Carpenter, February 26, 1990) is the high-speed **integer Bresenham quadrilateral scan-conversion and linear intensity interpolation engine** linked directly into [`mos2`](mos2.md) (`mos2: mos2.o fillquad2.o` in `code/newmos/makefile`).
+`fillquad2` (`code/newmos/fillquad2.c`, originally written as `quadfill.c` by Guy Carpenter, February 26, 1990) is the high-speed **integer Bresenham quadrilateral scan-conversion and linear intensity interpolation engine** linked directly into [`mos2`](mos2.html) (`mos2: mos2.o fillquad2.o` in `code/newmos/makefile`).
 
 When `mos2` projects two consecutive sidescan or multibeam backscatter pings onto the output mapsheet (unless `-just_drop` is specified), each adjacent pair of across-track samples between Ping $k-1$ and Ping $k$ forms a 4-vertex quadrilateral in pixel coordinates:
 - Vertex 0: `(x0, y0)` with backscatter intensity `c0`
@@ -54,4 +58,4 @@ Because a single survey line can require filling millions of sub-swath quadrilat
 ---
 
 ## Architectural Role
-`fillquad2.c` is the inner-loop rasterization workhorse of [`mos2`](mos2.md). By interpolating across-track and along-track pixels as continuous quadrilaterals between pings (whenever ping spacing is within `-maxdist`, `-maxtime`, and `-maxazi`), it eliminates inter-ping gaps on the outer swath while maintaining high throughput.
+`fillquad2.c` is the inner-loop rasterization workhorse of [`mos2`](mos2.html). By interpolating across-track and along-track pixels as continuous quadrilaterals between pings (whenever ping spacing is within `-maxdist`, `-maxtime`, and `-maxazi`), it eliminates inter-ping gaps on the outer swath while maintaining high throughput.

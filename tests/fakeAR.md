@@ -1,20 +1,21 @@
 ---
 layout: default
 title: fakeAR
-parent: tests (Test, Simulation & Diagnostic Suite)
+parent: Acoustic & Mathematical Test Harnesses (tests)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 nav_order: 5
 tool_name: fakeAR
 source_path: code/tests/fakeAR.c
 category: Backscatter & Multi-Spectral Grid Processing (tests)
 input_formats:
-  - Command-line physical geoacoustic parameters
+- Command-line physical geoacoustic parameters
 output_formats:
-  - ASCII multi-frequency / grazing-angle backscatter table (gnuplot / asciiplot)
+- ASCII multi-frequency / grazing-angle backscatter table (gnuplot / asciiplot)
 related_tools:
-  - comboASCIIParam
-  - comboASCIIParam2
-  - BatchProcEK
-  - EKlook
+- comboASCIIParam
+- comboASCIIParam2
+- BatchProcEK
+- EKlook
 ---
 
 # fakeAR
@@ -63,18 +64,21 @@ When `-RG` is specified, `fakeAR` divides the frequency span $[f_{\min}, f_{\max
 $$\Delta f = \frac{f_{\max,\text{kHz}} - f_{\min,\text{kHz}}}{80}, \qquad f_i = \left(f_{\min,\text{kHz}} + i\,\Delta f\right) \times 1000\text{ Hz}$$
 
 At each frequency $f_i$, it invokes:
+
 ```c
 do_RG_simple_model(In_f, In_nu, In_rho, In_lt, In_beta, In_gamma, In_sig_2,
                    Out_sigma_vol[i], Out_sigma_rss[i], Out_deg[i], &Crossover);
 ```
 By default (`printout == 2`, gnuplot 3D surface format), for each frequency $i \in [0, 79]$ and nadir-to-grazing half-swath index $j \in [90, 179]$, it filters out near-zero grazing kick-up artifacts (`Out_sigma_vol[i][j] < Out_sigma_vol[i][j-1]`) and writes space-separated triplets:
+
 ```text
 <Freq_kHz> <Grazing_Angle_deg> <Total_Backscatter_dB>
 ```
-separated by blank lines between frequency blocks (ideal for `gnuplot splot` or ingestion into [`comboASCIIParam`](comboASCIIParam.md)).
+separated by blank lines between frequency blocks (ideal for `gnuplot splot` or ingestion into [`comboASCIIParam`](comboASCIIParam.html)).
 
 ### 2. Default Parametric Output (without `-RG`)
 When run without `-RG`, `fakeAR` loops over $j = 0, \dots, 179$ and writes 4-column rows:
+
 ```text
 <Angle_deg> <BSn> <BSo> 0
 ```

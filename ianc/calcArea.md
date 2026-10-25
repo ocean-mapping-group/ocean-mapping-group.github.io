@@ -1,14 +1,20 @@
 ---
 layout: default
 title: calcArea
-parent: Ian Church (ianc) Tools
+parent: Ian Church — Hydrodynamic & 3D Ray-Trace Suite (ianc)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 nav_order: 5
 tool_name: calcArea
 source_path: code/ianc/calcArea.c
 category: Ocean Modeling & Hydrographic Utilities (ianc)
-input_formats: ["OMG R4 Floating-Point Grid (.r4)", "OMG 8-Bit Raster Grid (.8bit / .mos)"]
-output_formats: ["ASCII Area Summary (stdout)"]
-related_tools: ["checkEmpty", "modelAnalysis"]
+input_formats:
+- OMG R4 Floating-Point Grid (.r4)
+- OMG 8-Bit Raster Grid (.8bit / .mos)
+output_formats:
+- ASCII Area Summary (stdout)
+related_tools:
+- checkEmpty
+- modelAnalysis
 ---
 
 # calcArea
@@ -58,10 +64,12 @@ calcArea -v -in sheet01.r4 sheet02.r4 sheet03.r4
 
 ### Output Format
 For each valid projected map sheet, `calcArea` prints a single summary line to `stdout`:
+
 ```text
 Map <filename> area: <sumArea> m^2 of <mapArea> m^2 total area ( <percent> percent )
 ```
 When more than one input file is provided (`nFiles > 1`), a grand total line is printed at the end:
+
 ```text
 Total Area of all input maps: <totalArea> m^2 or <totalArea_km2> km^2
 ```

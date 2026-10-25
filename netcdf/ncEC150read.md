@@ -1,14 +1,21 @@
 ---
 layout: default
 title: ncEC150read
-parent: NetCDF & HDF5 Tools (netcdf)
+parent: NetCDF & HDF5 Ocean/Sonar Readers (netcdf)
+grand_parent: 4. Multi-Vendor Sonar & LiDAR Converters
 nav_order: 3
 tool_name: ncEC150read
 source_path: code/netcdf/ncEC150read.c
 category: Oceanographic & Acoustic NetCDF/HDF5 Readers
-input_formats: [".nc (Kongsberg Simrad EC150-3C SONAR-netCDF4)"]
-output_formats: ["<infile>.nav", "<outfile> (OMG1 .r4 header)"]
-related_tools: ["hdf5EC150read", "ncread", "ncCopernicusRead"]
+input_formats:
+- .nc (Kongsberg Simrad EC150-3C SONAR-netCDF4)
+output_formats:
+- <infile>.nav
+- <outfile> (OMG1 .r4 header)
+related_tools:
+- hdf5EC150read
+- ncread
+- ncCopernicusRead
 ---
 
 # ncEC150read
@@ -17,7 +24,7 @@ related_tools: ["hdf5EC150read", "ncread", "ncCopernicusRead"]
 
 `ncEC150read` (`code/netcdf/ncEC150read.c`) is an exploratory NetCDF-4 (`libnetcdf`) reader written by John Hughes Clarke aboard *USNS Heezen* in March 2023 to inspect the hierarchical group structure of **Kongsberg Simrad EC150-3C** ADCP / echosounder `.nc` (ICES SONAR-netCDF4 convention) files and extract vessel platform navigation into OMG `.nav` files.
 
-As documented in the source header comment (`code/netcdf/ncEC150read.c`, lines 6–9), `ncEC150read` was the initial `libnetcdf`-based prototype before development switched to [`hdf5EC150read`](hdf5EC150read.md) (`libhdf5`) due to `libnetcdf` limitations when reading deeply nested variable-length (`NC_VLEN`) user-defined per-ping velocity and backscatter records. However, `ncEC150read` remains a valuable diagnostic tool because it recursively traverses and prints 3 levels of NetCDF-4 groups (`CORE` $\rightarrow$ `GROUP` $\rightarrow$ `SUBGROUP` $\rightarrow$ `SUBSUBGROUP`), reports NetCDF user/VLEN type definitions (`nc_inq_type`, `nc_inq_vlen`), and extracts 1D platform trajectory arrays (`latitude`, `longitude`, `roll`, `pitch`, `heading`) from the `/Platform` group into `<infile>.nav`.
+As documented in the source header comment (`code/netcdf/ncEC150read.c`, lines 6–9), `ncEC150read` was the initial `libnetcdf`-based prototype before development switched to [`hdf5EC150read`](hdf5EC150read.html) (`libhdf5`) due to `libnetcdf` limitations when reading deeply nested variable-length (`NC_VLEN`) user-defined per-ping velocity and backscatter records. However, `ncEC150read` remains a valuable diagnostic tool because it recursively traverses and prints 3 levels of NetCDF-4 groups (`CORE` $\rightarrow$ `GROUP` $\rightarrow$ `SUBGROUP` $\rightarrow$ `SUBSUBGROUP`), reports NetCDF user/VLEN type definitions (`nc_inq_type`, `nc_inq_vlen`), and extracts 1D platform trajectory arrays (`latitude`, `longitude`, `roll`, `pitch`, `heading`) from the `/Platform` group into `<infile>.nav`.
 
 ---
 
@@ -76,4 +83,4 @@ For each input file `inname[ii]`, `ncEC150read` opens `<inname[ii]>.nav` and wal
 
 ## Architectural Fit
 
-Use `ncEC150read` (or [`ncread`](ncread.md)) when inspecting the NetCDF-4 group tree and VLEN type signatures of new SONAR-netCDF4 files; use [`hdf5EC150read`](hdf5EC150read.md) for production extraction of EC150 ADCP velocity curtains (`.N.r4`, `.E.r4`, `.D.r4`, `.Q.r4`), `.nav`, and `.motion` files.
+Use `ncEC150read` (or [`ncread`](ncread.html)) when inspecting the NetCDF-4 group tree and VLEN type signatures of new SONAR-netCDF4 files; use [`hdf5EC150read`](hdf5EC150read.html) for production extraction of EC150 ADCP velocity curtains (`.N.r4`, `.E.r4`, `.D.r4`, `.Q.r4`), `.nav`, and `.motion` files.

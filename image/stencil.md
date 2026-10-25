@@ -1,22 +1,32 @@
 ---
 layout: default
 title: stencil
-parent: Image Tools
+parent: Raster Image Processing (image)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 49
 tool_name: stencil
 source_path: code/image/stencil.c
 category: Masking & Stenciling
-input_formats: ["OMG1 8-bit or 32-bit float (.r4) input image", "OMG1 8-bit mask (-mask)", "Optional OMG1 underlay image (-under)"]
-output_formats: ["Masked/composited OMG1 8-bit or 32-bit float (.r4) image"]
-related_tools: ["stencilIPV", "mask_make", "jb_mask_make", "mask_ray"]
+input_formats:
+- OMG1 8-bit or 32-bit float (.r4) input image
+- OMG1 8-bit mask (-mask)
+- Optional OMG1 underlay image (-under)
+output_formats:
+- Masked/composited OMG1 8-bit or 32-bit float (.r4) image
+related_tools:
+- stencilIPV
+- mask_make
+- jb_mask_make
+- mask_ray
 ---
 
 # stencil
 
 ## Description
-`stencil` masks an 8-bit (`data_type = 1`) or 32-bit floating-point (`data_type = 3`, `.r4`) `OMG1` (`JHC_header`) image using an 8-bit `OMG1` mask file (`-mask`, produced by [`mask_make`](mask_make.md) or [`jb_mask_make`](jb_mask_make.md)). Masked-out pixels are filled either with a constant background value (`-undercolor`) or with corresponding pixels from a secondary underlay `OMG1` image (`-under`).
+`stencil` masks an 8-bit (`data_type = 1`) or 32-bit floating-point (`data_type = 3`, `.r4`) `OMG1` (`JHC_header`) image using an 8-bit `OMG1` mask file (`-mask`, produced by [`mask_make`](mask_make.html) or [`jb_mask_make`](jb_mask_make.html)). Masked-out pixels are filled either with a constant background value (`-undercolor`) or with corresponding pixels from a secondary underlay `OMG1` image (`-under`).
 
 ## CLI Options & Usage
+
 ```bash
 stencil -mask <mask.8bit> -in <infile> -out <outfile> \
   [-inverse] [-ignore <val>] \

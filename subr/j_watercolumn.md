@@ -1,21 +1,22 @@
 ---
 layout: default
 title: j_watercolumn
-parent: Core Shared Libraries (subr)
-module_name: j_watercolumn
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/j_watercolumn.c
-header_path: code/subr/j_watercolumn.h
 category: Water Column & Acoustic Raytracing
 related_tools:
-  - mergeAtt
-  - newMergeAtt
-  - makess
-  - getBeamPattern
-  - applySectBP
-  - LPFbeams
-  - gsf2svp
-  - SYN_internal_wave
-  - jview
+- mergeAtt
+- newMergeAtt
+- makess
+- getBeamPattern
+- applySectBP
+- LPFbeams
+- gsf2svp
+- SYN_internal_wave
+- jview
+module_name: j_watercolumn
+header_path: code/subr/j_watercolumn.h
 ---
 
 # `j_watercolumn` — Sound Velocity Profile (SVP) Management & Acoustic Raytracing Interface

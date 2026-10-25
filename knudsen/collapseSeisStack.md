@@ -1,14 +1,20 @@
 ---
 layout: default
 title: collapseSeisStack
-parent: Knudsen Tools
+parent: Knudsen Chirp Sub-Bottom (knudsen)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 2
 tool_name: collapseSeisStack
 source_path: knudsen/collapseSeisStack.c
 category: seismic_plotting
-input_formats: [JHC_ARRAY, ASCII_PERSPECT]
-output_formats: [JHC_ARRAY]
-related_tools: [makeSeisPlot, makeSeisPlot_Op]
+input_formats:
+- JHC_ARRAY
+- ASCII_PERSPECT
+output_formats:
+- JHC_ARRAY
+related_tools:
+- makeSeisPlot
+- makeSeisPlot_Op
 ---
 
 # collapseSeisStack

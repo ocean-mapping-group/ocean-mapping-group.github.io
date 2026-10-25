@@ -1,20 +1,21 @@
 ---
 layout: default
 title: plotlib
-parent: Core Shared Libraries (subr)
-module_name: plotlib
+parent: Core Shared C Library — libj.a (subr)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 source_path: code/subr/plotlib.c
-header_path: code/subr/plotlib.h
 category: Visualization, GUI & Plotting
 related_tools:
-  - viewmeta
-  - plotdriver
-  - hpgl
-  - plotSVP
-  - plotProf
-  - plotBP
-  - plotTides
-  - lineplot
+- viewmeta
+- plotdriver
+- hpgl
+- plotSVP
+- plotProf
+- plotBP
+- plotTides
+- lineplot
+module_name: plotlib
+header_path: code/subr/plotlib.h
 ---
 
 # plotlib

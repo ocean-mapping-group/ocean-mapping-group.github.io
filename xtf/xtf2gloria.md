@@ -1,14 +1,22 @@
 ---
 layout: default
 title: xtf2gloria
-parent: XTF Tools
+parent: eXtended Triton Format — XTF (xtf)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 7
 tool_name: xtf2gloria
 source_path: code/xtf/xtf2gloria.c
 category: Sidescan Conversion
-input_formats: [".xtf", ".idx"]
-output_formats: [".slr (JCU GLORIA)"]
-related_tools: ["klein2omg", "stripSS", "xtfTool", "mos2"]
+input_formats:
+- .xtf
+- .idx
+output_formats:
+- .slr (JCU GLORIA)
+related_tools:
+- klein2omg
+- stripSS
+- xtfTool
+- mos2
 ---
 
 # xtf2gloria
@@ -17,6 +25,7 @@ related_tools: ["klein2omg", "stripSS", "xtfTool", "mos2"]
 `xtf2gloria` converts sidescan sonar packets (`XTF_HEADER_SONAR`, packet ID 0) in an XTF file into 1024-pixel 8-bit JCU GLORIA (`.slr`) sidescan records. It supports multi-beam dynamically focused sidescan systems (such as Klein 5000/3000) by automatically grouping pings with identical centisecond timestamps into along-track beam numbers (`-2, -1, 0, +1, +2`) and storing the along-track beam offset (`cb_depth[0]`) and towfish layback (`cb_depth[1]`) inside the GLORIA record header.
 
 ## Usage
+
 ```bash
 xtf2gloria [-v] [-swap] [-log] [-min <val>] [-max <val>] [-plot_bottom] [-other_lalo_azi] -xtf <input.xtf> -omg <output.slr>
 ```
@@ -43,6 +52,7 @@ xtf2gloria [-v] [-swap] [-log] [-min <val>] [-max <val>] [-plot_bottom] [-other_
 ## Practical Examples
 
 **1. Convert a Klein XTF sidescan file to GLORIA format with sensor navigation and linear stretching:**
+
 ```bash
 xtf2gloria -v -other_lalo_azi -min 100 -max 8000 -xtf klein01.xtf -omg klein01.slr
 ```

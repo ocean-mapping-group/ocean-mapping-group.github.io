@@ -1,23 +1,29 @@
 ---
 layout: default
 title: to8bit
-parent: Mock Tools
-grand_parent: Sidescan Tools
+parent: Sidescan Radiometric & Geometric Suite (sidescan)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 23
 tool_name: to8bit
 source_path: code/sidescan/mock/to8bit
 category: Sidescan & Backscatter Modeling
-input_formats: ["32-bit floating-point array (e.g. ssmock / fullmock output)"]
-output_formats: ["8-bit XFB raster (.xfb)"]
-related_tools: ["ssmock.f", "fullmock.f", "synthetic"]
+input_formats:
+- 32-bit floating-point array (e.g. ssmock / fullmock output)
+output_formats:
+- 8-bit XFB raster (.xfb)
+related_tools:
+- ssmock.f
+- fullmock.f
+- synthetic
 ---
 
 # to8bit
 
 ## Description
-`to8bit` is a C-shell pipeline script (written by John Hughes Clarke, October 22, 1989) in `code/sidescan/mock/` that converts a 32-bit floating-point synthetic sidescan array (such as the grazing-angle grid output by [`ssmock.f`](ssmock.f.md) or [`fullmock.f`](fullmock.f.md)) into an 8-bit `.xfb` display image.
+`to8bit` is a C-shell pipeline script (written by John Hughes Clarke, October 22, 1989) in `code/sidescan/mock/` that converts a 32-bit floating-point synthetic sidescan array (such as the grazing-angle grid output by [`ssmock.f`](ssmock.f.html) or [`fullmock.f`](fullmock.f.html)) into an 8-bit `.xfb` display image.
 
 ## Usage
+
 ```csh
 to8bit <filename> <reclen> <low> <high>
 ```
@@ -27,6 +33,7 @@ to8bit <filename> <reclen> <low> <high>
 * **`<high>` (`$4`)**: Maximum floating-point value mapped to `255`.
 
 ## Pipeline Executed
+
 ```csh
 mask < $1 | color -low $3 -high $4 | fill -v127 | makexfb -reclen $2 > $1.xfb
 ```

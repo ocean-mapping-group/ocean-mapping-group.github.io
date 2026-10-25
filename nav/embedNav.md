@@ -1,14 +1,23 @@
 ---
 layout: default
 title: embedNav
-parent: Navigation Tools
+parent: Navigation Processing (nav)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 17
 tool_name: embedNav
 source_path: code/nav/embedNav.c
 category: Navigation & Georeferencing
-input_formats: [".nav (jcu_nav_rec binary)", "ASCII text (lat lon label with -ascii)", "8-bit OMG1 mapsheet (.byte / JHC_header data_type == 1)"]
-output_formats: ["8-bit OMG1 mapsheet (modified in-place)"]
-related_tools: ["appendNav", "stripNav", "dohypackLNW", "jview"]
+input_formats:
+- .nav (jcu_nav_rec binary)
+- ASCII text (lat lon label with -ascii)
+- 8-bit OMG1 mapsheet (.byte / JHC_header data_type == 1)
+output_formats:
+- 8-bit OMG1 mapsheet (modified in-place)
+related_tools:
+- appendNav
+- stripNav
+- dohypackLNW
+- jview
 ---
 
 # embedNav
@@ -29,21 +38,25 @@ embedNav [OPTIONS] -into <8bit_mapsheet_file> <nav_or_ascii_file(s)>
 ### Common Workflow Examples
 
 **1. Burn binary `.nav` tracklines (3 pixels wide, white = 255) into an 8-bit sun-illuminated mapsheet:**
+
 ```bash
 embedNav -col 255 -linethick 1 -into shade.byte decnav/JD100/*.decnav
 ```
 
 **2. Plot a center-of-line crosshair symbol (with automatic contrasting box outline) for each `.nav` file:**
+
 ```bash
 embedNav -cenfix -col 255 -into coverage.byte decnav/JD100/*.decnav
 ```
 
 **3. Plot box symbols at geographic coordinates listed in an ASCII `lat lon label` file:**
+
 ```bash
 embedNav -ascii -cenbox -col 0 -linelength 2 -into shade.byte stations.txt
 ```
 
 **4. Plot symbols at direct pixel `(x, y)` coordinates from an ASCII file:**
+
 ```bash
 embedNav -ascii -pixel_coords -cendot -col 255 -into shade.byte pixel_picks.txt
 ```

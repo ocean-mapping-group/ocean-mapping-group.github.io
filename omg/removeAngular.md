@@ -1,9 +1,11 @@
 ---
 layout: default
 title: removeAngular
-parent: OMG Tools
+parent: Core Swath & .all Suite (omg)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 56
 ---
+
 # removeAngular
 
 ## Description
@@ -12,6 +14,7 @@ nav_order: 56
 The tool can either re-calculate backscatter values (for EM1000/EM100_depth_ss/Seabat9001 systems) or apply a correction to existing reflectivity/calibrated backscatter values.
 
 ## Usage
+
 ```bash
 removeAngular <OMG_HDCS_datafile(s)> [OPTIONS]
 ```

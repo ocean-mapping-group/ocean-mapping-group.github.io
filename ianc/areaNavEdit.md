@@ -1,14 +1,19 @@
 ---
 layout: default
 title: areaNavEdit
-parent: Ian Church (ianc) Tools
+parent: Ian Church — Hydrodynamic & 3D Ray-Trace Suite (ianc)
+grand_parent: 5. Core Libraries, Researcher Suites & Utilities
 nav_order: 4
 tool_name: areaNavEdit
 source_path: code/ianc/areaNavEdit.c
 category: Ocean Modeling & Hydrographic Utilities (ianc)
-input_formats: ["OMG Binary Navigation (.nav)"]
-output_formats: ["OMG Binary Navigation (.nav)"]
-related_tools: ["Check_Nav", "POStoNav"]
+input_formats:
+- OMG Binary Navigation (.nav)
+output_formats:
+- OMG Binary Navigation (.nav)
+related_tools:
+- Check_Nav
+- POStoNav
 ---
 
 # areaNavEdit

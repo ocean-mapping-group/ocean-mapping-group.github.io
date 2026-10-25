@@ -1,15 +1,18 @@
 ---
 layout: default
 title: glSeis
-parent: GLSEIS Tools
+parent: OpenGL 3D Seismic & Curtain Viewer (glseis)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 nav_order: 1
 ---
+
 # glSeis
 
 ## Description
 `glSeis` is an interactive OpenGL-based application designed for the visualization of seismic and EM watercolumn data. it can display watercolumn profiles, often in conjunction with a loaded Digital Terrain Model (DTM) or "plate" for context. Users can configure scan settings, ping rates, and window sizes, making it suitable for analyzing sonar behavior and seismic returns in a 3D environment.
 
 ## Usage
+
 ```bash
 glSeis [OPTIONS]
 ```
@@ -18,12 +21,14 @@ As an interactive application, command-line options primarily configure the init
 ## Arguments
 
 ### Data Loading
+
 | Option | Description |
 |---|---|
 | `-emWC <filename>` | Load EM watercolumn data. This argument expects a merged file (e.g., `whatever.merged`), and it constructs the watercolumn filename by changing the suffix to `.watercol`. |
 | `-plate <filename>` | Load a Digital Terrain Model (DTM) or "plate" file. This typically expects three associated files with suffixes `.r4` (bathymetry), `.BT` (color/texture), and `.sun` (intensity). |
 
 ### Scan & Sonar Settings
+
 | Option | Description |
 |---|---|
 | `-first_ping_of_cycle <ping_number>` | Specify the starting ping number for a watercolumn data cycle. |
@@ -32,12 +37,14 @@ As an interactive application, command-line options primarily configure the init
 | `-scan_settings <deg_per_sec_x10> <upper_deg_x10> <lower_deg_x10>` | Configure the scanning parameters. |
 
 ### Rendering & Display
+
 | Option | Description | Default / Example |
 |---|---|---|
 | `-vert_exag <value>` | Set the vertical exaggeration factor for the terrain display. | |
 | `-winsize <width> <height>` | Set the explicit width and height of the main application window. | |
 
 ### Behavioral Flags
+
 | Option | Description |
 |---|---|
 | `-v` | Enable verbose output, printing detailed information to the console during operation. | |

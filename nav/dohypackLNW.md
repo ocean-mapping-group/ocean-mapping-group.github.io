@@ -1,14 +1,23 @@
 ---
 layout: default
 title: dohypackLNW
-parent: Navigation Tools
+parent: Navigation Processing (nav)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 15
 tool_name: dohypackLNW
 source_path: code/nav/dohypackLNW.c
 category: Navigation & Georeferencing
-input_formats: ["ASCII .llz (OMG segmented lat lon label)", "Hypack .LNW (planned survey line file)"]
-output_formats: ["Hypack .LNW (planned survey line file)", "ASCII .llz (OMG segmented lat lon label)"]
-related_tools: ["Generic_to_Nav", "DNMtoLLD", "embedNav", "jview"]
+input_formats:
+- ASCII .llz (OMG segmented lat lon label)
+- Hypack .LNW (planned survey line file)
+output_formats:
+- Hypack .LNW (planned survey line file)
+- ASCII .llz (OMG segmented lat lon label)
+related_tools:
+- Generic_to_Nav
+- DNMtoLLD
+- embedNav
+- jview
 ---
 
 # dohypackLNW
@@ -31,16 +40,19 @@ dohypackLNW [-jhc2hy | -hy2jhc] [-merid <deg>] [-skipline <N>] -in <infile> -out
 ### Common Workflow Examples
 
 **1. Convert OMG planned lines (`.llz`) to a HYPACK `.LNW` file (UTM Zone 20N, central meridian -63.0°):**
+
 ```bash
 dohypackLNW -jhc2hy -merid -63.0 -in planned_lines.llz -out survey_plan.LNW
 ```
 
 **2. Convert a HYPACK `.LNW` file to an OMG `.llz` file for display in `jview`:**
+
 ```bash
 dohypackLNW -hy2jhc -merid -63.0 -in survey_plan.LNW -out planned_lines.llz
 ```
 
 **3. Skip a 1-line header in the input `.llz` file before converting to `.LNW`:**
+
 ```bash
 dohypackLNW -jhc2hy -skipline 1 -merid -123.0 -in header_lines.llz -out lines.LNW
 ```
@@ -69,6 +81,7 @@ dohypackLNW -jhc2hy -skipline 1 -merid -123.0 -in header_lines.llz -out lines.LN
 
 ### OMG `.llz` Format
 Whitespace-delimited ASCII lines containing `lat lon label` (up to 1,000 points across up to 100 lines):
+
 ```text
 0.0 0.0 0.0
 45.123456 -63.123456 0.0
@@ -78,6 +91,7 @@ Whitespace-delimited ASCII lines containing `lat lon label` (up to 1,000 points 
 Rows where `lat == 0 && lon == 0` act as polyline segment separators.
 
 ### HYPACK `.LNW` Format
+
 ```text
 LNS <total_number_of_lines>
 LIN <num_points_in_line>

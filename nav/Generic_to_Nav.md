@@ -1,14 +1,23 @@
 ---
 layout: default
 title: Generic_to_Nav
-parent: Navigation Tools
+parent: Navigation Processing (nav)
+grand_parent: 1. Multibeam Unpacking, Nav & Ray-Tracing
 nav_order: 7
 tool_name: Generic_to_Nav
 source_path: code/nav/Generic_to_Nav.c
 category: Navigation & Georeferencing
-input_formats: ["ASCII CSV / text (Marine Institute Env, Starmon TD, MarineTraffic AIS, BGS Shapefile Extract, AutoWeather1, GrafNav)"]
-output_formats: [".nav (jcu_nav_rec binary)", ".nav.llz (MarineTraffic mode)"]
-related_tools: ["AGCtoNav", "NMEAtoNav", "PNAVtoNav", "QNSYtoNav", "dumpnav"]
+input_formats:
+- ASCII CSV / text (Marine Institute Env, Starmon TD, MarineTraffic AIS, BGS Shapefile Extract, AutoWeather1, GrafNav)
+output_formats:
+- .nav (jcu_nav_rec binary)
+- .nav.llz (MarineTraffic mode)
+related_tools:
+- AGCtoNav
+- NMEAtoNav
+- PNAVtoNav
+- QNSYtoNav
+- dumpnav
 ---
 
 # Generic_to_Nav
@@ -35,21 +44,25 @@ Generic_to_Nav [DATA_TYPE_FLAG] [OPTIONS] -comp <output.nav> <input_ascii_file(s
 ### Common Workflow Examples
 
 **1. Convert Marine Institute environmental data, storing channel 4 in `azi` and rejecting `-999.0`:**
+
 ```bash
 Generic_to_Nav -MI_env_data -val_to_use 4 -invalid -999.0 -comp env_ch4.nav mi_sensor_log.csv
 ```
 
 **2. Convert Waypoint GrafNav post-processed GNSS export (automatically skips 16 header lines):**
+
 ```bash
 Generic_to_Nav -GrafNav -comp grafnav_rtk.nav GrafNav_Export.txt
 ```
 
 **3. Convert MarineTraffic AIS CSV logs into `.nav` and segmented `.nav.llz` tracks:**
+
 ```bash
 Generic_to_Nav -MarineTraffic -maxdist 1000 -comp ais_tracks.nav marinetraffic_export.csv
 ```
 
 **4. Convert shipboard automated weather station logs (wind direction in `azi`, wind speed in `velocity`):**
+
 ```bash
 Generic_to_Nav -AutoWeather1 -comp wind_track.nav weather_station.csv
 ```

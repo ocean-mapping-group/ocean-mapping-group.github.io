@@ -1,13 +1,20 @@
 ---
 layout: default
 title: r4interp
-parent: Grid Tools
+parent: Bathymetric Gridding & Export (grid)
+grand_parent: 2. Gridding, Mosaicking & Interactive Editors
 tool_name: r4interp
 source_path: code/grid/r4interp.c
 category: gridding
-input_formats: [".r4 (JHC 32-bit float grid)"]
-output_formats: [".r4 (JHC 32-bit float grid)"]
-related_tools: ["fillGap", "r4filter", "interp", "weigh_grid"]
+input_formats:
+- .r4 (JHC 32-bit float grid)
+output_formats:
+- .r4 (JHC 32-bit float grid)
+related_tools:
+- fillGap
+- r4filter
+- interp
+- weigh_grid
 ---
 
 # r4interp
@@ -16,7 +23,7 @@ related_tools: ["fillGap", "r4filter", "interp", "weigh_grid"]
 
 `r4interp` (`code/grid/r4interp.c`) is an incomplete legacy prototype intended to interpolate across sparse gaps in a 32-bit floating-point (`.r4`) array within a circular search radius (`-radius <pixels>`).
 
-> **Note:** In the source repository (`code/grid/r4interp.c`), the inner interpolation loop (`lines 97–102`) is an empty stub and contains uncompiled syntax typos (`flaot radialrange[20][20];`). For production gap interpolation on `.r4` grids, use [`fillGap`](fillGap.md), [`r4filter`](r4filter.md) (`-low`), or [`surface`](surface.md).
+> **Note:** In the source repository (`code/grid/r4interp.c`), the inner interpolation loop (`lines 97–102`) is an empty stub and contains uncompiled syntax typos (`flaot radialrange[20][20];`). For production gap interpolation on `.r4` grids, use [`fillGap`](fillGap.html), [`r4filter`](r4filter.html) (`-low`), or [`surface`](surface.html).
 
 ---
 
@@ -44,6 +51,7 @@ r4interp -radius <pixels> <floatfile> <interpfile>
 ## Examples
 
 **Recommended production alternatives for `.r4` grid interpolation:**
+
 ```bash
 # Use fillGap to interpolate empty (0.0) pixels in an .r4 grid:
 fillGap -in sparse_grid.r4 -out filled_grid.r4
@@ -56,4 +64,4 @@ r4filter -xbox 5 -ybox 5 -low sparse_grid.r4 smoothed_grid.r4
 
 ## Workflow Context
 
-- Superseded by [`fillGap`](fillGap.md) and [`surface`](surface.md).
+- Superseded by [`fillGap`](fillGap.html) and [`surface`](surface.html).

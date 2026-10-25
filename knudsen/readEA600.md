@@ -1,14 +1,25 @@
 ---
 layout: default
 title: readEA600
-parent: Knudsen Tools
+parent: Knudsen Chirp Sub-Bottom (knudsen)
+grand_parent: 3. Sidescan, Echosounders, ADCP & Sub-Bottom
 nav_order: 13
 tool_name: readEA600
 source_path: knudsen/readEA600.c
 category: format_conversion
-input_formats: [SIMRAD_RAW_EA600_EK60_EK80]
-output_formats: [OMG_HDCS, OMG_SS_DATA, OMG_FL_DATA, NMEA, OMG_ORIENTATION, BINARY_RASTER]
-related_tools: [kflto8, makeSeisPlot, fcv30-2glo]
+input_formats:
+- SIMRAD_RAW_EA600_EK60_EK80
+output_formats:
+- OMG_HDCS
+- OMG_SS_DATA
+- OMG_FL_DATA
+- NMEA
+- OMG_ORIENTATION
+- BINARY_RASTER
+related_tools:
+- kflto8
+- makeSeisPlot
+- fcv30-2glo
 ---
 
 # readEA600
