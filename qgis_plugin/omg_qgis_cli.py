@@ -18,6 +18,8 @@ import sys
 from omg_qgis_plugin.omg_binary_io import (
     create_gdal_vrt_for_jhc,
     export_tracklines_geojson,
+    format_edhead_report,
+    make_blank_grid_from_bounds,
     parse_jhc_header,
     parse_omg_merged_summary,
     scan_survey_workspace,
@@ -26,19 +28,10 @@ from omg_qgis_plugin.omg_binary_io import (
 
 def cmd_inspect_raster(filepath: str, make_vrt: bool = False, output_dir: str = ""):
     hdr = parse_jhc_header(filepath)
-    print(f"=== OMG1 Raster Header: {os.path.basename(hdr.filepath)} ===")
-    print(f"  Path       : {hdr.filepath}")
-    print(f"  Dimensions : {hdr.dx} x {hdr.dy} pixels")
-    print(f"  Data Type  : {hdr.data_type_name} (GDAL: {hdr.gdal_data_type})")
-    print(f"  Bounds     : W={hdr.xmin:.6f}, E={hdr.xmax:.6f}, S={hdr.ymin:.6f}, N={hdr.ymax:.6f}")
-    print(f"  Step Size  : dx={hdr.xstep:.4f}, dy={hdr.ystep:.4f}")
-    print(f"  Projection : {hdr.projection_name}")
-    print(f"  Value Range: min={hdr.min_value:.4f}, max={hdr.max_value:.4f}")
-    if hdr.sun_elev > 0 or hdr.sun_azi > 0:
-        print(f"  Sun Params : azimuth={hdr.sun_azi:.1f}°, elevation={hdr.sun_elev:.1f}°, exag={hdr.sun_exag:.1f}x")
+    print(format_edhead_report(hdr))
     if make_vrt:
         vrt_path = create_gdal_vrt_for_jhc(filepath, output_dir=output_dir or None)
-        print(f"  Created Zero-Copy GDAL VRT: {vrt_path}")
+        print(f"Created Zero-Copy GDAL VRT: {vrt_path}")
 
 
 def cmd_scan_workspace(
